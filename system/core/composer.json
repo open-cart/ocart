@@ -1,0 +1,10 @@
+{
+    "name": "nguyenpt/core",
+    "authors": [
+        {
+            "name": "Phan Trung Nguyên",
+            "email": "nguyenpl117@gmail.com"
+        }
+    ],
+    "require": {}
+}
