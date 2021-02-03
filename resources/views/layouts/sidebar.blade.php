@@ -1,4 +1,4 @@
-<aside class="main-sidebar bg-white shadow-md w-64">
+<aside class="main-sidebar bg-white shadow-md w-64 hidden lg:block">
     <div class="bg-red-600 border-b border-gray-100">
         <div class="h-16 flex items-center justify-center">
             <span class="text-white text-2xl">Admin</span>

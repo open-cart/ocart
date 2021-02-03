@@ -21,7 +21,7 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class=" ml-64">
+            <header class="lg:ml-64">
                 <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     {{ $header }}
                 </div>
@@ -31,7 +31,7 @@
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-            <main class="ml-64">
+            <main class="lg:ml-64">
                 {{ $slot }}
             </main>
         </div>
