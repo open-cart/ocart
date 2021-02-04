@@ -30,6 +30,17 @@ Route::group(
         })->name('theme::black');
 
 
+        Route::get('/language/vi', function () {
+            session(['language' => 'vi']);
+            return back();
+        })->name('language::vi');
+
+        Route::get('/language/en', function () {
+            session(['language' => 'en']);
+            return back();
+        })->name('language::en');
+
+
         Route::get('/', function() {
             return view('admin.page');
         })->name('admin:home');

@@ -124,7 +124,7 @@
                                                     <x-confirm-delete
                                                         x-show="isOpen"
                                                         @close="isOpen = !isOpen"
-                                                        @accept="uninstall('{!! $plugin['AppConfig']->configKey !!}')"
+                                                        @accept="isOpen = !isOpen; uninstall('{!! $plugin['AppConfig']->configKey !!}')"
                                                     />
                                                 </div>
                                             </div>

@@ -18,7 +18,7 @@ class AppConfig extends ConfigBase
         $this->configCode = $config['configCode'];
         $this->configKey = $config['configKey'];
         $this->pathPlugin = $this->configGroup . '/' . $this->configKey;
-        $this->title = trans($this->pathPlugin.'::lang.title_module');
+        $this->title = 'Blog';
         $this->image = $this->pathPlugin.'/'.$config['image'];
         $this->version = $config['version'];
         $this->auth = $config['auth'];

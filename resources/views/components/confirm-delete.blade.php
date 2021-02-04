@@ -3,6 +3,7 @@
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-headline"
+    style="display:none"
     >
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
