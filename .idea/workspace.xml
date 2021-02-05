@@ -19,43 +19,25 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update response sidebar">
-      <change afterPath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Models/Language.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageDescriptionRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageDescriptionRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Services/Abstracts/StorePageDescriptionServiceAbstract.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Services/StorePageDescriptionService.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Views/components/control.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Views/components/input.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/Views/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Plugins/Blog/helpers.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/LanguageRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Repositories/LanguageRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/button-icon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/button-link-icon.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/switch.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/src/Library/MapData.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/src/Library/MapData/Builder.php" afterDir="false" />
+    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update plugin post">
+      <change afterPath="$PROJECT_DIR$/config/repository.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery.pjax.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/core.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.min.map" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.slim.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.slim.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/access/jquery/jquery.slim.min.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Admin/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Admin/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/AppConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/AppConfig.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/BlogServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/BlogServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Lang/vi/lang.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Lang/vi/lang.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Models/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Models/Page.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Models/PageDescription.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Models/PageDescription.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageRepositoryEloquent.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Views/blog.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/Views/blog.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/route.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Plugins/Blog/route.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AppServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/vi/admin.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/vi/admin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/plugin.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/plugin.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/button.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/button.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/confirm-delete.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/confirm-delete.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/input.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/input.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/components/label.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/components/label.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/navigation.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/src/Admin/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/src/Admin/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/lang/en/pagination.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/pagination.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +184,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/app/Plugins/Blog/Repositories" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/access" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
@@ -219,11 +201,11 @@
       <recent name="$PROJECT_DIR$/app/Plugins/Blog/Lang/en" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/access" />
+      <recent name="$PROJECT_DIR$/config" />
       <recent name="$PROJECT_DIR$/app/Plugins/Blog/Repositories" />
       <recent name="$PROJECT_DIR$/resources/views/components" />
       <recent name="$PROJECT_DIR$/system/core/src/Providers" />
-      <recent name="$PROJECT_DIR$/resources/views/admin" />
-      <recent name="$PROJECT_DIR$/resources/lang/vi" />
     </key>
   </component>
   <component name="RunManager">
@@ -242,7 +224,7 @@
       <updated>1611825843186</updated>
       <workItem from="1611825844314" duration="5350000" />
       <workItem from="1611893298233" duration="88237000" />
-      <workItem from="1612339951159" duration="42724000" />
+      <workItem from="1612339951159" duration="55208000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -251,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1612344439297</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="chore: update plugin post">
+      <created>1612442626488</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1612442626488</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,7 +259,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: update response sidebar" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update response sidebar" />
+    <MESSAGE value="chore: update plugin post" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update plugin post" />
   </component>
   <component name="WindowStateProjectService">
     <state x="712" y="427" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1612321214347">
@@ -316,10 +306,14 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1612324901472" />
-    <state x="880" y="443" width="604" height="490" key="find.popup" timestamp="1612353730209">
+    <state x="217" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612462186623">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="880" y="443" width="604" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1612353730209" />
+    <state x="217" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1612462186623" />
+    <state x="880" y="443" width="663" height="490" key="find.popup" timestamp="1612464303157">
+      <screen x="0" y="23" width="1920" height="1088" />
+    </state>
+    <state x="880" y="443" width="663" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1612464303157" />
     <state x="880" y="448" width="604" height="490" key="find.popup/0.23.1920.1100@0.23.1920.1100" timestamp="1611937433203" />
     <state x="407" y="277" width="670" height="676" key="search.everywhere.popup" timestamp="1612167987589">
       <screen x="0" y="23" width="1920" height="1088" />

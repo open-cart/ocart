@@ -15,6 +15,10 @@ use Prettus\Validator\Contracts\ValidatorInterface;
  */
 class PageRepositoryEloquent extends BaseRepository implements PageRepository
 {
+    protected $fieldSearchable = [
+        'alias' => 'like',
+    ];
+
     /**
      * Specify Model class name
      *
@@ -50,8 +54,8 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
      */
     public function boot()
     {
-        $this->pushCriteria(app(RequestCriteria::class));
         $this->pushCriteria(app(LanguageCriteriaCriteria::class));
+        $this->pushCriteria(app(RequestCriteria::class));
     }
 
 }

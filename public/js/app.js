@@ -3805,6 +3805,7 @@ var feather = __webpack_require__(/*! feather-icons */ "./node_modules/feather-i
 feather.replace({
   'stroke-width': 1.5
 });
+__webpack_require__.g.feather = feather;
 
 __webpack_require__(/*! alpinejs */ "./node_modules/alpinejs/dist/alpine.js");
 

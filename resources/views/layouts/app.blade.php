@@ -16,7 +16,7 @@
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased" id="body">
         <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -36,6 +36,14 @@
             </main>
         </div>
     </body>
+    <div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
+        <div class="relative inline-flex rounded-md shadow-sm">
+            <span class="flex items-center justify-center h-24 w-24">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-8 w-8 bg-purple-500"></span>
+            </span>
+        </div>
+    </div>
     <script>
         var themes = {
             blue: {
@@ -52,5 +60,19 @@
             }
         };
         var theme = {{ session('theme', 'themes.blue') }};
+    </script>
+    <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
+    <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+    <script>
+        $(function(){
+            // pjax
+            $(document).pjax('a', '#body');
+            $(document).on('pjax:send', function() {
+                $('#loading').show()
+            })
+            $(document).on('pjax:complete', function() {
+                $('#loading').hide()
+            })
+        })
     </script>
 </html>

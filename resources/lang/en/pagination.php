@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'previous' => '&laquo; Previous',
-    'next' => 'Next &raquo;',
+    'previous' => '<i data-feather="chevron-left"></i>',
+    'next' => '<i data-feather="chevron-right"></i>',
 
 ];

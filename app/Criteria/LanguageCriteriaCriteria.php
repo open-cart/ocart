@@ -25,6 +25,6 @@ class LanguageCriteriaCriteria implements CriteriaInterface
     {
         $descriptionModel = $model->language()->getModel();
         return $model->leftJoin($descriptionModel->getTable(), $descriptionModel->qualifyColumn('page_id'), $model->qualifyColumn('id'))
-            ->where($descriptionModel->qualifyColumn('lang'), session('language'));
+            ->where($descriptionModel->qualifyColumn('lang'), session('language', 'vi'));
     }
 }

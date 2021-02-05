@@ -34,6 +34,10 @@ class PageController extends Controller
     function index()
     {
         $pages = $this->repo->paginate();
+        $pages->getCollection()->map(function ($page) {
+            $page->editAction = route('plugin_blog::admin.edit', ['id' => $page->id]);
+            return $page;
+        });
         return view('blog::blog')->with('pages', $pages);
     }
 

@@ -12,7 +12,7 @@
             <li>Danh sách trang</li>
         </ol>
     </x-slot>
-    <div class="pb-12 pt-3">
+    <div class="pb-12 pt-3" id="page-container">
         <div class="sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -28,68 +28,71 @@
                         </div>
                     </div>
                     <div class="h-3"></div>
-                    <table
-                        x-data="listActions"
-                        class="w-full border-collapse border">
-                        <thead>
-                        <tr>
-                            <th class="border text-left px-2 py-2">Tiêu đề</th>
-                            <th class="border text-left px-2 py-2">Hình ảnh</th>
-                            <th class="border text-left px-2 py-2">URL Tùy chỉnh</th>
-                            <th class="border text-left px-2 py-2">{!! __('admin.status') !!}</th>
-                            <th class="border text-left px-2 py-2">{!! __('admin.action') !!}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach ($pages as $page)
+                    <div
+                        x-data="listActions">
+                        <table
+                            class="w-full border-collapse border">
+                            <thead>
                             <tr>
-                                <td class="border p-2">
-                                    {!! $page->title !!}
-                                </td>
-                                <td class="border p-2">
-                                    <img src="{!! $page->image !!}" class="w-14"/>
-                                </td>
-                                <td class="border p-2">
-                                    {!! $page->alias !!}
-                                </td>
-                                <td class="border p-2">
-                                    @if($page->status == 1)
-                                        <x-badge class="bg-green-500">
-                                            {!! __('admin.status_on') !!}
-                                        </x-badge>
-                                    @else
-                                        <x-badge class="bg-red-500">
-                                            {!! __('admin.status_off') !!}
-                                        </x-badge>
-                                    @endif
-                                </td>
-                                <td class="border p-2">
-                                    <div
-                                        x-data="{isOpen: false, deleteItem: listActions.deleteItem}"
-                                        class="flex">
-                                        <x-button-link-icon
-                                            href="{!! route('plugin_blog::admin.edit', ['id' => $page->id]) !!}"
-                                            title="{!! __('admin.edit') !!}"
-                                            class="bg-blue-500 hover:bg-blue-600 mr-2">
-                                            <i data-feather="edit" width="18" height="18"></i>
-                                        </x-button-link-icon>
-                                        <x-button-icon
-                                            x-on:click="isOpen = !isOpen"
-                                            title="{!! __('admin.delete') !!}"
-                                            class="bg-red-500 hover:bg-red-600">
-                                            <i data-feather="trash" width="18" height="18"></i>
-                                        </x-button-icon>
-                                        <x-confirm-delete
-                                            x-show="isOpen"
-                                            @close="isOpen = !isOpen"
-                                            @accept="isOpen = !isOpen; deleteItem({!! $page->id !!})"
-                                        />
-                                    </div>
-                                </td>
+                                <th class="border text-left px-2 py-2">Tiêu đề</th>
+                                <th class="border text-left px-2 py-2">Hình ảnh</th>
+                                <th class="border text-left px-2 py-2">URL Tùy chỉnh</th>
+                                <th class="border text-left px-2 py-2">{!! __('admin.status') !!}</th>
+                                <th class="border text-left px-2 py-2">{!! __('admin.action') !!}</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                            @foreach ($pages as $page)
+                                <tr>
+                                    <td class="border p-2">
+                                        {!! $page->title !!}
+                                    </td>
+                                    <td class="border p-2">
+                                        <img src="{!! $page->image !!}" class="w-14"/>
+                                    </td>
+                                    <td class="border p-2">
+                                        {!! $page->alias !!}
+                                    </td>
+                                    <td class="border p-2">
+                                        @if($page->status == 1)
+                                            <x-badge class="bg-green-500">
+                                                {!! __('admin.status_on') !!}
+                                            </x-badge>
+                                        @else
+                                            <x-badge class="bg-red-500">
+                                                {!! __('admin.status_off') !!}
+                                            </x-badge>
+                                        @endif
+                                    </td>
+                                    <td class="border p-2">
+                                        <div class="flex">
+                                            <x-button-link-icon
+                                                href="{!! route('plugin_blog::admin.edit', ['id' => $page->id]) !!}"
+                                                title="{!! __('admin.edit') !!}"
+                                                class="bg-blue-500 hover:bg-blue-600 mr-2">
+                                                <i data-feather="edit" width="18" height="18"></i>
+                                            </x-button-link-icon>
+                                            <x-button-icon
+                                                x-on:click="confirmDelete = !confirmDelete; itemSelected = {!! $page->id !!}"
+                                                title="{!! __('admin.delete') !!}"
+                                                class="bg-red-500 hover:bg-red-600">
+                                                <i data-feather="trash" width="18" height="18"></i>
+                                            </x-button-icon>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <x-confirm-delete
+                            x-show="confirmDelete"
+                            @close="confirmDelete = !confirmDelete;"
+                            @accept="confirmDelete = !confirmDelete; deleteItem(itemSelected)"
+                        />
+                        <div class="pt-3">
+                            {{ $pages->links() }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,9 +100,12 @@
 </x-app-layout>
 <script>
     const listActions = {
+        data: {!! json_encode($pages) !!},
+        confirmDelete: false,
+        itemSelected: null,
         deleteItem(id) {
             axios.post('{!! route('plugin_blog::admin.delete') !!}', {id}).then(res => {
-                window.location.reload();
+                $.pjax.reload('#body', {});
             })
         }
     }
