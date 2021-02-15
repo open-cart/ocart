@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\Admin\Models;
+namespace System\Core\Admin\Models;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;

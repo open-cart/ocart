@@ -18,7 +18,7 @@
                     <div x-data="{ open: false }">
                         <div
                             class="pl-5 pr-3 py-3 cursor-pointer flex items-center hover:bg-gray-100"
-                            @click="open = ! open"
+                            x-on:click="open = ! open"
                         >
                             {!! $level2->link->render() !!}
                             <svg :class="{'-rotate-180': open, 'rotate-0': ! open}" class="ml-auto fill-current h-4 w-4 transform" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -27,6 +27,7 @@
                         </div>
                         <div
                             x-show.transition.in.duration.200ms.out.duration.50ms="open"
+                            style="display: none;"
                             {!! $level2->link->parentAttributes() !!}>
                             @foreach ($level2->getChildren() as $level3)
                                 <div :class="{'hover:bg-gray-100 {{ request()->routeIs($level3->link->routeName()) ? 'bg-indigo-100':'' }}': true}"
@@ -47,3 +48,6 @@
         @endif
     @endforeach
 </aside>
+<script>
+    var theme = {{ session('theme', 'themes.blue') }};
+</script>

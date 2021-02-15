@@ -1,8 +1,8 @@
 <?php
 
-namespace Core\Providers;
+namespace System\Core\Providers;
 
-use Core\Admin\Models\AdminConfig;
+use System\Core\Admin\Models\AdminConfig;
 use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider

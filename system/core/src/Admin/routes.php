@@ -7,7 +7,7 @@ Route::group(
     [
         'prefix' => config('const.ADMIN_PREFIX', 'admin'),
         'middleware' => config('const.ADMIN_MIDDLEWARE', ['web']),
-        'namespace' => config('const.ADMIN_NAMESPACE', 'Core\\Admin\\Controllers'),
+        'namespace' => config('const.ADMIN_NAMESPACE', 'System\\Core\\Admin\\Controllers'),
     ],
     function() {
         Route::get('/theme/red', function () {

@@ -14,7 +14,9 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "prettus/l5-repository": "^2.7"
+        "prettus/l5-repository": "^2.7",
+        "spatie/laravel-pjax": "^2.1",
+        "yajra/laravel-datatables-html": "^4.36"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",
@@ -41,7 +43,7 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Core\\": "system/core/src/",
+            "System\\Core\\": "system/core/src/",
             "Blog\\": "plugins/blog/src/"
         }
     },

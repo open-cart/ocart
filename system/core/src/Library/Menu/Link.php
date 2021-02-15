@@ -1,12 +1,12 @@
 <?php
 
 
-namespace Core\Library\Menu;
+namespace System\Core\Library\Menu;
 
 
-use Core\Library\Menu\Traits\HasHtmlAttributes;
-use Core\Library\Menu\Traits\HasParentAttributes;
-use Core\Library\Menu\Traits\HasRoute;
+use System\Core\Library\Menu\Traits\HasHtmlAttributes;
+use System\Core\Library\Menu\Traits\HasParentAttributes;
+use System\Core\Library\Menu\Traits\HasRoute;
 
 class Link
 {

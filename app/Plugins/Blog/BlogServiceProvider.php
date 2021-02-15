@@ -8,9 +8,9 @@ use App\Plugins\Blog\Repositories\PageDescriptionRepository;
 use App\Plugins\Blog\Repositories\PageDescriptionRepositoryEloquent;
 use App\Plugins\Blog\Repositories\PageRepository;
 use App\Plugins\Blog\Repositories\PageRepositoryEloquent;
-use Core\Library\MapData;
-use Core\Library\Menu\Link;
-use Core\Library\Menu\Menu;
+use System\Core\Library\MapData;
+use System\Core\Library\Menu\Link;
+use System\Core\Library\Menu\Menu;
 use Illuminate\Support\ServiceProvider;
 
 class BlogServiceProvider extends ServiceProvider

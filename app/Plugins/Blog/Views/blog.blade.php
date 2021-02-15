@@ -17,7 +17,19 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="flex justify-between">
-                        <div></div>
+                        <div class="w-1/2">
+                            <div class="mt-1 w-36 relative">
+                                <select class="block appearance-none border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+                                    <option>Tên a-z</option>
+                                    <option>Tên z-a</option>
+                                    <option>ID desc</option>
+                                    <option>ID asc</option>
+                                </select>
+                                <div class="absolute flex inset-y-0 items-center px-3 right-0 text-gray-700 bg-purple-300 rounded-r">
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <x-button-link-icon
                                 href="{!! route('plugin_blog::admin.create') !!}"
@@ -91,6 +103,7 @@
                         />
                         <div class="pt-3">
                             {{ $pages->links() }}
+                            {{ $pages->nguyen() }}
                         </div>
                     </div>
                 </div>

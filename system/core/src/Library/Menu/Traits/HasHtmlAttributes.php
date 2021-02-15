@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\Library\Menu\Traits;
+namespace System\Core\Library\Menu\Traits;
 
 
 trait HasHtmlAttributes

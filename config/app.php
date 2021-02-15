@@ -182,7 +182,7 @@ return [
         /**
          * Custom Provider
          */
-        Core\CoreServiceProvider::class,
+        System\Core\CoreServiceProvider::class,
     ],
 
     /*

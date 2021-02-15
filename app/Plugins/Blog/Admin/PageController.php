@@ -4,9 +4,11 @@
 namespace App\Plugins\Blog\Admin;
 
 
+use App\Models\User;
 use App\Plugins\Blog\Models\Page;
 use App\Plugins\Blog\Repositories\PageRepository;
 use App\Plugins\Blog\Services\StorePageDescriptionService;
+use App\Plugins\Blog\Table\PageTable;
 use App\Repositories\LanguageRepository;
 use Core\Library\MapData;
 use \Illuminate\Http\Request;
@@ -14,6 +16,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Str;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Validator;
+use DataTables;
 
 class PageController extends Controller
 {
@@ -31,13 +34,15 @@ class PageController extends Controller
         view()->share('languages', $this->languages);
     }
 
-    function index()
+    function index(PageTable $table)
     {
+        return $table->render();
         $pages = $this->repo->paginate();
         $pages->getCollection()->map(function ($page) {
             $page->editAction = route('plugin_blog::admin.edit', ['id' => $page->id]);
             return $page;
         });
+//
         return view('blog::blog')->with('pages', $pages);
     }
 

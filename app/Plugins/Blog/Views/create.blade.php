@@ -9,7 +9,7 @@
             <li><span class="mx-2">/</span></li>
             <li><a href="#" class="text-blue font-bold">Bài viết</a></li>
             <li><span class="mx-2">/</span></li>
-            <li><a href="#" class="text-blue font-bold">Page</a></li>
+            <li><a href="{{ route('plugin_blog::admin.index') }}" class="text-blue font-bold">Page</a></li>
             <li><span class="mx-2">/</span></li>
             <li>Thêm mới</li>
         </ol>

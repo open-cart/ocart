@@ -22,12 +22,12 @@
                     <div>
                         <nav>
                             <ul class="flex">
-                                <li @click="tab = 1"
+                                <li x-on:click="tab = 1"
                                     :class="{'border-b-2 border-indigo-600': tab===1}"
                                     class="py-2 px-4 cursor-pointer">
                                     <span>Đã lưu trên máy</span>
                                 </li>
-                                <li @click="tab = 2"
+                                <li x-on:click="tab = 2"
                                     :class="{'border-b-2 border-indigo-600': tab===2}"
                                     class="py-2 px-4 cursor-pointer">
                                     <span>Cửa hàng</span>
@@ -67,7 +67,7 @@
                                 <th class="border text-left px-2 py-2">Hành động</th>
                             </tr>
                             </thead>
-                            <tbody x-data="pluginActions">
+                            <tbody x-data="pluginActions()">
                             @foreach($plugins as $plugin)
                                 <tr>
                                     <td class="border p-2">
@@ -112,10 +112,10 @@
                                                         </div>
                                                     </a>
                                                 @endif
-                                                <div x-data="confirmDelete()">
+                                                <div x-data="confirmDelete1()">
                                                     <a href="#"
                                                        title="{!! __('admin.plugins.action_uninstall_title') !!}"
-                                                       @click="isOpen = !isOpen"
+                                                       x-on:click="isOpen = !isOpen"
                                                     >
                                                         <div class="p-1">
                                                             <i data-feather="trash" class="text-red-600"></i>
@@ -279,39 +279,41 @@
             </div>
         </div>
     </div>
-</x-app-layout>
-<script>
-    const pluginActions = {
-        enable(key) {
-            axios.post('{!! route('admin_plugin::enable') !!}', {
-                key
-            }).then(() => {
-                window.location.reload();
-            })
-        },
-        disable(key) {
-            axios.post('{!! route('admin_plugin::disable') !!}', {
-                key
-            }).then(() => {
-                window.location.reload();
-            })
-        },
-        uninstall(key) {
-            console.log(key)
-            axios.post('{!! route('admin_plugin::uninstall') !!}', {
-                key
-            }).then(() => {
-                window.location.reload();
-            })
-        }
-    }
-
-    function confirmDelete() {
-        return {
-            isOpen: false,
-            uninstall(key) {
-                pluginActions.uninstall(key);
+    <script>
+        function pluginActions() {
+            return {
+                enable(key) {
+                    axios.post('{!! route('admin_plugin::enable') !!}', {
+                        key
+                    }).then(() => {
+                        $.pjax.reload('#body', {});
+                    })
+                },
+                disable(key) {
+                    axios.post('{!! route('admin_plugin::disable') !!}', {
+                        key
+                    }).then(() => {
+                        $.pjax.reload('#body', {});
+                    })
+                },
+                uninstall(key) {
+                    console.log(key)
+                    axios.post('{!! route('admin_plugin::uninstall') !!}', {
+                        key
+                    }).then(() => {
+                        window.location.reload();
+                    })
+                }
             }
         }
-    }
-</script>
+
+        function confirmDelete1() {
+            return {
+                isOpen: false,
+                uninstall(key) {
+                    pluginActions().uninstall(key);
+                }
+            }
+        }
+    </script>
+</x-app-layout>

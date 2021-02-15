@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const glob = require('glob');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,9 +11,16 @@ const mix = require('laravel-mix');
  |
  */
 
+
+glob.sync('./system/**/webpack.mix.js').forEach(config => {
+    require(config);
+});
+
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
 ]);
+
+
 mix.browserSync('https://ocart.test/');

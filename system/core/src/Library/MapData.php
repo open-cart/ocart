@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Core\Library;
+namespace System\Core\Library;
 
 
-use Core\Library\MapData\Builder;
+use System\Core\Library\MapData\Builder;
 
 class MapData
 {

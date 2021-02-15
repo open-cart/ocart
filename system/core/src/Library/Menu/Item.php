@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\Library\Menu;
+namespace System\Core\Library\Menu;
 use Illuminate\Contracts\Support\Arrayable;
 
 class Item implements Arrayable

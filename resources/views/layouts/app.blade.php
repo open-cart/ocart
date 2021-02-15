@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta http-equiv="x-pjax-version" content="{{ mix('/css/app.css') }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
@@ -15,25 +16,63 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
+        <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+        <script>
+            var themes = {
+                blue: {
+                    bg: 'bg-blue-500'
+                },
+                red: {
+                    bg: 'bg-red-500'
+                },
+                green: {
+                    bg: 'bg-green-600'
+                },
+                black: {
+                    bg: 'bg-gray-800'
+                }
+            };
+            var theme = {{ session('theme', 'themes.blue') }};
+            const confirmDelete = {
+                callback: () => {},
+                close: () => {},
+                show(accept = () => {}, close = () => {}) {
+                    $('#confirmDelete').show();
+                    this.callback = accept;
+                    this.close = close;
+                },
+                hide() {
+                    $('#confirmDelete').hide();
+                    this.close(this);
+                },
+                accept() {
+                    $('#confirmDelete').hide();
+                    this.callback(this);
+                }
+            }
+        </script>
     </head>
-    <body class="font-sans antialiased" id="body">
-        <div x-data class="min-h-screen bg-gray-100">
+    <body class="font-sans antialiased">
+        <div id="body">
+            <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            <header class="lg:ml-64">
-                <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    {{ $header }}
-                </div>
-            </header>
+                <header class="lg:ml-64">
+                    <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
+                        {{ $header }}
+                    </div>
+                </header>
 
-            <!-- Page Sidebar -->
+                <!-- Page Sidebar -->
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-            <main class="lg:ml-64">
-                {{ $slot }}
-            </main>
+                <main class="lg:ml-64">
+                    {{ $slot }}
+                </main>
+            </div>
         </div>
     </body>
     <div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
@@ -44,25 +83,12 @@
             </span>
         </div>
     </div>
-    <script>
-        var themes = {
-            blue: {
-                bg: 'bg-blue-500'
-            },
-            red: {
-                bg: 'bg-red-500'
-            },
-            green: {
-                bg: 'bg-green-600'
-            },
-            black: {
-                bg: 'bg-gray-800'
-            }
-        };
-        var theme = {{ session('theme', 'themes.blue') }};
-    </script>
-    <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
-    <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+    <div x-data="confirmDelete">
+        <x-confirm-delete
+            id="confirmDelete"
+            @close="hide()"
+            @accept="accept()"></x-confirm-delete>
+    </div>
     <script>
         $(function(){
             // pjax
@@ -71,8 +97,14 @@
                 $('#loading').show()
             })
             $(document).on('pjax:complete', function() {
-                $('#loading').hide()
+                feather.replace({'stroke-width': 1.5})
+                Alpine.start();
+                $('#loading').hide();
+                $('img').on("error", function (e) {
+                    e.target.src = '/images/no-image.jpg';
+                });
             })
         })
     </script>
+    @stack('scripts')
 </html>

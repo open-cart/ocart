@@ -1,10 +1,10 @@
 <?php
 
 
-namespace Core\Admin\Controllers;
+namespace System\Core\Admin\Controllers;
 
 
-use Core\Admin\Models\AdminConfig;
+use System\Core\Admin\Models\AdminConfig;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;

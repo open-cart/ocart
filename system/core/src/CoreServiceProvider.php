@@ -1,11 +1,13 @@
 <?php
 
-namespace Core;
+namespace System\Core;
 
-use Core\Library\Menu\Html;
-use Core\Library\Menu\Item;
-use Core\Library\Menu\Link;
-use Core\Library\Menu\Menu;
+use System\Core\Library\CustomPaginator;
+use System\Core\Library\Menu\Html;
+use System\Core\Library\Menu\Item;
+use System\Core\Library\Menu\Link;
+use System\Core\Library\Menu\Menu;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 
 class CoreServiceProvider extends ServiceProvider
@@ -16,6 +18,9 @@ class CoreServiceProvider extends ServiceProvider
         foreach (glob(__DIR__.'/Library/Helpers/*.php') as $filename) {
             require_once $filename;
         }
+
+        $this->app->bind(LengthAwarePaginator::class, CustomPaginator::class);
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
     }
 
     public function boot()

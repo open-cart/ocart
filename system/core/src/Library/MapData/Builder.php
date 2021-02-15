@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Core\Library\MapData;
+namespace System\Core\Library\MapData;
 
 use Illuminate\Support\Collection;
 
