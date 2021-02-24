@@ -42,6 +42,8 @@
                     <div class="h-3"></div>
                     <div
                         x-data="listActions">
+                        <span>{!! do_action('nguyen', 'Phan Trung Nguyen') !!}</span>
+                        <span>{!! apply_filters('nguyen', '123', 'abc') !!}</span>
                         <table
                             class="w-full border-collapse border">
                             <thead>

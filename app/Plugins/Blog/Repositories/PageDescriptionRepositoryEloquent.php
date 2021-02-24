@@ -29,7 +29,7 @@ class PageDescriptionRepositoryEloquent extends BaseRepository implements PageDe
     ];
 
     /**
-     * Specify Model class name
+     * Specify Models class name
      *
      * @return string
      */

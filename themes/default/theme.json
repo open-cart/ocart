@@ -1,0 +1,8 @@
+{
+    "name": "default",
+    "description": "Ripple is default theme for Botble since v2.0",
+    "author": "Phan Trung Nguyên",
+    "version": "1.0",
+    "required_plugins": [
+    ]
+}

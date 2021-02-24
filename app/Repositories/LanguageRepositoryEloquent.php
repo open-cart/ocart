@@ -24,7 +24,7 @@ class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepos
     protected static $_listCodeActive;
 
     /**
-     * Specify Model class name
+     * Specify Models class name
      *
      * @return string
      */

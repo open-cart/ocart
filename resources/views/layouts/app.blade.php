@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="x-pjax-version" content="{{ mix('/css/app.css') }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ page_title()->getTitle() }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">

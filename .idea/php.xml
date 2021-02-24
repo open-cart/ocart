@@ -119,6 +119,14 @@
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
       <path value="$PROJECT_DIR$/vendor/spatie/laravel-pjax" />
       <path value="$PROJECT_DIR$/vendor/symfony/dom-crawler" />
+      <path value="$PROJECT_DIR$/vendor/ocart/system" />
+      <path value="$PROJECT_DIR$/vendor/ocart/core" />
+      <path value="$PROJECT_DIR$/vendor/ocart/plugin-management" />
+      <path value="$PROJECT_DIR$/vendor/ocart/page" />
+      <path value="$PROJECT_DIR$/vendor/ocart/theme" />
+      <path value="$PROJECT_DIR$/vendor/laravelium/sitemap" />
+      <path value="$PROJECT_DIR$/vendor/ocart/seo-helper" />
+      <path value="$PROJECT_DIR$/vendor/artesaos/seotools" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

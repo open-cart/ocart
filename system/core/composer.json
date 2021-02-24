@@ -1,10 +1,28 @@
 {
-    "name": "nguyenpt/core",
+    "name": "ocart/core",
     "authors": [
         {
             "name": "Phan Trung Nguyên",
             "email": "nguyenpl117@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "System\\Core\\": "base/src/",
+            "Ocart\\Table\\": "table/src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "System\\Core\\CoreServiceProvider",
+                "Ocart\\Table\\TableServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    header("location: /dashboard");
-    return view('welcome');
-});
+//Route::get('/', function () {
+////    header("location: /dashboard");
+//    return view('welcome');
+//});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

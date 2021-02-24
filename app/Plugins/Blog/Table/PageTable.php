@@ -3,10 +3,11 @@
 
 namespace App\Plugins\Blog\Table;
 
-use System\Core\Tables\TableAbstract;
+use App\Plugins\Blog\Models\Page;
 use Collective\Html\HtmlBuilder;
+use Ocart\Page\Repositories\PageRepository;
+use Ocart\Table\Abstracts\TableAbstract;
 use Yajra\DataTables\Html\Builder;
-use App\Plugins\Blog\Repositories\PageRepository;
 
 class PageTable extends TableAbstract
 {
@@ -67,7 +68,8 @@ class PageTable extends TableAbstract
 
     public function buttons()
     {
-        $this->addCreateButton(route('plugin_blog::admin.create'), []);
-        return parent::buttons();
+        $buttons = $this->addCreateButton(route('plugin_blog::admin.create'), []);
+
+        return apply_filters('base_table_action', $buttons, Page::class);
     }
 }

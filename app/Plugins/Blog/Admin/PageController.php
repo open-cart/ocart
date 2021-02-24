@@ -13,6 +13,7 @@ use App\Repositories\LanguageRepository;
 use Core\Library\MapData;
 use \Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Prettus\Validator\Exceptions\ValidatorException;
 use Validator;
@@ -36,12 +37,28 @@ class PageController extends Controller
 
     function index(PageTable $table)
     {
+
+        add_action('nguyen', function($name) {
+           return $name;
+        },1);
+        add_action('nguyen', function($name) {
+            return '$name';
+        },1);
+
+        add_filter('base_table_action', function ($buttons, $model) {
+            $buttons['reload'] = '<input/>';
+
+            return $buttons;
+        }, 0, 2);
+
+
         return $table->render();
         $pages = $this->repo->paginate();
         $pages->getCollection()->map(function ($page) {
             $page->editAction = route('plugin_blog::admin.edit', ['id' => $page->id]);
             return $page;
         });
+
 //
         return view('blog::blog')->with('pages', $pages);
     }

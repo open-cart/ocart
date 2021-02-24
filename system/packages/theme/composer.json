@@ -1,0 +1,20 @@
+{
+    "name": "ocart/theme",
+    "description": "Theme package for Botble CMS application",
+    "type": "package",
+    "autoload": {
+        "psr-4": {
+            "Ocart\\Theme\\": "src"
+        }
+    },
+    "require": {
+        "laravelium/sitemap": "8.*"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ocart\\Theme\\Providers\\ThemeServiceProvider"
+            ]
+        }
+    }
+}

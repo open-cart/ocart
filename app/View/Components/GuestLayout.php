@@ -3,6 +3,7 @@
 namespace App\View\Components;
 
 use Illuminate\View\Component;
+use Ocart\Theme\Facades\Theme;
 
 class GuestLayout extends Component
 {
@@ -13,6 +14,7 @@ class GuestLayout extends Component
      */
     public function render()
     {
-        return view('layouts.guest');
+        return Theme::scope('layouts.default');
+//        return view('layouts.guest');
     }
 }

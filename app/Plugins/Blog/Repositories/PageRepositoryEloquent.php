@@ -20,7 +20,7 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
     ];
 
     /**
-     * Specify Model class name
+     * Specify Models class name
      *
      * @return string
      */
