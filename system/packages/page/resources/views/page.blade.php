@@ -25,7 +25,7 @@
                           class="form-horizontal"
                           id="from-page"
                           enctype="multipart/form-data">
-                        <input name="_method" type="hidden" value="PUT">
+{{--                        <input name="_method" type="hidden" value="PUT">--}}
                         {{ csrf_field()}}
                         <div class="border-b -mx-6 px-6">
                             <h3 class="text-xl">Tạo mới</h3>

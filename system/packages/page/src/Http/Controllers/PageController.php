@@ -39,7 +39,25 @@ class PageController extends BaseController
         return  view('packages/page::page')
             ->with('page', [])
             ->with('model', $this->repo->getModel())
-            ->with('url_action', route('pages.create'));
+            ->with('url_action', route('pages.store'));
+    }
+
+    function store(Request $request, StorePageDescriptionService $pageDescriptionService)
+    {
+        try {
+            $data = $request->all();
+            $lang = $this->languages->first()->code;
+            $data['alias'] = $request->input('alias') ?? Str::limit(Str::slug($request->input('description.'.$lang.'.title')));
+
+            $page = $this->repo->create($data);
+            $pageDescriptionService->execute($request, $page);
+        } catch (ValidatorException $e) {
+            return back()
+                ->withInput($data)
+                ->withErrors($e->getMessageBag());
+        }
+
+        return redirect()->route('pages.index');
     }
 
     function show($id)

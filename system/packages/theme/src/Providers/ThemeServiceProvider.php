@@ -31,10 +31,14 @@ class ThemeServiceProvider extends ServiceProvider
     {
         $this->setNamespace('packages/theme')
             ->loadAndPublishConfigurations([])
-            ->loadRoutes(['web', 'public'])
+            ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
             ->loadMigrations();
+
+        $this->app->booted(function () {
+            $this->loadRoutesFrom(__DIR__ . '/../../routes/public.php');
+        });
 
 
         Event::listen(RouteMatched::class, function () {

@@ -20,26 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: ...">
-      <change afterPath="$PROJECT_DIR$/system/core/base/database/migrations/2021_02_24_111113_create_meta_boxes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/routes/web.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/src/Facades/MetaBox.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/packages/seo-helper/resources/views/meta_box.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/base/src/Criteria/RequestCriteria.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/database/migrations/2013_04_09_032329_create_meta_box_tables.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/helpers/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/helpers/common.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/repository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/core/base/helpers/const.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/helpers/const.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Admin/Controllers/PluginController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Admin/Lang/vi/lang.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Admin/Models/AdminConfig.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Admin/Routes/plugin.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Admin/routes.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Library/MetaBox.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/Library/MetaBox.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/lang/vi/pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/lang/vi/pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/views/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/views/create.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/seo-helper/src/Providers/SeoHelperServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/seo-helper/src/Providers/SeoHelperServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/theme/routes/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/routes/public.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/theme/src/Providers/ThemeServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/src/Providers/ThemeServiceProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -247,7 +239,8 @@
       <workItem from="1612582925024" duration="17096000" />
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
-      <workItem from="1614073382905" duration="32334000" />
+      <workItem from="1614073382905" duration="34090000" />
+      <workItem from="1614225795358" duration="2853000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -284,7 +277,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614165056307</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="chore: ...">
+      <created>1614221239437</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1614221239437</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,15 +340,15 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="741" y="481" key="#com.intellij.ide.util.TreeClassChooserDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614071182210" />
-    <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614138304832">
+    <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1614228093920">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614138304832" />
+    <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614228093920" />
     <state x="471" y="119" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1612149780876" />
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614166957431">
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614228142998">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614166957431" />
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614228142998" />
     <state x="480" y="339" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1090@0.23.1920.1090" timestamp="1612430843214" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1093@0.23.1920.1093" timestamp="1612431319819" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1095@0.23.1920.1095" timestamp="1612152772284" />
@@ -356,10 +356,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="874" y="428" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1088@0.23.1920.1088" timestamp="1614056074274" />
-    <state x="747" y="417" key="NewPhpClassDialog" timestamp="1614165015572">
+    <state x="747" y="417" key="NewPhpClassDialog" timestamp="1614228033472">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="747" y="417" key="NewPhpClassDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614165015572" />
+    <state x="747" y="417" key="NewPhpClassDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614228033472" />
     <state x="638" y="301" key="NewPhpClassDialog/0.23.1920.1090@0.23.1920.1090" timestamp="1612102167586" />
     <state x="638" y="302" key="NewPhpClassDialog/0.23.1920.1095@0.23.1920.1095" timestamp="1612156806867" />
     <state x="488" y="460" key="NewPhpClassDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1612163531465" />

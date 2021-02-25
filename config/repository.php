@@ -219,6 +219,10 @@ return [
             'with'         => 'with',
             'searchJoin'   => 'searchJoin',
             'withCount'    => 'withCount'
+        ],
+        'default' => [
+            'sortedBy'  => 'desc',
+            'orderBy'   => 'id'
         ]
     ],
     /*

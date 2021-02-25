@@ -3,6 +3,7 @@
 namespace App\Criteria;
 
 use App\Plugins\Blog\Models\Page;
+use Illuminate\Database\Eloquent\Model;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -23,7 +24,11 @@ class LanguageCriteriaCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        $descriptionModel = $model->language()->getModel();
+        if ($model instanceof Model) {
+            $descriptionModel = $model->language()->getModel();
+        } else {
+            $descriptionModel = $model->getModel()->language()->getModel();
+        }
         return $model->leftJoin($descriptionModel->getTable(), $descriptionModel->qualifyColumn('page_id'), $model->qualifyColumn('id'))
             ->where($descriptionModel->qualifyColumn('lang'), session('language', 'vi'));
     }
