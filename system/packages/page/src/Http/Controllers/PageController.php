@@ -38,6 +38,7 @@ class PageController extends BaseController
     {
         return  view('packages/page::page')
             ->with('page', [])
+            ->with('method', 'POST')
             ->with('model', $this->repo->getModel())
             ->with('url_action', route('pages.store'));
     }
@@ -71,6 +72,7 @@ class PageController extends BaseController
 
         return  view('packages/page::page')
             ->with('url_action', route('pages.update', ['id' => $page->id]))
+            ->with('method', 'PUT')
             ->with('model', $page)
             ->with('page', $data);
     }

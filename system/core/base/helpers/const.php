@@ -11,3 +11,8 @@ if (!defined('BASE_ACTION_PUBLIC_RENDER_SINGLE')) {
 if (!defined('BASE_ACTION_META_BOXES')) {
     define('BASE_ACTION_META_BOXES', 'meta_boxes');
 }
+
+// use in get list data function in each repository
+if (!defined('BASE_FILTER_GET_LIST_DATA')) {
+    define('BASE_FILTER_GET_LIST_DATA', 'get_list_data');
+}

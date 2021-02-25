@@ -25,7 +25,7 @@
                           class="form-horizontal"
                           id="from-page"
                           enctype="multipart/form-data">
-{{--                        <input name="_method" type="hidden" value="PUT">--}}
+                        {{ method_field($method) }}
                         {{ csrf_field()}}
                         <div class="border-b -mx-6 px-6">
                             <h3 class="text-xl">Tạo mới</h3>
@@ -139,9 +139,9 @@
                                 <div class="lg:w-64"></div>
                                 <div class="flex flex-auto justify-between">
                                     <div>
-                                        <x-button color="yellow">
-                                            {!! __('admin.reset') !!}
-                                        </x-button>
+{{--                                        <x-button color="yellow">--}}
+{{--                                            {!! __('admin.reset') !!}--}}
+{{--                                        </x-button>--}}
                                     </div>
                                     <div>
                                         <x-button color="blue">

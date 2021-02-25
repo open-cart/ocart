@@ -4,10 +4,12 @@ namespace Ocart\Table\Abstracts;
 use Collective\Html\HtmlBuilder;
 use Illuminate\Support\Arr;
 use Illuminate\View\ComponentAttributeBag;
+use Ocart\Table\DataTables;
+use Prettus\Repository\Contracts\RepositoryInterface;
 
 abstract class TableAbstract
 {
-    protected $_table;
+    protected $table;
 
     protected $bulkAction;
 
@@ -19,6 +21,11 @@ abstract class TableAbstract
 
     public $html;
 
+    /**
+     * @var RepositoryInterface
+     */
+    protected $repository;
+
     public $view = 'core/table::simple-table';
 
     /**
@@ -26,8 +33,9 @@ abstract class TableAbstract
      */
     protected $tableAttributes = [];
 
-    public function __construct(HtmlBuilder $html)
+    public function __construct(DataTables $table, HtmlBuilder $html)
     {
+        $this->table = $table;
         $this->html = $html;
         // code
     }
@@ -36,11 +44,6 @@ abstract class TableAbstract
     {
         $options['table'] = $this;
         return view($view ?? $this->view, $options);
-    }
-
-    public function columns()
-    {
-        return [];
     }
 
     public function addCreateButton($link, $permission = null)
@@ -116,6 +119,11 @@ abstract class TableAbstract
             $tr[] = '<tr>' . implode('', $td) . '</tr>';
         }
         return $tr;
+    }
+
+    public function columns()
+    {
+        return $this->table->getColumns();
     }
 
     public function table($attributes = [])

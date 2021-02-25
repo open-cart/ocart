@@ -33,7 +33,6 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
             ->loadMigrations();
         $this->loadViewsFrom(__DIR__ . '/../../resources/views','blog');
 
-
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id' => 'cms-core-content',
