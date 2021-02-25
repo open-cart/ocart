@@ -34,6 +34,14 @@ class PageController extends BaseController
 //        return view('packages/page::index');
     }
 
+    function create()
+    {
+        return  view('packages/page::page')
+            ->with('page', [])
+            ->with('model', $this->repo->getModel())
+            ->with('url_action', route('pages.create'));
+    }
+
     function show($id)
     {
         $page = $this->repo->skipCriteria()->find($id);
@@ -43,7 +51,7 @@ class PageController extends BaseController
         ];
 
 
-        return  view('packages/page::create')
+        return  view('packages/page::page')
             ->with('url_action', route('pages.update', ['id' => $page->id]))
             ->with('model', $page)
             ->with('page', $data);

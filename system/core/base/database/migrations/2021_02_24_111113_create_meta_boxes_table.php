@@ -1,17 +1,20 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateMetaBoxTables extends Migration
+/**
+ * Class CreateMetaBoxesTable.
+ */
+class CreateMetaBoxesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
         Schema::create('meta_boxes', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('reference_id')->unsigned()->index();
@@ -20,15 +23,15 @@ class CreateMetaBoxTables extends Migration
             $table->text('meta_value')->nullable();
             $table->timestamps();
         });
-    }
+	}
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('meta_boxes');
-    }
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::drop('meta_boxes');
+	}
 }

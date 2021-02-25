@@ -61,7 +61,7 @@
                                         :errors="$errors"
                                         name="description.{!! $lang !!}.title"
                                         info="{!! trans('admin.max_c',['max'=>200]) !!}"
-                                        title="{!! __('Plugins/Blog::lang.title') !!}">
+                                        title="{!! __('packages/page::pages.title') !!}">
                                         <x-blog::input
                                             name="description[{!! $lang !!}][title]"
                                             value="{!! old('description.'.$lang.'.title', \Arr::get($page, 'description.'.$lang.'.title')) !!}"
@@ -73,7 +73,7 @@
                                         :errors="$errors"
                                         name="description.{!! $lang !!}.keyword"
                                         info="{!! trans('admin.max_c',['max'=>200]) !!}"
-                                        title="{!! __('Plugins/Blog::lang.keyword') !!}">
+                                        title="{!! __('packages/page::pages.keyword') !!}">
                                         <x-blog::input
                                             name="description[{!! $lang !!}][keyword]"
                                             value="{!! old('description.'.$lang.'.keyword', \Arr::get($page, 'description.'.$lang.'.keyword')) !!}"
@@ -84,7 +84,7 @@
                                         :errors="$errors"
                                         name="description.{!! $lang !!}.description"
                                         info="{!! trans('admin.max_c',['max'=>300]) !!}"
-                                        title="{!! __('Plugins/Blog::lang.description') !!}">
+                                        title="{!! __('packages/page::pages.description') !!}">
                                         <textarea
                                             name="description[{!! $lang !!}][description]"
                                             class="resize border border-gray-300 rounded-md w-full focus:ring-0"
@@ -93,7 +93,7 @@
                                     <x-blog::control
                                         :errors="$errors"
                                         name="description.{!! $lang !!}.content"
-                                        title="{!! __('Plugins/Blog::lang.description') !!}">
+                                        title="{!! __('packages/page::pages.description') !!}">
                                         <textarea
                                             name="description[{!! $lang !!}][content]"
                                             class="resize border border-gray-300 rounded-md w-full focus:ring-0"
@@ -105,12 +105,12 @@
                         </div>
                         <div>
                             <div>
-                                {!! __('Plugins/Blog::lang.image') !!}
+                                {!! __('packages/page::pages.image') !!}
                             </div>
                             <x-blog::control
                                 :error="$errors->has('alias')"
                                 :errors="$errors"
-                                title="{!! __('Plugins/Blog::lang.alias') !!}"
+                                title="{!! __('packages/page::pages.alias') !!}"
                                 name="alias"
                                 info="{!! trans('admin.max_c',['max'=>100]) !!}"
                             >
@@ -131,6 +131,8 @@
                                     color="green"
                                 />
                             </x-blog::control>
+
+                            {!! do_action(BASE_ACTION_META_BOXES, 'page', 'advanced', $model) !!}
                         </div>
                         <div class="border-t -mx-6 px-6 pt-6">
                             <div class="flex">

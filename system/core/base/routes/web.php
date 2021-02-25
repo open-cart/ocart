@@ -1,7 +1,5 @@
 <?php
-
 use \Illuminate\Support\Facades\Route;
-
 
 Route::group(
     [
@@ -61,4 +59,4 @@ Route::group(
 //        foreach (glob(__DIR__.'/Routes/*.php') as $filename) {
 //            require_once $filename;
 //        }
-});
+    });

@@ -7,6 +7,8 @@ use Illuminate\Routing\ResourceRegistrar;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use System\Core\Library\CustomResourceRegistrar;
+use System\Core\Repositories\MetaBoxRepository;
+use System\Core\Repositories\MetaBoxRepositoryEloquent;
 use System\Core\Traits\LoadAndPublishDataTrait;
 
 class CoreServiceProvider extends ServiceProvider
@@ -22,6 +24,7 @@ class CoreServiceProvider extends ServiceProvider
 
 //        $this->app->bind(LengthAwarePaginator::class, CustomPaginator::class);
         $this->app->bind(ResourceRegistrar::class, CustomResourceRegistrar::class);
+        $this->app->bind(MetaBoxRepository::class, MetaBoxRepositoryEloquent::class);
 
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
@@ -32,8 +35,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->setNamespace('core/base')->loadMigrations();
 
         // Route Admin
-        if (file_exists(__DIR__ . '/Admin/routes.php')) {
-            $this->loadRoutesFrom(__DIR__ . '/Admin/routes.php');
+        if (file_exists(__DIR__ . '/../routes/web.php')) {
+            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
         }
 
         function featherIcon($name) {

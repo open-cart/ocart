@@ -98,3 +98,17 @@ if (!function_exists('page_title')) {
         return \System\Core\Facades\PageTitleFacade::getFacadeRoot();
     }
 }
+
+if (!function_exists('get_meta_data')) {
+    /**
+     * @param Model $object
+     * @param $key
+     * @param boolean $single
+     * @param array $select
+     * @return mixed
+     */
+    function get_meta_data($object, $key, $single = false, $select = ['meta_value'])
+    {
+        return \System\Core\Facades\MetaBox::getMetaData($object, $key, $single, $select);
+    }
+}
