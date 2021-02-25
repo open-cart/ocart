@@ -52,8 +52,10 @@
                 }
             }
         </script>
+        @stack('head')
     </head>
     <body class="font-sans antialiased">
+        @stack('bodyPrepend')
         <div id="body">
             <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
@@ -73,6 +75,7 @@
                     {{ $slot }}
                 </main>
             </div>
+            @stack('scripts')
         </div>
     </body>
     <div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
@@ -106,5 +109,5 @@
             })
         })
     </script>
-    @stack('scripts')
+    @stack('bodyAppend')
 </html>

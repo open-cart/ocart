@@ -23,4 +23,11 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]);
 
 
-mix.browserSync('https://ocart.test/');
+mix.browserSync({
+    proxy: 'https://ocart.test/',
+    files: [
+        "**/*.css",
+        "**/*.php",
+        "**/*.js",
+    ]
+});

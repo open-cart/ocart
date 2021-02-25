@@ -92,4 +92,11 @@ class PageController extends BaseController
 
         return redirect()->route('pages.index');
     }
+
+    function destroy(Request $request)
+    {
+        $this->repo->delete($request->input('id'));
+
+        return response()->json([]);
+    }
 }

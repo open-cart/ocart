@@ -1,37 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BranchesTreeState">
-    <expand>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
+    <expand />
     <select />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: ...">
-      <change afterPath="$PROJECT_DIR$/system/core/base/src/Criteria/RequestCriteria.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/repository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/helpers/const.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/helpers/const.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Admin/PageController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/AppConfig.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/BlogServiceProvider.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Lang/en/lang.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Lang/vi/lang.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Models/Page.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Models/PageDescription.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageDescriptionRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageDescriptionRepositoryEloquent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageRepository.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Repositories/PageRepositoryEloquent.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Services/Abstracts/StorePageDescriptionServiceAbstract.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Services/StorePageDescriptionService.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Table/PageTable.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Views/blog.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Views/components/control.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Views/components/input.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/Views/create.blade.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/config.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/helpers.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/Blog/route.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Plugins/ConfigBase.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/core/base/resources/views/elements/tables/actions.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/resources/views/elements/tables/actions.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/views/index.blade.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/theme/routes/public.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/routes/public.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/theme/src/Providers/ThemeServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/src/Providers/ThemeServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -240,7 +242,7 @@
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
       <workItem from="1614073382905" duration="34090000" />
-      <workItem from="1614225795358" duration="2853000" />
+      <workItem from="1614225795358" duration="7361000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -284,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614221239437</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="chore: ...">
+      <created>1614228677317</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1614228677317</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,11 +302,41 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
+        <entry key="1">
+          <value>
+            <State>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:/Users/nguyenpt/easy/ocart/app" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
         <entry key="MAIN">
           <value>
             <State />
           </value>
         </entry>
+      </map>
+    </option>
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="1" value="TOOL_WINDOW" />
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
@@ -356,6 +395,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="874" y="428" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.1920.1088@0.23.1920.1088" timestamp="1614056074274" />
+    <state x="266" y="123" width="1448" height="888" key="DiffContextDialog" timestamp="1614238094349">
+      <screen x="0" y="23" width="1920" height="1088" />
+    </state>
+    <state x="266" y="123" width="1448" height="888" key="DiffContextDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614238094349" />
     <state x="747" y="417" key="NewPhpClassDialog" timestamp="1614228033472">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
@@ -373,10 +416,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="258" y="320" width="1294" height="791" key="SettingsEditor/0.23.1920.1088@0.23.1920.1088" timestamp="1614067571316" />
-    <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1612750971528">
+    <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1614238094349">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1612750971528" />
+    <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614238094349" />
     <state x="217" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1612462186623">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>

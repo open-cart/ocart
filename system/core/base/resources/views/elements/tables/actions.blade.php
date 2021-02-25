@@ -6,23 +6,27 @@
         <i data-feather="edit" width="18" height="18"></i>
     </x-button-link-icon>
     <x-button-icon
-        x-on:click="show()"
+        x-on:click="destroy('{!! $item->id !!}')"
         title="{!! __('admin.delete') !!}"
         class="bg-red-500 hover:bg-red-600">
         <i data-feather="trash" width="18" height="18"></i>
     </x-button-icon>
 </div>
-<script>
-    function tableActions() {
-        return {
-            show() {
-                confirmDelete.show(() => {
-                    axios.delete('{!! route($delete) !!}', {id: '{!! $item->id !!}'})
-                        .then(res => {
-                        $.pjax.reload('#body', {});
+@once
+@push('scripts')
+    <script>
+        function tableActions() {
+            return {
+                destroy(id) {
+                    confirmDelete.show(() => {
+                        axios.delete('{!! route($delete) !!}', {data: {id}})
+                            .then(res => {
+                                $.pjax.reload('#body', {});
+                            })
                     })
-                })
-            },
+                },
+            }
         }
-    }
-</script>
+    </script>
+@endpush
+@endonce
