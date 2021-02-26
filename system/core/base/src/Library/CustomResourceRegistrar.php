@@ -7,7 +7,7 @@ namespace System\Core\Library;
 class CustomResourceRegistrar extends \Illuminate\Routing\ResourceRegistrar
 {
     /**
-     * Add the destroy method for a resourceful route.
+     * Add the destroy method for a resourceful routes.
      *
      * @param  string  $name
      * @param  string  $base

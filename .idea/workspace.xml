@@ -5,15 +5,28 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update delete page">
-      <change afterPath="$PROJECT_DIR$/system/core/table/src/DataTables.php" afterDir="false" />
+    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update table">
+      <change afterPath="$PROJECT_DIR$/plugins/attribute/plugin.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/language/plugin.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/payment/plugin.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/seo/plugin.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/plugins/store/plugin.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/base/src/Models/BaseModel.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/setting/database/migrations/2021_02_26_024744_create_setting_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/setting/routes/web.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/setting/src/Setting.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/system/core/setting/src/SettingServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Criteria/LanguageCriteriaCriteria.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Kernel.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/RouteServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/core/base/helpers/const.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/helpers/const.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/table/src/Abstracts/TableAbstract.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/table/src/Abstracts/TableAbstract.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/views/page.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/core/base/src/Library/CustomResourceRegistrar.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/Library/CustomResourceRegistrar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/core/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/packages/page/src/Providers/PageServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Providers/PageServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Table/PageTable.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Table/PageTable.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Repositories/PageRepositoryEloquent.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/src/Providers/PluginManagementServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/src/Providers/PluginManagementServiceProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +43,9 @@
         <option value="JavaScript File" />
         <option value="CSS File" />
         <option value="tsconfig.json" />
-        <option value="plugin.json" />
         <option value="composer.json" />
         <option value="blade" />
+        <option value="plugin.json" />
       </list>
     </option>
   </component>
@@ -176,7 +189,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/system/packages/page/resources/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/plugins" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="php.override.implement.member.chooser.php.doc" value="NONE" />
@@ -186,19 +199,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/system/core/base/src/Repositories" />
-      <recent name="$PROJECT_DIR$/themes/ripple/views" />
-      <recent name="$PROJECT_DIR$/system/packages/plugin-management/resources/lang/vi" />
-      <recent name="$PROJECT_DIR$/plugins/blog/src/Providers" />
-      <recent name="$PROJECT_DIR$/plugins/blog/src" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/plugins" />
       <recent name="$PROJECT_DIR$/system/packages/page/resources/views" />
       <recent name="$PROJECT_DIR$/system/core/base/src/Facades" />
       <recent name="$PROJECT_DIR$/system/core/base/database/migrations" />
       <recent name="$PROJECT_DIR$/system/packages/page/src" />
-      <recent name="$PROJECT_DIR$/themes/default" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/system/core/setting/database/migrations" />
+      <recent name="$PROJECT_DIR$/system/core/setting/database" />
+      <recent name="$PROJECT_DIR$/system/core/base/src/Repositories" />
+      <recent name="$PROJECT_DIR$/themes/ripple/views" />
+      <recent name="$PROJECT_DIR$/system/packages/plugin-management/resources/lang/vi" />
     </key>
   </component>
   <component name="RunManager">
@@ -222,7 +235,7 @@
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
       <workItem from="1614073382905" duration="34090000" />
-      <workItem from="1614225795358" duration="10281000" />
+      <workItem from="1614225795358" duration="15978000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -280,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614239718970</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="chore: update table">
+      <created>1614243240658</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1614243240658</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +354,8 @@
     <MESSAGE value="chore: update phan trang" />
     <MESSAGE value="chore: ..." />
     <MESSAGE value="chore: update delete page" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update delete page" />
+    <MESSAGE value="chore: update table" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update table" />
   </component>
   <component name="WindowStateProjectService">
     <state x="716" y="229" key="#CLI_Interpreters" timestamp="1614056060810">
@@ -372,10 +393,10 @@
     </state>
     <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614241436896" />
     <state x="471" y="119" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1612149780876" />
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614241507453">
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614307325682">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614241507453" />
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614307325682" />
     <state x="480" y="339" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1090@0.23.1920.1090" timestamp="1612430843214" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1093@0.23.1920.1093" timestamp="1612431319819" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1095@0.23.1920.1095" timestamp="1612152772284" />
@@ -387,17 +408,17 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="266" y="123" width="1448" height="888" key="DiffContextDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614238094349" />
-    <state x="747" y="417" key="NewPhpClassDialog" timestamp="1614241399123">
+    <state x="712" y="577" key="NewPhpClassDialog" timestamp="1614307810950">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="747" y="417" key="NewPhpClassDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614241399123" />
+    <state x="712" y="577" key="NewPhpClassDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614307810950" />
     <state x="638" y="301" key="NewPhpClassDialog/0.23.1920.1090@0.23.1920.1090" timestamp="1612102167586" />
     <state x="638" y="302" key="NewPhpClassDialog/0.23.1920.1095@0.23.1920.1095" timestamp="1612156806867" />
     <state x="488" y="460" key="NewPhpClassDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1612163531465" />
-    <state x="410" y="593" key="NewPhpFileDialog" timestamp="1614220598434">
+    <state x="410" y="593" key="NewPhpFileDialog" timestamp="1614307390807">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="410" y="593" key="NewPhpFileDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614220598434" />
+    <state x="410" y="593" key="NewPhpFileDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614307390807" />
     <state x="909" y="517" key="NewPhpFileDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1611936877323" />
     <state x="909" y="518" key="NewPhpFileDialog/0.23.1920.1100@0.23.1920.1100" timestamp="1611981127619" />
     <state x="258" y="320" width="1294" height="791" key="SettingsEditor" timestamp="1614067571316">
@@ -416,10 +437,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="763" y="488" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1088@0.23.1920.1088" timestamp="1614159476733" />
-    <state x="480" y="72" width="663" height="490" key="find.popup" timestamp="1614157031655">
+    <state x="480" y="72" width="663" height="490" key="find.popup" timestamp="1614306522116">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="480" y="72" width="663" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1614157031655" />
+    <state x="480" y="72" width="663" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1614306522116" />
     <state x="880" y="448" width="604" height="490" key="find.popup/0.23.1920.1100@0.23.1920.1100" timestamp="1611937433203" />
     <state x="407" y="277" width="670" height="676" key="search.everywhere.popup" timestamp="1614157830689">
       <screen x="0" y="23" width="1920" height="1088" />

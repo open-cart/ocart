@@ -3,9 +3,9 @@ use \Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => config('const.ADMIN_PREFIX', 'admin'),
-        'middleware' => config('const.ADMIN_MIDDLEWARE', ['web']),
-        'namespace' => config('const.ADMIN_NAMESPACE', 'Ocart\PluginManagement\Http\Controllers'),
+        'prefix' => ADMIN_PREFIX,
+        'middleware' => ADMIN_MIDDLEWARE,
+        'namespace' => 'Ocart\PluginManagement\Http\Controllers',
     ],function() {
         Route::group(['prefix' => 'plugin'], function () {
             Route::get('/plugins', 'PluginManagementController@index')->name('admin::plugin');

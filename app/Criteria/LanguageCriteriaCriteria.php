@@ -24,11 +24,7 @@ class LanguageCriteriaCriteria implements CriteriaInterface
      */
     public function apply($model, RepositoryInterface $repository)
     {
-        if ($model instanceof Model) {
-            $descriptionModel = $model->language()->getModel();
-        } else {
-            $descriptionModel = $model->getModel()->language()->getModel();
-        }
+        $descriptionModel = $model->getModel()->language()->getModel();
         return $model->leftJoin($descriptionModel->getTable(), $descriptionModel->qualifyColumn('page_id'), $model->qualifyColumn('id'))
             ->where($descriptionModel->qualifyColumn('lang'), session('language', 'vi'));
     }

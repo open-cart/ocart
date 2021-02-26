@@ -33,6 +33,10 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
             ->loadMigrations();
         $this->loadViewsFrom(__DIR__ . '/../../resources/views','blog');
 
+        add_filter(BEFORE_QUERY_CRITERIA, function ($query, $model) {
+            return $query;
+        }, 1, 2);
+
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id' => 'cms-core-content',

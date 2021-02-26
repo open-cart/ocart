@@ -5,6 +5,7 @@ namespace Ocart\PluginManagement\Providers;
 use Composer\Autoload\ClassLoader;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Ocart\PluginManagement\Models\AdminConfig;
 use System\Core\Library\Helper;
@@ -30,6 +31,35 @@ class PluginManagementServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $this->loadPlugins();
+
+        Event::listen(RouteMatched::class, function() {
+            dashboard_menu()->registerItem([
+                'id'          => 'cms-plugins',
+                'parent_id'   => null,
+                'name'        => 'packages/plugin-management::plugin.menu',
+                'icon'        => null,
+                'url'         => '',
+                'permissions' => [],
+                'active'      => false,
+            ])->registerItem([
+                'id'          => 'cms-plugins-plugin',
+                'parent_id'   => 'cms-plugins',
+                'name'        => 'packages/plugin-management::plugin.index',
+                'icon'        => null,
+                'url'         => route('admin::plugin'),
+                'permissions' => [],
+                'active'      => false,
+            ]);
+        });
+    }
+
+    protected function loadPlugins()
+    {
+        if (!Schema::hasTable(with(new AdminConfig)->getTable())) {
+            return;
+        }
+
         $loader = new ClassLoader();
 
         $plugins = AdminConfig::getPluginCode();
@@ -59,25 +89,5 @@ class PluginManagementServiceProvider extends ServiceProvider
 
             $this->app->register($provider);
         }
-
-        Event::listen(RouteMatched::class, function() {
-            dashboard_menu()->registerItem([
-                'id'          => 'cms-plugins',
-                'parent_id'   => null,
-                'name'        => 'packages/plugin-management::plugin.menu',
-                'icon'        => null,
-                'url'         => '',
-                'permissions' => [],
-                'active'      => false,
-            ])->registerItem([
-                'id'          => 'cms-plugins-plugin',
-                'parent_id'   => 'cms-plugins',
-                'name'        => 'packages/plugin-management::plugin.index',
-                'icon'        => null,
-                'url'         => route('admin::plugin'),
-                'permissions' => [],
-                'active'      => false,
-            ]);
-        });
     }
 }

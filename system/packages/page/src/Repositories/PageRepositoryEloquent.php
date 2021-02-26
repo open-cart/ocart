@@ -2,6 +2,7 @@
 
 namespace Ocart\Page\Repositories;
 
+use App\Criteria\BeforeQueryCriteria;
 use App\Criteria\LanguageCriteriaCriteria;
 use Ocart\Page\Models\Page;
 use Prettus\Repository\Eloquent\BaseRepository;
@@ -56,6 +57,7 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
     {
         $this->pushCriteria(app(LanguageCriteriaCriteria::class));
         $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
 }

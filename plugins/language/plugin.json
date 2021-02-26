@@ -1,0 +1,15 @@
+{
+    "name": "Multiple Language",
+    "namespace": "Ocart\\Blog\\",
+    "image": "images/momo.png",
+    "auth": "Trung Nguyên",
+    "email": "nguyenpl117@gmail.com",
+    "link": "https://phantrungnguyen.com",
+    "configGroup": "Plugins",
+    "configCode": "Payment",
+    "configKey": "language",
+    "version": "1.0",
+    "providers": [
+        "Ocart\\Blog\\Providers\\BlogServiceProvider"
+    ]
+}

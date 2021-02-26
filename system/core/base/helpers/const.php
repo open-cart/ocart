@@ -16,3 +16,7 @@ if (!defined('BASE_ACTION_META_BOXES')) {
 if (!defined('BASE_FILTER_GET_LIST_DATA')) {
     define('BASE_FILTER_GET_LIST_DATA', 'get_list_data');
 }
+
+if (!defined('BEFORE_QUERY_CRITERIA')) {
+    define('BEFORE_QUERY_CRITERIA', 'criteria_before_query');
+}
