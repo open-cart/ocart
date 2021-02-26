@@ -28,7 +28,7 @@ class ThemeConfig
     public function __construct(Factory $view)
     {
         $this->view = $view;
-        self::uses(self::getConfig('theme'));
+        self::uses(self::getConfig('theme', 'ripple'));
     }
 
     /**
@@ -86,9 +86,7 @@ class ThemeConfig
     public function getConfig($key, $default = null)
     {
         if (!$this->adminConfig) {
-            $config = (new AdminConfig())->where('group', 'theme')->get()->pluck('value', 'key');
-
-            $this->adminConfig = $config;
+            $this->adminConfig = setting();
         }
 
         return Arr::get($this->adminConfig, $key, $default);

@@ -9,6 +9,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Ocart\PluginManagement\Models\AdminConfig;
+use Ocart\Setting\Facades\Setting;
 use Ocart\Theme\Facades\Theme;
 
 class ThemeController extends Controller
@@ -22,17 +23,6 @@ class ThemeController extends Controller
 
     public function index()
     {
-//        AdminConfig::insert(
-//            [
-//                'code' => 'global',
-//                'key' => 'theme',
-//                'group' => 'theme',
-//                'value' => 'default', //1- Enable extension; 0 - Disable
-//                'detail' => 'giao dien',
-//            ]
-//        );
-//        (new AdminConfig)->where('key', 'theme')->update(['value' => 'default']);
-
         $list = [];
 
         $themes = array_filter(glob(theme_path('*')), 'is_dir');
@@ -48,7 +38,7 @@ class ThemeController extends Controller
 
                 if (!empty($content)) {
                     $content->active = false;
-                    if ($content->name === Theme::getConfig('theme')) {
+                    if ($content->name === \setting('theme', 'default')) {
                         $content->active = true;
                     }
 
@@ -67,7 +57,9 @@ class ThemeController extends Controller
     {
         $theme = $request->input('theme');
 
-        (new AdminConfig)->where('key', 'theme')->update(['value' => $theme]);
+        Setting::set('theme', $theme)->save();
+
+//        (new AdminConfig)->where('key', 'theme')->update(['value' => $theme]);
 
         $resourcePath = $this->getPath('public', $theme);
 

@@ -5,6 +5,7 @@ namespace Ocart\Setting;
 
 
 use Illuminate\Support\ServiceProvider;
+use Ocart\Setting\Repositories\SettingRepository;
 use System\Core\Library\Helper;
 use System\Core\Traits\LoadAndPublishDataTrait;
 
@@ -14,7 +15,10 @@ class SettingServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->setNamespace('core/setting');
+        $this->setNamespace('core/setting')
+            ->loadAndPublishConfigurations(['general']);
+
+        $this->app->bind(SettingRepository::class, );
 
         Helper::autoload(__DIR__ . '/../helpers');
     }
