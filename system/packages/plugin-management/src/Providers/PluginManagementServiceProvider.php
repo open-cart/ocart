@@ -7,7 +7,7 @@ use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
-use Ocart\PluginManagement\Models\AdminConfig;
+use Ocart\Setting\Setting;
 use System\Core\Library\Helper;
 
 class PluginManagementServiceProvider extends ServiceProvider
@@ -56,23 +56,25 @@ class PluginManagementServiceProvider extends ServiceProvider
 
     protected function loadPlugins()
     {
-        if (!Schema::hasTable(with(new AdminConfig)->getTable())) {
+        if (!Schema::hasTable(with(new Setting())->getTable())) {
             return;
         }
 
         $loader = new ClassLoader();
 
-        $plugins = AdminConfig::getPluginCode();
+//        $plugins = AdminConfig::getPluginCode();
+
+        $activatedPlugins = get_active_plugins();
 
         $providers = [];
         $namespaces = [];
 
-        foreach ($plugins as $plugin) {
-            $config = get_file_data(plugin_path($plugin->key) . '/plugin.json');
+        foreach ($activatedPlugins as $plugin) {
+            $config = get_file_data(plugin_path($plugin . '/plugin.json'));
 
             $namespace = $config->namespace;
 
-            $namespaces[plugin_path($plugin->key . '/src')] = $namespace;
+            $namespaces[plugin_path($plugin . '/src')] = $namespace;
             $providers = array_merge($providers, $config->providers);
         }
 

@@ -5,24 +5,15 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update table">
-      <change afterPath="$PROJECT_DIR$/app/Criteria/BeforeQueryCriteria.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/config/general.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/helpers/constants.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/DatabaseSettingStore.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/Facades/Setting.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/JsonSettingStore.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/Repositories/SettingRepository.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/Repositories/SettingRepositoryEloquent.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/SettingManager.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/setting/src/SettingStore.php" afterDir="false" />
+    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update setting">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/repository.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/repository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/setting/database/migrations/2021_02_26_024744_create_setting_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/setting/database/migrations/2021_02_26_024744_create_setting_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/setting/helpers/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/setting/helpers/common.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/setting/src/SettingServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/setting/src/SettingServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/theme/src/Http/Controllers/ThemeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/src/Http/Controllers/ThemeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/theme/src/ThemeConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/src/ThemeConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins/blog/src/AppConfig.php" beforeDir="false" afterPath="$PROJECT_DIR$/plugins/blog/src/AppConfig.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/helpers/common.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/helpers/common.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/resources/views/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/resources/views/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/src/Abstracts/ConfigBase.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/src/Abstracts/ConfigBase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/src/Http/Controllers/PluginManagementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/src/Http/Controllers/PluginManagementController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/plugin-management/src/Providers/PluginManagementServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/plugin-management/src/Providers/PluginManagementServiceProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,7 +222,7 @@
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
       <workItem from="1614073382905" duration="34090000" />
-      <workItem from="1614225795358" duration="21834000" />
+      <workItem from="1614225795358" duration="24036000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -303,7 +294,21 @@
       <option name="project" value="LOCAL" />
       <updated>1614308055652</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="chore: update setting">
+      <created>1614314363444</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1614314363444</updated>
+    </task>
+    <task id="LOCAL-00012" summary="chore: update setting">
+      <created>1614314372900</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1614314372900</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +363,8 @@
     <MESSAGE value="chore: ..." />
     <MESSAGE value="chore: update delete page" />
     <MESSAGE value="chore: update table" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: update table" />
+    <MESSAGE value="chore: update setting" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update setting" />
   </component>
   <component name="WindowStateProjectService">
     <state x="716" y="229" key="#CLI_Interpreters" timestamp="1614056060810">
@@ -396,10 +402,10 @@
     </state>
     <state x="471" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614241436896" />
     <state x="471" y="119" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.1920.1098@0.23.1920.1098" timestamp="1612149780876" />
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614309504036">
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1614315094824">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614309504036" />
+    <state x="480" y="338" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1088@0.23.1920.1088" timestamp="1614315094824" />
     <state x="480" y="339" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1090@0.23.1920.1090" timestamp="1612430843214" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1093@0.23.1920.1093" timestamp="1612431319819" />
     <state x="480" y="340" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1920.1095@0.23.1920.1095" timestamp="1612152772284" />

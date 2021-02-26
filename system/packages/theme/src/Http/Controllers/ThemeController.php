@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
-use Ocart\PluginManagement\Models\AdminConfig;
 use Ocart\Setting\Facades\Setting;
-use Ocart\Theme\Facades\Theme;
 
 class ThemeController extends Controller
 {

@@ -3,6 +3,7 @@ namespace Ocart\PluginManagement\Http\Controllers;
 
 use Composer\Autoload\ClassLoader;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 
 class PluginManagementController extends Controller
@@ -17,6 +18,7 @@ class PluginManagementController extends Controller
 
         if (!empty($plugins)) {
             foreach ($plugins as $pluginPath) {
+                $plugin = Arr::last(explode(DIRECTORY_SEPARATOR, $pluginPath));
 
                 if (!File::isDirectory($pluginPath) || !File::exists($pluginPath . '/plugin.json')) {
                     continue;
@@ -34,7 +36,7 @@ class PluginManagementController extends Controller
                         $content->status = 1;
                         $content->config = (new $content->namespaceConfig)->config();
                     }
-                    $list[] = $content;
+                    $list[$plugin] = $content;
 ;                }
             }
         }
@@ -50,8 +52,8 @@ class PluginManagementController extends Controller
      */
     public function update()
     {
-        $key = request('key');
-        $content = get_file_data($key . '/plugin.json');
+        $plugin = strtolower(request('key'));
+        $content = get_file_data(plugin_path($plugin . '/plugin.json'));
 
         $content->namespaceConfig = $content->namespace . 'AppConfig';
 
@@ -64,9 +66,9 @@ class PluginManagementController extends Controller
             $loader->setPsr4($namespace, plugin_path($content->configKey . '/src'));
             $loader->register(true);
 
-            $response = (new $content->namespaceConfig)->enable();
+            $response = (new $content->namespaceConfig)->enable($plugin);
         } else {
-            $response = (new $content->namespaceConfig)->disable();
+            $response = (new $content->namespaceConfig)->disable($plugin);
         }
 
         return response()->json($response);

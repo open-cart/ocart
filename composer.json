@@ -21,7 +21,8 @@
         "ocart/theme": "*@dev",
         "prettus/l5-repository": "^2.7",
         "spatie/laravel-pjax": "^2.1",
-        "yajra/laravel-datatables-html": "^4.36"
+        "yajra/laravel-datatables-html": "^4.36",
+        "ext-json": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

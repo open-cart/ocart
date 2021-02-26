@@ -37,3 +37,13 @@ if (!function_exists('get_all_plugin2')) {
         return $arrClass;
     }
 }
+
+if (!function_exists('get_active_plugins')) {
+    /**
+     * @return array
+     */
+    function get_active_plugins()
+    {
+        return json_decode(setting('activated_plugins', '[]'), true);
+    }
+}

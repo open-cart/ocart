@@ -68,7 +68,7 @@
                             </tr>
                             </thead>
                             <tbody x-data="pluginActions()">
-                            @foreach($plugins as $plugin)
+                            @foreach($plugins as $key => $plugin)
                                 <tr>
                                     <td class="border p-2">
 {{--                                        <img src="/images/no-image.jpg" class="w-14"/>--}}
@@ -89,7 +89,7 @@
                                                 @if($plugin->status === 1)
                                                     <a href="javascript:void(0)"
                                                        title="{!! __('admin.plugins.action_disable_title') !!}"
-                                                       x-on:click="disable('{{ addslashes($plugin->path) }}')">
+                                                       x-on:click="disable('{{ $key }}')">
                                                         <div class="p-1">
                                                             <i data-feather="power" class="text-red-600"></i>
                                                         </div>
@@ -97,7 +97,7 @@
                                                 @else
                                                     <a href="javascript:void(0)"
                                                        title="{!! __('admin.plugins.action_enable_title') !!}"
-                                                       x-on:click="enable('{{ addslashes($plugin->path) }}')">
+                                                       x-on:click="enable('{{ $key }}')">
                                                        <div class="p-1">
                                                            <i data-feather="send" class="text-indigo-600"></i>
                                                        </div>

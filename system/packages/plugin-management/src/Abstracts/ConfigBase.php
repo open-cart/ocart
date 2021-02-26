@@ -32,14 +32,16 @@ abstract class ConfigBase
     abstract public function uninstall();
 
     /**
-     * Enable app
+     * @param $plugin
+     * @return mixed
      */
-    abstract public function enable();
+    public function enable($plugin) {}
 
     /**
-     * Disable app
+     * @param $plugin
+     * @return mixed
      */
-    abstract public function disable();
+    public function disable($plugin) {}
 
     /**
      * Get data app

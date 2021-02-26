@@ -6,7 +6,6 @@ namespace Ocart\Theme;
 
 use Illuminate\Support\Arr;
 use Illuminate\View\Factory;
-use Ocart\PluginManagement\Models\AdminConfig;
 
 class ThemeConfig
 {
