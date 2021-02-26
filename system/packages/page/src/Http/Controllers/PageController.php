@@ -18,13 +18,13 @@ class PageController extends BaseController
      */
     protected $repo;
 
-    protected $languages;
+//    protected $languages;
 
-    public function __construct(PageRepository $repo, LanguageRepository $languageRepository)
+    public function __construct(PageRepository $repo)
     {
         $this->repo = $repo;
-        $this->languages = $languageRepository->getListActive();
-        view()->share('languages', $this->languages);
+//        $this->languages = $languageRepository->getListActive();
+//        view()->share('languages', $this->languages);
     }
 
     public function index(PageTable $table)

@@ -51,8 +51,7 @@ class Plugin
         }
 
         if (File::isDirectory(plugin_path($plugin . '/public'))) {
-            File::copyDirectory(plugin_path($plugin . '/public'),
-                public_path('vendor/core/plugins/' . $plugin));
+            File::copyDirectory(plugin_path($plugin . '/public'), public_path('vendor/core/plugins/' . $plugin));
         }
 
         if (File::isDirectory(plugin_path($plugin . '/database/migrations'))) {

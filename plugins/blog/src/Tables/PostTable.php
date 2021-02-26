@@ -1,19 +1,15 @@
 <?php
+namespace Ocart\Blog\Tables;
 
-
-namespace Ocart\Page\Table;
-
-use Ocart\Page\Models\Page;
-use Ocart\Page\Repositories\PageRepository;
-use Ocart\Table\Abstracts\TableAbstract;
 use Collective\Html\HtmlBuilder;
+use Ocart\Blog\Repositories\PostRepository;
+use Ocart\Page\Models\Page;
+use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
-use Yajra\DataTables\Html\Builder;
 
-class PageTable extends TableAbstract
+class PostTable extends TableAbstract
 {
-
-    public function __construct(DataTables $table, PageRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, PostRepository $repo, HtmlBuilder $html)
     {
         parent::__construct($table, $html);
         $this->_table = $table;

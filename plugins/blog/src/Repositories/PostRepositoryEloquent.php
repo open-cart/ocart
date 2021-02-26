@@ -1,10 +1,8 @@
 <?php
 
-namespace Ocart\Page\Repositories;
+namespace Ocart\Blog\Repositories;
 
-use App\Criteria\BeforeQueryCriteria;
-use App\Criteria\LanguageCriteriaCriteria;
-use Ocart\Page\Models\Page;
+use Ocart\Blog\Models\Post;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Validator\Contracts\ValidatorInterface;
@@ -14,10 +12,10 @@ use Prettus\Validator\Contracts\ValidatorInterface;
  *
  * @package namespace App\Repositories;
  */
-class PageRepositoryEloquent extends BaseRepository implements PageRepository
+class PostRepositoryEloquent extends BaseRepository implements PostRepository
 {
     protected $fieldSearchable = [
-        'alias' => 'like',
+        'name' => 'like',
     ];
 
     /**
@@ -27,7 +25,7 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
      */
     public function model()
     {
-        return Page::class;
+        return Post::class;
     }
 
     /**
@@ -35,18 +33,20 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'alias' => [
+            'name' => 'required',
+            'content' => 'required',
+            'slug' => [
                 'required',
                 'regex:/(^([0-9A-Za-z\-_]+)$)/',
                 'string',
-                'max:100'
+                'max:191'
             ],
-            'description.*.title'  => 'required|string|max:200',
-            'description.*.keyword'  => 'nullable|string|max:200',
-            'description.*.description'  => 'nullable|string|max:300'
+//            'description.*.title'  => 'required|string|max:200',
+//            'description.*.keyword'  => 'nullable|string|max:200',
+//            'description.*.description'  => 'nullable|string|max:300'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'alias' => 'required'
+            'name' => 'filled'
         ]
     ];
 

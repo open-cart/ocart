@@ -15,7 +15,7 @@ class Page extends Model
      *
      * @var string
      */
-    protected $table = 'blog_page';
+    protected $table = 'pages';
 
     /**
      * The attributes that are mass assignable.
