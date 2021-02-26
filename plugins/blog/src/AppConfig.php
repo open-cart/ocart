@@ -23,61 +23,6 @@ class AppConfig extends \Ocart\PluginManagement\Abstracts\ConfigBase
         $this->link = $config['link'];
     }
 
-    public function enable($plugin)
-    {
-        $return = ['error' => 0, 'msg' => ''];
-
-        $content = get_file_data(plugin_path($plugin . '/plugin.json'));
-
-        $activatedPlugins = get_active_plugins();
-
-        if (!in_array($plugin, $activatedPlugins)) {
-
-            /**
-             * Yêu cầu bật các plugins đã được khai báo trước khi bật plugin này
-             */
-            if (!empty(Arr::get($content, 'require'))) {
-                $valid = count(array_intersect($content['require'],
-                        $activatedPlugins)) == count($content['require']);
-                if (!$valid) {
-                    $this->error('<info>Please activate plugin(s): ' . implode(',',
-                            $content['require']) . ' before activate this plugin!</info>');
-                    return false;
-                }
-            }
-
-            Setting::set('activated_plugins', json_encode(array_values(array_merge($activatedPlugins, [$plugin]))))
-                ->save();
-
-            Artisan::call('cache:clear');
-        }
-
-        return [];
-    }
-
-    public function disable($plugin)
-    {
-        $return = ['error' => 0, 'msg' => ''];
-        $content = get_file_data(plugin_path($plugin . '/plugin.json'));
-
-        $activatedPlugins = get_active_plugins();
-        if (in_array($plugin, $activatedPlugins)) {
-//            if (class_exists($content['namespace'] . 'Plugin')) {
-//                call_user_func([$content['namespace'] . 'Plugin', 'deactivate']);
-//            }
-
-            if (($key = array_search($plugin, $activatedPlugins)) !== false) {
-                unset($activatedPlugins[$key]);
-            }
-
-            Setting::set('activated_plugins', json_encode(array_values($activatedPlugins)))
-                ->save();
-
-            Artisan::call('cache:clear');
-        }
-        return $return;
-    }
-
     public function install()
     {
         // TODO: Implement install() method.

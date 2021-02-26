@@ -115,17 +115,12 @@
                                                 <div x-data="confirmDelete1()">
                                                     <a href="#"
                                                        title="{!! __('admin.plugins.action_uninstall_title') !!}"
-                                                       x-on:click="isOpen = !isOpen"
+                                                       x-on:click="trash('{!! $key !!}')"
                                                     >
                                                         <div class="p-1">
                                                             <i data-feather="trash" class="text-red-600"></i>
                                                         </div>
                                                     </a>
-                                                    <x-confirm-delete
-                                                        x-show="isOpen"
-                                                        @close="isOpen = !isOpen"
-                                                        @accept="isOpen = !isOpen; uninstall('{!! $plugin->configKey !!}')"
-                                                    />
                                                 </div>
                                             </div>
                                         @endif
@@ -135,58 +130,6 @@
                             </tbody>
                         </table>
                         <div class="h-4"></div>
-                        <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                            <div>
-                                <p class="text-sm text-gray-700">
-                                    Showing
-                                    <span class="font-medium">1</span>
-                                    to
-                                    <span class="font-medium">10</span>
-                                    of
-                                    <span class="font-medium">97</span>
-                                    results
-                                </p>
-                            </div>
-                            <div>
-                                <nav class="relative z-0 inline-flex shadow-sm -space-x-px" aria-label="Pagination">
-                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                        <span class="sr-only">Previous</span>
-                                        <!-- Heroicon name: chevron-left -->
-                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        1
-                                    </a>
-                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        2
-                                    </a>
-                                    <a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        3
-                                    </a>
-                                    <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-          ...
-        </span>
-                                    <a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        8
-                                    </a>
-                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        9
-                                    </a>
-                                    <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-                                        10
-                                    </a>
-                                    <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-                                        <span class="sr-only">Next</span>
-                                        <!-- Heroicon name: chevron-right -->
-                                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                        </svg>
-                                    </a>
-                                </nav>
-                            </div>
-                        </div>
                     </div>
                     <div x-show="tab === 2">
                         <div class="flex justify-between">
@@ -285,20 +228,27 @@
                 enable(key) {
                     axios.post('{!! route('plugins.change.status') !!}', {
                         key
-                    }).then(() => {
+                    }).then((res) => {
+                        toast.success('Your work has been saved');
+                    }).catch(e => {
+                        toast.error(e.message)
+                    }).finally(() => {
                         $.pjax.reload('#body', {});
                     })
                 },
                 disable(key) {
                     axios.post('{!! route('plugins.change.status') !!}', {
                         key
-                    }).then(() => {
+                    }).then((res) => {
+                        toast.success('Your work has been saved');
+                    }).catch(e => {
+                        toast.error(e.message)
+                    }).finally(() => {
                         $.pjax.reload('#body', {});
                     })
                 },
                 uninstall(key) {
-                    console.log(key)
-                    axios.post('{!! route('admin_plugin::uninstall') !!}', {
+                    return axios.post('{!! route('admin_plugin::uninstall') !!}', {
                         key
                     }).then(() => {
                         window.location.reload();
@@ -309,9 +259,20 @@
 
         function confirmDelete1() {
             return {
-                isOpen: false,
-                uninstall(key) {
-                    pluginActions().uninstall(key);
+                trash(key) {
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            pluginActions().enable(key);
+                        }
+                    })
                 }
             }
         }

@@ -16,12 +16,12 @@ glob.sync('./system/**/webpack.mix.js').forEach(config => {
     require(config);
 });
 
-mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
-    require('postcss-import'),
-    require('tailwindcss'),
-    require('autoprefixer'),
+mix.js('resources/js/app.js', 'public/js').sass('resources/css/app.scss', 'public/css', [
+    // require('postcss-import'),
+    // require('tailwindcss'),
+    // require('autoprefixer'),
 ]);
-
+// mix.sass('resources/css/app.scss', 'public/css')
 
 mix.browserSync({
     proxy: 'https://ocart.test/',

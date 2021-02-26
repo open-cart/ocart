@@ -57,6 +57,10 @@
                     axios.post('{!! route('theme.active') !!}', {
                         theme
                     }).then(() => {
+                        toast.success('Your work has been saved');
+                    }).catch(e => {
+                        toast.error(e.message);
+                    }).finally(() => {
                         $.pjax.reload('#body', {});
                     })
                 }

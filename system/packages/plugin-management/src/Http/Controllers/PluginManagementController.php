@@ -5,6 +5,8 @@ use Composer\Autoload\ClassLoader;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Ocart\PluginManagement\Plugin;
+use System\Core\Http\Responses\BaseHttpResponse;
 
 class PluginManagementController extends Controller
 {
@@ -15,6 +17,8 @@ class PluginManagementController extends Controller
         $list = [];
 
         $plugins = array_filter(glob(plugin_path('*')), 'is_dir');
+
+        $activatedPlugins = get_active_plugins();
 
         if (!empty($plugins)) {
             foreach ($plugins as $pluginPath) {
@@ -32,8 +36,12 @@ class PluginManagementController extends Controller
                     $content->namespaceConfig = $content->namespace . 'AppConfig';
                     $content->path = $pluginPath;
 
-                    if (class_exists($content->namespaceConfig)) {
+                    if (in_array($plugin, $activatedPlugins)) {
                         $content->status = 1;
+                    }
+
+                    if (class_exists($content->namespaceConfig)) {
+//                        $content->status = 1;
                         $content->config = (new $content->namespaceConfig)->config();
                     }
                     $list[$plugin] = $content;
@@ -48,29 +56,37 @@ class PluginManagementController extends Controller
     /**
      * Update plugin
      *
-     * @return  [type]  [return description]
+     * @param BaseHttpResponse $response
+     * @param Plugin $pluginManager
+     * @return BaseHttpResponse [type]  [return description]
+     * @throws \Illuminate\Contracts\Filesystem\FileNotFoundException
      */
-    public function update()
+    public function update(BaseHttpResponse $response, Plugin $pluginManager)
     {
         $plugin = strtolower(request('key'));
+
         $content = get_file_data(plugin_path($plugin . '/plugin.json'));
 
-        $content->namespaceConfig = $content->namespace . 'AppConfig';
-
-        $response = [];
-
-        if (!class_exists($content->namespaceConfig)) {
-            $loader = new ClassLoader();
-            $namespace = $content->namespace;
-
-            $loader->setPsr4($namespace, plugin_path($content->configKey . '/src'));
-            $loader->register(true);
-
-            $response = (new $content->namespaceConfig)->enable($plugin);
-        } else {
-            $response = (new $content->namespaceConfig)->disable($plugin);
+        if (!$content) {
+            return $response
+                ->setMessage(trans('packages/plugin-management::plugin.invalid_plugin'))
+                ->setError();
         }
 
-        return response()->json($response);
+        $activatedPlugins = get_active_plugins();
+
+        try {
+            if (!in_array($plugin, $activatedPlugins)) {
+                $pluginManager->activate($plugin);
+            } else {
+                $pluginManager->deactivate($plugin);
+            }
+
+            return $response->setMessage(trans('packages/plugin-management::plugin.update_plugin_status_success'));
+        } catch (\Exception $ex) {
+            return $response
+                ->setError()
+                ->setMessage($ex->getMessage());
+        }
     }
 }
