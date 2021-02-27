@@ -127,6 +127,7 @@
       <path value="$PROJECT_DIR$/vendor/laravelium/sitemap" />
       <path value="$PROJECT_DIR$/vendor/ocart/seo-helper" />
       <path value="$PROJECT_DIR$/vendor/artesaos/seotools" />
+      <path value="$PROJECT_DIR$/vendor/kris/laravel-form-builder" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.3" />

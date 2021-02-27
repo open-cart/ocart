@@ -3,6 +3,7 @@
 
 namespace Ocart\Page\Table;
 
+use Illuminate\Support\Facades\Date;
 use Ocart\Page\Models\Page;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Table\Abstracts\TableAbstract;
@@ -48,6 +49,14 @@ class PageTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
                     return $item->slug;
+                }
+            ],
+            'craeteAt' => [
+                'name' => 'created_at',
+                'title' => 'Ngày tạo',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return $item->created_at;
                 }
             ],
             'status' => [

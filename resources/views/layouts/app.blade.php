@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="x-pjax-version" content="{{ mix('/css/app.css') }}">
+        <meta http-equiv="x-pjax-version" content="{{ mix('/css/swal.css') }}">
 
         <title>{{ page_title()->getTitle() }}</title>
 
@@ -13,6 +14,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/swal.css') }}">
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>

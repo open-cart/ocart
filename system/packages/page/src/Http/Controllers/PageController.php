@@ -1,15 +1,16 @@
 <?php
 namespace Ocart\Page\Http\Controllers;
 
-use App\Repositories\LanguageRepository;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use Ocart\Page\Models\Page;
+use Ocart\Page\Forms\PageForm;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Services\StorePageDescriptionService;
 use Ocart\Page\Table\PageTable;
 use Prettus\Validator\Exceptions\ValidatorException;
+use System\Core\Forms\FormBuilder;
 
 class PageController extends BaseController
 {
@@ -18,78 +19,73 @@ class PageController extends BaseController
      */
     protected $repo;
 
-//    protected $languages;
-
     public function __construct(PageRepository $repo)
     {
         $this->repo = $repo;
-//        $this->languages = $languageRepository->getListActive();
-//        view()->share('languages', $this->languages);
     }
 
     public function index(PageTable $table)
     {
         return $table->render();
-
-//        return view('packages/page::index');
     }
 
-    function create()
+    function create(FormBuilder $formBuilder)
     {
-        return  view('packages/page::page')
-            ->with('page', [])
-            ->with('method', 'POST')
-            ->with('model', $this->repo->getModel())
-            ->with('url_action', route('pages.store'));
+        return $formBuilder->create(PageForm::class)
+            ->setMethod('POST')
+            ->setUrl(route('pages.store'))
+            ->renderForm();
     }
 
     function store(Request $request, StorePageDescriptionService $pageDescriptionService)
     {
         try {
             $data = $request->all();
-            $lang = $this->languages->first()->code;
-            $data['alias'] = $request->input('alias') ?? Str::limit(Str::slug($request->input('description.'.$lang.'.title')));
+            $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+            $data['slug_md5'] = md5($data['slug']);
 
-            $page = $this->repo->create($data);
-            $pageDescriptionService->execute($request, $page);
+            $this->repo->create($data + [
+                    'user_id'     => Auth::user()->getKey(),
+                    'is_featured' => $request->input('is_featured', false),
+                ]);
         } catch (ValidatorException $e) {
             return back()
                 ->withInput($data)
                 ->withErrors($e->getMessageBag());
+        } catch (\Exception $e) {
+            throw $e;
         }
-
+//
         return redirect()->route('pages.index');
     }
 
-    function show($id)
+    function show($id, FormBuilder $formBuilder)
     {
         $page = $this->repo->skipCriteria()->find($id);
 
-        $data = $page->toArray()+[
-            'description' => $page->description->keyBy('lang')->toArray()
-        ];
-
-
-        return  view('packages/page::page')
-            ->with('url_action', route('pages.update', ['id' => $page->id]))
-            ->with('method', 'PUT')
-            ->with('model', $page)
-            ->with('page', $data);
+        return $formBuilder->create(PageForm::class, ['model' => $page])
+            ->setMethod('PUT')
+            ->setUrl(route('pages.update', ['id' => $page->id]))
+            ->renderForm();
     }
 
-    function update($id, Request $request, StorePageDescriptionService $pageDescriptionService)
+    function update($id, Request $request)
     {
         try {
             $data = $request->all();
-            $lang = $this->languages->first()->code;
-            $data['alias'] = $request->input('alias') ?? Str::limit(Str::slug($request->input('description.'.$lang.'.title')));
+            $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+            $data['slug_md5'] = md5($data['slug']);
 
-            $page = $this->repo->update($data, $id);
-            $pageDescriptionService->execute($request, $page);
+            $this->repo->update($data + [
+                    'is_featured' => $request->input('is_featured', false),
+                ], $id);
+
         } catch (ValidatorException $e) {
             return back()
                 ->withInput($data)
                 ->withErrors($e->getMessageBag());
+        } catch (\Exception $e) {
+            throw $e;
         }
 
         return redirect()->route('pages.index');

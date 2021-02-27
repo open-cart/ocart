@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b1e828936eb6716ae0a8894882307a4",
+    "content-hash": "ed82580728669ee2a20d1aa888f99a08",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -962,6 +962,85 @@
                 "source": "https://github.com/guzzle/psr7/tree/1.7.0"
             },
             "time": "2020-09-30T07:37:11+00:00"
+        },
+        {
+            "name": "kris/laravel-form-builder",
+            "version": "1.40.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kristijanhusak/laravel-form-builder.git",
+                "reference": "06b6773318c52208c72f65756884964fe3171934"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kristijanhusak/laravel-form-builder/zipball/06b6773318c52208c72f65756884964fe3171934",
+                "reference": "06b6773318c52208c72f65756884964fe3171934",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^5.6@dev|^6|^7|^8",
+                "illuminate/validation": "^5.6@dev|^6|^7|^8",
+                "laravelcollective/html": "^5.6|^6|^7|^8",
+                "php": ">=7.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~3.6"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.16.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Kris\\LaravelFormBuilder\\FormBuilderServiceProvider"
+                    ],
+                    "aliases": {
+                        "FormBuilder": "Kris\\LaravelFormBuilder\\Facades\\FormBuilder"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Kris\\LaravelFormBuilder": "src/"
+                },
+                "classmap": [
+                    "tests/FormBuilderTestCase.php"
+                ],
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kristijan Husak",
+                    "email": "husakkristijan@gmail.com"
+                },
+                {
+                    "name": "Mike Erickson",
+                    "email": "codedungeon@gmail.com"
+                },
+                {
+                    "name": "Mike Erickson",
+                    "email": "mike.erickson@codedungeon.io"
+                }
+            ],
+            "description": "Laravel form builder - symfony like",
+            "keywords": [
+                "builder",
+                "form",
+                "laravel",
+                "symfony"
+            ],
+            "support": {
+                "issues": "https://github.com/kristijanhusak/laravel-form-builder/issues",
+                "source": "https://github.com/kristijanhusak/laravel-form-builder/tree/1.40.0"
+            },
+            "time": "2020-09-28T20:54:27+00:00"
         },
         {
             "name": "laravel/framework",
@@ -8430,7 +8509,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3|^8.0"
+        "php": "^7.3|^8.0",
+        "ext-json": "*"
     },
     "platform-dev": [],
     "plugin-api-version": "2.0.0"

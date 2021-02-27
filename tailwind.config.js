@@ -1,7 +1,11 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
-    purge: ['./storage/framework/views/*.php', './resources/views/**/*.blade.php'],
+    purge: [
+        './resources/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
+    ],
 
     theme: {
         extend: {
@@ -9,20 +13,24 @@ module.exports = {
                 sans: ['Nunito', ...defaultTheme.fontFamily.sans],
             },
         },
+        screens: {
+            'error': '0px',
+            'xs': '475px',
+            ...defaultTheme.screens,
+        }
     },
 
     variants: {
         extend: {
             opacity: ['disabled'],
             tableLayout: ['hover', 'focus'],
-            backgroundColor: ['checked'],
+            backgroundColor: ['checked', 'focus'],
             borderColor: ['checked'],
-            backgroundColor: ['focus'],
         },
     },
     corePlugins: {
         // ...
     },
 
-    plugins: [require('@tailwindcss/forms')],
+    // plugins: [require('@tailwindcss/forms')],
 };

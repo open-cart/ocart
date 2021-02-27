@@ -22,14 +22,17 @@ class Page extends Model
      *
      * @var string[]
      */
-    protected $fillable = ['image', 'alias', 'status'];
-
-    /**
-     * Indicates if the model should be timestamped.
-     *
-     * @var bool
-     */
-    public $timestamps     = false;
+    protected $fillable = [
+        'name',
+        'description',
+        'content',
+        'image',
+        'slug',
+        'slug_md5',
+        'status',
+        'user_id',
+        'is_featured',
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne

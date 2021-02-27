@@ -35,18 +35,18 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
      */
     protected $rules = [
         ValidatorInterface::RULE_CREATE => [
-            'alias' => [
-                'required',
-                'regex:/(^([0-9A-Za-z\-_]+)$)/',
-                'string',
-                'max:100'
+            'name' => [
+                'required'
             ],
-            'description.*.title'  => 'required|string|max:200',
-            'description.*.keyword'  => 'nullable|string|max:200',
-            'description.*.description'  => 'nullable|string|max:300'
+            'description' => [
+                'required'
+            ],
+//            'description.*.title'  => 'required|string|max:200',
+//            'description.*.keyword'  => 'nullable|string|max:200',
+//            'description.*.description'  => 'nullable|string|max:300'
         ],
         ValidatorInterface::RULE_UPDATE => [
-            'alias' => 'required'
+            'name' => 'required'
         ]
     ];
 
