@@ -20,3 +20,7 @@ if (!defined('BASE_FILTER_GET_LIST_DATA')) {
 if (!defined('BEFORE_QUERY_CRITERIA')) {
     define('BEFORE_QUERY_CRITERIA', 'criteria_before_query');
 }
+
+if (!defined('BASE_FILTER_TABLE_BUTTONS')) {
+    define('BASE_FILTER_TABLE_BUTTONS', 'base_filter_datatables_buttons');
+}

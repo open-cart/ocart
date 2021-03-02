@@ -20,6 +20,17 @@
                             @endforeach
 
                         @endif
+                        <div
+                            class="flex items-center space-x-3 cursor-pointer"
+                        >
+                            <x-switch
+                                checked="false"
+                                name="status"
+                                color="green"
+                            />
+                            <label for="nguyen">Status</label>
+                        </div>
+
                     </div>
                     <div class=" bg-white p-6 rounded-md">
                         123

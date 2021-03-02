@@ -34,7 +34,7 @@ class CoreServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->setNamespace('core/base')->loadMigrations();
+        $this->setNamespace('core/base')->loadMigrations()->loadAndPublishTranslations();
 
         // Route Admin
         if (file_exists(__DIR__ . '/../routes/web.php')) {

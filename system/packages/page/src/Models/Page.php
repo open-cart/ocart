@@ -5,6 +5,7 @@ namespace Ocart\Page\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
+use System\Core\Enums\BaseStatusEnum;
 
 class Page extends Model
 {
@@ -35,28 +36,15 @@ class Page extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @var array
      */
-    public function language()
-    {
-        return $this->hasOne(PageDescription::class);
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function description()
-    {
-        return $this->hasMany(PageDescription::class);
-    }
+    protected $casts = [
+        'status' => BaseStatusEnum::class,
+    ];
 
     protected static function boot()
     {
         parent::boot();
-
-        static::deleting(function (Page $page) {
-            $page->description()->delete();
-        });
     }
 
     /**

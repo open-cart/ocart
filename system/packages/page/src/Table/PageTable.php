@@ -65,6 +65,7 @@ class PageTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
+                    return $item->status->toHtml();
                     return view('components.activated', ['active' => $item->status]);
                 }
             ]
@@ -84,6 +85,6 @@ class PageTable extends TableAbstract
     {
         $buttons = $this->addCreateButton(route('pages.create'), []);
 
-        return apply_filters('base_table_action', $buttons, Page::class);
+        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Page::class);
     }
 }
