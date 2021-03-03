@@ -20,6 +20,18 @@ class ThemeConfig
     protected $view;
 
     /**
+     * @var string
+     */
+    protected $layout;
+
+    /**
+     * The name of theme.
+     *
+     * @var string
+     */
+    protected $theme;
+
+    /**
      * @var
      */
     protected $adminConfig;
@@ -27,7 +39,27 @@ class ThemeConfig
     public function __construct(Factory $view)
     {
         $this->view = $view;
-        self::uses(self::getConfig('theme', 'ripple'));
+        self::uses(setting('theme', 'ripple'))->layout(setting('layout', 'default'));
+    }
+
+    /**
+     * Get current theme name.
+     *
+     * @return string
+     */
+    public function getThemeName()
+    {
+        return $this->theme;
+    }
+
+    /**
+     * @param string $layout
+     * @return ThemeConfig
+     */
+    public function layout(string $layout = 'default')
+    {
+        $this->layout = $layout;
+        return $this;
     }
 
     /**
@@ -40,11 +72,14 @@ class ThemeConfig
 
     /**
      * @param null $theme
+     * @return ThemeConfig
      */
     public function uses($theme = null)
     {
-
+        $this->theme = $theme;
+        
         $this->view->addNamespace($this->getThemeNamespace(), [base_path('themes/'.$theme.'/views')]);
+        return $this;
     }
 
     /**
@@ -55,7 +90,22 @@ class ThemeConfig
      */
     public function scope($view, $args = [], $default = null)
     {
-        return $this->view->make($this->getThemeNamespace($view), $args);
+        $path = $this->getThemeNamespace($view);
+        if ($this->view->exists($path)) {
+            return $this->view->make($this->getThemeNamespace($view), $args);
+        }
+        if ($default) {
+            return $this->view->make($default, $args);
+        }
+    }
+
+    /**
+     * @param null $default
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function getLayout($default = null)
+    {
+        return $this->scope('layouts.' . $this->layout, [], $default);
     }
 
     /**
@@ -89,5 +139,19 @@ class ThemeConfig
         }
 
         return Arr::get($this->adminConfig, $key, $default);
+    }
+
+    /**
+     * @param string $path
+     */
+    protected function handleViewNotFound($path)
+    {
+        if (app()->isLocal()) {
+            dd('Theme is not support this view, please create file ' . theme_path() . '/' . str_replace($this->getThemeNamespace(),
+                    $this->getThemeName(),
+                    str_replace('::', '/', str_replace('.', '/', $path))) . '.blade.php" to render this page!');
+        } else {
+            abort(404);
+        }
     }
 }

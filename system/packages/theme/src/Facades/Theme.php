@@ -9,6 +9,7 @@ use Ocart\Theme\ThemeConfig;
 
 /**
  * @method static scope($view)
+ * @method static getLayout($defaultView = null)
  *
  * @see ThemeConfig
  */
