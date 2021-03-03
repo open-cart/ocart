@@ -52,8 +52,8 @@ class Page extends Model
      */
     public function getUrlAttribute()
     {
-        $prefix = apply_filters('FILTER_SLUG_PREFIX', '');
+        $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
 
-        return url($prefix ? $prefix . '/' . $this->alias : $this->alias);
+        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
     }
 }

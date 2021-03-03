@@ -4,8 +4,6 @@
 namespace Ocart\Theme\Http\Controllers;
 
 
-use Ocart\Page\Repositories\PageRepository;
-
 class PublicController
 {
 
@@ -16,9 +14,9 @@ class PublicController
 
     public function getView($slug)
     {
-        $result = apply_filters('BASE_FILTER_PUBLIC_SINGLE_DATA', $slug);
+        $result = apply_filters(BASE_FILTER_PUBLIC_SINGLE_DATA, $slug);
 
-        if (!$result['page']) {
+        if (empty($result['page'])) {
             abort(404);
         }
 

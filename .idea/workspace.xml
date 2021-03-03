@@ -5,26 +5,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: ...">
-      <change afterPath="$PROJECT_DIR$/resources/views/breadcrumbs/tailwind.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/resources/views/elements/form-actions.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/resources/views/forms/fields/on-off.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/src/Forms/Fields/OnOffField.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/system/core/base/src/Providers/BreadcrumsServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ocart.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ocart.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+    <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update breadcrumbs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.phar" beforeDir="false" afterPath="$PROJECT_DIR$/composer" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/resources/views/forms/form.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/resources/views/forms/form.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/CoreServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/core/base/helpers/const.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/helpers/const.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/system/core/base/src/Forms/FormAbstract.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/Forms/FormAbstract.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/core/base/src/Http/Responses/BaseHttpResponse.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/core/base/src/Http/Responses/BaseHttpResponse.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/resources/lang/vi/pages.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/resources/lang/vi/pages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Forms/PageForm.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Forms/PageForm.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Http/Controllers/PageController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Models/Page.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Models/Page.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/page/src/Providers/HookServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/page/src/Providers/HookServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/system/packages/theme/src/Http/Controllers/PublicController.php" beforeDir="false" afterPath="$PROJECT_DIR$/system/packages/theme/src/Http/Controllers/PublicController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/themes/ripple/views/page.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/themes/ripple/views/page.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +223,7 @@
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
       <workItem from="1614073382905" duration="34090000" />
-      <workItem from="1614225795358" duration="76320000" />
+      <workItem from="1614225795358" duration="77836000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -363,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614670702732</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="chore: update breadcrumbs">
+      <created>1614744081534</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1614744081534</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -424,7 +419,8 @@
     <MESSAGE value="chore: page packages" />
     <MESSAGE value="chore: update switch element" />
     <MESSAGE value="chore: ..." />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: ..." />
+    <MESSAGE value="chore: update breadcrumbs" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: update breadcrumbs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="716" y="229" key="#CLI_Interpreters" timestamp="1614056060810">
@@ -506,10 +502,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="763" y="488" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1920.1088@0.23.1920.1088" timestamp="1614159476733" />
-    <state x="480" y="72" width="750" height="490" key="find.popup" timestamp="1614396516360">
+    <state x="480" y="72" width="750" height="490" key="find.popup" timestamp="1614757844432">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
-    <state x="480" y="72" width="750" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1614396516360" />
+    <state x="480" y="72" width="750" height="490" key="find.popup/0.23.1920.1088@0.23.1920.1088" timestamp="1614757844432" />
     <state x="880" y="448" width="604" height="490" key="find.popup/0.23.1920.1100@0.23.1920.1100" timestamp="1611937433203" />
     <state x="407" y="277" width="670" height="676" key="search.everywhere.popup" timestamp="1614409844774">
       <screen x="0" y="23" width="1920" height="1088" />

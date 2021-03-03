@@ -18,23 +18,23 @@ class HookServiceProvider extends ServiceProvider
 
     public function register()
     {
-        add_filter('BASE_FILTER_PUBLIC_SINGLE_DATA', function ($slug) {
+        add_filter(BASE_FILTER_PUBLIC_SINGLE_DATA, function ($slug) {
             $repo = $this->app->make(PageRepository::class);
 
             $page = $repo->scopeQuery(function($query) {
-                return $query->where('status', '1');
-            })->findByField('alias', $slug)->first();
+                return $query;//->where('status', '1');
+            })->findByField('slug', $slug)->first();
 
             if (!$page) {
                 return [];
             }
 
-            SeoHelper::setTitle($page->language->title);
-            SeoHelper::setDescription($page->language->description);
+            SeoHelper::setTitle($page->name);
+            SeoHelper::setDescription($page->description);
 
             $meta = SeoHelper::openGraph();
-            $meta->setTitle($page->language->title);
-            $meta->setDescription($page->language->description);
+            $meta->setTitle($page->name);
+            $meta->setDescription($page->description);
             $meta->setUrl($page->url);
             $meta->setType('article');
 

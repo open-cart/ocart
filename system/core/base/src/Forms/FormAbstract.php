@@ -94,4 +94,18 @@ abstract class FormAbstract extends Form
         $this->actionButtons = $actionButtons;
         return $this;
     }
+
+    /**
+     * @param array $options
+     * @param bool $showStart
+     * @param bool $showFields
+     * @param bool $showEnd
+     * @return string
+     */
+    public function renderForm(array $options = [], $showStart = true, $showFields = true, $showEnd = true)
+    {
+        apply_filters(BASE_FILTER_BEFORE_RENDER_FORM, $this, $this->moduleName, $this->getModel());
+
+        return parent::renderForm($options, $showStart, $showFields, $showEnd);
+    }
 }

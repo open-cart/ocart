@@ -1,3 +1,3 @@
 <x-guest-layout>
-    {!! $page->language->content !!}
+    {!! $page->content !!}
 </x-guest-layout>
