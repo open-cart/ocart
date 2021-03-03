@@ -6,10 +6,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36b9ff11-1a41-483d-a0fd-13560faf5e9d" name="Default Changelist" comment="chore: update giao dien">
-      <change afterPath="$PROJECT_DIR$/themes/ripple/views/test-page.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/ripple/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/themes/ripple/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/themes/ripple/views/layouts/default.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/themes/ripple/views/layouts/default.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +218,7 @@
       <workItem from="1613200886074" duration="52113000" />
       <workItem from="1614056821830" duration="10263000" />
       <workItem from="1614073382905" duration="34090000" />
-      <workItem from="1614225795358" duration="80836000" />
+      <workItem from="1614225795358" duration="82997000" />
     </task>
     <task id="LOCAL-00001" summary="chore: update response sidebar">
       <created>1612344439297</created>
@@ -369,7 +367,14 @@
       <option name="project" value="LOCAL" />
       <updated>1614760966218</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="chore: update giao dien">
+      <created>1614761212550</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1614761212550</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,6 +507,10 @@
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
     <state x="258" y="320" width="1294" height="791" key="SettingsEditor/0.23.1920.1088@0.23.1920.1088" timestamp="1614739739281" />
+    <state x="573" y="307" key="Vcs.Push.Dialog.v2" timestamp="1614763118455">
+      <screen x="0" y="23" width="1920" height="1088" />
+    </state>
+    <state x="573" y="307" key="Vcs.Push.Dialog.v2/0.23.1920.1088@0.23.1920.1088" timestamp="1614763118455" />
     <state x="257" y="123" width="1448" height="888" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1614238094349">
       <screen x="0" y="23" width="1920" height="1088" />
     </state>
