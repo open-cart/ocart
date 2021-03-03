@@ -3,5 +3,5 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('nguyen', function() {
-    return 'nguyen';
+    return Theme::layout('guest')->scope('test-page');
 });
