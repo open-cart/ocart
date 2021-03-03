@@ -3,6 +3,7 @@ namespace Ocart\Page\Forms;
 
 use Kris\LaravelFormBuilder\Field;
 use System\Core\Forms\FormAbstract;
+use Kris\LaravelFormBuilder\Fields\FormField;
 
 class PageForm extends FormAbstract
 {
@@ -10,6 +11,8 @@ class PageForm extends FormAbstract
     public function buildForm()
     {
         $this
+            ->withCustomFields()
+            ->setModuleName('page')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
@@ -31,7 +34,7 @@ class PageForm extends FormAbstract
 //                'rules' => 'max:5000'
 //            ])
 //
-            ->add('status', Field::CHECKBOX);
+            ->add('is_featured', 'onOff');
 //            ->add('submit', Field::BUTTON_SUBMIT);
     }
 }

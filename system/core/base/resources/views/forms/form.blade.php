@@ -20,34 +20,14 @@
                             @endforeach
 
                         @endif
-                        <div
-                            class="flex items-center space-x-3 cursor-pointer"
-                        >
-                            <x-switch
-                                checked="false"
-                                name="status"
-                                color="green"
-                            />
-                            <label for="nguyen">Status</label>
-                        </div>
-
                     </div>
-                    <div class=" bg-white p-6 rounded-md">
-                        123
-                    </div>
+                    {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'advanced', $form->getModel()) !!}
                 </div>
                 <div class="col-span-3 space-y-4">
-                    <div class="rounded-md bg-white">
-                        <div class="border-b p-3 flex justify-between">
-                            <h3>title</h3>
-                        </div>
-                        <div class="p-3">
-                            <button type="submit" class="focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-blue-500 hover:bg-blue-600 hover:shadow-lg">
-                                Save
-                            </button>
-                        </div>
-                    </div>
-                    <div class="p-6 rounded-md bg-white">2</div>
+                    {!! $form->getActionButtons() !!}
+                    {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'top', $form->getModel()) !!}
+
+                    {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'side', $form->getModel()) !!}
                 </div>
 
             </div>

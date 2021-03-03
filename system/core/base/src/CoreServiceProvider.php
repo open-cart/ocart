@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
 use System\Core\Library\CustomResourceRegistrar;
+use System\Core\Providers\BreadcrumsServiceProvider;
 use System\Core\Repositories\MetaBoxRepository;
 use System\Core\Repositories\MetaBoxRepositoryEloquent;
 use System\Core\Traits\LoadAndPublishDataTrait;
@@ -30,6 +31,9 @@ class CoreServiceProvider extends ServiceProvider
 
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core/base');
+
+        $this->app->register(BreadcrumsServiceProvider::class);
     }
 
     public function boot()
@@ -102,5 +106,16 @@ class CoreServiceProvider extends ServiceProvider
                 'active'      => false,
             ]);
         });
+
+
+//        print_r(dashboard_menu()-)
+
+//        add_action(BASE_ACTION_META_BOXES, function ($screen, $priority, $object = null) {
+//            if (!($priority === 'advanced' && $screen === 'page')) {
+//                return;
+//            }
+//
+//            return 'metabox';
+//        }, 1, 3);
     }
 }

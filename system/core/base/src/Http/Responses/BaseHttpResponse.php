@@ -3,6 +3,7 @@ namespace System\Core\Http\Responses;
 
 
 use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Support\Facades\URL;
 
 class BaseHttpResponse implements Responsable
 {
@@ -25,6 +26,16 @@ class BaseHttpResponse implements Responsable
      * @var int
      */
     protected $code = 200;
+
+    /**
+     * @var string
+     */
+    protected $previousUrl = '';
+
+    /**
+     * @var string
+     */
+    protected $nextUrl = '';
 
     /**
      * @param bool $error
@@ -59,5 +70,33 @@ class BaseHttpResponse implements Responsable
                 'message' => $this->message,
             ], $this->code);
         }
+
+        if ($request->input('submit') === 'save' && !empty($this->previousUrl)) {
+            return redirect()->to($this->previousUrl);
+        } elseif (!empty($this->nextUrl)) {
+            return redirect()->to($this->nextUrl);
+        }
+
+        return redirect()->to(URL::previous());
+    }
+
+    /**
+     * @param string $nextUrl
+     * @return BaseHttpResponse
+     */
+    public function setNextUrl(string $nextUrl)
+    {
+        $this->nextUrl = $nextUrl;
+        return $this;
+    }
+
+    /**
+     * @param string $previousUrl
+     * @return BaseHttpResponse
+     */
+    public function setPreviousUrl(string $previousUrl)
+    {
+        $this->previousUrl = $previousUrl;
+        return $this;
     }
 }

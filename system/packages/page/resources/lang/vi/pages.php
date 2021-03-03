@@ -11,5 +11,7 @@ return [
     'title' => 'Tiêu đề',
     'description' => 'Mô tả',
     'image' => 'Hình ảnh',
-    'alias'           =>'URL Tùy chỉnh'
+    'alias'           =>'URL Tùy chỉnh',
+    'create'    => 'Tạo mới trang',
+    'edit' => 'Sửa trang',
 ];
