@@ -14,4 +14,7 @@ return [
     'alias'           =>'URL Tùy chỉnh',
     'create'    => 'Tạo mới trang',
     'edit' => 'Sửa trang',
+    'forms' => [
+        'name' => 'Name'
+    ]
 ];

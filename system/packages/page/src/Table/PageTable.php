@@ -59,6 +59,15 @@ class PageTable extends TableAbstract
                     return $item->created_at;
                 }
             ],
+            'featured' => [
+                'name' => 'featured',
+                'title' => __('admin.featured'),
+                'class' => 'border text-left px-2 py-2',
+                'width' => '120px',
+                'render' => function ($item) {
+                    return $item->is_featured;
+                }
+            ],
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
@@ -66,7 +75,6 @@ class PageTable extends TableAbstract
                 'width' => '120px',
                 'render' => function ($item) {
                     return $item->status->toHtml();
-                    return view('components.activated', ['active' => $item->status]);
                 }
             ]
         ]);

@@ -18,8 +18,16 @@ class BaseStatusEnum extends Enum
     {
         switch ($this->value) {
             case self::PUBLISHED:
-                return HtmlFacade::tag('span', $this->getLabel(), [
+                return HtmlFacade::tag('span', $this->getLabel($this->value), [
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-green-600 rounded',
+                ]);
+            case self::DRAFT:
+                return HtmlFacade::tag('span', $this->getLabel($this->value), [
+                    'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-blue-500 rounded',
+                ]);
+            case self::PENDING:
+                return HtmlFacade::tag('span', $this->getLabel($this->value), [
+                    'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-yellow-400 rounded',
                 ]);
         default:
             break;
@@ -28,7 +36,7 @@ class BaseStatusEnum extends Enum
         return "<label>{$this->value}</label>";
     }
 
-    function getLabel() {
-        return trans('core/base::enums.statuses.'.$this->value);
+    static function getLabel($value) {
+        return trans('core/base::enums.statuses.'.$value);
     }
 }
