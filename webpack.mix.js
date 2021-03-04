@@ -19,8 +19,7 @@ glob.sync('./system/**/webpack.mix.js').forEach(config => {
 mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
-    require('autoprefixer'),
-    // require('toastr')
+    require('autoprefixer')
 ]);
 mix.sass('resources/css/swal.scss', 'public/css')
 
