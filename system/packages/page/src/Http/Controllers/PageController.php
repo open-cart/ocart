@@ -6,8 +6,8 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Page\Forms\PageForm;
+use Ocart\Page\Http\Requests\PageRequest;
 use Ocart\Page\Repositories\PageRepository;
-use Ocart\Page\Services\StorePageDescriptionService;
 use Ocart\Page\Table\PageTable;
 use Prettus\Validator\Exceptions\ValidatorException;
 use System\Core\Forms\FormBuilder;
@@ -40,27 +40,19 @@ class PageController extends BaseController
             ->renderForm();
     }
 
-    function store(Request $request, BaseHttpResponse $response)
+    function store(PageRequest $request, BaseHttpResponse $response)
     {
-        try {
-            $data = $request->all();
-            $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-            $data['slug_md5'] = md5($data['slug']);
+        $data = $request->all();
+        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+        $data['slug_md5'] = md5($data['slug']);
 
-            $page = $this->repo->create($data + [
+        $page = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-            return $response->setPreviousUrl(route('pages.index'))
-                ->setNextUrl(route('pages.show', $page->id));
-        } catch (ValidatorException $e) {
-            return back()
-                ->withInput($data)
-                ->withErrors($e->getMessageBag());
-        } catch (\Exception $e) {
-            throw $e;
-        }
+        return $response->setPreviousUrl(route('pages.index'))
+            ->setNextUrl(route('pages.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -74,26 +66,18 @@ class PageController extends BaseController
             ->renderForm();
     }
 
-    function update($id, Request $request)
+    function update($id, PageRequest $request, BaseHttpResponse $response)
     {
-        try {
-            $data = $request->all();
-            $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-            $data['slug_md5'] = md5($data['slug']);
+        $data = $request->all();
+//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+//        $data['slug_md5'] = md5($data['slug']);
 
-            $this->repo->update($data + [
-                    'is_featured' => $request->input('is_featured', false),
-                ], $id);
+        $page = $this->repo->update($data + [
+                'is_featured' => $request->input('is_featured', false),
+            ], $id);
 
-        } catch (ValidatorException $e) {
-            return back()
-                ->withInput($data)
-                ->withErrors($e->getMessageBag());
-        } catch (\Exception $e) {
-            throw $e;
-        }
-
-        return redirect()->route('pages.index');
+        return $response->setPreviousUrl(route('pages.index'))
+            ->setNextUrl(route('pages.show', $page->id));
     }
 
     function destroy(Request $request)

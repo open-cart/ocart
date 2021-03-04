@@ -20,7 +20,6 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
         Helper::autoload(__DIR__ . '/../../helpers');
 
         $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
-        $this->app->bind(PageDescriptionRepository::class, PageDescriptionRepositoryEloquent::class);
     }
 
     public function boot()

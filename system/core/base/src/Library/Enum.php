@@ -121,4 +121,20 @@ class Enum implements CastsAttributes
 
         return $result;
     }
+
+    /**
+     * Returns instances of the Enum class of all Enum constants
+     *
+     * @return static[] name in key, Enum instance in value
+     */
+    public static function values()
+    {
+        $values = [];
+
+        foreach (static::toArray() as $key => $value) {
+            $values[$key] = new static($value);
+        }
+
+        return $values;
+    }
 }
