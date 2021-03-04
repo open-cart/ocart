@@ -56,7 +56,7 @@ class PluginManagementServiceProvider extends ServiceProvider
 
     protected function loadPlugins()
     {
-        if (!Schema::hasTable(with(new Setting())->getTable())) {
+        if (!check_database_connection() && !Schema::hasTable(with(new Setting())->getTable())) {
             return;
         }
 

@@ -112,3 +112,18 @@ if (!function_exists('get_meta_data')) {
         return \System\Core\Facades\MetaBox::getMetaData($object, $key, $single, $select);
     }
 }
+
+if (!function_exists('check_database_connection')) {
+    /**
+     * @return boolean
+     */
+    function check_database_connection(): bool
+    {
+        try {
+            DB::connection(config('database.default'))->reconnect();
+            return true;
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+}
