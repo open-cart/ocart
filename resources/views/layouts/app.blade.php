@@ -110,6 +110,10 @@
                     e.target.src = '/images/no-image.jpg';
                 });
             })
+            // $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown, options) {
+            //     options.success(xhr.responseText, textStatus, xhr);
+            //     return false;
+            // });
 
             // axios.interceptors.request.use((config) => {
             //     $('#loading').show()

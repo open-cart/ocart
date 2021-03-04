@@ -1,6 +1,6 @@
 <div class="rounded-md bg-white">
     <div class="border-b p-3 flex justify-between">
-        <h3>Publish</h3>
+        <h4>Publish</h4>
     </div>
     <div class="px-3 py-6">
         <input type="hidden" name="submit" value="">

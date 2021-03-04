@@ -91,10 +91,11 @@ class Enum implements CastsAttributes
     {
         if ($value instanceof static) {
             $this->value = $value->getValue();
-            return;
+        } else {
+            $this->value = $value;
         }
 
-        $this->value = $value;
+        return $this->getValue();
     }
 
     /**
@@ -132,9 +133,27 @@ class Enum implements CastsAttributes
         $values = [];
 
         foreach (static::toArray() as $key => $value) {
-            $values[$key] = new static($value);
+            $values[$key] = $value;
         }
 
         return $values;
+    }
+
+    /**
+     * @return array
+     */
+    public static function labels(): array
+    {
+        $result = [];
+
+        foreach (static::toArray() as $value) {
+            $result[$value] = static::getLabel($value);
+        }
+
+        return $result;
+    }
+
+    static function getLabel($value) {
+        return trans('core/base::enums.statuses.'.$value);
     }
 }

@@ -14,9 +14,32 @@ abstract class FormAbstract extends Form
 
     protected $actionButtons = '';
 
+    /**
+     * @var string
+     */
+    protected $breakFieldPoint = '';
+
     public function __construct()
     {
         $this->setFormOption('template', $this->template);
+    }
+
+    /**
+     * @param string $breakFieldPoint
+     * @return FormAbstract
+     */
+    public function setBreakFieldPoint(string $breakFieldPoint)
+    {
+        $this->breakFieldPoint = $breakFieldPoint;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBreakFieldPoint(): string
+    {
+        return $this->breakFieldPoint;
     }
 
     /**

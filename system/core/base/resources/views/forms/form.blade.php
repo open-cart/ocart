@@ -12,13 +12,16 @@
                 <div class="col-span-9 space-y-4">
                     <div class=" bg-white p-6 rounded-md space-y-4">
                         @if($showFields)
-
-                            @foreach ($fields as $field)
+                            @foreach ($fields as $key => $field)
+                                @if ($field->getName() == $form->getBreakFieldPoint())
+                                    @break
+                                @else
+                                    @unset($fields[$key])
+                                @endif
                                 @if( ! in_array($field->getName(), $exclude) )
                                     {!! $field->render() !!}
                                 @endif
                             @endforeach
-
                         @endif
                     </div>
                     {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'advanced', $form->getModel()) !!}
@@ -26,6 +29,19 @@
                 <div class="col-span-3 space-y-4">
                     {!! $form->getActionButtons() !!}
                     {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'top', $form->getModel()) !!}
+
+                    @foreach ($fields as $field)
+                        @if( ! in_array($field->getName(), $exclude) )
+                            <div class="rounded-md bg-white">
+                                <div class="border-b p-3 flex justify-between">
+                                    <h4>{!! Form::customLabel($field->getName(), $field->getOption('label'), $field->getOption('label_attr')) !!}</h4>
+                                </div>
+                                <div class="px-3 py-6">
+                                    {!! $field->render([], in_array($field->getType(), ['radio', 'checkbox'])) !!}
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
 
                     {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'side', $form->getModel()) !!}
                 </div>

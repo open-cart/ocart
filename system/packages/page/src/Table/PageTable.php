@@ -75,7 +75,6 @@ class PageTable extends TableAbstract
                 'width' => '120px',
                 'render' => function ($item) {
                     return $item->status->toHtml();
-                    return view('components.activated', ['active' => $item->status]);
                 }
             ]
         ]);
