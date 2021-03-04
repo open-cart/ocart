@@ -3,9 +3,9 @@ use \Illuminate\Support\Facades\Route;
 
 Route::group(
     [
-        'prefix' => config('const.ADMIN_PREFIX', 'admin'),
-        'middleware' => config('const.ADMIN_MIDDLEWARE', ['web']),
-        'namespace' => config('const.ADMIN_NAMESPACE', 'System\\Core\\Admin\\Controllers'),
+        'prefix' => ADMIN_PREFIX,
+        'middleware' => ADMIN_MIDDLEWARE,
+        'namespace' => 'System\\Core\\Admin\\Controllers',
     ],
     function() {
         Route::get('/theme/red', function () {
