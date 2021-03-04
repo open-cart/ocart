@@ -61,8 +61,6 @@ class PageController extends BaseController
         } catch (\Exception $e) {
             throw $e;
         }
-//
-        return redirect()->route('pages.index');
     }
 
     function show($id, FormBuilder $formBuilder)
