@@ -1,8 +1,14 @@
 @props(['checked', 'color' => 'indigo', 'name' => ''])
 <span class="flex items-center"
-      x-data="{ isOn: {!! $checked !!} }" {{ $attributes }}
+      x-data="{ isOn: {!! $checked !!} }"
 >
-    <input class="hidden" id="nguyen" x-on:change="$dispatch($event.target.checked); isOn = $event.target.checked" type="checkbox"/>
+    <input
+        class="hidden"
+        id="{!! $name !!}"
+        x-on:change="$dispatch($event.target.checked); isOn = $event.target.checked"
+        type="checkbox"
+        {{ $attributes }}
+    />
     <input type="hidden" :value="isOn ? 1 : 2" name="{!! $name !!}"/>
     <label
         :aria-checked="isOn"
@@ -10,7 +16,7 @@
         class="bg-gray-200 relative inline-block flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:shadow-outline"
         role="checkbox"
         tabindex="0"
-        for="nguyen"
+        for="{!! $name !!}"
     >
       <span
           aria-hidden="true"

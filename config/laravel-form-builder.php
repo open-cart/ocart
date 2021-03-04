@@ -20,6 +20,9 @@ return [
             'label_class' => 'text-gray-900 font-medium',
             'wrapper_class'       =>'flex items-center space-x-3'
         ],
+        'onOff' => [
+            'wrapper_class'         => 'flex items-center space-x-3 cursor-pointer'
+        ]
         //'text'                => [
         //    'wrapper_class'   => 'form-field-text',
         //    'label_class'     => 'form-field-text-label',

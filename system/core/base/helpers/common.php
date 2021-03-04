@@ -127,3 +127,49 @@ if (!function_exists('check_database_connection')) {
         }
     }
 }
+
+if (!function_exists('html_attributes_builder')) {
+    /**
+     * @param array $attributes
+     * @return string
+     */
+    function html_attributes_builder(array $attributes): string
+    {
+        $html = [];
+
+        foreach ((array)$attributes as $key => $value) {
+            $element = html_attribute_element($key, $value);
+
+            if (!empty($element)) {
+                $html[] = $element;
+            }
+        }
+
+        return count($html) > 0 ? ' ' . implode(' ', $html) : '';
+    }
+}
+
+if (!function_exists('html_attribute_element')) {
+    /**
+     * @param $key
+     * @param $value
+     * @return string
+     */
+    function html_attribute_element($key, $value)
+    {
+        if (is_numeric($key)) {
+            return $value;
+        }
+
+        // Treat boolean attributes as HTML properties
+        if (is_bool($value) && $key != 'value') {
+            return $value ? $key : '';
+        }
+
+        if (!empty($value)) {
+            return $key . '="' . e($value) . '"';
+        }
+
+        return '';
+    }
+}
