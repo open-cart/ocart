@@ -2,6 +2,7 @@
 namespace Ocart\Page\Forms;
 
 use Kris\LaravelFormBuilder\Field;
+use Ocart\Page\Supports\Template;
 use System\Core\Enums\BaseStatusEnum;
 use System\Core\Forms\FormAbstract;
 use Kris\LaravelFormBuilder\Fields\FormField;
@@ -32,6 +33,8 @@ class PageForm extends FormAbstract
             ->add('is_featured', 'onOff')
             ->add('status', 'select', [
                 'choices'    => BaseStatusEnum::labels()
+            ])->add('template', 'select', [
+                'choices'    => Template::getTemplate()
             ])
             ->setBreakFieldPoint('is_featured');
     }

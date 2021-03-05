@@ -1,11 +1,9 @@
 <?php
-
-
 namespace System\Core\Enums;
 
 
-use Collective\Html\HtmlFacade;
 use System\Core\Library\Enum;
+use Html;
 
 class BaseStatusEnum extends Enum
 {
@@ -18,15 +16,15 @@ class BaseStatusEnum extends Enum
     {
         switch ($this->value) {
             case self::PUBLISHED:
-                return HtmlFacade::tag('span', $this->getLabel($this->value), [
+                return Html::tag('span', $this->getLabel($this->value), [
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-green-600 rounded',
                 ]);
             case self::DRAFT:
-                return HtmlFacade::tag('span', $this->getLabel($this->value), [
+                return Html::tag('span', $this->getLabel($this->value), [
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-blue-500 rounded',
                 ]);
             case self::PENDING:
-                return HtmlFacade::tag('span', $this->getLabel($this->value), [
+                return Html::tag('span', $this->getLabel($this->value), [
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none text-white bg-yellow-400 rounded',
                 ]);
         default:
