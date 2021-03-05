@@ -12,6 +12,7 @@ use System\Core\Providers\BreadcrumsServiceProvider;
 use System\Core\Repositories\MetaBoxRepository;
 use System\Core\Repositories\MetaBoxRepositoryEloquent;
 use System\Core\Traits\LoadAndPublishDataTrait;
+use Illuminate\Database\Schema\Builder;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -34,6 +35,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core/base');
 
         $this->app->register(BreadcrumsServiceProvider::class);
+
+        Builder::defaultStringLength(191);
     }
 
     public function boot()
