@@ -4,10 +4,6 @@
 namespace Ocart\Page\Providers;
 
 
-use Illuminate\Routing\Events\RouteMatched;
-use Illuminate\Routing\Route;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\TestMiddleware;
