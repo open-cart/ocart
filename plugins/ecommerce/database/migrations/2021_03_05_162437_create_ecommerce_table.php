@@ -31,6 +31,22 @@ class CreateEcommerceTable extends Migration
             $table->timestamps();
         });
 
+        \Illuminate\Support\Facades\DB::table('ecommerce_categories')->insert(
+            array(
+                'name' => 'Uncategorized',
+                'slug' => 'uncategorized',
+                'slug_md5' => md5('uncategorized'),
+                'parent_id' => 0,
+                'author_id' => 1,
+                'author_type' => User::class,
+                'order' => 0,
+                'is_featured' => 0,
+                'is_default' => 1,
+                'created_at'   => \Carbon\Carbon::now(),
+                'updated_at' => \Carbon\Carbon::now()
+            )
+        );
+
         Schema::create('ecommerce_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 120);
