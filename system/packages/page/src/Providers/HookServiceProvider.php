@@ -6,7 +6,6 @@ namespace Ocart\Page\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Ocart\Page\Repositories\PageRepository;
-use Ocart\Page\TestMiddleware;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
 

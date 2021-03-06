@@ -24,6 +24,11 @@
                             @endforeach
                         @endif
                     </div>
+
+                    @foreach ($form->getMetaBoxes() as $key => $metaBox)
+                        {!! $form->getMetaBox($key) !!}
+                    @endforeach
+
                     {!! do_action(BASE_ACTION_META_BOXES, $form->getModuleName(), 'advanced', $form->getModel()) !!}
                 </div>
                 <div class="col-span-3 space-y-4">
