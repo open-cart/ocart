@@ -6,11 +6,14 @@ namespace Ocart\Ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\CategoryForm;
 use Ocart\Ecommerce\Http\Requests\CategoryRequest;
+use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Table\CategoryTable;
+use Prettus\Repository\Events\RepositoryEntityDeleting;
 use System\Core\Forms\FormBuilder;
 use System\Core\Http\Controllers\BaseController;
 use System\Core\Http\Responses\BaseHttpResponse;
@@ -83,6 +86,14 @@ class CategoryController extends BaseController
 
     function destroy(Request $request)
     {
+        Event::listen(RepositoryEntityDeleting::class, function($repo) {
+            if ($repo->getModel() instanceof Category) {
+                if ($repo->getModel()->is_default) {
+                    throw new \Error(trans('core/base::notices.cannot_delete'));
+                }
+            }
+        });
+
         $this->repo->delete($request->input('id'));
 
         return response()->json([]);

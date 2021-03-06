@@ -10,7 +10,7 @@ class CategoryForm extends FormAbstract
 
     public function buildForm()
     {
-        $list = \get_categories();
+        $list = get_categories();
 
         $categories = [];
         foreach ($list as $row) {

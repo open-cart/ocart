@@ -31,25 +31,6 @@ class CreateEcommerceTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('ecommerce_products', function (Blueprint $table) {
-            $table->id();
-
-            $table->string('name', 255);
-            $table->longText('content');
-            $table->string('description', 400)->nullable();
-            $table->string('slug', 255)->nullable();
-            $table->string('slug_md5', 64)->unique();
-            $table->string('status', 60)->default('published');
-            $table->integer('user_id')->references('id')->on('users');
-            $table->tinyInteger('is_featured')->default(0);
-
-            $table->string('sku', 255);
-            $table->float('price');
-            $table->float('price_sell')->nullable();
-
-            $table->timestamps();
-        });
-
         Schema::create('ecommerce_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 120);
@@ -78,6 +59,40 @@ class CreateEcommerceTable extends Migration
             $table->tinyInteger('is_featured')->default(0);
             $table->timestamps();
         });
+
+        Schema::create('ecommerce_products', function (Blueprint $table) {
+            $table->id();
+
+            $table->string('name', 255);
+            $table->longText('content');
+            $table->string('description', 400)->nullable();
+            $table->string('slug', 255)->nullable();
+            $table->string('slug_md5', 64)->unique();
+            $table->string('status', 60)->default('published');
+            $table->integer('user_id')->references('id')->on('users');
+
+            $table->integer('brand_id')->nullable()->references('id')->on('ecommerce_brands');
+
+            $table->tinyInteger('is_featured')->default(0);
+
+            $table->string('sku', 255);
+            $table->float('price');
+            $table->float('price_sell')->nullable();
+
+            $table->timestamps();
+        });
+
+        Schema::create('ecommerce_product_tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tag_id')->unsigned()->references('id')->on('ecommerce_tags')->onDelete('cascade');
+            $table->integer('product_id')->unsigned()->references('id')->on('ecommerce_products')->onDelete('cascade');
+        });
+
+        Schema::create('ecommerce_product_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('category_id')->unsigned()->references('id')->on('ecommerce_categories')->onDelete('cascade');
+            $table->integer('product_id')->unsigned()->references('id')->on('ecommerce_products')->onDelete('cascade');
+        });
     }
 
     /**
@@ -91,5 +106,7 @@ class CreateEcommerceTable extends Migration
         Schema::dropIfExists('ecommerce_products');
         Schema::dropIfExists('ecommerce_tags');
         Schema::dropIfExists('ecommerce_brands');
+        Schema::dropIfExists('ecommerce_product_tags');
+        Schema::dropIfExists('ecommerce_product_categories');
     }
 }

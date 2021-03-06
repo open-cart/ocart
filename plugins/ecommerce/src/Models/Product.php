@@ -32,6 +32,7 @@ class Product extends Model
         'slug_md5',
         'status',
         'user_id',
+        'brand_id',
         'is_featured',
         'sku',
         'price',
@@ -58,5 +59,13 @@ class Product extends Model
         $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
 
         return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'ecommerce_product_categories');
     }
 }
