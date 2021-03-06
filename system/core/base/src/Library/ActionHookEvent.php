@@ -78,20 +78,7 @@ abstract class ActionHookEvent
      */
     protected function getFunction($callback)
     {
-        if (is_string($callback)) {
-            if (strpos($callback, '@')) {
-                $callback = explode('@', $callback);
-                return [app('\\' . $callback[0]), $callback[1]];
-            }
-
-            return $callback;
-        } elseif ($callback instanceof Closure) {
-            return $callback;
-        } elseif (is_array($callback)) {
-            return $callback;
-        }
-
-        return false;
+        return get_function_callback($callback);
     }
 
     /**

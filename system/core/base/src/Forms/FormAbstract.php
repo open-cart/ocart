@@ -1,6 +1,7 @@
 <?php
 namespace System\Core\Forms;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Kris\LaravelFormBuilder\Form;
 use System\Core\Forms\Fields\OnOffField;
@@ -13,6 +14,11 @@ abstract class FormAbstract extends Form
     protected $moduleName = '';
 
     protected $actionButtons = '';
+
+    /**
+     * @var array
+     */
+    protected $metaBoxes = [];
 
     /**
      * @var string
@@ -130,5 +136,64 @@ abstract class FormAbstract extends Form
         apply_filters(BASE_FILTER_BEFORE_RENDER_FORM, $this, $this->moduleName, $this->getModel());
 
         return parent::renderForm($options, $showStart, $showFields, $showEnd);
+    }
+
+    /**
+     * @return array
+     */
+    public function getMetaBoxes(): array
+    {
+        uasort($this->metaBoxes, function ($before, $after) {
+            if (Arr::get($before, 'priority', 0) > Arr::get($after, 'priority', 0)) {
+                return 1;
+            } elseif (Arr::get($before, 'priority', 0) < Arr::get($after, 'priority', 0)) {
+                return -1;
+            }
+
+            return 0;
+        });
+
+        return $this->metaBoxes;
+    }
+
+
+    /**
+     * @param string $name
+     * @return string
+     * @throws Throwable
+     */
+    public function getMetaBox($name): string
+    {
+        if (!Arr::get($this->metaBoxes, $name)) {
+            return '';
+        }
+
+        $meta_box = $this->metaBoxes[$name];
+
+        return view('core/base::forms.partials.meta-box', compact('meta_box'))->render();
+    }
+
+    /**
+     * @param array $boxes
+     * @return $this
+     */
+    public function addMetaBoxes($boxes): self
+    {
+        if (!is_array($boxes)) {
+            $boxes = [$boxes];
+        }
+        $this->metaBoxes = array_merge($this->metaBoxes, $boxes);
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return FormAbstract
+     */
+    public function removeMetaBox($name): self
+    {
+        Arr::forget($this->metaBoxes, $name);
+        return $this;
     }
 }
