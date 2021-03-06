@@ -5,11 +5,14 @@ use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Ecommerce\Repositories\BrandRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
+use System\Core\Library\Helper;
 use System\Core\Traits\LoadAndPublishDataTrait;
 
 class EcommerceServiceProvider extends ServiceProvider {
@@ -17,6 +20,7 @@ class EcommerceServiceProvider extends ServiceProvider {
 
     public function register()
     {
+
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/ecommerce')
@@ -27,6 +31,9 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
         $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
         $this->app->bind(BrandRepository::class, BrandRepositoryEloquent::class);
+        $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
+
+        Helper::autoload(__DIR__ . '/../../helpers');
     }
 
     public function boot()
@@ -87,7 +94,7 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Danh mục sản phẩm',
                 'icon'        => null,
-                'url'         => '',
+                'url'         => route('categories.index'),
                 'permissions' => [],
                 'active'      => false,
             ])->registerItem([

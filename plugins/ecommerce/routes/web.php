@@ -18,4 +18,8 @@ Route::group([
     Route::group(['prefix'=>'product-brands', 'as' => 'brands.'], function () {
         Route::resource('', 'BrandController')->parameters(['' => 'id']);
     });
+
+    Route::group(['prefix'=>'product-categories', 'as' => 'categories.'], function () {
+        Route::resource('', 'CategoryController')->parameters(['' => 'id']);
+    });
 });
