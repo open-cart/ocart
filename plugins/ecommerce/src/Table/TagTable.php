@@ -2,14 +2,14 @@
 namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
-use Ocart\Ecommerce\Models\Product;
-use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Models\Tag;
+use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
 
-class ProductTable extends TableAbstract
+class TagTable extends TableAbstract
 {
-    public function __construct(DataTables $table, ProductRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, TagRepository $repo, HtmlBuilder $html)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
@@ -79,15 +79,15 @@ class ProductTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('products.update', 'products.destroy', $item);
+                    return $this->tableActions('tags.update', 'tags.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('products.create'), []);
+        $buttons = $this->addCreateButton(route('tags.create'), []);
 
-        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Product::class);
+        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Tag::class);
     }
 }

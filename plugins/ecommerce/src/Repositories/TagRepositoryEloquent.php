@@ -2,17 +2,17 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
-use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Models\Tag;
+use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 
 /**
  * Class PageRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class TagRepositoryEloquent extends BaseRepository implements TagRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',
@@ -25,7 +25,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
      */
     public function model()
     {
-        return Product::class;
+        return Tag::class;
     }
 
     /**

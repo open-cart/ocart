@@ -1,15 +1,12 @@
 <?php
-
-
 namespace Ocart\Ecommerce\Http\Controllers;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\ProductForm;
 use Ocart\Ecommerce\Http\Requests\ProductRequest;
-use Ocart\Ecommerce\Repositories\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Table\ProductTable;
 use System\Core\Forms\FormBuilder;
 use System\Core\Http\Controllers\BaseController;

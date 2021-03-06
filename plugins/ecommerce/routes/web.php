@@ -7,7 +7,11 @@ Route::group([
     'middleware' => ADMIN_MIDDLEWARE,
     'namespace' => 'Ocart\Ecommerce\Http\Controllers',
 ], function () {
-    Route::group(['prefix'=>'product', 'as' => 'products.'], function () {
+    Route::group(['prefix'=>'products', 'as' => 'products.'], function () {
         Route::resource('', 'ProductController')->parameters(['' => 'id']);
+    });
+
+    Route::group(['prefix'=>'product-tags', 'as' => 'tags.'], function () {
+        Route::resource('', 'TagController')->parameters(['' => 'id']);
     });
 });

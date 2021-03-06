@@ -4,8 +4,10 @@ namespace Ocart\Ecommerce\Providers;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Ocart\Ecommerce\Repositories\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
 use System\Core\Traits\LoadAndPublishDataTrait;
 
 class EcommerceServiceProvider extends ServiceProvider {
@@ -21,6 +23,7 @@ class EcommerceServiceProvider extends ServiceProvider {
             ->loadMigrations();
 
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
+        $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
     }
 
     public function boot()
@@ -90,7 +93,7 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Product Tags',
                 'icon'        => null,
-                'url'         => '',
+                'url'         => route('tags.index'),
                 'permissions' => [],
                 'active'      => false,
             ])->registerItem([

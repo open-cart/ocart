@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use System\Core\Enums\BaseStatusEnum;
 
-class Product extends Model
+class Tag extends Model
 {
     use HasFactory;
 
@@ -16,7 +16,7 @@ class Product extends Model
      *
      * @var string
      */
-    protected $table = 'ecommerce_products';
+    protected $table = 'ecommerce_tags';
 
     /**
      * The attributes that are mass assignable.
@@ -25,17 +25,13 @@ class Product extends Model
      */
     protected $fillable = [
         'name',
-        'description',
-        'content',
-        'image',
         'slug',
         'slug_md5',
+        'author_id',
+        'author_type',
+        'description',
+        'parent_id',
         'status',
-        'user_id',
-        'is_featured',
-        'sku',
-        'price',
-        'price_sell'
     ];
 
     /**
