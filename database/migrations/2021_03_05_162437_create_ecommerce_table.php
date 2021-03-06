@@ -68,12 +68,14 @@ class CreateEcommerceTable extends Migration
             $table->string('name', 120);
             $table->string('slug', 255)->nullable();
             $table->string('slug_md5', 64)->unique();
-            $table->string('website', 255);
+            $table->string('website', 255)->nullable();
             $table->integer('author_id');
             $table->string('author_type', 255)->default(addslashes(User::class));
             $table->string('description', 400)->nullable()->default('');
             $table->integer('parent_id')->unsigned()->default(0);
             $table->string('status', 60)->default('published');
+            $table->string('image', 255)->nullable();
+            $table->tinyInteger('is_featured')->default(0);
             $table->timestamps();
         });
     }

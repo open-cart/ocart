@@ -14,4 +14,8 @@ Route::group([
     Route::group(['prefix'=>'product-tags', 'as' => 'tags.'], function () {
         Route::resource('', 'TagController')->parameters(['' => 'id']);
     });
+
+    Route::group(['prefix'=>'product-brands', 'as' => 'brands.'], function () {
+        Route::resource('', 'BrandController')->parameters(['' => 'id']);
+    });
 });

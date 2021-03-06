@@ -4,6 +4,8 @@ namespace Ocart\Ecommerce\Providers;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Ecommerce\Repositories\BrandRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
@@ -24,6 +26,7 @@ class EcommerceServiceProvider extends ServiceProvider {
 
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
         $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
+        $this->app->bind(BrandRepository::class, BrandRepositoryEloquent::class);
     }
 
     public function boot()
@@ -102,7 +105,7 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Brands',
                 'icon'        => null,
-                'url'         => '',
+                'url'         => route('brands.index'),
                 'permissions' => [],
                 'active'      => false,
             ])->registerItem([
