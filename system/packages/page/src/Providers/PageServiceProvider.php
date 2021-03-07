@@ -3,8 +3,6 @@ namespace Ocart\Page\Providers;
 
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
-use Ocart\Page\Repositories\PageDescriptionRepository;
-use Ocart\Page\Repositories\PageDescriptionRepositoryEloquent;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Repositories\PageRepositoryEloquent;
 use System\Core\Library\Helper;

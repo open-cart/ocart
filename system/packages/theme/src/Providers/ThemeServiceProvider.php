@@ -25,6 +25,7 @@ class ThemeServiceProvider extends ServiceProvider
         ]);
 
         $this->app->register(RouteServiceProvider::class);
+        $this->app->register(ThemeManagementServiceProvider::class);
 
         parent::register();
     }

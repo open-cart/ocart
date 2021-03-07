@@ -33,6 +33,7 @@ class Page extends Model
         'status',
         'user_id',
         'is_featured',
+        'template'
     ];
 
     /**

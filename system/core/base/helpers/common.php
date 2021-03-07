@@ -173,3 +173,68 @@ if (!function_exists('html_attribute_element')) {
         return '';
     }
 }
+
+if (!function_exists('get_function_callback')) {
+    function get_function_callback($callback)
+    {
+        if (is_string($callback)) {
+            if (strpos($callback, '@')) {
+                $callback = explode('@', $callback);
+                return [app('\\' . $callback[0]), $callback[1]];
+            }
+
+            return $callback;
+        } elseif ($callback instanceof Closure) {
+            return $callback;
+        } elseif (is_array($callback)) {
+            return $callback;
+        }
+
+        return false;
+    }
+}
+
+if (!function_exists('filter_form')) {
+    function filter_form($screenName, $positionName, $callback)
+    {
+        return function ($screen, $position, $model) use ($screenName, $positionName, $callback) {
+            if ($screen === $screenName && $positionName === $position) {
+                return call_user_func_array(get_function_callback($callback), [$screen, $position, $model]);
+            }
+        };
+    }
+}
+
+use Illuminate\Support\Collection;
+
+if (!function_exists('sort_item_with_children')) {
+    /**
+     * Sort parents before children
+     * @param Collection|array $list
+     * @param array $result
+     * @param int $parent
+     * @param int $depth
+     * @return array
+     */
+    function sort_item_with_children($list, array &$result = [], $parent = null, $depth = 0): array
+    {
+        if ($list instanceof Collection) {
+            $listArr = [];
+            foreach ($list as $item) {
+                $listArr[] = $item;
+            }
+            $list = $listArr;
+        }
+
+        foreach ($list as $key => $object) {
+            if ((int)$object->parent_id == (int)$parent) {
+                array_push($result, $object);
+                $object->depth = $depth;
+                unset($list[$key]);
+                sort_item_with_children($list, $result, $object->id, $depth + 1);
+            }
+        }
+
+        return $result;
+    }
+}

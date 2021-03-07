@@ -1,6 +1,6 @@
 {
-    "name": "Multiple Store",
-    "namespace": "Ocart\\Blog\\",
+    "name": "Ecommerce",
+    "namespace": "Ocart\\Ecommerce\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
@@ -10,6 +10,7 @@
     "configKey": "blog",
     "version": "1.0",
     "providers": [
-        "Ocart\\Blog\\Providers\\BlogServiceProvider"
+        "Ocart\\Ecommerce\\Providers\\EcommerceServiceProvider",
+        "Ocart\\Ecommerce\\Providers\\HookServiceProvider"
     ]
 }
