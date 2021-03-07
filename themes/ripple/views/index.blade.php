@@ -1,3 +1,3 @@
 <x-guest-layout>
-    theme ripple
+    theme ripple abcdbc
 </x-guest-layout>

@@ -17,10 +17,10 @@
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
-    {{ $slot }}
-    <div>
-        @include(Theme::getThemeNamespace('layouts.footer'))
-    </div>
+    @include(Theme::getThemeNamespace('layouts.header'))
+    <div>{{ $slot }}</div>
+    @include(Theme::getThemeNamespace('layouts.footer'))
+
 </div>
 </body>
 </html>
