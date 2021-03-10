@@ -1,7 +1,7 @@
 <?php
 
 
-namespace System\Core\Library\MapData;
+namespace Ocart\Core\Library\MapData;
 
 use Illuminate\Support\Collection;
 

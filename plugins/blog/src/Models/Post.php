@@ -2,7 +2,7 @@
 
 namespace Ocart\Blog\Models;
 
-use System\Core\Models\BaseModel;
+use Ocart\Core\Models\BaseModel;
 
 class Post extends BaseModel
 {

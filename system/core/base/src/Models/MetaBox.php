@@ -1,5 +1,5 @@
 <?php
-namespace System\Core\Models;
+namespace Ocart\Core\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

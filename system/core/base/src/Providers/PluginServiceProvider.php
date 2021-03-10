@@ -1,8 +1,8 @@
 <?php
 
-namespace System\Core\Providers;
+namespace Ocart\Core\Providers;
 
-use System\Core\Admin\Models\AdminConfig;
+use Ocart\Core\Admin\Models\AdminConfig;
 use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider

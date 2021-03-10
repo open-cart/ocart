@@ -5,8 +5,8 @@ use Kris\LaravelFormBuilder\Field;
 use Ocart\Ecommerce\Forms\Fields\CategoryMultiField;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
-use System\Core\Enums\BaseStatusEnum;
-use System\Core\Forms\FormAbstract;
+use Ocart\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Forms\FormAbstract;
 
 class ProductForm extends FormAbstract
 {

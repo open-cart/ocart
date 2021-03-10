@@ -1,5 +1,5 @@
 <?php
-namespace System\Core\Http\Controllers;
+namespace Ocart\Core\Http\Controllers;
 
 
 use Illuminate\Routing\Controller;

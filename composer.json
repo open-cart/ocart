@@ -22,6 +22,7 @@
         "ocart/plugin-management": "*@dev",
         "ocart/seo-helper": "*@dev",
         "ocart/theme": "*@dev",
+        "ocart/media": "*@dev",
         "prettus/l5-repository": "^2.7",
         "spatie/laravel-pjax": "^2.1",
         "yajra/laravel-datatables-html": "^4.36"

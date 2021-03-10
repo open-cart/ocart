@@ -5,7 +5,7 @@ namespace Ocart\Page\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
-use System\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Enums\BaseStatusEnum;
 
 class Page extends Model
 {

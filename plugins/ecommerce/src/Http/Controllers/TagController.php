@@ -11,9 +11,9 @@ use Ocart\Ecommerce\Forms\TagForm;
 use Ocart\Ecommerce\Http\Requests\TagRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Table\TagTable;
-use System\Core\Forms\FormBuilder;
-use System\Core\Http\Controllers\BaseController;
-use System\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Core\Forms\FormBuilder;
+use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 
 class TagController extends BaseController
 {

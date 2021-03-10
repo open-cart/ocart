@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Setting\Setting;
-use System\Core\Library\Helper;
+use Ocart\Core\Library\Helper;
 
 class PluginManagementServiceProvider extends ServiceProvider
 {

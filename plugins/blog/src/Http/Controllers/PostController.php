@@ -4,7 +4,7 @@ namespace Ocart\Blog\Http\Controllers;
 
 
 use Ocart\Blog\Tables\PostTable;
-use System\Core\Http\Controllers\BaseController;
+use Ocart\Core\Http\Controllers\BaseController;
 
 class PostController extends BaseController
 {

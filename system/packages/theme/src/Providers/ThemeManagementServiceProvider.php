@@ -5,7 +5,7 @@ namespace Ocart\Theme\Providers;
 
 
 use Illuminate\Support\ServiceProvider;
-use System\Core\Library\Helper;
+use Ocart\Core\Library\Helper;
 
 class ThemeManagementServiceProvider extends ServiceProvider
 {

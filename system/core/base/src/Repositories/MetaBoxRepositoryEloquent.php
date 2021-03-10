@@ -1,10 +1,10 @@
 <?php
 
-namespace System\Core\Repositories;
+namespace Ocart\Core\Repositories;
 
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use System\Core\Models\MetaBox;
+use Ocart\Core\Models\MetaBox;
 
 /**
  * Class MetaBoxRepositoryEloquent.

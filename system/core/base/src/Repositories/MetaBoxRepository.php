@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core\Repositories;
+namespace Ocart\Core\Repositories;
 
 use Prettus\Repository\Contracts\RepositoryCriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;

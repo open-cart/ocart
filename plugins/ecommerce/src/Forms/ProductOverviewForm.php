@@ -5,7 +5,7 @@ namespace Ocart\Ecommerce\Forms;
 
 
 use Kris\LaravelFormBuilder\Field;
-use System\Core\Forms\FormAbstract;
+use Ocart\Core\Forms\FormAbstract;
 
 class ProductOverviewForm extends FormAbstract
 {
