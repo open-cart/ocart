@@ -1,7 +1,7 @@
 <?php
 
 
-namespace System\Core\Providers;
+namespace Ocart\Core\Providers;
 
 
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;

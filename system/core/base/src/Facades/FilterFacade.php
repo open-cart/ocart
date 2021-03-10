@@ -1,11 +1,11 @@
 <?php
 
 
-namespace System\Core\Facades;
+namespace Ocart\Core\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
-use System\Core\Library\Filter;
+use Ocart\Core\Library\Filter;
 
 class FilterFacade extends Facade
 {

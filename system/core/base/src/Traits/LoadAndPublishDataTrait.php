@@ -1,5 +1,5 @@
 <?php
-namespace System\Core\Traits;
+namespace Ocart\Core\Traits;
 
 use Illuminate\Support\Str;
 

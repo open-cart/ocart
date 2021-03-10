@@ -9,7 +9,7 @@
     "require": {},
     "autoload": {
         "psr-4": {
-            "System\\Core\\": "base/src/",
+            "Ocart\\Core\\": "base/src/",
             "Ocart\\Table\\": "table/src/",
             "Ocart\\Setting\\": "setting/src/"
         }
@@ -17,7 +17,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "System\\Core\\CoreServiceProvider",
+                "Ocart\\Core\\CoreServiceProvider",
                 "Ocart\\Table\\TableServiceProvider",
                 "Ocart\\Setting\\SettingServiceProvider"
             ],

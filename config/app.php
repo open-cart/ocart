@@ -182,7 +182,7 @@ return [
         /**
          * Custom Provider
          */
-//        System\Core\CoreServiceProvider::class,
+//        Ocart\Core\CoreServiceProvider::class,
     ],
 
     /*

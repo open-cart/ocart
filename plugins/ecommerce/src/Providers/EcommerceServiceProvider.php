@@ -12,8 +12,8 @@ use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
-use System\Core\Library\Helper;
-use System\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Core\Library\Helper;
+use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
 class EcommerceServiceProvider extends ServiceProvider {
     use  LoadAndPublishDataTrait;

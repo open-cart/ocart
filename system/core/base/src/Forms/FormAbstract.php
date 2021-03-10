@@ -1,10 +1,10 @@
 <?php
-namespace System\Core\Forms;
+namespace Ocart\Core\Forms;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Kris\LaravelFormBuilder\Form;
-use System\Core\Forms\Fields\OnOffField;
+use Ocart\Core\Forms\Fields\OnOffField;
 
 abstract class FormAbstract extends Form
 {

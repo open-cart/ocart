@@ -1,11 +1,11 @@
 <?php
 
 
-namespace System\Core\Facades;
+namespace Ocart\Core\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
-use System\Core\Library\PageTitle;
+use Ocart\Core\Library\PageTitle;
 
 class PageTitleFacade extends Facade
 {

@@ -1,5 +1,5 @@
 <?php
-namespace System\Core\Http\Responses;
+namespace Ocart\Core\Http\Responses;
 
 
 use Illuminate\Contracts\Support\Responsable;

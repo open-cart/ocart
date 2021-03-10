@@ -1,10 +1,10 @@
 <?php
 
 
-namespace System\Core\Library;
+namespace Ocart\Core\Library;
 
 
-use System\Core\Library\MapData\Builder;
+use Ocart\Core\Library\MapData\Builder;
 
 class MapData
 {

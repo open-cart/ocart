@@ -1,17 +1,17 @@
 <?php
 
-namespace System\Core;
+namespace Ocart\Core;
 
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\ResourceRegistrar;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
-use System\Core\Library\CustomResourceRegistrar;
-use System\Core\Providers\BreadcrumsServiceProvider;
-use System\Core\Repositories\MetaBoxRepository;
-use System\Core\Repositories\MetaBoxRepositoryEloquent;
-use System\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Core\Library\CustomResourceRegistrar;
+use Ocart\Core\Providers\BreadcrumsServiceProvider;
+use Ocart\Core\Repositories\MetaBoxRepository;
+use Ocart\Core\Repositories\MetaBoxRepositoryEloquent;
+use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Illuminate\Database\Schema\Builder;
 
 class CoreServiceProvider extends ServiceProvider
@@ -28,7 +28,7 @@ class CoreServiceProvider extends ServiceProvider
 //        $this->app->bind(LengthAwarePaginator::class, CustomPaginator::class);
         $this->app->bind(ResourceRegistrar::class, CustomResourceRegistrar::class);
         $this->app->bind(MetaBoxRepository::class, MetaBoxRepositoryEloquent::class);
-        $this->app->bind(RequestCriteria::class, \System\Core\Criteria\RequestCriteria::class);
+        $this->app->bind(RequestCriteria::class, \Ocart\Core\Criteria\RequestCriteria::class);
 
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
