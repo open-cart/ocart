@@ -6,7 +6,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
 use Ocart\PluginManagement\Plugin;
-use System\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 
 class PluginManagementController extends Controller
 {

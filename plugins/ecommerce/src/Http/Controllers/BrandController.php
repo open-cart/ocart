@@ -9,9 +9,9 @@ use Ocart\Ecommerce\Forms\BrandForm;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Table\BrandTable;
-use System\Core\Forms\FormBuilder;
-use System\Core\Http\Controllers\BaseController;
-use System\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Core\Forms\FormBuilder;
+use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 
 class BrandController extends BaseController
 {

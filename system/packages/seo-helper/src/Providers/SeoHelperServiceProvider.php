@@ -7,7 +7,7 @@ namespace Ocart\SeoHelper\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Ocart\SeoHelper\Facades\SeoHelper;
-use System\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
 class SeoHelperServiceProvider extends ServiceProvider
 {

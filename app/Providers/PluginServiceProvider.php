@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use System\Core\Providers\PluginServiceProvider as BasePluginServiceProvider;
+use Ocart\Core\Providers\PluginServiceProvider as BasePluginServiceProvider;
 
 class PluginServiceProvider extends BasePluginServiceProvider
 {

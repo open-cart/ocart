@@ -1,7 +1,7 @@
 <?php
 
 
-namespace System\Core\Library;
+namespace Ocart\Core\Library;
 
 
 class CustomResourceRegistrar extends \Illuminate\Routing\ResourceRegistrar

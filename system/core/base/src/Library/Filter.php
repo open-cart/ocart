@@ -1,7 +1,7 @@
 <?php
 
 
-namespace System\Core\Library;
+namespace Ocart\Core\Library;
 
 class Filter extends ActionHookEvent
 {

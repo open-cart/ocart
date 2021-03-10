@@ -9,8 +9,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Blog\Repositories\PostRepository;
 use Ocart\Blog\Repositories\PostRepositoryEloquent;
-use System\Core\Library\Helper;
-use System\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Core\Library\Helper;
+use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
 class BlogServiceProvider extends ServiceProvider
 {

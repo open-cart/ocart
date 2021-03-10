@@ -63,12 +63,12 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-                <header class="lg:ml-64">
-                    <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        <div class="hidden">{{ $header }}</div>
-                        {{ Breadcrumbs::render('main', page_title()->getTitle(false)) }}
-                    </div>
-                </header>
+{{--                <header class="lg:ml-64">--}}
+{{--                    <div class="mx-auto py-6 px-4 sm:px-6 lg:px-8">--}}
+{{--                        <div class="hidden">{{ $header }}</div>--}}
+{{--                        {{ Breadcrumbs::render('main', page_title()->getTitle(false)) }}--}}
+{{--                    </div>--}}
+{{--                </header>--}}
 
                 <!-- Page Sidebar -->
             @include('layouts.sidebar')

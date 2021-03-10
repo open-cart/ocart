@@ -5,7 +5,7 @@ namespace Ocart\Ecommerce\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
-use System\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Enums\BaseStatusEnum;
 
 class Product extends Model
 {

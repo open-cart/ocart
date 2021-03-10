@@ -5,8 +5,8 @@ use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Repositories\PageRepositoryEloquent;
-use System\Core\Library\Helper;
-use System\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Core\Library\Helper;
+use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
 class PageServiceProvider extends \Illuminate\Support\ServiceProvider
 {

@@ -1,10 +1,10 @@
 <?php
 
 
-namespace System\Core\Library;
+namespace Ocart\Core\Library;
 
 
-use System\Core\Repositories\MetaBoxRepository;
+use Ocart\Core\Repositories\MetaBoxRepository;
 use Throwable;
 use Exception;
 use Illuminate\Database\Eloquent\Model;

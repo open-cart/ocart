@@ -1,8 +1,8 @@
 <?php
-namespace System\Core\Enums;
+namespace Ocart\Core\Enums;
 
 
-use System\Core\Library\Enum;
+use Ocart\Core\Library\Enum;
 use Html;
 
 class BaseStatusEnum extends Enum

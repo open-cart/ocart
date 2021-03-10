@@ -1,18 +1,18 @@
 <?php
 
 
-namespace System\Core\Facades;
+namespace Ocart\Core\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
-use System\Core\Library\Action;
+use Ocart\Core\Library\Action;
 
 /**
  *
  * @see Action
  *
  * Class ActionFacade
- * @package System\Core\Facades
+ * @package Ocart\Core\Facades
  */
 class ActionFacade extends Facade
 {

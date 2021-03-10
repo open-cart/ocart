@@ -3,7 +3,7 @@ namespace Ocart\Page\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use System\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Enums\BaseStatusEnum;
 
 class PageRequest extends FormRequest
 {

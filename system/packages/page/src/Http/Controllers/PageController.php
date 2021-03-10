@@ -10,8 +10,8 @@ use Ocart\Page\Http\Requests\PageRequest;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Table\PageTable;
 use Prettus\Validator\Exceptions\ValidatorException;
-use System\Core\Forms\FormBuilder;
-use System\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Core\Forms\FormBuilder;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 
 class PageController extends BaseController
 {

@@ -15,6 +15,7 @@ module.exports = {
         },
         screens: {
             'error': '0px',
+            'selected': '0px',
             'xs': '475px',
             ...defaultTheme.screens,
         }

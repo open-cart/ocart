@@ -2,8 +2,8 @@
 namespace Ocart\Ecommerce\Forms;
 
 use Kris\LaravelFormBuilder\Field;
-use System\Core\Enums\BaseStatusEnum;
-use System\Core\Forms\FormAbstract;
+use Ocart\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Forms\FormAbstract;
 
 class TagForm extends FormAbstract
 {

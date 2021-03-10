@@ -1,6 +1,6 @@
 <?php
 
-use System\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Enums\BaseStatusEnum;
 
 return [
     'statuses' => [

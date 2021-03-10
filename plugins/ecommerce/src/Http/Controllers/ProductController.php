@@ -10,9 +10,9 @@ use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Services\Abstracts\StoreCategoryServiceAbstract;
 use Ocart\Ecommerce\Services\StoreCategoryService;
 use Ocart\Ecommerce\Table\ProductTable;
-use System\Core\Forms\FormBuilder;
-use System\Core\Http\Controllers\BaseController;
-use System\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Core\Forms\FormBuilder;
+use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 
 class ProductController extends BaseController
 {

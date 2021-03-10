@@ -1,7 +1,7 @@
 <?php
 
 
-namespace System\Core\Facades;
+namespace Ocart\Core\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
@@ -11,6 +11,6 @@ class MetaBox extends Facade
 
     protected static function getFacadeAccessor()
     {
-        return \System\Core\Library\MetaBox::class;
+        return \Ocart\Core\Library\MetaBox::class;
     }
 }

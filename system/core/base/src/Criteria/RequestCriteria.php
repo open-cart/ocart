@@ -1,6 +1,6 @@
 <?php
 
-namespace System\Core\Criteria;
+namespace Ocart\Core\Criteria;
 
 use Illuminate\Database\Eloquent\Builder;
 use Prettus\Repository\Contracts\RepositoryInterface;

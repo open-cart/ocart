@@ -4,7 +4,7 @@
 namespace Ocart\Setting;
 
 
-use System\Core\Models\BaseModel;
+use Ocart\Core\Models\BaseModel;
 
 class Setting extends BaseModel
 {
