@@ -154,4 +154,15 @@ class ThemeConfig
             abort(404);
         }
     }
+
+    /**
+     * @param $path
+     * @param null $secure
+     * @return mixed
+     */
+    public function asset($path, $secure = null)
+    {
+        $path = trim($path, DIRECTORY_SEPARATOR);
+        return app('url')->asset('themes/' . $this->theme . DIRECTORY_SEPARATOR . $path, $secure);
+    }
 }
