@@ -40,5 +40,13 @@
         </div>
 
     </section>
-    <section class="antialiased font-sans py-16 max-w-7xl mx-auto px-4 sm:px-6">Footer</section>
+    <section class="antialiased font-sans bg-blue-600">
+        <div class="call-to-act py-14 max-w-7xl mx-auto px-4 sm:px-6 block sm:flex items-center">
+            <div class="call-to-act-head text-white flex-1 mb-8 sm:mb-0">
+                <h3 class="text-2xl font-bold">Want to Become a Real Estate Agent?</h3>
+                <span>We'll help you to grow your career and growth.</span>
+            </div>
+            <a href="#" class="btn btn-call-to-act bg-white border-4 border-blue-400 rounded-full py-4 px-8">SignUp Today</a>
+        </div>
+    </section>
 </x-guest-layout>
