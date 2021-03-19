@@ -35,7 +35,7 @@ if (!function_exists('get_categories')) {
 if (!function_exists('get_list_products')) {
     function get_list_products() {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
 
         return $repo->all();
     }
