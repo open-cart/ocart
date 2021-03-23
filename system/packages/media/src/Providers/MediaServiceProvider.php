@@ -42,6 +42,7 @@ class MediaServiceProvider extends ServiceProvider
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id' => 'cms-media',
+                'priority'    => 199,
                 'parent_id' => null,
                 'name' => 'Media',
                 'icon' => null,

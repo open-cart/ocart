@@ -5,6 +5,7 @@ import './index.css';
 import './media.css';
 import {ConfigContext} from "./common/WithConfig";
 import {HttpClient} from "./controllers/HttpClient";
+import EventEmitter from "./common/EventEmitter"
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -22,6 +23,10 @@ function TnMedia(options) {
     const config = {...defaultOptions, ...options};
 
     HttpClient.config = config;
+
+    EventEmitter.events = {};
+
+    // ReactDOM.unmountComponentAtNode(document.getElementById(config.id));
 
     ReactDOM.render(
         <ConfigContext.Provider value={config}>,

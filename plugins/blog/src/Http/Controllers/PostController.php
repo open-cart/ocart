@@ -34,7 +34,7 @@ class PostController extends BaseController
 
     function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::posts.create'));
+        page_title()->setTitle(trans('plugins/blog::posts.create'));
 
         return $formBuilder->create(PostForm::class)
             ->setMethod('POST')
@@ -65,7 +65,7 @@ class PostController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::posts.edit'));
+        page_title()->setTitle(trans('plugins/blog::posts.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 
         return $formBuilder->create(PostForm::class, ['model' => $page])

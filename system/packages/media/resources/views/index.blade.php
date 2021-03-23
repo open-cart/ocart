@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="/tnmedia/app.css"/>
 
 
-    <button id="show">select single</button>
-    <button id="showm">select multiple</button>
-    <link rel="stylesheet" href="{{ asset('tnmedia/app.css?v=' . time()) }}"/>
-    <script src="{{ asset('tnmedia/bundle.js?v=1'. time()) }}"></script>
+{{--    <button id="show">select single</button>--}}
+{{--    <button id="showm">select multiple</button>--}}
+{{--    <link rel="stylesheet" href="{{ asset('tnmedia/app.css?v=' . time()) }}"/>--}}
+{{--    <script src="{{ asset('tnmedia/bundle.js?v=1'. time()) }}"></script>--}}
     <script>
         TnMedia.default({
             id: 'root',
@@ -19,6 +19,8 @@
             uploadAPI: '{!! route('media.files.upload') !!}',
             listAPI: '{!! route('media.list') !!}',
         })
+        // $(document).on('pjax:send', function() {
+        // })
     </script>
 </x-app-layout>
 

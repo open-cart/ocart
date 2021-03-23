@@ -4,7 +4,6 @@ import ReactDOM from "react-dom";
 function Popup({children, selected, config}) {
 
     const close = () => {
-        config.insert(selected);
         config.close();
         ReactDOM.unmountComponentAtNode(document.getElementById(config.id));
     }
@@ -13,6 +12,7 @@ function Popup({children, selected, config}) {
         if (!selected.length) {
            return;
         }
+        config.insert(selected);
         close();
     }
 
@@ -45,6 +45,7 @@ function Popup({children, selected, config}) {
                     </div>
                     <div className="flex justify-end pt-2 h-8">
                         <button
+                            type="button"
                             onClick={insert}
                             className="bg-blue-500 hover:bg-blue-400 mr-2 text-white">
                             Chèn

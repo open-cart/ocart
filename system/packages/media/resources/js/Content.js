@@ -63,7 +63,23 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
         setLastSelected(file);
     }
 
+    const close = () => {
+        config.close();
+        ReactDOM.unmountComponentAtNode(document.getElementById(config.id));
+    }
+
+    const insert = () => {
+        if (!selected.length) {
+            return;
+        }
+        config.insert(selected);
+        close();
+    }
+
     const changeFolder = () => {
+        if (config.popup) {
+            return insert();
+        }
         setVisible(true);
     }
 
@@ -96,22 +112,30 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
     }, [lastSelected])
 
     useEffect(() => {
-        EventEmitter.subscribe('before', () => {
-            setLoading(true);
-        });
-        EventEmitter.subscribe('after', () => {
-            setLoading(false);
-        });
-        EventEmitter.subscribe('refresh', event => {
-            console.log("button pressed inside child");
-            console.log(event);
-            fetchList()
-        });
+        const subscribes = [
+            EventEmitter.subscribe('before', () => {
+                setLoading(true);
+            }),
+            EventEmitter.subscribe('after', () => {
+                setLoading(false);
+            }),
+            EventEmitter.subscribe('refresh', event => {
+                console.log("button pressed inside child");
+                console.log(event);
+                fetchList()
+            }),
 
-        EventEmitter.subscribe('rename-modal', event => {
-            setVisibleRename(true);
-            fetchList();
-        });
+            EventEmitter.subscribe('rename-modal', event => {
+                setVisibleRename(true);
+                fetchList();
+            }),
+        ]
+
+        return () => {
+            subscribes.forEach(item => {
+                item.remove();
+            })
+        }
     }, [])
 
     useEffect(() => {

@@ -12,14 +12,17 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
-        <!-- Styles -->
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/swal.css') }}">
+{{--        <!-- Styles -->--}}
+{{--        <link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
+{{--        <link rel="stylesheet" href="{{ asset('css/swal.css') }}">--}}
 
-        <!-- Scripts -->
-        <script src="{{ asset('js/app.js') }}" defer></script>
-        <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
-        <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+{{--        <!-- Scripts -->--}}
+{{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
+{{--        <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>--}}
+{{--        <script src="{!! asset('access/jquery.pjax.js') !!}"></script>--}}
+
+        {!! Assets::renderHeader(['core']) !!}
+
         <script>
             var themes = {
                 blue: {
@@ -78,6 +81,7 @@
                     {{ $slot }}
                 </main>
             </div>
+            {!! Assets::renderBody() !!}
             @stack('scripts')
         </div>
     </body>

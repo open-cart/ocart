@@ -30,14 +30,14 @@ class CategoryTable extends TableAbstract
                     return $item->name;
                 }
             ],
-            'image' => [
-                'name' => 'id',
-                'title' => 'image',
-                'class' => 'border text-left px-2 py-2',
-                'render' => function ($item) {
-                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
-                }
-            ],
+//            'image' => [
+//                'name' => 'id',
+//                'title' => 'image',
+//                'class' => 'border text-left px-2 py-2',
+//                'render' => function ($item) {
+//                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
+//                }
+//            ],
             'alias' => [
                 'name' => 'alias',
                 'title' => 'URL Tùy chỉnh',

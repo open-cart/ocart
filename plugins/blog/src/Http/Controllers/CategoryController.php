@@ -38,7 +38,7 @@ class CategoryController extends BaseController
 
     function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::categories.create'));
+        page_title()->setTitle(trans('plugins/blog::categories.create'));
 
         return $formBuilder->create(CategoryForm::class)
             ->setMethod('POST')
@@ -63,7 +63,7 @@ class CategoryController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::categories.edit'));
+        page_title()->setTitle(trans('plugins/blog::categories.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 
         return $formBuilder->create(CategoryForm::class, ['model' => $page])

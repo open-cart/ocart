@@ -1,13 +1,17 @@
-import {useState} from "react"
+import {useState, useEffect} from "react"
 import Popup from "./Popup";
 import Content from "./Content";
 
 function App({popup}) {
     const [selected, setSelected] = useState([]);
+
+    useEffect(() => {
+        return () => {
+            console.log('dis mount')
+        }
+    }, [])
   return (
-      <div style={{
-          // width: '1200px',
-      }}>
+      <div id="tnmedia">
           {
               popup ? (
                   <Popup selected={selected}>
