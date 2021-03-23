@@ -39,7 +39,7 @@ class ThemeConfig
     public function __construct(Factory $view)
     {
         $this->view = $view;
-        self::uses(setting('theme', 'ripple'))->layout(setting('layout', 'default'));
+        self::uses(setting('theme', 'default'))->layout(setting('layout', 'default'));
     }
 
     /**

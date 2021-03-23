@@ -2,14 +2,14 @@
 namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
-use Ocart\Blog\Repositories\Interfaces\PostRepository;
-use Ocart\Page\Models\Page;
+use Ocart\Blog\Models\Tag;
+use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
 
-class PostTable extends TableAbstract
+class CategoryTable extends TableAbstract
 {
-    public function __construct(DataTables $table, PostRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, CategoryRepository $repo, HtmlBuilder $html)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
@@ -46,6 +46,23 @@ class PostTable extends TableAbstract
                     return $item->slug;
                 }
             ],
+            'craeteAt' => [
+                'name' => 'created_at',
+                'title' => 'Ngày tạo',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return $item->created_at;
+                }
+            ],
+            'featured' => [
+                'name' => 'featured',
+                'title' => __('admin.featured'),
+                'class' => 'border text-left px-2 py-2',
+                'width' => '120px',
+                'render' => function ($item) {
+                    return $item->is_featured;
+                }
+            ],
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
@@ -62,15 +79,15 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('posts.update', 'posts.destroy', $item);
+                    return $this->tableActions('blog.categories.update', 'blog.categories.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('posts.create'), []);
+        $buttons = $this->addCreateButton(route('blog.categories.create'), []);
 
-        return apply_filters('base_table_action', $buttons, Page::class);
+        return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Tag::class);
     }
 }
