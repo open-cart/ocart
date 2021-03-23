@@ -5,6 +5,7 @@ use Botble\Media\Services\UploadsManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\Storage;
 
 class MediaFile extends Model
 {
@@ -41,6 +42,9 @@ class MediaFile extends Model
         'size',
         'url',
         'options',
+        'slug',
+        'parent_folder',
+        'is_folder',
     ];
 
     /**
@@ -63,12 +67,32 @@ class MediaFile extends Model
     }
 
     /**
-     * @return UrlGenerator|string
+     * @return string
      */
-    public function getUrlAttribute()
+    public function getTypeAttribute()
     {
-        $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
+        $type = 'document';
+        if ($this->attributes['mime_type'] == 'youtube') {
+            return 'video';
+        }
 
-        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
+        foreach (config('packages.media.media.mime_types', []) as $key => $value) {
+            if (in_array($this->attributes['mime_type'], $value)) {
+                $type = $key;
+                break;
+            }
+        }
+
+        return $type;
+    }
+
+    /**
+     * @return bool
+     */
+    public function canGenerateThumbnails(): bool
+    {
+        return is_image($this->mime_type) &&
+            !in_array($this->mime_type, ['image/svg+xml', 'image/x-icon']) &&
+            Storage::exists($this->url);
     }
 }

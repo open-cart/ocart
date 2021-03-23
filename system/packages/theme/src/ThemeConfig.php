@@ -39,7 +39,7 @@ class ThemeConfig
     public function __construct(Factory $view)
     {
         $this->view = $view;
-        self::uses(setting('theme', 'ripple'))->layout(setting('layout', 'default'));
+        self::uses(setting('theme', 'default'))->layout(setting('layout', 'default'));
     }
 
     /**
@@ -153,5 +153,16 @@ class ThemeConfig
         } else {
             abort(404);
         }
+    }
+
+    /**
+     * @param $path
+     * @param null $secure
+     * @return mixed
+     */
+    public function asset($path, $secure = null)
+    {
+        $path = trim($path, DIRECTORY_SEPARATOR);
+        return app('url')->asset('themes/' . $this->theme . DIRECTORY_SEPARATOR . $path, $secure);
     }
 }

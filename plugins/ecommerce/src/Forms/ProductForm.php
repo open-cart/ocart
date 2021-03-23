@@ -65,6 +65,15 @@ class ProductForm extends FormAbstract
                         $this
                     )
                 ],
+            ])->addMetaBoxes([
+                'images' => [
+                    'title' => trans('images'),
+                    'content' => apply_filters(
+                        'product_images',
+                        view('plugins/ecommerce::images'),
+                        $this
+                    )
+                ],
             ])
 
             ->add('is_featured', 'onOff')

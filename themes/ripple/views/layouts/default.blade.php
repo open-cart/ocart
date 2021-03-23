@@ -11,16 +11,17 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/ripple/public/css/style.css') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
-    {{ $slot }}
-    <div>
-        @include(Theme::getThemeNamespace('layouts.footer'))
-    </div>
+    @include(Theme::getThemeNamespace('layouts.header'))
+    <div class="content">{{ $slot }}</div>
+    @include(Theme::getThemeNamespace('layouts.footer'))
+
 </div>
 </body>
 </html>

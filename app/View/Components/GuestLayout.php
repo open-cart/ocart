@@ -14,6 +14,6 @@ class GuestLayout extends Component
      */
     public function render()
     {
-        return Theme::getLayout('default');
+        return Theme::getLayout('layouts.guest');
     }
 }

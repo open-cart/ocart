@@ -13,7 +13,37 @@ class CreatePostsTable extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('blog_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 120);
+            $table->integer('parent_id')->unsigned()->default(0);
+            $table->string('description', 400)->nullable();
+            $table->string('status', 60)->default('published');
+            $table->integer('author_id');
+            $table->string('author_type', 255)->default(addslashes(User::class));
+            $table->string('icon', 60)->nullable();
+            $table->tinyInteger('order')->default(0);
+            $table->tinyInteger('is_featured')->default(0);
+            $table->tinyInteger('is_default')->unsigned()->default(0);
+            $table->string('slug', 255)->nullable();
+            $table->string('slug_md5', 64)->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('blog_tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 120);
+            $table->integer('author_id');
+            $table->string('author_type', 255)->default(addslashes(User::class));
+            $table->string('description', 400)->nullable()->default('');
+            $table->integer('parent_id')->unsigned()->default(0);
+            $table->string('status', 60)->default('published');
+            $table->string('slug', 255)->nullable();
+            $table->string('slug_md5', 64)->unique();
+            $table->timestamps();
+        });
+
+        Schema::create('blog_posts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 255);
             $table->string('description', 400)->nullable();
@@ -29,6 +59,18 @@ class CreatePostsTable extends Migration
             $table->string('slug_md5', 64)->unique();
             $table->timestamps();
         });
+
+        Schema::create('blog_post_tags', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('tag_id')->unsigned()->references('id')->on('blog_tags')->onDelete('cascade');
+            $table->integer('post_id')->unsigned()->references('id')->on('blog_posts')->onDelete('cascade');
+        });
+
+        Schema::create('blog_post_categories', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('category_id')->unsigned()->references('id')->on('blog_categories')->onDelete('cascade');
+            $table->integer('post_id')->unsigned()->references('id')->on('blog_posts')->onDelete('cascade');
+        });
     }
 
     /**
@@ -38,6 +80,11 @@ class CreatePostsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::disableForeignKeyConstraints();
+        Schema::dropIfExists('blog_post_tags');
+        Schema::dropIfExists('blog_post_categories');
+        Schema::dropIfExists('blog_posts');
+        Schema::dropIfExists('blog_categories');
+        Schema::dropIfExists('blog_tags');
     }
 }

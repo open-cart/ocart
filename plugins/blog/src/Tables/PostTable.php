@@ -2,7 +2,7 @@
 namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
-use Ocart\Blog\Repositories\PostRepository;
+use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Page\Models\Page;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
@@ -52,7 +52,7 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return view('components.activated', ['active' => $item->status]);
+                    return $item->status->toHtml();
                 }
             ]
         ]);
@@ -62,14 +62,14 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('pages.update', 'pages.destroy', $item);
+                    return $this->tableActions('posts.update', 'posts.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('pages.create'), []);
+        $buttons = $this->addCreateButton(route('posts.create'), []);
 
         return apply_filters('base_table_action', $buttons, Page::class);
     }

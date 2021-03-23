@@ -12,7 +12,7 @@ class MediaFileController extends BaseController
 
     public function postUpload(MediaFileRequest $request)
     {
-        $result = TnMedia::handleUpload(Arr::first($request->file('file')), $request->input('folder_id', 0));
+        $result = TnMedia::handleUpload(Arr::first($request->file('file')), $request->input('parent_id', 0));
 
         if ($result['error'] == false) {
             return TnMedia::responseSuccess([

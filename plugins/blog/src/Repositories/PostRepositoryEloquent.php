@@ -3,6 +3,7 @@
 namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Post;
+use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Validator\Contracts\ValidatorInterface;
