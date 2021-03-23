@@ -5,7 +5,10 @@ namespace Ocart\Media;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Intervention\Image\Facades\Image;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
+use Ocart\Media\Services\ThumbnailService;
 
 class TnMedia
 {
@@ -14,9 +17,15 @@ class TnMedia
      */
     protected $fileRepository;
 
-    public function __construct(MediaFileRepository $mediaFileRepository)
+    /**
+     * @var ThumbnailService
+     */
+    protected $thumbnailService;
+
+    public function __construct(MediaFileRepository $mediaFileRepository, ThumbnailService $thumbnailService)
     {
         $this->fileRepository = $mediaFileRepository;
+        $this->thumbnailService = $thumbnailService;
     }
 
     /**
@@ -38,9 +47,9 @@ class TnMedia
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function renderContent()
+    public function renderContent($data = [])
     {
-        return view('packages/media::content');
+        return view('packages/media::content', $data);
     }
 
     /**
@@ -50,66 +59,68 @@ class TnMedia
      */
     public function handleUpload($fileUpload, $folderId = 0, $path = '')
     {
+//        $fileUpload->move('upload', $fileUpload->getClientOriginalName());
         $file = $this->fileRepository->getModel();
 
-        if ($fileUpload->getSize() / 1024 > (int)config('core.media.media.max_file_size_upload')) {
+        if ($fileUpload->getSize() / 1024 > (int)config('packages.media.media.max_file_size_upload')) {
             return [
                 'error'   => true,
-                'message' => trans('core/media::media.file_too_big', ['size' => config('packages.media.media.max_file_size_upload')]),
+                'message' => trans('packages/media::media.file_too_big', ['size' => config('packages.media.media.max_file_size_upload')]),
             ];
         }
 
+
         $fileExtension = $fileUpload->getClientOriginalExtension();
 
-        $file->name = $this->fileRepository->createName(File::name($fileUpload->getClientOriginalName()),
-            $folderId);
+        $file->name = $fileUpload->getClientOriginalName();
 
-//        $folderPath = $this->folderRepository->getFullPath($folderId, $path);
+        $folderPath = 'upload';
 
-        $fileName = $this->fileRepository->createSlug($file->name, $fileExtension, Storage::path($folderPath));
+        $fileName = $file->name;
 
         $filePath = $fileName;
-
+//
         if ($folderPath) {
-            $filePath = $folderPath . '/' . $filePath;
+            $filePath = $folderPath . DIRECTORY_SEPARATOR . $filePath;
         }
 
         $content = File::get($fileUpload->getRealPath());
-
-        Storage::put($filePath, $content);
-
+//
+//        Storage::put($filePath, $content);
+        $filePath = Storage::putFile($folderPath, $fileUpload);
+//
 //        $this->uploadManager->saveFile($filePath, $content);
 //
 //        $data = $this->uploadManager->fileDetails($filePath);
 
-        if (empty($data['mime_type'])) {
-            return [
-                'error'   => true,
-                'message' => trans('core/media::media.can_not_detect_file_type'),
-            ];
-        }
-
-        $file->url = $data['url'];
-        $file->size = $data['size'];
-        $file->mime_type = $data['mime_type'];
+//        if (empty($data['mime_type'])) {
+//            return [
+//                'error'   => true,
+//                'message' => trans('core/media::media.can_not_detect_file_type'),
+//            ];
+//        }
+//
+        $file->url = $filePath;
+        $file->size = $fileUpload->getSize();
+        $file->mime_type = $fileUpload->getMimeType();
 
         $file->folder_id = $folderId;
         $file->user_id = Auth::check() ? Auth::user()->getKey() : 0;
         $file->options = request()->get('options', []);
-        $this->fileRepository->createOrUpdate($file);
+        $file = $this->fileRepository->updateOrCreate($file->toArray(), ['url' => $file->url]);
 
         if ($file->canGenerateThumbnails()) {
-            foreach (config('core.media.media.sizes', []) as $size) {
+            foreach (config('packages.media.media.sizes', []) as $size) {
                 $readableSize = explode('x', $size);
                 $this->thumbnailService
                     ->setImage($fileUpload->getRealPath())
                     ->setSize($readableSize[0], $readableSize[1])
                     ->setDestinationPath($folderPath)
-                    ->setFileName(File::name($fileName) . '-' . $size . '.' . $fileExtension)
+                    ->setFileName(File::name($filePath) . '-' . $size . '.' . $fileExtension)
                     ->save();
             }
 
-            if (config('core.media.media.watermark.source')) {
+            if (config('packages.media.media.watermark.source')) {
                 $image = Image::make(public_path($file->url));
                 $image->insert(
                     config('core.media.media.watermark.source'),
@@ -121,19 +132,71 @@ class TnMedia
             }
         }
 
+
+
         return [
             'error' => false,
             'data'  => $file,
         ];
     }
 
-    public function responseSuccess()
+    /**
+     * @param $data
+     * @param null $message
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function responseSuccess($data, $message = null)
     {
-
+        return response()->json([
+            'error'   => false,
+            'data'    => $data,
+            'message' => $message,
+        ]);
     }
 
-    public function responseError()
+    /**
+     * @param $message
+     * @param array $data
+     * @param null $code
+     * @param int $status
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function responseError($message, $data = [], $code = null, $status = 200)
     {
+        return response()->json([
+            'error'   => true,
+            'message' => $message,
+            'data'    => $data,
+            'code'    => $code,
+        ], $status);
+    }
 
+    /**
+     * @param $path
+     * @return string
+     */
+    public function url($path)
+    {
+        if (Str::contains($path, 'https://')) {
+            return $path;
+        }
+
+        return Storage::url($path);
+    }
+
+    /**
+     * @return array
+     */
+    public function getSizes(): array
+    {
+        return config('packages.media.media.sizes', []);
+    }
+
+    /**
+     * @return string
+     */
+    public function getSize(string $name): ?string
+    {
+        return config('packages.media.media.sizes.' . $name);
     }
 }

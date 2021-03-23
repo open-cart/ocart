@@ -34379,10 +34379,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./themes/ripple/access/css/style.scss":
-/*!*********************************************!*\
-  !*** ./themes/ripple/access/css/style.scss ***!
-  \*********************************************/
+/***/ "./resources/css/swal.scss":
+/*!*********************************!*\
+  !*** ./resources/css/swal.scss ***!
+  \*********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -34392,10 +34392,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/css/swal.scss":
-/*!*********************************!*\
-  !*** ./resources/css/swal.scss ***!
-  \*********************************/
+/***/ "./themes/ripple/assets/css/style.css":
+/*!********************************************!*\
+  !*** ./themes/ripple/assets/css/style.css ***!
+  \********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -35195,8 +35195,8 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 /******/ 		
 /******/ 		var deferredModules = [
 /******/ 			["./resources/js/app.js"],
-/******/ 			["./themes/ripple/access/css/style.scss"],
 /******/ 			["./resources/css/swal.scss"],
+/******/ 			["./themes/ripple/assets/css/style.css"],
 /******/ 			["./resources/css/app.css"]
 /******/ 		];
 /******/ 		// no chunk on demand loading

@@ -58,7 +58,7 @@
     </head>
     <body class="font-sans antialiased">
         @stack('bodyPrepend')
-        <div id="body">
+        <div id="body" data-pjax-container="body">
             <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -82,10 +82,10 @@
         </div>
     </body>
     <div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
-        <div class="relative inline-flex rounded-md shadow-sm">
+        <div class="relative inline-flex">
             <span class="flex items-center justify-center h-24 w-24">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-8 w-8 bg-purple-500"></span>
+              <span class="relative inline-flex rounded-full h-0 w-0 bg-purple-500"></span>
             </span>
         </div>
     </div>
@@ -98,14 +98,32 @@
     <script>
         $(function(){
             // pjax
-            $(document).pjax('a', '#body');
+            $(document).on('click', 'a', function(event) {
+                // event.preventDefault();
+                var container = $(this).closest('[data-pjax-container]')
+                var containerSelector = '#' + container[0].id
+                console.log(container[0].id)
+                $.pjax.click(event, {container: containerSelector})
+            })
+            // $(document).pjax('a', '#body');
+            $.pjax.defaults.timeout = 1200;
+
+            let loading;
+
             $(document).on('pjax:send', function() {
-                $('#loading').show()
+                loading =  new Promise((resolve, reject) => {
+                    setTimeout(function() {
+                        resolve(true)
+                    }, 120)
+                });
+                $('#loading').show();
             })
             $(document).on('pjax:complete', function() {
                 feather.replace({'stroke-width': 1.5})
                 Alpine.start();
-                $('#loading').hide();
+                loading.then(() => {
+                    $('#loading').hide();
+                })
                 $('img').on("error", function (e) {
                     e.target.src = '/images/no-image.jpg';
                 });

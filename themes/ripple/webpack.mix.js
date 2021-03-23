@@ -1,7 +1,7 @@
 const mix = require('laravel-mix');
 
+const resourcePath = 'themes/ripple/';
+const publicPath = 'public/themes/ripple/';
 
-mix.sass('themes/ripple/access/css/style.scss', 'themes/ripple/public/css');
-    // .copy('themes/ripple/public/css/style.css', 'public/themes/ripple/css');
-
-// ok rồi, e vừa thêm chữ c đó
+mix.postCss(resourcePath + 'assets/css/style.css', publicPath + 'css')
+    .copy(publicPath + 'css/', resourcePath + 'public/css');
