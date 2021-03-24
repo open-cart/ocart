@@ -64,13 +64,8 @@ class RoleController extends BaseController
     function store(RoleRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
-        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-        $data['slug_md5'] = md5($data['slug']);
 
-        $page = $this->repo->create($data + [
-                'user_id'     => Auth::user()->getKey(),
-                'is_featured' => $request->input('is_featured', false),
-            ]);
+        $page = $this->repo->create($data);
 
         return $response->setPreviousUrl(route('system.roles.index'))
             ->setNextUrl(route('system.roles.show', $page->id));
@@ -78,8 +73,6 @@ class RoleController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-//        dd(Gate::forUser(Auth::user())->check('pages-update', 1));
-//        $this->authorize('system.roles.update', $id);
         page_title()->setTitle(trans('packages/page::pages.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 
@@ -92,19 +85,10 @@ class RoleController extends BaseController
     function update($id, RoleRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
-//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-//        $data['slug_md5'] = md5($data['slug']);
-
-        unset($data['password']);
-
-        if ($password = $request->input('password', null)) {
-            $data['password'] = Hash::make($request['password']);
-        }
 
         /** @var User $user */
         $user = $this->repo->update($data, $id);
 
-        $user->syncRoles($request->roles);
         $user->forgetCachedPermissions();
 
         return $response->setPreviousUrl(route('system.roles.index'))

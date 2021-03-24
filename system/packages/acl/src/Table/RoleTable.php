@@ -41,6 +41,14 @@ class RoleTable extends TableAbstract
                     return $item->guard_name;
                 }
             ],
+            'description' => [
+                'name' => 'guard_name',
+                'title' => 'Description',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return $item->description;
+                }
+            ],
 
             'craeteAt' => [
                 'name' => 'created_at',

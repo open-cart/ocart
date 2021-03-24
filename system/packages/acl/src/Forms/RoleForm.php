@@ -23,6 +23,8 @@ class RoleForm extends FormAbstract
             ->add('name', Field::TEXT, [
                 'label'      => trans('Role name'),
                 'rules' => 'required',
+            ])->add('description', Field::TEXTAREA, [
+                'label'      => trans('Description'),
             ]);
     }
 }
