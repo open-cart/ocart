@@ -6,7 +6,7 @@
                  src="https://themezhub.net/resido-live/resido/assets/img/p-2.jpg" alt="">
         </div>
         <div class="p-4">
-            <span class="inline-block px-2 py-1 leading-none bg-orange-200 text-gray-500 rounded-full font-semibold uppercase tracking-wide text-xs">
+            <span class="inline-block py-1 leading-none bg-orange-200 text-gray-500 rounded-full font-semibold uppercase tracking-wide text-xs">
                 {{ Arr::get($data->categories->first(), 'name') }}
             </span>
             <h2 class="mt-2 mb-2 font-bold">{{ $data->name }}</h2>
