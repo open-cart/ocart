@@ -47,12 +47,12 @@ class BlogServiceProvider extends ServiceProvider
                 'parent_id'   => 'cms-core-content',
                 'name'        => 'Blog/Tin tức',
                 'icon'        => null,
-                'url'         => route('posts.index'),
+                'url'         => route('blog.posts.index'),
                 'permissions' => [
-                    'posts.index',
-                    'posts.create',
-                    'posts.update',
-                    'posts.destroy',
+                    'blog.posts.index',
+                    'blog.posts.create',
+                    'blog.posts.update',
+                    'blog.posts.destroy',
                 ],
                 'active'      => false,
             ])->registerItem([

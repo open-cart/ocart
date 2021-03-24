@@ -24,5 +24,11 @@ class DatabaseSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::factory(10)->create();
+
+        /** @var User $admin */
+        $admin = User::where('id', 1)->first();
+        $admin->assignRole(['owners']);
+
+        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }
