@@ -1,0 +1,26 @@
+{
+    "name": "ocart/acl",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "Ocart\\Acl\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Phan Trung Nguyên",
+            "email": "nguyenpl117@gmail.com"
+        }
+    ],
+    "extra":{
+        "laravel":{
+            "providers":[
+                "Ocart\\Acl\\Providers\\AclServiceProvider"
+            ]
+        }
+    },
+    "require": {
+    }
+}

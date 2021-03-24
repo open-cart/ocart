@@ -1,8 +1,9 @@
 <?php
 namespace Ocart\Page\Http\Controllers;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Page\Forms\PageForm;
@@ -20,13 +21,35 @@ class PageController extends BaseController
      */
     protected $repo;
 
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'pages.index',
+            'show' => 'pages.update',
+            'create' => 'pages.create',
+            'store' => 'pages.create',
+            'edit' => 'pages.update',
+            'update' => 'pages.update',
+            'destroy' => 'pages.destroy',
+        ];
+    }
+
     public function __construct(PageRepository $repo)
     {
         $this->repo = $repo;
+//        $this->middleware('can:pages.index1')->only(['index']);
+        $this->authorizeResource($repo->getModel(), 'pages');
     }
 
     public function index(PageTable $table)
     {
+//        $this->authorize('pages.index');
+
         page_title()->setTitle(trans('packages/page::pages.menu'));
         return $table->render();
     }

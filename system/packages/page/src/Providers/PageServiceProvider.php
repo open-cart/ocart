@@ -49,7 +49,12 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
                 'name' => 'packages/page::pages.menu',
                 'icon' => null,
                 'url' => route('pages.index'),
-                'permissions' => [],
+                'permissions' => [
+                    'pages.index',
+                    'pages.create',
+                    'pages.update',
+                    'pages.destroy',
+                ],
                 'active' => false,
             ]);
         });
