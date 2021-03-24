@@ -19,7 +19,7 @@
                             {!! implode(PHP_EOL.PHP_EOL, (array) $table->buttons()) !!}
                             <a
                                 href=""
-                                title="{!! __('admin.add_new') !!}"
+                                title="{!! __('admin.reload') !!}"
                                 class="block focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center">
                                 <i data-feather="plus" width="18" height="18"></i> Reload
                             </a>

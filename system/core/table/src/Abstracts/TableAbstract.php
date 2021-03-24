@@ -46,9 +46,12 @@ abstract class TableAbstract
         return view($view ?? $this->view, $options);
     }
 
-    public function addCreateButton($link, $permission = null)
+    public function addCreateButton($link, $permission = null, $buttons = [])
     {
-        $buttons['create'] = view('core::elements.tables.actions.create', compact('link', 'permission'));
+        if (!$permission || \Auth::user()->can($permission)) {
+            $buttons['create'] = view('core::elements.tables.actions.create', compact('link', 'permission'));
+        }
+
         return $buttons;
     }
 

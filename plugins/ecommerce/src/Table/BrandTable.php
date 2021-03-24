@@ -79,14 +79,14 @@ class BrandTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('brands.update', 'brands.destroy', $item);
+                    return $this->tableActions('ecommerce.brands.update', 'ecommerce.brands.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('brands.create'), []);
+        $buttons = $this->addCreateButton(route('ecommerce.brands.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Tag::class);
     }

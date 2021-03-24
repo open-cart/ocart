@@ -49,7 +49,9 @@ class PluginManagementServiceProvider extends ServiceProvider
                 'name'        => 'packages/plugin-management::plugin.index',
                 'icon'        => null,
                 'url'         => route('admin::plugin'),
-                'permissions' => [],
+                'permissions' => [
+                    'plugins.index'
+                ],
                 'active'      => false,
             ]);
         });

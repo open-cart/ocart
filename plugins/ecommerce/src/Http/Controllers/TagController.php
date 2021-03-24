@@ -25,6 +25,25 @@ class TagController extends BaseController
     public function __construct(TagRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'ecommerce.tags.index',
+            'show' => 'ecommerce.tags.update',
+            'create' => 'ecommerce.tags.create',
+            'store' => 'ecommerce.tags.create',
+            'edit' => 'ecommerce.tags.update',
+            'update' => 'ecommerce.tags.update',
+            'destroy' => 'ecommerce.tags.destroy',
+        ];
     }
 
     public function index(TagTable $table)
@@ -39,7 +58,7 @@ class TagController extends BaseController
 
         return $formBuilder->create(TagForm::class)
             ->setMethod('POST')
-            ->setUrl(route('tags.store'))
+            ->setUrl(route('ecommerce.tags.store'))
             ->renderForm();
     }
 
@@ -54,8 +73,8 @@ class TagController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        return $response->setPreviousUrl(route('tags.index'))
-            ->setNextUrl(route('tags.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.tags.index'))
+            ->setNextUrl(route('ecommerce.tags.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -65,7 +84,7 @@ class TagController extends BaseController
 
         return $formBuilder->create(TagForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('tags.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.tags.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -77,8 +96,8 @@ class TagController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        return $response->setPreviousUrl(route('tags.index'))
-            ->setNextUrl(route('tags.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.tags.index'))
+            ->setNextUrl(route('ecommerce.tags.show', $page->id));
     }
 
     function destroy(Request $request)

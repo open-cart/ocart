@@ -48,7 +48,12 @@ class BlogServiceProvider extends ServiceProvider
                 'name'        => 'Blog/Tin tức',
                 'icon'        => null,
                 'url'         => route('posts.index'),
-                'permissions' => [],
+                'permissions' => [
+                    'posts.index',
+                    'posts.create',
+                    'posts.update',
+                    'posts.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-plugins-blog-categories',
@@ -57,7 +62,12 @@ class BlogServiceProvider extends ServiceProvider
                 'name'        => 'Danh mục',
                 'icon'        => null,
                 'url'         => route('blog.categories.index'),
-                'permissions' => [],
+                'permissions' => [
+                    'blog.categories.index',
+                    'blog.categories.create',
+                    'blog.categories.update',
+                    'blog.categories.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-plugins-blog-tags',
@@ -66,7 +76,12 @@ class BlogServiceProvider extends ServiceProvider
                 'name'        => 'Tags',
                 'icon'        => null,
                 'url'         => route('blog.tags.index'),
-                'permissions' => [],
+                'permissions' => [
+                    'blog.tags.index',
+                    'blog.tags.create',
+                    'blog.tags.update',
+                    'blog.tags.destroy',
+                ],
                 'active'      => false,
             ]);
         });

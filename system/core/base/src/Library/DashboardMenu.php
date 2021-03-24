@@ -7,6 +7,7 @@ namespace Ocart\Core\Library;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use RuntimeException;
@@ -144,10 +145,10 @@ class DashboardMenu
         $menus = [];
 
         foreach ($links as $key => &$link) {
-//            if (!Auth::user()->hasAnyPermission($link['permissions'])) {
-//                Arr::forget($links, $key);
-//                continue;
-//            }
+            if (!Gate::any($link['permissions'], Auth::user())) {
+                Arr::forget($links, $key);
+                continue;
+            }
 
             $link['active'] = $currentUrl == $link['url'] ||
                 (Str::contains($link['url'], $routePrefix) && $routePrefix != '//');
@@ -163,10 +164,10 @@ class DashboardMenu
             $link['children'] = collect($link['children'])->sortBy('priority')->toArray();
 
             foreach ($link['children'] as $sub_key => $sub_menu) {
-//                if (!Auth::user()->hasAnyPermission($sub_menu['permissions'])) {
-//                    Arr::forget($link['children'], $sub_key);
-//                    continue;
-//                }
+                if (!Gate::any($sub_menu['permissions'], Auth::user())) {
+                    Arr::forget($link['children'], $sub_key);
+                    continue;
+                }
 
                 if ($currentUrl == $sub_menu['url'] ||
                     (Str::contains($sub_menu['url'], $routePrefix) && $routePrefix != '//')
