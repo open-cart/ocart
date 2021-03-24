@@ -83,24 +83,6 @@ class BlogServiceProvider extends ServiceProvider
                     'blog.tags.destroy',
                 ],
                 'active'      => false,
-            ])->registerItem([
-                'id'          => 'cms-plugins-blog-categories',
-                'priority'    => 102,
-                'parent_id'   => 'cms-core-content',
-                'name'        => 'Danh mục',
-                'icon'        => null,
-                'url'         => route('blog.categories.index'),
-                'permissions' => [],
-                'active'      => false,
-            ])->registerItem([
-                'id'          => 'cms-plugins-blog-tags',
-                'priority'    => 103,
-                'parent_id'   => 'cms-core-content',
-                'name'        => 'Tags',
-                'icon'        => null,
-                'url'         => route('blog.tags.index'),
-                'permissions' => [],
-                'active'      => false,
             ]);
         });
     }

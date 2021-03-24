@@ -39,7 +39,7 @@ class TagController extends BaseController
 
         return $formBuilder->create(TagForm::class)
             ->setMethod('POST')
-            ->setUrl(route('tags.store'))
+            ->setUrl(route('ecommerce.tags.store'))
             ->renderForm();
     }
 
@@ -54,8 +54,8 @@ class TagController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        return $response->setPreviousUrl(route('tags.index'))
-            ->setNextUrl(route('tags.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.tags.index'))
+            ->setNextUrl(route('ecommerce.tags.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -65,7 +65,7 @@ class TagController extends BaseController
 
         return $formBuilder->create(TagForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('tags.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.tags.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -77,8 +77,8 @@ class TagController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        return $response->setPreviousUrl(route('tags.index'))
-            ->setNextUrl(route('tags.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.tags.index'))
+            ->setNextUrl(route('ecommerce.tags.show', $page->id));
     }
 
     function destroy(Request $request)

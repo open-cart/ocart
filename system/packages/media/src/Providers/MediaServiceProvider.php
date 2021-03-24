@@ -55,7 +55,9 @@ class MediaServiceProvider extends ServiceProvider
                 'name' => 'Media',
                 'icon' => null,
                 'url' => route('media.index'),
-                'permissions' => [],
+                'permissions' => [
+                    'media.index'
+                ],
                 'active' => false,
             ]);
         });

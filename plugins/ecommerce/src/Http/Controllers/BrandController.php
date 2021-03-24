@@ -38,7 +38,7 @@ class BrandController extends BaseController
 
         return $formBuilder->create(BrandForm::class)
             ->setMethod('POST')
-            ->setUrl(route('brands.store'))
+            ->setUrl(route('ecommerce.brands.store'))
             ->renderForm();
     }
 
@@ -53,8 +53,8 @@ class BrandController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        return $response->setPreviousUrl(route('brands.index'))
-            ->setNextUrl(route('brands.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.brands.index'))
+            ->setNextUrl(route('ecommerce.brands.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -64,7 +64,7 @@ class BrandController extends BaseController
 
         return $formBuilder->create(BrandForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('brands.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.brands.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -76,8 +76,8 @@ class BrandController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        return $response->setPreviousUrl(route('brands.index'))
-            ->setNextUrl(route('brands.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.brands.index'))
+            ->setNextUrl(route('ecommerce.brands.show', $page->id));
     }
 
     function destroy(Request $request)

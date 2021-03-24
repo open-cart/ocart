@@ -8,6 +8,7 @@ Route::group([
     Route::group([
         'prefix' => ADMIN_PREFIX,
         'middleware' => ADMIN_MIDDLEWARE,
+        'as' => 'ecommerce.'
     ], function () {
         Route::group(['prefix'=>'products', 'as' => 'products.'], function () {
             Route::resource('', 'ProductController')->parameters(['' => 'id']);
