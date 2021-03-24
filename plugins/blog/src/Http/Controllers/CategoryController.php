@@ -28,6 +28,25 @@ class CategoryController extends BaseController
     public function __construct(CategoryRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'blog.categories.index',
+            'show' => 'blog.categories.update',
+            'create' => 'blog.categories.create',
+            'store' => 'blog.categories.create',
+            'edit' => 'blog.categories.update',
+            'update' => 'blog.categories.update',
+            'destroy' => 'blog.categories.destroy',
+        ];
     }
 
     public function index(CategoryTable $table)

@@ -25,6 +25,25 @@ class PostController extends BaseController
     public function __construct(PostRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'posts.index',
+            'show' => 'posts.update',
+            'create' => 'posts.create',
+            'store' => 'posts.create',
+            'edit' => 'posts.update',
+            'update' => 'posts.update',
+            'destroy' => 'posts.destroy',
+        ];
     }
 
     public function index(PostTable $blog)

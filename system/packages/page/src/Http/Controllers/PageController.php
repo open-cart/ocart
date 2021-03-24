@@ -1,13 +1,16 @@
 <?php
 namespace Ocart\Page\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Ocart\Page\Forms\PageForm;
 use Ocart\Page\Http\Requests\PageRequest;
+use Ocart\Page\Models\Page;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Table\PageTable;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -42,14 +45,11 @@ class PageController extends BaseController
     public function __construct(PageRepository $repo)
     {
         $this->repo = $repo;
-//        $this->middleware('can:pages.index1')->only(['index']);
-        $this->authorizeResource($repo->getModel(), 'pages');
+        $this->authorizeResource(Page::class, 'id');
     }
 
     public function index(PageTable $table)
     {
-//        $this->authorize('pages.index');
-
         page_title()->setTitle(trans('packages/page::pages.menu'));
         return $table->render();
     }
@@ -80,6 +80,8 @@ class PageController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
+//        dd(Gate::forUser(Auth::user())->check('pages-update', 1));
+//        $this->authorize('pages.update', $id);
         page_title()->setTitle(trans('packages/page::pages.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 

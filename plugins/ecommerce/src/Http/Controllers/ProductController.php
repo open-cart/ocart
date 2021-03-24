@@ -25,6 +25,25 @@ class ProductController extends BaseController
     public function __construct(ProductRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'ecommerce.products.index',
+            'show' => 'ecommerce.products.update',
+            'create' => 'ecommerce.products.create',
+            'store' => 'ecommerce.products.create',
+            'edit' => 'ecommerce.products.update',
+            'update' => 'ecommerce.products.update',
+            'destroy' => 'ecommerce.products.destroy',
+        ];
     }
 
     public function index(ProductTable $table)

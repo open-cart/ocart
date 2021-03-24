@@ -23,6 +23,25 @@ class BrandController extends BaseController
     public function __construct(BrandRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'ecommerce.brands.index',
+            'show' => 'ecommerce.brands.update',
+            'create' => 'ecommerce.brands.create',
+            'store' => 'ecommerce.brands.create',
+            'edit' => 'ecommerce.brands.update',
+            'update' => 'ecommerce.brands.update',
+            'destroy' => 'ecommerce.brands.destroy',
+        ];
     }
 
     public function index(BrandTable $table)

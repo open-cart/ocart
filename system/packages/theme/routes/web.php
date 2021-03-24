@@ -16,7 +16,7 @@ Route::group([
         ]);
 
         Route::post('active', [
-            'as'         => 'theme.active',
+            'as'         => 'themes.activate',
             'uses'       => 'ThemeController@postActivateTheme',
             'permission' => 'theme.index',
         ]);

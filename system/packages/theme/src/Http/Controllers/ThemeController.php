@@ -5,12 +5,15 @@ namespace Ocart\Theme\Http\Controllers;
 
 
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Session;
+use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Setting\Facades\Setting;
 
-class ThemeController extends Controller
+class ThemeController extends BaseController
 {
     protected $files;
 
@@ -21,6 +24,8 @@ class ThemeController extends Controller
 
     public function index()
     {
+        $this->authorize('themes.index');
+
         $list = [];
 
         $themes = array_filter(glob(theme_path('*')), 'is_dir');
@@ -53,6 +58,14 @@ class ThemeController extends Controller
 
     public function postActivateTheme(Request $request)
     {
+        try {
+            Gate::forUser(Auth::user())
+                ->authorize('themes.activate');
+        } catch(\Exception $e) {
+            Session::flash('message', $e->getMessage());
+            return response()->json(['error' => 1, 'msg' => $e->getMessage()]);
+        }
+
         $theme = $request->input('theme');
 
         Setting::set('theme', $theme)->save();
