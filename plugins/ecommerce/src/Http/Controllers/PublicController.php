@@ -33,4 +33,12 @@ class PublicController extends BaseController
 
         return Theme::scope('product',  compact('product', 'category'),'package/ecommerce::product');
     }
+
+    public function productCategory($id)
+    {
+        $category = $this->repoCategory->find($id);
+        $products = $category->product;
+
+        return Theme::scope('product-category',  compact('category', 'products'),'package/ecommerce::product-category');
+    }
 }

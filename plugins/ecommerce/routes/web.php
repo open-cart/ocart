@@ -27,6 +27,7 @@ Route::group([
     });
 
     Route::get('product/{id}', 'PublicController@product');
+    Route::get('product-category/{id}', 'PublicController@productCategory');
 
 });
 
