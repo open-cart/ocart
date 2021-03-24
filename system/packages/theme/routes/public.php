@@ -10,7 +10,7 @@ use \Illuminate\Support\Facades\Route;
     Route::group(['prefix'=>''], function () {
         Route::get('/', 'PublicController@getIndex');
 
-        Route::get('{slug?}', [
+        Route::get('{slug?}.html', [
             'as'   => 'public.single',
             'uses' => 'PublicController@getView',
         ]);

@@ -10,7 +10,6 @@
     "configKey": "blog",
     "version": "1.0",
     "require": [
-        "attribute"
     ],
     "providers": [
         "Ocart\\Blog\\Providers\\BlogServiceProvider"

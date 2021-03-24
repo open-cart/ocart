@@ -79,14 +79,14 @@ class ProductTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('products.update', 'products.destroy', $item);
+                    return $this->tableActions('ecommerce.products.update', 'ecommerce.products.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('products.create'), []);
+        $buttons = $this->addCreateButton(route('ecommerce.products.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Product::class);
     }

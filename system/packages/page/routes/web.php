@@ -10,6 +10,7 @@ Route::group([
     'namespace' => 'Ocart\Page\Http\Controllers',
 ], function () {
     Route::group(['prefix'=>'page', 'as' => 'pages.'], function () {
-        Route::resource('', 'PageController')->parameters(['' => 'id']);
+        Route::resource('', 'PageController')
+            ->parameters(['' => 'id']);
     });
 });

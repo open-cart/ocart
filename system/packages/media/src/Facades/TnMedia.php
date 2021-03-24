@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string renderHeader()
  * @method static string renderContent()
  * @method static string renderFooter()
+ * @method static string url($path)
  *
  * Class \Ocart\Media\TnMedia
  * @package Ocart\Media\Facades

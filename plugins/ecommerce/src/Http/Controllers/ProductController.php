@@ -25,6 +25,25 @@ class ProductController extends BaseController
     public function __construct(ProductRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'ecommerce.products.index',
+            'show' => 'ecommerce.products.update',
+            'create' => 'ecommerce.products.create',
+            'store' => 'ecommerce.products.create',
+            'edit' => 'ecommerce.products.update',
+            'update' => 'ecommerce.products.update',
+            'destroy' => 'ecommerce.products.destroy',
+        ];
     }
 
     public function index(ProductTable $table)
@@ -39,7 +58,7 @@ class ProductController extends BaseController
 
         return $formBuilder->create(ProductForm::class)
             ->setMethod('POST')
-            ->setUrl(route('products.store'))
+            ->setUrl(route('ecommerce.products.store'))
             ->renderForm();
     }
 
@@ -60,8 +79,8 @@ class ProductController extends BaseController
 
         $categoryService->execute($request, $product);
 
-        return $response->setPreviousUrl(route('products.index'))
-            ->setNextUrl(route('products.show', $product->id));
+        return $response->setPreviousUrl(route('ecommerce.products.index'))
+            ->setNextUrl(route('ecommerce.products.show', $product->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -71,7 +90,7 @@ class ProductController extends BaseController
 
         return $formBuilder->create(ProductForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('products.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.products.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -90,8 +109,8 @@ class ProductController extends BaseController
 
         $categoryService->execute($request, $product);
 
-        return $response->setPreviousUrl(route('products.index'))
-            ->setNextUrl(route('products.show', $product->id));
+        return $response->setPreviousUrl(route('ecommerce.products.index'))
+            ->setNextUrl(route('ecommerce.products.show', $product->id));
     }
 
     function destroy(Request $request)

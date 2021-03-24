@@ -1,0 +1,68 @@
+/* Ripple effect */
+#tnmedia .ripple {
+    background-position: center;
+    transition: background 0.8s;
+}
+
+#tnmedia .ripple:hover {
+    background: #f7f6f6 radial-gradient(circle, transparent 1%, #f7f6f6 1%) center/15000%;
+}
+
+#tnmedia .ripple:active {
+    background-color: #eaeaea;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+/* Button style */
+#tnmedia button {
+    border: solid 1px #222;
+    /*border-radius: 2px;*/
+    padding: 0px 18px;
+    height: 34px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #222;
+    background-color: #fff;
+    outline: none;
+    margin: 0 4px;
+}
+
+#tnmedia button:focus {
+    outline: none;
+}
+
+#tnmedia .ripple.active {
+    background-color: #ccc;
+}
+
+#tnmedia .ripple span {
+    display: flex;
+    align-items: center;
+}
+#tnmedia .btn-left {
+    margin-right: 0;
+    border-right-width: 0;
+}
+#tnmedia .btn-right {
+    margin-left: 0;
+}
+
+#tnmedia .dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#tnmedia .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+#tnmedia .dropdown-content.active{
+    display: block;
+}

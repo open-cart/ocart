@@ -39,11 +39,13 @@
             <div class="flex justify-center pt-2">
                 <x-button
                     x-on:click="$dispatch('accept', { foo: 'bar' })"
+                    type="button"
                     class="bg-blue-500 hover:bg-blue-400 mr-2">
                     {!! __('admin.action_admin.confirm_yes') !!}
                 </x-button>
                 <x-button
                     x-on:click="$dispatch('close', { foo: 'bar' })"
+                    type="button"
                     class="modal-close px-4 bg-red-500 hover:bg-red-400">
                     {!! __('admin.action_admin.cancel') !!}
                 </x-button>

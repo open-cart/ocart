@@ -19,8 +19,9 @@ class CreateMediaTable extends Migration
             $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->integer('parent_id')->default(0);
-            $table->integer('parent_folder')->default(0);
+            $table->string('parent_folder', 500)->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('media_files', function (Blueprint $table) {
@@ -28,11 +29,17 @@ class CreateMediaTable extends Migration
             $table->integer('user_id')->unsigned()->references('id')->on('users')->index();
             $table->string('name', 255);
             $table->integer('folder_id')->default(0)->unsigned();
-            $table->string('mime_type', 120);
-            $table->integer('size');
-            $table->string('url', 255);
+            $table->string('mime_type', 120)->nullable();
+            $table->integer('size')->nullable();
+            $table->string('url', 255)->nullable();
             $table->text('options')->nullable();
+
+            $table->string('is_folder')->default(0);
+            $table->string('slug')->nullable();
+            $table->string('parent_folder', 500)->default(0);
+
             $table->timestamps();
+            $table->softDeletes();
         });
 
         Schema::create('media_settings', function (Blueprint $table) {

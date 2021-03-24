@@ -88,8 +88,13 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Sản phẩm',
                 'icon'        => null,
-                'url'         => route('products.index'),
-                'permissions' => [],
+                'url'         => route('ecommerce.products.index'),
+                'permissions' => [
+                    'ecommerce.products.index',
+                    'ecommerce.products.create',
+                    'ecommerce.products.update',
+                    'ecommerce.products.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-store-product-category-manager',
@@ -97,8 +102,13 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Danh mục sản phẩm',
                 'icon'        => null,
-                'url'         => route('categories.index'),
-                'permissions' => [],
+                'url'         => route('ecommerce.categories.index'),
+                'permissions' => [
+                    'ecommerce.categories.index',
+                    'ecommerce.categories.create',
+                    'ecommerce.categories.update',
+                    'ecommerce.categories.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-store-product-tag-manager',
@@ -106,8 +116,13 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Product Tags',
                 'icon'        => null,
-                'url'         => route('tags.index'),
-                'permissions' => [],
+                'url'         => route('ecommerce.tags.index'),
+                'permissions' => [
+                    'ecommerce.tags.index',
+                    'ecommerce.tags.create',
+                    'ecommerce.tags.update',
+                    'ecommerce.tags.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-store-brand-manager',
@@ -115,8 +130,13 @@ class EcommerceServiceProvider extends ServiceProvider {
                 'parent_id'   => 'cms-store',
                 'name'        => 'Brands',
                 'icon'        => null,
-                'url'         => route('brands.index'),
-                'permissions' => [],
+                'url'         => route('ecommerce.brands.index'),
+                'permissions' => [
+                    'ecommerce.brands.index',
+                    'ecommerce.brands.create',
+                    'ecommerce.brands.update',
+                    'ecommerce.brands.destroy',
+                ],
                 'active'      => false,
             ])->registerItem([
                 'id'          => 'cms-store-setting-manager',
