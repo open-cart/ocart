@@ -62,14 +62,14 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('posts.update', 'posts.destroy', $item);
+                    return $this->tableActions('blog.posts.update', 'blog.posts.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('posts.create'), []);
+        $buttons = $this->addCreateButton(route('blog.posts.create'), []);
 
         return apply_filters('base_table_action', $buttons, Page::class);
     }

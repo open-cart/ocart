@@ -20,10 +20,19 @@ class CreatePermissionTables extends Migration
             throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
 
+        Schema::create('acl_groups', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');       // For MySQL 8.0 use string('name', 125);
+            $table->string('description')->nullable();
+            $table->timestamps();
+        });
+
         Schema::create($tableNames['permissions'], function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
+            $table->string('description')->nullable();
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->integer('group_id')->unsigned()->nullable(); // For MySQL 8.0 use integer('group_id',10)
             $table->timestamps();
 
             $table->unique(['name', 'guard_name']);
@@ -32,7 +41,9 @@ class CreatePermissionTables extends Migration
         Schema::create($tableNames['roles'], function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');       // For MySQL 8.0 use string('name', 125);
+            $table->string('description')->nullable();
             $table->string('guard_name'); // For MySQL 8.0 use string('guard_name', 125);
+            $table->tinyInteger('is_default')->unsigned()->default(0); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
 
             $table->unique(['name', 'guard_name']);
@@ -99,12 +110,15 @@ class CreatePermissionTables extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
+
         $tableNames = config('permission.table_names');
 
         if (empty($tableNames)) {
             throw new \Exception('Error: config/permission.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the tables manually.');
         }
 
+        Schema::drop($tableNames['acl_groups']);
         Schema::drop($tableNames['role_has_permissions']);
         Schema::drop($tableNames['model_has_roles']);
         Schema::drop($tableNames['model_has_permissions']);

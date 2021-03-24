@@ -36,13 +36,13 @@ class PostController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'posts.index',
-            'show' => 'posts.update',
-            'create' => 'posts.create',
-            'store' => 'posts.create',
-            'edit' => 'posts.update',
-            'update' => 'posts.update',
-            'destroy' => 'posts.destroy',
+            'index' => 'blog.posts.index',
+            'show' => 'blog.posts.update',
+            'create' => 'blog.posts.create',
+            'store' => 'blog.posts.create',
+            'edit' => 'blog.posts.update',
+            'update' => 'blog.posts.update',
+            'destroy' => 'blog.posts.destroy',
         ];
     }
 
@@ -57,7 +57,7 @@ class PostController extends BaseController
 
         return $formBuilder->create(PostForm::class)
             ->setMethod('POST')
-            ->setUrl(route('posts.store'))
+            ->setUrl(route('blog.posts.store'))
             ->renderForm();
     }
 
@@ -78,8 +78,8 @@ class PostController extends BaseController
 
         $categoryService->execute($request, $post);
 
-        return $response->setPreviousUrl(route('posts.index'))
-            ->setNextUrl(route('posts.show', $post->id));
+        return $response->setPreviousUrl(route('blog.posts.index'))
+            ->setNextUrl(route('blog.posts.show', $post->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -89,7 +89,7 @@ class PostController extends BaseController
 
         return $formBuilder->create(PostForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('posts.update', ['id' => $page->id]))
+            ->setUrl(route('blog.posts.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -108,8 +108,8 @@ class PostController extends BaseController
 
         $categoryService->execute($request, $post);
 
-        return $response->setPreviousUrl(route('posts.index'))
-            ->setNextUrl(route('posts.show', $post->id));
+        return $response->setPreviousUrl(route('blog.posts.index'))
+            ->setNextUrl(route('blog.posts.show', $post->id));
     }
 
     function destroy(Request $request)

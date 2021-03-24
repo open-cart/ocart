@@ -4,6 +4,8 @@ namespace Ocart\Acl\Providers;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Acl\Repositories\RoleRepository;
+use Ocart\Acl\Repositories\RoleRepositoryEloquent;
 use Ocart\Acl\Repositories\UserRepository;
 use Ocart\Acl\Repositories\UserRepositoryEloquent;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
@@ -15,6 +17,7 @@ class AclServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
+        $this->app->bind(RoleRepository::class, RoleRepositoryEloquent::class);
     }
 
     public function boot()
@@ -41,16 +44,16 @@ class AclServiceProvider extends ServiceProvider
                 'parent_id' => 'cms-system-content',
                 'name' => 'Roles & permissions',
                 'icon' => null,
-                'url' => route('system.users.index'),
+                'url' => route('system.roles.index'),
                 'permissions' => [
-                    'system.users.index',
-                    'system.users.create',
-                    'system.users.update',
-                    'system.users.destroy',
+                    'system.roles.index',
+                    'system.roles.create',
+                    'system.roles.update',
+                    'system.roles.destroy',
                 ],
                 'active' => false,
             ])->registerItem([
-                'id' => 'cms-system-role-roles2',
+                'id' => 'cms-system-user-users',
                 'parent_id' => 'cms-system-content',
                 'name' => 'Users',
                 'icon' => null,

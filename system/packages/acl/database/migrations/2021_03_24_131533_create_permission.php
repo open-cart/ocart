@@ -21,10 +21,20 @@ class CreatePermission extends Migration
         $owner = Role::create(['name' => 'owners', 'guard_name' => $guard_name]);
         $members = Role::create(['name' => 'members', 'guard_name' => $guard_name]);
 
-        Permission::create(['name' => 'system.users.index', 'guard_name' => $guard_name]);
-        Permission::create(['name' => 'system.users.create', 'guard_name' => $guard_name]);
-        Permission::create(['name' => 'system.users.update', 'guard_name' => $guard_name]);
-        Permission::create(['name' => 'system.users.destroy', 'guard_name' => $guard_name]);
+        collect([
+            'system.users.index',
+            'system.users.create',
+            'system.users.update',
+            'system.users.destroy',
+
+            'system.roles.index',
+            'system.roles.create',
+            'system.roles.update',
+            'system.roles.destroy',
+        ])->map(function ($permission) use ($guard_name) {
+            $group = \Ocart\Acl\Models\Group::create(['name' => 'System']);
+            Permission::create(['name' => $permission, 'guard_name' => $guard_name, 'group_id' => $group->id]);
+        });
 
         collect([
             'pages.index',
@@ -56,10 +66,10 @@ class CreatePermission extends Migration
         });
 
         collect([
-            'posts.index',
-            'posts.create',
-            'posts.update',
-            'posts.destroy',
+            'blog.posts.index',
+            'blog.posts.create',
+            'blog.posts.update',
+            'blog.posts.destroy',
 
             'blog.tags.index',
             'blog.tags.create',
@@ -101,10 +111,6 @@ class CreatePermission extends Migration
 
 
         $owner->syncPermissions(Permission::all()->pluck('id')->toArray());
-
-        /** @var User $admin */
-        $admin = User::where('id', 1)->first();
-        $admin->assignRole(['owners']);
 
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
     }

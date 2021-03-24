@@ -11,7 +11,9 @@ Route::group([
     'as' => 'system.'
 ], function () {
     Route::group(['prefix'=>'users', 'as' => 'users.'], function () {
-        Route::resource('', 'UserController')
-            ->parameters(['' => 'id']);
+        Route::resource('', 'UserController')->parameters(['' => 'id']);
+    });
+    Route::group(['prefix'=>'roles', 'as' => 'roles.'], function () {
+        Route::resource('', 'RoleController')->parameters(['' => 'id']);
     });
 });
