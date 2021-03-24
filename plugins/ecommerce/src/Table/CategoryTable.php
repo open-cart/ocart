@@ -30,14 +30,14 @@ class CategoryTable extends TableAbstract
                     return $item->name;
                 }
             ],
-            'image' => [
-                'name' => 'id',
-                'title' => 'image',
-                'class' => 'border text-left px-2 py-2',
-                'render' => function ($item) {
-                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
-                }
-            ],
+//            'image' => [
+//                'name' => 'id',
+//                'title' => 'image',
+//                'class' => 'border text-left px-2 py-2',
+//                'render' => function ($item) {
+//                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
+//                }
+//            ],
             'alias' => [
                 'name' => 'alias',
                 'title' => 'URL Tùy chỉnh',
@@ -79,14 +79,14 @@ class CategoryTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('categories.update', 'categories.destroy', $item);
+                    return $this->tableActions('ecommerce.categories.update', 'ecommerce.categories.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('categories.create'), []);
+        $buttons = $this->addCreateButton(route('ecommerce.categories.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Tag::class);
     }

@@ -2,7 +2,7 @@
 namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
-use Ocart\Blog\Repositories\PostRepository;
+use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Page\Models\Page;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
@@ -46,13 +46,21 @@ class PostTable extends TableAbstract
                     return $item->slug;
                 }
             ],
+            'categories' => [
+                'name' => 'id',
+                'title' => 'Category',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return join(',', $item->categories->pluck('name')->toArray());
+                }
+            ],
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return view('components.activated', ['active' => $item->status]);
+                    return $item->status->toHtml();
                 }
             ]
         ]);
@@ -62,14 +70,14 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2',
                 'width' => '120px',
                 'render' => function ($item) {
-                    return $this->tableActions('pages.update', 'pages.destroy', $item);
+                    return $this->tableActions('blog.posts.update', 'blog.posts.destroy', $item);
                 }
             ]);
     }
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('pages.create'), []);
+        $buttons = $this->addCreateButton(route('blog.posts.create'), []);
 
         return apply_filters('base_table_action', $buttons, Page::class);
     }

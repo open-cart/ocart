@@ -1,12 +1,16 @@
 <?php
 namespace Ocart\Page\Http\Controllers;
 
+use App\Models\User;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller as BaseController;
+use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use Ocart\Page\Forms\PageForm;
 use Ocart\Page\Http\Requests\PageRequest;
+use Ocart\Page\Models\Page;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Table\PageTable;
 use Prettus\Validator\Exceptions\ValidatorException;
@@ -20,9 +24,28 @@ class PageController extends BaseController
      */
     protected $repo;
 
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+//            'index' => 'pages.index',
+            'show' => 'pages.update',
+            'create' => 'pages.create',
+            'store' => 'pages.create',
+            'edit' => 'pages.update',
+            'update' => 'pages.update',
+            'destroy' => 'pages.destroy',
+        ];
+    }
+
     public function __construct(PageRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource(Page::class, 'id');
     }
 
     public function index(PageTable $table)
@@ -57,6 +80,8 @@ class PageController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
+//        dd(Gate::forUser(Auth::user())->check('pages-update', 1));
+//        $this->authorize('pages.update', $id);
         page_title()->setTitle(trans('packages/page::pages.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 

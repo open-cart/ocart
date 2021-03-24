@@ -24,4 +24,8 @@ namespace {
     class Form extends Collective\Html\FormBuilder {}
 
     class TnMedia extends \Ocart\Media\Facades\TnMedia {}
+
+    class File extends \Illuminate\Support\Facades\File {}
+
+    class Assets extends \Ocart\Core\Assets\CustomAsset {}
 }

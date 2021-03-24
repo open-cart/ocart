@@ -48,7 +48,9 @@ class ThemeServiceProvider extends ServiceProvider
                     'name'        => 'Giao diện',
                     'icon'        => null,
                     'url'         => route('themes.index'),
-                    'permissions' => [],
+                    'permissions' => [
+                        'themes.index'
+                    ],
                     'active'      => false,
                 ]);
         });

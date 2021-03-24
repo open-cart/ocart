@@ -2,10 +2,13 @@
 
 namespace Ocart\Core;
 
+use Botble\Assets\Assets;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\ResourceRegistrar;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Core\Assets\CustomAsset;
+use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Library\CustomResourceRegistrar;
 use Ocart\Core\Providers\BreadcrumsServiceProvider;
@@ -29,12 +32,14 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->bind(ResourceRegistrar::class, CustomResourceRegistrar::class);
         $this->app->bind(MetaBoxRepository::class, MetaBoxRepositoryEloquent::class);
         $this->app->bind(RequestCriteria::class, \Ocart\Core\Criteria\RequestCriteria::class);
+        $this->app->bind(Assets::class, CustomAsset::class);
 
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core/base');
 
         $this->app->register(BreadcrumsServiceProvider::class);
+        $this->app->register(FormServiceProvider::class);
 
         Builder::defaultStringLength(191);
     }

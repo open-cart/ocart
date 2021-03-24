@@ -28,6 +28,25 @@ class CategoryController extends BaseController
     public function __construct(CategoryRepository $repo)
     {
         $this->repo = $repo;
+        $this->authorizeResource($repo->getModel(), 'id');
+    }
+
+    /**
+     * Get the map of resource methods to ability names.
+     *
+     * @return array
+     */
+    protected function resourceAbilityMap()
+    {
+        return [
+            'index' => 'ecommerce.categories.index',
+            'show' => 'ecommerce.categories.update',
+            'create' => 'ecommerce.categories.create',
+            'store' => 'ecommerce.categories.create',
+            'edit' => 'ecommerce.categories.update',
+            'update' => 'ecommerce.categories.update',
+            'destroy' => 'ecommerce.categories.destroy',
+        ];
     }
 
     public function index(CategoryTable $table)
@@ -42,7 +61,7 @@ class CategoryController extends BaseController
 
         return $formBuilder->create(CategoryForm::class)
             ->setMethod('POST')
-            ->setUrl(route('categories.store'))
+            ->setUrl(route('ecommerce.categories.store'))
             ->renderForm();
     }
 
@@ -57,8 +76,8 @@ class CategoryController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        return $response->setPreviousUrl(route('categories.index'))
-            ->setNextUrl(route('categories.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.categories.index'))
+            ->setNextUrl(route('ecommerce.categories.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -68,7 +87,7 @@ class CategoryController extends BaseController
 
         return $formBuilder->create(CategoryForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('categories.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.categories.update', ['id' => $page->id]))
             ->renderForm();
     }
 
@@ -80,8 +99,8 @@ class CategoryController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        return $response->setPreviousUrl(route('categories.index'))
-            ->setNextUrl(route('categories.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.categories.index'))
+            ->setNextUrl(route('ecommerce.categories.show', $page->id));
     }
 
     function destroy(Request $request)

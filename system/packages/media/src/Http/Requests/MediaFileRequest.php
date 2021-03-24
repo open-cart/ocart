@@ -19,7 +19,7 @@ class MediaFileRequest extends FormRequest
                 $files = [$files];
             }
             foreach (array_keys($files) as $key) {
-                $rules['file.' . $key] = 'required|mimes:' . config('core.media.media.allowed_mime_types');
+                $rules['file.' . $key] = 'required|mimes:' . config('packages.media.media.allowed_mime_types');
             }
         }
 

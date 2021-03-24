@@ -1,12 +1,15 @@
 {
     "name": "ocart/core",
+    "description": "description",
     "authors": [
         {
             "name": "Phan Trung Nguyên",
             "email": "nguyenpl117@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "botble/assets": "^1.0"
+    },
     "autoload": {
         "psr-4": {
             "Ocart\\Core\\": "base/src/",

@@ -2,7 +2,7 @@
 namespace Ocart\Core\Http\Controllers;
 
 
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 
 class BaseController extends Controller
 {

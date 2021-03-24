@@ -91,7 +91,7 @@ class PageTable extends TableAbstract
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('pages.create'), []);
+        $buttons = $this->addCreateButton(route('pages.create'), ['pages.create']);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Page::class);
     }
