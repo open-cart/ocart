@@ -65,10 +65,14 @@ class RoleController extends BaseController
     {
         $data = $request->all();
 
-        $page = $this->repo->create($data);
+        $role = $this->repo->create($data);
+
+        $role->syncPermissions($request->permissions);
+
+        $role->forgetCachedPermissions();
 
         return $response->setPreviousUrl(route('system.roles.index'))
-            ->setNextUrl(route('system.roles.show', $page->id));
+            ->setNextUrl(route('system.roles.show', $role->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -86,13 +90,16 @@ class RoleController extends BaseController
     {
         $data = $request->all();
 
-        /** @var User $user */
-        $user = $this->repo->update($data, $id);
+        /** @var Role $user */
+        $role = $this->repo->update($data, $id);
 
-        $user->forgetCachedPermissions();
+
+        $role->syncPermissions($request->permissions);
+
+        $role->forgetCachedPermissions();
 
         return $response->setPreviousUrl(route('system.roles.index'))
-            ->setNextUrl(route('system.roles.show', $user->id));
+            ->setNextUrl(route('system.roles.show', $role->id));
     }
 
     function destroy(Request $request)

@@ -25,7 +25,7 @@ class AclServiceProvider extends ServiceProvider
         $this->setNamespace('packages/acl')
             ->loadAndPublishConfigurations([])
             ->loadRoutes(['web'])
-//            ->loadAndPublishViews()
+            ->loadAndPublishViews()
 //            ->loadAndPublishTranslations()
             ->loadMigrations();
 
