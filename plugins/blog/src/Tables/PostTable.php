@@ -46,6 +46,14 @@ class PostTable extends TableAbstract
                     return $item->slug;
                 }
             ],
+            'categories' => [
+                'name' => 'id',
+                'title' => 'Category',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return join(',', $item->categories->pluck('name')->toArray());
+                }
+            ],
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
