@@ -26,7 +26,7 @@ class PublicController extends BaseController
      * Chi tiet san pham
      * @return mixed
      */
-    public function index($id)
+    public function product($id)
     {
         $product = $this->repo->find($id);
         $category = $this->repoCategory->first();

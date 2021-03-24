@@ -1,3 +1,65 @@
+.icon-features-wrap{
+  &:before{
+    content: url(../img/arrow.png);
+    position: absolute;
+    width: auto;
+    height: auto;
+    background: 0 0;
+    left: 100%;
+    top: 40px;
+  }
+  &.remove{
+    &:before{
+      display: none;
+    }
+  }
+  .middle-icon-large-features-box{
+    background: #fff;
+    width: 85px;
+    height: 85px;
+    line-height: 90px;
+    text-align: center;
+    transition: .25s ease-in-out;
+    font-size: 30px;
+    border-radius: 20px;
+    margin: 15px auto;
+    position: relative;
+    border: 1px solid transparent;
+    &:before{
+      content: "";
+      position: absolute;
+      border-radius: 20px;
+      width: 85px;
+      height: 85px;
+      top: 0;
+      left: 0;
+      transform: rotate(45deg);
+      background: 0 0;
+      border: 1px solid transparent;
+    }
+  }
+  .f-light-success{
+    &:before{
+      background: rgba(15,202,152,.1);
+      border-color: rgba(15,202,152,.3);
+      color: #29cf8d!important;
+    }
+  }
+  .f-light-warning{
+    &:before{
+      background: rgba(255,143,0,.1);
+      border-color: rgba(255,143,0,.3);
+      color: #ff8f00!important;
+    }
+  }
+  .f-light-blue{
+    &:before{
+      color: #1d96ff!important;
+      background: rgba(29,150,255,.1);
+      border-color: rgba(29,150,255,.3);
+    }
+  }
+}
 .sec-product {
   .c-card {
     img {
