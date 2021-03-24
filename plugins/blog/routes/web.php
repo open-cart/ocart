@@ -7,7 +7,7 @@ Route::group([
     'middleware' => ADMIN_MIDDLEWARE,
     'namespace' => 'Ocart\Blog\Http\Controllers',
 ], function () {
-    Route::group(['prefix'=>'posts', 'as' => 'posts.'], function () {
+    Route::group(['prefix'=>'posts', 'as' => 'blog.posts.'], function () {
         Route::resource('', 'PostController')->parameters(['' => 'id']);
     });
     Route::group(['prefix'=>'tags', 'as' => 'blog.tags.'], function () {

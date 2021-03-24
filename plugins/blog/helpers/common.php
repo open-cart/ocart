@@ -1,5 +1,6 @@
 <?php
 use Ocart\Blog\Supports\PostFormat;
+use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 
 if (!function_exists('register_post_format')) {
     /**
@@ -25,3 +26,32 @@ if (!function_exists('get_post_formats')) {
     }
 }
 
+if (!function_exists('get_blog_categories')) {
+    /**
+     * @param array $args
+     * @return array|mixed
+     */
+    function get_blog_categories(array $args = [])
+    {
+        $indent = Arr::get($args, 'indent', '——');
+
+        $repo = app(CategoryRepository::class);
+
+        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        $categories = $repo->all();
+
+        $categories = sort_item_with_children($categories);
+
+        foreach ($categories as $category) {
+            $indentText = '';
+            $depth = (int)$category->depth;
+            for ($i = 0; $i < $depth; $i++) {
+                $indentText .= $indent;
+            }
+            $category->indent_text = $indentText;
+        }
+
+        return $categories;
+    }
+}

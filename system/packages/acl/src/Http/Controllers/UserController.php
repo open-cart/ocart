@@ -1,26 +1,23 @@
 <?php
-namespace Ocart\Page\Http\Controllers;
+namespace Ocart\Acl\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Ocart\Page\Forms\PageForm;
-use Ocart\Page\Http\Requests\PageRequest;
-use Ocart\Page\Models\Page;
-use Ocart\Page\Repositories\PageRepository;
-use Ocart\Page\Table\PageTable;
-use Prettus\Validator\Exceptions\ValidatorException;
+use Ocart\Acl\Forms\UserForm;
+use Ocart\Acl\Http\Requests\UserRequest;
+use Ocart\Acl\Repositories\UserRepository;
+use Ocart\Acl\Table\UserTable;
 use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 
-class PageController extends BaseController
+class UserController extends BaseController
 {
     /**
-     * @var \Ocart\Page\Repositories\PageRepository
+     * @var UserRepository
      */
     protected $repo;
 
@@ -33,22 +30,22 @@ class PageController extends BaseController
     {
         return [
 //            'index' => 'pages.index',
-            'show' => 'pages.update',
-            'create' => 'pages.create',
-            'store' => 'pages.create',
-            'edit' => 'pages.update',
-            'update' => 'pages.update',
-            'destroy' => 'pages.destroy',
+            'show' => 'system.users.update',
+            'create' => 'system.users.create',
+            'store' => 'system.users.create',
+            'edit' => 'system.users.update',
+            'update' => 'system.users.update',
+            'destroy' => 'system.users.destroy',
         ];
     }
 
-    public function __construct(PageRepository $repo)
+    public function __construct(UserRepository $repo)
     {
         $this->repo = $repo;
-        $this->authorizeResource(Page::class, 'id');
+        $this->authorizeResource(User::class, 'id');
     }
 
-    public function index(PageTable $table)
+    public function index(UserTable $table)
     {
         page_title()->setTitle(trans('packages/page::pages.menu'));
         return $table->render();
@@ -57,13 +54,13 @@ class PageController extends BaseController
     function create(FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('packages/page::pages.create'));
-        return $formBuilder->create(PageForm::class)
+        return $formBuilder->create(UserForm::class)
             ->setMethod('POST')
-            ->setUrl(route('pages.store'))
+            ->setUrl(route('system.users.store'))
             ->renderForm();
     }
 
-    function store(PageRequest $request, BaseHttpResponse $response)
+    function store(UserRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
         $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
@@ -74,35 +71,43 @@ class PageController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        return $response->setPreviousUrl(route('pages.index'))
-            ->setNextUrl(route('pages.show', $page->id));
+        return $response->setPreviousUrl(route('system.users.index'))
+            ->setNextUrl(route('system.users.show', $page->id));
     }
 
     function show($id, FormBuilder $formBuilder)
     {
 //        dd(Gate::forUser(Auth::user())->check('pages-update', 1));
-//        $this->authorize('pages.update', $id);
+//        $this->authorize('system.users.update', $id);
         page_title()->setTitle(trans('packages/page::pages.edit'));
         $page = $this->repo->skipCriteria()->find($id);
 
-        return $formBuilder->create(PageForm::class, ['model' => $page])
+        return $formBuilder->create(UserForm::class, ['model' => $page])
             ->setMethod('PUT')
-            ->setUrl(route('pages.update', ['id' => $page->id]))
+            ->setUrl(route('system.users.update', ['id' => $page->id]))
             ->renderForm();
     }
 
-    function update($id, PageRequest $request, BaseHttpResponse $response)
+    function update($id, UserRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
 //        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
 //        $data['slug_md5'] = md5($data['slug']);
 
-        $page = $this->repo->update($data + [
-                'is_featured' => $request->input('is_featured', false),
-            ], $id);
+        unset($data['password']);
 
-        return $response->setPreviousUrl(route('pages.index'))
-            ->setNextUrl(route('pages.show', $page->id));
+        if ($password = $request->input('password', null)) {
+            $data['password'] = Hash::make($request['password']);
+        }
+
+        /** @var User $user */
+        $user = $this->repo->update($data, $id);
+
+        $user->syncRoles($request->roles);
+        $user->forgetCachedPermissions();
+
+        return $response->setPreviousUrl(route('system.users.index'))
+            ->setNextUrl(route('system.users.show', $user->id));
     }
 
     function destroy(Request $request)
