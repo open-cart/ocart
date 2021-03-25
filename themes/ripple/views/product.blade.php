@@ -1,12 +1,14 @@
 <x-guest-layout>
-    <ol class="max-w-7xl mx-auto px-4 sm:px-6 list-reset py-4 pl-4 flex text-grey">
-        <li class="px-2"><a href="/" class="no-underline text-indigo">Home</a></li>
-        <li>/</li>
-        <li class="px-2"><a href="/product/{{$product->id}}" class="no-underline text-indigo">{{ $product->name }}</a></li>
-    </ol>
+    <div class="container-custom">
+        <ol class="list-reset py-4 flex text-grey">
+            <li class="pr-2"><a href="/" class="no-underline text-red-500">Home</a></li>
+            <li>/</li>
+            <li class="px-2"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
+        </ol>
+    </div>
 
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 ">
+        <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <img class="lg:w-1/2 w-full object-cover object-center rounded" src="https://graph.noithattruongyen.vn/images/1650c3c4-3b03-4d36-a057-f974128c0e3b-n%E1%BB%99i%20th%E1%BA%A5t%20th%C3%B4ng%20minh%20(3).png" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -102,7 +104,7 @@
     </section>
 
     <div class="bg-blue-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 justify-center">
+        <div class="container-custom py-12 justify-center">
             <div class="bg-white rounded-md mb-7" x-data="{selected:1}">
                 <ul class="shadow-box">
 
