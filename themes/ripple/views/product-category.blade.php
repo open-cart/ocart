@@ -1,9 +1,7 @@
 <x-guest-layout>
-    <div>{{ $category }}</div>
-
-
-    @foreach($products as $product)
-        {!! $product !!}
-    @endforeach
+    <div class="container-custom">
+        <div id="test" class="btn-indigo">Sidebar a</div>
+        <div>Content</div>
+    </div>
 
 </x-guest-layout>
