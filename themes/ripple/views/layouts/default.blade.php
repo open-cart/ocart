@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="x-pjax-version" content="{{ mix(Theme::asset('css/style.css')) }}">
+    <meta http-equiv="x-pjax-version" content="{{ mix('themes/ripple/css/style.css') }}">
 
     <title>Bdstayhanoi.vn - Bất động sản phía tây hà nội</title>
     <link rel="icon" type="image/png" href="{{ Theme::asset('img/favicon-bdstayhanoi.jpg') }}">
