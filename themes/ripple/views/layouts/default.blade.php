@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-pjax-version" content="{{ mix(Theme::asset('css/style.css')) }}">
 
     <title>Bdstayhanoi.vn - Bất động sản phía tây hà nội</title>
     <link rel="icon" type="image/png" href="{{ Theme::asset('img/favicon-bdstayhanoi.jpg') }}">
@@ -23,13 +24,19 @@
 
     <!-- Scripts -->
     <script src="{{ Theme::asset('js/app.js') }}" defer></script>
+    <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
+    <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
     @include(Theme::getThemeNamespace('layouts.header'))
-    <div class="content">{{ $slot }}</div>
+    <div id="body" class="content">{{ $slot }}</div>
     @include(Theme::getThemeNamespace('layouts.footer'))
 
 </div>
 </body>
+<script>
+    $(document).pjax('a', '#body');
+    $.pjax.defaults.timeout = 1200;
+</script>
 </html>

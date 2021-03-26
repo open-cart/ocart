@@ -102,14 +102,14 @@
     <script>
         $(function(){
             // pjax
-            $(document).on('click', 'a', function(event) {
-                // event.preventDefault();
-                var container = $(this).closest('[data-pjax-container]')
-                var containerSelector = '#' + container[0].id
-                console.log(container[0].id)
-                $.pjax.click(event, {container: containerSelector})
-            })
-            // $(document).pjax('a', '#body');
+            // $(document).on('click', 'a', function(event) {
+            //     // event.preventDefault();
+            //     var container = $(this).closest('[data-pjax-container]')
+            //     var containerSelector = '#' + container[0].id
+            //     console.log(container[0].id)
+            //     $.pjax.click(event, {container: containerSelector})
+            // })
+            $(document).pjax('a', '#body');
             $.pjax.defaults.timeout = 1200;
 
             let loading;
