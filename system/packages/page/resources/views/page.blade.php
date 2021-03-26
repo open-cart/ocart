@@ -128,7 +128,7 @@
                                 <x-switch
                                     checked="{!! old('status', \Arr::get($page, 'status', '2')) == 2 ? 'false' : 'true' !!}"
                                     name="status"
-                                    color="green"
+                                    color="bg-green-600"
                                 />
                             </x-blog::control>
 
@@ -144,7 +144,7 @@
 {{--                                        </x-button>--}}
                                     </div>
                                     <div>
-                                        <x-button color="blue">
+                                        <x-button color="bg-blue-500 hover:bg-blue-600">
                                             {!! __('admin.submit') !!}
                                         </x-button>
                                     </div>

@@ -1,8 +1,8 @@
-@props(['color' => 'indigo'])
+@props(['color' => 'bg-indigo-500 hover:bg-indigo-600'])
 
 <button {{ $attributes->merge(['type' => 'submit', 'class' => '
-inline-flex items-center px-4 py-2 bg-'.$color.'-500 border border-transparent rounded-md text-white tracking-widest
- hover:bg-'.$color.'-600 focus:border-transparent focus:outline-none
+inline-flex items-center px-4 py-2 '.$color.' border border-transparent rounded-md text-white tracking-widest
+focus:border-transparent focus:outline-none
   disabled:opacity-25 transition ease-in-out duration-150
   ']) }}>
     {{ $slot }}

@@ -8,7 +8,7 @@
                 <x-switch
                     checked="{!! $options['value'] === '1' ? 'true':'false' !!}"
                     name="{!! $name !!}"
-                    color="green"
+                    color="bg-green-600"
                 />
                 @if ($showLabel && $options['label'] !== false && $options['label_show'])
                     {!! Form::customLabel($name, $options['label'], $options['label_attr']) !!}
