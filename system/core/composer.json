@@ -14,7 +14,8 @@
         "psr-4": {
             "Ocart\\Core\\": "base/src/",
             "Ocart\\Table\\": "table/src/",
-            "Ocart\\Setting\\": "setting/src/"
+            "Ocart\\Setting\\": "setting/src/",
+            "Ocart\\Dashboard\\": "dashboard/src/"
         }
     },
     "extra": {
@@ -22,7 +23,8 @@
             "providers": [
                 "Ocart\\Core\\CoreServiceProvider",
                 "Ocart\\Table\\TableServiceProvider",
-                "Ocart\\Setting\\SettingServiceProvider"
+                "Ocart\\Setting\\SettingServiceProvider",
+                "Ocart\\Dashboard\\Providers\\DashboardServiceProvider"
             ],
             "aliases": {
             }

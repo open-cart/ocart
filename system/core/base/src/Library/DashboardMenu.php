@@ -123,7 +123,7 @@ class DashboardMenu
 
 
         $prefix = request()->route()->getPrefix();
-        if (!$prefix || $prefix === config('core.base.general.admin_dir')) {
+        if (!$prefix || $prefix === ADMIN_PREFIX) {
             $uri = explode('/', request()->route()->uri());
             $prefix = end($uri);
         }

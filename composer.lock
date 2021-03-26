@@ -2171,7 +2171,7 @@
         },
         {
             "name": "ocart/acl",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/acl",
@@ -2206,11 +2206,11 @@
         },
         {
             "name": "ocart/core",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/core",
-                "reference": "56aae737a98724e27c9e05752611b6d38800e1cf"
+                "reference": "3bdea70bd537cf6321be369c5c1aebcf6955ee4f"
             },
             "require": {
                 "botble/assets": "^1.0"
@@ -2221,7 +2221,8 @@
                     "providers": [
                         "Ocart\\Core\\CoreServiceProvider",
                         "Ocart\\Table\\TableServiceProvider",
-                        "Ocart\\Setting\\SettingServiceProvider"
+                        "Ocart\\Setting\\SettingServiceProvider",
+                        "Ocart\\Dashboard\\Providers\\DashboardServiceProvider"
                     ],
                     "aliases": []
                 }
@@ -2230,7 +2231,8 @@
                 "psr-4": {
                     "Ocart\\Core\\": "base/src/",
                     "Ocart\\Table\\": "table/src/",
-                    "Ocart\\Setting\\": "setting/src/"
+                    "Ocart\\Setting\\": "setting/src/",
+                    "Ocart\\Dashboard\\": "dashboard/src/"
                 }
             },
             "authors": [
@@ -2246,7 +2248,7 @@
         },
         {
             "name": "ocart/media",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/media",
@@ -2281,7 +2283,7 @@
         },
         {
             "name": "ocart/page",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/page",
@@ -2317,7 +2319,7 @@
         },
         {
             "name": "ocart/plugin-management",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/plugin-management",
@@ -2352,7 +2354,7 @@
         },
         {
             "name": "ocart/seo-helper",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/seo-helper",
@@ -2381,7 +2383,7 @@
         },
         {
             "name": "ocart/theme",
-            "version": "dev-bay",
+            "version": "dev-dashboard",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/theme",
@@ -6361,16 +6363,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "2.5.14",
+            "version": "2.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "17097f7a83e200d90d1cf9f4d1b35c1001513a47"
+                "reference": "4be10a998815f77952b9eb983fb0b64c8a4defbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/17097f7a83e200d90d1cf9f4d1b35c1001513a47",
-                "reference": "17097f7a83e200d90d1cf9f4d1b35c1001513a47",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/4be10a998815f77952b9eb983fb0b64c8a4defbb",
+                "reference": "4be10a998815f77952b9eb983fb0b64c8a4defbb",
                 "shasum": ""
             },
             "require": {
@@ -6434,7 +6436,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-03-04T08:48:01+00:00"
+            "time": "2021-03-24T18:58:31+00:00"
         },
         {
             "name": "fakerphp/faker",

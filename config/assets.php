@@ -14,6 +14,7 @@ return [
         'app',
         'swal',
         'tnmedia',
+        'font',
     ],
     'resources'      => [
         'scripts' => [
@@ -79,6 +80,14 @@ return [
                     'local' => 'tnmedia/app.css',
                 ],
             ],
+            'font' => [
+                'use_cdn'  => false,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'css/font-awesome/css/font-awesome.min.css',
+                ],
+            ],
+
         ],
     ],
 ];

@@ -1,11 +1,17 @@
 <aside class="main-sidebar bg-white shadow-md w-64 hidden lg:block">
     <div class="bg-red-600 border-b border-gray-100">
-        <div class="h-16 flex items-center justify-center">
+        <a href="{!! route('dashboard.index') !!}" class="h-16 flex items-center justify-center">
             <span class="text-white text-2xl">Admin</span>
-        </div>
+        </a>
     </div>
     <div class="h-1"></div>
     <ul style="overflow: auto; height: calc(100vh - 80px)">
+{{--        <li class="nav-item">--}}
+{{--            <a href="{!! route('dashboard.index') !!}" class="px-3 py-3 block">--}}
+{{--                <i class=""></i>--}}
+{{--                <span>Dashboard</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
     @foreach ($menus = dashboard_menu()->getAll() as $menu)
         <li class="nav-item @if ($menu['active']) active @endif" id="{{ $menu['id'] }}">
             <a :class="{[theme.bg]:true}" href="javascript:void(0)" class="px-3 py-3 block">

@@ -18,6 +18,7 @@ class AclServiceProvider extends ServiceProvider
     {
         $this->app->bind(UserRepository::class, UserRepositoryEloquent::class);
         $this->app->bind(RoleRepository::class, RoleRepositoryEloquent::class);
+        $this->app->register(HookServiceProvider::class);
     }
 
     public function boot()
@@ -28,44 +29,5 @@ class AclServiceProvider extends ServiceProvider
             ->loadAndPublishViews()
 //            ->loadAndPublishTranslations()
             ->loadMigrations();
-
-        Event::listen(RouteMatched::class, function () {
-            dashboard_menu()->registerItem([
-                'id' => 'cms-system-content',
-                'priority'    => 999,
-                'parent_id' => null,
-                'name' => 'packages/acl::systems.manager',
-                'icon' => null,
-                'url' => '',
-                'permissions' => [],
-                'active' => false,
-            ])->registerItem([
-                'id' => 'cms-system-role-roles',
-                'parent_id' => 'cms-system-content',
-                'name' => 'Roles & permissions',
-                'icon' => null,
-                'url' => route('system.roles.index'),
-                'permissions' => [
-                    'system.roles.index',
-                    'system.roles.create',
-                    'system.roles.update',
-                    'system.roles.destroy',
-                ],
-                'active' => false,
-            ])->registerItem([
-                'id' => 'cms-system-user-users',
-                'parent_id' => 'cms-system-content',
-                'name' => 'Users',
-                'icon' => null,
-                'url' => route('system.users.index'),
-                'permissions' => [
-                    'system.users.index',
-                    'system.users.create',
-                    'system.users.update',
-                    'system.users.destroy',
-                ],
-                'active' => false,
-            ]);
-        });
     }
 }
