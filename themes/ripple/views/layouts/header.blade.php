@@ -21,7 +21,7 @@
                 <div class="relative" x-data="{ open: false, focus: false }">
                     <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
                     <button @click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
-                        <span>Solutions</span>
+                        <span>Nhà đất bán</span>
                         <!--
                           Heroicon name: solid/chevron-down
 
@@ -147,11 +147,11 @@
                     </div>
                 </div>
 
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                    Pricing
+                <a href="/product-category/1" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Tin tức
                 </a>
                 <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                    Docs
+                    Liên hệ
                 </a>
 
             </nav>
