@@ -1,11 +1,11 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<header x-data="{ openMobile : false }" class="relative bg-white">
+<header x-data="{ openMobile : false }" class="relative bg-white sticky top-0 z-40 lg:z-50">
     <div class="container-custom">
-        <div class="flex justify-between items-center border-b-2 border-gray-100 py-6 md:justify-start md:space-x-10">
+        <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-10">
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="/">
                     <span class="sr-only">Workflow</span>
-                    <img class="h-8 w-auto sm:h-10" src="https://sevenweb.vn/logoseven02.svg" alt="">
+                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo_bds.jpg') }}" alt="">
                 </a>
             </div>
             <div class="-mr-2 -my-2 md:hidden">
@@ -156,7 +156,7 @@
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <a href="#" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-500 hover:bg-indigo-700">
+                <a href="#" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22px" class="mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>

@@ -3,6 +3,8 @@
         <ol class="list-reset py-4 border-b border-gray-200 flex text-grey">
             <li class="pr-2"><a href="/" class="no-underline text-red-500">Home</a></li>
             <li>/</li>
+            <li class="px-2"><a href="/post-category/{{ Arr::get($post->categories->first(), 'id') }}" class="no-underline text-red-500">{{ Arr::get($post->categories->first(), 'name') }}</a></li>
+            <li>/</li>
             <li class="px-2"><span class="no-underline text-gray-500">{{ $post->name }}</span></li>
         </ol>
     </div>
@@ -24,16 +26,28 @@
                 <em>Nguồn: admin</em>
             </div>
             <div class="py-4 border-b border-gray-100">
-                Chuyên mục: Tin tức
+                Chuyên mục:
+                @foreach($post->categories as $category)
+                    <a href="#">{{ $category->name }}</a><span> , </span>
+                @endforeach
             </div>
             <div class="py-4 border-b border-gray-100">
                 Tag: Tin tức
             </div>
             <div class="py-4 border-b border-gray-100">
-                Chia sẻ
+                Chia sẻ:
             </div>
-            <div class="py-4">Comment</div>
-            <div class="py-4">Bài liên quan</div>
+            <div class="py-4 border-b border-gray-100">Comment</div>
+            <div class="py-4">
+                <div>Bài liên quan</div>
+                <div class="flex flex-wrap -mx-4">
+                    @foreach(get_list_posts() as $post)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                            <x-theme::card.post :data="$post"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 

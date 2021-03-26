@@ -28,7 +28,7 @@ class PublicController extends BaseController
      */
     public function post($id)
     {
-        $post = $this->repo->find($id);
+        $post = $this->repo->with('categories')->find($id);
 
         return Theme::scope('post',  compact('post'),'packages/blog::post');
     }

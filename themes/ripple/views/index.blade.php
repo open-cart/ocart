@@ -12,7 +12,7 @@
 
                             <div class="form-group mb-4">
                                 <div class="input-with-icon relative">
-                                    <x-theme::input type="text" class="pl-12" placeholder="Search for a location"/>
+                                    <x-theme::form.input type="text" class="pl-12" placeholder="Search for a location"/>
                                     <svg class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -40,7 +40,7 @@
             <div class="flex flex-wrap -mx-4">
                 @foreach(get_list_products() as $product)
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                        <x-theme::item-product :data="$product"/>
+                        <x-theme::card.product :data="$product"/>
                     </div>
                 @endforeach
             </div>
@@ -114,7 +114,7 @@
             <div class="flex flex-wrap -mx-4">
                 @foreach(get_list_posts() as $post)
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                        <x-theme::item-post :data="$post"/>
+                        <x-theme::card.post :data="$post"/>
                     </div>
                 @endforeach
             </div>
