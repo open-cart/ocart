@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ Theme::asset('css/style.css?v=1') }}">
 
     <!-- Scripts -->
-    <script src="{{ Theme::asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
     <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
 </head>
@@ -36,7 +36,17 @@
 </div>
 </body>
 <script>
-    $(document).pjax('a', '#body');
+    $(document).on('click', 'a:not(no-pjax)', function(event) {
+        // event.preventDefault();
+        const container = $(this).attr('data-body');
+        const containerSelector = '#' + container;
+        if ($(containerSelector).length) {
+            $.pjax.click(event, {container: containerSelector})
+        } else {
+            $.pjax.click(event, {container: '#body'})
+        }
+    })
+    // $(document).pjax('a', '#category-container');
     $.pjax.defaults.timeout = 1200;
 </script>
 </html>
