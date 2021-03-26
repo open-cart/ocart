@@ -176,13 +176,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\PluginServiceProvider::class,
-
-        Barryvdh\Debugbar\ServiceProvider::class,
-
-        /**
-         * Custom Provider
-         */
-//        Ocart\Core\CoreServiceProvider::class,
     ],
 
     /*
