@@ -24,6 +24,8 @@ class HookServiceProvider extends ServiceProvider
             ->setKey('product_stats_widget')
             ->setIcon('fa fa-file-text')
             ->create(ProductStatsWidget::class);
+
+        $this->registerMenu();
     }
 
     protected function registerMenu()

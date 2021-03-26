@@ -5,7 +5,7 @@
 {{--        </h2>--}}
         <ol class="list-reset flex text-grey-dark">
             <li>
-                <a href="{{ route('admin:home') }}" class="text-blue font-bold flex items-center">
+                <a href="{{ route('dashboard.index') }}" class="text-blue font-bold flex items-center">
                     <i data-feather="home" width="16"></i>&nbsp;Home
                 </a>
             </li>
