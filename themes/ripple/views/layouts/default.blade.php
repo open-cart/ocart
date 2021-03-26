@@ -36,17 +36,17 @@
 </div>
 </body>
 <script>
-    $(document).on('click', 'a:not(no-pjax)', function(event) {
-        // event.preventDefault();
-        const container = $(this).attr('data-body');
-        const containerSelector = '#' + container;
-        if ($(containerSelector).length) {
-            $.pjax.click(event, {container: containerSelector})
-        } else {
-            $.pjax.click(event, {container: '#body'})
-        }
-    })
-    // $(document).pjax('a', '#category-container');
+    // $(document).on('click', 'a:not(no-pjax)', function(event) {
+    //     // event.preventDefault();
+    //     const container = $(this).attr('data-body');
+    //     const containerSelector = '#' + container;
+    //     if ($(containerSelector).length) {
+    //         $.pjax.click(event, {container: containerSelector})
+    //     } else {
+    //         $.pjax.click(event, {container: '#body'})
+    //     }
+    // })
+    $(document).pjax('a:not(no-pjax)', '#category-container');
     $.pjax.defaults.timeout = 1200;
 </script>
 </html>
