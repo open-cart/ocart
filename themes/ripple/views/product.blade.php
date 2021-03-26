@@ -112,7 +112,7 @@
 
                     <li class="relative">
 
-                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" @click="selected !== 1 ? selected = 1 : selected = null">
+                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Nội dung chi tiết</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +137,7 @@
 
                     <li class="relative">
 
-                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" @click="selected !== 1 ? selected = 1 : selected = null">
+                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Bình Luận</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -164,7 +164,7 @@
 
                     <li class="relative">
 
-                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" @click="selected !== 1 ? selected = 1 : selected = null">
+                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Viết Bình Luận</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
