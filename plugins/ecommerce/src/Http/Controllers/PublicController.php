@@ -31,15 +31,19 @@ class PublicController extends BaseController
         $product = $this->repo->find($id);
         $category = $this->repoCategory->first();
 
-        return Theme::scope('product',  compact('product', 'category'),'package/ecommerce::product');
+        return Theme::scope('product',  compact('product', 'category'),'packages/ecommerce::product');
     }
 
+    /**
+     * Danh muc san pham
+     * @return mixed
+     */
     public function productCategory($id)
     {
         $category = $this->repoCategory->find($id);
 
         $products = $this->repo->productForCategory($category->id);
 
-        return Theme::scope('product-category',  compact('category', 'products'),'package/ecommerce::product-category');
+        return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
     }
 }

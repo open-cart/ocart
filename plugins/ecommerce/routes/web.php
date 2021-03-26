@@ -4,7 +4,8 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'middleware' => 'web',
     'namespace' => 'Ocart\Ecommerce\Http\Controllers',
-], function(){
+],
+    function(){
     Route::group([
         'prefix' => ADMIN_PREFIX,
         'middleware' => ADMIN_MIDDLEWARE,
@@ -29,6 +30,7 @@ Route::group([
 
     Route::get('product/{id}', 'PublicController@product');
     Route::get('product-category/{id}', 'PublicController@productCategory');
+
 
 });
 

@@ -1,6 +1,6 @@
 <footer class="text-gray-300 dark-footer skin-dark-footer">
     <div class="bg-gray-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-20">
+        <div class="container-custom py-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="footer-widget">
                     <img src="https://themezhub.net/resido-live/resido/assets/img/logo-light.png" class="img-footer w-2/3 mb-3" alt="">
@@ -46,7 +46,7 @@
     </div>
 
     <div class="footer-bottom bg-gray-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 align-items-center py-4">
+        <div class="container-custom align-items-center py-4">
             <p class="mb-0">© 2021 Resido. Designd By <a href="https://themezhub.com">Themez Hub</a> All Rights
                 Reserved</p>
         </div>
