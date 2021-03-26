@@ -5,7 +5,7 @@
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="/">
                     <span class="sr-only">Workflow</span>
-                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo_bds.jpg') }}" alt="">
+                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" alt="">
                 </a>
             </div>
             <div class="-mr-2 -my-2 md:hidden">

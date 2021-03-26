@@ -3,6 +3,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Bdstayhanoi.vn - Bất động sản phía tây hà nội</title>
+    <link rel="icon" type="image/png" href="{{ Theme::asset('img/favicon-bdstayhanoi.jpg') }}">
+
+    <!-- Meta -->
+    <meta name="description" content="Bdstayhanoi.vn - Bất động sản phía tây hà nội">
+    <meta name="keywords" content="bds tay ha noi">
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SeoHelper::render() !!}
 
@@ -11,10 +19,10 @@
 
     <!-- Styles -->
     {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
-    <link rel="stylesheet" href="{{ asset('themes/ripple/css/style.css?v=1') }}">
+    <link rel="stylesheet" href="{{ Theme::asset('css/style.css?v=1') }}">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ Theme::asset('js/app.js') }}" defer></script>
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
