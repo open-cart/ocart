@@ -14,7 +14,7 @@
             <div class="flex flex-wrap -mx-4">
                 @foreach($posts as $post)
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4 pt-0">
-                        <x-theme::item-post :data="$post"/>
+                        <x-theme::card.post :data="$post"/>
                     </div>
                 @endforeach
             </div>

@@ -1,4 +1,4 @@
 <x-guest-layout>
     test page
-    <x-theme::input></x-theme::input>
+    <x-theme::form.input></x-theme::form.input>
 </x-guest-layout>

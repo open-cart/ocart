@@ -3,6 +3,8 @@
         <ol class="list-reset py-4 flex text-grey">
             <li class="pr-2"><a href="/" class="no-underline text-red-500">Home</a></li>
             <li>/</li>
+            <li class="px-2"><a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}" class="no-underline text-red-500">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
+            <li>/</li>
             <li class="px-2"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
@@ -12,7 +14,7 @@
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <img class="lg:w-1/2 w-full object-cover object-center rounded" src="https://graph.noithattruongyen.vn/images/1650c3c4-3b03-4d36-a057-f974128c0e3b-n%E1%BB%99i%20th%E1%BA%A5t%20th%C3%B4ng%20minh%20(3).png" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                    <h2 class="text-sm title-font text-gray-500">{{ $product->name }}</h2>
+                    <h2 class="text-sm title-font text-gray-500">{{ Arr::get($product->categories->first(), 'name') }}</h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
                     <div class="flex mb-4">
           <span class="flex items-center">

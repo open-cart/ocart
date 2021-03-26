@@ -3,7 +3,7 @@
         <div class="container-custom py-20">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div class="footer-widget">
-                    <img src="https://themezhub.net/resido-live/resido/assets/img/logo-light.png" class="img-footer w-2/3 mb-3" alt="">
+                    <img src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" class="img-footer w-2/3 mb-3" alt="">
                     <div class="footer-add">
                         <p>Collins Street West, Victoria 8007, Au.</p>
                         <p>+1 246-345-0695</p>
