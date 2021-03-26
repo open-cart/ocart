@@ -3,7 +3,7 @@
     <div class="container-custom">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-10">
             <div class="flex justify-start lg:w-0 lg:flex-1">
-                <a href="/">
+                <a href="{!! route('home') !!}">
                     <span class="sr-only">Workflow</span>
                     <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" alt="">
                 </a>

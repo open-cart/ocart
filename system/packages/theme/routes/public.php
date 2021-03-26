@@ -8,7 +8,7 @@ use \Illuminate\Support\Facades\Route;
     'namespace' => 'Ocart\Theme\Http\Controllers',
 ], function () {
     Route::group(['prefix'=>''], function () {
-        Route::get('/', 'PublicController@getIndex');
+        Route::get('/', 'PublicController@getIndex')->name('home');
 
         Route::get('{slug?}.html', [
             'as'   => 'public.single',

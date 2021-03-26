@@ -1,7 +1,7 @@
 <x-guest-layout>
     <div class="container-custom">
         <ol class="list-reset py-4 flex text-grey">
-            <li class="pr-2"><a href="/" class="no-underline text-red-500">Home</a></li>
+            <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-red-500">Home</a></li>
             <li>/</li>
             <li class="px-2"><a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}" class="no-underline text-red-500">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
