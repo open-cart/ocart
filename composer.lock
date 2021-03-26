@@ -2171,7 +2171,7 @@
         },
         {
             "name": "ocart/acl",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/acl",
@@ -2206,7 +2206,7 @@
         },
         {
             "name": "ocart/core",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/core",
@@ -2248,7 +2248,7 @@
         },
         {
             "name": "ocart/page",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/page",
@@ -2284,7 +2284,7 @@
         },
         {
             "name": "ocart/plugin-management",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/plugin-management",
@@ -2319,7 +2319,7 @@
         },
         {
             "name": "ocart/seo-helper",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/seo-helper",
@@ -2348,7 +2348,7 @@
         },
         {
             "name": "ocart/theme",
-            "version": "dev-dashboard",
+            "version": "dev-dev",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/theme",
