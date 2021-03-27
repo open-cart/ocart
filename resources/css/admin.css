@@ -6,3 +6,10 @@
     position: fixed;
     top: 0;
 }
+.gallery-image-item-handler .list-photo-hover-overlay {
+    display: none;
+}
+
+.gallery-image-item-handler:hover .list-photo-hover-overlay {
+    display: block;
+}

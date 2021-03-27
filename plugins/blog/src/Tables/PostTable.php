@@ -3,6 +3,7 @@ namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
+use Ocart\Media\Facades\TnMedia;
 use Ocart\Page\Models\Page;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
@@ -35,7 +36,7 @@ class PostTable extends TableAbstract
                 'title' => 'image',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
+                    return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
             'alias' => [

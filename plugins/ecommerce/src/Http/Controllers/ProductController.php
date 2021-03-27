@@ -72,6 +72,8 @@ class ProductController extends BaseController
         $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
         $data['slug_md5'] = md5($data['slug']);
 
+        $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
+
         $product = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),

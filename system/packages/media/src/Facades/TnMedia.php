@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Facade;
  * @method static string renderFooter()
  * @method static string url($path)
  *
- * Class \Ocart\Media\TnMedia
- * @package Ocart\Media\Facades
+ * @see \Ocart\Media\TnMedia
  */
 class TnMedia extends Facade
 {

@@ -1,13 +1,11 @@
 <?php
 namespace Ocart\Blog\Forms;
 
-use Kris\LaravelFormBuilder\Field;
 use Ocart\Blog\Forms\Fields\CategoryMultiField;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
-use Ocart\Page\Supports\Template;
+use Ocart\Core\Forms\Field;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
-use Assets;
 
 class PostForm extends FormAbstract
 {
@@ -48,7 +46,6 @@ class PostForm extends FormAbstract
                 ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'rules' => 'max:5000',
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
                 ]

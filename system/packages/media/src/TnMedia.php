@@ -177,6 +177,10 @@ class TnMedia
      */
     public function url($path)
     {
+        if (!$path) {
+            return null;
+        }
+
         if (Str::contains($path, 'https://')) {
             return $path;
         }

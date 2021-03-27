@@ -110,7 +110,7 @@
             //     console.log(container[0].id)
             //     $.pjax.click(event, {container: containerSelector})
             // })
-            $(document).pjax('a', '#body');
+            $(document).pjax('a:not(.blank)', '#body');
             $.pjax.defaults.timeout = 1200;
 
             let loading;

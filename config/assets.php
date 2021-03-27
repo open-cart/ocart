@@ -6,6 +6,7 @@ return [
     'version'        => env('ASSETS_VERSION', time()),
     'scripts'        => [
         'jquery',
+        'jquery-ui',
         'app',
         'pjax',
         'tnmedia',
@@ -13,6 +14,7 @@ return [
     ],
     'styles'         => [
         'app',
+        'jquery-ui',
         'swal',
         'tnmedia',
         'font',
@@ -44,6 +46,14 @@ return [
                     'local' => 'access/jquery/jquery.min.js',
                 ],
             ],
+            'jquery-ui' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+                    'cdn' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+                ],
+            ],
             'tinymce' => [
                 'use_cdn'  => false,
                 'location' => 'header',
@@ -67,7 +77,13 @@ return [
             ],
         ],
         'styles'  => [
-            'app' => [
+            'jquery-ui' => [
+                'use_cdn'    => true,
+                'location'   => 'header',
+                'src'        => [
+                    'cdn' => '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
+                ],
+            ],'app' => [
                 'use_cdn'    => false,
                 'location'   => 'header',
                 'src'        => [
@@ -92,7 +108,7 @@ return [
                 'use_cdn'  => false,
                 'location' => 'header',
                 'src'      => [
-                    'local' => 'css/font-awesome/css/font-awesome.min.css',
+                    'local' => 'css/fontawesome/css/all.min.css',
                 ],
             ],
 //            'tinymce' => [

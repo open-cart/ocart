@@ -28,5 +28,11 @@ class FormServiceProvider extends ServiceProvider
             'value'      => null,
             'attributes' => [],
         ]);
+
+        Form::component('mediaImages', 'core/base::elements.forms.images', [
+            'name',
+            'value'      => null,
+            'attributes' => [],
+        ]);
     }
 }
