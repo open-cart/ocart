@@ -77,7 +77,7 @@ class ThemeConfig
     public function uses($theme = null)
     {
         $this->theme = $theme;
-        
+
         $this->view->addNamespace($this->getThemeNamespace(), [base_path('themes/'.$theme.'/views')]);
         return $this;
     }

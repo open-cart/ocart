@@ -16,7 +16,7 @@ glob.sync('./system/**/webpack.mix.js').forEach(config => {
     require(config);
 });
 
-glob.sync('./themes/**/webpack.mix.js').forEach(config => {
+glob.sync('./themes/ximang/webpack.mix.js').forEach(config => {
     require(config);
 });
 

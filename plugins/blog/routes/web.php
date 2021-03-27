@@ -33,5 +33,8 @@ Route::group([
 ], function () {
     Route::get('post/{id}', 'PublicController@post');
     Route::get('post-category/{id}', 'PublicController@postCategory');
-
+    Route::get('/', 'PublicController@index')->name('blog.index');
+    Route::get('/about', 'PublicController@about')->name('blog.about');
+    Route::get('/atriment', 'PublicController@Atriment')->name('blog.atriment');
+    Route::get('/information', 'PublicController@Information')->name('blog.information');
 });
