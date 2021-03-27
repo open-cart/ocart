@@ -46,7 +46,7 @@
     //         $.pjax.click(event, {container: '#body'})
     //     }
     // })
-    $(document).pjax('a:not(no-pjax)', '#category-container');
+    $(document).pjax('a', '#body');
     $.pjax.defaults.timeout = 1200;
 </script>
 </html>
