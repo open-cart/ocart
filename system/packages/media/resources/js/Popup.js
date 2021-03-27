@@ -21,8 +21,8 @@ function Popup({children, selected, config}) {
             role="dialog"
             aria-modal="true"
             aria-labelledby="modal-headline"
-            className="z-10 fixed w-full h-full top-0 left-0 flex items-center justify-center"
-            // style="display:none"
+            className="fixed w-full h-full top-0 left-0 flex items-center justify-center"
+            style={{zIndex: 99999}}
         >
             <div onClick={close} className="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"/>
             <div

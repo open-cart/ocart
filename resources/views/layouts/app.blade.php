@@ -99,6 +99,7 @@
             @close="hide()"
             @accept="accept()"></x-confirm-delete>
     </div>
+    <div id="tnmedia-root"></div>
     <script>
         $(function(){
             // pjax

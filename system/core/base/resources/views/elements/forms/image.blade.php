@@ -12,14 +12,13 @@
             {{ trans('core/base::forms.choose_image') }}
         </a>
     </div>
-    <div id="root"></div>
 </div>
 <script>
     $(function() {
         $("[data-action]").click(function(e) {
             e.preventDefault();
             TnMedia.default({
-                id: 'root',
+                id: 'tnmedia-root',
                 popup: true,
                 uploadAPI: '{!! route('media.files.upload') !!}',
                 listAPI: '{!! route('media.list') !!}',
