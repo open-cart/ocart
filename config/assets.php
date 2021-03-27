@@ -9,6 +9,7 @@ return [
         'app',
         'pjax',
         'tnmedia',
+        'tinymce',
     ],
     'styles'         => [
         'app',
@@ -41,6 +42,13 @@ return [
                 'location' => 'header',
                 'src'      => [
                     'local' => 'access/jquery/jquery.min.js',
+                ],
+            ],
+            'tinymce' => [
+                'use_cdn'  => false,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/tinymce/tinymce.min.js',
                 ],
             ],
             'pjax' => [
@@ -87,7 +95,13 @@ return [
                     'local' => 'css/font-awesome/css/font-awesome.min.css',
                 ],
             ],
-
+//            'tinymce' => [
+//                'use_cdn'  => false,
+//                'location' => 'header',
+//                'src'      => [
+//                    'local' => 'access/tinymce/tinymce.min.js',
+//                ],
+//            ],
         ],
     ],
 ];

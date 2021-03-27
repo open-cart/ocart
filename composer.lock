@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77c4ef8719f7a5d0e28a2816256b352c",
+    "content-hash": "cae2eef72a887d046b16042267f354ce",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -2235,6 +2235,41 @@
                     "Ocart\\Dashboard\\": "dashboard/src/"
                 }
             },
+            "authors": [
+                {
+                    "name": "Phan Trung Nguyên",
+                    "email": "nguyenpl117@gmail.com"
+                }
+            ],
+            "description": "description",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ocart/media",
+            "version": "dev-dev",
+            "dist": {
+                "type": "path",
+                "url": "./system/packages/media",
+                "reference": "024ecba1d5235383b529e03ad91cda8974bf7ff0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ocart\\Media\\Providers\\MediaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ocart\\Media\\": "src"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
             "authors": [
                 {
                     "name": "Phan Trung Nguyên",
@@ -8821,6 +8856,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "ocart/core": 20,
+        "ocart/media": 20,
         "ocart/acl": 20,
         "ocart/page": 20,
         "ocart/plugin-management": 20,

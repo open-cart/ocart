@@ -132,25 +132,6 @@
                     e.target.src = '/images/no-image.jpg';
                 });
             })
-            // $(document).on('pjax:error', function(event, xhr, textStatus, errorThrown, options) {
-            //     options.success(xhr.responseText, textStatus, xhr);
-            //     return false;
-            // });
-
-            // axios.interceptors.request.use((config) => {
-            //     $('#loading').show()
-            //     return config;
-            // }, (error) => {
-            //     $('#loading').hide();
-            //     return Promise.reject(error);
-            // });
-            // axios.interceptors.response.use((response) => {
-            //     $('#loading').hide();
-            //     return response;
-            // }, (error) => {
-            //     $('#loading').hide();
-            //     return Promise.reject(error);
-            // });
         })
     </script>
     @stack('bodyAppend')

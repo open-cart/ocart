@@ -25,10 +25,16 @@ class PageForm extends FormAbstract
                 'rules' => 'min:5',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'rules' => 'max:5000',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'rules' => 'max:5000',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
+                ]
             ])
             ->add('is_featured', 'onOff')
             ->add('status', 'select', [

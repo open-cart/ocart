@@ -23,7 +23,10 @@ class BrandForm extends FormAbstract
 //                'rules' => 'min:5',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:400'
+                'rules' => 'max:400',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
             ->add('website', Field::TEXT, [
                 'rules' => 'max:255'

@@ -48,10 +48,16 @@ class ProductForm extends FormAbstract
                 'rules' => 'min:5',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'rules' => 'max:5000',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'rules' => 'max:5000',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
 
             ->addMetaBoxes([
