@@ -147,10 +147,13 @@
                     </div>
                 </div>
 
+                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Sản phẩm
+                </a>
                 <a href="/product-category/1" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Tin tức
                 </a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                <a href="/about" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Liên hệ
                 </a>
 
