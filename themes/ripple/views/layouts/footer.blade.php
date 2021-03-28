@@ -7,9 +7,9 @@
                         <img src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" class="img-footer w-2/3 mb-3" alt="">
                     </a>
                     <div class="footer-add">
-                        <p>Collins Street West, Victoria 8007, Au.</p>
-                        <p>+1 246-345-0695</p>
-                        <p>info@example.com</p>
+                        <p>Phú Lương, Thái Nguyên.</p>
+                        <p>+84 357-096-209</p>
+                        <p>nguyenpl117@gmail.com</p>
                     </div>
 
                 </div>
