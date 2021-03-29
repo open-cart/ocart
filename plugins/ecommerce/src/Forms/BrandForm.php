@@ -12,7 +12,7 @@ class BrandForm extends FormAbstract
     {
         $this
             ->withCustomFields()
-            ->setModuleName('product')
+            ->setModuleName('ecommerce_brand')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [

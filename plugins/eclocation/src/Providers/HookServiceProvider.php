@@ -34,7 +34,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function addMetaBoxeLocation($form, $module, $model)
     {
-        if ($module !== 'product') {
+        if ($module !== 'ecommerce_product') {
             return $form;
         }
 

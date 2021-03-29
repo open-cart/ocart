@@ -12,7 +12,7 @@ class TagForm extends FormAbstract
     {
         $this
             ->withCustomFields()
-            ->setModuleName('product')
+            ->setModuleName('blog_tag')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [

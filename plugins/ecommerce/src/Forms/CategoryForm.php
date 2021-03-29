@@ -24,7 +24,7 @@ class CategoryForm extends FormAbstract
 
         $this
             ->withCustomFields()
-            ->setModuleName('product')
+            ->setModuleName('ecommerce_category')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
