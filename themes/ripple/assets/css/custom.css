@@ -62,7 +62,7 @@
     }
 }
 @media (max-width: 1290px) {
-    .icon-features-wrap .middle-icon-large-features-box:before{
-        display: none !important;
+    .icon-features-wrap:before{
+        display: none;
     }
 }

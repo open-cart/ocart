@@ -28,7 +28,7 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 mix.sass('resources/css/swal.scss', 'public/css')
 
 mix.browserSync({
-    proxy: 'https://ocart.test/',
+    proxy: 'http://127.0.0.1:8000/',
     files: [
         "**/*.css",
         "**/*.php",

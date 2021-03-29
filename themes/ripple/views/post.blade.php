@@ -17,10 +17,10 @@
                 <h1 class="text-2xl text-red-500 font-bold">{{ $post->name }}</h1>
             </div>
             <div class="mb-4 p-4 bg-gray-100">
-                {{ $post->description }}
+                {!! $post->description !!}
             </div>
             <div class="mb-4">
-                {{ $post->content }}
+                {!! $post->content !!}
             </div>
             <div class="text-right pb-4 border-b border-gray-100">
                 <em>Nguồn: admin</em>
