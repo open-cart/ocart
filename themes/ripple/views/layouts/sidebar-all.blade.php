@@ -1,4 +1,5 @@
 <div class="lg:w-1/4 w-full px-0 lg:pr-4 mb-4">
+    @if(is_active_plugin('ecommerce'))
     <div>
         <div>Danh mục sản phẩm</div>
         <ul class="mt-2 mb-4">
@@ -14,6 +15,7 @@
             @endforeach
         </ul>
     </div>
+    @endif
     <div class="pt-4 border-t border-gray-200">
         <div class="mb-2">Danh mục bài viết</div>
         <ul>
