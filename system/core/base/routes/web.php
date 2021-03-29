@@ -5,9 +5,13 @@ Route::group(
     [
         'prefix' => ADMIN_PREFIX,
         'middleware' => ADMIN_MIDDLEWARE,
-        'namespace' => 'System\\Core\\Admin\\Controllers',
+        'namespace' => 'Ocart\\Core\\Http\\Controllers',
     ],
     function() {
+        Route::get('/location/district', 'LocationController@getDistrict')
+            ->name('location.district');
+
+
         Route::get('/theme/red', function () {
             session(['theme' => 'themes.red']);
             return back();

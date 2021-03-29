@@ -47,6 +47,12 @@ class Product extends Model
         'status' => BaseStatusEnum::class,
     ];
 
+    public function __construct(array $attributes = [])
+    {
+        do_action('model_product', $this);
+        parent::__construct($attributes);
+    }
+
     protected static function boot()
     {
         parent::boot();

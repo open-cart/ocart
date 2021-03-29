@@ -1,0 +1,16 @@
+{
+    "name": "Ecommerce Bất động sản",
+    "namespace": "Ocart\\EcLocation\\",
+    "image": "images/momo.png",
+    "auth": "Trung Nguyên",
+    "email": "nguyenpl117@gmail.com",
+    "link": "https://phantrungnguyen.com",
+    "configGroup": "Plugins",
+    "configCode": "Payment",
+    "configKey": "blog",
+    "version": "1.0",
+    "providers": [
+        "Ocart\\EcLocation\\Providers\\EcLocationServiceProvider",
+        "Ocart\\EcLocation\\Providers\\HookServiceProvider"
+    ]
+}
