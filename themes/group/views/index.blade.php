@@ -104,24 +104,26 @@
         </div>
 
     </section>
-    <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
-        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Explore Good places</h2>
-            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                praesentium voluptatum deleniti atque corrupti quos dolores</p>
-        </div>
-
-        <div class="container-custom">
-            <div class="flex flex-wrap -mx-4">
-                @foreach(get_list_products() as $product)
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                        <x-theme::card.product :data="$product"/>
-                    </div>
-                @endforeach
+    @if(is_active_plugin('ecommerce'))
+        <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
+            <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+                <h2 class="text-3xl font-bold">Explore Good places</h2>
+                <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+                    praesentium voluptatum deleniti atque corrupti quos dolores</p>
             </div>
-        </div>
 
-    </section>
+            <div class="container-custom">
+                <div class="flex flex-wrap -mx-4">
+                    @foreach(get_list_products() as $product)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+        </section>
+    @endif
     <section class="sec-testimonials">
         <div class="max-w-6xl mx-auto px-8 py-16">
             <div class="relative" x-data="{ activeSlide: 1, slides:[1, 2] }">
