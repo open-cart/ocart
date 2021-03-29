@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "77c4ef8719f7a5d0e28a2816256b352c",
+    "content-hash": "cae2eef72a887d046b16042267f354ce",
     "packages": [
         {
             "name": "artesaos/seotools",
@@ -2171,11 +2171,11 @@
         },
         {
             "name": "ocart/acl",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/acl",
-                "reference": "0d224a2f91856fa161a6fa60027f31a0a109578b"
+                "reference": "003239613b6d3b302db116ec0776d6a510a09599"
             },
             "type": "library",
             "extra": {
@@ -2206,11 +2206,11 @@
         },
         {
             "name": "ocart/core",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/core",
-                "reference": "3bdea70bd537cf6321be369c5c1aebcf6955ee4f"
+                "reference": "53fa1e037d7eec136c6cc113e25764f76ef03456"
             },
             "require": {
                 "botble/assets": "^1.0"
@@ -2247,12 +2247,47 @@
             }
         },
         {
+            "name": "ocart/media",
+            "version": "dev-bay",
+            "dist": {
+                "type": "path",
+                "url": "./system/packages/media",
+                "reference": "85751e143fee7386446d0a16bba1098f07780cc7"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ocart\\Media\\Providers\\MediaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ocart\\Media\\": "src"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Phan Trung Nguyên",
+                    "email": "nguyenpl117@gmail.com"
+                }
+            ],
+            "description": "description",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
             "name": "ocart/page",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/page",
-                "reference": "4901387cb79e501fa999cc5279bc18a87e02a952"
+                "reference": "e79aeab0f600310505fcd25dc7b0fde7acd5be7f"
             },
             "type": "library",
             "extra": {
@@ -2284,11 +2319,11 @@
         },
         {
             "name": "ocart/plugin-management",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/plugin-management",
-                "reference": "46f0c22ce87d277b1eda24f2e6c68f4293fd73df"
+                "reference": "98a80588011994bb392cefb99c431f92a54eea1a"
             },
             "type": "library",
             "extra": {
@@ -2319,11 +2354,11 @@
         },
         {
             "name": "ocart/seo-helper",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/seo-helper",
-                "reference": "17df984ee9b3cd43c0e5ada0ba3fcdf886199e29"
+                "reference": "261766c3c0cbb6f6aeb5d7c85ecbdbe07378b05f"
             },
             "require": {
                 "artesaos/seotools": "^0.20.0"
@@ -2348,11 +2383,11 @@
         },
         {
             "name": "ocart/theme",
-            "version": "dev-dev",
+            "version": "dev-bay",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/theme",
-                "reference": "97e8d072ce26ab365fd791d7fd78f4bd14f36ab1"
+                "reference": "6fd241bfa02fcea2d37b3bf43d3a97d0a4fa6958"
             },
             "require": {
                 "laravelium/sitemap": "8.*"
@@ -8821,6 +8856,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "ocart/core": 20,
+        "ocart/media": 20,
         "ocart/acl": 20,
         "ocart/page": 20,
         "ocart/plugin-management": 20,
