@@ -59,11 +59,8 @@ class ProductForm extends FormAbstract
                 ]
             ])
             ->add('images[]', Field::MEDIA_IMAGES, [
-//                'rules' => 'max:5000',
-//                'attr' => [
-//                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
-//                ]
-                'value' => $this->getModel() ? $this->getModel()->images : []
+                'label'      =>'Images',
+                'value'     => $this->getModel() ? $this->getModel()->images : []
             ])
 
             ->addMetaBoxes([

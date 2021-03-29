@@ -47,3 +47,14 @@ if (!function_exists('get_active_plugins')) {
         return json_decode(setting('activated_plugins', '[]'), true);
     }
 }
+
+if (!function_exists('is_active_plugin')) {
+    /**
+     * @param string $plugin
+     * @return bool
+     */
+    function is_active_plugin($plugin = '')
+    {
+        return in_array($plugin, get_active_plugins());
+    }
+}

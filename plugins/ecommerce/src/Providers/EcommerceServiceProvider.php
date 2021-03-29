@@ -26,6 +26,7 @@ class EcommerceServiceProvider extends ServiceProvider {
             ->setNamespace('plugins/ecommerce')
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
+            ->loadAndPublishConfigurations(['ecommerce'])
             ->loadMigrations();
 
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);

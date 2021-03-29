@@ -18,6 +18,7 @@ class ProductRequest extends FormRequest
         return [
             'name'    => 'required|max:120',
             'content' => 'required',
+            'description' => 'required:400',
             'sku'    => 'required|max:120',
         ];
     }
