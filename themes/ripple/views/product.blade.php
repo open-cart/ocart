@@ -15,7 +15,12 @@
                 <img class="lg:w-1/2 w-full object-cover object-center rounded" src="{{ TnMedia::url(head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">{{ Arr::get($product->categories->first(), 'name') }}</h2>
-                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
+                    <h1 class="text-gray-900 text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
+                    <div class="text-sm text-gray-500">
+                        <span class="flex items-center">
+                            <x-theme::icons.marker/> {{ $product->address }}
+                        </span>
+                    </div>
                     <div class="flex mb-4">
           <span class="flex items-center">
             <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
@@ -116,7 +121,7 @@
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Nội dung chi tiết</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </div>
                         </button>
@@ -141,7 +146,7 @@
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Bình Luận</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </div>
                         </button>
@@ -168,7 +173,7 @@
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Viết Bình Luận</span>
                                 <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                                 </svg>
                             </div>
                         </button>
