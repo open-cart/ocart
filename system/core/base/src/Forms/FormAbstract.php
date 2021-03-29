@@ -5,6 +5,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Kris\LaravelFormBuilder\Form;
 use Ocart\Core\Forms\Fields\MediaImageField;
+use Ocart\Core\Forms\Fields\MediaImagesField;
 use Ocart\Core\Forms\Fields\OnOffField;
 
 abstract class FormAbstract extends Form
@@ -83,6 +84,9 @@ abstract class FormAbstract extends Form
 //        }
         if (!$this->formHelper->hasCustomField('mediaImage')) {
             $this->addCustomField('mediaImage', MediaImageField::class);
+        }
+        if (!$this->formHelper->hasCustomField('mediaImages')) {
+            $this->addCustomField('mediaImages', MediaImagesField::class);
         }
 //        if (!$this->formHelper->hasCustomField('color')) {
 //            $this->addCustomField('color', ColorField::class);

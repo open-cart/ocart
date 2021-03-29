@@ -10,10 +10,10 @@
 
             @if ($showField)
                 {!! Form::mediaImage($name, $options['value']) !!}
-{{--                @include('core/base::forms.partials.help_block')--}}
+                <?php include helpBlockPath(); ?>
             @endif
 
-{{--            @include('core/base::forms.partials.errors')--}}
+            <?php include errorBlockPath(); ?>
 
             @if ($showLabel && $showField)
                 @if ($options['wrapper'] !== false)

@@ -1,6 +1,6 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
-         style="background-image:url(https://themezhub.net/resido-live/resido/assets/img/banner-1.jpg);">
+         style="background-image:url({!! Theme::asset('images/banner-1.jpg') !!});">
         <div class="container-custom py-20">
             <div class="hero-search-wrap bg-white max-w-xl p-10 pt-8 shadow-md">
                 <div class="hero-search">

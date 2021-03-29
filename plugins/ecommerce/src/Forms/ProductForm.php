@@ -1,7 +1,7 @@
 <?php
 namespace Ocart\Ecommerce\Forms;
 
-use Kris\LaravelFormBuilder\Field;
+use Ocart\Core\Forms\Field;
 use Ocart\Ecommerce\Forms\Fields\CategoryMultiField;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
@@ -48,10 +48,22 @@ class ProductForm extends FormAbstract
                 'rules' => 'min:5',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'rules' => 'max:5000',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'rules' => 'max:5000'
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
+                ]
+            ])
+            ->add('images[]', Field::MEDIA_IMAGES, [
+//                'rules' => 'max:5000',
+//                'attr' => [
+//                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
+//                ]
+                'value' => $this->getModel() ? $this->getModel()->images : []
             ])
 
             ->addMetaBoxes([
@@ -65,16 +77,17 @@ class ProductForm extends FormAbstract
                         $this
                     )
                 ],
-            ])->addMetaBoxes([
-                'images' => [
-                    'title' => trans('images'),
-                    'content' => apply_filters(
-                        'product_images',
-                        view('plugins/ecommerce::images'),
-                        $this
-                    )
-                ],
             ])
+//            ->addMetaBoxes([
+//                'images' => [
+//                    'title' => trans('images'),
+//                    'content' => apply_filters(
+//                        'product_images',
+//                        view('plugins/ecommerce::images'),
+//                        $this
+//                    )
+//                ],
+//            ])
 
             ->add('is_featured', 'onOff')
             ->add('status', 'select', [

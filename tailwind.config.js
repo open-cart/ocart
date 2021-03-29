@@ -4,6 +4,7 @@ module.exports = {
     purge: [
         './resources/**/*.blade.php',
         './system/**/*.blade.php',
+        './plugins/**/*.blade.php',
         './resources/**/*.js',
         './resources/**/*.vue',
     ],
@@ -37,5 +38,6 @@ module.exports = {
     plugins: [
         // require('@tailwindcss/forms'),
         require('@tailwindcss/line-clamp'),
+        require('@tailwindcss/aspect-ratio'),
     ],
 };

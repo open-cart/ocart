@@ -4,6 +4,7 @@ namespace Ocart\Ecommerce\Table;
 use Collective\Html\HtmlBuilder;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Media\Facades\TnMedia;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
 
@@ -35,7 +36,7 @@ class ProductTable extends TableAbstract
                 'title' => 'image',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
+                    return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
             'alias' => [

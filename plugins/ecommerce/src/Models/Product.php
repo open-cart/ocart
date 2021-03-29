@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Arr;
 use Ocart\Core\Enums\BaseStatusEnum;
 
 class Product extends Model
@@ -27,7 +28,7 @@ class Product extends Model
         'name',
         'description',
         'content',
-        'image',
+        'images',
         'slug',
         'slug_md5',
         'status',
@@ -67,5 +68,37 @@ class Product extends Model
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'ecommerce_product_categories');
+    }
+
+    /**
+     * @param string $value
+     * @return array
+     */
+    public function getImagesAttribute($value)
+    {
+        try {
+            if ($value === '[null]') {
+                return [];
+            }
+
+            $images = json_decode((string)$value, true);
+
+            if (is_array($images)) {
+                $images = array_filter($images);
+            }
+
+            return $images ?: [];
+        } catch (\Exception $exception) {
+            return [];
+        }
+    }
+
+    /**
+     * @param string $value
+     * @return mixed
+     */
+    public function getImageAttribute()
+    {
+        return Arr::first($this->images) ?? null;
     }
 }

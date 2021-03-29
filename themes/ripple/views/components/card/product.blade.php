@@ -2,7 +2,7 @@
 @if($data)
     <a href="/product/{{ $data->id }}" class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-60 overflow-hidden">
-            <img class="absolute inset-0 h-full w-full object-cover" src="https://themezhub.net/resido-live/resido/assets/img/p-2.jpg" alt="">
+            <img class="absolute inset-0 h-full w-full object-cover" src="{!! Theme::asset('images/p-2.jpg') !!}" alt="">
         </div>
         <div class="p-4">
             <span class="inline-block py-1 leading-none bg-orange-200 text-gray-500 rounded-full font-semibold uppercase tracking-wide text-xs">

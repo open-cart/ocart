@@ -23,7 +23,10 @@ class TagForm extends FormAbstract
 //                'rules' => 'min:5',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:400'
+                'rules' => 'max:400',
+                'attr' => [
+                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                ]
             ])
 
             ->add('status', 'select', [
