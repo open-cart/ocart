@@ -8,11 +8,10 @@
             <li class="px-2"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
-
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <img class="lg:w-1/2 w-full object-cover object-center rounded" src="https://graph.noithattruongyen.vn/images/1650c3c4-3b03-4d36-a057-f974128c0e3b-n%E1%BB%99i%20th%E1%BA%A5t%20th%C3%B4ng%20minh%20(3).png" alt="ecommerce">
+                <img class="lg:w-1/2 w-full object-cover object-center rounded" src="{{ TnMedia::url(head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">{{ Arr::get($product->categories->first(), 'name') }}</h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{ $product->name }}</h1>
@@ -53,7 +52,7 @@
                             </a>
                         </span>
                     </div>
-                    <p class="leading-relaxed">{{ $product->description }}</p>
+                    <p class="leading-relaxed">{!! $product->description !!}</p>
                     <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                         <div class="flex mr-6 hidden">
                             <span class="mr-3">Color</span>
@@ -122,9 +121,7 @@
                         </button>
 
                         <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
-                            <div class="px-6 pb-4">
-                                {{ $product->content }}
-                            </div>
+                            <div class="px-6 pb-4">{!! $product->content !!}</div>
                         </div>
 
                     </li>
