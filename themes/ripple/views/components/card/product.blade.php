@@ -25,11 +25,14 @@
                 @endif
             </div>
         </div>
-        <div class="p-4 border-t text-sm text-gray-500">
-            <span class="flex items-center">
-                <x-theme::icons.marker/> {{ $data->address }}
-            </span>
-        </div>
+        @if($data->address)
+            <div class="p-4 border-t text-sm text-gray-500">
+                <span class="flex items-center">
+                    <x-theme::icons.marker/> {{ $data->address }}
+                </span>
+            </div>
+        @endif
+
         <div class="p-4 flex items-center text-sm text-gray-600">
 
             <x-theme::icons.star class="text-yellow-500"/>
