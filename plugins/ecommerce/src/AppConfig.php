@@ -27,12 +27,12 @@ class AppConfig extends \Ocart\PluginManagement\Abstracts\ConfigBase
     public static function activate() {}
 
     public static function deactivate() {
-        if (File::isDirectory(plugin_path('ecommerce/database/migrations'))) {
-            Artisan::call('migrate:rollback', [
-                '--force' => true,
-                '--path'  => str_replace(base_path(), '', plugin_path('ecommerce/database/migrations')),
-            ]);
-        }
+//        if (File::isDirectory(plugin_path('ecommerce/database/migrations'))) {
+//            Artisan::call('migrate:rollback', [
+//                '--force' => true,
+//                '--path'  => str_replace(base_path(), '', plugin_path('ecommerce/database/migrations')),
+//            ]);
+//        }
     }
 
     public function install()
