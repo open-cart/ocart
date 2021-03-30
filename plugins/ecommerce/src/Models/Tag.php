@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use Ocart\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Models\BaseModel;
 
-class Tag extends Model
+class Tag extends BaseModel
 {
     use HasFactory;
 

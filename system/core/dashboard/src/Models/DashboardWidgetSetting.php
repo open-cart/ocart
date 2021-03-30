@@ -3,9 +3,9 @@
 namespace Ocart\Dashboard\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Ocart\Core\Models\BaseModel;
 
-class DashboardWidgetSetting extends Model
+class DashboardWidgetSetting extends BaseModel
 {
     use HasFactory;
 

@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Storage;
+use Ocart\Core\Models\BaseModel;
 
-class MediaFolder extends Model
+class MediaFolder extends BaseModel
 {
     use SoftDeletes;
 

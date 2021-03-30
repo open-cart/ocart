@@ -1,9 +1,9 @@
 <?php
 namespace Ocart\Acl\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use Ocart\Core\Models\BaseModel;
 
-class Group extends Model
+class Group extends BaseModel
 {
     protected $table = 'acl_groups';
 

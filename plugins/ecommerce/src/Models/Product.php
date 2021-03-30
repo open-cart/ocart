@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Ocart\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Models\BaseModel;
 
-class Product extends Model
+class Product extends BaseModel
 {
     use HasFactory;
 
@@ -46,12 +47,6 @@ class Product extends Model
     protected $casts = [
         'status' => BaseStatusEnum::class,
     ];
-
-    public function __construct(array $attributes = [])
-    {
-        do_action('model_product', $this);
-        parent::__construct($attributes);
-    }
 
     protected static function boot()
     {

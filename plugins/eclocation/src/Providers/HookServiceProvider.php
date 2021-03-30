@@ -2,20 +2,16 @@
 
 namespace Ocart\EcLocation\Providers;
 
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
-use Ocart\Core\Forms\Field;
 use Ocart\EcLocation\Forms\ProductLocationForm;
-use Ocart\Ecommerce\Forms\ProductOverviewForm;
 use Ocart\Ecommerce\Models\Product;
-use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 
 class HookServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        add_action('model_product', function ($model) {
+        Product::fire(function ($model) {
             $model->mergeFillable([
                 'district_id',
                 'province_id',

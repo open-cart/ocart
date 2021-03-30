@@ -3,10 +3,10 @@
 namespace Ocart\Dashboard\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Ocart\Core\Models\BaseModel;
 
-class DashboardWidget extends Model
+class DashboardWidget extends BaseModel
 {
     use HasFactory;
 
