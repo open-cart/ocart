@@ -156,7 +156,7 @@
                                 As <strong class="text-gray-900 font-medium">Slack</strong> grows rapidly, using Stripe helps them scale payments easily &mdash; supporting everything from getting paid by users around the world to enabling ACH payments for corporate customers.
                             </p>
                             <p class="mt-6">
-                                <a href="#" class="font-medium text-red-500 hover:text-red-900">Mai Thu Huyền nói gì về &rarr;</a>
+                                <a href="#" class="font-medium text-blue-600 hover:text-red-900">Mai Thu Huyền nói gì về &rarr;</a>
                             </p>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                                 <strong class="text-gray-900 font-medium">Với</strong> khối lượng công việc triền miên ngày này qua ngày khác &mdash; thời gian nghỉ ngời thì ít, Diễn viên Danh Tùng đã lựa chọn Tinh nghệ mật ong collagen để sử dụng.
                             </p>
                             <p class="mt-6">
-                                <a href="#" class="font-medium text-red-500 hover:text-red-900">Ca sỹ Mỹ Tâm nói gì &rarr;</a>
+                                <a href="#" class="font-medium text-blue-600 hover:text-red-900">Ca sỹ Mỹ Tâm nói gì &rarr;</a>
                             </p>
                         </div>
                     </div>
@@ -197,7 +197,47 @@
             </div>
         </div>
     </section>
+    <section class="antialiased font-sans py-16">
+        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+            <h2 class="text-3xl font-bold">Đối tác của chúng tôi</h2>
+        </div>
 
+        <div class="container-custom">
+            <div class="flex flex-wrap">
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+                <div class="w-full sm:w-1/2 xl:w-1/3 p-0.5">
+                    <div class="bg-gray-100 py-8">
+                        <img class="w-auto max-h-12 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Lazada_%282019%29.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
     <section class="antialiased font-sans bg-blue-600">
         <div class="container-custom call-to-act py-14 block sm:flex items-center">
             <div class="call-to-act-head text-white flex-1 mb-8 sm:mb-0">

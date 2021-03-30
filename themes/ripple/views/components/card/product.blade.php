@@ -34,7 +34,6 @@
         @endif
 
         <div class="p-4 flex items-center text-sm text-gray-600">
-
             <x-theme::icons.star class="text-yellow-500"/>
             <x-theme::icons.star class="text-yellow-500"/>
             <x-theme::icons.star class="text-yellow-500"/>
