@@ -8,7 +8,7 @@
                     <a
                         data-body="category-container"
                         href="/product-category/{{ $category->id }}"
-                        class="text-sm font-semibold block text-gray-500 hover:text-red-500">
+                        class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
                         {{ $category->name }}
                     </a>
                 </li>
@@ -23,7 +23,7 @@
                 <li>
                     <a href="/post-category/{{ $category->id }}"
                        data-body="category-container"
-                       class="text-sm font-semibold block text-gray-500 hover:text-red-500">{{ $category->name }}</a>
+                       class="text-sm font-semibold block text-gray-500 hover:text-blue-600">{{ $category->name }}</a>
                 </li>
             @endforeach
         </ul>
