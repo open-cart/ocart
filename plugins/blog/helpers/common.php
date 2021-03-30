@@ -65,3 +65,12 @@ if (!function_exists('get_list_posts')) {
         return $repo->all();
     }
 }
+
+if (!function_exists('get_list_posts_feature')) {
+    function get_list_posts_feature($limit = 1)
+    {
+        /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
+        $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);
+        return $repo->getFeature($limit);
+    }
+}

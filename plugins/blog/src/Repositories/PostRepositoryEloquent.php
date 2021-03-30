@@ -71,4 +71,13 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
         return $this->parserResult($results);
     }
 
+    public function getFeature($limit)
+    {
+        $this->applyConditions([
+//            'is_featured' => 1
+        ]);
+        $results = $this->paginate($limit);
+
+        return $this->parserResult($results);
+    }
 }
