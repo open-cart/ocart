@@ -41,7 +41,7 @@ class PublicController extends BaseController
     {
         $category = $this->repoCategory->find($id);
 
-        $products = $this->repo->productForCategory($category->id);
+        $products = $this->repo->productForCategory($category->id, 9);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
     }

@@ -67,7 +67,7 @@ if (!function_exists('get_list_posts')) {
 }
 
 if (!function_exists('get_list_posts_feature')) {
-    function get_list_posts_feature($limit = 1)
+    function get_list_posts_feature($limit = 9)
     {
         /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
         $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);

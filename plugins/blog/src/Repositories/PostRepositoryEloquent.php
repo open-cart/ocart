@@ -62,11 +62,13 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     }
 
 
-    public function postForCategory($categoryId)
+    public function postForCategory($categoryId, $paginate = 9)
     {
-        $results = $this->whereHas('categories', function ($query) use ($categoryId) {
+        $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         })->limit(10)->get();
+
+        $results = $this->paginate($paginate);
 
         return $this->parserResult($results);
     }

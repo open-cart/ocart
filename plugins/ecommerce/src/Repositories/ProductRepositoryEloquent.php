@@ -38,11 +38,13 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
-    public function productForCategory($categoryId)
+    public function productForCategory($categoryId, $paginate = 9)
     {
-        $results = $this->whereHas('categories', function ($query) use ($categoryId) {
+        $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         })->limit(10)->get();
+
+        $results = $this->paginate($paginate);
 
         return $this->parserResult($results);
     }

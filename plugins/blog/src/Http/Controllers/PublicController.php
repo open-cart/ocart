@@ -41,7 +41,7 @@ class PublicController extends BaseController
     {
         $category = $this->repoCategory->find($id);
 
-        $posts = $this->repo->postForCategory($category->id);
+        $posts = $this->repo->postForCategory($category->id, 9);
 
         return Theme::scope('post-category',  compact('category', 'posts'),'packages/post::post-category');
     }
