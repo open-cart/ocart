@@ -51,8 +51,8 @@
         <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
             <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
                 <h2 class="text-3xl font-bold">Explore Good places</h2>
-                <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-                    praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
+                    và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
             </div>
             <div class="container-custom">
                 <div class="flex flex-wrap -mx-4">
