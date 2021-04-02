@@ -187,7 +187,8 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
                             icon={<Icon name="folder"/>}>
                             Tạo thư mục
                         </Button>
-                        <Button onClick={() => EventEmitter.emit('refresh')}icon={<Icon name="refresh"/>}>
+                        <Button onClick={() => EventEmitter.emit('refresh')}
+                                icon={<Icon name="refresh"/>}>
                             Làm mới
                         </Button>
                         <Dropdown items={['name']}>

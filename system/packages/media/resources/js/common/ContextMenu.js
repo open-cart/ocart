@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 export default function ContextMenu({children, menu = () => {}}) {
     const contextMenu = useRef(null);
     const [viewMenu, setViewMenu] = useState(null);
-    const [menuStyle, setMenuStyle] = useState({top: '0px', left: '0px'});
+    const [menuStyle, setMenuStyle] = useState({top: '-500px', left: '0px'});
 
     const contextMenuHandle = (file, e) => {
         e.preventDefault();
@@ -34,6 +34,7 @@ export default function ContextMenu({children, menu = () => {}}) {
 
     const closeMenu = () => {
         setViewMenu(false)
+        setMenuStyle({top: '-500px', left: '0px'})
     }
 
     useEffect(() => {
