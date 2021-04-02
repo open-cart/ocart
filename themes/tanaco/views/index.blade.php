@@ -249,6 +249,15 @@
             <h2 class="text-3xl font-bold">Hệ thống phân phối</h2>
             <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
         </div>
+        <div class="container-custom">
+            <span class="hidden md:inline-block">Chọn tỉnh/thành phố:</span>
+            <select name="distrubution" id="distrubution" class="p-2 md:ml-2 rounded-md outline-none border">
+                <option value="hn">Hà nội</option>
+                <option value="dn">Đà nẵng</option>
+                <option value="hcm">Hồ Chí minh</option>
+            </select>
+        </div>
+
         <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-2">
             <div data-default="hanoi" class="vietnam-map mt-12 max-w-md hidden lg:block">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1047 2224">
