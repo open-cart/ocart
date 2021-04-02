@@ -12,12 +12,13 @@
 
         <div class="lg:w-3/4 w-full">
             <div class="flex flex-wrap -mx-4">
-                @foreach($posts as $post)
+                @foreach($products as $product)
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4 pt-0">
-                        <x-theme::card.post :data="$post"/>
+                        <x-theme::card.product :data="$product"/>
                     </div>
                 @endforeach
             </div>
+            <div>{!! $products->links() !!}</div>
         </div>
     </div>
 

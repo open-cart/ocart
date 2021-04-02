@@ -9,8 +9,8 @@
                 {{ Arr::get($data->categories->first(), 'name') }}
             </span>
             <h2 class="mt-2 mb-2 font-bold">{{ $data->name }}</h2>
-            <p class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</p>
-            <div class="mt-3 flex items-center text-blue-600">
+            <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
+            <div class="mt-3 flex items-center text-red-500">
                 @if($data->price >= 1)
                     <span class="font-bold text-2xl">{{ $data->price }}</span>
                     &nbsp;
@@ -25,6 +25,21 @@
                 @endif
             </div>
         </div>
+        @if($data->address)
+            <div class="p-4 border-t text-sm text-gray-500">
+                <span class="flex items-center">
+                    <x-theme::icons.marker/> {{ $data->address }}
+                </span>
+            </div>
+        @endif
+
+        <div class="p-4 flex items-center text-sm text-gray-600">
+            <x-theme::icons.star class="text-yellow-500"/>
+            <x-theme::icons.star class="text-yellow-500"/>
+            <x-theme::icons.star class="text-yellow-500"/>
+            <x-theme::icons.star class="text-yellow-500"/>
+            <x-theme::icons.star class="text-gray-400"/>
+            <span class="ml-2 ">34 Đánh giá</span></div>
     </a>
 
 @endif

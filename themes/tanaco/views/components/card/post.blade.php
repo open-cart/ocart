@@ -6,7 +6,7 @@
         </div>
         <div class="p-4">
             <h2 class="mt-2 mb-2 font-bold">{{ $data->name }}</h2>
-            <p class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</p>
+            <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
         </div>
     </a>
 @endif

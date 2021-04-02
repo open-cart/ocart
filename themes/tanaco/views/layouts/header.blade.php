@@ -5,7 +5,8 @@
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{!! route('home') !!}">
                     <span class="sr-only">Workflow</span>
-                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-tanaco.gif') }}" alt="">
+                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-tanaco.gif') }}"
+                         alt="">
                 </a>
             </div>
             <div class="-mr-2 -my-2 md:hidden">
@@ -21,7 +22,7 @@
                 <div class="relative" x-data="{ open: false, focus: false }">
                     <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
                     <button @click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
-                        <span>Sản phẩm</span>
+                        <span>Tanaco</span>
                         <!--
                           Heroicon name: solid/chevron-down
 
@@ -147,16 +148,19 @@
                     </div>
                 </div>
 
+                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                    Sản phẩm
+                </a>
                 <a href="/product-category/1" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Tin tức
                 </a>
-                <a href="#" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                <a href="/about.html" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Liên hệ
                 </a>
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <a href="#" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-500 hover:bg-red-700">
+                <a href="{!! route('login') !!}" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-red-500 hover:bg-red-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22px" class="mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
@@ -176,7 +180,7 @@
         From: "opacity-100 scale-100"
         To: "opacity-0 scale-95"
     -->
-    <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
+    <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right hidden">
         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div class="pt-5 pb-6 px-5">
                 <div class="flex items-center justify-between">
