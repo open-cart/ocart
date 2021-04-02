@@ -66,3 +66,11 @@
         display: none;
     }
 }
+.vietnam-map path{
+    fill: #e6e6e6;
+    stroke: #fff;
+}
+.vietnam-map path.active, .vietnam-map path:hover {
+    fill: #2563EB;
+    cursor: pointer;
+}
