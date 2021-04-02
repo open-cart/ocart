@@ -35,9 +35,8 @@ function ButtonUpload({config, name}) {
                 type="file"
                 multiple
                 style={{display: "none"}}/>
-            <Button onClick={() => {
-                inputRef.current.click();
-            }} icon={<Icon name="upload"/>}>
+            <Button onClick={() => inputRef.current.click()}
+                    icon={<Icon name="upload"/>}>
                 Tải lên
             </Button>
         </>
