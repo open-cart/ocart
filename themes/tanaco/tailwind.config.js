@@ -5,9 +5,9 @@ module.exports = {
         './resources/**/*.blade.php',
         './system/**/*.blade.php',
         './plugins/**/*.blade.php',
-        './themes/ripple/**/*.blade.php',
-        './themes/ripple/**/*.js',
-        './themes/ripple/**/*.vue',
+        './themes/tanaco/**/*.blade.php',
+        './themes/tanaco/**/*.js',
+        './themes/tanaco/**/*.vue',
     ],
 
     theme: {
