@@ -70,6 +70,7 @@ if (!function_exists('get_list_posts_feature')) {
     function get_list_posts_feature($limit = 9)
     {
         /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
+        /** @var \Ocart\Blog\Repositories\PostRepositoryEloquent $repo */
         $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);
         return $repo->getFeature($limit);
     }

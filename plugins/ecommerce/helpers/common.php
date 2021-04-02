@@ -40,3 +40,13 @@ if (!function_exists('get_list_products')) {
         return $repo->all();
     }
 }
+
+if (!function_exists('get_list_products_feature')) {
+    function get_list_products_feature($limit = 9)
+    {
+        /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
+        /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        return $repo->getFeature($limit);
+    }
+}

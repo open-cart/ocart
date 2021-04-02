@@ -47,24 +47,6 @@
             </div>
         </div>
     </div>
-    @if(is_active_plugin('ecommerce'))
-        <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
-            <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-3xl font-bold">Explore Good places</h2>
-                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
-                    và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
-            </div>
-            <div class="container-custom">
-                <div class="flex flex-wrap -mx-4">
-                    @foreach(get_list_products() as $product)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                            <x-theme::card.product :data="$product"/>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
     <section class="sec-post antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
             <h2 class="text-3xl font-bold">How It Works?</h2>
@@ -122,28 +104,29 @@
         </div>
 
     </section>
-    <section class="sec-post antialiased bg-gray-100 font-sans py-16">
-        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Blog</h2>
-            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-        </div>
-
-        <div class="container-custom">
-            @php
-                $posts = get_list_posts_feature();
-            @endphp
-            <div class="flex flex-wrap -mx-4">
-                @foreach($posts as $post)
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                        <x-theme::card.post :data="$post"/>
-                    </div>
-                @endforeach
+@if(is_active_plugin('ecommerce'))
+        <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
+            <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+                <h2 class="text-3xl font-bold">Explore Good places</h2>
+                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
+                    và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
             </div>
-        </div>
-
-    </section>
-    <section class="sec-testimonials">
-        <div class="max-w-6xl mx-auto px-8 py-16">
+            <div class="container-custom">
+                @php
+                    $products = get_list_products_feature(6);
+                @endphp
+                <div class="flex flex-wrap -mx-4">
+                    @foreach($products as $product)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    <section class="sec-testimonials py-16">
+        <div class="max-w-6xl mx-auto px-8">
             <div class="relative" x-data="{ activeSlide: 1, slides:[1, 2] }">
                 <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="1" x-show="activeSlide === 1">
                     <div class="h-56 lg:h-auto lg:w-5/12 relative flex items-center justify-center">
@@ -200,9 +183,30 @@
             </div>
         </div>
     </section>
+    <section class="sec-post antialiased bg-gray-100 font-sans py-16">
+        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+            <h2 class="text-3xl font-bold">Blog</h2>
+            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+        </div>
+
+        <div class="container-custom">
+            @php
+                $posts = get_list_posts_feature(6);
+            @endphp
+            <div class="flex flex-wrap -mx-4">
+                @foreach($posts as $post)
+                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                        <x-theme::card.post :data="$post"/>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+    </section>
     <section class="antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Đối tác của chúng tôi</h2>
+            <h2 class="text-3xl font-bold">Đối tác</h2>
+            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
         </div>
 
         <div class="container-custom">
@@ -239,9 +243,12 @@
                 </div>
             </div>
         </div>
-
     </section>
-    <section class="distrubution antialiased bg-gray-100  py-16">
+    <section class="distrubution antialiased bg-gray-100 py-16">
+        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+            <h2 class="text-3xl font-bold">Hệ thống phân phối</h2>
+            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+        </div>
         <div class="container-custom grid grid-cols-1 lg:grid-cols-2 gap-2">
             <div data-default="hanoi" class="vietnam-map mt-12 max-w-md hidden lg:block">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1047 2224">
@@ -483,7 +490,7 @@
                     </g>
                 </svg>
             </div>
-            <div id="distributionInfo">
+            <div id="distributionInfo" class="mt-8">
                 <div>
                     <div class="mb-7 section-row-title">
                         <div class="col-sm-6 col-12">
