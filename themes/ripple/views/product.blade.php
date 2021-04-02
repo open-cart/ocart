@@ -106,9 +106,7 @@
                         <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Nội dung chi tiết</span>
-                                <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
+                                <x-theme::icons.chevron-down/>
                             </div>
                         </button>
 
@@ -123,7 +121,7 @@
                 </ul>
             </div>
 
-            <div class="bg-white rounded-md mb-7" x-data="{selected:null}">
+            <div class="bg-white rounded-md mb-7" x-data="{selected:1}">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -131,17 +129,55 @@
                         <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Bình Luận</span>
-                                <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
+                                <x-theme::icons.chevron-down/>
                             </div>
                         </button>
 
                         <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
                             <div class="px-6 pb-4">
-                                <p>reCAPTCHA v2 is not going away! We will continue to fully support and improve security and usability for v2.</p>
-                                <p>reCAPTCHA v3 is intended for power users, site owners that want more data about their traffic, and for use cases in which it is not appropriate to show a challenge to the user.</p>
-                                <p>For example, a registration page might still use reCAPTCHA v2 for a higher-friction challenge, whereas more common actions like sign-in, searches, comments, or voting might use reCAPTCHA v3. To see more details, see the reCAPTCHA v3 developer guide.</p>
+                                <ul>
+                                    <li class="mb-5 border-b border-dotted">
+                                        <div class="pb-6">
+                                            <div class="float-left w-16">
+                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
+                                            </div>
+                                            <div class="pl-6 flex flex-wrap">
+                                                <div class="comment-meta">
+                                                    <div class="comment-left-meta">
+                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>
+                                                        <div class="mt-1 text-green-500">19th May 2018</div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 text-gray-500">
+                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+                                                        perspiciatis unde omnis iste natus error
+                                                        perspiciatis unde omnis iste natus error.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="mb-5">
+                                        <div class="pb-6">
+                                            <div class="float-left w-16">
+                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
+                                            </div>
+                                            <div class="pl-6 flex flex-wrap">
+                                                <div class="comment-meta">
+                                                    <div class="comment-left-meta">
+                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>
+                                                        <div class="mt-1 text-green-500">19th May 2018</div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-4 text-gray-500">
+                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+                                                        perspiciatis unde omnis iste natus error
+                                                        perspiciatis unde omnis iste natus error.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                </ul>
                             </div>
                         </div>
 
@@ -150,25 +186,26 @@
                 </ul>
             </div>
 
-            <div class="bg-white rounded-md" x-data="{selected:null}">
+            <div x-data="{selected:1}" class="bg-white rounded-md">
                 <ul class="shadow-box">
 
                     <li class="relative">
 
-                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
+                        <button x-on:click="selected !== 1 ? selected = 1 : selected = null" type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none">
                             <div class="flex items-center justify-between">
                                 <span class="font-bold">Viết Bình Luận</span>
-                                <svg class="h-6 w-6 bg-blue-50 p-1 rounded-full font-bold" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                                </svg>
+                                <x-theme::icons.chevron-down/>
                             </div>
                         </button>
 
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
+                        <div x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''" class="relative overflow-hidden transition-all max-h-0 duration-700">
                             <div class="px-6 pb-4">
-                                <p>reCAPTCHA v2 is not going away! We will continue to fully support and improve security and usability for v2.</p>
-                                <p>reCAPTCHA v3 is intended for power users, site owners that want more data about their traffic, and for use cases in which it is not appropriate to show a challenge to the user.</p>
-                                <p>For example, a registration page might still use reCAPTCHA v2 for a higher-friction challenge, whereas more common actions like sign-in, searches, comments, or voting might use reCAPTCHA v3. To see more details, see the reCAPTCHA v3 developer guide.</p>
+                                <form>
+                                    <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none" placeholder="Viết bình luận..." rows="5"></textarea>
+                                    <div class="my-2">
+                                        <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded" type="submit">Submit Review</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 
@@ -180,13 +217,8 @@
         </div>
     </div>
 
-
     <div class="bg-red-100 h-screen flex flex-col justify-center items-center hidden">
-
-        <div
-                class="max-w-4xl mx-auto relative"
-                x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }"
-        >
+        <div class="max-w-4xl mx-auto relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
             <!-- Slides -->
             <template x-for="slide in slides" :key="slide">
                 <div x-show="activeSlide === slide" class="p-24 font-bold text-5xl h-64 flex items-center bg-blue-600 text-white rounded-lg">
@@ -228,7 +260,6 @@
                 </template>
             </div>
         </div>
-
     </div>
 
 </x-guest-layout>
