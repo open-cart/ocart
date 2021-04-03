@@ -11,9 +11,11 @@ use Ocart\SeoHelper\Manager;
  * @method static void setSeoOpenGraph($seoOpenGraph)
  * @method static void setTitle($title)
  * @method static void setDescription($description)
+ * @method static boolean saveMetaData($model, \Illuminate\Http\Request $request, $repository)
+ * @method static boolean deleteMetaData($model, $key)
+ * @method static Manager registerModule($model)
  *
- * Class SeoHelper
- * @package Ocart\SeoHelper\Facades
+ * @see Manager
  */
 class SeoHelper extends Facade
 {

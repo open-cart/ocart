@@ -9,6 +9,7 @@ use Artesaos\SEOTools\Contracts\JsonLdMulti;
 use Artesaos\SEOTools\Contracts\MetaTags;
 use Artesaos\SEOTools\Contracts\OpenGraph;
 use Artesaos\SEOTools\Contracts\TwitterCards;
+use Ocart\Core\Facades\MetaBox;
 
 class Manager
 {
@@ -140,5 +141,54 @@ class Manager
     public function __toString()
     {
         return $this->render();
+    }
+
+    /**
+     * @param $model
+     * @param \Illuminate\Http\Request $request
+     * @param $repository
+     */
+    public function saveMetaData($model, \Illuminate\Http\Request $request, $repository)
+    {
+        if (!in_array(get_class($model), config('packages.seo-helper.general.supported', []))) {
+            return false;
+        }
+
+        try {
+            if (empty($request->input('seo_meta'))) {
+                $this->deleteMetaData($model, 'seo_meta');
+                return false;
+            }
+
+            MetaBox::saveMetaBoxData($model, 'seo_meta', $request->input('seo_meta'));
+            return true;
+        } catch (\Exception $exception) {
+            return false;
+        }
+    }
+
+    public function deleteMetaData($model, $key)
+    {
+        if (in_array(get_class($model), config('packages.seo-helper.general.supported', []))) {
+            MetaBox::deleteMetaData($model, $key);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param string | array $model
+     * @return $this
+     */
+    public function registerModule($model)
+    {
+        if (!is_array($model)) {
+            $model = [$model];
+        }
+        config([
+            'packages.seo-helper.general.supported' => array_merge(config('packages.seo-helper.general.supported', []),
+                $model),
+        ]);
+        return $this;
     }
 }

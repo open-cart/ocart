@@ -13,10 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-////    header("location: /dashboard");
-//    return view('welcome');
-//});
+Route::get('/install-migrate', function () {
+//    \Illuminate\Support\Facades\Artisan::call('migrate');
+//    \Illuminate\Support\Facades\Artisan::call('key:generate');
+//    \Illuminate\Support\Facades\Artisan::call('db:seed');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

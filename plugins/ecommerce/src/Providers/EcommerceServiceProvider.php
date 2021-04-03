@@ -1,9 +1,11 @@
 <?php
 namespace Ocart\Ecommerce\Providers;
 
-use Illuminate\Routing\Events\RouteMatched;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Ecommerce\Models\Brand;
+use Ocart\Ecommerce\Models\Category;
+use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\BrandRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
@@ -14,6 +16,7 @@ use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\SeoHelper\Facades\SeoHelper;
 
 class EcommerceServiceProvider extends ServiceProvider {
     use  LoadAndPublishDataTrait;
@@ -40,5 +43,8 @@ class EcommerceServiceProvider extends ServiceProvider {
     public function boot()
     {
 
+        $this->booted(function () {
+            SeoHelper::registerModule([Product::class, Tag::class, Brand::class, Category::class]);
+        });
     }
 }

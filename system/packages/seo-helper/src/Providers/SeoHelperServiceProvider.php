@@ -15,8 +15,10 @@ class SeoHelperServiceProvider extends ServiceProvider
 
     public function register()
     {
+        $this->app->register(EventServiceProvider::class);
+
         add_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, [$this, 'setSeoMeta'], 1, 2);
-//        add_action(BASE_ACTION_META_BOXES, [$this, 'addMetaBox'], 12, 3);
+        add_action(BASE_ACTION_META_BOXES, [$this, 'addMetaBox'], 12, 3);
     }
 
     public function boot()
@@ -43,8 +45,11 @@ class SeoHelperServiceProvider extends ServiceProvider
         }
     }
 
-    public function addMetaBox()
+    public function addMetaBox($module, $screen)
     {
+        if ($screen !== 'advanced') {
+            return;
+        }
         $meta = [
             'seo_title'       => null,
             'seo_description' => null,
