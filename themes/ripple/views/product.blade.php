@@ -25,7 +25,7 @@
                         </div>
                     @endif
                     <div class="flex mb-4">
-                        <a href="#" class="flex items-center">
+                        <a href="#comment-list" class="flex items-center">
                             <x-theme::icons.star class="text-yellow-500"/>
                             <x-theme::icons.star class="text-yellow-500"/>
                             <x-theme::icons.star class="text-yellow-500"/>
@@ -44,9 +44,9 @@
                     </div>
                     <div class="mb-4 pt-4 border-t border-gray-200">
                         @if($product->price >= 1)
-                            <span class="title-font font-medium text-2xl text-gray-900">{{ $product->price }}đ</span>
+                            <span class="title-font font-medium text-2xl text-red-600">{{ $product->price }}đ</span>
                         @else
-                            <span class="title-font font-medium text-2xl text-gray-900">Liên hệ</span>
+                            <span class="title-font font-medium text-2xl text-red-600">Liên hệ</span>
                         @endif
                         @if($product->price >= 1 && $product->price < $product->price_sell)
                             <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ $product->price_sell }}đ</span>
@@ -98,7 +98,7 @@
 
     <div class="bg-blue-50">
         <div class="container-custom py-12 justify-center">
-            <div class="bg-white rounded-md mb-7" x-data="{selected:1}">
+            <div x-data="{selected:1}" id="comment-list" class="bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">

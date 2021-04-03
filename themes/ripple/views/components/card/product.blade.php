@@ -10,7 +10,7 @@
             </span>
             <h2 class="mt-2 mb-2 font-bold">{{ $data->name }}</h2>
             <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
-            <div class="mt-3 flex items-center text-blue-600">
+            <div class="mt-3 flex items-center text-red-600">
                 @if($data->price >= 1)
                     <span class="font-bold text-2xl">{{ $data->price }}</span>
                     &nbsp;
