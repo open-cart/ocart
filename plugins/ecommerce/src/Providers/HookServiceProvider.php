@@ -131,13 +131,29 @@ class HookServiceProvider extends ServiceProvider
                     ],
                     'active'      => false,
                 ])->registerItem([
-                    'id'          => 'cms-store-setting-manager',
+                    'id'          => 'cms-store-currency-manager',
+                    'priority'    => 1,
+                    'parent_id'   => 'cms-store',
+                    'name'        => 'Currencies',
+                    'icon'        => null,
+                    'url'         => route('ecommerce.currencies.index'),
+                    'permissions' => [
+                        'ecommerce.currencies.index',
+                        'ecommerce.currencies.create',
+                        'ecommerce.currencies.update',
+                        'ecommerce.currencies.destroy',
+                    ],
+                    'active'      => false,
+                ])->registerItem([
+                    'id'          => 'cms-store-settings-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
                     'name'        => 'Settings',
                     'icon'        => null,
-                    'url'         => '',
-                    'permissions' => [],
+                    'url'         => route('ecommerce.settings'),
+                    'permissions' => [
+                        'ecommerce.brands.index',
+                    ],
                     'active'      => false,
                 ]);
         });

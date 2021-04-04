@@ -92,8 +92,8 @@ class CreateEcommerceTable extends Migration
             $table->tinyInteger('is_featured')->default(0);
 
             $table->string('sku', 255);
-            $table->float('price');
-            $table->float('price_sell')->nullable();
+            $table->double('price')->unsigned();
+            $table->double('price_sell')->unsigned()->nullable();
 
             $table->timestamps();
         });

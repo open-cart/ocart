@@ -11,6 +11,15 @@ Route::group([
         'middleware' => ADMIN_MIDDLEWARE,
         'as' => 'ecommerce.'
     ], function () {
+        Route::group(['prefix'=>'products'], function () {
+            Route::get('settings', 'EcommerceController@getSettings')->name('settings');
+            Route::post('settings', 'EcommerceController@postSettings')->name('settings');
+        });
+
+        Route::group(['prefix'=>'currencies', 'as' => 'currencies.'], function () {
+            Route::resource('', 'CurrencyController')->parameters(['' => 'id']);
+        });
+
         Route::group(['prefix'=>'products', 'as' => 'products.'], function () {
             Route::resource('', 'ProductController')->parameters(['' => 'id']);
         });

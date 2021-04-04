@@ -201,4 +201,17 @@ abstract class FormAbstract extends Form
         Arr::forget($this->metaBoxes, $name);
         return $this;
     }
+
+    /**
+     * @param $model
+     * @return $this|FormAbstract
+     */
+    protected function setupModel($model)
+    {
+        if ($this->model) {
+            return $this;
+        }
+
+        return parent::setupModel($model);
+    }
 }

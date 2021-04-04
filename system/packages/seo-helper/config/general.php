@@ -75,7 +75,7 @@ return [
     ],
 
     'supported' => [
-        'Botble\Page\Models\Page',
+        Ocart\Page\Models\Page::class
     ],
 
 ];

@@ -7,6 +7,7 @@
         id="{!! $name !!}"
         x-on:change="$dispatch($event.target.checked); isOn = $event.target.checked"
         type="checkbox"
+        x-bind:checked="isOn"
         {{ $attributes }}
     />
     <input type="hidden" :value="isOn ? 1 : 2" name="{!! $name !!}"/>

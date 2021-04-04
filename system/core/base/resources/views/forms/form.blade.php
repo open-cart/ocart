@@ -60,6 +60,9 @@
     </div>
     <script>
         $(function() {
+            $("#from-builder").submit(function() {
+                $.pjax.submit(event, '#body');
+            });
             tinymce.remove();
             tinymce.init({
                 selector: '.editor-inline',
@@ -123,8 +126,3 @@
         })
     </script>
 </x-app-layout>
-<script>
-    $(document).on('submit', '#from-builder', function(event) {
-        $.pjax.submit(event, '#body');
-    });
-</script>

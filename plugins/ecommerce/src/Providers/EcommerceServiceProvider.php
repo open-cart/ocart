@@ -1,15 +1,19 @@
 <?php
 namespace Ocart\Ecommerce\Providers;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Ecommerce\Facades\EcommerceHelper;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\BrandRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\CurrencyRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\CurrencyRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
@@ -23,21 +27,24 @@ class EcommerceServiceProvider extends ServiceProvider {
 
     public function register()
     {
+        Helper::autoload(__DIR__ . '/../../helpers');
 
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/ecommerce')
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
-            ->loadAndPublishConfigurations(['ecommerce'])
+            ->loadAndPublishTranslations()
+            ->loadAndPublishConfigurations(['ecommerce', 'general'])
             ->loadMigrations();
 
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);
         $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
         $this->app->bind(BrandRepository::class, BrandRepositoryEloquent::class);
         $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
+        $this->app->bind(CurrencyRepository::class, CurrencyRepositoryEloquent::class);
 
-        Helper::autoload(__DIR__ . '/../../helpers');
+        AliasLoader::getInstance(['EcommerceHelper' => EcommerceHelper::class]);
     }
 
     public function boot()
