@@ -56,7 +56,7 @@ class MediaController extends BaseController
         view()->share('breadcrumbs', $breadcrumbs);
         view()->share('root', $folder);
 
-        return view('packages/media::index', compact('files', 'items', 'folders', 'breadcrumbs'));
+        return view('packages.media::index', compact('files', 'items', 'folders', 'breadcrumbs'));
     }
 
     public function list(Request $request){

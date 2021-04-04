@@ -54,16 +54,19 @@ class HookServiceProvider extends ServiceProvider
 //                'url'         => '',
 //                'permissions' => [],
 //                'active'      => false,
-//            ])->registerItem([
-//                'id'          => 'cms-store-order',
-//                'priority'    => 1,
-//                'parent_id'   => 'cms-store',
-//                'name'        => 'Đơn hàng',
-//                'icon'        => null,
-//                'url'         => '',
-//                'permissions' => [],
-//                'active'      => false,
 //            ])
+                 ->registerItem([
+                    'id'          => 'cms-store-order',
+                    'priority'    => 1,
+                    'parent_id'   => 'cms-store',
+                    'name'        => 'Đơn hàng',
+                    'icon'        => null,
+                    'url'         => route('ecommerce.orders.create'),
+                    'permissions' => [
+                        'ecommerce.orders.index',
+                    ],
+                    'active'      => false,
+                ])
 //                ->registerItem([
 //                'id'          => 'cms-store-incomplete-order',
 //                'priority'    => 1,

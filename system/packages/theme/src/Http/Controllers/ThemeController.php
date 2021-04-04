@@ -52,7 +52,7 @@ class ThemeController extends BaseController
             }
         }
 
-        return view('packages/theme::index')
+        return view('packages.theme::index')
             ->with('themes', $list);
     }
 

@@ -9,7 +9,7 @@ use Ocart\Core\Forms\FormAbstract;
 
 class ProductOverviewForm extends FormAbstract
 {
-    protected $template = 'plugins/ecommerce::product-overview';
+    protected $template = 'plugins.ecommerce::product-overview';
 
     public function buildForm()
     {

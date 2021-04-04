@@ -11,7 +11,7 @@ Route::group([
         'middleware' => ADMIN_MIDDLEWARE,
         'as' => 'ecommerce.'
     ], function () {
-        Route::group(['prefix'=>'products'], function () {
+        Route::group(['prefix'=>'settings'], function () {
             Route::get('settings', 'EcommerceController@getSettings')->name('settings');
             Route::post('settings', 'EcommerceController@postSettings')->name('settings');
         });

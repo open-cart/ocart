@@ -32,7 +32,7 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/ecommerce')
-            ->loadRoutes(['web'])
+            ->loadRoutes(['web', 'order'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
             ->loadAndPublishConfigurations(['ecommerce', 'general'])

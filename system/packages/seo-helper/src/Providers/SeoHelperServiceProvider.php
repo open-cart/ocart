@@ -76,6 +76,6 @@ class SeoHelperServiceProvider extends ServiceProvider
 
         $object = $args[2];
 
-        return view('packages/seo-helper::meta_box', compact('meta', 'object'));
+        return view('packages.seo-helper::meta_box', compact('meta', 'object'));
     }
 }

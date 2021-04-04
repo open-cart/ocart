@@ -14,7 +14,7 @@ class EcommerceController extends BaseController
     {
         page_title()->setTitle(trans('plugins/ecommerce::ecommerce.settings'));
 
-        return view('plugins/ecommerce::settings.index');
+        return view('plugins.ecommerce::settings.index');
     }
 
     public function postSettings(
