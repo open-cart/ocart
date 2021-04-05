@@ -7,7 +7,7 @@ class DashboardWidget
     /**
      * @var string
      */
-    protected $template = 'core/dashboard::widgets.base';
+    protected $template = 'core.dashboard::widgets.base';
 
     /**
      * @var string

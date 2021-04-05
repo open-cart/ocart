@@ -11,11 +11,17 @@ use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\BrandRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\CurrencyRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\CustomerRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CurrencyRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
+use Ocart\Ecommerce\Repositories\OrderProductRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\OrderRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Library\Helper;
@@ -43,6 +49,10 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this->app->bind(BrandRepository::class, BrandRepositoryEloquent::class);
         $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
         $this->app->bind(CurrencyRepository::class, CurrencyRepositoryEloquent::class);
+
+        $this->app->bind(OrderRepository::class, OrderRepositoryEloquent::class);
+        $this->app->bind(OrderProductRepository::class, OrderProductRepositoryEloquent::class);
+        $this->app->bind(CustomerRepository::class, CustomerRepositoryEloquent::class);
 
         AliasLoader::getInstance(['EcommerceHelper' => EcommerceHelper::class]);
     }

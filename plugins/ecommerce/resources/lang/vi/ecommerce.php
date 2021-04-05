@@ -14,5 +14,5 @@ return [
         'enable_cart' => 'Enable cart',
         'enable_tax' => 'Enable tax',
     ],
-
+    'list_order' => 'List order',
 ];

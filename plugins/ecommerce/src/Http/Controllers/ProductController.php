@@ -51,7 +51,6 @@ class ProductController extends BaseController
         return $table->render();
     }
 
-
     function create(FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/ecommerce::products.create'));
@@ -120,5 +119,12 @@ class ProductController extends BaseController
         $this->repo->delete($request->input('id'));
 
         return response()->json([]);
+    }
+
+    function getSearchProducts()
+    {
+        $products = $this->repo->paginate(5);
+
+        return view('plugins.ecommerce::products.get-search-products', compact('products'));
     }
 }

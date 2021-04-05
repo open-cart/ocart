@@ -7,7 +7,7 @@
     >
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+    <div class="modal-container bg-white w-96 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
 
         <div
             x-on:click="$dispatch('close', { foo: 'bar' })"

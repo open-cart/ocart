@@ -21,8 +21,11 @@ Route::group([
         });
 
         Route::group(['prefix'=>'products', 'as' => 'products.'], function () {
+            Route::get('search-product', 'ProductController@getSearchProducts')->name('search');
+
             Route::resource('', 'ProductController')->parameters(['' => 'id']);
         });
+
 
         Route::group(['prefix'=>'product-tags', 'as' => 'tags.'], function () {
             Route::resource('', 'TagController')->parameters(['' => 'id']);
@@ -34,6 +37,12 @@ Route::group([
 
         Route::group(['prefix'=>'product-categories', 'as' => 'categories.'], function () {
             Route::resource('', 'CategoryController')->parameters(['' => 'id']);
+        });
+
+        Route::group(['prefix'=>'customers', 'as' => 'customers.'], function () {
+            Route::get('search-customer', 'CustomerController@getSearchCustomers')->name('search');
+
+            Route::resource('', 'CustomerController')->parameters(['' => 'id']);
         });
     });
 

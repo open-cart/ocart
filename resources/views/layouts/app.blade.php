@@ -56,12 +56,28 @@
                     this.callback(this);
                 }
             }
+            function tableActions() {
+                return {
+                    destroy(id, url) {
+                        confirmDelete.show(() => {
+                            $('#loading').show();
+                            axios.delete(url, {data: {id}})
+                                .then(res => {
+                                    $.pjax.reload('#body', {});
+                                })
+                                .finally(() => {
+                                    $('#loading').hide();
+                                })
+                        })
+                    },
+                }
+            }
         </script>
         @stack('head')
     </head>
     <body class="font-sans antialiased">
         @stack('bodyPrepend')
-        <div id="body" data-pjax-container="body">
+        <div>
             <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -77,7 +93,7 @@
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-                <main class="lg:ml-64">
+                <main class="lg:ml-64" id="body" data-pjax-container="body">
                     {{ $slot }}
                 </main>
             </div>

@@ -34,7 +34,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function boot()
     {
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
-        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 

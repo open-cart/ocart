@@ -3,26 +3,51 @@ namespace Ocart\Ecommerce\Http\Controllers;
 
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Ocart\Ecommerce\Enums\OrderStatusEnum;
+use Ocart\Ecommerce\Enums\ShippingMethodEnum;
 use Ocart\Ecommerce\Forms\BrandForm;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
+use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Table\BrandTable;
 use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Ecommerce\Table\OrderTable;
 
 class OrderController extends BaseController
 {
     /**
-     * @var BrandRepository
+     * @var OrderRepository
      */
     protected $repo;
 
-    public function __construct(BrandRepository $repo)
+    /**
+     * @var OrderProductRepository
+     */
+    protected $orderProductRepository;
+
+    /**
+     * @var ProductRepository
+     */
+    protected $productRepository;
+
+    public function __construct(
+        OrderRepository $repo,
+        OrderProductRepository $orderProductRepository,
+        ProductRepository $productRepository
+    )
     {
         $this->repo = $repo;
+        $this->orderProductRepository = $orderProductRepository;
+        $this->productRepository = $productRepository;
+
         $this->authorizeResource($repo->getModel(), 'id');
     }
 
@@ -44,9 +69,9 @@ class OrderController extends BaseController
         ];
     }
 
-    public function index(BrandTable $table)
+    public function index(OrderTable $table)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::brands.title'));
+        page_title()->setTitle(trans('plugins/ecommerce::ecommerce.list_order'));
         return $table->render();
     }
 
@@ -58,19 +83,51 @@ class OrderController extends BaseController
         return view('plugins.ecommerce::orders.create');
     }
 
-    function store(BrandRequest $request, BaseHttpResponse $response)
+    function store(OrderCreateRequest $request, BaseHttpResponse $response)
     {
-        $data = $request->all();
-        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-        $data['slug_md5'] = md5($data['slug']);
+        $data = [
+            'amount'               => $request->input('amount') + $request->input('shipping_amount') - $request->input('discount_amount'),
+            'currency_id'          => get_application_currency_id(),
+            'user_id'              => $request->input('customer_id') ?? 0,
+            'shipping_method'      => $request->input('shipping_method', ShippingMethodEnum::DEFAULT),
+            'shipping_option'      => $request->input('shipping_option'),
+            'shipping_amount'      => $request->input('shipping_amount'),
+            'tax_amount'           => session('tax_amount', 0),
+            'sub_total'            => $request->input('amount'),
+            'coupon_code'          => $request->input('coupon_code'),
+            'discount_amount'      => $request->input('discount_amount'),
+            'discount_description' => $request->input('discount_description'),
+            'description'          => $request->input('note'),
+            'is_confirmed'         => 1,
+            'status'               => OrderStatusEnum::PROCESSING,
+        ];
 
-        $page = $this->repo->create($data + [
-                'author_id'     => Auth::user()->getKey(),
-                'is_featured' => $request->input('is_featured', false),
-            ]);
+        $order = $this->repo->create($data);
+
+        if ($order) {
+            foreach ($request->input('products', []) as $productItem) {
+                $product = $this->productRepository->findByField('id', Arr::get($productItem, 'id'))->first();
+                if (!$product) {
+                    continue;
+                }
+
+                $data = [
+                    'order_id'     => $order->id,
+                    'product_id'   => $product->id,
+                    'product_name' => $product->name,
+                    'qty'          => Arr::get($productItem, 'qty', 1),
+                    'weight'       => $product->weight,
+                    'price'        => $product->price,
+                    'tax_amount'   => 0,
+                    'options'      => [],
+                ];
+
+                $this->orderProductRepository->create($data);
+            }
+        }
 
         return $response->setPreviousUrl(route('ecommerce.brands.index'))
-            ->setNextUrl(route('ecommerce.brands.show', $page->id));
+            ->setNextUrl(route('ecommerce.brands.show', $order->id));
     }
 
     function show($id, FormBuilder $formBuilder)

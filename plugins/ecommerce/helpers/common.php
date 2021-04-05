@@ -75,9 +75,26 @@ if (!function_exists('cms_currency')) {
     }
 }
 
-function get_application_currency()
-{
-    return cms_currency()->getApplicationCurrency();
+if(!function_exists('get_application_currency')) {
+    /**
+     * @return Currency
+     */
+    function get_application_currency()
+    {
+        return cms_currency()->getApplicationCurrency();
+    }
+}
+
+if (!function_exists('get_application_currency_id')) {
+    /**
+     * @return int|null
+     */
+    function get_application_currency_id()
+    {
+        $currency = cms_currency()->getApplicationCurrency();
+
+        return $currency ? $currency->id : null;
+    }
 }
 
 if (!function_exists('format_price')) {

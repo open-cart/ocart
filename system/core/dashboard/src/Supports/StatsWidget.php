@@ -4,7 +4,7 @@ namespace Ocart\Dashboard\Supports;
 
 class StatsWidget extends AbstractDashboardWidget
 {
-    protected $template = 'core/dashboard::widgets.stats';
+    protected $template = 'core.dashboard::widgets.stats';
 
     public $total = 0;
 

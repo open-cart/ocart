@@ -9,32 +9,10 @@
     @endif
     @if(Auth::user()->can($delete))
         <x-button-icon
-                x-on:click="destroy('{!! $item->id !!}')"
+                x-on:click="destroy('{!! $item->id !!}', '{!! route($delete) !!}')"
                 title="{!! __('admin.delete') !!}"
                 class="bg-red-500 hover:bg-red-600">
             <i data-feather="trash" width="18" height="18"></i>
         </x-button-icon>
     @endif
 </div>
-@once
-@push('scripts')
-    <script>
-        function tableActions() {
-            return {
-                destroy(id) {
-                    confirmDelete.show(() => {
-                        $('#loading').show();
-                        axios.delete('{!! route($delete) !!}', {data: {id}})
-                            .then(res => {
-                                $.pjax.reload('#body', {});
-                            })
-                            .finally(() => {
-                                $('#loading').hide();
-                            })
-                    })
-                },
-            }
-        }
-    </script>
-@endpush
-@endonce
