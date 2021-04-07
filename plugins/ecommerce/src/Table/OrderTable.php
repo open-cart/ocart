@@ -14,7 +14,10 @@ class OrderTable extends TableAbstract
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->paginate();
+        $this->data = $repo->orderBy('id', 'desc')->with([
+            'payment',
+            'user'
+        ])->paginate();
         $this->ajax();
     }
 
@@ -35,7 +38,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Khách hàng',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return $item->slug;
+                    return $item->user->name;
                 }
             ],
             'amount' => [
@@ -67,7 +70,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Payment method',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return 'COD';
+                    return $item->payment->payment_channel;
                 }
             ],
             'payment_status' => [
@@ -75,7 +78,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Payment status',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return 'status';
+                    return $item->payment->status->toHtml();
                 }
             ],
             'status' => [

@@ -12,6 +12,7 @@ use Ocart\Ecommerce\Forms\BrandForm;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
@@ -20,6 +21,8 @@ use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Ecommerce\Table\OrderTable;
+use Ocart\Payment\Enums\PaymentStatusEnum;
+use Ocart\Payment\Repositories\PaymentRepository;
 
 class OrderController extends BaseController
 {
@@ -38,15 +41,29 @@ class OrderController extends BaseController
      */
     protected $productRepository;
 
+    /**
+     * @var OrderAddressRepository
+     */
+    protected $orderAddressRepository;
+
+    /**
+     * @var PaymentRepository
+     */
+    protected $paymentRepository;
+
     public function __construct(
         OrderRepository $repo,
+        OrderAddressRepository $orderAddressRepository,
         OrderProductRepository $orderProductRepository,
+        PaymentRepository $paymentRepository,
         ProductRepository $productRepository
     )
     {
         $this->repo = $repo;
+        $this->orderAddressRepository = $orderAddressRepository;
         $this->orderProductRepository = $orderProductRepository;
         $this->productRepository = $productRepository;
+        $this->paymentRepository = $paymentRepository;
 
         $this->authorizeResource($repo->getModel(), 'id');
     }
@@ -105,6 +122,35 @@ class OrderController extends BaseController
         $order = $this->repo->create($data);
 
         if ($order) {
+
+            $payment = $this->paymentRepository->create([
+                'amount'          => $order->amount,
+                'currency'        => get_application_currency()->title,
+                'payment_channel' => $request->input('payment_method'),
+                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING),
+                'payment_type'    => 'confirm',
+                'order_id'        => $order->id,
+                'charge_id'       => Str::upper(Str::random(10)),
+                'user_id'         => Auth::user()->getAuthIdentifier(),
+            ]);
+
+            $order->payment_id = $payment->id;
+            $order->save();
+
+            if ($request->input('customer_address.name')) {
+                $this->orderAddressRepository->create([
+                    'name'     => $request->input('customer_address.name'),
+                    'phone'    => $request->input('customer_address.phone'),
+                    'email'    => $request->input('customer_address.email'),
+                    'state'    => $request->input('customer_address.state'),
+                    'city'     => $request->input('customer_address.city'),
+                    'zip_code' => $request->input('customer_address.zip_code'),
+                    'country'  => $request->input('customer_address.country'),
+                    'address'  => $request->input('customer_address.address'),
+                    'order_id' => $order->id,
+                ]);
+            }
+
             foreach ($request->input('products', []) as $productItem) {
                 $product = $this->productRepository->findByField('id', Arr::get($productItem, 'id'))->first();
                 if (!$product) {

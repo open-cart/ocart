@@ -61,7 +61,7 @@ class HookServiceProvider extends ServiceProvider
                     'parent_id'   => 'cms-store',
                     'name'        => 'Đơn hàng',
                     'icon'        => null,
-                    'url'         => route('ecommerce.orders.index'),
+                    'url'         => route('ecommerce.orders.create'),
                     'permissions' => [
                         'ecommerce.orders.index',
                     ],

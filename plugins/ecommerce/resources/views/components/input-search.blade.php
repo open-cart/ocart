@@ -40,6 +40,19 @@
                 }).finally(() => {
                     parent.find(".container-loading-search").html('')
                 });
+            },
+            toPage(url) {
+                const parent = $(this.$el);
+
+                parent.find(".container-loading-search").html('loading');
+                parent.find(".container-result-search").hide();
+
+                axios.get(url).then(res => {
+                    parent.find(".container-result-search").html(res)
+                    parent.find(".container-result-search").show()
+                }).finally(() => {
+                    parent.find(".container-loading-search").html('')
+                });
             }
         }
     }

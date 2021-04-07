@@ -38,12 +38,6 @@ Route::group([
         Route::group(['prefix'=>'product-categories', 'as' => 'categories.'], function () {
             Route::resource('', 'CategoryController')->parameters(['' => 'id']);
         });
-
-        Route::group(['prefix'=>'customers', 'as' => 'customers.'], function () {
-            Route::get('search-customer', 'CustomerController@getSearchCustomers')->name('search');
-
-            Route::resource('', 'CustomerController')->parameters(['' => 'id']);
-        });
     });
 
     Route::get('product/{id}', 'PublicController@product');

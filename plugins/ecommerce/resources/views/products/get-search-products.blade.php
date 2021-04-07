@@ -26,8 +26,6 @@
 @endif
 @endforeach
 <div class="flex justify-between py-2">
-    <div>&nbsp;</div>
-    <div>
-        <x-button>Next</x-button>
-    </div>
+    <div></div>
+    {!! $products->links('plugins.ecommerce::partials.paginate') !!}
 </div>

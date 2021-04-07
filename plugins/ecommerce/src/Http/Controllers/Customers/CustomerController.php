@@ -1,14 +1,17 @@
 <?php
 
 
-namespace Ocart\Ecommerce\Http\Controllers;
+namespace Ocart\Ecommerce\Http\Controllers\Customers;
 
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\TagForm;
+use Ocart\Ecommerce\Http\Requests\AddCustomerWhenCreateOrderRequest;
 use Ocart\Ecommerce\Http\Requests\TagRequest;
+use Ocart\Ecommerce\Repositories\Interfaces\CustomerAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Table\TagTable;
@@ -23,9 +26,12 @@ class CustomerController extends BaseController
      */
     protected $repo;
 
-    public function __construct(CustomerRepository $repo)
+    protected $addressRepository;
+
+    public function __construct(CustomerRepository $repo, CustomerAddressRepository $addressRepository)
     {
         $this->repo = $repo;
+        $this->addressRepository = $addressRepository;
         $this->authorizeResource($repo->getModel(), 'id');
     }
 
@@ -37,13 +43,13 @@ class CustomerController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'ecommerce.tags.index',
-            'show' => 'ecommerce.tags.update',
-            'create' => 'ecommerce.tags.create',
-            'store' => 'ecommerce.tags.create',
-            'edit' => 'ecommerce.tags.update',
-            'update' => 'ecommerce.tags.update',
-            'destroy' => 'ecommerce.tags.destroy',
+            'index' => 'ecommerce.customers.index',
+            'show' => 'ecommerce.customers.update',
+            'create' => 'ecommerce.customers.create',
+            'store' => 'ecommerce.customers.create',
+            'edit' => 'ecommerce.customers.update',
+            'update' => 'ecommerce.customers.update',
+            'destroy' => 'ecommerce.customers.destroy',
         ];
     }
 
@@ -70,7 +76,7 @@ class CustomerController extends BaseController
         $data['slug_md5'] = md5($data['slug']);
 
         $page = $this->repo->create($data + [
-                'author_id'     => Auth::user()->getKey(),
+                'author_id' => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
@@ -113,5 +119,32 @@ class CustomerController extends BaseController
         $customers = $this->repo->paginate(5);
 
         return view('plugins.ecommerce::customers.get-search-customers', compact('customers'));
+    }
+
+    public function getCustomerAddresses(Request $request, BaseHttpResponse $response)
+    {
+        $addresses = $this->addressRepository->findByField('customer_id', $request->input('id'));
+
+        return $response->setData($addresses);
+    }
+
+    public function postCreateCustomerWhenCreatingOrder(
+        AddCustomerWhenCreateOrderRequest $request,
+        BaseHttpResponse $response
+    ) {
+        $request->merge(['password' => Hash::make(time())]);
+        $customer = $this->repo->create($request->input());
+        $customer->avatar = (string)$customer->avatar_url;
+
+        $request->merge([
+            'customer_id' => $customer->id,
+            'is_default'  => true,
+        ]);
+
+        $address = $this->addressRepository->create($request->input());
+
+        return $response
+            ->setData(compact('address', 'customer'))
+            ->setMessage(trans('core/base::notices.create_success_message'));
     }
 }

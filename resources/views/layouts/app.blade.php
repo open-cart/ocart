@@ -72,6 +72,12 @@
                     },
                 }
             }
+            $(function () {
+                $(document).on('click', '[data-toggle=modal]', function () {
+                    const idModal = $(this).attr('data-target');
+                    $(idModal).click();
+                })
+            })
         </script>
         @stack('head')
     </head>

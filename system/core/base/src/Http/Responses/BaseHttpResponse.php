@@ -99,4 +99,14 @@ class BaseHttpResponse implements Responsable
         $this->previousUrl = $previousUrl;
         return $this;
     }
+
+    /**
+     * @param mixed $data
+     * @return $this
+     */
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
 }

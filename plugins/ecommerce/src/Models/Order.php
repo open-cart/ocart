@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ocart\Core\Models\BaseModel;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
+use Ocart\Payment\Models\Payment;
 
 class Order extends BaseModel
 {
@@ -52,5 +53,29 @@ class Order extends BaseModel
     protected static function boot()
     {
         parent::boot();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class, 'payment_id')->withDefault();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function address()
+    {
+        return $this->hasOne(OrderAddress::class, 'order_id')->withDefault();
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user()
+    {
+        return $this->belongsTo(Customer::class, 'user_id', 'id')->withDefault();
     }
 }

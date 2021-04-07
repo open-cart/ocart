@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Routing\UrlGenerator;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
+use Ocart\Payment\Enums\PaymentStatusEnum;
 
 class Payment extends BaseModel
 {
@@ -42,7 +43,7 @@ class Payment extends BaseModel
      * @var array
      */
     protected $casts = [
-        'status' => BaseStatusEnum::class,
+        'status' => PaymentStatusEnum::class,
     ];
 
     protected static function boot()

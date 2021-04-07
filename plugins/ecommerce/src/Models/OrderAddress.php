@@ -20,6 +20,11 @@ class OrderAddress extends BaseModel
     protected $table = 'ecommerce_order_addresses';
 
     /**
+     * @var bool
+     */
+    public $timestamps = false;
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var string[]
