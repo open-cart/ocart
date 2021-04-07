@@ -1,5 +1,13 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     <div class="container-custom mt-10">
+        @foreach($cart as $item)
+            <div>{{ $item->id }}</div>
+            <div>{{ $item->name }}</div>
+            <div>{{ $item->price }}</div>
+            <div>{{ $item->qty }}</div>
+            <div>{{ $item->options->image }}</div>
+            <div>{{ $item->options->slug }}</div>
+        @endforeach
         <div class="flex shadow-md my-10">
             <div class="w-3/4 bg-white px-10 py-10 border-t border-gray-100">
                 <div class="flex justify-between border-b pb-8">

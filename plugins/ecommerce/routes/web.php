@@ -30,7 +30,12 @@ Route::group([
 
     Route::get('product/{id}', 'PublicController@product');
     Route::get('product-category/{id}', 'PublicController@productCategory');
+    Route::get('shopping-cart', 'ShoppingController@cart')->name('shopping-cart');
+    Route::get('shopping-test', function() {
+        return Theme::layout('default')->scope('shopping-test');
+    })->name('shopping-test');
 
+    Route::post('add-to-cart', 'ShoppingController@add')->name('add-to-cart');
 
 });
 

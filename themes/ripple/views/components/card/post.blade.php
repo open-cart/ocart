@@ -5,7 +5,7 @@
             <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url($data->image) }}" alt="{{ $data->name }}">
         </div>
         <div class="p-4">
-            <h2 class="mt-2 mb-2 font-bold">{{ $data->name }}</h2>
+            <h3 class="mt-2 mb-2 font-bold">{{ $data->name }}</h3>
             <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
         </div>
     </a>

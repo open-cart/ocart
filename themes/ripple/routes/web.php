@@ -5,9 +5,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('nguyen', function() {
     return Theme::layout('guest')->scope('test-page');
 });
-Route::get('shopping-cart', function() {
-    return Theme::layout('default')->scope('shopping-cart');
-})->name('shopping-cart');
 Route::get('shopping-buy', function() {
     return Theme::layout('default')->scope('shopping-buy');
 })->name('shopping-buy');

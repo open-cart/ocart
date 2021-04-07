@@ -50,3 +50,28 @@ if (!function_exists('get_list_products_feature')) {
         return $repo->getFeature($limit);
     }
 }
+
+if (!function_exists('get_cart_content')) {
+    function get_cart_content()
+    {
+        return Cart::content();
+    }
+}
+
+
+if (!function_exists('add_to_cart')) {
+    function add_to_cart($data)
+    {
+        return Cart::add([
+            'id' => $data['id'],
+            'name' => $data['name'],
+            'price' => $data['price'],
+            'weight' => 500,
+            'qty' => 1,
+            'options' => [
+                'image' => head($data['images']),
+                'slug' => $data['slug']
+            ]
+        ]);
+    }
+}

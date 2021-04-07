@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
+        "bumbummen99/shoppingcart": "^4.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
@@ -18,9 +19,9 @@
         "kris/laravel-form-builder": "^1.40",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
+        "ocart/acl": "*@dev",
         "ocart/core": "*@dev",
         "ocart/media": "*@dev",
-        "ocart/acl": "*@dev",
         "ocart/page": "*@dev",
         "ocart/plugin-management": "*@dev",
         "ocart/seo-helper": "*@dev",
