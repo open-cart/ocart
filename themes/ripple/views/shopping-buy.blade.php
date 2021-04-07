@@ -21,7 +21,8 @@
                             <x-theme::form.input type="text" class="pl-12" placeholder="Email"/>
                             <x-theme::icons.mail class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
                         </div>
-                    </div> <div class="mb-4">
+                    </div>
+                    <div class="mb-4">
                         <div class="relative">
                             <x-theme::form.input type="text" class="pl-12" placeholder="Địa chỉ giao hàng"/>
                             <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
@@ -41,46 +42,24 @@
                     <a href="{!! route('shopping-cart') !!}" class="font-semibold text-sm text-blue-600 hover:text-blue-700">Chỉnh sửa đơn hàng</a>
                 </div>
                 <div class="mb-4">
-                    <div class="flex items-center border-b hover:bg-gray-100 px-6 py-5">
-                        <div class="flex w-4/5"> <!-- product -->
-                            <div class="w-16">
-                                <img class="h-16" src="https://topshare.vn/wp-content/uploads/2020/09/hinh-nen-tet-2021-dep.jpg" alt="">
+                    @foreach($cart as $item)
+                        <div class="flex items-center border-b hover:bg-gray-100 px-6 py-5">
+                            <div class="flex w-4/5"> <!-- product -->
+                                <div class="w-16">
+                                    <img class="h-16" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
+                                </div>
+                                <div class="flex-1 flex-col justify-between ml-4 flex-grow">
+                                    <span class="font-bold text-sm line-clamp-2">{{ $item->name }}</span>
+                                    <span class="text-red-500 text-xs">{{ $item->price }}</span>
+                                </div>
                             </div>
-                            <div class="flex-1 flex-col justify-between ml-4 flex-grow">
-                                <span class="font-bold text-sm line-clamp-2">Tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm</span>
-                                <span class="text-red-500 text-xs">$400.00</span>
-                            </div>
+                            <div class="text-right w-1/5 font-semibold text-sm">Số lượng: {{ $item->qty }}</div>
                         </div>
-                        <div class="text-right w-1/5 font-semibold text-sm">Số lượng: 1</div>
-                    </div>
-                    <div class="flex items-center border-b hover:bg-gray-100 px-6 py-5">
-                        <div class="flex w-4/5"> <!-- product -->
-                            <div class="w-16">
-                                <img class="h-16" src="https://topshare.vn/wp-content/uploads/2020/09/hinh-nen-tet-2021-dep.jpg" alt="">
-                            </div>
-                            <div class="flex-1 flex-col justify-between ml-4 flex-grow">
-                                <span class="font-bold text-sm line-clamp-2">Tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm</span>
-                                <span class="text-red-500 text-xs">$400.00</span>
-                            </div>
-                        </div>
-                        <div class="text-right w-1/5 font-semibold text-sm">Số lượng: 1</div>
-                    </div>
-                    <div class="flex items-center border-b hover:bg-gray-100 px-6 py-5">
-                        <div class="flex w-4/5"> <!-- product -->
-                            <div class="w-16">
-                                <img class="h-16" src="https://topshare.vn/wp-content/uploads/2020/09/hinh-nen-tet-2021-dep.jpg" alt="">
-                            </div>
-                            <div class="flex-1 flex-col justify-between ml-4 flex-grow">
-                                <span class="font-bold text-sm line-clamp-2">Tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm tên sản phẩm</span>
-                                <span class="text-red-500 text-xs">$400.00</span>
-                            </div>
-                        </div>
-                        <div class="text-right w-1/5 font-semibold text-sm">Số lượng: 1</div>
-                    </div>
+                    @endforeach
                 </div>
                 <div class="flex justify-between items-center">
                     <div class="font-bold text-2xl">Tổng cộng</div>
-                    <div href="{!! route('shopping-cart') !!}" class="font-bold text-2xl text-red-600">1.000.000đ</div>
+                    <div href="{!! route('shopping-cart') !!}" class="font-bold text-2xl text-red-600">{{ Cart::priceTotal(0, '.', '.') }}</div>
                 </div>
 
             </div>

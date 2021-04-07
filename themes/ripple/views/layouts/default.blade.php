@@ -150,5 +150,18 @@
         e.preventDefault();
         $('html, body').animate({scrollTop: 0}, '300');
     });
+
+    function addToCart(data) {
+        axios.post('{!! route('add-to-cart') !!}', {
+            data: data
+        }).then((res) => {
+            toast.success('Thêm vào giỏ thành công.');
+            $.pjax.reload('#cartcount', {});
+        }).catch(e => {
+            toast.error(e.message)
+        }).finally(() => {
+            // $.pjax.reload('#body', {});
+        })
+    }
 </script>
 </html>

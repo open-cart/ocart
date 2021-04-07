@@ -16,7 +16,7 @@
                     <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
                         <div class="flex w-2/5"> <!-- product -->
                             <div class="w-20">
-                                <img class="h-24" src="{{ $item->options->image }}" alt="">
+                                <img class="h-24" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
                             </div>
                             <div class="flex flex-col justify-between ml-4 flex-grow">
                                 <span class="font-bold text-sm">{{ $item->name }}</span>
@@ -73,7 +73,7 @@
                         <span>Tổng đơn</span>
                         <span>{{ Cart::priceTotal(0, '.', '.') }}</span>
                     </div>
-                    <button class="bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</button>
+                    <a href="{{ route('shopping-buy') }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
                 </div>
             </div>
 
@@ -87,10 +87,11 @@
             rowId: rowId
         }).then((res) => {
             toast.success('Xóa sản phẩm khỏi giỏ hàng thành công.');
+            $.pjax.reload('#body', {});
         }).catch(e => {
             toast.error(e.message)
         }).finally(() => {
-            $.pjax.reload('#body', {});
+            // $.pjax.reload('#body', {});
         })
     }
 </script>

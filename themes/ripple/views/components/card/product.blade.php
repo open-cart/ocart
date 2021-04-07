@@ -3,7 +3,7 @@
     <div class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-60 overflow-hidden">
             <a href="/product/{{ $data->id }}">
-                <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url(head($data->images)) }}" alt="">
+                <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url(head($data->images) ?? '/images/no-image.jpg') }}" alt="">
             </a>
         </div>
         <div class="p-4">
@@ -29,9 +29,12 @@
                         <span class="text-sm font-semibold text-gray-300 line-through">đ</span>
                     @endif
                 </div>
-                <button onclick="addToCart({{ $data }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
-                    <x-theme::icons.shopping-cart class="w-7"/>
-                </button>
+                @if($data->price >= 1)
+                    <button onclick="addToCart({{ $data }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
+                        <x-theme::icons.shopping-cart class="w-7"/>
+                    </button>
+                @endif
+
             </div>
         </div>
         @if($data->address)
@@ -61,17 +64,3 @@
     </div>
 
 @endif
-
-<script type="text/javascript">
-    function addToCart($data) {
-        axios.post('{!! route('add-to-cart') !!}', {
-            data: $data
-        }).then((res) => {
-            toast.success('Thêm vào giỏ thành công.');
-        }).catch(e => {
-            toast.error(e.message)
-        }).finally(() => {
-            // $.pjax.reload('#body', {});
-        })
-    }
-</script>

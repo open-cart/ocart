@@ -1,6 +1,4 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
-    {{ get_cart_content() }}
-
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({!! Theme::asset('/images/banner-1.jpg') !!});">
         <div class="container-custom py-20">

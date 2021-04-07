@@ -31,6 +31,8 @@ Route::group([
     Route::get('product/{id}', 'PublicController@product');
     Route::get('product-category/{id}', 'PublicController@productCategory');
     Route::get('shopping-cart', 'ShoppingController@cart')->name('shopping-cart');
+    Route::get('shopping-buy', 'ShoppingController@buy')->name('shopping-buy');
+    Route::get('shopping-thank', 'ShoppingController@thank')->name('shopping-thank');
     Route::get('shopping-test', function() {
         return Theme::layout('default')->scope('shopping-test');
     })->name('shopping-test');

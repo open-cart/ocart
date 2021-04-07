@@ -61,7 +61,7 @@ if (!function_exists('get_cart_content')) {
 if (!function_exists('add_to_cart')) {
     function add_to_cart($data)
     {
-        return Cart::add([
+        Cart::add([
             'id' => $data['id'],
             'name' => $data['name'],
             'price' => $data['price'],
@@ -79,6 +79,6 @@ if (!function_exists('add_to_cart')) {
 if (!function_exists('remove_to_cart')) {
     function remove_to_cart($rowId)
     {
-        return Cart::remove($rowId);
+        Cart::remove($rowId);
     }
 }
