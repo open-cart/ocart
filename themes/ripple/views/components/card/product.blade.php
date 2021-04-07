@@ -62,7 +62,7 @@
 
 @endif
 
-<script>
+<script type="text/javascript">
     function addToCart($data) {
         axios.post('{!! route('add-to-cart') !!}', {
             data: $data

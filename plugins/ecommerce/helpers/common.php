@@ -58,7 +58,6 @@ if (!function_exists('get_cart_content')) {
     }
 }
 
-
 if (!function_exists('add_to_cart')) {
     function add_to_cart($data)
     {
@@ -70,8 +69,16 @@ if (!function_exists('add_to_cart')) {
             'qty' => 1,
             'options' => [
                 'image' => head($data['images']),
+                'category' => head($data['categories']),
                 'slug' => $data['slug']
             ]
         ]);
+    }
+}
+
+if (!function_exists('remove_to_cart')) {
+    function remove_to_cart($rowId)
+    {
+        return Cart::remove($rowId);
     }
 }

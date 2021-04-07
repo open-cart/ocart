@@ -25,4 +25,15 @@ class ShoppingController
         add_to_cart($data);
         return json_encode(['status' => 1, 'data' => $data, 'messenge' => "Thêm sản phẩm thành công"]);
     }
+
+    public function remove(Request $request)
+    {
+        $params = $request->all();
+        if (!empty($params)) {
+            $rowID       = $params['rowId'];
+        }
+        remove_to_cart($rowID);
+        return json_encode(['status' => 1, 'data' => $data, 'messenge' => "Xóa sản phẩm khỏi giỏ hàng thành công."]);
+
+    }
 }
