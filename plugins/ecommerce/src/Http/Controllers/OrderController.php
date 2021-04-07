@@ -179,12 +179,14 @@ class OrderController extends BaseController
     function show($id, FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
-        $page = $this->repo->skipCriteria()->find($id);
 
-        return $formBuilder->create(BrandForm::class, ['model' => $page])
-            ->setMethod('PUT')
-            ->setUrl(route('ecommerce.brands.update', ['id' => $page->id]))
-            ->renderForm();
+        return view('plugins.ecommerce::orders.edit');
+//        $page = $this->repo->skipCriteria()->find($id);
+//
+//        return $formBuilder->create(BrandForm::class, ['model' => $page])
+//            ->setMethod('PUT')
+//            ->setUrl(route('ecommerce.brands.update', ['id' => $page->id]))
+//            ->renderForm();
     }
 
     function update($id, BrandRequest $request, BaseHttpResponse $response)
