@@ -9,8 +9,11 @@ use Illuminate\Support\Str;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
 use Ocart\Ecommerce\Enums\ShippingMethodEnum;
 use Ocart\Ecommerce\Forms\BrandForm;
+use Ocart\Ecommerce\Http\Requests\AddressRequest;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
+use Ocart\Ecommerce\Http\Requests\CreateShipmentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
+use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
@@ -180,7 +183,12 @@ class OrderController extends BaseController
     {
         page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
 
-        return view('plugins.ecommerce::orders.edit');
+        $order = $this->repo
+            ->with(['products', 'user', 'address'])
+            ->skipCriteria()
+            ->find($id);
+
+        return view('plugins.ecommerce::orders.edit', compact('order'));
 //        $page = $this->repo->skipCriteria()->find($id);
 //
 //        return $formBuilder->create(BrandForm::class, ['model' => $page])
@@ -189,16 +197,14 @@ class OrderController extends BaseController
 //            ->renderForm();
     }
 
-    function update($id, BrandRequest $request, BaseHttpResponse $response)
+    function update($id, OrderUpdateRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
 
-        $page = $this->repo->update($data + [
-                'is_featured' => $request->input('is_featured', false),
-            ], $id);
+        $page = $this->repo->update($data, $id);
 
-        return $response->setPreviousUrl(route('ecommerce.brands.index'))
-            ->setNextUrl(route('ecommerce.brands.show', $page->id));
+        return $response->setPreviousUrl(route('ecommerce.orders.index'))
+            ->setNextUrl(route('ecommerce.orders.show', $page->id));
     }
 
     function destroy(Request $request)
@@ -206,5 +212,71 @@ class OrderController extends BaseController
         $this->repo->delete($request->input('id'));
 
         return response()->json([]);
+    }
+
+    function postConfirmOrder(Request $request, BaseHttpResponse $response)
+    {
+        $order = $this->repo->update([
+            'is_confirmed' => 1
+        ], $request->input('id'));
+
+        return $response->setMessage('success');
+    }
+
+    function postConfirmPayment(Request $request, BaseHttpResponse $response)
+    {
+        $id = $request->input('id');
+
+        $order = $this->repo->find($id);
+
+        if ($order->status === OrderStatusEnum::PENDING) {
+            $order->status = OrderStatusEnum::PROCESSING;
+        }
+
+        $order->save();
+
+        $payment = $order->payment;
+
+        $payment->status = PaymentStatusEnum::COMPLETED;
+
+        $payment->save();
+
+        return $response->setMessage('successfully');
+    }
+
+    public function postUpdateShippingAddress($id, AddressRequest $request, BaseHttpResponse $response)
+    {
+        $address = $this->orderAddressRepository->update($request->input(), $id);
+
+        if (!$address) {
+            abort(404);
+        }
+
+        return $response
+            ->setData($address)
+            ->setMessage(trans('plugins/ecommerce::order.update_shipping_address_success'));
+    }
+
+    public function postCreateShipment(
+        $id,
+        CreateShipmentRequest $request,
+        BaseHttpResponse $response
+    ) {
+
+    }
+
+    /**
+     * @param $id
+     * @param CreateShipmentRequest $request
+     * @param BaseHttpResponse $response
+     */
+    public function postMarkAsFulfilled(
+        $id,
+        CreateShipmentRequest $request,
+        BaseHttpResponse $response
+    ) {
+        $this->repo->update(['status' => OrderStatusEnum::COMPLETED], $id);
+
+        return $response->setMessage('successfully');
     }
 }

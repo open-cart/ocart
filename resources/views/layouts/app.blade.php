@@ -24,6 +24,14 @@
         {!! Assets::renderHeader(['core']) !!}
 
         <script>
+            const bodyLoading = {
+                show() {
+                    $('#loading').show();
+                },
+                hide() {
+                    $('#loading').hide();
+                }
+            }
             var themes = {
                 blue: {
                     bg: 'bg-blue-500'
@@ -60,13 +68,13 @@
                 return {
                     destroy(id, url) {
                         confirmDelete.show(() => {
-                            $('#loading').show();
+                            bodyLoading.show();
                             axios.delete(url, {data: {id}})
                                 .then(res => {
                                     $.pjax.reload('#body', {});
                                 })
                                 .finally(() => {
-                                    $('#loading').hide();
+                                    bodyLoading.hide();
                                 })
                         })
                     },
@@ -143,13 +151,13 @@
                         resolve(true)
                     }, 120)
                 });
-                $('#loading').show();
+                bodyLoading.show();
             })
             $(document).on('pjax:complete', function() {
                 feather.replace({'stroke-width': 1.5})
                 Alpine.start();
                 loading.then(() => {
-                    $('#loading').hide();
+                    bodyLoading.hide();
                 })
                 $('img').on("error", function (e) {
                     e.target.src = '/images/no-image.jpg';

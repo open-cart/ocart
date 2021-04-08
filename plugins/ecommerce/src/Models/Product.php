@@ -38,7 +38,10 @@ class Product extends BaseModel
         'is_featured',
         'sku',
         'price',
-        'price_sell'
+        'sale_price',
+        'sale_type',
+        'sale_at',
+        'end_sale_at'
     ];
 
     /**
@@ -101,5 +104,22 @@ class Product extends BaseModel
     public function getImageAttribute()
     {
         return Arr::first($this->images) ?? null;
+    }
+
+    /**
+     * Giá đang bán
+     */
+    public function getSellPriceAttribute()
+    {
+        if ($this->sale_price) {
+            return $this->sale_price;
+        }
+
+        return $this->price;
+    }
+
+    public function getOriginPriceAttribute()
+    {
+        return $this->sell_price ?? $this->price ?? 0;
     }
 }

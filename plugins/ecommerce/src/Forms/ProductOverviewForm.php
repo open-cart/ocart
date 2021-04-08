@@ -26,8 +26,8 @@ class ProductOverviewForm extends FormAbstract
                 'label' => 'Price',
 //                'rules' => 'min:5',
                 'default_value' => 0
-            ])->add('price_sell', Field::TEXT, [
-                'label' => 'Price sell',
+            ])->add('sale_price', Field::TEXT, [
+                'label' => 'Price sale',
 //                'rules' => 'min:5',
                 'default_value' => 0
             ]);

@@ -12,6 +12,17 @@ Route::group([
             'as' => 'ecommerce.'
         ], function () {
             Route::group(['prefix'=>'orders', 'as' => 'orders.'], function () {
+                Route::post('confirm', 'OrderController@postConfirmOrder')
+                    ->name('confirm');
+                Route::post('confirm-payment', 'OrderController@postConfirmPayment')
+                    ->name('confirm-payment');
+                Route::post('update-shipping-address/{id}', 'OrderController@postUpdateShippingAddress')
+                    ->name('update-shipping-address');
+                Route::post('mark-as-fulfilled/{id}', 'OrderController@postMarkAsFulfilled')
+                    ->name('mark-as-fulfilled');
+
+
+
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
             });
         });

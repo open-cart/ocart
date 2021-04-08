@@ -190,23 +190,23 @@
                     </div>
                 </div>
                 <div x-on:before-show="$store.order.total = totalAmount(); $store.order.payment_status = null" x-on:ok="submit()">
-                    <x-plugins.ecommerce::orders.create-modal></x-plugins.ecommerce::orders.create-modal>
+                    <x-plugins.ecommerce::orders.create-modal/>
                 </div>
 
                 <div x-on:before-show="$store.order.total = totalAmount(); $store.order.payment_status = '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'" x-on:ok="submit()">
-                    <x-plugins.ecommerce::orders.create-modal target="order-create-paid-modal"></x-plugins.ecommerce::orders.create-modal>
+                    <x-plugins.ecommerce::orders.create-modal target="order-create-paid-modal"/>
                 </div>
 
                 <div x-on:before-show="openModelEditAdress()" x-on:ok="updateOrderAddress">
-                    <x-plugins.ecommerce::orders.update-address-modal></x-plugins.ecommerce::orders.update-address-modal>
+                    <x-plugins.ecommerce::orders.update-address-modal/>
                 </div>
 
                 <div x-on:before-show="$store.customer = {}" x-on:ok="createNewCustomer($event)">
-                    <x-plugins.ecommerce::orders.create-customer-modal></x-plugins.ecommerce::orders.create-customer-modal>
+                    <x-plugins.ecommerce::orders.create-customer-modal/>
                 </div>
 
                 <div x-on:accept="changeDiscount" x-on:close="closeDiscount">
-                   <x-plugins.ecommerce::orders.discount-modal></x-plugins.ecommerce::orders.discount-modal>
+                   <x-plugins.ecommerce::orders.discount-modal/>
                 </div>
             </div>
         </div>

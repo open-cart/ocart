@@ -78,4 +78,12 @@ class Order extends BaseModel
     {
         return $this->belongsTo(Customer::class, 'user_id', 'id')->withDefault();
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(OrderProduct::class, 'order_id')->with(['product']);
+    }
 }
