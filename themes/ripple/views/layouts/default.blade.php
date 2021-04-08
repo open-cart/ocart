@@ -151,9 +151,9 @@
         $('html, body').animate({scrollTop: 0}, '300');
     });
 
-    function addToCart(data) {
+    function addToCart(productId) {
         axios.post('{!! route('add-to-cart') !!}', {
-            data: data
+            productId: productId
         }).then((res) => {
             toast.success(res.message);
             $(".cart-count").text(res.count);

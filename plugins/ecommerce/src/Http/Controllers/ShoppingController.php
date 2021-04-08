@@ -3,12 +3,20 @@
 
 namespace Ocart\Ecommerce\Http\Controllers;
 
+use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Theme\Facades\Theme;
 use Illuminate\Http\Request;
 
 
 class ShoppingController
 {
+    protected $repo;
+
+    public function __construct(ProductRepository $productRepository)
+    {
+        $this->repo = $productRepository;
+    }
+
     public function cart()
     {
         $cart = get_cart_content();
@@ -32,11 +40,14 @@ class ShoppingController
     {
         $params = $request->all();
         if (!empty($params)) {
-            $data       = $params['data'];
+            $productId       = $params['productId'];
         }
-        add_to_cart($data);
+
+        $product = $this->repo->with('categories')->find($productId);
+
+        add_to_cart($product);
         $cart_count = get_cart_count();
-        return json_encode(['status' => 1, 'data' => $data, 'count' => $cart_count, 'message' => "Thêm sản phẩm thành công"]);
+        return json_encode(['status' => 1, 'data' => $product, 'count' => $cart_count, 'message' => "Thêm sản phẩm thành công"]);
     }
 
     public function remove(Request $request)

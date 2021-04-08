@@ -69,15 +69,15 @@ if (!function_exists('add_to_cart')) {
     function add_to_cart($data)
     {
         Cart::add([
-            'id' => $data['id'],
-            'name' => $data['name'],
-            'price' => $data['price'],
+            'id' => $data->id,
+            'name' => $data->name,
+            'price' => $data->price,
             'weight' => 500,
             'qty' => 1,
             'options' => [
-                'image' => head($data['images']),
-                'category' => head($data['categories']),
-                'slug' => $data['slug']
+                'image' => head($data->images),
+                'categories' => $data->categories,
+                'slug' => $data->slug
             ]
         ]);
     }

@@ -5,7 +5,8 @@
                 <div class="flex justify-between border-b pb-8">
                     <h1 class="font-semibold text-2xl">Giỏ hàng</h1>
                     <h2 class="font-semibold text-2xl">
-                        <span class="cart-count">{{ Cart::count() }}</span> sản phẩm</h2>
+                        <span class="cart-count">{{ Cart::count() }}</span> sản phẩm
+                    </h2>
                 </div>
                 <div class="flex mt-10 mb-5">
                     <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Chi tiết sản phẩm</h3>
@@ -20,10 +21,8 @@
                                 <img class="h-24" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
                             </div>
                             <div class="flex flex-col justify-between ml-4 flex-grow">
-                                <span class="font-bold text-sm">{{ $item->name }}</span>
-                                @if($item->options && $item->options->category)
-                                    <span class="text-red-500 text-xs">{{ $item->options->category['name'] }}</span>
-                                @endif
+                                <a href="/product/{{ $item->id }}" class="font-bold text-sm hover:text-blue-700">{{ $item->name }}</a>
+                                <a href="/product-category/{{ Arr::get($item->options->categories->first(), 'id') }}" class="text-red-500 text-xs hover:text-blue-700">{{ Arr::get($item->options->categories->first(), 'name') }}</a>
                                 <button onclick="removeToCart('{{ $item->rowId }}')" class="w-5 text-gray-400 rounded-full hover:text-red-500 focus:outline-none focus:text-red-500" title="Xóa sản phẩm">
                                     <x-theme::icons.trash class="w-5"/>
                                 </button>
@@ -36,7 +35,7 @@
 
                             <input class="mx-2 border text-center w-8" type="text" value="{{ $item->qty }}" disabled>
 
-                            <button onclick="updateToCart('{{ $item->rowId }}', {{ $item->qty + 1 }})"  {{($item->qty > 9) ? 'disabled' : ''}} >
+                            <button onclick="updateToCart('{{ $item->rowId }}', {{ $item->qty + 1 }})" {{($item->qty > 9) ? 'disabled' : ''}} >
                                 <x-theme::icons.plus class="fill-current text-gray-600"/>
                             </button>
 
@@ -101,7 +100,7 @@
         })
     }
 
-     function updateToCart(rowId, qty) {
+    function updateToCart(rowId, qty) {
         axios.post('{!! route('update-to-cart') !!}', {
             rowId: rowId, qty: qty
         }).then((res) => {

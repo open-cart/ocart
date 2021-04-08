@@ -7,10 +7,10 @@
             </a>
         </div>
         <div class="p-4">
-            <span class="inline-block leading-none text-gray-500 tracking-wide text-xs">
+            <a href=/product-category/{{ Arr::get($data->categories->first(), 'id') }}" class="inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
                 {{ Arr::get($data->categories->first(), 'name') }}
-            </span>
-            <a href="/product/{{ $data->id }}">
+            </a>
+            <a href="/product/{{ $data->id }}" class="hover:text-blue-700">
                 <h3 class="mb-2 font-bold">{{ $data->name }}</h3>
             </a>
             <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
@@ -30,7 +30,7 @@
                     @endif
                 </div>
                 @if($data->price >= 1)
-                    <button onclick="addToCart({{ $data }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
+                    <button onclick="addToCart({{ $data->id }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
                         <x-theme::icons.shopping-cart class="w-7"/>
                     </button>
                 @endif

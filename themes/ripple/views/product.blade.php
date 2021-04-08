@@ -14,7 +14,7 @@
                 <img class="lg:w-1/2 w-full object-cover object-center rounded" src="{{ TnMedia::url(head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
-                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}">{{ Arr::get($product->categories->first(), 'name') }}</a>
+                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
@@ -34,17 +34,17 @@
                             <span class="text-gray-600 ml-3">4 Reviews</span>
                         </a>
                         <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-                            <a class="text-gray-500" href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
+                            <a class="text-gray-500 hover:text-blue-700" href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
                                 <x-theme::icons.facebook/>
                             </a>
-                            <a class="ml-2 text-gray-500" href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
+                            <a class="ml-2 text-gray-500 hover:text-blue-700" href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
                                 <x-theme::icons.twitter/>
                             </a>
                         </span>
                     </div>
                     <div class="mb-4 pt-4 border-t border-gray-200">
                         @if($product->price >= 1)
-                            <span class="title-font font-medium text-2xl text-red-600">{{ $product->price }}đ</span>
+                            <span class="title-font font-bold text-2xl text-red-600">{{ $product->price }}đ</span>
                         @else
                             <span class="title-font font-medium text-2xl text-red-600">Liên hệ</span>
                         @endif
@@ -85,7 +85,7 @@
                     </div>
                     <div class="flex pt-4 border-t border-gray-200 ">
                         @if($product->price >= 1)
-                            <button onclick="addToCart({{ $product }})" class="flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ</button>
+                            <button onclick="addToCart({{ $product->id }})" class="flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ</button>
                         @endif
 
                         <button class="ml-auto rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
