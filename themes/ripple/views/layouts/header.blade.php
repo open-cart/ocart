@@ -159,9 +159,9 @@
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-                <a href="{!! route('shopping-cart') !!}" id="cartcount" class="relative z-20">
+                <a href="{!! route('shopping-cart') !!}" class="relative z-20">
                     <x-theme::icons.shopping-cart class="w-6"/>
-                    <small class="absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ Cart::count() }}</small>
+                    <small id="cartcount" class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>
                 </a>
 
                 <a href="{!! route('login') !!}" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">

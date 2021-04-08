@@ -39,6 +39,7 @@ Route::group([
 
     Route::post('add-to-cart', 'ShoppingController@add')->name('add-to-cart');
     Route::post('remove-to-cart', 'ShoppingController@remove')->name('remove-to-cart');
+    Route::post('update-to-cart', 'ShoppingController@update')->name('update-to-cart');
 
 });
 

@@ -35,7 +35,8 @@ class ShoppingController
             $data       = $params['data'];
         }
         add_to_cart($data);
-        return json_encode(['status' => 1, 'data' => $data, 'messenge' => "Thêm sản phẩm thành công"]);
+        $cart_count = get_cart_count();
+        return json_encode(['status' => 1, 'data' => $data, 'count' => $cart_count, 'message' => "Thêm sản phẩm thành công"]);
     }
 
     public function remove(Request $request)
@@ -45,7 +46,21 @@ class ShoppingController
             $rowID       = $params['rowId'];
         }
         remove_to_cart($rowID);
-        return json_encode(['status' => 1, 'data' => $rowID, 'messenge' => "Xóa sản phẩm khỏi giỏ hàng thành công."]);
+        $cart_count = get_cart_count();
+        return json_encode(['status' => 1, 'data' => $rowID, 'count' => $cart_count, 'message' => "Xóa sản phẩm khỏi giỏ hàng thành công."]);
+
+    }
+
+    public function update(Request $request)
+    {
+        $params = $request->all();
+        if (!empty($params)) {
+            $rowID       = $params['rowId'];
+            $qty       = $params['qty'];
+        }
+        update_to_cart($rowID, $qty);
+        $cart_count = get_cart_count();
+        return json_encode(['status' => 1, 'data' => $rowID, 'count' => $cart_count, 'message' => "Cập nhật giỏ hàng thành công."]);
 
     }
 }

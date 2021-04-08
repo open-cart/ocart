@@ -58,6 +58,13 @@ if (!function_exists('get_cart_content')) {
     }
 }
 
+if (!function_exists('get_cart_count')) {
+    function get_cart_count()
+    {
+        return Cart::count();
+    }
+}
+
 if (!function_exists('add_to_cart')) {
     function add_to_cart($data)
     {
@@ -80,5 +87,12 @@ if (!function_exists('remove_to_cart')) {
     function remove_to_cart($rowId)
     {
         Cart::remove($rowId);
+    }
+}
+
+if (!function_exists('update_to_cart')) {
+    function update_to_cart($rowId, $qty)
+    {
+        Cart::update($rowId, $qty);
     }
 }

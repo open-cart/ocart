@@ -155,8 +155,8 @@
         axios.post('{!! route('add-to-cart') !!}', {
             data: data
         }).then((res) => {
-            toast.success('Thêm vào giỏ thành công.');
-            $.pjax.reload('#cartcount', {});
+            toast.success(res.message);
+            $(".cart-count").text(res.count);
         }).catch(e => {
             toast.error(e.message)
         }).finally(() => {
