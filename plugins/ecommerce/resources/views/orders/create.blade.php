@@ -220,6 +220,13 @@
             payment_method: 'cod',
             payment_status: null
         })
+        function showError(e) {
+            if (e?.errors) {
+                toast.error(Object.values(e.errors).find(Boolean));
+            } else {
+                toast.error(e.message);
+            }
+        }
         function orderData() {
             function productItem(product) {
                 product.total = () => {
@@ -259,18 +266,24 @@
                     this.data.push(new productItem(e.detail));
                 },
                 createNewCustomer(customer) {
+                    bodyLoading.show();
                     axios.post('{!! route('ecommerce.customers.create-customer-when-creating-order') !!}', customer.detail)
                         .then(res => {
-                        this.customer = res.data?.customer;
-                        this.loadCustomerAddress();
-                    })
+                            this.customer = res.data?.customer;
+                            toast.success('Customer saved');
+                            return this.loadCustomerAddress();
+                        })
+                        .catch(showError)
+                        .finally(() => {
+                            bodyLoading.hide();
+                        })
                 },
                 changeCustomer(e) {
                     this.customer = e.detail;
                     this.loadCustomerAddress();
                 },
                 loadCustomerAddress() {
-                    axios.get('{!! route('ecommerce.customers.get-customer-addresses') !!}', {
+                    return axios.get('{!! route('ecommerce.customers.get-customer-addresses') !!}', {
                         params: {
                             id: this.customer.id,
                         }
@@ -304,6 +317,7 @@
                     return this.amount() - this.discount_amount;
                 },
                 submit() {
+                    bodyLoading.show();
                     return axios.post('{!! route('ecommerce.orders.store') !!}', {
                         customer_id: this.customer?.id,
                         customer_address: this.customer_address,
@@ -313,6 +327,13 @@
                         payment_method: this.$store.order.payment_method,
                         payment_status: this.$store.order.payment_status,
                         products: this.data.map(product => ({id: product.id, qty: product.qty})),
+                    }).then((res) => {
+                        $.pjax.reload('#body', {
+                            url: '{!! route('ecommerce.orders.index') !!}/' + res.data.id //route('ecommerce.orders.update', ['id' => res.data.id])
+                        });
+                        toast.success('Order saved');
+                    }).catch(showError).finally(() => {
+                        bodyLoading.hide();
                     })
                 }
             }

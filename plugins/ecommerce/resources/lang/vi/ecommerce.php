@@ -15,4 +15,12 @@ return [
         'enable_tax' => 'Enable tax',
     ],
     'list_order' => 'List order',
+    'statuses'                            => [
+        'pending'    => 'Chưa xử lý',
+        'processing' => 'Đang xử lý',
+        'delivering' => 'Đang giao hàng',
+        'delivered'  => 'Đã giao hàng',
+        'completed'  => 'Hoàn thành',
+        'canceled'   => 'Bị huỷ',
+    ],
 ];

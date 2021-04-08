@@ -71,7 +71,11 @@
                             bodyLoading.show();
                             axios.delete(url, {data: {id}})
                                 .then(res => {
+                                    toast.success('Deleted successfully')
                                     $.pjax.reload('#body', {});
+                                })
+                                .catch(e => {
+                                    toast.error(e.message);
                                 })
                                 .finally(() => {
                                     bodyLoading.hide();

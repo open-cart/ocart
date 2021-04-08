@@ -46,6 +46,6 @@ class PaymentStatusEnum extends Enum
     }
 
     static function getLabel($value) {
-        return trans('core/base::enums.statuses.'.$value);
+        return trans('plugins/payment::payment.statuses.'.$value);
     }
 }

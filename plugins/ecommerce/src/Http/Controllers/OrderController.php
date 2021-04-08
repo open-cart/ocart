@@ -175,8 +175,7 @@ class OrderController extends BaseController
             }
         }
 
-        return $response->setPreviousUrl(route('ecommerce.brands.index'))
-            ->setNextUrl(route('ecommerce.brands.show', $order->id));
+        return $response->setData($order);
     }
 
     function show($id, FormBuilder $formBuilder)

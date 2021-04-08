@@ -8,7 +8,7 @@
                 <div class="col-span-9 space-y-4">
                     <div class="bg-white p-4 rounded-md space-y-4"
                     >
-                        <a href="">Reload</a>
+{{--                        <a href="">Reload</a>--}}
                         <div class="title">
                             <h3 class="text-2xl">Order Infomation #{!! str_pad($order->id, 8, '1000000000', STR_PAD_LEFT) !!}</h3>
                         </div>
