@@ -5,6 +5,7 @@ return [
     'enable_version' => env('ASSETS_ENABLE_VERSION', false),
     'version'        => env('ASSETS_VERSION', time()),
     'scripts'        => [
+        'spruce',
         'jquery',
         'jquery-ui',
         'app',
@@ -21,6 +22,13 @@ return [
     ],
     'resources'      => [
         'scripts' => [
+            'spruce' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src' => [
+                    'local' => 'https://cdn.jsdelivr.net/npm/@ryangjchandler/spruce@2.6.3/dist/spruce.umd.js',
+                ]
+            ],
             'app'       => [
                 'use_cdn'  => false,
                 'location' => 'header',

@@ -15,7 +15,7 @@ $value = isset($value) ? (array)$value : [];
 {{--                        {!! Form::customLabel($name, $category->name, ['class' => 'text-gray-900 font-medium']) !!}--}}
                         <span class="text-gray-900 font-medium">{!! $category->name !!}</span>
                     </label>
-                    @include('plugins/blog::categories.categories-checkbox-option-line', [
+                    @include('plugins.blog::categories.categories-checkbox-option-line', [
                         'categories' => $category->child_cats,
                         'value' => $value,
                         'currentId' => $currentId,

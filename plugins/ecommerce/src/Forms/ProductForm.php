@@ -3,6 +3,7 @@ namespace Ocart\Ecommerce\Forms;
 
 use Ocart\Core\Forms\Field;
 use Ocart\Ecommerce\Forms\Fields\CategoryMultiField;
+use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Core\Enums\BaseStatusEnum;
@@ -36,6 +37,7 @@ class ProductForm extends FormAbstract
         $brands = [0 => 'No brand'] + $brands;
 
         $this
+            ->setupModel(new Product())
             ->withCustomFields()
             ->setModuleName('ecommerce_product')
             ->setFormOption('class', 'space-y-4')

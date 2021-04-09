@@ -22,15 +22,6 @@ class ProductTable extends TableAbstract
     public function ajax()
     {
         $data = $this->table->columns([
-            'id' => [
-                'name' => 'id',
-                'title' => 'title',
-                'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
-                'render' => function ($item) {
-                    return $item->name;
-                }
-            ],
             'image' => [
                 'name' => 'id',
                 'title' => 'image',
@@ -39,6 +30,34 @@ class ProductTable extends TableAbstract
                     return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
+            'name' => [
+                'name' => 'name',
+                'title' => 'title',
+                'with' => '20px',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return $item->name;
+                }
+            ],
+            'price' => [
+                'name' => 'price',
+                'title' => 'Price',
+                'with' => '20px',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return format_price($item->price);
+                }
+            ],
+            'sku' => [
+                'name' => 'sku',
+                'title' => 'Sku',
+                'with' => '20px',
+                'class' => 'border text-left px-2 py-2',
+                'render' => function ($item) {
+                    return $item->sku;
+                }
+            ],
+
             'alias' => [
                 'name' => 'alias',
                 'title' => 'URL Tùy chỉnh',

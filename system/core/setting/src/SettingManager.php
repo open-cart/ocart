@@ -4,7 +4,6 @@
 namespace Ocart\Setting;
 
 
-use Illuminate\Database\DatabaseManager;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Manager;
 

@@ -60,9 +60,17 @@
     </div>
     <script>
         $(function() {
+            $("#from-builder").submit(function() {
+                $.pjax.submit(event, '#body');
+            });
             tinymce.remove();
             tinymce.init({
                 selector: '.editor-inline',
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                },
                 height: 150,
                 menubar: false,
                 plugins: [
@@ -94,10 +102,18 @@
             });
             tinymce.init({
                 selector: '.editor-full',
+                setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                },
                 height: 300,
-                theme: 'modern',
+                // theme: 'modern',
+                mobile: {
+                    theme: 'mobile'
+                },
                 plugins: 'print preview searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | image link media | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | fullscreen',
+                toolbar: 'formatselect | bold italic strikethrough forecolor backcolor | image link media | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | fullscreen',
                 image_advtab: true,
                 imagetools_toolbar: 'alignleft aligncenter alignright | imageoptions',
                 templates: [
@@ -106,7 +122,7 @@
                 ],
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css'
+                    '//www.tiny.cloud/css/codepen.min.css'
                 ],
                 'file_picker_callback': (cb, value, meta) => {
                     TnMedia.default({
@@ -123,8 +139,3 @@
         })
     </script>
 </x-app-layout>
-<script>
-    $(document).on('submit', '#from-builder', function(event) {
-        $.pjax.submit(event, '#body');
-    });
-</script>

@@ -4,6 +4,7 @@ namespace Ocart\Ecommerce\Forms;
 use Kris\LaravelFormBuilder\Field;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
+use Ocart\Ecommerce\Models\Tag;
 
 class TagForm extends FormAbstract
 {
@@ -11,6 +12,7 @@ class TagForm extends FormAbstract
     public function buildForm()
     {
         $this
+            ->setupModel(new Tag())
             ->withCustomFields()
             ->setModuleName('ecommerce_tag')
             ->setFormOption('class', 'space-y-4')

@@ -33,4 +33,6 @@ return [
     'status_on'        => 'Bật',
     'status_off'       => 'Tắt',
     'max_c'            => 'Tối đa :max kí tự',
+    'save'             => 'Lưu',
+    'cancel'           => 'Hủy bỏ',
 ];

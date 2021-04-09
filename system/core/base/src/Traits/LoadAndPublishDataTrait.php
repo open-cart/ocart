@@ -87,7 +87,7 @@ trait LoadAndPublishDataTrait
      */
     public function loadAndPublishViews(): self
     {
-        $this->loadViewsFrom($this->getViewsPath(), $this->getDashedNamespace());
+        $this->loadViewsFrom($this->getViewsPath(), $this->getDotedNamespace());
         if ($this->app->runningInConsole()) {
             $this->publishes([$this->getViewsPath() => resource_path('views/vendor/' . $this->getDashedNamespace())],
                 'cms-views');

@@ -17,7 +17,7 @@ class PluginManagementServiceProvider extends ServiceProvider
     {
         Helper::autoload(__DIR__.'/../../helpers');
 
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'packages/plugin-management');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'packages.plugin-management');
 
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
 

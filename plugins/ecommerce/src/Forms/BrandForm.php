@@ -4,6 +4,7 @@ namespace Ocart\Ecommerce\Forms;
 use Kris\LaravelFormBuilder\Field;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
+use Ocart\Ecommerce\Models\Brand;
 
 class BrandForm extends FormAbstract
 {
@@ -11,6 +12,7 @@ class BrandForm extends FormAbstract
     public function buildForm()
     {
         $this
+            ->setupModel(new Brand())
             ->withCustomFields()
             ->setModuleName('ecommerce_brand')
             ->setFormOption('class', 'space-y-4')

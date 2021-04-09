@@ -2,6 +2,7 @@
 namespace Ocart\Blog\Forms;
 
 use Ocart\Blog\Forms\Fields\CategoryMultiField;
+use Ocart\Blog\Models\Post;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Core\Forms\Field;
 use Ocart\Core\Enums\BaseStatusEnum;
@@ -28,6 +29,7 @@ class PostForm extends FormAbstract
         }
 
         $this
+            ->setupModel(new Post())
             ->withCustomFields()
             ->setModuleName('blog')
             ->setFormOption('class', 'space-y-4')

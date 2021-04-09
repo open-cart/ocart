@@ -7,8 +7,7 @@
     >
     <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
 
-    <div class="modal-container bg-white w-11/12 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
-
+    <div class="modal-container bg-white w-96 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div
             x-on:click="$dispatch('close', { foo: 'bar' })"
             class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
@@ -40,13 +39,13 @@
                 <x-button
                     x-on:click="$dispatch('accept', { foo: 'bar' })"
                     type="button"
-                    class="bg-blue-500 hover:bg-blue-400 mr-2">
+                    color="bg-blue-500 hover:bg-blue-400 mr-2">
                     {!! __('admin.action_admin.confirm_yes') !!}
                 </x-button>
                 <x-button
                     x-on:click="$dispatch('close', { foo: 'bar' })"
                     type="button"
-                    class="modal-close px-4 bg-red-500 hover:bg-red-400">
+                    color="modal-close px-4 bg-red-500 hover:bg-red-400">
                     {!! __('admin.action_admin.cancel') !!}
                 </x-button>
             </div>

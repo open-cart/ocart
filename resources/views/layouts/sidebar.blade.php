@@ -5,7 +5,7 @@
         </a>
     </div>
     <div class="h-1"></div>
-    <ul style="overflow: auto; height: calc(100vh - 80px)">
+    <ul id="sidebar-menu" style="overflow: auto; height: calc(100vh - 80px)">
 {{--        <li class="nav-item">--}}
 {{--            <a href="{!! route('dashboard.index') !!}" class="px-3 py-3 block">--}}
 {{--                <i class=""></i>--}}
@@ -57,4 +57,9 @@
 </aside>
 <script>
     var theme = {{ session('theme', 'themes.blue') }};
+    $("#sidebar-menu a").click(function(){
+        $("#sidebar-menu li").removeClass('bg-indigo-100');
+
+        $(this).closest('li').addClass('bg-indigo-100');
+    })
 </script>

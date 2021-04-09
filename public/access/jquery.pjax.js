@@ -140,9 +140,11 @@ function handleSubmit(event, container, options) {
     defaults.data = $form.serializeArray()
   }
 
-  pjax($.extend({}, defaults, options))
+  const res = pjax($.extend({}, defaults, options))
 
   event.preventDefault()
+
+  return res;
 }
 
 // Loads a URL with ajax, puts the response body inside a container,
