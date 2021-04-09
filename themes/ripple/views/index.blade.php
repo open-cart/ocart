@@ -1,35 +1,8 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({!! Theme::asset('/images/banner-1.jpg') !!});">
-        <div class="container-custom py-20">
-            <div id="form-contact" class="bg-white max-w-xl p-10 pt-8 shadow-md">
-                <div class="mb-4">
-                    <h1 class="text-4xl font-extrabold capitalize">Bạn cần tư vấn mua bất động sản?</h1>
-                </div>
-                <form class="mb-4">
-                    <div class="mb-4">
-                        <div class="relative">
-                            <x-theme::form.input type="text" class="pl-12" placeholder="Họ tên"/>
-                            <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="relative">
-                            <x-theme::form.input type="text" class="pl-12" placeholder="Số điện thoại"/>
-                            <x-theme::icons.phone class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <div class="relative">
-                            <x-theme::form.input type="text" class="pl-12" placeholder="Địa chỉ Email"/>
-                            <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
-                        </div>
-                    </div>
-                    <div class="hero-search-action">
-                        <button type="submit" class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Gửi cho chúng tôi</button>
-                    </div>
-                </form>
-            </div>
+        <div id="form-contact" class="container-custom py-20">
+            <x-theme::card.contact/>
         </div>
     </div>
     <section class="sec-post antialiased font-sans py-16">
