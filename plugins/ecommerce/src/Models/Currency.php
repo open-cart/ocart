@@ -57,4 +57,9 @@ class Currency extends BaseModel
 
         return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
     }
+
+    public function getExchangeRateAttribute($value)
+    {
+        return decimal_notation($value);
+    }
 }

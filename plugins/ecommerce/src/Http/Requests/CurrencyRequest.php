@@ -18,6 +18,8 @@ class CurrencyRequest extends FormRequest
         return [
             'title'    => 'required|max:120',
             'symbol'    => 'required|max:120',
+            'exchange_rate' => 'numeric',
+            'decimals' => 'integer',
         ];
     }
 }

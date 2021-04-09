@@ -24,6 +24,6 @@ class ShippingMethodEnum extends Enum
     }
 
     static function getLabel($value) {
-        return trans('core/base::enums.statuses.'.$value);
+        return trans('plugins/ecommerce::ecommerce.statuses.'.$value);
     }
 }

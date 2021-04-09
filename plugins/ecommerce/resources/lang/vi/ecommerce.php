@@ -22,5 +22,6 @@ return [
         'delivered'  => 'Đã giao hàng',
         'completed'  => 'Hoàn thành',
         'canceled'   => 'Bị huỷ',
+        'default'    => 'Mặc định'
     ],
 ];

@@ -283,6 +283,7 @@
                     this.loadCustomerAddress();
                 },
                 loadCustomerAddress() {
+                    this.customer_address = {};
                     return axios.get('{!! route('ecommerce.customers.get-customer-addresses') !!}', {
                         params: {
                             id: this.customer.id,

@@ -15,6 +15,7 @@ use Ocart\Ecommerce\Http\Requests\CreateShipmentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
@@ -54,11 +55,17 @@ class OrderController extends BaseController
      */
     protected $paymentRepository;
 
+    /**
+     * @var CustomerRepository
+     */
+    protected $customerRepository;
+
     public function __construct(
         OrderRepository $repo,
         OrderAddressRepository $orderAddressRepository,
         OrderProductRepository $orderProductRepository,
         PaymentRepository $paymentRepository,
+        CustomerRepository $customerRepository,
         ProductRepository $productRepository
     )
     {
@@ -67,6 +74,7 @@ class OrderController extends BaseController
         $this->orderProductRepository = $orderProductRepository;
         $this->productRepository = $productRepository;
         $this->paymentRepository = $paymentRepository;
+        $this->customerRepository = $customerRepository;
 
         $this->authorizeResource($repo->getModel(), 'id');
     }
@@ -151,6 +159,15 @@ class OrderController extends BaseController
                     'country'  => $request->input('customer_address.country'),
                     'address'  => $request->input('customer_address.address'),
                     'order_id' => $order->id,
+                ]);
+            } else if ($request->input('customer_id')) {
+                $customer = $this->customerRepository->findByField('id', $request->input('customer_id'))->first();
+                $this->orderAddressRepository->create([
+                    'name'     => $customer->name,
+                    'phone'    => $customer->phone,
+                    'email'    => $customer->email,
+                    'order_id' => $order->id,
+                    'address'  => ''
                 ]);
             }
 

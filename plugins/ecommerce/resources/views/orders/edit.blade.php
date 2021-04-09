@@ -183,10 +183,10 @@
                                 </div>
                                 <div>
                                     <div>
-                                        <x-link href="javascript:void(0)" x-text="customer.name"></x-link>
+                                        <x-link href="javascript:void(0)" x-text="customer.name || customer_address.name"></x-link>
                                     </div>
                                     <div>
-                                        <x-link href="javascript:void(0)" x-text="customer.email"/>
+                                        <x-link href="javascript:void(0)" x-text="customer.email || customer_address.email"/>
                                     </div>
                                 </div>
                                 <hr class="-mx-6">
@@ -240,7 +240,8 @@
     </div>
     <script>
         Spruce.store('customer', {
-            name: ''
+            name: '',
+            email: ''
         })
         function showError(e) {
             if (e?.errors) {
@@ -271,7 +272,7 @@
                 updateOrderAddress() {
                     // update-shipping-address
                     bodyLoading.show();
-                    axios.post('{!! route('ecommerce.orders.update-shipping-address', ['id' => $order->user->id]) !!}', {
+                    axios.post('{!! route('ecommerce.orders.update-shipping-address', ['id' => $order->address->id]) !!}', {
                         ...this.$store.customer
                     }).then(res => {
                         this.customer_address = this.$store.customer;

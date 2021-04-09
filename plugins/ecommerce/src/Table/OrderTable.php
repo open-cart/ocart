@@ -38,7 +38,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Khách hàng',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return $item->user->name;
+                    return $item->user->name ?? $item->address->name;
                 }
             ],
             'amount' => [
@@ -54,7 +54,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Tax amount',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return 0;
+                    return format_price($item->tax_amount);
                 }
             ],
             'shipping_amount' => [
@@ -62,7 +62,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Ship amount',
                 'class' => 'border text-left px-2 py-2',
                 'render' => function ($item) {
-                    return 0;
+                    return format_price($item->shipping_amount);
                 }
             ],
             'payment_method' => [

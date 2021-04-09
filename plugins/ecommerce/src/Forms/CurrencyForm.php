@@ -25,10 +25,10 @@ class CurrencyForm extends FormAbstract
             ->add('symbol', Field::TEXT, [
                 'label'      => trans('plugins/ecommerce::currency.symbol'),
             ])
-            ->add('exchange_rate', Field::TEXT, [
+            ->add('exchange_rate', Field::NUMBER, [
                 'label'      => trans('plugins/ecommerce::currency.exchange_rate'),
             ])
-            ->add('decimals', Field::TEXT, [
+            ->add('decimals', Field::NUMBER, [
                 'label'      => trans('plugins/ecommerce::currency.number_of_decimals'),
             ])
             ->add('is_prefix_symbol', Field::SELECT, [
@@ -55,7 +55,7 @@ class CurrencyForm extends FormAbstract
                 ]
             ])
 
-            ->add('order', Field::TEXT, [
+            ->add('order', Field::NUMBER, [
                 'label'      => trans('plugins/ecommerce::currency.order'),
             ])
             ->add('is_default', Field::ON_OFF, [

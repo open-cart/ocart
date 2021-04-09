@@ -165,3 +165,25 @@ if (!function_exists('human_price_text')) {
         return $price . ($priceUnit ? $priceUnit : '');
     }
 }
+
+if (!function_exists('decimal_notation')) {
+    /**
+     * @param $float
+     * @return string
+     */
+    function decimal_notation($float) {
+        $parts = explode('E', $float);
+
+        if(count($parts) === 2){
+            $exp = abs(end($parts)) + strlen($parts[0]);
+            $decimal = number_format($float, $exp, '.', ',');
+            $decimal = str_replace(',', '', $decimal);
+            $parts = explode('.', $decimal);
+            $parts[1] = rtrim($parts[1], '.0');
+            return trim(join('.', $parts), '.');
+        }
+        else{
+            return $float;
+        }
+    }
+}
