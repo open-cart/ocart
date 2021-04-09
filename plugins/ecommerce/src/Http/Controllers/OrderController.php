@@ -295,4 +295,69 @@ class OrderController extends BaseController
 
         return $response->setMessage('successfully');
     }
+
+    public function buy(Request $request, BaseHttpResponse $response)
+    {
+        $params = $request->all();
+        if (!empty($params)) {
+            $customer = $params['customer'];
+            $products = $params['products'];
+        }
+
+        $data = [
+            'amount'               => get_cart_pricetotal(),
+            'currency_id'          => get_application_currency_id(),
+            'user_id'              => 0,
+            'shipping_method'      => ShippingMethodEnum::DEFAULT,
+            'shipping_option'      => '',
+            'shipping_amount'      => 0,
+            'tax_amount'           => 0,
+            'sub_total'            => get_cart_subtotal(),
+            'coupon_code'          => '',
+            'discount_amount'      => 0,
+            'discount_description' => '',
+            'description'          => '',
+            'is_confirmed'         => 1,
+            'status'               => OrderStatusEnum::PROCESSING,
+        ];
+
+        $order = $this->repo->create($data);
+
+        if ($order) {
+
+            $this->orderAddressRepository->create([
+                'name'     => $customer['name'],
+                'phone'    => $customer['phone'],
+                'email'    => $customer['email'],
+                'order_id' => $order->id,
+                'address'  => $customer['address']
+            ]);
+
+            foreach ($products as $productItem) {
+                $product = $this->productRepository->findByField('id', Arr::get($productItem, 'id'))->first();
+                if (!$product) {
+                    continue;
+                }
+
+                $data = [
+                    'order_id'     => $order->id,
+                    'product_id'   => $product->id,
+                    'product_name' => $product->name,
+                    'qty'          => Arr::get($productItem, 'qty', 1),
+                    'weight'       => $product->weight,
+                    'price'        => $product->price,
+                    'tax_amount'   => 0,
+                    'options'      => [],
+                ];
+
+                $this->orderProductRepository->create($data);
+
+            }
+
+            destroy_to_cart();
+
+        }
+
+        return $response->setData($order);
+    }
 }

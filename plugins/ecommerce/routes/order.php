@@ -26,5 +26,6 @@ Route::group([
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
             });
         });
-    });
+        Route::post('shopping-buy', 'OrderController@buy')->name('shopping-buy');
 
+    });

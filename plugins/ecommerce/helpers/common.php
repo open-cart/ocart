@@ -202,6 +202,20 @@ if (!function_exists('get_cart_count')) {
     }
 }
 
+if (!function_exists('get_cart_pricetotal')) {
+    function get_cart_pricetotal()
+    {
+        return Cart::priceTotal(0, '', '');
+    }
+}
+
+if (!function_exists('get_cart_subtotal')) {
+    function get_cart_subtotal()
+    {
+        return Cart::subtotal(0, '', '');
+    }
+}
+
 if (!function_exists('add_to_cart')) {
     function add_to_cart($data)
     {
@@ -233,3 +247,12 @@ if (!function_exists('update_to_cart')) {
         Cart::update($rowId, $qty);
     }
 }
+
+
+if (!function_exists('destroy_to_cart')) {
+    function destroy_to_cart()
+    {
+        Cart::destroy();
+    }
+}
+

@@ -98,7 +98,7 @@
     </div>
 
 </div>
-</body>
+
 <script>
     // $(document).on('click', 'a:not(no-pjax)', function(event) {
     //     // event.preventDefault();
@@ -141,4 +141,6 @@
         });
     }
 </script>
+
+</body>
 </html>

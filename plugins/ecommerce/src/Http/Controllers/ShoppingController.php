@@ -33,7 +33,7 @@ class ShoppingController
 
     public function thank()
     {
-        return Theme::scope('shopping-thank','packages/ecommerce::shopping-thank');
+        return Theme::scope('shopping-thank');
     }
 
     public function add(Request $request)
