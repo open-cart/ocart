@@ -28,6 +28,6 @@ class DashboardController extends BaseController
 
         $user_widgets = collect($widgetData)->pluck('view')->all();
 
-        return view('core/dashboard::list', compact('user_widgets'));
+        return view('core.dashboard::list', compact('user_widgets'));
     }
 }

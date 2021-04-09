@@ -2,6 +2,7 @@
 namespace Ocart\Blog\Forms;
 
 use Kris\LaravelFormBuilder\Field;
+use Ocart\Blog\Models\Category;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
@@ -34,6 +35,7 @@ class CategoryForm extends FormAbstract
         $categories = [0 => 'None'] + $categories;
 
         $this
+            ->setupModel(new Category())
             ->withCustomFields()
             ->setModuleName('blog_category')
             ->setFormOption('class', 'space-y-4')

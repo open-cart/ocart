@@ -49,7 +49,7 @@ class PluginManagementController extends Controller
             }
         }
 
-        return view('packages/plugin-management::index')
+        return view('packages.plugin-management::index')
             ->with('plugins', $list);
     }
 
@@ -69,7 +69,7 @@ class PluginManagementController extends Controller
 
         if (!$content) {
             return $response
-                ->setMessage(trans('packages/plugin-management::plugin.invalid_plugin'))
+                ->setMessage(trans('packages.plugin-management::plugin.invalid_plugin'))
                 ->setError();
         }
 

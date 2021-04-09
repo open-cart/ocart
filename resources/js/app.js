@@ -34,8 +34,8 @@ window.toast = {
 }
 
 // Toast
-const Toast = require('toastr');
-window.toast = Toast;
+// const Toast = require('toastr');
+// window.toast = Toast;
 
 for(let item of document.getElementsByTagName('img')) {
     item.addEventListener("error", function(e) {

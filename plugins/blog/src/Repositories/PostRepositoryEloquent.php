@@ -66,8 +66,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     {
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
-        })->limit(10)->get();
-
+        });
         $results = $this->paginate($paginate);
 
         return $this->parserResult($results);
@@ -76,9 +75,9 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
     public function getFeature($limit)
     {
         $this->applyConditions([
-//            'is_featured' => 1
+            'is_featured' => 1
         ]);
-        $results = $this->paginate($limit);
+        $results = $this->limit($limit)->get();
 
         return $this->parserResult($results);
     }

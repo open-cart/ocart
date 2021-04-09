@@ -2,10 +2,10 @@
 namespace Ocart\Page\Forms;
 
 use Kris\LaravelFormBuilder\Field;
+use Ocart\Page\Models\Page;
 use Ocart\Page\Supports\Template;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
-use Kris\LaravelFormBuilder\Fields\FormField;
 
 class PageForm extends FormAbstract
 {
@@ -13,6 +13,7 @@ class PageForm extends FormAbstract
     public function buildForm()
     {
         $this
+            ->setupModel(new Page())
             ->withCustomFields()
             ->setModuleName('page')
             ->setFormOption('class', 'space-y-4')

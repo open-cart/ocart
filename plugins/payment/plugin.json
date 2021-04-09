@@ -1,6 +1,6 @@
 {
     "name": "Payment",
-    "namespace": "Ocart\\Blog\\",
+    "namespace": "Ocart\\Payment\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
@@ -10,6 +10,6 @@
     "configKey": "blog",
     "version": "1.0",
     "providers": [
-        "Ocart\\Blog\\Providers\\BlogServiceProvider"
+        "Ocart\\Payment\\Providers\\PaymentServiceProvider"
     ]
 }

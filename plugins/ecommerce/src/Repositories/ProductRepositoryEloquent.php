@@ -34,7 +34,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     public function boot()
     {
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
-        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
@@ -42,9 +42,19 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
     {
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
-        })->limit(10)->get();
+        });
 
         $results = $this->paginate($paginate);
+
+        return $this->parserResult($results);
+    }
+
+    public function getFeature($limit)
+    {
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+        $results = $this->limit($limit)->get();
 
         return $this->parserResult($results);
     }

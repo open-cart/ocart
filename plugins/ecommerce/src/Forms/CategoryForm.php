@@ -4,6 +4,7 @@ namespace Ocart\Ecommerce\Forms;
 use Kris\LaravelFormBuilder\Field;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
+use Ocart\Ecommerce\Models\Category;
 
 class CategoryForm extends FormAbstract
 {
@@ -23,6 +24,7 @@ class CategoryForm extends FormAbstract
         $categories = [0 => 'None'] + $categories;
 
         $this
+            ->setupModel(new Category())
             ->withCustomFields()
             ->setModuleName('ecommerce_category')
             ->setFormOption('class', 'space-y-4')

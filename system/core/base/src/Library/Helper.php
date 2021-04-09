@@ -19,4 +19,9 @@ class Helper
             File::requireOnce($helper);
         }
     }
+
+    public static function countries()
+    {
+        return config('core.base.general.countries', []);
+    }
 }

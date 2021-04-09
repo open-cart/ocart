@@ -28,4 +28,6 @@ namespace {
     class File extends \Illuminate\Support\Facades\File {}
 
     class Assets extends \Ocart\Core\Assets\CustomAsset {}
+
+    class EcommerceHelper extends \Ocart\Ecommerce\Facades\EcommerceHelper {}
 }

@@ -8,6 +8,7 @@ use Illuminate\Routing\ResourceRegistrar;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Assets\CustomAsset;
+use Ocart\Core\Library\Helper;
 use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Library\CustomResourceRegistrar;
@@ -24,9 +25,7 @@ class CoreServiceProvider extends ServiceProvider
     public function register()
     {
         parent::register();
-        foreach (glob(__DIR__.'/../helpers/*.php') as $filename) {
-            require_once $filename;
-        }
+        Helper::autoload(__DIR__ . '/../helpers');
 
 //        $this->app->bind(LengthAwarePaginator::class, CustomPaginator::class);
         $this->app->bind(ResourceRegistrar::class, CustomResourceRegistrar::class);
@@ -46,7 +45,10 @@ class CoreServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->setNamespace('core/base')->loadMigrations()->loadAndPublishTranslations();
+        $this->setNamespace('core/base')
+            ->loadMigrations()
+            ->loadAndPublishConfigurations(['general'])
+            ->loadAndPublishTranslations();
 
         // Route Admin
         if (file_exists(__DIR__ . '/../routes/web.php')) {

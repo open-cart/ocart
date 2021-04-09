@@ -24,6 +24,14 @@
         {!! Assets::renderHeader(['core']) !!}
 
         <script>
+            const bodyLoading = {
+                show() {
+                    $('#loading').show();
+                },
+                hide() {
+                    $('#loading').hide();
+                }
+            }
             var themes = {
                 blue: {
                     bg: 'bg-blue-500'
@@ -56,12 +64,38 @@
                     this.callback(this);
                 }
             }
+            function tableActions() {
+                return {
+                    destroy(id, url) {
+                        confirmDelete.show(() => {
+                            bodyLoading.show();
+                            axios.delete(url, {data: {id}})
+                                .then(res => {
+                                    toast.success('Deleted successfully')
+                                    $.pjax.reload('#body', {});
+                                })
+                                .catch(e => {
+                                    toast.error(e.message);
+                                })
+                                .finally(() => {
+                                    bodyLoading.hide();
+                                })
+                        })
+                    },
+                }
+            }
+            $(function () {
+                $(document).on('click', '[data-toggle=modal]', function () {
+                    const idModal = $(this).attr('data-target');
+                    $(idModal).click();
+                })
+            })
         </script>
         @stack('head')
     </head>
     <body class="font-sans antialiased">
         @stack('bodyPrepend')
-        <div id="body" data-pjax-container="body">
+        <div>
             <div x-data class="min-h-screen bg-gray-100">
             @include('layouts.navigation')
 
@@ -77,7 +111,7 @@
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-                <main class="lg:ml-64">
+                <main class="lg:ml-64" id="body" data-pjax-container="body">
                     {{ $slot }}
                 </main>
             </div>
@@ -121,13 +155,13 @@
                         resolve(true)
                     }, 120)
                 });
-                $('#loading').show();
+                bodyLoading.show();
             })
             $(document).on('pjax:complete', function() {
                 feather.replace({'stroke-width': 1.5})
                 Alpine.start();
                 loading.then(() => {
-                    $('#loading').hide();
+                    bodyLoading.hide();
                 })
                 $('img').on("error", function (e) {
                     e.target.src = '/images/no-image.jpg';

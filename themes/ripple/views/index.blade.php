@@ -47,24 +47,6 @@
             </div>
         </div>
     </div>
-    @if(is_active_plugin('ecommerce'))
-        <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
-            <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-3xl font-bold">Explore Good places</h2>
-                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
-                    và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
-            </div>
-            <div class="container-custom">
-                <div class="flex flex-wrap -mx-4">
-                    @foreach(get_list_products() as $product)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                            <x-theme::card.product :data="$product"/>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </section>
-    @endif
     <section class="sec-post antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
             <h2 class="text-3xl font-bold">How It Works?</h2>
@@ -78,7 +60,7 @@
                         <div class="icon-features-wrap relative">
                             <div class="middle-icon-large-features-box f-light-success">
                                 <svg class="inline-block text-green-500" width="30px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
                             </div>
                         </div>
@@ -93,7 +75,7 @@
                         <div class="icon-features-wrap relative">
                             <div class="middle-icon-large-features-box f-light-warning">
                                 <svg class="inline-block text-yellow-500" width="30px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
                             </div>
                         </div>
@@ -108,7 +90,7 @@
                         <div class="icon-features-wrap relative remove">
                             <div class="middle-icon-large-features-box f-light-blue">
                                 <svg class="inline-block text-blue-500" width="30px" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                                 </svg>
                             </div>
                         </div>
@@ -122,32 +104,33 @@
         </div>
 
     </section>
-    <section class="sec-post antialiased bg-gray-100 font-sans py-16">
-        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Blog</h2>
-            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
-        </div>
-
-        <div class="container-custom">
-            @php
-            $posts = get_list_posts_feature();
-            @endphp
-            <div class="flex flex-wrap -mx-4">
-                @foreach($posts as $post)
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
-                        <x-theme::card.post :data="$post"/>
-                    </div>
-                @endforeach
+@if(is_active_plugin('ecommerce'))
+        <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
+            <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+                <h2 class="text-3xl font-bold">Explore Good places</h2>
+                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
+                    và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
             </div>
-        </div>
-
-    </section>
-    <section class="sec-testimonials">
-        <div class="max-w-6xl mx-auto px-8 py-16">
+            <div class="container-custom">
+                @php
+                    $products = get_list_products_feature(6);
+                @endphp
+                <div class="flex flex-wrap -mx-4">
+                    @foreach($products as $product)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
+    <section class="sec-testimonials py-16">
+        <div class="max-w-6xl mx-auto px-8">
             <div class="relative" x-data="{ activeSlide: 1, slides:[1, 2] }">
                 <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="1" x-show="activeSlide === 1">
                     <div class="h-56 lg:h-auto lg:w-5/12 relative flex items-center justify-center">
-                        <img class="absolute h-full w-full object-cover" src="https://danviet.mediacdn.vn/zoom/480_300/2021/1/26/cover-dv-16115958454521459392617.jpg" alt="" />
+                        <img class="absolute h-full w-full object-cover" src="https://danviet.mediacdn.vn/zoom/480_300/2021/1/26/cover-dv-16115958454521459392617.jpg" alt=""/>
                         <div class="absolute inset-0 bg-indigo-900 opacity-20"></div>
                     </div>
                     <div class="relative lg:w-7/12 bg-white">
@@ -166,7 +149,7 @@
                 </div>
                 <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="2" x-show="activeSlide === 2">
                     <div class="h-56 lg:h-auto lg:w-5/12 relative flex items-center justify-center">
-                        <img class="absolute h-full w-full object-cover" src="https://list.vn/wp-content/uploads/2020/01/m%E1%BB%B9-t%C3%A2m.jpg" alt="" />
+                        <img class="absolute h-full w-full object-cover" src="https://list.vn/wp-content/uploads/2020/01/m%E1%BB%B9-t%C3%A2m.jpg" alt=""/>
                         <div class="absolute inset-0 bg-indigo-900 opacity-20"></div>
                     </div>
                     <div class="relative lg:w-7/12 bg-white">
@@ -200,9 +183,30 @@
             </div>
         </div>
     </section>
+    <section class="sec-post antialiased bg-gray-100 font-sans py-16">
+        <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
+            <h2 class="text-3xl font-bold">Blog</h2>
+            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+        </div>
+
+        <div class="container-custom">
+            @php
+                $posts = get_list_posts_feature(6);
+            @endphp
+            <div class="flex flex-wrap -mx-4">
+                @foreach($posts as $post)
+                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                        <x-theme::card.post :data="$post"/>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+    </section>
     <section class="antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Đối tác của chúng tôi</h2>
+            <h2 class="text-3xl font-bold">Đối tác</h2>
+            <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
         </div>
 
         <div class="container-custom">
@@ -239,8 +243,8 @@
                 </div>
             </div>
         </div>
-
     </section>
+
     <section class="antialiased font-sans bg-blue-600">
         <div class="container-custom call-to-act py-14 block sm:flex items-center">
             <div class="call-to-act-head text-white flex-1 mb-8 sm:mb-0">

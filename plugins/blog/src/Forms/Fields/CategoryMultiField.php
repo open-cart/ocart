@@ -12,6 +12,6 @@ class CategoryMultiField extends FormField
     protected function getTemplate()
     {
 
-        return 'plugins/blog::categories.categories-multi';
+        return 'plugins.blog::categories.categories-multi';
     }
 }

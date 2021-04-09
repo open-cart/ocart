@@ -2,6 +2,7 @@
 namespace Ocart\Blog\Forms;
 
 use Kris\LaravelFormBuilder\Field;
+use Ocart\Blog\Models\Tag;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
 
@@ -11,6 +12,7 @@ class TagForm extends FormAbstract
     public function buildForm()
     {
         $this
+            ->setupModel(new Tag())
             ->withCustomFields()
             ->setModuleName('blog_tag')
             ->setFormOption('class', 'space-y-4')

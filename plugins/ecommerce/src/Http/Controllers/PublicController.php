@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Http\Controllers;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\Theme\Facades\Theme;
 
 class PublicController extends BaseController

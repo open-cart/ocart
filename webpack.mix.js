@@ -25,6 +25,7 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
     require('tailwindcss')('./tailwind.config.js'),
     require('autoprefixer')
 ]);
+
 mix.sass('resources/css/swal.scss', 'public/css')
 
 mix.browserSync({

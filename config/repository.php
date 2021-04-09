@@ -15,7 +15,7 @@ return [
     |
     */
     'pagination' => [
-        'limit' => 5
+        'limit' => 10
     ],
 
     /*

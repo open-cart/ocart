@@ -197,7 +197,6 @@ class MetaBox
             }
 
             $fieldMeta->meta_value = [$value];
-//            $this->metaBoxRepository->createOrUpdate($fieldMeta);
             $fieldMeta->save();
             return true;
         } catch (Exception $ex) {

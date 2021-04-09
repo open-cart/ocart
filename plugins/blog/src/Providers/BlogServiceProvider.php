@@ -7,6 +7,9 @@ namespace Ocart\Blog\Providers;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Blog\Models\Category;
+use Ocart\Blog\Models\Post;
+use Ocart\Blog\Models\Tag;
 use Ocart\Blog\Repositories\CategoryRepositoryEloquent;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
@@ -15,6 +18,7 @@ use Ocart\Blog\Repositories\PostRepositoryEloquent;
 use Ocart\Blog\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\SeoHelper\Facades\SeoHelper;
 
 class BlogServiceProvider extends ServiceProvider
 {
@@ -84,6 +88,10 @@ class BlogServiceProvider extends ServiceProvider
                 ],
                 'active'      => false,
             ]);
+        });
+
+        $this->booted(function () {
+            SeoHelper::registerModule([Post::class, Category::class, Tag::class]);
         });
     }
 }

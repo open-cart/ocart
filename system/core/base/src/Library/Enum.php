@@ -9,7 +9,7 @@ use ReflectionClass;
 use ReflectionException;
 use UnexpectedValueException;
 
-class Enum implements CastsAttributes
+class Enum implements CastsAttributes, \JsonSerializable, \Stringable
 {
 
     /**
@@ -54,6 +54,11 @@ class Enum implements CastsAttributes
     }
 
     public function __toString()
+    {
+        return (string) $this->value;
+    }
+
+    public function jsonSerialize()
     {
         return (string) $this->value;
     }

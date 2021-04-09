@@ -12,7 +12,7 @@ use Ocart\Core\Models\Province;
 
 class ProductLocationForm extends FormAbstract
 {
-    protected $template = 'plugins/eclocation::product-location';
+    protected $template = 'plugins.eclocation::product-location';
 
     public function buildForm()
     {
