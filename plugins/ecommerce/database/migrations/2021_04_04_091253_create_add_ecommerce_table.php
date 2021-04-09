@@ -28,7 +28,7 @@ class CreateAddEcommerceTable extends Migration
             $table->timestamps();
         });
 
-        DB::statement('ALTER TABLE `nguyen`.`ecommerce_products` 
+        DB::statement('ALTER TABLE `ecommerce_products` 
 MODIFY COLUMN `price` double UNSIGNED NOT NULL AFTER `sku`,
 MODIFY COLUMN `price_sell` double UNSIGNED NULL DEFAULT NULL AFTER `price`');
 
