@@ -11,7 +11,7 @@ class UpdateProductTable extends Migration
      */
     public function up()
     {
-        DB::statement('ALTER TABLE `nguyen`.`ecommerce_products` 
+        DB::statement('ALTER TABLE `ecommerce_products` 
 CHANGE COLUMN `price_sell` `sale_price` double UNSIGNED NULL DEFAULT NULL AFTER `price`,
 ADD COLUMN `sale_type` tinyint NOT NULL DEFAULT 0 AFTER `bds_type`,
 ADD COLUMN `sale_at` timestamp NULL DEFAULT NULL AFTER `bds_type`,

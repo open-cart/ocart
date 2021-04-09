@@ -4,23 +4,24 @@ namespace Ocart\EcLocation\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Ocart\EcLocation\Forms\ProductLocationForm;
-use Ocart\Ecommerce\Models\Product;
 
 class HookServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
-        Product::fire(function ($model) {
-            $model->mergeFillable([
-                'district_id',
-                'province_id',
-                'address',
-                'location',
-                'acreage',
-                'bds_type',
-            ]);
-        });
+        if (is_active_plugin('ecommerce')) {
+            \Ocart\Ecommerce\Models\Product::fire(function ($model) {
+                $model->mergeFillable([
+                    'district_id',
+                    'province_id',
+                    'address',
+                    'location',
+                    'acreage',
+                    'bds_type',
+                ]);
+            });
+        }
     }
 
     public function boot()
