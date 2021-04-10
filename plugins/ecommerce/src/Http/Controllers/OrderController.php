@@ -298,9 +298,20 @@ class OrderController extends BaseController
 
     public function buy(Request $request, BaseHttpResponse $response)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|min:8|max:12',
+            'email' => 'required|string|email|max:255|unique:users',
+            'address' => 'required',
+        ]);
+
         $params = $request->all();
+
         if (!empty($params)) {
-            $customer = $params['customer'];
+            $name = $params['name'];
+            $phone = $params['phone'];
+            $email = $params['email'];
+            $address = $params['address'];
             $products = $params['products'];
         }
 
@@ -326,11 +337,11 @@ class OrderController extends BaseController
         if ($order) {
 
             $this->orderAddressRepository->create([
-                'name'     => $customer['name'],
-                'phone'    => $customer['phone'],
-                'email'    => $customer['email'],
+                'name'     => $name,
+                'phone'    => $phone,
+                'email'    => $email,
                 'order_id' => $order->id,
-                'address'  => $customer['address']
+                'address'  => $address
             ]);
 
             foreach ($products as $productItem) {

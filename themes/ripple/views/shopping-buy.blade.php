@@ -3,29 +3,29 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
             <div>
                 <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Đặt hàng</h2>
-                <div x-data="{name: '', phone: '', email: '', address: ''}" class="mb-4">
+                <div x-data="{name: '', phone: '', email: '', address: ''}" class="mb-4 form-order-buy">
                     <div class="mb-4">
                         <div class="relative">
                             <x-theme::form.input x-model="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
-                            <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
+                            <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                         </div>
                     </div>
                     <div class="mb-4">
                         <div class="relative">
-                            <x-theme::form.input x-model="phone" id="phone" type="text" class="pl-12" placeholder="Số điện thoại" required/>
-                            <x-theme::icons.phone class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
+                            <x-theme::form.input x-model="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
+                            <x-theme::icons.phone class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                         </div>
                     </div>
                     <div class="mb-4">
                         <div class="relative">
                             <x-theme::form.input x-model="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
-                            <x-theme::icons.mail class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
+                            <x-theme::icons.mail class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                         </div>
                     </div>
                     <div class="mb-4">
                         <div class="relative">
                             <x-theme::form.input x-model="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
-                            <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-1/2 left-4 transform -translate-y-2/4"/>
+                            <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                         </div>
                     </div>
                     <div class="hero-search-action">
@@ -69,6 +69,14 @@
         function showError(e) {
             if (e?.errors) {
                 toast.error(Object.values(e.errors).find(Boolean));
+
+                var keyserror = Object.keys(e.errors)
+                if (keyserror) {
+                    for (x in keyserror) {
+                        $("#" + keyserror[x]).addClass('text-red-600 border border-red-500 error:focus:border-red-500');
+                    }
+                }
+
             } else {
                 toast.error(e.message);
             }
@@ -79,32 +87,24 @@
             const email = $("#email").val();
             const address = $("#address").val();
 
-            if (phone === undefined || phone === '') {
-                toast.error('Vui lòng nhập số điện thoại!');
-                $("#phone").focus();
-            }
+            $(".form-order-buy input").removeClass('text-red-600 border border-red-500 error:focus:border-red-500');
 
             data = Object.values(order);
-            customer = {
+            this.data = this.data.map(product => ({id: product.id, qty: product.qty}));
+
+            return axios.post('{!! route('shopping-buy') !!}', {
                 name: name,
                 phone: phone,
                 email: email,
-                address: address
-            }
-            this.data = this.data.map(product => ({id: product.id, qty: product.qty}));
-            // bodyLoading.hide();
-
-            return axios.post('{!! route('shopping-buy') !!}', {
-                customer: this.customer,
+                address: address,
                 products: this.data
             }).then((res) => {
                 $(".cart-count").text(0);
-                $.pjax.reload('#body', {
-                    url: '{!! route('shopping-thank') !!}'
-                });
+                {{--// $.pjax.reload('#body', {--}}
+                    {{--url: '{!! route('shopping-thank') !!}'--}}
+                {{--// });--}}
                 toast.success('Order saved');
             }).catch(showError).finally(() => {
-                // bodyLoading.hide();
             });
         }
     </script>
