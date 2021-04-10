@@ -6,7 +6,7 @@
                     <div class="flex justify-between border-b pb-8">
                         <h1 class="font-semibold text-2xl">Giỏ hàng</h1>
                         <h2 class="font-semibold text-2xl">
-                            <span class="cart-count">{{ Cart::count() }}</span> sản phẩm
+                            <span class="cart-count">{{ get_cart_count() }}</span> sản phẩm
                         </h2>
                     </div>
                     <div class="flex mt-10 mb-5">
@@ -59,7 +59,7 @@
                 <div id="summary" class="w-1/4 px-8 py-10 bg-gray-100">
                     <h1 class="font-semibold text-2xl border-b pb-8">Thông tin</h1>
                     <div class="flex justify-between mt-10 mb-5">
-                        <span class="font-semibold text-sm uppercase"><span class="cart-count">{{ Cart::count() }}</span> sản phẩm</span>
+                        <span class="font-semibold text-sm uppercase"><span class="cart-count">{{ get_cart_count() }}</span> sản phẩm</span>
                         <span class="font-semibold text-sm">{{ format_price(get_cart_subtotal()) }}</span>
                     </div>
                     {{--<div>--}}
@@ -78,7 +78,9 @@
                             <span class="font-bold">Tổng đơn</span>
                             <span class="text-red-600 font-bold">{{ format_price(get_cart_pricetotal()) }}</span>
                         </div>
+                        @if(get_cart_count() > 0)
                         <a href="{{ route('shopping-buy') }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
+                        @endif
                     </div>
                 </div>
 
