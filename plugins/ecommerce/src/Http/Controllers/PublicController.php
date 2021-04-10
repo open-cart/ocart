@@ -2,6 +2,7 @@
 
 namespace Ocart\Ecommerce\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
