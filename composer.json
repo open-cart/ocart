@@ -10,6 +10,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "ext-json": "*",
+        "bumbummen99/shoppingcart": "^4.0",
         "appstract/laravel-opcache": "^4.0",
         "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "doctrine/dbal": "^3.0",

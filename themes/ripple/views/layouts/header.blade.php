@@ -1,5 +1,5 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<header x-data="{ openMobile : false }" class="relative bg-white sticky top-0 z-40 lg:z-50">
+<header x-data="{ openMobile : false }" id="header" class="relative bg-white sticky top-0 z-40">
     <div class="container-custom">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-10">
             <div class="flex justify-start lg:w-0 lg:flex-1">
@@ -9,7 +9,7 @@
                 </a>
             </div>
             <div class="-mr-2 -my-2 md:hidden">
-                <button @click="openMobile = !openMobile" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
+                <button x-on:click="openMobile = !openMobile" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
                     <span class="sr-only">Open menu</span>
                     <!-- Heroicon name: outline/menu -->
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -20,7 +20,7 @@
             <nav class="hidden md:flex space-x-10">
                 <div class="relative" x-data="{ open: false, focus: false }">
                     <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
-                    <button @click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
+                    <button x-on:click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
                         <span>Nhà đất bán</span>
                         <!--
                           Heroicon name: solid/chevron-down
@@ -159,6 +159,13 @@
 
             </nav>
             <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+                @if(is_active_plugin('ecommerce'))
+                    <a href="{!! route('shopping-cart') !!}" class="relative z-20">
+                        <x-theme::icons.shopping-cart class="w-6"/>
+                        <small id="cartcount" class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>
+                    </a>
+                @endif
+
                 <a href="{!! route('login') !!}" class="ml-8 items-center justify-center whitespace-nowrap inline-flex px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-blue-600 hover:bg-blue-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="22px" class="mr-1">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -187,8 +194,8 @@
                         <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg" alt="Workflow">
                     </div>
                     <div class="-mr-2">
-                        <button @click="openMobile = !openMobile" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                            <span @click="open : false" class="sr-only">Close menu</span>
+                        <button x-on:click="openMobile = !openMobile" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                            <span x-on:click="open : false">Close menu</span>
                             <!-- Heroicon name: outline/x -->
                             <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

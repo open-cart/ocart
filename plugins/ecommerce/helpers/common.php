@@ -187,3 +187,72 @@ if (!function_exists('decimal_notation')) {
         }
     }
 }
+
+if (!function_exists('get_cart_content')) {
+    function get_cart_content()
+    {
+        return Cart::content();
+    }
+}
+
+if (!function_exists('get_cart_count')) {
+    function get_cart_count()
+    {
+        return Cart::count();
+    }
+}
+
+if (!function_exists('get_cart_pricetotal')) {
+    function get_cart_pricetotal()
+    {
+        return Cart::priceTotal(0, '', '');
+    }
+}
+
+if (!function_exists('get_cart_subtotal')) {
+    function get_cart_subtotal()
+    {
+        return Cart::subtotal(0, '', '');
+    }
+}
+
+if (!function_exists('add_to_cart')) {
+    function add_to_cart($data)
+    {
+        Cart::add([
+            'id' => $data->id,
+            'name' => $data->name,
+            'price' => $data->price,
+            'weight' => 500,
+            'qty' => 1,
+            'options' => [
+                'image' => head($data->images),
+                'categories' => $data->categories,
+                'slug' => $data->slug
+            ]
+        ]);
+    }
+}
+
+if (!function_exists('remove_to_cart')) {
+    function remove_to_cart($rowId)
+    {
+        Cart::remove($rowId);
+    }
+}
+
+if (!function_exists('update_to_cart')) {
+    function update_to_cart($rowId, $qty)
+    {
+        Cart::update($rowId, $qty);
+    }
+}
+
+
+if (!function_exists('destroy_to_cart')) {
+    function destroy_to_cart()
+    {
+        Cart::destroy();
+    }
+}
+
