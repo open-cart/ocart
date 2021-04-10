@@ -15,6 +15,11 @@ Route::get('shopping-thank', function() {
     return Theme::layout('default')->scope('shopping-thank');
 })->name('shopping-thank');
 
-Route::get('user-profile', function() {
-    return Theme::layout('default')->scope('user-profile');
-})->name('user-profile');
+Route::group([
+    'middleware' => 'web'
+],
+    function(){
+        Route::get('user-profile', function () {
+            return Theme::layout('default')->scope('user-profile');
+        })->name('user-profile')->middleware(['auth']);
+    });

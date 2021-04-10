@@ -1,5 +1,5 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
-    <div>
+    @if(Auth::user())
         <div class="container-custom flex flex-wrap py-6">
             @include(Theme::getThemeNamespace('layouts.sidebar-profile'))
 
@@ -8,11 +8,11 @@
                 <div class="p-6 grid grid-cols-3 gap-4">
                     <div class="mb-6">
                         <label>Họ tên</label>
-                        <x-theme::form.input type="text" placeholder="Họ tên" x-bind:disabled="!edit"/>
+                        <x-theme::form.input type="text" placeholder="Họ tên" x-bind:disabled="!edit" value="{{ Auth::user()->name }}"/>
                     </div>
                     <div class="mb-6">
                         <label>Email</label>
-                        <x-theme::form.input type="text" placeholder="Email" disabled/>
+                        <x-theme::form.input type="text" placeholder="Email" disabled value="{{ Auth::user()->email }}"/>
                     </div>
                     <div class="mb-6">
                         <label>Số điện thoại</label>
@@ -39,6 +39,7 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    @endif
 
 </x-guest-layout>
