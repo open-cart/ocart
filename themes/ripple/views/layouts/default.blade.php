@@ -36,7 +36,16 @@
     <div id="body" class="content">{{ $slot }}</div>
     @include(Theme::getThemeNamespace('layouts.footer'))
 
-<!-- This example requires Tailwind CSS v2.0+ -->
+    <div x-data="confirmDelete">
+        <x-confirm-delete
+                id="confirmDelete"
+                @close="hide()"
+                @accept="accept()"
+                class="z-50"
+        ></x-confirm-delete>
+    </div>
+
+    <!-- This example requires Tailwind CSS v2.0+ -->
     <div x-data="{ modal : false }" class="hidden fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" x-ref="dialog" aria-modal="true">
         <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
             <!--
@@ -140,6 +149,29 @@
             // $.pjax.reload('#body', {});
         });
     }
+    const confirmDelete = {
+        callback: () => {},
+        close: () => {},
+        show(accept = () => {}, close = () => {}) {
+            $('#confirmDelete').show();
+            this.callback = accept;
+            this.close = close;
+        },
+        hide() {
+            $('#confirmDelete').hide();
+            this.close(this);
+        },
+        accept() {
+            $('#confirmDelete').hide();
+            this.callback(this);
+        }
+    }
+    $(function () {
+        $(document).on('click', '[data-toggle=modal]', function () {
+            const idModal = $(this).attr('data-target');
+            $(idModal).click();
+        })
+    })
 </script>
 
 </body>

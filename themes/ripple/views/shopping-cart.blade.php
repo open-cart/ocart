@@ -89,17 +89,19 @@
 
         <script type="text/javascript">
             function removeToCart(rowId) {
-                axios.post('{!! route('remove-to-cart') !!}', {
-                    rowId: rowId
-                }).then((res) => {
-                    toast.success(res.message);
-                    $(".cart-count").text(res.count);
-                    $.pjax.reload('#body', {});
-                }).catch(e => {
-                    toast.error(e.message)
-                }).finally(() => {
-                    // $.pjax.reload('#body', {});
-                })
+                confirmDelete.show(() => {
+                    axios.post('{!! route('remove-to-cart') !!}', {
+                        rowId: rowId
+                    }).then((res) => {
+                        toast.success(res.message);
+                        $(".cart-count").text(res.count);
+                        $.pjax.reload('#body', {});
+                    }).catch(e => {
+                        toast.error(e.message)
+                    }).finally(() => {
+                        // $.pjax.reload('#body', {});
+                    })
+                });
             }
 
             function updateToCart(rowId, qty) {
