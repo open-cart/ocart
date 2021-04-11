@@ -58,7 +58,16 @@ class ShoppingController
         }
         remove_to_cart($rowID);
         $cart_count = get_cart_count();
-        return json_encode(['status' => 1, 'data' => $rowID, 'count' => $cart_count, 'message' => "Xóa sản phẩm khỏi giỏ hàng thành công."]);
+        $cart_subTotal = format_price(get_cart_subtotal());
+        $cart_priceTotal = format_price(get_cart_pricetotal());
+        return json_encode([
+            'status' => 1,
+            'data' => $rowID,
+            'count' => $cart_count,
+            'subTotal' => $cart_subTotal,
+            'priceTotal' => $cart_priceTotal,
+            'message' => "Xóa sản phẩm khỏi giỏ hàng thành công."
+        ]);
 
     }
 
@@ -71,7 +80,15 @@ class ShoppingController
         }
         update_to_cart($rowID, $qty);
         $cart_count = get_cart_count();
-        return json_encode(['status' => 1, 'data' => $rowID, 'count' => $cart_count, 'message' => "Cập nhật giỏ hàng thành công."]);
-
+        $cart_subTotal = format_price(get_cart_subtotal());
+        $cart_priceTotal = format_price(get_cart_pricetotal());
+        return json_encode([
+            'status' => 1,
+            'data' => $rowID,
+            'count' => $cart_count,
+            'subTotal' => $cart_subTotal,
+            'priceTotal' => $cart_priceTotal,
+            'message' => "Cập nhật giỏ hàng thành công."
+        ]);
     }
 }
