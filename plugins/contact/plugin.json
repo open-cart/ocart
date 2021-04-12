@@ -1,6 +1,6 @@
 {
-    "name": "Ecommerce Bất động sản",
-    "namespace": "Ocart\\EcLocation\\",
+    "name": "Contact",
+    "namespace": "Ocart\\Contact\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
@@ -10,10 +10,7 @@
     "configKey": "blog",
     "version": "1.0",
     "providers": [
-        "Ocart\\EcLocation\\Providers\\EcLocationServiceProvider",
-        "Ocart\\EcLocation\\Providers\\HookServiceProvider"
-    ],
-    "require": [
-        "ecommerce"
+        "Ocart\\Contact\\Providers\\ContactServiceProvider",
+        "Ocart\\Contact\\Providers\\HookServiceProvider"
     ]
 }

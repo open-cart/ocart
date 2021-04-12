@@ -30,9 +30,6 @@ class HookServiceProvider extends ServiceProvider
 
     protected function registerMenu()
     {
-        function featherIcon($name) {
-            return '<i data-feather="'.$name.'"></i>';
-        }
 
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
@@ -40,7 +37,7 @@ class HookServiceProvider extends ServiceProvider
                 'priority'    => 1,
                 'parent_id'   => null,
                 'name'        => 'Cửa hàng',
-                'icon'        => featherIcon('shopping-cart'),
+                'icon'        => null,
                 'url'         => '',
                 'permissions' => [],
                 'active'      => false,
