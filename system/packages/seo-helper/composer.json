@@ -1,6 +1,6 @@
 {
     "name": "ocart/seo-helper",
-    "description": "Theme package for Botble CMS application",
+    "description": "Seo for Ocart",
     "type": "package",
     "autoload": {
         "psr-4": {

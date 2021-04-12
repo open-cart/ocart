@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "72623a4b1334fb94cd4bacb4f49e3ad5",
+    "content-hash": "a71544ebbe1063553e7c8c3ff75a7728",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -519,43 +519,6 @@
             },
             "abandoned": "diglactic/laravel-breadcrumbs",
             "time": "2019-12-30T22:50:51+00:00"
-        },
-        {
-            "name": "dnoegel/php-xdg-base-dir",
-            "version": "v0.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/dnoegel/php-xdg-base-dir.git",
-                "reference": "8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/dnoegel/php-xdg-base-dir/zipball/8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd",
-                "reference": "8f8a6e48c5ecb0f991c2fdcf5f154a47d85f9ffd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~7.0|~6.0|~5.0|~4.8.35"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "XdgBaseDir\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "implementation of xdg base directory specification for php",
-            "support": {
-                "issues": "https://github.com/dnoegel/php-xdg-base-dir/issues",
-                "source": "https://github.com/dnoegel/php-xdg-base-dir/tree/v0.1.1"
-            },
-            "time": "2019-12-04T15:06:13+00:00"
         },
         {
             "name": "doctrine/cache",
@@ -2682,11 +2645,11 @@
         },
         {
             "name": "ocart/acl",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/acl",
-                "reference": "003239613b6d3b302db116ec0776d6a510a09599"
+                "reference": "0d224a2f91856fa161a6fa60027f31a0a109578b"
             },
             "type": "library",
             "extra": {
@@ -2717,11 +2680,11 @@
         },
         {
             "name": "ocart/core",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/core",
-                "reference": "53fa1e037d7eec136c6cc113e25764f76ef03456"
+                "reference": "3bdea70bd537cf6321be369c5c1aebcf6955ee4f"
             },
             "require": {
                 "botble/assets": "^1.0"
@@ -2759,11 +2722,11 @@
         },
         {
             "name": "ocart/media",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/media",
-                "reference": "85751e143fee7386446d0a16bba1098f07780cc7"
+                "reference": "024ecba1d5235383b529e03ad91cda8974bf7ff0"
             },
             "type": "library",
             "extra": {
@@ -2794,11 +2757,11 @@
         },
         {
             "name": "ocart/page",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/page",
-                "reference": "e79aeab0f600310505fcd25dc7b0fde7acd5be7f"
+                "reference": "4901387cb79e501fa999cc5279bc18a87e02a952"
             },
             "type": "library",
             "extra": {
@@ -2830,11 +2793,11 @@
         },
         {
             "name": "ocart/plugin-management",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/plugin-management",
-                "reference": "98a80588011994bb392cefb99c431f92a54eea1a"
+                "reference": "46f0c22ce87d277b1eda24f2e6c68f4293fd73df"
             },
             "type": "library",
             "extra": {
@@ -2865,11 +2828,11 @@
         },
         {
             "name": "ocart/seo-helper",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/seo-helper",
-                "reference": "261766c3c0cbb6f6aeb5d7c85ecbdbe07378b05f"
+                "reference": "2db79e8ae4bcc6f4e2f27cf6ac3136e3819c5883"
             },
             "require": {
                 "artesaos/seotools": "^0.20.0"
@@ -2887,18 +2850,44 @@
                     "Ocart\\SeoHelper\\": "src"
                 }
             },
-            "description": "Theme package for Botble CMS application",
+            "description": "Seo for Ocart",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ocart/shortcode",
+            "version": "dev-nguyen",
+            "dist": {
+                "type": "path",
+                "url": "./system/packages/shortcode",
+                "reference": "f501404a2665b72e0baeb24e2735206fdd373bb3"
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ocart\\Shortcode\\Providers\\ShortcodeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ocart\\Shortcode\\": "src"
+                }
+            },
+            "description": "Shortcode package for Ocart",
             "transport-options": {
                 "relative": true
             }
         },
         {
             "name": "ocart/theme",
-            "version": "dev-bay_cart",
+            "version": "dev-nguyen",
             "dist": {
                 "type": "path",
                 "url": "./system/packages/theme",
-                "reference": "6fd241bfa02fcea2d37b3bf43d3a97d0a4fa6958"
+                "reference": "97e8d072ce26ab365fd791d7fd78f4bd14f36ab1"
             },
             "require": {
                 "laravelium/sitemap": "8.*"
@@ -2923,16 +2912,16 @@
         },
         {
             "name": "opis/closure",
-            "version": "3.6.1",
+            "version": "3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5"
+                "reference": "06e2ebd25f2869e54a306dda991f7db58066f7f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5",
-                "reference": "943b5d70cc5ae7483f6aff6ff43d7e34592ca0f5",
+                "url": "https://api.github.com/repos/opis/closure/zipball/06e2ebd25f2869e54a306dda991f7db58066f7f6",
+                "reference": "06e2ebd25f2869e54a306dda991f7db58066f7f6",
                 "shasum": ""
             },
             "require": {
@@ -2982,9 +2971,9 @@
             ],
             "support": {
                 "issues": "https://github.com/opis/closure/issues",
-                "source": "https://github.com/opis/closure/tree/3.6.1"
+                "source": "https://github.com/opis/closure/tree/3.6.2"
             },
-            "time": "2020-11-07T02:01:34+00:00"
+            "time": "2021-04-09T13:42:10+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3484,20 +3473,19 @@
         },
         {
             "name": "psy/psysh",
-            "version": "v0.10.7",
+            "version": "v0.10.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobthecow/psysh.git",
-                "reference": "a395af46999a12006213c0c8346c9445eb31640c"
+                "reference": "e4573f47750dd6c92dca5aee543fa77513cbd8d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/a395af46999a12006213c0c8346c9445eb31640c",
-                "reference": "a395af46999a12006213c0c8346c9445eb31640c",
+                "url": "https://api.github.com/repos/bobthecow/psysh/zipball/e4573f47750dd6c92dca5aee543fa77513cbd8d3",
+                "reference": "e4573f47750dd6c92dca5aee543fa77513cbd8d3",
                 "shasum": ""
             },
             "require": {
-                "dnoegel/php-xdg-base-dir": "0.1.*",
                 "ext-json": "*",
                 "ext-tokenizer": "*",
                 "nikic/php-parser": "~4.0|~3.0|~2.0|~1.3",
@@ -3554,9 +3542,9 @@
             ],
             "support": {
                 "issues": "https://github.com/bobthecow/psysh/issues",
-                "source": "https://github.com/bobthecow/psysh/tree/v0.10.7"
+                "source": "https://github.com/bobthecow/psysh/tree/v0.10.8"
             },
-            "time": "2021-03-14T02:14:56+00:00"
+            "time": "2021-04-10T16:23:39+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -6572,16 +6560,16 @@
         },
         {
             "name": "yajra/laravel-datatables-oracle",
-            "version": "v9.17.1",
+            "version": "v9.17.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yajra/laravel-datatables.git",
-                "reference": "53b3f8532b5021ffda813a8a54ecca121834ddb7"
+                "reference": "a970ba1159df6940a87fabcf44f571ef14b57927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/53b3f8532b5021ffda813a8a54ecca121834ddb7",
-                "reference": "53b3f8532b5021ffda813a8a54ecca121834ddb7",
+                "url": "https://api.github.com/repos/yajra/laravel-datatables/zipball/a970ba1159df6940a87fabcf44f571ef14b57927",
+                "reference": "a970ba1159df6940a87fabcf44f571ef14b57927",
                 "shasum": ""
             },
             "require": {
@@ -6641,7 +6629,7 @@
             ],
             "support": {
                 "issues": "https://github.com/yajra/laravel-datatables/issues",
-                "source": "https://github.com/yajra/laravel-datatables/tree/v9.17.1"
+                "source": "https://github.com/yajra/laravel-datatables/tree/v9.17.2"
             },
             "funding": [
                 {
@@ -6653,7 +6641,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-03-23T01:32:51+00:00"
+            "time": "2021-04-12T04:03:34+00:00"
         }
     ],
     "packages-dev": [
@@ -6809,16 +6797,16 @@
         },
         {
             "name": "facade/flare-client-php",
-            "version": "1.6.1",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/flare-client-php.git",
-                "reference": "f2b0969f2d9594704be74dbeb25b201570a98098"
+                "reference": "6bf380035890cb0a09b9628c491ae3866b858522"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/f2b0969f2d9594704be74dbeb25b201570a98098",
-                "reference": "f2b0969f2d9594704be74dbeb25b201570a98098",
+                "url": "https://api.github.com/repos/facade/flare-client-php/zipball/6bf380035890cb0a09b9628c491ae3866b858522",
+                "reference": "6bf380035890cb0a09b9628c491ae3866b858522",
                 "shasum": ""
             },
             "require": {
@@ -6862,7 +6850,7 @@
             ],
             "support": {
                 "issues": "https://github.com/facade/flare-client-php/issues",
-                "source": "https://github.com/facade/flare-client-php/tree/1.6.1"
+                "source": "https://github.com/facade/flare-client-php/tree/1.7.0"
             },
             "funding": [
                 {
@@ -6870,20 +6858,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-08T08:50:01+00:00"
+            "time": "2021-04-12T09:30:36+00:00"
         },
         {
             "name": "facade/ignition",
-            "version": "2.8.2",
+            "version": "2.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "cb7f790e6306caeb4a9ffe21e59942b7128cc630"
+                "reference": "a8201d51aae83addceaef9344592a3b068b5d64d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/cb7f790e6306caeb4a9ffe21e59942b7128cc630",
-                "reference": "cb7f790e6306caeb4a9ffe21e59942b7128cc630",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/a8201d51aae83addceaef9344592a3b068b5d64d",
+                "reference": "a8201d51aae83addceaef9344592a3b068b5d64d",
                 "shasum": ""
             },
             "require": {
@@ -6947,7 +6935,7 @@
                 "issues": "https://github.com/facade/ignition/issues",
                 "source": "https://github.com/facade/ignition"
             },
-            "time": "2021-04-08T10:42:53+00:00"
+            "time": "2021-04-09T20:45:59+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -7449,16 +7437,16 @@
         },
         {
             "name": "nunomaduro/collision",
-            "version": "v5.3.0",
+            "version": "v5.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/collision.git",
-                "reference": "aca63581f380f63a492b1e3114604e411e39133a"
+                "reference": "41b7e9999133d5082700d31a1d0977161df8322a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/aca63581f380f63a492b1e3114604e411e39133a",
-                "reference": "aca63581f380f63a492b1e3114604e411e39133a",
+                "url": "https://api.github.com/repos/nunomaduro/collision/zipball/41b7e9999133d5082700d31a1d0977161df8322a",
+                "reference": "41b7e9999133d5082700d31a1d0977161df8322a",
                 "shasum": ""
             },
             "require": {
@@ -7533,7 +7521,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-01-25T15:34:13+00:00"
+            "time": "2021-04-09T13:38:32+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -9385,7 +9373,8 @@
         "ocart/page": 20,
         "ocart/plugin-management": 20,
         "ocart/seo-helper": 20,
-        "ocart/theme": 20
+        "ocart/theme": 20,
+        "ocart/shortcode": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

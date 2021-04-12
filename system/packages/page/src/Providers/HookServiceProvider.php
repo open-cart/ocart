@@ -7,6 +7,7 @@ namespace Ocart\Page\Providers;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\SeoHelper\Facades\SeoHelper;
+use Ocart\Shortcode\View\View;
 use Ocart\Theme\Facades\Theme;
 
 class HookServiceProvider extends ServiceProvider
@@ -44,5 +45,14 @@ class HookServiceProvider extends ServiceProvider
                 'page' => $page
             ];
         });
+    }
+
+    public function boot()
+    {
+        if (function_exists('shortcode')) {
+            view()->composer(['theme::page'], function (View $view) {
+                $view->withShortcodes();
+            });
+        }
     }
 }
