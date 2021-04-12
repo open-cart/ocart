@@ -2,6 +2,12 @@
     .container-custom {
         @apply max-w-7xl mx-auto px-4 sm:px-6;
     }
+    .toast{
+        @apply p-8;
+    }
+    .toast-message {
+        @apply text-xl;
+    }
     .toast-top-right {
         @apply fixed top-4 right-4 z-50;
     }
