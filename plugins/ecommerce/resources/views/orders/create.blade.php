@@ -189,11 +189,11 @@
                         </div>
                     </div>
                 </div>
-                <div x-on:before-show="$store.order.total = totalAmount(); $store.order.payment_status = null" x-on:ok="submit()">
+                <div x-on:before-show="showCreateModal()">
                     <x-plugins.ecommerce::orders.create-modal/>
                 </div>
 
-                <div x-on:before-show="$store.order.total = totalAmount(); $store.order.payment_status = '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'" x-on:ok="submit()">
+                <div x-on:before-show="showCreatePaidModal()">
                     <x-plugins.ecommerce::orders.create-modal target="order-create-paid-modal"/>
                 </div>
 
@@ -201,7 +201,7 @@
                     <x-plugins.ecommerce::orders.update-address-modal/>
                 </div>
 
-                <div x-on:before-show="$store.customer = {}" x-on:ok="createNewCustomer($event)">
+                <div x-on:before-show="showCreateNewCustomerForm()" x-on:ok="createNewCustomer($event)">
                     <x-plugins.ecommerce::orders.create-customer-modal/>
                 </div>
 
@@ -226,6 +226,7 @@
             } else {
                 toast.error(e.message);
             }
+            throw e;
         }
         function orderData() {
             function productItem(product) {
@@ -234,6 +235,7 @@
                 };
                 return product;
             }
+
             return {
                 customer: null,
                 customer_addresses: [],
@@ -249,7 +251,7 @@
                     const amount = this.amount();
                     let discount_amount = discount;
                     if (discount_type === '2') {
-                        discount_amount = amount / (100/discount);
+                        discount_amount = amount / (100 / discount);
                     }
                     if (discount_amount !== this.discount_amount) {
                         this.discount_amount = discount_amount;
@@ -265,9 +267,13 @@
                     e.detail.qty = 1;
                     this.data.push(new productItem(e.detail));
                 },
-                createNewCustomer(customer) {
-                    bodyLoading.show();
-                    axios.post('{!! route('ecommerce.customers.create-customer-when-creating-order') !!}', customer.detail)
+                showCreateNewCustomerForm() {
+                    this.$store.customer = {};
+                    this.$store.order.createNewCustomer = this.createNewCustomer.bind(this);
+                },
+                createNewCustomer() {
+                    this.$store.order.loading = true;
+                    return axios.post('{!! route('ecommerce.customers.create-customer-when-creating-order') !!}', this.$store.customer)
                         .then(res => {
                             this.customer = res.data?.customer;
                             toast.success('Customer saved');
@@ -275,7 +281,7 @@
                         })
                         .catch(showError)
                         .finally(() => {
-                            bodyLoading.hide();
+                            this.$store.order.loading = false;
                         })
                 },
                 changeCustomer(e) {
@@ -317,8 +323,18 @@
                     this.changeDiscount()
                     return this.amount() - this.discount_amount;
                 },
+                showCreateModal() {
+                    this.$store.order.submit = this.submit.bind(this);
+                    this.$store.order.total = this.totalAmount();
+                    this.$store.order.payment_status = null
+                },
+                showCreatePaidModal() {
+                    this.$store.order.submit = this.submit.bind(this);
+                    this.$store.order.total = this.totalAmount();
+                    this.$store.order.payment_status = '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'
+                },
                 submit() {
-                    bodyLoading.show();
+                    this.$store.order.loading = true;
                     return axios.post('{!! route('ecommerce.orders.store') !!}', {
                         customer_id: this.customer?.id,
                         customer_address: this.customer_address,
@@ -334,10 +350,10 @@
                         });
                         toast.success('Order saved');
                     }).catch(showError).finally(() => {
-                        bodyLoading.hide();
+                        this.$store.order.loading = false;
                     })
                 }
-            }
+            };
         }
     </script>
 </x-app-layout>
