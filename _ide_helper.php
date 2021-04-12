@@ -30,4 +30,6 @@ namespace {
     class Assets extends \Ocart\Core\Assets\CustomAsset {}
 
     class EcommerceHelper extends \Ocart\Ecommerce\Facades\EcommerceHelper {}
+
+    class EmailHandler extends \Ocart\Core\Facades\EmailHandler {}
 }
