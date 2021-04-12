@@ -8,6 +8,14 @@ Route::group(
         'namespace' => 'Ocart\\Core\\Http\\Controllers',
     ],
     function() {
+        Route::get('/mailable', function () {
+            return \Ocart\Core\Facades\EmailHandler::create(\Illuminate\Support\Facades\Mail::to('nguyen@gmail.com'))
+                ->preview()
+                ->sendUsingTemplate('plugins.contact::emails.contact', [
+                    'contact_content' => 'nguen'
+                ]);
+        });
+
         Route::get('/location/district', 'LocationController@getDistrict')
             ->name('location.district');
 

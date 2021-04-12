@@ -65,20 +65,25 @@ class PluginManagementServiceProvider extends ServiceProvider
 
         $loader = new ClassLoader();
 
-//        $plugins = AdminConfig::getPluginCode();
-
         $activatedPlugins = get_active_plugins();
 
         $providers = [];
         $namespaces = [];
 
         foreach ($activatedPlugins as $plugin) {
-            $config = get_file_data(plugin_path($plugin . '/plugin.json'));
+            $config = get_file_data(plugin_path($plugin . '/plugin.json'), true);
 
             $namespace = $config->namespace;
 
-            $namespaces[plugin_path($plugin . '/src')] = $namespace;
-            $providers = array_merge($providers, $config->providers);
+            if (!isset($config->require) || count($config->require) == 0) {
+                $namespaces[plugin_path($plugin . '/src')] = $namespace;
+                $providers = array_merge($providers, $config->providers);
+            } else {
+                if ($this->checkRequirePlugin($activatedPlugins, $config->require)) {
+                    $namespaces[plugin_path($plugin . '/src')] = $namespace;
+                    $providers = array_merge($providers, $config->providers);
+                }
+            }
         }
 
         foreach ($namespaces as $path => $namespace) {
@@ -94,5 +99,16 @@ class PluginManagementServiceProvider extends ServiceProvider
 
             $this->app->register($provider);
         }
+    }
+
+    protected function checkRequirePlugin($activatedPlugins, $require)
+    {
+        foreach ($require as $plugin) {
+            if (!in_array($plugin, $activatedPlugins)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

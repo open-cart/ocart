@@ -10,20 +10,20 @@
 
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-9 space-y-4">
+                    @if ($showFields)
                     <div class=" bg-white p-6 rounded-md space-y-4">
-                        @if($showFields)
-                            @foreach ($fields as $key => $field)
-                                @if ($field->getName() == $form->getBreakFieldPoint())
-                                    @break
-                                @else
-                                    @unset($fields[$key])
-                                @endif
-                                @if( ! in_array($field->getName(), $exclude) )
-                                    {!! $field->render() !!}
-                                @endif
-                            @endforeach
-                        @endif
+                        @foreach ($fields as $key => $field)
+                            @if ($field->getName() == $form->getBreakFieldPoint())
+                                @break
+                            @else
+                                @unset($fields[$key])
+                            @endif
+                            @if( ! in_array($field->getName(), $exclude) )
+                                {!! $field->render() !!}
+                            @endif
+                        @endforeach
                     </div>
+                    @endif
 
                     @foreach ($form->getMetaBoxes() as $key => $metaBox)
                         {!! $form->getMetaBox($key) !!}
