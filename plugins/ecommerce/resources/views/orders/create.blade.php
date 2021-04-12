@@ -304,9 +304,11 @@
                 },
                 openModelEditAdress() {
                     this.$store.customer = {...this.customer_address};
+                    this.$store.order.updateOrderAddress = this.updateOrderAddress.bind(this);
                 },
                 updateOrderAddress() {
                     this.customer_address = {...this.$store.customer};
+                    return Promise.resolve();
                 },
                 removeCustomer() {
                     this.customer = null;
