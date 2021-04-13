@@ -229,10 +229,10 @@
                         </div>
                     </div>
                 </div>
-                <div x-on:ok="confirmPayment">
+                <div x-on:before-show="openConfirmPayment()">
                     <x-plugins.ecommerce::orders.confirm-payment-modal/>
                 </div>
-                <div x-on:before-show="openModelEditAdress()" x-on:ok="updateOrderAddress">
+                <div x-on:before-show="openModelEditAdress()">
                     <x-plugins.ecommerce::orders.update-address-modal/>
                 </div>
             </div>
@@ -243,12 +243,14 @@
             name: '',
             email: ''
         })
+        Spruce.store('order', {})
         function showError(e) {
             if (e?.errors) {
                 toast.error(Object.values(e.errors).find(Boolean));
             } else {
                 toast.error(e.message);
             }
+            throw e;
         }
         function orderUpdateData() {
             return {
@@ -268,17 +270,17 @@
                 },
                 openModelEditAdress() {
                     this.$store.customer = {...this.customer_address};
+                    this.$store.order.updateOrderAddress = this.updateOrderAddress.bind(this);
                 },
                 updateOrderAddress() {
-                    // update-shipping-address
-                    bodyLoading.show();
-                    axios.post('{!! route('ecommerce.orders.update-shipping-address', ['id' => $order->address->id]) !!}', {
+                    this.$store.order.loading = true;
+                    return axios.post('{!! route('ecommerce.orders.update-shipping-address', ['id' => $order->address->id]) !!}', {
                         ...this.$store.customer
                     }).then(res => {
                         this.customer_address = this.$store.customer;
                         toast.success('Address saved');
                     }).catch(showError).finally(() => {
-                        bodyLoading.hide();
+                        this.$store.order.loading = false;
                     })
                 },
                 confirmOrder() {
@@ -292,16 +294,18 @@
                         bodyLoading.hide();
                     })
                 },
+                openConfirmPayment() {
+                    this.$store.order.confirmPayment = this.confirmPayment.bind(this);
+                },
                 confirmPayment() {
-                    bodyLoading.show();
+                    this.$store.order.loading = true;
                     axios.post('{!! route('ecommerce.orders.confirm-payment') !!}', {
                         id: {!! $order->id !!}
                     }).then(res => {
-                        // this.order.is_confirmed = 1;
+                        $.pjax.reload('#body');
                         toast.success('Confirm payment success');
                     }).catch(showError).finally(() => {
-                        // bodyLoading.hide();
-                        $.pjax.reload('#body');
+                        this.$store.order.loading = false;
                     })
                 },
                 markAsFulfilled() {
