@@ -336,6 +336,20 @@ class OrderController extends BaseController
 
         if ($order) {
 
+            $payment = $this->paymentRepository->create([
+                'amount'          => $order->amount,
+                'currency'        => get_application_currency()->title,
+                'payment_channel' => $request->input('payment_method', 'cod'),
+                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING),
+                'payment_type'    => 'confirm',
+                'order_id'        => $order->id,
+                'charge_id'       => Str::upper(Str::random(10)),
+                'user_id'         => Auth::user()->getAuthIdentifier(),
+            ]);
+
+            $order->payment_id = $payment->id;
+            $order->save();
+
             $this->orderAddressRepository->create([
                 'name'     => $name,
                 'phone'    => $phone,

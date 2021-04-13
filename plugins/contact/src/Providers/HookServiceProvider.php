@@ -35,5 +35,15 @@ class HookServiceProvider extends ServiceProvider
                     'active' => false,
                 ]);
         });
+
+        add_shortcode('contact-form', 'contact-form', 'Contact Form', function ($compile) {
+            $view = apply_filters(CONTACT_FORM_TEMPLATE_VIEW, 'plugins.contact::shortcode.contact', $compile);
+
+            if ($compile->view && view()->exists($compile->view)) {
+                $view = $compile->view;
+            }
+
+           return view($view, $compile->toArray());
+        });
     }
 }

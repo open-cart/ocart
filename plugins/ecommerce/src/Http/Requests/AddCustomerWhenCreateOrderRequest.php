@@ -16,7 +16,7 @@ class AddCustomerWhenCreateOrderRequest extends FormRequest
     public function rules()
     {
         return [
-//            'name'    => 'required|max:120',
+            'name'    => 'required|max:120',
         ];
     }
 }

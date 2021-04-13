@@ -12,7 +12,7 @@
     >
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"  x-on:click="close"></div>
 
-        <div class="modal-container bg-white md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
+        <div class="modal-container bg-white mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
             <div
                     x-on:click="close"
                     class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">

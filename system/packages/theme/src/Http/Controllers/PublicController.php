@@ -20,6 +20,6 @@ class PublicController
             abort(404);
         }
 
-        return \Theme::scope('page', $result);
+        return \Theme::scope('page', $result, 'packages.page::themes.page');
     }
 }

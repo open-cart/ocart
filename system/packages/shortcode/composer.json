@@ -1,0 +1,19 @@
+{
+  "name": "ocart/shortcode",
+  "description": "Shortcode package for Ocart",
+  "type": "package",
+  "autoload": {
+    "psr-4": {
+      "Ocart\\Shortcode\\": "src"
+    }
+  },
+  "require": {
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Ocart\\Shortcode\\Providers\\ShortcodeServiceProvider"
+      ]
+    }
+  }
+}
