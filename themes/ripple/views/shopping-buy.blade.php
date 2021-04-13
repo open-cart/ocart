@@ -1,5 +1,5 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
-    <div class="container-custom mt-10">
+    <div class="container-custom my-10">
         @if(get_cart_count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="mb-4">
                         @foreach($cart as $item)
-                            <div class="flex items-center border-b hover:bg-gray-100 px-6 py-5">
+                            <div class="flex items-center border-b hover:bg-gray-100 px-2 md:px-6 py-5">
                                 <div class="flex w-4/5"> <!-- product -->
                                     <div class="w-16">
                                         <img class="h-16" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
@@ -54,7 +54,7 @@
                                         <span class="text-red-500 text-xs">{{ format_price($item->price) }}</span>
                                     </div>
                                 </div>
-                                <div class="text-right w-1/5 font-semibold text-sm">Số lượng: {{ $item->qty }}</div>
+                                <div class="text-right w-1/5 font-semibold text-sm"><span class="hidden md:inline-block">Số lượng: </span> {{ $item->qty }}</div>
                             </div>
                         @endforeach
                     </div>

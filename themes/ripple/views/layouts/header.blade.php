@@ -1,14 +1,22 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <header x-data="{ openMobile : false }" id="header" class="relative bg-white sticky top-0 z-40">
     <div class="container-custom">
-        <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 md:justify-start md:space-x-10">
+        <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 lg:justify-start lg:space-x-10">
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{!! route('home') !!}">
                     <span class="sr-only">Workflow</span>
                     <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" alt="">
                 </a>
             </div>
-            <div class="-mr-2 -my-2 md:hidden">
+            <div class="-mr-2 -my-2 lg:hidden">
+
+                @if(is_active_plugin('ecommerce'))
+                    <a href="{!! route('shopping-cart') !!}" class="relative z-20 mr-2 bg-white rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
+                        <x-theme::icons.shopping-cart class="w-6"/>
+                        <small id="cartcount" class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>
+                    </a>
+                @endif
+
                 <button x-on:click="openMobile = !openMobile" type="button" class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" aria-expanded="false">
                     <span class="sr-only">Open menu</span>
                     <!-- Heroicon name: outline/menu -->
@@ -17,7 +25,7 @@
                     </svg>
                 </button>
             </div>
-            <nav class="hidden md:flex space-x-10">
+            <nav class="hidden lg:flex space-x-10">
                 <div class="relative" x-data="{ open: false, focus: false }">
                     <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
                     <button x-on:click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
@@ -158,7 +166,7 @@
                 </a>
 
             </nav>
-            <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div class="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0">
                 @if(is_active_plugin('ecommerce'))
                     <a href="{!! route('shopping-cart') !!}" class="relative z-20">
                         <x-theme::icons.shopping-cart class="w-6"/>
@@ -186,7 +194,7 @@
         From: "opacity-100 scale-100"
         To: "opacity-0 scale-95"
     -->
-    <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right hidden">
+    <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right" style="display:none;">
         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div class="pt-5 pb-6 px-5">
                 <div class="flex items-center justify-between">

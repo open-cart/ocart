@@ -8,9 +8,7 @@
     </div>
 
     <div class="container-custom flex flex-wrap pb-2">
-        @include(Theme::getThemeNamespace('layouts.sidebar-all'))
-
-        <div class="lg:w-3/4 w-full">
+        <div class="lg:w-3/4 w-full md:order-last">
             <div class="flex flex-wrap -mx-4">
                 @foreach($posts as $post)
                     <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4 pt-0">
@@ -21,6 +19,9 @@
                 @endforeach
             </div>
         </div>
+
+        @include(Theme::getThemeNamespace('layouts.sidebar-all'))
+
     </div>
 
 </x-guest-layout>

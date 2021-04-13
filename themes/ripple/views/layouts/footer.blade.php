@@ -1,7 +1,7 @@
 <footer class="text-gray-300 dark-footer skin-dark-footer">
     <div class="bg-gray-800">
         <div class="container-custom py-20">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="footer-widget">
                     <a href="{!! route('home') !!}">
                         <img src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" class="img-footer w-2/3 mb-3" alt="">
