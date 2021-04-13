@@ -27,29 +27,31 @@
             </div>
         </div>
         <div class="hero-search-action">
-            <button onclick="submit()" type="button" class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Gửi cho chúng tôi</button>
+            <button onclick="submit()" type="button" class="btn text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">
+                <x-theme::icons.loading class="loading-icon animate-spin -ml-1 mr-3 text-white" style="display: none"/>
+                Gửi cho chúng tôi
+            </button>
         </div>
     </div>
 </div>
 <script>
     function showError(e) {
-        console.log('e', e);
-
         if (e?.errors) {
             toast.error(Object.values(e.errors).find(Boolean));
 
             var keyserror = Object.keys(e.errors)
-            // if (keyserror) {
-            //     for (x in keyserror) {
-            //         $("input[name=" + keyserror[x] + ").addClass('text-red-600 border border-red-500 error:focus:border-red-500');
-            //     }
-            // }
+            if (keyserror) {
+                for (x in keyserror) {
+                    $("input[name=" + keyserror[x] + "]").addClass('text-red-600 border border-red-500 error:focus:border-red-500');
+                }
+            }
 
         } else {
             toast.error(e.message);
         }
     }
     function submit() {
+        $(".loading-icon").show();
         const name = $("input[name=name]").val();
         const phone = $("input[name=phone]").val();
         const email = $("input[name=email]").val();
@@ -63,7 +65,10 @@
             email: email,
             content: content,
         }).then((res) => {
+            $(".form-contact input").val("");
+            toast.success(res.message);
         }).catch(showError).finally(() => {
+            $(".loading-icon").hide();
         });
     }
 </script>
