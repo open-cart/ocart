@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="hero-search-action">
-                            <button type="submit" onclick="submit({{ $cart }})" class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Đặt hàng</button>
+                            <button type="button" onclick="submit({{ $cart }})" class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Đặt hàng</button>
                         </div>
                         <div class="mt-2 text-base text-gray-500">
                             Bằng cách nhấp vào 'Đặt hàng', bạn đồng ý với chúng tôi <a href="#" class="underline" title="Chính sách bảo mật" target="_blank">Chính sách bảo mật</a> và <a href="#" class="underline" title="điều khoản dịch vụ" target="_blank">điều khoản dịch vụ</a>. Bạn cũng đồng ý nhận cập nhật email định kỳ, giảm giá và ưu đãi đặc biệt.
