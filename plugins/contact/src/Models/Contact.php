@@ -25,12 +25,11 @@ class Contact extends BaseModel
      */
     protected $fillable = [
         'name',
-        'slug',
-        'slug_md5',
-        'author_id',
-        'author_type',
-        'description',
-        'parent_id',
+        'email',
+        'phone',
+        'address',
+        'subject',
+        'content',
         'status',
     ];
 

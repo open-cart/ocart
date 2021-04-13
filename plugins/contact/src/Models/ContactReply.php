@@ -24,21 +24,8 @@ class ContactReply extends BaseModel
      * @var string[]
      */
     protected $fillable = [
-        'name',
-        'slug',
-        'slug_md5',
-        'author_id',
-        'author_type',
-        'description',
-        'parent_id',
-        'status',
-    ];
-
-    /**
-     * @var array
-     */
-    protected $casts = [
-        'status' => BaseStatusEnum::class,
+        'message',
+        'contact_id',
     ];
 
     protected static function boot()
