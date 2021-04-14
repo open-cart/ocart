@@ -2,8 +2,7 @@
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({!! Theme::asset('/images/banner-1.jpg') !!});">
         <div class="container-custom py-20">
-            @include(Theme::getThemeNamespace('components.form.contact'))
-
+            <x-theme::form.contact id="contact-index"/>
         </div>
     </div>
     <section class="sec-post antialiased font-sans py-16">
@@ -210,7 +209,14 @@
                 <h3 class="text-2xl font-bold">Want to Become a Real Estate Agent?</h3>
                 <span>We'll help you to grow your career and growth.</span>
             </div>
-            <a href="#form-contact" class="btn btn-call-to-act bg-white border-4 border-blue-400 rounded-full py-4 px-8">SignUp Today</a>
+            <a href="javascript:void(0)"
+               data-toggle="modal"
+               data-target="#form-contact-modal"
+               class="btn btn-call-to-act bg-white border-4 border-blue-400 rounded-full py-4 px-8"
+            >
+                SignUp Today
+            </a>
         </div>
     </section>
+    <x-theme::form.contact-modal/>
 </x-guest-layout>
