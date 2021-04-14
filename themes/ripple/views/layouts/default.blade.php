@@ -26,6 +26,16 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
     <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+
+    <script>
+        $(function () {
+            $(document).on('click', '[data-toggle=modal]', function () {
+                const idModal = $(this).attr('data-target');
+                console.log(idModal);
+                $(idModal).click();
+            })
+        })
+    </script>
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
@@ -33,7 +43,7 @@
     <button id="gotop" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 opacity-0 fixed bottom-10 right-10 z-50 focus:outline-none">
         <x-theme::icons.chevron-double/>
     </button>
-    <div id="body" class="content">{{ $slot }}</div>
+    <div id="body" class="content" data-pjax-container="body">{{ $slot }}</div>
     @include(Theme::getThemeNamespace('layouts.footer'))
 
     <div x-data="confirmDelete">

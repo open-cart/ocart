@@ -16,24 +16,18 @@
             <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
             <div class="flex justify-between items-center mt-3">
                 <div class="flex text-red-600">
-                    @if($data->price >= 1)
-                        <span class="font-bold text-2xl">{{ format_price($data->price) }}</span>
-                        &nbsp;
-                        <span class="text-sm font-semibold">đ</span>
-                    @else
-                        <span class="font-bold text-2xl">Liên hệ</span>
-                    @endif
-                    @if($data->price >= 1 && $data->price < $data->price_sell)
-                        <span class="font-medium line-through text-gray-300 text-lg ml-4">{{ format_price($data->price_sell) }}</span>
+                    <span class="font-bold text-2xl">{{ format_price($data->sell_price) }}</span>
+                    &nbsp;
+                    <span class="text-sm font-semibold">đ</span>
+                    @if($data->price > $data->sell_price)
+                        <span class="font-medium line-through text-gray-300 text-lg ml-4">{{ format_price($data->price) }}</span>
                         &nbsp;
                         <span class="text-sm font-semibold text-gray-300 line-through">đ</span>
                     @endif
                 </div>
-                @if($data->price >= 1)
-                    <button onclick="addToCart({{ $data->id }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
-                        <x-theme::icons.shopping-cart class="w-7"/>
-                    </button>
-                @endif
+                <button onclick="addToCart({{ $data->id }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
+                    <x-theme::icons.shopping-cart class="w-7"/>
+                </button>
 
             </div>
         </div>
