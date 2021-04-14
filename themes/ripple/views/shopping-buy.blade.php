@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="flex-1 flex-col justify-between ml-4 flex-grow">
                                         <span class="font-bold text-sm line-clamp-2">{{ $item->name }}</span>
-                                        <span class="text-red-500 text-xs">{{ format_price($item->price_sell) }}</span>
+                                        <span class="text-red-500 text-xs">{{ format_price($item->price) }} đ</span>
                                     </div>
                                 </div>
                                 <div class="text-right w-1/5 font-semibold text-sm"><span class="hidden md:inline-block">Số lượng: </span> {{ $item->qty }}</div>
@@ -60,7 +60,7 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <div class="font-bold text-2xl">Tổng cộng</div>
-                        <div href="{!! route('shopping-cart') !!}" class="font-bold text-2xl text-red-600">{{ format_price(get_cart_pricetotal()) }}</div>
+                        <div href="{!! route('shopping-cart') !!}" class="font-bold text-2xl text-red-600">{{ format_price(get_cart_pricetotal()) }} đ</div>
                     </div>
 
                 </div>

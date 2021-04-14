@@ -43,12 +43,8 @@
                         </span>
                     </div>
                     <div class="mb-4 pt-4 border-t border-gray-200">
-                        @if($product->price_sell >= 1)
-                            <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->price_sell) }}đ</span>
-                        @else
-                            <span class="title-font font-medium text-2xl text-red-600">Liên hệ</span>
-                        @endif
-                        @if($product->price_sell >= 1 && $product->price > $product->price_sell)
+                        <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->sell_price) }}đ</span>
+                        @if($product->price > $product->sell_price)
                             <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
                         @endif
                     </div>
@@ -84,9 +80,7 @@
                         </div>
                     </div>
                     <div class="flex pt-4 border-t border-gray-200 ">
-                        @if($product->price >= 1)
-                            <button onclick="addToCart({{ $product->id }})" class="flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ</button>
-                        @endif
+                        <button onclick="addToCart({{ $product->id }})" class="flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ</button>
 
                         <button class="ml-auto rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
                             <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">

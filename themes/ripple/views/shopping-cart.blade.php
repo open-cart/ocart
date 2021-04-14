@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
                                     <a href="/product/{{ $item->id }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
-                                    <div class="text-red-500 text-xs">{{ format_price($item->price_sell) }}</div>
+                                    <div class="text-red-500 text-xs">{{ format_price($item->price) }} đ</div>
                                     <button x-on:click="removeProduct()" class="w-5 text-gray-400 rounded-full hover:text-red-500 focus:outline-none focus:text-red-500" title="Xóa sản phẩm">
                                         <x-theme::icons.trash class="w-5"/>
                                     </button>
@@ -65,7 +65,7 @@
                     <h1 class="font-semibold text-2xl border-b pb-8">Thông tin</h1>
                     <div class="flex justify-between mt-10 mb-5">
                         <span class="font-semibold text-sm uppercase"><span class="cart-count">{{ get_cart_count() }}</span> sản phẩm</span>
-                        <span class="font-semibold text-sm">{{ format_price(get_cart_subtotal()) }}</span>
+                        <span class="font-semibold text-sm">{{ format_price(get_cart_subtotal()) }} đ</span>
                     </div>
                     {{--<div>--}}
                     {{--<label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>--}}
@@ -81,7 +81,7 @@
                     <div class="border-t mt-8">
                         <div class="flex font-semibold justify-between py-6 text-sm uppercase">
                             <span class="font-bold">Tổng đơn</span>
-                            <span class="text-red-600 font-bold">{{ format_price(get_cart_pricetotal()) }}</span>
+                            <span class="text-red-600 font-bold">{{ format_price(get_cart_pricetotal()) }} đ</span>
                         </div>
                         @if(get_cart_count() > 0)
                             <a href="{{ route('shopping-buy') }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
