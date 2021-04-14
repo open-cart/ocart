@@ -45,9 +45,6 @@ Route::group([
     Route::get('shopping-cart', 'ShoppingController@cart')->name('shopping-cart');
     Route::get('shopping-buy', 'ShoppingController@buy')->name('shopping-buy');
     Route::get('shopping-thank', 'ShoppingController@thank')->name('shopping-thank');
-    Route::get('shopping-test', function() {
-        return Theme::layout('default')->scope('shopping-test');
-    })->name('shopping-test');
 
     Route::post('add-to-cart', 'ShoppingController@add')->name('add-to-cart');
     Route::post('remove-to-cart', 'ShoppingController@remove')->name('remove-to-cart');

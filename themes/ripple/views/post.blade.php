@@ -10,9 +10,7 @@
     </div>
 
     <div class="container-custom flex flex-wrap pb-2">
-        @include(Theme::getThemeNamespace('layouts.sidebar-all'))
-
-        <div class="lg:w-3/4 w-full">
+        <div class="lg:w-3/4 w-full md:order-last">
             <div class="mb-4">
                 <h1 class="text-2xl text-blue-600 font-bold">{{ $post->name }}</h1>
             </div>
@@ -110,6 +108,9 @@
                 </div>
             </div>
         </div>
+
+        @include(Theme::getThemeNamespace('layouts.sidebar-all'))
+
     </div>
 
 </x-guest-layout>
