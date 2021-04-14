@@ -4,7 +4,7 @@
             <div class="lg:flex shadow-md my-10">
                 <div class="w-full lg:w-3/4 bg-white px-2 md:px-4 lg:px-10 py-10 border-t border-gray-100">
                     <div class="flex justify-between border-b pb-8">
-                        <h1 class="font-semibold text-2xl">Giỏ hàng</h1>
+                        <h1 class="font-semibold text-2xl text-blue-600">Giỏ hàng</h1>
                         <h2 class="font-semibold text-2xl">
                             <span class="cart-count">{{ get_cart_count() }}</span> sản phẩm
                         </h2>
