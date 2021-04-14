@@ -18,6 +18,10 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|string|max:255',
+            'phone' => 'required|min:8|max:12',
+            'email' => 'required|string|email|max:255|unique:users',
+            'content' => 'required',
             'status'    => Rule::in(ContactStatusEnum::toArray()),
         ];
     }

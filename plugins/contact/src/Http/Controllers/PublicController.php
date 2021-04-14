@@ -27,11 +27,6 @@ class PublicController extends BaseController
 
     public function postSendContact(ContactRequest $request, BaseHttpResponse $response)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|min:8|max:12',
-            'email' => 'required|string|email|max:255|unique:users',
-        ]);
         try {
             $contact = $this->contactRepository->create($request->input());
 
