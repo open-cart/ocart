@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="flex-1 flex-col justify-between ml-4 flex-grow">
                                         <span class="font-bold text-sm line-clamp-2">{{ $item->name }}</span>
-                                        <span class="text-red-500 text-xs">{{ format_price($item->price) }}</span>
+                                        <span class="text-red-500 text-xs">{{ format_price($item->price_sell) }}</span>
                                     </div>
                                 </div>
                                 <div class="text-right w-1/5 font-semibold text-sm"><span class="hidden md:inline-block">Số lượng: </span> {{ $item->qty }}</div>

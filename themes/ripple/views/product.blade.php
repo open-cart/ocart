@@ -43,13 +43,13 @@
                         </span>
                     </div>
                     <div class="mb-4 pt-4 border-t border-gray-200">
-                        @if($product->price >= 1)
-                            <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->price) }}đ</span>
+                        @if($product->price_sell >= 1)
+                            <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->price_sell) }}đ</span>
                         @else
                             <span class="title-font font-medium text-2xl text-red-600">Liên hệ</span>
                         @endif
-                        @if($product->price >= 1 && $product->price < $product->price_sell)
-                            <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price_sell) }}đ</span>
+                        @if($product->price_sell >= 1 && $product->price > $product->price_sell)
+                            <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
                         @endif
                     </div>
                     <div class="leading-relaxed pt-4 border-t border-gray-200">{!! $product->description !!}</div>

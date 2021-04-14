@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
                                     <a href="/product/{{ $item->id }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
-                                    <div class="text-red-500 text-xs">{{ format_price($item->price) }}</div>
+                                    <div class="text-red-500 text-xs">{{ format_price($item->price_sell) }}</div>
                                     <button x-on:click="removeProduct()" class="w-5 text-gray-400 rounded-full hover:text-red-500 focus:outline-none focus:text-red-500" title="Xóa sản phẩm">
                                         <x-theme::icons.trash class="w-5"/>
                                     </button>
@@ -51,7 +51,6 @@
                             </div>
                         </div>
                     @endforeach
-
 
                     <a href="/" class="flex font-semibold text-blue-600 text-sm mt-10">
 

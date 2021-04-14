@@ -222,7 +222,7 @@ if (!function_exists('add_to_cart')) {
         Cart::add([
             'id' => $data->id,
             'name' => $data->name,
-            'price' => $data->price,
+            'price' => $data->price_sell,
             'weight' => 500,
             'qty' => 1,
             'options' => [
