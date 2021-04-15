@@ -7,5 +7,4 @@ use Ocart\Core\Http\Controllers\BaseController;
 class PublicController extends BaseController
 {
 
-
 }

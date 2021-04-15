@@ -97,4 +97,14 @@ class DistributorController extends BaseController
 
         return response()->json([]);
     }
+
+    public function list(Request $request)
+    {
+        $params = $request->all();
+        if (!empty($params)) {
+            $location       = $params['location'];
+
+        }
+        return get_distributor($location);
+    }
 }
