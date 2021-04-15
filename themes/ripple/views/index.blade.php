@@ -202,7 +202,9 @@
             </div>
         </div>
     </section>
-    @include(Theme::getThemeNamespace('sections.distributor'))
+    @if(is_active_plugin('distributor'))
+        @include(Theme::getThemeNamespace('sections.distributor'))
+    @endif
 
     <section class="antialiased font-sans bg-blue-600">
         <div class="container-custom call-to-act py-14 block sm:flex items-center">
