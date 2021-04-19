@@ -1,8 +1,8 @@
-@props(['id' => 'form-contact'])
+@props(['id' => 'form-contact', 'title' => 'Bạn cần tư vấn mua bất động sản?'])
 
-<div id="{!! $id !!}" x-data="contact('#{{ $id }}')" class="form-contact bg-white max-w-xl p-10 pt-8 shadow-md">
+<div id="{!! $id !!}" x-data="contact('#{{ $id }}')" {!! $attributes->merge(['class' => 'form-contact max-w-xl']) !!}>
     <div class="mb-4">
-        <h1 class="text-4xl font-extrabold capitalize">Bạn cần tư vấn mua bất động sản?</h1>
+        <h1 class="text-4xl font-extrabold capitalize">{!! $title !!}</h1>
     </div>
     <div class="mb-4">
         <div class="mb-4">

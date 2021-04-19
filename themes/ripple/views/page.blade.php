@@ -1,3 +1,6 @@
 <x-guest-layout>
-    {!! $page->content !!}
+    <div class="container-custom">
+        {!! $page->content !!}
+
+    </div>
 </x-guest-layout>

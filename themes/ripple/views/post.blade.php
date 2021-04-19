@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 border-b border-gray-200 flex text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2"><a href="/post-category/{{ Arr::get($post->categories->first(), 'id') }}" class="no-underline text-blue-600">{{ Arr::get($post->categories->first(), 'name') }}</a></li>
+            <li class="px-2"><a href="/post-category/{{ Arr::get($post->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($post->categories->first(), 'name') }}</a></li>
             <li>/</li>
             <li class="px-2"><span class="no-underline text-gray-500">{{ $post->name }}</span></li>
         </ol>
@@ -29,7 +29,7 @@
             <div class="py-4 border-b border-gray-100">
                 Chuyên mục:
                 @foreach($post->categories as $category)
-                    <a href="#">{{ $category->name }}</a><span> , </span>
+                    <a href="/post-category/{{ $category->slug }}">{{ $category->name }}</a><span> , </span>
                 @endforeach
             </div>
             <div class="py-4 border-b border-gray-100">
@@ -99,9 +99,9 @@
             </div>
             <div class="py-4">
                 <div>Bài liên quan</div>
-                <div class="flex flex-wrap -mx-4">
-                    @foreach(get_list_posts() as $post)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                <div class="flex flex-wrap -mx-2">
+                    @foreach(get_list_posts_relate(Arr::get($post->categories->first(), 'id'), 6) as $post)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2">
                             <x-theme::card.post :data="$post"/>
                         </div>
                     @endforeach
