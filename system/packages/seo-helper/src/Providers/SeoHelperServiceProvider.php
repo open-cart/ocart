@@ -34,8 +34,14 @@ class SeoHelperServiceProvider extends ServiceProvider
         AliasLoader::getInstance(['SeoHelper' => SeoHelper::class]);
     }
 
-    public function setSeoMeta($screen, $object) {
-        $meta = get_meta_data($object, 'seo_meta', true);
+    public function setSeoMeta($screen, $model) {
+        // Nếu không hỗ trợ thì dừng lại.
+        if (empty($model) || !seo_helper_support($model)) {
+            return;
+        }
+
+        $meta = get_meta_data($model, 'seo_meta', true);
+
         if (!empty($meta)) {
             if (!empty($meta['seo_title'])) {
                 SeoHelper::setTitle($meta['seo_title']);

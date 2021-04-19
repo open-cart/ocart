@@ -32,6 +32,8 @@ class PublicController extends BaseController
     {
         $product = $this->repo->with('categories')->find($id);
 
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME, $product);
+
         return Theme::scope('product',  compact('product'),'packages/ecommerce::product');
     }
 
@@ -44,6 +46,8 @@ class PublicController extends BaseController
         $category = $this->repoCategory->find($id);
 
         $products = $this->repo->productForCategory($category->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
     }
