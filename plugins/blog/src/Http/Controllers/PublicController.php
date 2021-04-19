@@ -43,6 +43,8 @@ class PublicController extends BaseController
         $meta->setDescription($description);
         $meta->setType('article');
 
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, POST_MODULE_SCREEN_NAME, $post);
+
         return Theme::scope('post',  compact('post'),'packages/blog::post');
     }
 
@@ -66,6 +68,8 @@ class PublicController extends BaseController
         $meta->setType('category article');
 
         $posts = $this->repo->postForCategory($category->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('post-category',  compact('category', 'posts'),'packages/post::post-category');
     }

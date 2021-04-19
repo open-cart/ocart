@@ -36,6 +36,8 @@ class PublicController extends BaseController
         if (empty($product)) {
             abort(404);
         }
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME, $product);
+
         $title = $product->name;
         $description = Str::limit(strip_tags($product->description), 250);
         SeoHelper::setTitle($title);
@@ -67,6 +69,8 @@ class PublicController extends BaseController
         $meta->setType('category product');
 
         $products = $this->repo->productForCategory($category->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
     }
