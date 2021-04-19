@@ -58,4 +58,14 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
         return $this->parserResult($results);
     }
+
+    public function getRelate($categoryId, $limit)
+    {
+        $this->whereHas('categories', function ($query) use ($categoryId) {
+            return $query->where($query->qualifyColumn('id'), $categoryId);
+        });
+        $results = $this->limit($limit)->get();
+
+        return $this->parserResult($results);
+    }
 }

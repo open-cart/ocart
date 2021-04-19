@@ -118,7 +118,7 @@
                 </ul>
             </div>
 
-            <div class="bg-white rounded-md mb-7" x-data="{selected:1}">
+            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -183,7 +183,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md">
+            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -211,7 +211,20 @@
                 </ul>
             </div>
 
+            <div class="bg-white rounded-md">
+                <div class="px-6 py-4 text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
+                <div class="flex flex-wrap px-6 pb-4 -mx-2">
+                    @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
         </div>
     </div>
+
+
 
 </x-guest-layout>
