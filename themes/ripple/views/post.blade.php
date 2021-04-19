@@ -107,6 +107,17 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="py-4">
+                <div>Bài nổi bật</div>
+                <div class="flex flex-wrap -mx-4">
+                    @foreach(get_list_posts_feature(4) as $post)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                            <x-theme::card.post :data="$post"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
 
         @include(Theme::getThemeNamespace('layouts.sidebar-all'))

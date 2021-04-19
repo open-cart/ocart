@@ -46,7 +46,7 @@
                 <x-theme::icons.star class="text-yellow-500"/>
                 <x-theme::icons.star class="text-yellow-500"/>
                 <x-theme::icons.star class="text-gray-400"/>
-                <span class="ml-1">34 Đánh giá</span>
+                <span class="ml-1">(34)</span>
             </div>
             @if($data->created_at)
                 <div class="flex">
