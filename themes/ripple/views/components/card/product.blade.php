@@ -2,15 +2,15 @@
 @if($data)
     <div class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-60 overflow-hidden">
-            <a href="/product/{{ $data->id }}">
+            <a href="/product/{{ $data->slug }}">
                 <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url(head($data->images) ?? '/images/no-image.jpg') }}" alt="">
             </a>
         </div>
         <div class="p-4">
-            <a href=/product-category/{{ Arr::get($data->categories->first(), 'id') }}" class="inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
+            <a href=/product-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
                 {{ Arr::get($data->categories->first(), 'name') }}
             </a>
-            <a href="/product/{{ $data->id }}" class="hover:text-blue-700">
+            <a href="/product/{{ $data->slug }}" class="hover:text-blue-700">
                 <h3 class="mb-2 font-bold">{{ $data->name }}</h3>
             </a>
             <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>

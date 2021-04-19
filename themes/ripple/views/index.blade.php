@@ -1,9 +1,12 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({!! Theme::asset('/images/banner-1.jpg') !!});">
-        <div class="container-custom py-20">
-            <x-theme::form.contact id="contact-index"/>
-        </div>
+        @if(is_active_plugin('contact'))
+            <div class="container-custom py-20">
+                <x-theme::form.contact id="contact-index" class="bg-white p-10 pt-8 shadow-md"/>
+            </div>
+        @endif
+
     </div>
     <section class="sec-post antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">

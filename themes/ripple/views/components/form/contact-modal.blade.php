@@ -2,7 +2,7 @@
     <x-slot name="header">
     </x-slot>
     <x-slot name="content">
-        <x-theme::form.contact id="contact-modal"/>
+        <x-theme::form.contact id="contact-modal" class="bg-white py-8"/>
 
     </x-slot>
     <x-slot name="footer">

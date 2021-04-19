@@ -7,7 +7,7 @@
                 <li>
                     <a
                         data-body="category-container"
-                        href="/product-category/{{ $category->id }}"
+                        href="/product-category/{{ $category->slug }}"
                         class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
                         {{ $category->name }}
                     </a>
@@ -21,7 +21,7 @@
         <ul>
             @foreach(get_blog_categories() as $category)
                 <li>
-                    <a href="/post-category/{{ $category->id }}"
+                    <a href="/post-category/{{ $category->slug }}"
                        data-body="category-container"
                        class="text-sm font-semibold block text-gray-500 hover:text-blue-600">{{ $category->name }}</a>
                 </li>

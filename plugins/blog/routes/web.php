@@ -31,7 +31,7 @@ Route::group([
     'middleware' => ['web'],
     'namespace' => 'Ocart\Blog\Http\Controllers',
 ], function () {
-    Route::get('post/{id}', 'PublicController@post');
-    Route::get('post-category/{id}', 'PublicController@postCategory');
+    Route::get('post/{slug}', 'PublicController@post');
+    Route::get('post-category/{slug}', 'PublicController@postCategory');
 
 });

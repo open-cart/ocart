@@ -1,6 +1,6 @@
 @props(['data' => null])
 @if($data)
-    <a href="/post/{{ $data->id }}" class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+    <a href="/post/{{ $data->slug }}" class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-60 overflow-hidden">
             <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url($data->image) }}" alt="{{ $data->name }}">
         </div>
