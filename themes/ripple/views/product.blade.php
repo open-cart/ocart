@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 flex text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2"><a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
+            <li class="px-2"><a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
             <li class="px-2"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
@@ -11,10 +11,10 @@
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <img class="lg:w-1/2 w-full object-cover object-center rounded" src="{{ TnMedia::url(head($product->images)) }}" alt="ecommerce">
+                <img class="lg:w-1/2 w-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? '/images/no-image.jpg' : head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
-                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'id') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
+                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
                     <h1 class="text-gray-900 text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
@@ -118,7 +118,7 @@
                 </ul>
             </div>
 
-            <div class="bg-white rounded-md mb-7" x-data="{selected:1}">
+            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -183,7 +183,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md">
+            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -211,52 +211,20 @@
                 </ul>
             </div>
 
-        </div>
-    </div>
-
-    <div class="bg-red-100 h-screen flex flex-col justify-center items-center hidden">
-        <div class="max-w-4xl mx-auto relative" x-data="{ activeSlide: 1, slides: [1, 2, 3, 4, 5] }">
-            <!-- Slides -->
-            <template x-for="slide in slides" :key="slide">
-                <div x-show="activeSlide === slide" class="p-24 font-bold text-5xl h-64 flex items-center bg-blue-600 text-white rounded-lg">
-                    <span class="w-12 text-center" x-text="slide"></span>
-                    <span class="text-red-300">/</span>
-                    <span class="w-12 text-center" x-text="slides.length"></span>
-                </div>
-            </template>
-
-            <!-- Prev/Next Arrows -->
-            <div class="absolute inset-0 flex">
-                <div class="flex items-center justify-start w-1/2">
-                    <button
-                            class="bg-red-100 text-red-500 hover:text-orange-500 font-bold hover:shadow-lg rounded-full w-12 h-12 -ml-6"
-                            x-on:click="activeSlide = activeSlide === 1 ? slides.length : activeSlide - 1">
-                        &#8592;
-                    </button>
-                </div>
-                <div class="flex items-center justify-end w-1/2">
-                    <button
-                            class="bg-red-100 text-red-500 hover:text-orange-500 font-bold hover:shadow rounded-full w-12 h-12 -mr-6"
-                            x-on:click="activeSlide = activeSlide === slides.length ? 1 : activeSlide + 1">
-                        &#8594;
-                    </button>
+            <div class="bg-white rounded-md">
+                <div class="px-6 py-4 text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
+                <div class="flex flex-wrap px-6 pb-4 -mx-2">
+                    @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
+                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
                 </div>
             </div>
 
-            <!-- Buttons -->
-            <div class="absolute w-full flex items-center justify-center px-4">
-                <template x-for="slide in slides" :key="slide">
-                    <button
-                            class="flex-1 w-4 h-2 mt-4 mx-2 mb-0 rounded-full overflow-hidden transition-colors duration-200 ease-out hover:bg-red-600 hover:shadow-lg"
-                            :class="{
-              'bg-blue-600': activeSlide === slide,
-              'bg-red-300': activeSlide !== slide
-          }"
-                            x-on:click="activeSlide = slide"
-                    ></button>
-                </template>
-            </div>
         </div>
     </div>
+
+
 
 </x-guest-layout>

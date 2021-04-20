@@ -75,3 +75,13 @@ if (!function_exists('get_list_posts_feature')) {
         return $repo->getFeature($limit);
     }
 }
+
+if (!function_exists('get_list_posts_relate')) {
+    function get_list_posts_relate($categoryId = 1, $limit = 9) {
+        /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
+        /** @var \Ocart\Blog\Repositories\PostRepositoryEloquent $repo */
+        $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);
+
+        return $repo->getRelate($categoryId, $limit);
+    }
+}

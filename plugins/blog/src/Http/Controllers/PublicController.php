@@ -5,7 +5,9 @@ namespace Ocart\Blog\Http\Controllers;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
+use Illuminate\Support\Str;
 
 class PublicController extends BaseController
 {
@@ -26,9 +28,20 @@ class PublicController extends BaseController
      * Chi tiet bai viet
      * @return mixed
      */
-    public function post($id)
+    public function post($slug)
     {
-        $post = $this->repo->with('categories')->find($id);
+        $post = $this->repo->with('categories')->findByField('slug', $slug)->first();
+        if (empty($post)) {
+            abort(404);
+        }
+        $title = $post->name;
+        $description = Str::limit(strip_tags($post->description), 250);
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('article');
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, POST_MODULE_SCREEN_NAME, $post);
 
@@ -39,9 +52,20 @@ class PublicController extends BaseController
      * Danh muc bai viet
      * @return mixed
      */
-    public function postCategory($id)
+    public function postCategory($slug)
     {
-        $category = $this->repoCategory->find($id);
+        $category = $this->repoCategory->findByField('slug', $slug)->first();
+        if (empty($category)) {
+            abort(404);
+        }
+        $title = $category->name;
+        $description = Str::limit(strip_tags($category->description), 250);
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('category article');
 
         $posts = $this->repo->postForCategory($category->id, 9);
 

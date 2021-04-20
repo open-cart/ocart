@@ -9,9 +9,9 @@
 
     <div class="container-custom flex flex-wrap pb-2">
         <div class="lg:w-3/4 w-full md:order-last">
-            <div class="flex flex-wrap -mx-4">
+            <div class="flex flex-wrap -mx-2">
                 @foreach($products as $product)
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4 pt-0">
+                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2 pt-0">
                         <x-theme::card.product :data="$product"/>
                     </div>
                 @endforeach

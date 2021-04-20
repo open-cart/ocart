@@ -53,6 +53,16 @@ if (!function_exists('get_list_products_feature')) {
     }
 }
 
+if (!function_exists('get_list_products_relate')) {
+    function get_list_products_relate($categoryId = 1, $limit = 9)
+    {
+        /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
+        /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        return $repo->getRelate($categoryId, $limit);
+    }
+}
+
 if (!function_exists('get_ecommerce_setting')) {
     /**
      * @param string $key
