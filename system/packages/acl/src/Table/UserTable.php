@@ -28,7 +28,7 @@ class UserTable extends TableAbstract
                 'name' => 'id',
                 'title' => 'full name',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->name;
                 }
@@ -36,7 +36,7 @@ class UserTable extends TableAbstract
 //            'name' => [
 //                'name' => 'name',
 //                'title' => 'full name',
-//                'class' => 'border text-left px-2 py-2',
+//                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
 //                'render' => function ($item) {
 //                    return $item->name;
 //                }
@@ -44,7 +44,7 @@ class UserTable extends TableAbstract
 //            'image' => [
 //                'name' => 'id',
 //                'title' => 'image',
-//                'class' => 'border text-left px-2 py-2',
+//                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
 //                'render' => function ($item) {
 //                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
 //                }
@@ -52,7 +52,7 @@ class UserTable extends TableAbstract
             'email' => [
                 'name' => 'email',
                 'title' => 'Email',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->email;
                 }
@@ -60,7 +60,7 @@ class UserTable extends TableAbstract
             'role' => [
                 'name' => 'roles',
                 'title' => 'Roles',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return join(',', $item->roles->pluck('name')->toArray());
                 }
@@ -68,7 +68,7 @@ class UserTable extends TableAbstract
             'craeteAt' => [
                 'name' => 'created_at',
                 'title' => 'Ngày tạo',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -77,7 +77,7 @@ class UserTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('system.users.update', 'system.users.destroy', $item);

@@ -25,7 +25,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'title',
                 'title' => trans('plugins/ecommerce::currency.title'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return "<span>{$item->title}</span><p class='text-xs'>{$item->description}</p>";
                 }
@@ -34,7 +34,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'symbol',
                 'title' => trans('plugins/ecommerce::currency.symbol'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->symbol;
                 }
@@ -43,7 +43,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'exchange_rate',
                 'title' => trans('plugins/ecommerce::currency.exchange_rate'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->exchange_rate;
                 }
@@ -52,7 +52,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'number_of_decimals',
                 'title' => trans('plugins/ecommerce::currency.number_of_decimals'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->decimals;
                 }
@@ -61,7 +61,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'position_of_symbol',
                 'title' => trans('plugins/ecommerce::currency.position_of_symbol'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->is_prefix_symbol;
                 }
@@ -70,7 +70,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'thousands_separator',
                 'title' => trans('plugins/ecommerce::currency.thousands_separator'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->thousands_separator;
                 }
@@ -79,7 +79,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'decimal_separator',
                 'title' => trans('plugins/ecommerce::currency.decimal_separator'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->decimal_separator;
                 }
@@ -89,7 +89,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'order',
                 'title' => trans('plugins/ecommerce::currency.order'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->order;
                 }
@@ -98,7 +98,7 @@ class CurrencyTable extends TableAbstract
                 'name' => 'is_default',
                 'title' => trans('plugins/ecommerce::currency.is_default'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->is_default == 1 ? '<i class="fa fa-star"></i>' : '';
                 }
@@ -107,7 +107,7 @@ class CurrencyTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('ecommerce.currencies.update', 'ecommerce.currencies.destroy', $item);

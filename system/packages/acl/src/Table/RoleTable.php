@@ -28,7 +28,7 @@ class RoleTable extends TableAbstract
                 'name' => 'name',
                 'title' => 'Role',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->name;
                 }
@@ -36,7 +36,7 @@ class RoleTable extends TableAbstract
             'guard_name' => [
                 'name' => 'guard_name',
                 'title' => 'Guard name',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->guard_name;
                 }
@@ -44,7 +44,7 @@ class RoleTable extends TableAbstract
             'description' => [
                 'name' => 'guard_name',
                 'title' => 'Description',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->description;
                 }
@@ -53,7 +53,7 @@ class RoleTable extends TableAbstract
             'craeteAt' => [
                 'name' => 'created_at',
                 'title' => 'Ngày tạo',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -62,7 +62,7 @@ class RoleTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('system.roles.update', 'system.roles.destroy', $item);

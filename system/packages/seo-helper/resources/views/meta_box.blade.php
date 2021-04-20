@@ -1,7 +1,7 @@
 <div x-data="{open: false}"
-     class="rounded-md bg-white">
+     class="rounded-md bg-white border border-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300">
     <div>
-        <div class="border-b px-6 py-3 flex justify-between">
+        <div class="border-b px-6 py-3 flex justify-between dark:border-gray-700">
             <h3>
                 Search Engine Optimize
             </h3>
@@ -30,14 +30,16 @@
             {!! Form::text('seo_meta[seo_title]', $meta['seo_title'], [
     'data-counter' => 120,
      'id' => 'seo_title',
-     'class' => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600']) !!}
+     'class' => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full
+      sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300']) !!}
         </div>
         <div class="flex flex-col">
             <label for="seo_description">SEO Description</label>
             {!! Form::textarea('seo_meta[seo_description]', $meta['seo_description'], [
     'id' => 'seo_description',
     'rows' => '3',
-    'class' => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600'
+    'class' => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full
+     sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300'
 ]) !!}
         </div>
     </div>

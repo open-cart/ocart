@@ -25,7 +25,7 @@ class ContactTable extends TableAbstract
                 'name' => 'id',
                 'title' => trans('admin.name'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->name;
                 }
@@ -33,7 +33,7 @@ class ContactTable extends TableAbstract
             'email' => [
                 'name' => 'email',
                 'title' => trans('admin.email'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->email;
                 }
@@ -41,7 +41,7 @@ class ContactTable extends TableAbstract
             'phone' => [
                 'name' => 'phone',
                 'title' => trans('admin.phone'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->phone;
                 }
@@ -49,7 +49,7 @@ class ContactTable extends TableAbstract
             'createdAt' => [
                 'name' => 'created_at',
                 'title' => 'Ngày tạo',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -57,7 +57,7 @@ class ContactTable extends TableAbstract
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $item->status->toHtml();
@@ -67,7 +67,7 @@ class ContactTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('contacts.update', 'contacts.destroy', $item);

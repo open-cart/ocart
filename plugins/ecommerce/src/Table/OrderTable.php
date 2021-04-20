@@ -28,7 +28,7 @@ class OrderTable extends TableAbstract
                 'name' => 'id',
                 'title' => 'ID',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->id;
                 }
@@ -36,7 +36,7 @@ class OrderTable extends TableAbstract
             'customer' => [
                 'name' => 'customer',
                 'title' => 'Khách hàng',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->user->name ?? $item->address->name;
                 }
@@ -44,7 +44,7 @@ class OrderTable extends TableAbstract
             'amount' => [
                 'name' => 'amount',
                 'title' => 'Amount',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return format_price($item->amount);
                 }
@@ -52,7 +52,7 @@ class OrderTable extends TableAbstract
             'tax_amount' => [
                 'name' => 'alias',
                 'title' => 'Tax amount',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return format_price($item->tax_amount);
                 }
@@ -60,7 +60,7 @@ class OrderTable extends TableAbstract
             'shipping_amount' => [
                 'name' => 'alias',
                 'title' => 'Ship amount',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return format_price($item->shipping_amount);
                 }
@@ -68,7 +68,7 @@ class OrderTable extends TableAbstract
             'payment_method' => [
                 'name' => 'alias',
                 'title' => 'Payment method',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->payment->payment_channel;
                 }
@@ -76,7 +76,7 @@ class OrderTable extends TableAbstract
             'payment_status' => [
                 'name' => 'alias',
                 'title' => 'Payment status',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->payment->status->toHtml();
                 }
@@ -84,7 +84,7 @@ class OrderTable extends TableAbstract
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->status->toHtml();
                 }
@@ -93,7 +93,7 @@ class OrderTable extends TableAbstract
             'created_at' => [
                 'name' => 'created_at',
                 'title' => 'Ngày tạo',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -102,7 +102,7 @@ class OrderTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('ecommerce.orders.update', 'ecommerce.orders.destroy', $item);

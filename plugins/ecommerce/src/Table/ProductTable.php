@@ -25,7 +25,7 @@ class ProductTable extends TableAbstract
             'image' => [
                 'name' => 'id',
                 'title' => 'image',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
                 }
@@ -34,7 +34,7 @@ class ProductTable extends TableAbstract
                 'name' => 'name',
                 'title' => 'title',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->name;
                 }
@@ -43,7 +43,7 @@ class ProductTable extends TableAbstract
                 'name' => 'price',
                 'title' => 'Price',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return format_price($item->price);
                 }
@@ -52,7 +52,7 @@ class ProductTable extends TableAbstract
                 'name' => 'sku',
                 'title' => 'Sku',
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->sku;
                 }
@@ -61,7 +61,7 @@ class ProductTable extends TableAbstract
             'alias' => [
                 'name' => 'alias',
                 'title' => 'URL Tùy chỉnh',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->slug;
                 }
@@ -69,7 +69,7 @@ class ProductTable extends TableAbstract
             'craeteAt' => [
                 'name' => 'created_at',
                 'title' => 'Ngày tạo',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -77,7 +77,7 @@ class ProductTable extends TableAbstract
             'featured' => [
                 'name' => 'featured',
                 'title' => __('admin.featured'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $item->is_featured;
@@ -86,7 +86,7 @@ class ProductTable extends TableAbstract
             'status' => [
                 'name' => 'status',
                 'title' => __('admin.status'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $item->status->toHtml();
@@ -96,7 +96,7 @@ class ProductTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('ecommerce.products.update', 'ecommerce.products.destroy', $item);

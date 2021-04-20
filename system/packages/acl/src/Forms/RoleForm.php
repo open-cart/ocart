@@ -42,7 +42,7 @@ class RoleForm extends FormAbstract
             ])->addMetaBoxes([
                 'overview' => [
                     'title' => trans('Permission flags'),
-                    'content' => view('packages/acl::roles.permissions', compact('active', 'permissions', 'prTree')),
+                    'content' => view('packages.acl::roles.permissions', compact('active', 'permissions', 'prTree')),
                 ],
             ]);
     }
