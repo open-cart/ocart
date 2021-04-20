@@ -1,4 +1,4 @@
-<div class="image-box border-dashed border p-3">
+<div class="image-box border-dashed border p-3 dark:border-gray-700 dark:text-gray-300">
     @php
         $values = $value == '[null]' ? '[]' : $value;
         $attributes = isset($attributes) ? $attributes : [];

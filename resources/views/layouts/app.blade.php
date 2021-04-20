@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,7 +43,7 @@
                     bg: 'bg-green-600'
                 },
                 black: {
-                    bg: 'bg-gray-800'
+                    bg: 'bg-gray-900'
                 }
             };
             var theme = {{ session('theme', 'themes.blue') }};
@@ -93,10 +93,10 @@
         </script>
         @stack('head')
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased dark:bg-gray-800">
         @stack('bodyPrepend')
         <div>
-            <div x-data class="min-h-screen bg-gray-100">
+            <div x-data class="min-h-screen bg-gray-100 dark:bg-gray-800">
             @include('layouts.navigation')
 
             <!-- Page Heading -->

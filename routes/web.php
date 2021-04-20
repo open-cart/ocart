@@ -19,6 +19,12 @@ Route::get('/install-migrate', function () {
 //    \Illuminate\Support\Facades\Artisan::call('db:seed');
 });
 
+Route::get('/notification', function () {
+//    \Illuminate\Support\Facades\Notification::send(\App\Models\User::first(), new \App\Notifications\InvoicePaid());
+    \Illuminate\Support\Facades\Notification::route('telegram', '-1001326089934')
+        ->notify(new \App\Notifications\InvoicePaid());
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

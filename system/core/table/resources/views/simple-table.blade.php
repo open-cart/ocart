@@ -6,11 +6,11 @@
     </x-slot>
     <div class="pb-12 pt-3" id="page-container">
         <div class="sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-{{--                    <div>--}}
-{{--                        filter--}}
-{{--                    </div>--}}
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg dark:bg-gray-800">
+                <div class="p-6 border-b border-gray-200 dark:border-gray-600">
+                    <div>
+                        {!! $table->searchForm !!}
+                    </div>
                     <div class="flex justify-between mb-2">
                         <div>
 {{--                            {!! $table->renderBulkAction() !!}--}}

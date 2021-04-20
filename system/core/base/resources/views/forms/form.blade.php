@@ -11,7 +11,7 @@
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-9 space-y-4">
                     @if ($showFields)
-                    <div class=" bg-white p-6 rounded-md space-y-4">
+                    <div class="bg-white border border-white p-6 rounded-md space-y-4 dark:bg-gray-800 dark:border-gray-700">
                         @foreach ($fields as $key => $field)
                             @if ($field->getName() == $form->getBreakFieldPoint())
                                 @break
@@ -37,8 +37,8 @@
 
                     @foreach ($fields as $field)
                         @if( ! in_array($field->getName(), $exclude) )
-                            <div class="rounded-md bg-white">
-                                <div class="border-b p-3 flex justify-between">
+                            <div class="rounded-md bg-white border border-white dark:bg-gray-800 dark:border-gray-700">
+                                <div class="border-b p-3 flex justify-between dark:border-gray-700">
                                     <h4>{!! Form::customLabel($field->getName(), $field->getOption('label'), $field->getOption('label_attr')) !!}</h4>
                                 </div>
                                 <div class="px-3 py-6">
@@ -66,6 +66,7 @@
             tinymce.remove();
             tinymce.init({
                 selector: '.editor-inline',
+                skin: 'dark',
                 setup: function (editor) {
                     editor.on('change', function () {
                         editor.save();
@@ -85,7 +86,8 @@
                 toolbar: 'insert | undo redo |  formatselect | bold italic backcolor  | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | fullscreen help',
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tiny.cloud/css/codepen.min.css'
+                    '//www.tiny.cloud/css/codepen.min.css',
+                    '/access/tinymce/skins/dark/dark-content.css'
                 ],
                 imagetools_toolbar: 'alignleft aligncenter alignright | imageoptions',
                 'file_picker_callback': (cb, value, meta) => {
@@ -102,6 +104,7 @@
             });
             tinymce.init({
                 selector: '.editor-full',
+                skin: 'dark',
                 setup: function (editor) {
                     editor.on('change', function () {
                         editor.save();
@@ -122,7 +125,8 @@
                 ],
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tiny.cloud/css/codepen.min.css'
+                    '//www.tiny.cloud/css/codepen.min.css',
+                    '/access/tinymce/skins/dark/dark-content.css'
                 ],
                 'file_picker_callback': (cb, value, meta) => {
                     TnMedia.default({

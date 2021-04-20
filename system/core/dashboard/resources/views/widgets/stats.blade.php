@@ -1,13 +1,15 @@
 <div class="w-1/4 p-3">
     <div class="content">
-        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg w-64">
+        <div class="relative flex flex-col min-w-0 break-words bg-white rounded mb-6 xl:mb-0 shadow-lg w-64
+        border border-white
+        dark:bg-gray-800 dark:text-gray-300 dark:border-gray-700">
             <div class="flex-auto p-4">
                 <div class="flex flex-wrap">
                     <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                        <h5 class="text-gray-500 uppercase font-bold text-xs">
+                        <h5 class="text-gray-500 uppercase font-bold text-xs dark:text-gray-300">
                             {!! $widget->title !!}
                         </h5>
-                        <span class="font-semibold text-xl text-gray-800">
+                        <span class="font-semibold text-xl text-gray-800 dark:text-gray-500">
                             {!! $widget->total !!}
                         </span>
                     </div>

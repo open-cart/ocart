@@ -21,6 +21,8 @@ abstract class TableAbstract
 
     public $html;
 
+    public $searchForm;
+
     /**
      * @var RepositoryInterface
      */

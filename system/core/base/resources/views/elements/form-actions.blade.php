@@ -1,6 +1,6 @@
-<div class="rounded-md bg-white">
-    <div class="border-b p-3 flex justify-between">
-        <h4>Publish</h4>
+<div class="rounded-md bg-white border border-white dark:bg-gray-800 dark:border-gray-700">
+    <div class="border-b p-3 flex justify-between dark:border-gray-700">
+        <h4 class="dark:text-gray-300">Publish</h4>
     </div>
     <div class="px-3 py-6">
         <input type="hidden" name="submit" value="">

@@ -4,8 +4,11 @@ return [
     'defaults'      => [
         'wrapper_class'       => 'flex flex-col',
         'wrapper_error_class' => 'has-error text-red-600',
-        'label_class'         => 'leading-loose',
-        'field_class'         => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600',
+        'label_class'         => 'leading-loose dark:text-gray-300',
+        'field_class'         => 'px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full
+         sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600
+         dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300',
+
         'field_error_class'   => 'text-red-600 border-red-500 error:focus:border-red-500',
         'help_block_class'    => 'help-block',
         'error_class'         => 'text-red-600',

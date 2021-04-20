@@ -36,7 +36,7 @@ class PageRepositoryEloquent extends BaseRepository implements PageRepository
     public function boot()
     {
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
-        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 

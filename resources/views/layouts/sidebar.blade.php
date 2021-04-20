@@ -1,7 +1,7 @@
-<aside class="main-sidebar bg-white shadow-md w-64 hidden lg:block">
-    <div class="bg-red-600 border-b border-gray-100">
+<aside class="main-sidebar bg-white dark:bg-gray-800 shadow-md w-64 hidden lg:block">
+    <div class="bg-red-600 border-b border-gray-100 dark:border-gray-700">
         <a href="{!! route('dashboard.index') !!}" class="h-16 flex items-center justify-center">
-            <span class="text-white text-2xl">Admin</span>
+            <span class="text-white text-2xl dark:text-gray-300">Admin</span>
         </a>
     </div>
     <div class="h-1"></div>
@@ -24,11 +24,11 @@
                     @foreach ($menu['children'] as $level1)
                         <li
                             x-data="{ open: false }"
-                            class="nav-item @if ($level1['active']) bg-indigo-100 @endif" id="{{ $level1['id'] }}">
+                            class="nav-item @if ($level1['active']) bg-indigo-100 dark:bg-gray-700 @endif" id="{{ $level1['id'] }}">
                             <a
                                 x-on:click="open = ! open"
                                 href="{{ isset($level1['children']) && count($level1['children']) ? 'javascript: void(0)' : $level1['url'] }}"
-                                class="pl-5 pr-3 py-3 cursor-pointer flex items-center hover:bg-gray-100 block">
+                                class="pl-5 pr-3 py-3 cursor-pointer flex items-center hover:bg-gray-100 block dark:hover:bg-gray-700 dark:text-gray-300">
                                 <i class="{{ $level1['icon'] }}"></i>
                                 {{ trans($level1['name']) }}
                             </a>
@@ -38,7 +38,7 @@
                                     class="sub-menu @if (!$menu['active']) hidden-ul @endif">
                                     @foreach ($level1['children'] as $level2)
                                         <li class="nav-item @if ($level2['active']) active @endif" id="{{ $level2['id'] }}">
-                                            <a href="{{ $level2['url'] }}" class="pl-10 pr-3 py-3 hover:bg-gray-100 block">
+                                            <a href="{{ $level2['url'] }}" class="pl-10 pr-3 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 block">
                                                 <i class="{{ $level2['icon'] }}"></i>
                                                 {{ trans($level2['name']) }}
                                             </a>
@@ -58,8 +58,8 @@
 <script>
     var theme = {{ session('theme', 'themes.blue') }};
     $("#sidebar-menu a").click(function(){
-        $("#sidebar-menu li").removeClass('bg-indigo-100');
+        $("#sidebar-menu li").removeClass('bg-indigo-100 dark:bg-gray-700');
 
-        $(this).closest('li').addClass('bg-indigo-100');
+        $(this).closest('li').addClass('bg-indigo-100 dark:bg-gray-700');
     })
 </script>

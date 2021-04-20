@@ -25,7 +25,7 @@ class DistributorTable extends TableAbstract
                 'name' => 'name',
                 'title' => trans('plugins/distributor::distributor.name'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->name;
                 }
@@ -34,7 +34,7 @@ class DistributorTable extends TableAbstract
                 'name' => 'address',
                 'title' => trans('plugins/distributor::distributor.address'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->address;
                 }
@@ -43,7 +43,7 @@ class DistributorTable extends TableAbstract
                 'name' => 'phone',
                 'title' => trans('plugins/distributor::distributor.phone'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->phone;
                 }
@@ -52,7 +52,7 @@ class DistributorTable extends TableAbstract
                 'name' => 'location',
                 'title' => trans('plugins/distributor::distributor.location'),
                 'with' => '20px',
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->position->name;
                 }
@@ -60,7 +60,7 @@ class DistributorTable extends TableAbstract
             'created_at' => [
                 'name' => 'created_at',
                 'title' => trans('plugins/distributor::distributor.created_at'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
                 }
@@ -69,7 +69,7 @@ class DistributorTable extends TableAbstract
         return apply_filters(BASE_FILTER_GET_LIST_DATA, $data, $this->repository->getModel())
             ->addColumn('actions', [
                 'title' => __('admin.action'),
-                'class' => 'border text-left px-2 py-2',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
                     return $this->tableActions('distributors.update', 'distributors.destroy', $item);
