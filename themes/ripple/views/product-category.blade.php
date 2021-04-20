@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 border-b border-gray-200 flex text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2"><span class="no-underline text-gray-500">{{ $category->name }}</span></li>
+            <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $category->name }}</span></li>
         </ol>
     </div>
 
@@ -11,7 +11,7 @@
         <div class="lg:w-3/4 w-full md:order-last">
             <div class="flex flex-wrap -mx-2">
                 @foreach($products as $product)
-                    <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2 pt-0">
+                    <div class="w-1/2 xl:w-1/3 p-2 pt-0">
                         <x-theme::card.product :data="$product"/>
                     </div>
                 @endforeach
