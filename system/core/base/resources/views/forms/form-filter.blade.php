@@ -23,7 +23,7 @@
             <button class="inline-flex items-center px-4 py-1.5 bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-md text-white tracking-widest
 focus:border-transparent focus:outline-none
   disabled:opacity-25 transition ease-in-out duration-150
-   w-48 dark:text-gray-300" id="searchButton">
+   w-32 dark:text-gray-300" id="searchButton">
                 <i class="zmdi zmdi-search">&nbsp;{{__('general.search')}}</i>
             </button>
         </div>

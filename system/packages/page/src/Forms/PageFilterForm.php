@@ -25,7 +25,10 @@ class PageFilterForm extends FormAbstract
         $this
             ->setModuleName('page-filter')->add('name', Field::TEXT, [
 //                'label'      => 'label search',
-                'wrapper_class' => 'col-span-2'
+                'wrapper_class' => 'col-span-2',
+                'attr' => [
+                    'placeholder' => 'tìm kiếm...',
+                ]
             ]);
     }
 }
