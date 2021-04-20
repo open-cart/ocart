@@ -6,9 +6,11 @@
         <div class="sm:px-6 lg:px-8">
             <div class="grid grid-cols-12 gap-4" x-data="orderUpdateData()">
                 <div class="col-span-9 space-y-4">
-                    <div class="bg-white p-4 rounded-md space-y-4"
+                    <div class="bg-white border
+                     dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
+                     p-4 rounded-md space-y-4"
                     >
-{{--                        <a href="">Reload</a>--}}
+                        <a href="">Reload</a>
                         <div class="title">
                             <h3 class="text-2xl">Order Infomation #{!! str_pad($order->id, 8, '1000000000', STR_PAD_LEFT) !!}</h3>
                         </div>
@@ -151,7 +153,7 @@
 
                     </div>
 
-                    <div class="bg-white">
+                    <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <h3 class=" p-4">History</h3>
                         <hr>
                         <div class="p-4">
@@ -167,7 +169,7 @@
                     </div>
                 </div>
                 <div class="col-span-3 space-y-4">
-                    <div class="rounded-md bg-white">
+                    <div class="rounded-md bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <div class="px-6 py-4 space-y-2">
                             <div class="space-y-4 pb-6">
                                 <div class="flex justify-between">
@@ -216,7 +218,7 @@
                         </div>
                     </div>
 
-                    <div class="rounded-md bg-white">
+                    <div class="rounded-md bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <div class="px-6 py-4 space-y-2">
                             <div class="space-y-4 pb-6">
                                 <div class="flex justify-between">

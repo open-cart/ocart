@@ -13,16 +13,16 @@
 {{--    </div>--}}
 {{--</div>--}}
 @foreach($products as $product)
-<div class="cursor-pointer hover:bg-blue-50" x-on:click="change($dispatch, JSON.parse('{{ json_encode($product) }}'))">
+<div class="cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600" x-on:click="change($dispatch, JSON.parse('{{ json_encode($product) }}'))">
     <div class="flex items-center h-12">
         <img src="{!! TnMedia::url($product->image ?? null) ?? '/images/no-image.jpg' !!}" class="w-12 px-2" alt="img" />
         <span class="pl-2">{!! $product->name !!}</span>
     </div>
 </div>
 @if($loop->last)
-    <hr class="-mx-3">
+    <hr class="-mx-3 dark:border-gray-600">
 @else
-    <hr>
+    <hr class="dark:border-gray-600">
 @endif
 @endforeach
 <div class="flex justify-between py-2">

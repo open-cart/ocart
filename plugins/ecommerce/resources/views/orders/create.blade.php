@@ -6,12 +6,12 @@
         <div class="sm:px-6 lg:px-8">
             <div class="grid grid-cols-12 gap-4" x-data="orderData()">
                 <div class="col-span-9 space-y-4">
-                    <div class="bg-white p-4 rounded-md space-y-4"
-                         >
+                    <div class="bg-white p-4 rounded-md space-y-4 border border-white
+                     dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600">
                         <div class="title">
                             <h3 class="text-2xl">Order Infomation</h3>
                         </div>
-                        <hr class="-mx-4">
+                        <hr class="-mx-4 dark:border-gray-600">
 
                         <div class="container-list-order-products">
                             <template x-for="(item, index) in data" :key="index">
@@ -43,7 +43,7 @@
                                             </a>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr class="dark:border-gray-600">
                                 </div>
                             </template>
                         </div>
@@ -96,7 +96,7 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="-mx-4">
+                        <hr class="-mx-4 dark:border-gray-600">
                         <div class="flex justify-between items-center">
                             <div>
                                 <i class="fa fa-credit-card fa-1-5 text-blue-500"></i>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="col-span-3 space-y-4">
-                    <div class="rounded-md bg-white">
+                    <div class="rounded-md bg-white border dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300">
                         <div class="px-6 py-4 space-y-2" x-on:change-item="changeCustomer">
                             <template x-if="!customer">
                                 <div>
@@ -120,13 +120,13 @@
                                             placeholder="Search or create customer..."
                                             source="{!! route('ecommerce.customers.search') !!}">
                                         <x-slot name="first">
-                                            <div class="flex items-center hover:bg-blue-50 cursor-pointer px-2 pl-5"
+                                            <div class="flex items-center hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer px-2 pl-5"
                                                  data-toggle="modal"
                                                  data-target="#order-create-customer-modal">
                                                 <img src="//hstatic.net/0/0/global/design/imgs/next-create-customer.svg" alt="user" class="w-8">
                                                 <span class="px-2 py-3">Create customer</span>
                                             </div>
-                                            <hr>
+                                            <hr class="dark:border-gray-600">
                                         </x-slot>
                                     </x-plugins.ecommerce::input-search>
                                 </div>
