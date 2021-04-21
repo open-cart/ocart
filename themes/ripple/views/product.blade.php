@@ -1,11 +1,11 @@
 <x-guest-layout>
     <div class="container-custom">
-        <ol class="list-reset py-4 flex text-grey">
+        <ol class="list-reset py-4 flex text-xs md:text-base text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2"><a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
+            <li class="px-2 line-clamp-1"><a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
-            <li class="px-2"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
+            <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
@@ -211,11 +211,11 @@
                 </ul>
             </div>
 
-            <div class="bg-white rounded-md">
-                <div class="px-6 py-4 text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
-                <div class="flex flex-wrap px-6 pb-4 -mx-2">
+            <div>
+                <div class="text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
+                <div class="flex flex-wrap -mx-2 md:-mx-4">
                     @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-2">
+                        <div class="w-1/2 xl:w-1/3 p-2 md:p-4">
                             <x-theme::card.product :data="$product"/>
                         </div>
                     @endforeach
