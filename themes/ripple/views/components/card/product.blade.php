@@ -1,45 +1,45 @@
 @props(['data' => null])
 @if($data)
     <div class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-        <div class="relative pb-60 overflow-hidden">
+        <div class="relative pb-32 md:pb-60 overflow-hidden">
             <a href="/product/{{ $data->slug }}">
                 <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url(empty($data->images) ? '/images/no-image.jpg' : head($data->images)) }}" alt="">
             </a>
         </div>
-        <div class="p-4">
-            <a href=/product-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
+        <div class="p-2 md:p-4">
+            <a href=/product-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
                 {{ Arr::get($data->categories->first(), 'name') }}
             </a>
             <a href="/product/{{ $data->slug }}" class="hover:text-blue-700">
-                <h3 class="mb-2 font-bold">{{ $data->name }}</h3>
+                <h3 class="md:mb-2 text-xs md:text-base font-bold line-clamp-2">{{ $data->name }}</h3>
             </a>
-            <div class="text-sm text-gray-500 line-clamp-3">{!! $data->description !!}</div>
-            <div class="flex justify-between items-center mt-3">
+            <div class="hidden md:block text-sm text-gray-500 md:line-clamp-3">{!! $data->description !!}</div>
+            <div class="flex justify-between items-center md:mt-3">
                 <div class="flex text-red-600">
-                    <span class="font-bold text-2xl">{{ format_price($data->sell_price) }}</span>
+                    <span class="font-bold text-sm md:text-2xl">{{ format_price($data->sell_price) }}</span>
                     &nbsp;
                     <span class="text-sm font-semibold">đ</span>
                     @if($data->price > $data->sell_price)
-                        <span class="font-medium line-through text-gray-300 text-lg ml-4">{{ format_price($data->price) }}</span>
+                        <span class="hidden md:block font-medium line-through text-gray-300 text-lg ml-4">{{ format_price($data->price) }}</span>
                         &nbsp;
-                        <span class="text-sm font-semibold text-gray-300 line-through">đ</span>
+                        <span class="hidden md:block text-sm font-semibold text-gray-300 line-through">đ</span>
                     @endif
                 </div>
-                <button onclick="addToCart({{ $data->id }})" class="flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
+                <button onclick="addToCart({{ $data->id }})" class="hidden md:block flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
                     <x-theme::icons.shopping-cart class="w-7"/>
                 </button>
 
             </div>
         </div>
         @if($data->address)
-            <div class="p-4 border-t text-sm text-gray-500">
+            <div class="p-2 md:p-4 border-t text-xs md:text-sm text-gray-500">
                 <span class="flex items-center">
                     <x-theme::icons.marker/> {{ $data->address }}
                 </span>
             </div>
         @endif
 
-        <div class="flex justify-between p-4 border-t items-center text-sm text-gray-600">
+        <div class="hidden md:flex justify-between p-4 border-t items-center text-sm text-gray-600">
             <div class="flex">
                 <x-theme::icons.star class="text-yellow-500"/>
                 <x-theme::icons.star class="text-yellow-500"/>

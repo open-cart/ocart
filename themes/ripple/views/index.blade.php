@@ -2,15 +2,15 @@
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({!! Theme::asset('/images/banner-1.jpg') !!});">
         @if(is_active_plugin('contact'))
-            <div class="container-custom py-20">
-                <x-theme::form.contact id="contact-index" class="bg-white p-10 pt-8 shadow-md"/>
+            <div class="container-custom py-10 md:py-20">
+                <x-theme::form.contact id="contact-index" class="bg-white p-4 md:p-10 pt-5 md:pt-8 shadow-md"/>
             </div>
         @endif
 
     </div>
     <section class="sec-post antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">How It Works?</h2>
+            <h2 class="text-xl md:text-2xl font-bold">How It Works?</h2>
             <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
         </div>
 
@@ -68,17 +68,17 @@
     @if(is_active_plugin('ecommerce'))
         <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
             <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-3xl font-bold">Explore Good places</h2>
-                <p class="text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
+                <h2 class="text-xl md:text-2xl font-bold">Explore Good places</h2>
+                <p class="text-sm md:text-base text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
                     và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
             </div>
             <div class="container-custom">
                 @php
                     $products = get_list_products_feature(6);
                 @endphp
-                <div class="flex flex-wrap -mx-4">
+                <div class="flex flex-wrap -mx-2 md:-mx-4">
                     @foreach($products as $product)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                        <div class="w-1/2 lg:w-1/3 p-2 md:p-4">
                             <x-theme::card.product :data="$product"/>
                         </div>
                     @endforeach
@@ -147,17 +147,17 @@
     @if(is_active_plugin('blog'))
         <section class="sec-post antialiased bg-gray-100 font-sans py-16">
             <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-3xl font-bold">Blog</h2>
-                <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+                <h2 class="text-xl md:text-2xl font-bold">Blog</h2>
+                <p class="text-sm md:text-base text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
             </div>
 
             <div class="container-custom">
                 @php
                     $posts = get_list_posts_feature(6);
                 @endphp
-                <div class="flex flex-wrap -mx-4">
+                <div class="flex flex-wrap -mx-2 md:-mx-4">
                     @foreach($posts as $post)
-                        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/3 p-4">
+                        <div class="w-1/2 lg:w-1/3 p-2 md:p-4">
                             <x-theme::card.post :data="$post"/>
                         </div>
                     @endforeach
@@ -168,7 +168,7 @@
     @endif
     <section class="antialiased font-sans py-16">
         <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-            <h2 class="text-3xl font-bold">Đối tác</h2>
+            <h2 class="text-xl md:text-2xl font-bold">Đối tác</h2>
             <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
         </div>
 
@@ -215,13 +215,13 @@
         <section class="antialiased font-sans bg-blue-600">
             <div class="container-custom call-to-act py-14 block sm:flex items-center">
                 <div class="call-to-act-head text-white flex-1 mb-8 sm:mb-0">
-                    <h3 class="text-2xl font-bold">Want to Become a Real Estate Agent?</h3>
-                    <span>We'll help you to grow your career and growth.</span>
+                    <h3 class="text-base md:text-2xl font-bold">Want to Become a Real Estate Agent?</h3>
+                    <span class="text-xs md:text-base">We'll help you to grow your career and growth.</span>
                 </div>
                 <a href="javascript:void(0)"
                    data-toggle="modal"
                    data-target="#form-contact-modal"
-                   class="btn btn-call-to-act bg-white border-4 border-blue-400 rounded-full py-4 px-8"
+                   class="btn btn-call-to-act bg-white border-4 border-blue-400 rounded-full py-2 px-4 md:py-4 md:px-8"
                 >
                     SignUp Today
                 </a>

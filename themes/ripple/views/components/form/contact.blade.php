@@ -2,7 +2,7 @@
 
 <div id="{!! $id !!}" x-data="contact('#{{ $id }}')" {!! $attributes->merge(['class' => 'form-contact max-w-xl']) !!}>
     <div class="mb-4">
-        <h1 class="text-4xl font-extrabold capitalize">{!! $title !!}</h1>
+        <h1 class="md:text-4xl font-extrabold capitalize">{!! $title !!}</h1>
     </div>
     <div class="mb-4">
         <div class="mb-4">
@@ -29,7 +29,7 @@
             </div>
         </div>
         <div class="hero-search-action">
-            <button x-on:click="submit()" type="button" class="btn text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">
+            <button x-on:click="submit()" type="button" class="btn md:text-xl text-white bg-blue-600 p-2 md:p-5 w-full text-center rounded-md">
                 <x-theme::icons.loading class="loading-icon animate-spin -ml-1 mr-3 text-white" style="display: none"/>
                 Gửi cho chúng tôi
             </button>
