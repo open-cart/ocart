@@ -21,7 +21,7 @@ return [
     'action'           => 'Actions',
     'delete'           => 'Delete',
     'edit'             => 'Edit',
-    'add_new'          => 'Add a new',
+    'add_new'          => 'Add new',
     'add_new_multi'    => 'Add multiple products',
     'sort'             => 'Sort',
     'export'           => 'Export',
@@ -34,9 +34,12 @@ return [
     'status_off'       => 'Off',
     'max_c'            => 'Max :max char',
     'save'             => 'Save',
+    'save_and_edit'    => 'Save & Edit',
     'cancel'           => 'Cancel',
     'title'            => 'Title',
     'template'         => 'Template',
     'created_at'       => 'Created at',
-    'alias'            => 'Alias'
+    'alias'            => 'Alias',
+    'publish'          => 'Publish',
+    'reload'           => 'Reload'
 ];
