@@ -12,7 +12,7 @@
     >
         <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"  x-on:click="close"></div>
 
-        <div class="modal-container bg-white mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
+        <div class="modal-container bg-white dark:bg-gray-800 dark:text-gray-300 mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
             <div
                     x-on:click="close"
                     class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
@@ -25,9 +25,9 @@
             <!-- Add margin if you want to see some of the overlay behind the modal-->
             <div class="modal-content py-4 text-left px-6">
                 {!! $header !!}
-                <hr class="-mx-6">
+                <x-divider class="-mx-6"/>
                 {!! $content !!}
-                <hr class="-mx-6">
+                <x-divider class="-mx-6"/>
                 <!--Footer-->
                 {!! $footer !!}
             </div>

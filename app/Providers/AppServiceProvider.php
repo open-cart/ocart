@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Repositories\LanguageRepository;
 use App\Repositories\LanguageRepositoryEloquent;
+use Illuminate\Pagination\AbstractPaginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -17,6 +18,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         $this->app->bind(LanguageRepository::class, LanguageRepositoryEloquent::class);
+
+        AbstractPaginator::defaultView('pagination.tailwind');
+//        AbstractPaginator::defaultSimpleView('pagination::simple-tailwind');
     }
 
     /**

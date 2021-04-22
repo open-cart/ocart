@@ -1,8 +1,8 @@
 <x-app-layout>
     <div class="pb-12 pt-3">
         <div class="sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div x-data="{tab: 1}" class="p-6 bg-white border-b border-gray-200">
+            <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
+                <div x-data="{tab: 1}" class="p-6 border-b border-gray-200">
 {{--                    <div>--}}
 {{--                        <nav>--}}
 {{--                            <ul class="flex">--}}
@@ -72,14 +72,13 @@
                                         <label for="store_country">
                                             {!! trans('plugins/ecommerce::store.country') !!}
                                         </label>
-                                        <select name="store_country"
+                                        <x-select name="store_country"
                                                 id="store_country"
-                                                class="px-4 py-2 border focus:ring-blue-400 focus:border-blue-500 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                                         >
                                             @foreach(['' => trans('plugins/ecommerce::store.select_country')] + \Ocart\Core\Library\Helper::countries() as $countryCode => $countryName)
                                                 <option value="{{ $countryCode }}" @if (get_ecommerce_setting('store_country') == $countryCode) selected @endif>{{ $countryName }}</option>
                                             @endforeach
-                                        </select>
+                                        </x-select>
                                     </div>
                                 </div>
                             </div>
