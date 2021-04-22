@@ -12,10 +12,10 @@ class PageFilterForm extends FormAbstract
     {
         $this
             ->setModuleName('page-filter')->add('name', Field::TEXT, [
-                'label'      => 'label search',
+                'label'      => trans('packages/page::pages.search.label'),
                 'wrapper_class' => 'col-span-2',
                 'attr' => [
-                    'placeholder' => 'tìm kiếm...',
+                    'placeholder' => trans('packages/page::pages.search.placeholder'),
                 ]
             ]);
     }

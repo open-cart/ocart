@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'content' => 'Bài viết',
+    'content' => 'Nội dung',
     'menu' => 'Trang',
     'blog_content' => 'Bài viết',
     'page_title' => 'Trang',
@@ -15,6 +15,10 @@ return [
     'create'    => 'Tạo mới trang',
     'edit' => 'Sửa trang',
     'forms' => [
-        'name' => 'Name'
+        'name' => 'Tên trang'
+    ],
+    'search' => [
+        'label' => 'Search',
+        'placeholder' => 'Tìm kiếm...',
     ]
 ];

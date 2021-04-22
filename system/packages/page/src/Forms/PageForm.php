@@ -20,29 +20,30 @@ class PageForm extends FormAbstract
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
                 'label'      => trans('packages/page::pages.forms.name'),
-                'rules' => 'min:5',
             ])
             ->add('slug', Field::TEXT, [
-                'rules' => 'min:5',
+                'label'      => trans('admin.alias'),
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:5000',
-                'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                'label'      => trans('packages/page::pages.description'),
+                'attr'      => [
+                    'rows' => 3
                 ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'rules' => 'max:5000',
+                'label'      => trans('packages/page::pages.content'),
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
                 ]
             ])
-            ->add('is_featured', 'onOff')
+//            ->add('is_featured', 'onOff')
             ->add('status', 'select', [
+                'label'      => trans('admin.status'),
                 'choices'    => BaseStatusEnum::labels()
             ])->add('template', 'select', [
+                'label'      => trans('admin.template'),
                 'choices'    => Template::getTemplate()
             ])
-            ->setBreakFieldPoint('is_featured');
+            ->setBreakFieldPoint('status');
     }
 }

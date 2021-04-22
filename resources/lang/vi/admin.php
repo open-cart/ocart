@@ -35,4 +35,8 @@ return [
     'max_c'            => 'Tối đa :max kí tự',
     'save'             => 'Lưu',
     'cancel'           => 'Hủy bỏ',
+    'title'            => 'Tiêu đề',
+    'template'         => 'Template',
+    'created_at'       => 'Ngày tạo',
+    'alias'            => 'URL tùy chỉnh'
 ];
