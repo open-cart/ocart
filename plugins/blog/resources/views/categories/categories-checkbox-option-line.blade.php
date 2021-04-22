@@ -13,7 +13,7 @@ $value = isset($value) ? (array)$value : [];
                     <label class="flex items-center space-x-3">
                         {!! Form::checkbox($name, $category->id, in_array($category->id, $value), ['class' => 'rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50']) !!}
 {{--                        {!! Form::customLabel($name, $category->name, ['class' => 'text-gray-900 font-medium']) !!}--}}
-                        <span class="text-gray-900 font-medium">{!! $category->name !!}</span>
+                        <span class="text-gray-900 font-medium dark:text-gray-300">{!! $category->name !!}</span>
                     </label>
                     @include('plugins.blog::categories.categories-checkbox-option-line', [
                         'categories' => $category->child_cats,

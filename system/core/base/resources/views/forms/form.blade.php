@@ -37,7 +37,7 @@
 
                     @foreach ($fields as $field)
                         @if( ! in_array($field->getName(), $exclude) )
-                            <div class="rounded-md bg-white border border-white dark:bg-gray-800 dark:border-gray-700">
+                            <div class="rounded-md bg-white border border-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300">
                                 <div class="border-b p-3 flex justify-between dark:border-gray-700">
                                     <h4>{!! Form::customLabel($field->getName(), $field->getOption('label'), $field->getOption('label_attr')) !!}</h4>
                                 </div>

@@ -23,44 +23,29 @@ class TagTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
-                'title' => 'title',
-                'with' => '20px',
-                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
+                'title' => 'ID',
+                'width' => '20px',
+                'class' => 'border text-center px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->name;
+                    return $item->id;
                 }
             ],
-//            'image' => [
-//                'name' => 'id',
-//                'title' => 'image',
-//                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
-//                'render' => function ($item) {
-//                    return '<img src="' . ($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
-//                }
-//            ],
-            'alias' => [
-                'name' => 'alias',
-                'title' => 'URL Tùy chỉnh',
+            'name' => [
+                'name' => 'name',
+                'title' => trans('plugins/blog::tags.name'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->slug;
+                    $link = route('blog.tags.update', ['id' => $item->id]);
+                    return "<a class='text-blue-400' href='$link'>$item->name</a>";
                 }
             ],
-            'craeteAt' => [
+            'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => trans('admin.created_at'),
+                'width' => '180px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
-                }
-            ],
-            'featured' => [
-                'name' => 'featured',
-                'title' => __('admin.featured'),
-                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
-                'width' => '120px',
-                'render' => function ($item) {
-                    return $item->is_featured;
                 }
             ],
             'status' => [
