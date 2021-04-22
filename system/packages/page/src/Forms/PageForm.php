@@ -31,7 +31,7 @@ class PageForm extends FormAbstract
                 ]
             ])
             ->add('content', Field::TEXTAREA, [
-                'label'      => trans('packages/page::pages.content'),
+                'label'      => trans('packages/page::pages.forms.content'),
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
                 ]
