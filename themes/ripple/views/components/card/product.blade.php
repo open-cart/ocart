@@ -31,12 +31,14 @@
 
             </div>
         </div>
-        @if($data->address)
-            <div class="p-2 md:p-4 border-t text-xs md:text-sm text-gray-500">
+        @if(is_active_plugin('eclocation'))
+            @if($data->address)
+                <div class="p-2 md:p-4 border-t text-xs md:text-sm text-gray-500">
                 <span class="flex items-center">
-                    <x-theme::icons.marker/> {{ $data->address }}
+                    <x-theme::icons.marker class="hidden md:block"/> {{ $data->address }}
                 </span>
-            </div>
+                </div>
+            @endif
         @endif
 
         <div class="hidden md:flex justify-between p-4 border-t items-center text-sm text-gray-600">
