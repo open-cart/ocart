@@ -41,5 +41,6 @@ return [
     'created_at'       => 'Ngày tạo',
     'alias'            => 'URL tùy chỉnh',
     'publish'          => 'Publish',
-    'reload'           => 'Làm mới'
+    'reload'           => 'Làm mới',
+    'phone'            => 'Số điện thoại'
 ];

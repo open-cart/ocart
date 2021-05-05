@@ -41,5 +41,6 @@ return [
     'created_at'       => 'Created at',
     'alias'            => 'Alias',
     'publish'          => 'Publish',
-    'reload'           => 'Reload'
+    'reload'           => 'Reload',
+    'phone'       => 'Phone'
 ];

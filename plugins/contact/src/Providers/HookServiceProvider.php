@@ -16,7 +16,7 @@ class HookServiceProvider extends ServiceProvider
                 'id' => 'cms-contact',
                 'priority' => 5,
                 'parent_id' => null,
-                'name' => 'Contact',
+                'name' => trans('plugins/contact::contact.menu_manager'),
                 'icon' => null,
                 'url' => '',
                 'permissions' => [],
@@ -26,7 +26,7 @@ class HookServiceProvider extends ServiceProvider
                     'id' => 'cms-contact-management',
                     'priority' => 1,
                     'parent_id' => 'cms-contact',
-                    'name' => 'Contact',
+                    'name' => trans('plugins/contact::contact.menu'),
                     'icon' => null,
                     'url' => route('contacts.index'),
                     'permissions' => [

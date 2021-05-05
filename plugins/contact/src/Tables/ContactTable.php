@@ -23,7 +23,7 @@ class ContactTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
-                'title' => trans('admin.name'),
+                'title' => trans('plugins/contact::contact.name'),
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
@@ -32,7 +32,7 @@ class ContactTable extends TableAbstract
             ],
             'email' => [
                 'name' => 'email',
-                'title' => trans('admin.email'),
+                'title' => trans('plugins/contact::contact.email'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->email;
@@ -46,9 +46,9 @@ class ContactTable extends TableAbstract
                     return $item->phone;
                 }
             ],
-            'createdAt' => [
+            'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => trans('admin.created_at'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
