@@ -77,7 +77,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
         $this->applyConditions([
             'is_featured' => 1
         ]);
-        $results = $this->limit($limit)->get();
+        $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
@@ -87,7 +87,7 @@ class PostRepositoryEloquent extends BaseRepository implements PostRepository
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $results = $this->limit($limit)->get();
+        $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
