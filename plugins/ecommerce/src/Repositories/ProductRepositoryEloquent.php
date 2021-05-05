@@ -54,7 +54,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         $this->applyConditions([
             'is_featured' => 1
         ]);
-        $results = $this->limit($limit)->get();
+        $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
@@ -64,7 +64,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $results = $this->limit($limit)->get();
+        $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
