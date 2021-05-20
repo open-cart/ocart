@@ -15,6 +15,11 @@ return [
     'create'    => 'Tạo mới trang',
     'edit' => 'Sửa trang',
     'forms' => [
-        'name' => 'Name'
+        'name' => 'Tên trang',
+        'content' => 'Nội dung',
+    ],
+    'search' => [
+        'label' => 'Search',
+        'placeholder' => 'Tìm kiếm...',
     ]
 ];

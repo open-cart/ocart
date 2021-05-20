@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Promo Code</title>
+    <style>
+        *{
+            font-size: 18px;
+        }
+        body {
+            margin: 0px;
+            padding: 0px;
+        }
+        .header{
+            position: relative;
+        }
+        .cover{
+            height: 220px;
+            width: 100%;
+        }
+        .avatar{
+            width: 60px;
+            height: 60px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            border-radius: 5px;
+        }
+        .box-title .title{
+            text-align: center;
+            font-size: 22px;
+            font-weight: 500
+        }
+        .notice{
+            text-align: center;
+        }
+        .tag{
+            background-color: #f84e4e30;
+            border-radius: 25px;
+            padding: 5px 10px;
+            color: #f84e4e;
+            font-size: 12px;
+        }
+        .content{
+            padding: 10px 20px 120px;
+        }
+        .divider{
+            border-bottom: 1px solid #eee;
+            margin: 10px 0;
+        }
+        .box-title{
+            padding-bottom: 10px;
+        }
+        h3{
+            margin: 10px 0;
+        }
+        .expire_date{
+            font-size: 13px;
+        }
+        .expire_date .title{
+            padding: 5px 0;
+        }
+        .btn{
+            padding: 10px 0;
+            border-top: solid 1px #eee;
+            border-bottom: solid 1px #eee;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <img src="https://sgodev.com/uploads/2020/12/04/picture/5ed93242a78e65cc8597040af70917d2_ef6cf3811cbfede1b4ae.jpg"
+         alt="img" class="cover">
+    <img src="https://sgodev.com/uploads/2021/04/05/picture/6a3e244b676cee30bfe49bcbdef5e9e1_hinh-ve-sieu-cute.jpg"
+         alt="avatar" class="avatar">
+</div>
+<div class="content">
+    <div class="box-title">
+        <h3 class="title">
+            Tiêu đề
+        </h3>
+        <div class="notice">
+        <span class="tag">
+            Hết hạn sau
+        </span>
+        </div>
+    </div>
+    <div class="expire_date">
+        <div class="title">
+            <span>Ngày hết hạn</span>
+        </div>
+        <div>
+            <span>22-12-2021 - 22-12-2021</span>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <div>
+        <p>
+            - Ưu đãi 40.000đ cho đơn hàng SGOFood từ 40.000đ.
+        </p>
+        <p>
+            - Ưu đãi 40.000đ cho đơn hàng SGOFood từ 40.000đ.
+        </p>
+        <p>
+            - Muỗi khách hàng chỉ có thể sử dụng 1 lần muỗi ngày.
+        </p>
+        <p>
+            - Ưu đãi số lượng có hạn.
+        </p>
+
+        <h3>Liên hệ</h3>
+        <p>SGO Food</p>
+        <a class="btn" href="http://google.com" onclick="clickYourButton(event)">Trợ giúp</a>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    function clickYourButton(event) {
+        event.preventDefault();
+        setTimeout(function () {
+            window.ReactNativeWebView.postMessage(event.target.href)
+        }, 0)
+    }
+</script>
+</html>

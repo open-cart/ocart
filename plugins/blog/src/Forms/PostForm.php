@@ -35,36 +35,42 @@ class PostForm extends FormAbstract
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
-                'label'      => trans('packages/page::pages.forms.name'),
+                'label'      => trans('plugins/blog::posts.name'),
                 'rules' => 'min:3',
             ])
             ->add('slug', Field::TEXT, [
+                'label'      => trans('admin.alias'),
                 'rules' => 'min:3',
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:5000',
+                'label'      => trans('plugins/blog::posts.description'),
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
                 ]
             ])
             ->add('content', Field::TEXTAREA, [
+                'label'      => trans('plugins/blog::posts.content'),
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
                 ]
             ])
-            ->add('is_featured', 'onOff')
+            ->add('is_featured', 'onOff', [
+                'label'      => trans('plugins/blog::posts.is_featured'),
+            ])
             ->add('status', 'select', [
+                'label'      => trans('admin.status'),
                 'choices'    => BaseStatusEnum::labels()
             ])
             ->add('categories[]', 'categoryMulti', [
-                'label'      =>'Category',
+                'label'      => trans('plugins/blog::posts.categories'),
                 'choices'    => get_blog_categories(),
                 'value'      => old('categories', $selectedCategories),
             ])
             ->add('format_type', 'select', [
+                'label'      => trans('plugins/blog::posts.type'),
                 'choices'    => \Arr::pluck(get_post_formats(false), 'name', 'key')
             ])->add('image', 'mediaImage', [
-                'label'      => trans('core/base::forms.image'),
+                'label'      => trans('plugins/blog::posts.image'),
                 'label_attr' => ['class' => 'control-label'],
             ])
             ->setBreakFieldPoint('is_featured');

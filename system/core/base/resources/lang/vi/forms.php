@@ -2,6 +2,6 @@
 
 return [
     'image' => 'Image',
-    'choose_image' => 'Choose Image',
-    'add_image' => 'Add Image',
+    'choose_image' => 'Chọn ảnh',
+    'add_image' => 'Thêm ảnh',
 ];

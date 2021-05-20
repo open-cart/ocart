@@ -33,7 +33,7 @@ class PageTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
-                'title' => trans('admin.title'),
+                'title' => trans('packages/page::pages.forms.name'),
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
@@ -42,7 +42,7 @@ class PageTable extends TableAbstract
             ],
             'alias' => [
                 'name' => 'alias',
-                'title' => 'URL Tùy chỉnh',
+                'title' => trans('admin.alias'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->slug;
@@ -58,7 +58,7 @@ class PageTable extends TableAbstract
             ],
             'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => trans('admin.created_at'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;

@@ -18,20 +18,20 @@ class TagForm extends FormAbstract
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
-                'label'      => trans('plugins/ecommerce::products.forms.name'),
-//                'rules' => 'min:5',
+                'label'      => trans('plugins/blog::tags.name'),
             ])
             ->add('slug', Field::TEXT, [
-//                'rules' => 'min:5',
+                'label'      => trans('admin.alias'),
             ])
             ->add('description', Field::TEXTAREA, [
-                'rules' => 'max:400',
+                'label'      => trans('plugins/blog::tags.description'),
                 'attr' => [
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
                 ]
             ])
 
             ->add('status', 'select', [
+                'label'      => trans('admin.status'),
                 'choices'    => BaseStatusEnum::labels()
             ])
             ->setBreakFieldPoint('status');

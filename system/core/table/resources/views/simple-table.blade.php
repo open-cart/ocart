@@ -23,7 +23,7 @@
                                     title="{!! __('admin.add_new') !!}"
                                     class="space-x-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center">
                                     <i data-feather="refresh-ccw" width="16" height="16"></i>
-                                    <span>Reload</span>
+                                    <span>{!! trans('admin.reload') !!}</span>
                                 </a>
                             </div>
                         </div>

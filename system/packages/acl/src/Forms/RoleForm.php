@@ -35,13 +35,13 @@ class RoleForm extends FormAbstract
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
-                'label'      => trans('Role name'),
+                'label'      => trans('packages/acl::roles.name'),
                 'rules' => 'required',
             ])->add('description', Field::TEXTAREA, [
-                'label'      => trans('Description'),
+                'label'      => trans('packages/acl::roles.description'),
             ])->addMetaBoxes([
                 'overview' => [
-                    'title' => trans('Permission flags'),
+                    'title' => trans('packages/acl::roles.permission_flag'),
                     'content' => view('packages.acl::roles.permissions', compact('active', 'permissions', 'prTree')),
                 ],
             ]);

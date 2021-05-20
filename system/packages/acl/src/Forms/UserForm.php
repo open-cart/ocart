@@ -16,7 +16,7 @@ class UserForm extends FormAbstract
 
     public function buildForm()
     {
-        $roles = ['' => '- Select Role -'] + Role::all()->pluck('name', 'id')->toArray();
+        $roles = ['' => trans('packages/acl::users.select_role')] + Role::all()->pluck('name', 'id')->toArray();
 
         $this
             ->withCustomFields()
@@ -24,22 +24,22 @@ class UserForm extends FormAbstract
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->add('name', Field::TEXT, [
-                'label'      => trans('full_name'),
-                'rules' => 'min:5',
+                'label'      => trans('packages/acl::users.full_name'),
             ])
             ->add('email', Field::TEXT, [
+                'label'      => trans('packages/acl::users.email'),
                 'rules' => 'email',
                 'attr' => [
                     'disabled' => !!$this->getModel()
                 ]
             ])->add('password', Field::PASSWORD, [
-                'label' => 'Password',
+                'label'      => trans('packages/acl::users.password'),
                 'value' => '',
             ])->add('password_confirmation', Field::PASSWORD, [
-                'label' => 'Confirm Password',
+                'label'      => trans('packages/acl::users.password_confirmation'),
             ])
             ->add('roles', 'select', [
-                'label'      => 'Role',
+                'label'      => trans('packages/acl::users.roles'),
                 'choices'    => $roles
             ])
             ->setBreakFieldPoint('roles');

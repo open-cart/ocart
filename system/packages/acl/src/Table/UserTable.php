@@ -4,6 +4,9 @@
 namespace Ocart\Acl\Table;
 
 use App\Models\User;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Acl\Forms\UserFilterForm;
+use Ocart\Acl\Repositories\Criteria\UserSearchCriteria;
 use Ocart\Acl\Repositories\UserRepository;
 use Ocart\Table\Abstracts\TableAbstract;
 use Collective\Html\HtmlBuilder;
@@ -12,13 +15,18 @@ use Ocart\Table\DataTables;
 class UserTable extends TableAbstract
 {
 
-    public function __construct(DataTables $table, UserRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, UserRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->with('roles')->paginate(10);
+        $this->data = $repo->with('roles')
+            ->pushCriteria(app(UserSearchCriteria::class))
+            ->paginate(10);
         $this->ajax();
+
+        $this->searchForm = $formBuilder->create(UserFilterForm::class, ['model' => request()->all()])
+            ->renderForm();
     }
 
     public function ajax()
@@ -26,7 +34,7 @@ class UserTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
-                'title' => 'full name',
+                'title' => trans('packages/acl::users.full_name'),
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
@@ -51,7 +59,7 @@ class UserTable extends TableAbstract
 //            ],
             'email' => [
                 'name' => 'email',
-                'title' => 'Email',
+                'title' => trans('packages/acl::users.email'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->email;
@@ -59,15 +67,15 @@ class UserTable extends TableAbstract
             ],
             'role' => [
                 'name' => 'roles',
-                'title' => 'Roles',
+                'title' => trans('packages/acl::users.roles'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return join(',', $item->roles->pluck('name')->toArray());
+                    return join(',', $item->roles->pluck('name')->toArray()) ?: trans('packages/acl::users.unknown');
                 }
             ],
-            'craeteAt' => [
+            'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => trans('admin.created_at'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;

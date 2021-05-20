@@ -22,7 +22,7 @@ class HookServiceProvider extends ServiceProvider
                 'id' => 'cms-system-content',
                 'priority'    => 999,
                 'parent_id' => null,
-                'name' => 'packages/acl::systems.manager',
+                'name' => trans('packages/acl::menu.manager'),
                 'icon' => null,
                 'url' => '',
                 'permissions' => [],
@@ -30,7 +30,7 @@ class HookServiceProvider extends ServiceProvider
             ])->registerItem([
                 'id' => 'cms-system-role-roles',
                 'parent_id' => 'cms-system-content',
-                'name' => 'Roles & permissions',
+                'name' => trans('packages/acl::menu.role_manager'),
                 'icon' => null,
                 'url' => route('system.roles.index'),
                 'permissions' => [
@@ -43,7 +43,7 @@ class HookServiceProvider extends ServiceProvider
             ])->registerItem([
                 'id' => 'cms-system-user-users',
                 'parent_id' => 'cms-system-content',
-                'name' => 'Users',
+                'name' => trans('packages/acl::menu.user_manager'),
                 'icon' => null,
                 'url' => route('system.users.index'),
                 'permissions' => [

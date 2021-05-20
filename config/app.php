@@ -69,6 +69,14 @@ return [
 
     'timezone' => 'Asia/Ho_Chi_Minh',
 
+    /**
+     * Những ngôn ngữ được hỗ trợ
+     */
+    'locales' => [
+        'en',
+        'vi'
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration

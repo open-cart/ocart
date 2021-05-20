@@ -41,7 +41,7 @@ class BlogServiceProvider extends ServiceProvider
             ->loadAndPublishConfigurations([])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
-//            ->loadAndPublishTranslations()
+            ->loadAndPublishTranslations()
             ->loadMigrations();
 
         Event::listen(RouteMatched::class, function () {
@@ -49,7 +49,7 @@ class BlogServiceProvider extends ServiceProvider
                 'id'          => 'cms-plugins-blog-post',
                 'priority'    => 101,
                 'parent_id'   => 'cms-core-content',
-                'name'        => 'Blog/Tin tức',
+                'name'        => trans('plugins/blog::menu.posts'),
                 'icon'        => null,
                 'url'         => route('blog.posts.index'),
                 'permissions' => [
@@ -63,7 +63,7 @@ class BlogServiceProvider extends ServiceProvider
                 'id'          => 'cms-plugins-blog-categories',
                 'priority'    => 102,
                 'parent_id'   => 'cms-core-content',
-                'name'        => 'Danh mục',
+                'name'        => trans('plugins/blog::menu.categories'),
                 'icon'        => null,
                 'url'         => route('blog.categories.index'),
                 'permissions' => [
@@ -77,7 +77,7 @@ class BlogServiceProvider extends ServiceProvider
                 'id'          => 'cms-plugins-blog-tags',
                 'priority'    => 103,
                 'parent_id'   => 'cms-core-content',
-                'name'        => 'Tags',
+                'name'        => trans('plugins/blog::menu.tags'),
                 'icon'        => null,
                 'url'         => route('blog.tags.index'),
                 'permissions' => [

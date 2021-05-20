@@ -22,37 +22,40 @@ class PostTable extends TableAbstract
     public function ajax()
     {
         $data = $this->table->columns([
-            'id' => [
-                'name' => 'id',
-                'title' => 'title',
-                'with' => '20px',
-                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
-                'render' => function ($item) {
-                    return $item->name;
-                }
-            ],
             'image' => [
                 'name' => 'id',
-                'title' => 'image',
+                'title' => trans('plugins/blog::posts.image'),
+                'width' => '120px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
-            'alias' => [
-                'name' => 'alias',
-                'title' => 'URL Tùy chỉnh',
+            'title' => [
+                'name' => 'title',
+                'title' => trans('plugins/blog::posts.name'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->slug;
+                    $link = route('blog.posts.update', ['id' => $item->id]);
+                    return "<a class='text-blue-400' href='$link'>$item->name</a>";
                 }
             ],
             'categories' => [
                 'name' => 'id',
-                'title' => 'Category',
+                'title' => trans('plugins/blog::posts.categories'),
+                'width' => '180px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return join(',', $item->categories->pluck('name')->toArray());
+                }
+            ],
+            'created_at' => [
+                'name' => 'created_at',
+                'title' => trans('admin.created_at'),
+                'width' => '180px',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
+                'render' => function ($item) {
+                    return $item->created_at;
                 }
             ],
             'status' => [

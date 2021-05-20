@@ -27,7 +27,7 @@ class AclServiceProvider extends ServiceProvider
             ->loadAndPublishConfigurations([])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
-//            ->loadAndPublishTranslations()
+            ->loadAndPublishTranslations()
             ->loadMigrations();
     }
 }

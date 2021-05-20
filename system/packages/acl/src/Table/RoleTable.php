@@ -26,7 +26,7 @@ class RoleTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'name',
-                'title' => 'Role',
+                'title' => trans('packages/acl::roles.name'),
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
@@ -35,7 +35,7 @@ class RoleTable extends TableAbstract
             ],
             'guard_name' => [
                 'name' => 'guard_name',
-                'title' => 'Guard name',
+                'title' => trans('packages/acl::roles.guard_name'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->guard_name;
@@ -43,16 +43,16 @@ class RoleTable extends TableAbstract
             ],
             'description' => [
                 'name' => 'guard_name',
-                'title' => 'Description',
+                'title' => trans('packages/acl::roles.description'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->description;
                 }
             ],
 
-            'craeteAt' => [
+            'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => trans('admin.created_at'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at;
