@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $admin = User::create([
             'name' => 'Phan Trung Nguyên',
             'email' => 'nguyen@gmail.com',
             'email_verified_at' => now(),
@@ -25,8 +25,6 @@ class DatabaseSeeder extends Seeder
         ]);
         User::factory(10)->create();
 
-        /** @var User $admin */
-        $admin = User::where('id', 1)->first();
         $admin->assignRole(['owners']);
 
         app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
