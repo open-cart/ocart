@@ -33,6 +33,15 @@ class PageTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
+                'title' => 'ID',
+                'with' => '20px',
+                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
+                'render' => function ($item) {
+                    return $item->id;
+                }
+            ],
+            'name' => [
+                'name' => 'name',
                 'title' => trans('packages/page::pages.forms.name'),
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
