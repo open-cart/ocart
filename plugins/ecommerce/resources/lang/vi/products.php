@@ -1,5 +1,8 @@
 <?php
 
 return [
-    'create' => 'Tạo mới sản phẩm'
+    'create' => 'Tạo mới sản phẩm',
+    'forms' => [
+        'name' => 'Tên'
+    ]
 ];
