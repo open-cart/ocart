@@ -6,6 +6,7 @@ use Ocart\Ecommerce\Models\Product;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Hashids\Hashids;
 
 /**
  * Class PageRepositoryEloquent.
@@ -36,6 +37,27 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
 //        $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
+    }
+
+    public function createSku(): string
+    {
+        $num = setting('increment_product', 1);
+
+        setting()->set('increment_sku', $num + 1);
+
+        $sku = 'SP_' . str_pad($num, 6, '0', STR_PAD_LEFT);
+
+        $query = $this->makeModel();
+
+        $count = $query->where('sku', $sku)->count();
+
+        if ($count) {
+            $hashids = new Hashids('increment_product', 8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
+
+            return $hashids->encode($num);
+        }
+
+        return $sku;
     }
 
     public function productForCategory($categoryId, $paginate = 9)

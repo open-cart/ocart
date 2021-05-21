@@ -73,6 +73,8 @@ class ProductController extends BaseController
 
         $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
 
+        $data['sku'] = $request->input('sku') ?: $this->repo->createSku();
+
         $product = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
