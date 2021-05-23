@@ -5,6 +5,8 @@ namespace Ocart\Ecommerce\Http\Requests;
 
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Ocart\Ecommerce\Models\Product;
 
 class ProductRequest extends FormRequest
 {
@@ -17,9 +19,12 @@ class ProductRequest extends FormRequest
     {
         return [
             'name'    => 'required|max:120',
+            'description' => 'max:400',
             'content' => 'required',
-            'description' => 'required:400',
-            'sku'    => 'required|max:120',
+            'sku'    => [
+                'max:120',
+                Rule::unique((new Product)->getTable())
+            ],
         ];
     }
 }

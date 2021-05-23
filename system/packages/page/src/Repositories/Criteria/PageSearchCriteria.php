@@ -2,6 +2,7 @@
 
 namespace Ocart\Page\Repositories\Criteria;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Prettus\Repository\Contracts\CriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
@@ -25,7 +26,7 @@ class PageSearchCriteria implements CriteriaInterface
     /**
      * Apply criteria in query repository
      *
-     * @param string              $model
+     * @param Builder              $model
      * @param RepositoryInterface $repository
      *
      * @return mixed
@@ -43,6 +44,12 @@ class PageSearchCriteria implements CriteriaInterface
                     $q->orWhere('description', 'like', "%$name%");
                 });
             }
+        }
+
+        if ($request->get('order')) {
+
+        } else {
+            $model = $model->orderBy('id', 'desc');
         }
 
         return $model;

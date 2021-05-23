@@ -12,5 +12,9 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  */
 interface ProductRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
-    //
+    /**
+     * Tạo ra 1 sku không trùng lặp cho sản phẩm
+     * @return string
+     */
+    public function createSku(): string;
 }

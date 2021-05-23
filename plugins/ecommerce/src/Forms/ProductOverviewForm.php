@@ -20,6 +20,9 @@ class ProductOverviewForm extends FormAbstract
             ->setFormOption('id', 'from-builder')
             ->add('sku', Field::TEXT, [
                 'label' => 'Sku',
+                'attr' => [
+                    'placeholder' => 'VD: SP_000001',
+                ]
 //                'rules' => 'min:5',
 
             ])->add('price', Field::TEXT, [
