@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     <div class="container-custom mb-4">
         <ol class="list-reset py-4 border-b border-gray-200 flex text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>

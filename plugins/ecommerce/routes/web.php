@@ -43,6 +43,7 @@ Route::group([
 
     Route::get('product/{slug}', 'PublicController@product');
     Route::get('product-category/{slug}', 'PublicController@productCategory');
+    Route::get('shop', 'PublicController@shop');
     Route::get('shopping-cart', 'ShoppingController@cart')->name('shopping-cart');
     Route::get('shopping-buy', 'ShoppingController@buy')->name('shopping-buy');
     Route::get('shopping-thank', 'ShoppingController@thank')->name('shopping-thank');
