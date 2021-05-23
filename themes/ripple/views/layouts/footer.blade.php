@@ -4,12 +4,15 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="footer-widget">
                     <a href="{!! route('home') !!}">
-                        <img src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" class="img-footer w-2/3 mb-3" alt="">
+                        @php
+                        $logo = get_logo();
+                        @endphp
+                        <img src="{{ $logo }}" class="img-footer w-2/3 mb-3" alt="">
                     </a>
                     <div class="footer-add">
-                        <p>Phú Lương, Thái Nguyên.</p>
-                        <p>+84 357-096-209</p>
-                        <p>nguyenpl117@gmail.com</p>
+                        <p>SevenWeb.vn</p>
+                        <p>0972 675 428</p>
+                        <p>sevenwebvn@gmail.com</p>
                     </div>
 
                 </div>
@@ -49,7 +52,10 @@
 
     <div class="footer-bottom bg-gray-900">
         <div class="container-custom align-items-center py-4">
-            <p class="mb-0">© 2021 Resido. Designd By <a href="https://phantrungnguyen.com">Phan Trung Nguyên</a> All Rights
+            @php
+                $domain = get_domain();
+            @endphp
+            <p class="mb-0">© 2021 {{ $domain }} Designd By <a href="https://sevenweb.vn">SevenWeb</a> All Rights
                 Reserved</p>
         </div>
     </div>

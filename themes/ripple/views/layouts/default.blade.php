@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-pjax-version" content="{{ mix('themes/ripple/css/style.css') }}">
 
-    <link rel="icon" type="image/png" href="{{ Theme::asset('img/favicon-bdstayhanoi.jpg') }}">
+    @php
+    $favicon = get_favicon();
+    @endphp
+    <link rel="icon" type="image/png" href="{{ $favicon }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SeoHelper::render() !!}

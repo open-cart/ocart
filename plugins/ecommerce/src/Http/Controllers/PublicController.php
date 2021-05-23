@@ -10,6 +10,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
+use function MongoDB\BSON\toJSON;
 
 class PublicController extends BaseController
 {
@@ -37,7 +38,8 @@ class PublicController extends BaseController
             abort(404);
         }
         $title = $product->name;
-        $description = Str::limit(strip_tags($product->description), 250);
+//        $description = Str::limit(strip_tags($product->description), 250);
+        $description = Str::limit($product->description, 250);
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
         $meta = SeoHelper::openGraph();
@@ -48,6 +50,25 @@ class PublicController extends BaseController
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME, $product);
 
         return Theme::scope('product',  compact('product'),'packages/ecommerce::product');
+    }
+
+    public function shop()
+    {
+        $title = 'shop';
+        $description = 'shop';
+
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('Shop');
+
+        $products = $this->repo->paginate( 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, []);
+
+        return Theme::scope('shop',  compact( 'products'),'packages/ecommerce::shop');
     }
 
     /**

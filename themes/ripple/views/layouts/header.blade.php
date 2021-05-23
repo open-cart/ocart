@@ -5,7 +5,10 @@
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{!! route('home') !!}">
                     <span class="sr-only">Workflow</span>
-                    <img class="h-8 w-auto sm:h-16" src="{{ Theme::asset('img/logo-bdstayhanoi.jpg') }}" alt="">
+                    @php
+                    $logo = get_logo();
+                    @endphp
+                    <img class="h-8 w-auto sm:h-16" src="{{ $logo }}" alt="">
                 </a>
             </div>
             <div class="-mr-2 -my-2 lg:hidden">
@@ -26,8 +29,7 @@
                 </button>
             </div>
             <nav class="hidden lg:flex space-x-10">
-                <div class="relative" x-data="{ open: false, focus: false }">
-                    <!-- Item active: "text-gray-900", Item inactive: "text-gray-500" -->
+                <div class="hidden" x-data="{ open: false, focus: false }">
                     <button x-on:click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
                         <span>Nhà đất bán</span>
                         <!--
@@ -41,16 +43,6 @@
 
                     </button>
 
-                    <!--
-                      'Solutions' flyout menu, show/hide based on flyout menu state.
-
-                      Entering: "transition ease-out duration-200"
-                        From: "opacity-0 translate-y-1"
-                        To: "opacity-100 translate-y-0"
-                      Leaving: "transition ease-in duration-150"
-                        From: "opacity-100 translate-y-0"
-                        To: "opacity-0 translate-y-1"
-                    -->
                     <div x-show="open" @click.away="open = false" @keydown.escape="open = false" @close-popover-group.window="open = false" class="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2" style="display: none">
                         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                             <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
@@ -155,10 +147,11 @@
                     </div>
                 </div>
 
-                <a href="/product-category/nha-dat-cho-thue" class="text-base font-medium text-gray-500 hover:text-gray-900">
+
+                <a href="/shop" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Sản phẩm
                 </a>
-                <a href="/post-category/tin-tuc" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                <a href="/blog" class="text-base font-medium text-gray-500 hover:text-gray-900">
                     Tin tức
                 </a>
                 <a href="/about.html" class="text-base font-medium text-gray-500 hover:text-gray-900">
