@@ -68,7 +68,7 @@
     @if(is_active_plugin('ecommerce'))
         <section class="sec-product antialiased bg-gray-100 text-gray-900 font-sans py-16">
             <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-xl md:text-2xl font-bold">Explore Good places</h2>
+                <h2 class="text-xl md:text-2xl font-bold">Sản phẩm nổi bật</h2>
                 <p class="text-sm md:text-base text-gray-600">Chúng tôi cho là xứng đáng với họ, và họ đang buộc tội những người ghét người công bình, Nhưng, sự thật,
                     và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>
             </div>
@@ -147,7 +147,7 @@
     @if(is_active_plugin('blog'))
         <section class="sec-post antialiased bg-gray-100 font-sans py-16">
             <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-                <h2 class="text-xl md:text-2xl font-bold">Blog</h2>
+                <h2 class="text-xl md:text-2xl font-bold">Tin tức mới nhất</h2>
                 <p class="text-sm md:text-base text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
             </div>
 

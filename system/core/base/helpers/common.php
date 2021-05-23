@@ -238,3 +238,21 @@ if (!function_exists('sort_item_with_children')) {
         return $result;
     }
 }
+
+if (!function_exists('get_logo')) {
+    function get_logo(){
+        return setting('logo', '/images/logo-default.jpg');
+    }
+}
+
+if (!function_exists('get_favicon')) {
+    function get_favicon(){
+        return setting('favicon', '/images/favicon-default.jpg');
+    }
+}
+
+if (!function_exists('get_domain')) {
+    function get_domain(){
+        return setting('domain', 'Sevenweb.vn');
+    }
+}

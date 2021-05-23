@@ -1,4 +1,4 @@
-@props(['id' => 'form-contact', 'title' => 'Bạn cần tư vấn mua bất động sản?'])
+@props(['id' => 'form-contact', 'title' => 'Bạn cần tư vấn? Vui lòng liên hệ.'])
 
 <div id="{!! $id !!}" x-data="contact('#{{ $id }}')" {!! $attributes->merge(['class' => 'form-contact max-w-xl']) !!}>
     <div class="mb-4">

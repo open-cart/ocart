@@ -278,6 +278,11 @@
                                 </div>
                             </li>
                         </template>
+                        <template x-if="!distributor.length">
+                            <li class="py-4 border-b-2">
+                                Chưa có đại lý nào.
+                            </li>
+                        </template>
 
                     </div>
                 </ul>
