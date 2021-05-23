@@ -256,3 +256,9 @@ if (!function_exists('get_domain')) {
         return setting('domain', 'Sevenweb.vn');
     }
 }
+
+if (!function_exists('get_banner')) {
+    function get_banner(){
+        return setting('banner', 'Sevenweb.vn');
+    }
+}
