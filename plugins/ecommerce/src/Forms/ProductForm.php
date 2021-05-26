@@ -52,7 +52,8 @@ class ProductForm extends FormAbstract
             ->add('description', Field::TEXTAREA, [
                 'rules' => 'max:5000',
                 'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+                      'rows' => 3,
+//                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
                 ]
             ])
             ->add('content', Field::TEXTAREA, [
