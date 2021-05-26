@@ -262,3 +262,9 @@ if (!function_exists('get_banner')) {
         return setting('banner', 'Sevenweb.vn');
     }
 }
+
+if (!function_exists('get_config_sections')) {
+    function get_config_sections(){
+        return json_decode(setting('config-sections', null));
+    }
+}
