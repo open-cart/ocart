@@ -9,6 +9,7 @@ module.exports = {
     //     './themes/ripple/**/*.js',
     //     './themes/ripple/**/*.vue',
     // ],
+    purge: false,
 
     theme: {
         extend: {
