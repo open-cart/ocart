@@ -47,7 +47,7 @@
                             <div class="flex items-center border-b hover:bg-gray-100 px-2 md:px-6 py-5">
                                 <div class="flex w-4/5"> <!-- product -->
                                     <div class="w-16">
-                                        <img class="h-16" src="{{ TnMedia::url($item->options->image ?? asset('/images/no-image.jpg')) }}" alt="">
+                                        <img class="h-16" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
                                     </div>
                                     <div class="flex-1 flex-col justify-between ml-4 flex-grow">
                                         <span class="font-bold text-sm line-clamp-2">{{ $item->name }}</span>

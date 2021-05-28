@@ -58,11 +58,11 @@ if (!function_exists('get_blog_categories')) {
 
 
 if (!function_exists('get_list_posts')) {
-    function get_list_posts() {
+    function get_list_posts($limit = 10, $columns = ['*']) {
         /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
         $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);
 
-        return $repo->all();
+        return $repo->paginate($limit, $columns);
     }
 }
 

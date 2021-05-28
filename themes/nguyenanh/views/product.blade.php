@@ -11,7 +11,7 @@
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
+                <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? '/images/no-image.jpg' : head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
                         <a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>

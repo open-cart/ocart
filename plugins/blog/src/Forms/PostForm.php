@@ -44,9 +44,9 @@ class PostForm extends FormAbstract
             ])
             ->add('description', Field::TEXTAREA, [
                 'label'      => trans('plugins/blog::posts.description'),
-                'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
-                ]
+//                'attr' => [
+//                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
+//                ]
             ])
             ->add('content', Field::TEXTAREA, [
                 'label'      => trans('plugins/blog::posts.content'),

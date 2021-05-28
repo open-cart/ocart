@@ -17,7 +17,7 @@
                         <div x-data='shoppingCartData(@json($item))' class="flex items-center hover:bg-gray-100 lg:-mx-6 lg:px-6 py-5">
                             <div class="flex w-4/5"> <!-- product -->
                                 <div class="w-20">
-                                    <img class="h-24" src="{{ TnMedia::url($item->options->image ?? asset('/images/no-image.jpg')) }}" alt="">
+                                    <img class="h-24" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
                                     <a href="/product/{{ $item->slug }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
