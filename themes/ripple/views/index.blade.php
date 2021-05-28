@@ -5,6 +5,7 @@
     @php
         $sections = get_config_sections();
     @endphp
+
     <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
          style="background-image:url({{ $banner }});">
         @if(is_active_plugin('contact'))
@@ -12,6 +13,59 @@
                 <x-theme::form.contact id="contact-index" class="bg-white p-4 md:p-10 pt-5 md:pt-8 shadow-md"/>
             </div>
         @endif
+    </div>
+
+    <div class="container-custom grid xl:grid-cols-6 xl:grid-rows-2 mx-auto gap-x-4 my-8 gap-y-6 md:grid-cols-4 md:grid-rows-3 grid-cols-2">
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thoi-trang-nam-1-150x150.jpg" class="w-full block m-auto">
+            <a href="" class="text-gray-600 font-bold">Thời Trang Nam</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thoi-trang-nu-1.jpg" class="block m-auto">
+            <a href="" class="text-gray-600 font-bold">Thời Trang Nữ</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thiet-bi-nghe-nhin-1.jpg" class=" block m-auto">
+            <a href="" class="text-gray-600 font-bold">Thiết Bị Nghe Nhìn</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-may-tinh-lap-top-1.jpg" class="block m-auto">
+            <a href="" class="text-gray-600 font-bold">Máy Tính & Laptop</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-the-thao-1.jpg" class="block m-auto">
+            <a href="" class="text-gray-600 font-bold">Thể Thao</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-phu-kien-thu-cung-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Phụ Kiện & Thú Cưng</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-giay-dep-nu-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Giày Dép Nữ</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-giay-nam-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Giày Dép Nam</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-dien-thoai-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Phụ Kiện Điện Thoại</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-Thiet-bi-van-phong-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Thiết Bị Văn Phòng</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-do-choi-1.jpg" class="block m-auto   ">
+            <a href="" class="text-gray-600 font-bold">Đồ Chơi</a>
+        </div>
+        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
+            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-sach-1.jpg" class="block m-auto">
+            <a href="" class="text-gray-600 font-bold">Sách</a>
+        </div>
+
+
     </div>
 
     @if($sections != null && in_array('about', $sections->value))
