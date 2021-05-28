@@ -50,6 +50,28 @@ class PublicController extends BaseController
     }
 
     /**
+     * Trang chi tiết shop
+     * @return mixed
+     */
+    public function blog()
+    {
+        $title = 'Blog title';
+        $description = 'Blog deps';
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('Blog page');
+
+        $posts = $this->repo->paginate(9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, []);
+
+        return Theme::scope('blog',  compact( 'posts'),'packages/post::blog');
+    }
+
+    /**
      * Danh muc bai viet
      * @return mixed
      */

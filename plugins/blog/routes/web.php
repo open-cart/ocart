@@ -32,6 +32,7 @@ Route::group([
     'namespace' => 'Ocart\Blog\Http\Controllers',
 ], function () {
     Route::get('post/{slug}', 'PublicController@post');
+    Route::get('blog', 'PublicController@blog');
     Route::get('post-category/{slug}', 'PublicController@postCategory');
 
 });

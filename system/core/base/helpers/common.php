@@ -251,6 +251,18 @@ if (!function_exists('get_favicon')) {
     }
 }
 
+if (!function_exists('get_title')) {
+    function get_title(){
+        return setting('title', 'Giới thiệu công ty');
+    }
+}
+
+if (!function_exists('get_deps')) {
+    function get_deps(){
+        return setting('deps', 'Mô tả công ty');
+    }
+}
+
 if (!function_exists('get_domain')) {
     function get_domain(){
         return setting('domain', 'Sevenweb.vn');
