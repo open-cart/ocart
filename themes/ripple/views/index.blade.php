@@ -14,6 +14,8 @@
         @endif
     </div>
 
+    @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-slide'))
+
     @if($sections != null && in_array('about', $sections->value))
         @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-about'))
     @endif
