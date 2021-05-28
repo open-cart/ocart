@@ -12,8 +12,8 @@ class PublicController
 
     function getIndex()
     {
-        $title = 'Title Website';
-        $description = 'Description Website';
+        $title = get_title();
+        $description = get_deps();
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
         $meta = SeoHelper::openGraph();
