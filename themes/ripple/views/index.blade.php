@@ -15,60 +15,24 @@
         @endif
     </div>
 
-    <div class="container-custom grid xl:grid-cols-6 xl:grid-rows-2 mx-auto gap-x-4 my-8 gap-y-6 md:grid-cols-4 md:grid-rows-3 grid-cols-2">
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thoi-trang-nam-1-150x150.jpg" class="w-full block m-auto">
-            <a href="" class="text-gray-600 font-bold">Thời Trang Nam</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thoi-trang-nu-1.jpg" class="block m-auto">
-            <a href="" class="text-gray-600 font-bold">Thời Trang Nữ</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thiet-bi-nghe-nhin-1.jpg" class=" block m-auto">
-            <a href="" class="text-gray-600 font-bold">Thiết Bị Nghe Nhìn</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-may-tinh-lap-top-1.jpg" class="block m-auto">
-            <a href="" class="text-gray-600 font-bold">Máy Tính & Laptop</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-the-thao-1.jpg" class="block m-auto">
-            <a href="" class="text-gray-600 font-bold">Thể Thao</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-phu-kien-thu-cung-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Phụ Kiện & Thú Cưng</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-giay-dep-nu-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Giày Dép Nữ</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-giay-nam-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Giày Dép Nam</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-dien-thoai-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Phụ Kiện Điện Thoại</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-Thiet-bi-van-phong-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Thiết Bị Văn Phòng</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-do-choi-1.jpg" class="block m-auto   ">
-            <a href="" class="text-gray-600 font-bold">Đồ Chơi</a>
-        </div>
-        <div class="text-center border p-2 border-gray-600 hover:shadow-xl">
-            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-sach-1.jpg" class="block m-auto">
-            <a href="" class="text-gray-600 font-bold">Sách</a>
-        </div>
+    @if($sections != null && in_array('categories_product', $sections->value))
+        <section class="antialiased font-sans pt-16">
+            <div class="container-custom">
+                <div class="flex flex-wrap -mx-2">
+                    @foreach([1,2,3,4,5,6,7,8,9,10,11,12] as $category)
+                    <div class="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/6 p-2 hover:shadow-xl text-center">
+                        <a href="" class="p-2 border border-gray-300 inline-block">
+                            <img src="https://mua1.xyz/wp-content/uploads/2021/05/hinh-anh-thoi-trang-nam-1-150x150.jpg" class="w-full block m-auto rounded-full p-2">
+                            <div class="text-gray-600 font-bold">Thời Trang Nam</div>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
-
-    </div>
-
-    @if($sections != null && in_array('about', $sections->value))
+@if($sections != null && in_array('about', $sections->value))
         @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-about'))
     @endif
 
