@@ -8,12 +8,10 @@
         </div>
         <div class="p-2 md:p-3">
             <a href=/product-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
-                {{ 'Sofa' }}
+                {{ Arr::get($data->categories->first(), 'name') }}
             </a>
             <a href="/product/{{ $data->slug }}" class="hover:text-blue-700">
-                <h3 class="text-xs md:text-base font-bold line-clamp-2">{{ '
-            Sofa góc phòng khách cao cấp ZB191
-        ' }}</h3>
+                <h3 class="text-xs md:text-base font-bold line-clamp-2">{{ $data->name }}</h3>
             </a>
 {{--            <div class="hidden md:block text-sm text-gray-500 md:line-clamp-3">{!! $data->description !!}</div>--}}
             <div class="flex justify-between items-center md:mt-2">
