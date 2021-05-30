@@ -293,8 +293,8 @@
 <script type="text/javascript">
     function distributor() {
         return {
-            selected: 'hanoi',
-            nameDistributor: 'Hà Nội',
+            selected: "hanoi",
+            nameDistributor: "Hà Nội",
             distributor: @json(get_distributor('hanoi')),
             getDistributor() {
                 this.distributor = [];
