@@ -277,6 +277,18 @@ if (!function_exists('get_banner')) {
 
 if (!function_exists('get_config_sections')) {
     function get_config_sections(){
-        return json_decode(setting('config-sections', null));
+        return json_decode(setting('config_sections', null));
+    }
+}
+
+if (!function_exists('get_meta_head')) {
+    function get_meta_head(){
+        return setting('meta_head', null);
+    }
+}
+
+if (!function_exists('get_meta_footer')) {
+    function get_meta_footer(){
+        return setting('meta_footer', null);
     }
 }

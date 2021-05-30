@@ -1,6 +1,6 @@
 @props(['data' => null])
 @if($data)
-    <a href="/post/{{ $data->slug }}" class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+    <a href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $data->slug]) !!}" class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-32 md:pb-60 overflow-hidden">
             <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url($data->image ?? asset('/images/no-image.jpg')) }}" alt="{{ $data->name }}">
         </div>

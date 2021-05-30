@@ -7,10 +7,10 @@
         <div class="pl-3 flex flex-wrap">
             <div>
                 <div>
-                    <a href="/post/{{ $data->slug }}" class="font-bold text-gray-500 hover:text-blue-600 line-clamp-2">{{ $data->name }}</a>
+                    <a href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $data->slug]) !!}" class="font-bold text-gray-500 hover:text-blue-600 line-clamp-2">{{ $data->name }}</a>
                 </div>
                 <div>
-                    <a href="/post-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="text-sm text-green-500 hover:text-blue-600 line-clamp-1">{{ Arr::get($data->categories->first(), 'name') }}</a>
+                    <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="text-sm text-green-500 hover:text-blue-600 line-clamp-1">{{ Arr::get($data->categories->first(), 'name') }}</a>
                 </div>
             </div>
         </div>

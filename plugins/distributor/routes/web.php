@@ -16,16 +16,6 @@ Route::group([
         });
     });
 
-    Route::get('list-distributor', 'DistributorController@list')->name('list-distributor');
-
+    Route::get('list-distributor', 'DistributorController@list')->name(ROUTE_LIST_DISTRIBUTOR_NAME);
 
 });
-
-//Route::group([
-//    'middleware' => ['web'],
-//    'namespace' => 'Ocart\Blog\Http\Controllers',
-//], function () {
-//    Route::get('post/{id}', 'PublicController@post');
-//    Route::get('post-category/{id}', 'PublicController@postCategory');
-//
-//});
