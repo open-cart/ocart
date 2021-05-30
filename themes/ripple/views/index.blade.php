@@ -20,7 +20,7 @@
                 <div class="flex flex-wrap -mx-2">
                     @foreach($categories as $category)
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/6 p-2 hover:shadow-xl text-center">
-                        <a href="{!! route('product-category', ['slug'=> $category->slug]) !!}" class="p-2 border border-gray-300 inline-block w-full">
+                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="p-2 border border-gray-300 inline-block w-full">
                             <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full p-2">
                             <div class="text-gray-600 font-bold line-clamp-1">{{ $category->name }}</div>
                         </a>

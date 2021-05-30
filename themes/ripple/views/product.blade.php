@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 flex text-xs md:text-base text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2 line-clamp-1"><a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
+            <li class="px-2 line-clamp-1"><a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
@@ -14,7 +14,7 @@
                 <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
-                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
+                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
                     <h1 class="text-gray-900 text-xl lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)

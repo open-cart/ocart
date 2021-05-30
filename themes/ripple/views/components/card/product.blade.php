@@ -2,15 +2,15 @@
 @if($data)
     <div class="h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div class="relative pb-32 md:pb-44 overflow-hidden">
-            <a href="/product/{{ $data->slug }}">
+            <a href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $data->slug]) !!}">
                 <img class="absolute inset-0 h-full w-full object-cover" src="{{ TnMedia::url(empty($data->images) ? asset('/images/no-image.jpg') : head($data->images)) }}" alt="">
             </a>
         </div>
         <div class="p-2 md:p-3">
-            <a href=/product-category/{{ Arr::get($data->categories->first(), 'slug') }}" class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
+            <a href={!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
                 {{ Arr::get($data->categories->first(), 'name') }}
             </a>
-            <a href="/product/{{ $data->slug }}" class="hover:text-blue-700">
+            <a href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $data->slug]) !!}" class="hover:text-blue-700">
                 <h3 class="text-xs md:text-base font-bold line-clamp-2">{{ $data->name }}</h3>
             </a>
 {{--            <div class="hidden md:block text-sm text-gray-500 md:line-clamp-3">{!! $data->description !!}</div>--}}

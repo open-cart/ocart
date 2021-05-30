@@ -16,7 +16,7 @@
                             {!! $posts->links() !!}
                         </div>
                         @foreach($posts as $post)
-                            <a href="{!! route('post_view', ['slug' => $post->slug]) !!}"
+                            <a href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}"
                                class="w-full lg:flex">
                                 <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
                                      style="background-image: url('{!! TnMedia::url($data->image ?? asset('/images/no-image.jpg')) !!}')" title="Mountain">

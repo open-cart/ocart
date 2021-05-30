@@ -40,7 +40,7 @@
                 <div>
                     <div class="flex justify-between items-center border-b pb-4">
                         <h1 class="font-semibold text-2xl">Thông tin đơn hàng</h1>
-                        <a href="{!! route('shopping-cart') !!}" class="font-semibold text-sm text-blue-600 hover:text-blue-700">Chỉnh sửa đơn hàng</a>
+                        <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="font-semibold text-sm text-blue-600 hover:text-blue-700">Chỉnh sửa đơn hàng</a>
                     </div>
                     <div class="mb-4">
                         @foreach($cart as $item)
@@ -60,7 +60,7 @@
                     </div>
                     <div class="flex justify-between items-center">
                         <div class="font-bold text-2xl">Tổng cộng</div>
-                        <div href="{!! route('shopping-cart') !!}" class="font-bold text-2xl text-red-600">{{ format_price(get_cart_pricetotal()) }} đ</div>
+                        <div href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="font-bold text-2xl text-red-600">{{ format_price(get_cart_pricetotal()) }} đ</div>
                     </div>
 
                 </div>
@@ -103,7 +103,7 @@
             data = Object.values(order);
             this.data = this.data.map(product => ({id: product.id, qty: product.qty}));
 
-            return axios.post('{!! route('shopping-buy') !!}', {
+            return axios.post('{!! route(ROUTE_SHOPPING_BUY_SCREEN_NAME) !!}', {
                 name: name,
                 phone: phone,
                 email: email,
@@ -112,7 +112,7 @@
             }).then((res) => {
                 $(".cart-count").text(0);
                 $.pjax.reload('#body', {
-                    url: '{!! route('shopping-thank') !!}'
+                    url: '{!! route(ROUTE_SHOPPING_THANK_SCREEN_NAME) !!}'
                 });
                 toast.success('Đặt mua hàng thành công.');
             }).catch(showError).finally(() => {

@@ -300,7 +300,7 @@
                 this.distributor = [];
                 $('#loading-distri').show();
                 this.nameDistributor = $('#distributor-select').find('option:selected').text();
-                axios.get('{!! route('list-distributor') !!}', {
+                axios.get('{!! route(ROUTE_LIST_DISTRIBUTOR_NAME) !!}', {
                     params: {
                         location: this.selected
                     }

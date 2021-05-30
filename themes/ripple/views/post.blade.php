@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 border-b border-gray-200 flex text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2 line-clamp-1"><a href="/post-category/{{ Arr::get($post->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($post->categories->first(), 'name') }}</a></li>
+            <li class="px-2 line-clamp-1"><a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($post->categories->first(), 'slug')]) !!}" class="no-underline text-blue-600">{{ Arr::get($post->categories->first(), 'name') }}</a></li>
             <li>/</li>
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $post->name }}</span></li>
         </ol>
@@ -29,7 +29,7 @@
             <div class="py-4 border-b border-gray-100">
                 Chuyên mục:
                 @foreach($post->categories as $category)
-                    <a href="/post-category/{{ $category->slug }}">{{ $category->name }}</a><span> , </span>
+                    <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => $category->slug]) !!}">{{ $category->name }}</a><span> , </span>
                 @endforeach
             </div>
             <div class="py-4 border-b border-gray-100">
