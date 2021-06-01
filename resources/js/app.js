@@ -6,6 +6,7 @@ window.feather = feather;
 require('alpinejs');
 
 import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.min.css'
 import 'owl.carousel';
 
 // ### Swal

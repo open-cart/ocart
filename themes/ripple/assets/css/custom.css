@@ -74,3 +74,11 @@
     fill: #2563EB;
     cursor: pointer;
 }
+.banner-height{
+    height: 750px;
+}
+@media (max-width: 1023px){
+    .banner-height{
+        height: 550px;
+    }
+}
