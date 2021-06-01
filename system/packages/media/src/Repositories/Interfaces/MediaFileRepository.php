@@ -7,6 +7,4 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 interface MediaFileRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
-
-    public function createSlug($name = null, $a, $b);
 }

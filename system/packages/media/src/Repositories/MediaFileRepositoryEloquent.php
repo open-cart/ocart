@@ -33,8 +33,4 @@ class MediaFileRepositoryEloquent extends BaseRepository implements MediaFileRep
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
-    public function createSlug($name = null, $a, $b)
-    {
-        return 'nguyen';
-    }
 }

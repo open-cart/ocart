@@ -2,11 +2,16 @@
 
 namespace Ocart\Blog\Models;
 
+use App\Models\User;
+use Database\Factories\PostFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
 
 class Post extends BaseModel
 {
+    use HasFactory;
+
     /**
      * The table associated with the model.
      * @var string
@@ -45,5 +50,18 @@ class Post extends BaseModel
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'blog_post_categories');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function auth()
+    {
+        return $this->belongsTo(User::class, 'author_id', 'id');
+    }
+
+    protected static function newFactory()
+    {
+        return new PostFactory();
     }
 }

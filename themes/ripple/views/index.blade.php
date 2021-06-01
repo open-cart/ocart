@@ -1,12 +1,28 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     @php
         $banner = get_banner();
-    @endphp
-    @php
         $sections = get_config_sections();
+        $categories = get_categories();
     @endphp
 
     @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-slide'))
+
+    @if(is_active_plugin('ecommerce') && !empty($categories) && $sections != null && in_array('categories_product', $sections->value))
+        <section class="antialiased font-sans pt-16">
+            <div class="container-custom">
+                <div class="flex flex-wrap -mx-2">
+                    @foreach($categories as $category)
+                    <div class="w-1/2 sm:w-1/3 md:w-1/4 xl:w-1/6 p-2 hover:shadow-xl text-center">
+                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="p-2 border border-gray-300 inline-block w-full">
+                            <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full p-2">
+                            <div class="text-gray-600 font-bold line-clamp-1">{{ $category->name }}</div>
+                        </a>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+    @endif
 
     @if($sections != null && in_array('about', $sections->value))
         @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-about'))
@@ -68,9 +84,8 @@
         @include(Theme::getThemeNamespace('sections.distributor'))
     @endif
 
-
     @if(is_active_plugin('contact') && $sections != null && in_array('contact', $sections->value))
         @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-contact'))
     @endif
-    @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-end'))
+
 </x-guest-layout>

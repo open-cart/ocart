@@ -17,7 +17,7 @@
                         <div x-data='shoppingCartData(@json($item))' class="flex items-center hover:bg-gray-100 lg:-mx-6 lg:px-6 py-5">
                             <div class="flex w-4/5"> <!-- product -->
                                 <div class="w-20">
-                                    <img class="h-24" src="{{ TnMedia::url($item->options->image ?? '/images/no-image.jpg') }}" alt="">
+                                    <img class="h-24" src="{{ TnMedia::url($item->options->image ?? asset('/images/no-image.jpg')) }}" alt="">
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
                                     <a href="/product/{{ $item->slug }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
@@ -84,7 +84,7 @@
                             <span class="text-red-600 font-bold">{{ format_price(get_cart_pricetotal()) }} đ</span>
                         </div>
                         @if(get_cart_count() > 0)
-                            <a href="{{ route('shopping-buy') }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
+                            <a href="{{ route(ROUTE_SHOPPING_BUY_SCREEN_NAME) }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
                         @endif
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                             this.product.qty = 100;
                         }
 
-                        axios.post('{!! route('update-to-cart') !!}', {
+                        axios.post('{!! route(ROUTE_UPDATE_TO_CART_NAME) !!}', {
                             rowId: this.product.rowId,
                             qty: this.product.qty
                         }).then((res) => {
@@ -118,7 +118,7 @@
                         })
                     },
                     removeProduct() {
-                        axios.post('{!! route('remove-to-cart') !!}', {
+                        axios.post('{!! route(ROUTE_REMOVE_TO_CART_NAME) !!}', {
                             rowId: this.product.rowId,
                         }).then((res) => {
                             toast.success(res.message);

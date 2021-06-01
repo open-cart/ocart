@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-pjax-version" content="{{ mix('themes/ripple/css/style.css') }}">
 
-    @php
-    $favicon = get_favicon();
-    @endphp
-    <link rel="icon" type="image/png" href="{{ $favicon }}">
+    <link rel="icon" type="image/png" href="{{ get_favicon() }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {!! SeoHelper::render() !!}
@@ -34,6 +31,11 @@
             })
         })
     </script>
+
+    <!-- Meta Head -->
+    {!! get_meta_head() !!}
+    <!-- End Meta Head -->
+
 </head>
 <body>
 <div class="font-sans text-gray-900 antialiased">
@@ -146,7 +148,7 @@
     });
 
     function addToCart(productId) {
-        axios.post('/add-to-cart', {
+        axios.post('{!! route(ROUTE_ADD_TO_CART_NAME) !!}', {
             productId: productId
         }).then((res) => {
             toast.success(res.message);
@@ -181,6 +183,8 @@
         })
     })
 </script>
+
+{!! get_meta_footer() !!}
 
 </body>
 </html>

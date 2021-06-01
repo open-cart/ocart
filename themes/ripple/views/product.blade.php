@@ -3,7 +3,7 @@
         <ol class="list-reset py-4 flex text-xs md:text-base text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
-            <li class="px-2 line-clamp-1"><a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
+            <li class="px-2 line-clamp-1"><a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
@@ -11,10 +11,10 @@
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? '/images/no-image.jpg' : head($product->images)) }}" alt="ecommerce">
+                <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
-                        <a href="/product-category/{{ Arr::get($product->categories->first(), 'slug') }}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
+                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
                     <h1 class="text-gray-900 text-xl lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
@@ -48,7 +48,7 @@
                             <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
                         @endif
                     </div>
-                    <div class="leading-relaxed text-sm md:text-base pt-4 border-t border-gray-200">{{ $product->description }}</div>
+                    <div class="leading-relaxed text-sm md:text-base pt-4 border-t border-gray-200">{!! $product->description !!}</div>
                     <div class="flex items-center pt-4 border-t border-gray-200 my-4">
 {{--                        <div class="flex mr-6">--}}
 {{--                            <span class="mr-3">Color</span>--}}
@@ -224,7 +224,5 @@
 
         </div>
     </div>
-
-
 
 </x-guest-layout>
