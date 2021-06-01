@@ -5,14 +5,7 @@
         $categories = get_categories();
     @endphp
 
-    <div class="image-cover hero-banner bg-no-repeat bg-cover bg-center"
-         style="background-image:url({{ $banner }});">
-        @if(is_active_plugin('contact'))
-            <div class="container-custom py-10 md:py-20">
-                <x-theme::form.contact id="contact-index" class="bg-white p-4 md:p-10 pt-5 md:pt-8 shadow-md"/>
-            </div>
-        @endif
-    </div>
+    @include(Theme::getThemeNamespace('config-section/' . $sections->name . '/sec-slide'))
 
     @if(is_active_plugin('ecommerce') && !empty($categories) && $sections != null && in_array('categories_product', $sections->value))
         <section class="antialiased font-sans pt-16">

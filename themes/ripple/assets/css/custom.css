@@ -74,6 +74,15 @@
     fill: #2563EB;
     cursor: pointer;
 }
+.banner-height{
+    height: 750px;
+}
+@media (max-width: 1023px){
+    .banner-height{
+        height: 550px;
+    }
+}
+
 .box-shadow:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
