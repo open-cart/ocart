@@ -26,6 +26,6 @@ Route::group([
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
             });
         });
-        Route::post('shopping-buy', 'OrderController@buy')->name('shopping-buy');
+        Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
 
     });

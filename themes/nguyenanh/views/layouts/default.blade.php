@@ -148,7 +148,7 @@
     });
 
     function addToCart(productId) {
-        axios.post('/add-to-cart', {
+        axios.post('{!! route(ROUTE_ADD_TO_CART_NAME) !!}', {
             productId: productId
         }).then((res) => {
             toast.success(res.message);

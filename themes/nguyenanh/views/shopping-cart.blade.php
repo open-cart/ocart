@@ -84,7 +84,7 @@
                             <span class="text-red-600 font-bold">{{ format_price(get_cart_pricetotal()) }} đ</span>
                         </div>
                         @if(get_cart_count() > 0)
-                            <a href="{{ route('shopping-buy') }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
+                            <a href="{{ route(ROUTE_SHOPPING_BUY_SCREEN_NAME) }}" class="inline-block text-center bg-blue-600 font-semibold hover:bg-blue-700 py-3 text-sm text-white uppercase w-full rounded-md">Tiến hành đặt hàng</a>
                         @endif
                     </div>
                 </div>
@@ -104,7 +104,7 @@
                             this.product.qty = 100;
                         }
 
-                        axios.post('{!! route('update-to-cart') !!}', {
+                        axios.post('{!! route(ROUTE_UPDATE_TO_CART_NAME) !!}', {
                             rowId: this.product.rowId,
                             qty: this.product.qty
                         }).then((res) => {
@@ -118,7 +118,7 @@
                         })
                     },
                     removeProduct() {
-                        axios.post('{!! route('remove-to-cart') !!}', {
+                        axios.post('{!! route(ROUTE_REMOVE_TO_CART_NAME) !!}', {
                             rowId: this.product.rowId,
                         }).then((res) => {
                             toast.success(res.message);
