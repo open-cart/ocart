@@ -19,11 +19,13 @@
     <!-- Styles -->
     {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
     <link rel="stylesheet" href="{{ Theme::asset('css/style.css?v=1') }}">
+    <link rel="stylesheet" href="{{ asset('access/prismjs/prism.css') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
     <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
+    <script src="{!! asset('access/prismjs/prism.js?v=1.3') !!}"></script>
 
     <script>
         $(function () {
@@ -180,6 +182,10 @@
             $(idModal).click();
         })
     })
+    $(document).on('pjax:complete', function() {
+        Prism.highlightAll()
+    })
+
 </script>
 
 </body>
