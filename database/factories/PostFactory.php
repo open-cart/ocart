@@ -33,7 +33,7 @@ class PostFactory extends Factory
             'author_id' => 1,
             'author_type' => User::class,
             'is_featured' => 2,
-            'image' => $this->faker->name,
+            'image' => $this->faker->imageUrl(360, 360, 'animals', true, 'cats'),
             'views' => 0,
             'format_type' => $this->faker->name,
             'slug' => Str::slug($name),

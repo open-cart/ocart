@@ -21,7 +21,9 @@
             @endif
 
             <div class="mb-4">
-                {!! $post->content !!}
+                @php
+                    echo \Ocart\SimpleMDE\Markdown::parse($post->content);
+                @endphp
             </div>
             <div class="text-right pb-4 border-b border-gray-100">
                 <em>Nguồn: admin</em>
