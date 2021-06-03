@@ -1,0 +1,15 @@
+{
+    "name": "simplemde",
+    "namespace": "Ocart\\SimpleMDE\\",
+    "image": "images/momo.png",
+    "auth": "Trung Nguyên",
+    "email": "nguyenpl117@gmail.com",
+    "link": "https://phantrungnguyen.com",
+    "configGroup": "Plugins",
+    "configCode": "SimpleMDE",
+    "configKey": "blog",
+    "version": "1.0",
+    "providers": [
+        "Ocart\\SimpleMDE\\Providers\\SimpleMDEServiceProvider"
+    ]
+}
