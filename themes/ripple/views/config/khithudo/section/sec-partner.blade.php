@@ -1,7 +1,8 @@
 <section class="antialiased font-sans py-16">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
         <h2 class="text-xl md:text-2xl font-bold">Đối tác</h2>
-        <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+        <p class="text-gray-600">
+            Là một công ty hàng đầu chúng tôi hợp tác các cơ quan tiêu chuẩn trên thế giới để giúp phát triển những cam kết và chuẩn mực thực hành.</p>
     </div>
 
     <div class="container-custom">
