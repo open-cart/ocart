@@ -147,18 +147,6 @@
         $('html, body').animate({scrollTop: 0}, '300');
     });
 
-    function addToCart(productId) {
-        axios.post('{!! route(ROUTE_ADD_TO_CART_NAME) !!}', {
-            productId: productId
-        }).then((res) => {
-            toast.success(res.message);
-            $(".cart-count").text(res.count);
-        }).catch(e => {
-            toast.error(e.message)
-        }).finally(() => {
-            // $.pjax.reload('#body', {});
-        });
-    }
     const confirmDelete = {
         callback: () => {},
         close: () => {},
