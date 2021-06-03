@@ -1,7 +1,7 @@
 <section class="sec-about antialiased font-sans py-16">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-        <h2 class="text-xl md:text-2xl font-bold">How It Works?</h2>
-        <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
+        <h2 class="text-xl md:text-2xl font-bold mb-2">Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh</h2>
+        <p class="text-gray-600">Chuyên cung cấp các sản phẩm khí bao gồm: khí đặc biệt, khí hiếm, khí y tế, khí tinh khiết, khí hỗn hợp, khí hiệu chuẩn, khí phân tích, khí thí nghiệm.</p>
     </div>
 
     <div class="container-custom">
@@ -16,8 +16,8 @@
                         </div>
                     </div>
                     <div class="middle-icon-features-content pt-4">
-                        <h4 class="text-xl mb-3 font-bold">Evaluate Property</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                        <h4 class="text-xl mb-3 font-bold">Dịch vụ tận tâm</h4>
+                        <p>Chúng tôi tin tưởng sẽ làm hài lòng quý khách hàng sử dụng sản phẩm của chúng tôi.</p>
                     </div>
                 </div>
             </div>
@@ -31,8 +31,8 @@
                         </div>
                     </div>
                     <div class="middle-icon-features-content pt-4">
-                        <h4 class="text-xl mb-3 font-bold">Evaluate Property</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                        <h4 class="text-xl mb-3 font-bold">Giá thành hợp lý</h4>
+                        <p>Chúng tôi tin tưởng sẽ làm hài lòng quý khách hàng sử dụng sản phẩm của chúng tôi.</p>
                     </div>
                 </div>
             </div>
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                     <div class="middle-icon-features-content pt-4">
-                        <h4 class="text-xl mb-3 font-bold">Evaluate Property</h4>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have Ipsum available.</p>
+                        <h4 class="text-xl mb-3 font-bold">Sản phẩm đa dạng</h4>
+                        <p>Chúng tôi tin tưởng sẽ làm hài lòng quý khách hàng sử dụng sản phẩm của chúng tôi.</p>
                     </div>
                 </div>
             </div>

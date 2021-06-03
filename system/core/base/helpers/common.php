@@ -271,7 +271,7 @@ if (!function_exists('get_domain')) {
 
 if (!function_exists('get_banner')) {
     function get_banner(){
-        return setting('banner', 'Sevenweb.vn');
+        return json_decode(setting('banner', []));
     }
 }
 
