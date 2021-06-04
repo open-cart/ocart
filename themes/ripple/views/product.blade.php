@@ -240,70 +240,60 @@
         </div>
     </div>
 
-    @push('head')
-        <link rel="stylesheet" href="{!! asset('access/owlcarousel/dist/assets/owl.carousel.css?v=1') !!}">
-        <link rel="stylesheet" href="{!! asset('access/owlcarousel/dist/assets/owl.theme.default.css?v=1') !!}">
-        <script defer src="{!! asset('access/owlcarousel/dist/owl.carousel.js?v=1') !!}"></script>
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                margin: 10,
+                nav: true,
+                items:5,
+                dots:false,
+            })
+        });
+    </script>
+    <style>
+        .owl-carousel:not(.owl-loaded){
+            opacity: 0;
+            visibility:hidden;
+            height:354px;
+        }
+        .owl-carousel .owl-dots {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+        }
+        .owl-nav{
+            font-size: 4rem;
+        }
+        .owl-prev:focus,
+        .owl-next:focus{
+            outline: none;
+        }
+        .owl-prev{
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
 
-        <div id="fb-root"></div>
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="VKxCFr5E"></script>
-    @endpush
+        }
+        .owl-next{
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+        }
+        .owl-prev span,
+        .owl-next span{
+            color: grey;
+        }
+        .owl-prev span:hover,
+        .owl-next span:hover{
+            color: black;
+        }
 
-    @push('footer')
-        <script>
-            $(document).ready(function() {
-                $('.owl-carousel').owlCarousel({
-                    margin: 10,
-                    nav: true,
-                    items:5,
-                    dots:false,
-                })
-            });
-        </script>
-        <style>
-            .owl-carousel:not(.owl-loaded){
-                opacity: 0;
-                visibility:hidden;
-                height:354px;
-            }
-            .owl-carousel .owl-dots {
-                position: absolute;
-                bottom: 0px;
-                width: 100%;
-            }
-            .owl-nav{
-                font-size: 4rem;
-            }
-            .owl-prev:focus,
-            .owl-next:focus{
-                outline: none;
-            }
-            .owl-prev{
-                position: absolute;
-                top: 50%;
-                left: 5px;
-                transform: translateY(-50%);
-
-            }
-            .owl-next{
-                position: absolute;
-                top: 50%;
-                right: 5px;
-                transform: translateY(-50%);
-            }
-            .owl-prev span,
-            .owl-next span{
-                color: grey;
-            }
-            .owl-prev span:hover,
-            .owl-next span:hover{
-                color: black;
-            }
-
-            .owl-carousel button:hover, .owl-carousel button:focus, .owl-carousel button:focus-visible{
-                outline: none;
-                background: none !important;
-            }
-        </style>
-    @endpush
+        .owl-carousel button:hover, .owl-carousel button:focus, .owl-carousel button:focus-visible{
+            outline: none;
+            background: none !important;
+        }
+    </style>
 </x-guest-layout>
+

@@ -87,12 +87,9 @@
         @include(Theme::getThemeNamespace('config/' . $sections->name . '/section/sec-contact'))
     @endif
 
-    @push('head')
-        <style>
-            section:nth-child(even) {
-                background: #ececec63;
-            }
-        </style>
-    @endpush
-
 </x-guest-layout>
+<style>
+    section:nth-child(even) {
+        background: #ececec63;
+    }
+</style>
