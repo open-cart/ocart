@@ -31,6 +31,7 @@ module.exports = {
             tableLayout: ['hover', 'focus'],
             backgroundColor: ['checked', 'focus'],
             borderColor: ['checked'],
+            display: ['group-hover'],
         },
     },
     corePlugins: {

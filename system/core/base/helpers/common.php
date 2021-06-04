@@ -304,3 +304,15 @@ if (!function_exists('get_menu_main')) {
         return json_decode(setting('menu_main', null));
     }
 }
+
+if (!function_exists('get_menu_footer')) {
+    function get_menu_footer(){
+        return json_decode(setting('menu_footer', null));
+    }
+}
+
+if (!function_exists('get_deps_footer')) {
+    function get_deps_footer(){
+        return setting('deps_footer', null);
+    }
+}

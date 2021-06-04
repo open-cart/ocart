@@ -10,42 +10,26 @@
                         <img src="{{ $logo }}" class="img-footer w-2/3 mb-3" alt="">
                     </a>
                     <div class="footer-add">
-                        <p>SevenWeb.vn</p>
-                        <p>0972 675 428</p>
-                        <p>sevenwebvn@gmail.com</p>
+                        {!! get_deps_footer() !!}
                     </div>
-
                 </div>
-                <div class="footer-widget">
-                    <h4 class="widget-title mb-3 font-bold text-lg text-white">Navigations</h4>
-                    <ul class="footer-menu">
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="faq.html">FAQs Page</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-widget">
-                    <h4 class="widget-title mb-3 font-bold text-lg text-white">Navigations</h4>
-                    <ul class="footer-menu">
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="faq.html">FAQs Page</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
-                <div class="footer-widget">
-                    <h4 class="widget-title mb-3 font-bold text-lg text-white">Navigations</h4>
-                    <ul class="footer-menu">
-                        <li><a href="about-us.html">About Us</a></li>
-                        <li><a href="faq.html">FAQs Page</a></li>
-                        <li><a href="checkout.html">Checkout</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="blog.html">Blog</a></li>
-                    </ul>
-                </div>
+                @php
+                    $menuFooter = get_menu_footer();
+                @endphp
+                @if(!empty($menuFooter) && !empty($menuFooter->data) && is_array($menuFooter->data))
+                    @foreach($menuFooter->data as $item)
+                        <div class="footer-widget">
+                            <h4 class="widget-title mb-3 font-bold text-lg text-white">{{ $item->title }}</h4>
+                            @if(!empty($item->menu) && is_array($item->menu))
+                                <ul class="footer-menu">
+                                    @foreach($item->menu as $i)
+                                        <li><a href="{{ $i->slug }}">{{ $i->name }}</a></li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                        </div>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>

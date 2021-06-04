@@ -1,4 +1,4 @@
-<section class="antialiased font-sans bg-blue-600">
+<div class="antialiased font-sans bg-blue-600">
     <div class="container-custom call-to-act py-14 block sm:flex items-center">
         <div class="call-to-act-head text-white flex-1 mb-8 sm:mb-0">
             <h3 class="text-base md:text-2xl font-bold">Want to Become a Real Estate Agent?</h3>
@@ -13,4 +13,4 @@
         </a>
     </div>
     <x-theme::form.contact-modal/>
-</section>
+</div>

@@ -36,12 +36,13 @@
             @php
             $menuMain = get_menu_main();
             @endphp
+
             @if(!empty($menuMain))
                 <nav class="hidden lg:flex space-x-10">
                     @foreach($menuMain->data as $item)
                         @if(!empty($item->children))
-                            <div x-data="{ open: false, focus: false }">
-                                <button x-on:click="open = !open" type="button" :class="{ 'text-gray-900': open, 'text-gray-500': !(open) }" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
+                            <div class="group inline-block relative">
+                                <button type="button" class="text-gray-500 group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" aria-expanded="false">
                                     <span>{{ $item->name }}</span>
                                     <svg class="text-gray-400 ml-2 h-5 w-5 group-hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                                         <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -49,7 +50,7 @@
 
                                 </button>
 
-                                <div x-show="open" @click.away="open = false" @keydown.escape="open = false" @close-popover-group.window="open = false" class="absolute z-10 -ml-4 mt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2" style="display: none">
+                                <div class="absolute z-10 -ml-4 pt-3 transform px-2 w-screen max-w-md sm:px-0 lg:ml-0 lg:left-1/2 lg:-translate-x-1/2 absolute hidden group-hover:block">
                                     <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                                         <div class="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
                                             @foreach($item->children as $i)
@@ -284,35 +285,3 @@
     </div>
 
 </header>
-<div class="container-custom absolute z-20 left-0 right-0">
-    <ul class="bg-white w-56 shadow-lg">
-        @foreach([1,2,3,4,5,6,7,8,9] as $item)
-            <li class="dropdown">
-                <a href="" class="hover:bg-gray-400 hover:text-white py-2 pl-2 block">Thiết Bị Điện Tử</a>
-
-                <ul class="absolute top-0 left-56 ml-6 bg-white hidden dropdown-content shadow-lg">
-                    @foreach([1,2,3,4,5] as $item)
-                        <li class="dropdown2">
-                            <a href="" class="hover:bg-gray-400 hover:text-white block py-2 pl-2 w-56">Dropdown</a>
-
-                            <ul class="absolute top-0 left-56 bg-white hidden dropdown-content2 shadow-lg">
-                                @foreach([1,2,3] as $item)
-                                    <li class="">
-                                        <a href="" class="hover:bg-gray-400 hover:text-white py-2 pl-2 w-56 block">Dropdown2</a>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-                        </li>
-                    @endforeach
-                </ul>
-            </li>
-        @endforeach
-    </ul>
-</div>
-<style>
-    .dropdown:hover .dropdown-content,
-    .dropdown2:hover .dropdown-content2{
-        display: block;
-    }
-</style>
