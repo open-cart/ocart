@@ -32,12 +32,16 @@
         })
     </script>
 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="VKxCFr5E"></script>
+
     <!-- Meta Head -->
     {!! get_meta_head() !!}
     <!-- End Meta Head -->
 
 </head>
 <body>
+<div id="fb-root"></div>
+
 <div class="font-sans text-gray-900 antialiased">
     @include(Theme::getThemeNamespace('layouts.header'))
     <button id="gotop" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 opacity-0 fixed bottom-10 right-10 z-50 focus:outline-none">

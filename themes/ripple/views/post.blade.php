@@ -45,7 +45,7 @@
                             </a>
                         </span>
             </div>
-            <div class="py-4 border-b border-gray-100">
+            <div class="hidden py-4 border-b border-gray-100">
                 <ul>
                     <li class="mb-5 border-b border-dotted">
                         <div class="pb-6">
@@ -107,6 +107,9 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="fb-comments" data-href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}" data-width="100%" data-numposts="5"></div>
+
         </div>
 
         @include(Theme::getThemeNamespace('layouts.sidebar-all'))

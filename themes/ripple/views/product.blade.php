@@ -118,7 +118,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
+            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -183,7 +183,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
+            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -221,6 +221,8 @@
                     @endforeach
                 </div>
             </div>
+
+            <div class="fb-comments" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5"></div>
 
         </div>
     </div>

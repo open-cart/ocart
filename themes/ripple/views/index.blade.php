@@ -88,3 +88,8 @@
     @endif
 
 </x-guest-layout>
+<style>
+    section:nth-child(even) {
+        background: #ececec63;
+    }
+</style>
