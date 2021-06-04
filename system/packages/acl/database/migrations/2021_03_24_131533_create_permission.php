@@ -16,7 +16,7 @@ class CreatePermission extends Migration
      */
     public function up()
     {
-        $guard_name = Guard::getDefaultName(User::class);
+        $guard_name = Guard::getDefaultName(\App\Models\Admin::class);
         /** @var Role $owner */
         $owner = Role::create(['name' => 'owners', 'guard_name' => $guard_name]);
         $members = Role::create(['name' => 'members', 'guard_name' => $guard_name]);
@@ -124,7 +124,7 @@ class CreatePermission extends Migration
     {
         Schema::disableForeignKeyConstraints();
 
-        $admin = User::where('id', 1)->first();
+        $admin = \App\Models\Admin::where('id', 1)->first();
         $admin->roles()->detach();
 
         $roles = Role::all();
