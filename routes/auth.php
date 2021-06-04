@@ -9,6 +9,23 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AdminLoginController;
+
+Route::group([
+    'prefix' => ADMIN_PREFIX,
+    'as' => 'admin.'
+], function() {
+    Route::get('/login', [AdminLoginController::class, 'create'])
+        ->middleware('guest:admin')
+        ->name('login');
+
+    Route::post('/login', [AdminLoginController::class, 'store'])
+        ->middleware('guest:admin');
+
+    Route::post('/logout', [AdminLoginController::class, 'destroy'])
+        ->middleware('auth:admin')
+        ->name('logout');
+});
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
                 ->middleware('guest')

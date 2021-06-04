@@ -126,6 +126,12 @@
     $(document).pjax('a', '#body');
     $.pjax.defaults.timeout = 1200;
 
+    $(document).on('pjax:complete', function() {
+        if (typeof FB != 'undefined') {
+            FB.XFBML.parse();
+        }
+    })
+
     var btn = $('#gotop');
 
     $(window).scroll(function () {
