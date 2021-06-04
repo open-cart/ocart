@@ -239,6 +239,18 @@ if (!function_exists('sort_item_with_children')) {
     }
 }
 
+if (!function_exists('get_meta_head')) {
+    function get_meta_head(){
+        return setting('meta_head', null);
+    }
+}
+
+if (!function_exists('get_meta_footer')) {
+    function get_meta_footer(){
+        return setting('meta_footer', null);
+    }
+}
+
 if (!function_exists('get_logo')) {
     function get_logo(){
         return setting('logo', '/images/logo-default.jpg');
@@ -271,7 +283,13 @@ if (!function_exists('get_domain')) {
 
 if (!function_exists('get_banner')) {
     function get_banner(){
-        return json_decode(setting('banner', []));
+        return json_decode(setting('banner', "[]"));
+    }
+}
+
+if (!function_exists('get_partner')) {
+    function get_partner(){
+        return json_decode(setting('partner', "[]"));
     }
 }
 
@@ -281,14 +299,8 @@ if (!function_exists('get_config_sections')) {
     }
 }
 
-if (!function_exists('get_meta_head')) {
-    function get_meta_head(){
-        return setting('meta_head', null);
-    }
-}
-
-if (!function_exists('get_meta_footer')) {
-    function get_meta_footer(){
-        return setting('meta_footer', null);
+if (!function_exists('get_menu_main')) {
+    function get_menu_main(){
+        return json_decode(setting('menu_main', null));
     }
 }

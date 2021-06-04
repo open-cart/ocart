@@ -3,7 +3,7 @@
         <div class="relative" x-data="{ activeSlide: 1, slides:[1, 2] }">
             <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="1" x-show="activeSlide === 1">
                 <div class="h-56 lg:h-auto lg:w-5/12 relative flex items-center justify-center">
-                    <img class="absolute h-full w-full object-cover" src="https://danviet.mediacdn.vn/zoom/480_300/2021/1/26/cover-dv-16115958454521459392617.jpg" alt=""/>
+                    <img class="absolute h-full w-full object-cover" src="https://thudoxanh.com.vn/images/f3b74354-92c2-470a-bc5b-39bff0910f00-optimized-ligh.jpg" alt=""/>
                     <div class="absolute inset-0 bg-indigo-900 opacity-20"></div>
                 </div>
                 <div class="relative lg:w-7/12 bg-white">
@@ -12,17 +12,17 @@
                     </svg>
                     <div class="relative py-12 lg:py-24 px-8 lg:px-16 text-gray-700 leading-relaxed">
                         <p>
-                            As <strong class="text-gray-900 font-medium">Slack</strong> grows rapidly, using Stripe helps them scale payments easily &mdash; supporting everything from getting paid by users around the world to enabling ACH payments for corporate customers.
+                            Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh <strong class="text-gray-900 font-medium">là</strong> đơn vị có thâm niên trong lĩnh vực tư vấn môi trường, đã thực hiện nhiều dự án trọng điểm. Các khách hàng có thể kể đến như Geleximco, Tập đoàn BĐS Tây Bắc, Cảng Quy Nhơn, Greenity Nam Định và nhiều chủ dự án là các công ty FDI tại nhiều Khu công nghiệp tại Bắc Ninh, Hà Nội, Hưng Yên, Thái Bình, Hà Nam...
                         </p>
                         <p class="mt-6">
-                            <a href="#" class="font-medium text-blue-600 hover:text-red-900">Mai Thu Huyền nói gì về &rarr;</a>
+                            <a href="#" class="font-medium text-blue-600 hover:text-red-900">Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh &rarr;</a>
                         </p>
                     </div>
                 </div>
             </div>
             <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="2" x-show="activeSlide === 2">
                 <div class="h-56 lg:h-auto lg:w-5/12 relative flex items-center justify-center">
-                    <img class="absolute h-full w-full object-cover" src="https://list.vn/wp-content/uploads/2020/01/m%E1%BB%B9-t%C3%A2m.jpg" alt=""/>
+                    <img class="absolute h-full w-full object-cover" src="https://thudoxanh.com.vn/images/f3b74354-92c2-470a-bc5b-39bff0910f00-optimized-ligh.jpg" alt=""/>
                     <div class="absolute inset-0 bg-indigo-900 opacity-20"></div>
                 </div>
                 <div class="relative lg:w-7/12 bg-white">
@@ -31,10 +31,10 @@
                     </svg>
                     <div class="relative py-12 lg:py-24 px-8 lg:px-16 text-gray-700 leading-relaxed">
                         <p>
-                            <strong class="text-gray-900 font-medium">Với</strong> khối lượng công việc triền miên ngày này qua ngày khác &mdash; thời gian nghỉ ngời thì ít, Diễn viên Danh Tùng đã lựa chọn Tinh nghệ mật ong collagen để sử dụng.
+                            Chúng tôi tin tưởng với năng lực kinh nghiệm và mối quan hệ mật thiết với các Bộ, Sở ban ngành trong lĩnh vực môi trường, chúng tôi có thể đảm bảo thực hiện đúng tiến độ với chất lượng hoàn hảo, giá cả phải chăng cho các gói thầu của Quý doanh nghiệp. Liên hệ hotline: 0912.110.941 và mọi vấn đề nằm trong lĩnh vực môi trường của Quý doanh nghiệp sẽ được giải quyết.
                         </p>
                         <p class="mt-6">
-                            <a href="#" class="font-medium text-blue-600 hover:text-red-900">Ca sỹ Mỹ Tâm nói gì &rarr;</a>
+                            <a href="#" class="font-medium text-blue-600 hover:text-red-900">Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh &rarr;</a>
                         </p>
                     </div>
                 </div>

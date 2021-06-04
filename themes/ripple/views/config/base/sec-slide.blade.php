@@ -1,5 +1,5 @@
 @php
-    $banner = get_banner(6);
+    $banner = get_banner();
 @endphp
 <div class="slide-home owl-carousel owl-theme relative">
     @if(!empty($banner))

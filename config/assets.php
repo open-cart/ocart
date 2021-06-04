@@ -83,6 +83,20 @@ return [
                     'local' => 'tnmedia/bundle.js',
                 ],
             ],
+            'simplemde' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/simplemde/simplemde.min.js',
+                ],
+            ],
+            'prismjs' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/prismjs/prism.js',
+                ],
+            ],
         ],
         'styles'  => [
             'jquery-ui' => [
@@ -119,6 +133,22 @@ return [
                     'local' => 'css/fontawesome/css/all.min.css',
                 ],
             ],
+            'simplemde' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/simplemde/simplemde.min.css',
+                ],
+            ],
+            'prismjs' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/prismjs/prism.css',
+                ],
+            ],
+
+
 //            'tinymce' => [
 //                'use_cdn'  => false,
 //                'location' => 'header',
