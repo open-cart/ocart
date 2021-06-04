@@ -2,7 +2,7 @@
     $banner = get_banner();
 @endphp
 <div class="slide-home owl-carousel owl-theme relative">
-    @if(!empty($banner))
+    @if(!empty($banner) && is_array($banner))
         @foreach($banner as $item)
         <div class="item">
             <img src="{{ $item->img }}">

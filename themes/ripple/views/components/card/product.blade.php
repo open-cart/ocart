@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="p-2 md:p-3">
-            <a href={!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
+            <a href={!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!} class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
                 {{ Arr::get($data->categories->first(), 'name') }}
             </a>
             <a href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $data->slug]) !!}" class="hover:text-blue-700">
