@@ -1,4 +1,4 @@
-<section x-data='distributor()' class="distributor antialiased bg-gray-100 py-16">
+<section x-data='distributor()' class="distributor antialiased py-16">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
         <h2 class="text-3xl font-bold">Hệ thống phân phối</h2>
         <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
