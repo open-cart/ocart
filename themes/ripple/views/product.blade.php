@@ -10,8 +10,22 @@
     </div>
     <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
+
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <img class="lg:w-1/2 w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
+                <div class="lg:w-1/2 w-full ">
+                    <div class="mb-4">
+                        <img class="w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
+                    </div>
+                    <div class="owl-carousel owl-theme mt-2 relative">
+
+                        @foreach($product->images as $item)
+                            <div class="item">
+                                <img src="{{ TnMedia::url($item) }}" alt=""
+                                     class="w-full h-full object-cover">
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     <h2 class="text-sm title-font text-gray-500">
                         <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
@@ -118,7 +132,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
+            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -183,7 +197,7 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="bg-white rounded-md mb-7">
+            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
                 <ul class="shadow-box">
 
                     <li class="relative">
@@ -222,7 +236,38 @@
                 </div>
             </div>
 
+            <div class="fb-comments" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5"></div>
+
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                margin: 10,
+                nav: true,
+                items:5,
+                dots:false,
+            })
+        });
+    </script>
+    <style>
+        .owl-nav{
+            font-size: 2rem ;
+        }
+        .owl-prev,
+        .owl-next{
+            position: absolute;
+        }
 
+        .owl-prev{
+            top:50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .owl-next{
+            top:50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+    </style>
 </x-guest-layout>
