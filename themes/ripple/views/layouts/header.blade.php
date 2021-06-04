@@ -1,6 +1,6 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
 <header x-data="{ openMobile : false }" id="header" class="relative bg-white sticky top-0 z-40">
-    <div class="container-custom">
+        <div class="container-custom">
         <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 lg:justify-start lg:space-x-10">
             <div class="flex justify-start lg:w-0 lg:flex-1">
                 <a href="{!! route('home') !!}">
@@ -221,7 +221,7 @@
         From: "opacity-100 scale-100"
         To: "opacity-0 scale-95"
     -->
-    <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right z-50" style="display:none;">
+        <div x-show="openMobile" class="absolute top-0 inset-x-0 p-2 transition transform origin-top-right z-50" style="display:none;">
         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
             <div class="pt-5 pb-6 px-5">
                 <div class="flex items-center justify-between">
@@ -340,4 +340,14 @@
             </div>
         </div>
     </div>
+
 </header>
+<div class="container-custom absolute z-20 left-0 right-0">
+        <ul class="bg-white w-60">
+            @foreach([1,2,3,4,5,6,7,8,9] as $item)
+                <li class="p-2 hover:bg-gray-400 hover:text-white">
+                    <a href="">Thiết Bị Điện Tử</a>
+                </li>
+            @endforeach
+        </ul>
+</div>
