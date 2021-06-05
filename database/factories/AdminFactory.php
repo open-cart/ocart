@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -14,7 +14,7 @@ class AdminFactory extends Factory
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Admin::class;
 
     /**
      * Define the model's default state.
