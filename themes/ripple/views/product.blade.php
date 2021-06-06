@@ -8,7 +8,7 @@
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
-    <section class="pb-12 text-gray-700 body-font overflow-hidden bg-white">
+    <section class="section-custom text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
 
             <div class="lg:w-full mx-auto flex flex-wrap">
@@ -224,6 +224,8 @@
                 </ul>
             </div>
 
+            <div class="fb-comments mb-7" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5" style="background: white;display: block;"></div>
+
             <div>
                 <div class="text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
                 <div class="flex flex-wrap -mx-2 md:-mx-4">
@@ -234,8 +236,6 @@
                     @endforeach
                 </div>
             </div>
-
-            <div class="fb-comments" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5"></div>
 
         </div>
     </div>
@@ -262,7 +262,7 @@
             width: 100%;
         }
         .owl-nav{
-            font-size: 4rem;
+            font-size: 2rem;
         }
         .owl-prev:focus,
         .owl-next:focus{
@@ -270,21 +270,21 @@
         }
         .owl-prev{
             position: absolute;
-            top: 50%;
+            top: calc(50% - 5px);
             left: 5px;
             transform: translateY(-50%);
 
         }
         .owl-next{
             position: absolute;
-            top: 50%;
+            top: calc(50% - 5px);
             right: 5px;
             transform: translateY(-50%);
         }
-        .owl-prev span,
-        .owl-next span{
-            color: grey;
-        }
+        /*.owl-prev span,*/
+        /*.owl-next span{*/
+        /*    color: grey;*/
+        /*}*/
         .owl-prev span:hover,
         .owl-next span:hover{
             color: black;

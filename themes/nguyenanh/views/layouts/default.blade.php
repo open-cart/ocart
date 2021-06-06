@@ -40,7 +40,7 @@
 <body>
 <div class="font-sans text-gray-900 antialiased">
     @include(Theme::getThemeNamespace('layouts.header'))
-    <button id="gotop" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 opacity-0 fixed bottom-5 right-5 z-50 focus:outline-none">
+    <button id="gotop" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 lg:p-4 opacity-0 fixed bottom-5 right-5 z-50 focus:outline-none">
         <x-theme::icons.chevron-double/>
     </button>
     <div id="body" class="content" data-pjax-container="body">{{ $slot }}</div>
