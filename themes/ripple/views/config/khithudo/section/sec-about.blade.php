@@ -1,4 +1,4 @@
-<section class="sec-about antialiased font-sans py-16">
+<section class="section-custom sec-about antialiased font-sans">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
         <h2 class="text-xl md:text-2xl font-bold mb-2">Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh</h2>
         <p class="text-gray-600">Chuyên cung cấp các sản phẩm khí bao gồm: khí đặc biệt, khí hiếm, khí y tế, khí tinh khiết, khí hỗn hợp, khí hiệu chuẩn, khí phân tích, khí thí nghiệm.</p>

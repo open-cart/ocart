@@ -2,6 +2,9 @@
     .container-custom {
         @apply max-w-7xl mx-auto px-4 sm:px-6;
     }
+    .section-custom {
+        @apply py-4 lg:py-12;
+    }
     .toast {
         @apply mb-4;
     }
