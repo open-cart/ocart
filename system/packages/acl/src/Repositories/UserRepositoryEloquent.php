@@ -2,12 +2,9 @@
 
 namespace Ocart\Acl\Repositories;
 
-use App\Criteria\BeforeQueryCriteria;
-use App\Criteria\LanguageCriteriaCriteria;
-use App\Models\User;
+use App\Models\Admin;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
  * Class PageRepositoryEloquent.
@@ -27,7 +24,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository
      */
     public function model()
     {
-        return User::class;
+        return Admin::class;
     }
 
     /**
