@@ -22,25 +22,22 @@
     <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>
     <script src="{!! asset('access/jquery.pjax.js') !!}"></script>
 
-    <script>
-        $(function () {
-            $(document).on('click', '[data-toggle=modal]', function () {
-                const idModal = $(this).attr('data-target');
-                console.log(idModal);
-                $(idModal).click();
-            })
-        })
-    </script>
-
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="VKxCFr5E"></script>
+    <link rel="stylesheet" href="{!! asset('access/owlcarousel/dist/assets/owl.carousel.css?v=1') !!}">
+    <link rel="stylesheet" href="{!! asset('access/owlcarousel/dist/assets/owl.theme.default.css?v=1') !!}">
+    <script defer src="{!! asset('access/owlcarousel/dist/owl.carousel.js?v=1') !!}"></script>
 
     <!-- Meta Head -->
     {!! get_meta_head() !!}
     <!-- End Meta Head -->
 
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0" nonce="VKxCFr5E"></script>
+
+    @stack('head')
+
 </head>
 <body>
 <div id="fb-root"></div>
+@stack('body')
 
 <div class="font-sans text-gray-900 antialiased">
     @include(Theme::getThemeNamespace('layouts.header'))
@@ -122,6 +119,8 @@
 
 </div>
 
+@stack('bodybelow')
+
 <script>
     // $(document).on('click', 'a:not(no-pjax)', function(event) {
     //     // event.preventDefault();
@@ -195,6 +194,8 @@
 </script>
 
 {!! get_meta_footer() !!}
+
+@stack('footer')
 
 </body>
 </html>

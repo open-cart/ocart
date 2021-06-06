@@ -17,7 +17,6 @@
                         <img class="w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
                     </div>
                     <div class="owl-carousel owl-theme mt-2 relative">
-
                         @foreach($product->images as $item)
                             <div class="item">
                                 <img src="{{ TnMedia::url($item) }}" alt=""
@@ -240,6 +239,7 @@
 
         </div>
     </div>
+
     <script>
         $(document).ready(function() {
             $('.owl-carousel').owlCarousel({
@@ -251,23 +251,49 @@
         });
     </script>
     <style>
-        .owl-nav{
-            font-size: 2rem ;
+        .owl-carousel:not(.owl-loaded){
+            opacity: 0;
+            visibility:hidden;
+            height:354px;
         }
-        .owl-prev,
+        .owl-carousel .owl-dots {
+            position: absolute;
+            bottom: 0px;
+            width: 100%;
+        }
+        .owl-nav{
+            font-size: 4rem;
+        }
+        .owl-prev:focus,
+        .owl-next:focus{
+            outline: none;
+        }
+        .owl-prev{
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            transform: translateY(-50%);
+
+        }
         .owl-next{
             position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+        }
+        .owl-prev span,
+        .owl-next span{
+            color: grey;
+        }
+        .owl-prev span:hover,
+        .owl-next span:hover{
+            color: black;
         }
 
-        .owl-prev{
-            top:50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-        .owl-next{
-            top:50%;
-            right: 0;
-            transform: translateY(-50%);
+        .owl-carousel button:hover, .owl-carousel button:focus, .owl-carousel button:focus-visible{
+            outline: none;
+            background: none !important;
         }
     </style>
 </x-guest-layout>
+
