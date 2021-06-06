@@ -8,21 +8,19 @@
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
-    <section class="section-custom text-gray-700 body-font overflow-hidden bg-white">
+    <section x-data="imageData({{ $product }})" class="section-custom product-library text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
-
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full ">
                     <div class="mb-4">
-                        <img class="w-full h-full object-cover object-center rounded" src="{{ TnMedia::url(empty($product->images) ? asset('/images/no-image.jpg') : head($product->images)) }}" alt="ecommerce">
+                        <img class="w-full h-full object-cover object-center rounded" :src="images.length ? '/' + images[index] : '/no-images'" alt="ecommerce">
                     </div>
                     <div class="owl-carousel owl-theme mt-2 relative">
-                        @foreach($product->images as $item)
-                            <div class="item">
-                                <img src="{{ TnMedia::url($item) }}" alt=""
-                                     class="w-full h-full object-cover">
+                        <template x-for="(item, i) in images" :key="index">
+                            <div x-on:click="index = i" class="item">
+                                <img :src="'/' + item" alt="" class="w-full h-full object-cover">
                             </div>
-                        @endforeach
+                        </template>
                     </div>
                 </div>
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
@@ -131,98 +129,98 @@
                 </ul>
             </div>
 
-            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
-                <ul class="shadow-box">
+{{--            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">--}}
+{{--                <ul class="shadow-box">--}}
 
-                    <li class="relative">
+{{--                    <li class="relative">--}}
 
-                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold">Bình Luận</span>
-                                <x-theme::icons.chevron-down/>
-                            </div>
-                        </button>
+{{--                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">--}}
+{{--                            <div class="flex items-center justify-between">--}}
+{{--                                <span class="font-bold">Bình Luận</span>--}}
+{{--                                <x-theme::icons.chevron-down/>--}}
+{{--                            </div>--}}
+{{--                        </button>--}}
 
-                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">
-                            <div class="px-6 pb-4">
-                                <ul>
-                                    <li class="mb-5 border-b border-dotted">
-                                        <div class="pb-6">
-                                            <div class="float-left w-16">
-                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
-                                            </div>
-                                            <div class="pl-6 flex flex-wrap">
-                                                <div class="comment-meta">
-                                                    <div class="comment-left-meta">
-                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>
-                                                        <div class="mt-1 text-green-500">19th May 2018</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4 text-gray-500">
-                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
-                                                        perspiciatis unde omnis iste natus error
-                                                        perspiciatis unde omnis iste natus error.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="mb-5">
-                                        <div class="pb-6">
-                                            <div class="float-left w-16">
-                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
-                                            </div>
-                                            <div class="pl-6 flex flex-wrap">
-                                                <div class="comment-meta">
-                                                    <div class="comment-left-meta">
-                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>
-                                                        <div class="mt-1 text-green-500">19th May 2018</div>
-                                                    </div>
-                                                </div>
-                                                <div class="mt-4 text-gray-500">
-                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
-                                                        perspiciatis unde omnis iste natus error
-                                                        perspiciatis unde omnis iste natus error.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+{{--                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">--}}
+{{--                            <div class="px-6 pb-4">--}}
+{{--                                <ul>--}}
+{{--                                    <li class="mb-5 border-b border-dotted">--}}
+{{--                                        <div class="pb-6">--}}
+{{--                                            <div class="float-left w-16">--}}
+{{--                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">--}}
+{{--                                            </div>--}}
+{{--                                            <div class="pl-6 flex flex-wrap">--}}
+{{--                                                <div class="comment-meta">--}}
+{{--                                                    <div class="comment-left-meta">--}}
+{{--                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>--}}
+{{--                                                        <div class="mt-1 text-green-500">19th May 2018</div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mt-4 text-gray-500">--}}
+{{--                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.--}}
+{{--                                                        perspiciatis unde omnis iste natus error--}}
+{{--                                                        perspiciatis unde omnis iste natus error.</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="mb-5">--}}
+{{--                                        <div class="pb-6">--}}
+{{--                                            <div class="float-left w-16">--}}
+{{--                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">--}}
+{{--                                            </div>--}}
+{{--                                            <div class="pl-6 flex flex-wrap">--}}
+{{--                                                <div class="comment-meta">--}}
+{{--                                                    <div class="comment-left-meta">--}}
+{{--                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>--}}
+{{--                                                        <div class="mt-1 text-green-500">19th May 2018</div>--}}
+{{--                                                    </div>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="mt-4 text-gray-500">--}}
+{{--                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.--}}
+{{--                                                        perspiciatis unde omnis iste natus error--}}
+{{--                                                        perspiciatis unde omnis iste natus error.</p>--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </li>--}}
 
-                                </ul>
-                            </div>
-                        </div>
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </li>
+{{--                    </li>--}}
 
-                </ul>
-            </div>
+{{--                </ul>--}}
+{{--            </div>--}}
 
-            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">
-                <ul class="shadow-box">
+{{--            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">--}}
+{{--                <ul class="shadow-box">--}}
 
-                    <li class="relative">
+{{--                    <li class="relative">--}}
 
-                        <button x-on:click="selected !== 1 ? selected = 1 : selected = null" type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none">
-                            <div class="flex items-center justify-between">
-                                <span class="font-bold">Viết Bình Luận</span>
-                                <x-theme::icons.chevron-down/>
-                            </div>
-                        </button>
+{{--                        <button x-on:click="selected !== 1 ? selected = 1 : selected = null" type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none">--}}
+{{--                            <div class="flex items-center justify-between">--}}
+{{--                                <span class="font-bold">Viết Bình Luận</span>--}}
+{{--                                <x-theme::icons.chevron-down/>--}}
+{{--                            </div>--}}
+{{--                        </button>--}}
 
-                        <div x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''" class="relative overflow-hidden transition-all max-h-0 duration-700">
-                            <div class="px-6 pb-4">
-                                <form>
-                                    <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none" placeholder="Viết bình luận..." rows="5"></textarea>
-                                    <div class="my-2">
-                                        <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded" type="submit">Submit Review</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+{{--                        <div x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''" class="relative overflow-hidden transition-all max-h-0 duration-700">--}}
+{{--                            <div class="px-6 pb-4">--}}
+{{--                                <form>--}}
+{{--                                    <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none" placeholder="Viết bình luận..." rows="5"></textarea>--}}
+{{--                                    <div class="my-2">--}}
+{{--                                        <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded" type="submit">Submit Review</button>--}}
+{{--                                    </div>--}}
+{{--                                </form>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
-                    </li>
+{{--                    </li>--}}
 
-                </ul>
-            </div>
+{{--                </ul>--}}
+{{--            </div>--}}
 
             <div class="fb-comments mb-7" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5" style="background: white;display: block;"></div>
 
@@ -249,12 +247,20 @@
                 dots:false,
             })
         });
+        function imageData(data){
+            return {
+                images : data.images || [],
+                index: 0,
+            }
+        }
     </script>
     <style>
+        .product-library .owl-item:first-child{
+            display: none !important;
+        }
         .owl-carousel:not(.owl-loaded){
             opacity: 0;
             visibility:hidden;
-            height:354px;
         }
         .owl-carousel .owl-dots {
             position: absolute;
@@ -262,7 +268,7 @@
             width: 100%;
         }
         .owl-nav{
-            font-size: 2rem;
+            font-size: 3rem;
         }
         .owl-prev:focus,
         .owl-next:focus{
@@ -281,10 +287,10 @@
             right: 5px;
             transform: translateY(-50%);
         }
-        /*.owl-prev span,*/
-        /*.owl-next span{*/
-        /*    color: grey;*/
-        /*}*/
+        .owl-prev span,
+        .owl-next span{
+            color: grey;
+        }
         .owl-prev span:hover,
         .owl-next span:hover{
             color: black;
