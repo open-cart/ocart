@@ -8,20 +8,8 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Ocart\Ecommerce\Models\Product;
 
-class ProductRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     */
-    protected function prepareForValidation()
-    {
-        $sku = $this->input('sku') ?: create_sku();
-
-        $this->merge(['sku' => $sku]);
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,13 +18,13 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'    => 'required|max:120',
+            'name'    => 'filled|max:120',
             'description' => 'max:400',
-            'content' => 'required',
+            'content' => 'filled',
             'sku'    => [
-                'required',
+                'filled',
                 'max:120',
-                Rule::unique((new Product)->getTable())
+                Rule::unique((new Product)->getTable())->ignore($this->route('id'))
             ],
         ];
     }

@@ -49,6 +49,7 @@ class CategoryForm extends FormAbstract
             ->add('status', 'select', [
                 'choices'    => BaseStatusEnum::labels()
             ])
+            ->add('is_featured', 'onOff')
             ->setBreakFieldPoint('status');
     }
 }

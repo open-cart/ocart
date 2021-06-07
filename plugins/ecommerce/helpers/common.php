@@ -258,7 +258,6 @@ if (!function_exists('update_to_cart')) {
     }
 }
 
-
 if (!function_exists('destroy_to_cart')) {
     function destroy_to_cart()
     {
@@ -266,3 +265,10 @@ if (!function_exists('destroy_to_cart')) {
     }
 }
 
+if (!function_exists('createSku')) {
+    function create_sku()
+    {
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
+        return $repo->createSku();
+    }
+}

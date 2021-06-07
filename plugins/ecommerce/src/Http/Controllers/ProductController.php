@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\ProductForm;
 use Ocart\Ecommerce\Http\Requests\ProductRequest;
+use Ocart\Ecommerce\Http\Requests\ProductUpdateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
-use Ocart\Ecommerce\Services\Abstracts\StoreCategoryServiceAbstract;
 use Ocart\Ecommerce\Services\StoreCategoryService;
 use Ocart\Ecommerce\Table\ProductTable;
 use Ocart\Core\Forms\FormBuilder;
@@ -73,8 +73,6 @@ class ProductController extends BaseController
 
         $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
 
-        $data['sku'] = $request->input('sku') ?: $this->repo->createSku();
-
         $product = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
@@ -99,7 +97,7 @@ class ProductController extends BaseController
 
     function update(
         $id,
-        ProductRequest $request,
+        ProductUpdateRequest $request,
         BaseHttpResponse $response,
         StoreCategoryService $categoryService
     )

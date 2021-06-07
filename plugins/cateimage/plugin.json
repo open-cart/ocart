@@ -1,0 +1,19 @@
+{
+    "name": "Category image và banner into ecommerce",
+    "namespace": "Ocart\\CateImage\\",
+    "image": "images/momo.png",
+    "auth": "Trung Nguyên",
+    "email": "nguyenpl117@gmail.com",
+    "link": "https://phantrungnguyen.com",
+    "configGroup": "Plugins",
+    "configCode": "Payment",
+    "configKey": "blog",
+    "version": "1.0",
+    "providers": [
+        "Ocart\\CateImage\\Providers\\CateImageServiceProvider",
+        "Ocart\\CateImage\\Providers\\HookServiceProvider"
+    ],
+    "require": [
+        "ecommerce"
+    ]
+}

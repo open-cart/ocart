@@ -55,10 +55,10 @@ return [
                 ],
             ],
             'jquery-ui' => [
-                'use_cdn'  => true,
+                'use_cdn'  => false,
                 'location' => 'header',
                 'src'      => [
-                    'local' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+                    'local' => 'access/jquery-ui/jquery-ui.js',
                     'cdn' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
                 ],
             ],
@@ -100,10 +100,10 @@ return [
         ],
         'styles'  => [
             'jquery-ui' => [
-                'use_cdn'    => true,
+                'use_cdn'    => false,
                 'location'   => 'header',
                 'src'        => [
-                    'cdn' => '//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css',
+                    'local' => 'access/jquery-ui/jquery-ui.css',
                 ],
             ],'app' => [
                 'use_cdn'    => false,
