@@ -1,4 +1,4 @@
-<section class="sec-testimonials py-16">
+<section class="section-custom sec-testimonials">
     <div class="max-w-6xl mx-auto px-8">
         <div class="relative" x-data="{ activeSlide: 1, slides:[1, 2] }">
             <div class="relative lg:flex rounded-lg shadow-2xl overflow-hidden" key="1" x-show="activeSlide === 1">

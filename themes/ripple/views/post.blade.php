@@ -97,6 +97,9 @@
                     </form>
                 </div>
             </div>
+
+            <div class="fb-comments" data-href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}" data-width="100%" data-numposts="5"></div>
+
             <div class="py-4">
                 <div>Bài liên quan</div>
                 <div class="flex flex-wrap -mx-2">
@@ -107,8 +110,6 @@
                     @endforeach
                 </div>
             </div>
-
-            <div class="fb-comments" data-href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}" data-width="100%" data-numposts="5"></div>
 
         </div>
 

@@ -38,7 +38,7 @@
     }
 
     .owl-nav {
-        font-size: 4rem;
+        font-size: 3rem;
     }
 
     .owl-prev:focus,
