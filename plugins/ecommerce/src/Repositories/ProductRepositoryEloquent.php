@@ -41,9 +41,9 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
     public function createSku(): string
     {
-        $num = setting('increment_product', 1);
+        $num = setting('increment_sku', 1);
 
-        setting()->set('increment_sku', $num + 1);
+        setting()->set('increment_sku', $num + 1)->save();
 
         $sku = 'SP_' . str_pad($num, 6, '0', STR_PAD_LEFT);
 
@@ -52,7 +52,7 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
         $count = $query->where('sku', $sku)->count();
 
         if ($count) {
-            $hashids = new Hashids('increment_product', 8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
+            $hashids = new Hashids('increment_sku', 8, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890');
 
             return $hashids->encode($num);
         }
