@@ -11,7 +11,7 @@
             <div class="container-custom">
                 <div class="flex flex-wrap -mx-2">
                     @foreach(parent_recursive($categories) as $category)
-                    <div class="w-1/4 xl:w-1/6 p-2 hover:shadow-xl text-center">
+                    <div class="w-1/3 xl:w-1/6 p-2 lg:p-4 hover:shadow-xl text-center">
                         <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="p-1 lg:p-3 border border-gray-300 inline-block w-full">
                             <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full lg:p-2">
                             <div class="hidden lg:inline-block text-gray-600 font-bold lg:line-clamp-1">{{ $category->name }}</div>
