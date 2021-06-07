@@ -4,7 +4,7 @@
             <div class="mb-2 font-bold">Danh mục sản phẩm</div>
             <ul>
                 @foreach(get_categories() as $category)
-                    <li>
+                    <li class="py-0.5">
                         <a
                                 data-body="category-container"
                                 href="/product-category/{{ $category->slug }}"
@@ -21,7 +21,7 @@
             <div class="mb-2 font-bold">Danh mục bài viết</div>
             <ul>
                 @foreach(get_blog_categories() as $category)
-                    <li>
+                    <li class="py-0.5">
                         <a href="/post-category/{{ $category->slug }}"
                            data-body="category-container"
                            class="text-sm font-semibold block text-gray-500 hover:text-blue-600">{{ $category->name }}</a>

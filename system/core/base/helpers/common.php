@@ -238,6 +238,29 @@ if (!function_exists('sort_item_with_children')) {
         return $result;
     }
 }
+if (!function_exists('parent_recursive')) {
+    /**
+     * Sort parents before children
+     * @param array $list
+     * @param int $parentId
+     * @return array
+     */
+    function parent_recursive(array $list, $parentId = 0) {
+        $result = array();
+
+        foreach ($list as $element) {
+            if ($element['parent_id'] == $parentId) {
+                $children = parent_recursive($list, $element['id']);
+                if ($children) {
+                    $element['children'] = $children;
+                }
+                $result[] = $element;
+            }
+        }
+
+        return $result;
+    }
+}
 
 if (!function_exists('get_meta_head')) {
     function get_meta_head(){
@@ -314,5 +337,17 @@ if (!function_exists('get_menu_footer')) {
 if (!function_exists('get_deps_footer')) {
     function get_deps_footer(){
         return setting('deps_footer', null);
+    }
+}
+
+if (!function_exists('get_phone')) {
+    function get_phone(){
+        return setting('phone', null);
+    }
+}
+
+if (!function_exists('get_fb_chat')) {
+    function get_fb_chat(){
+        return setting('fb_chat', null);
     }
 }

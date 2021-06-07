@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="container-custom">
+    <div class="section-custom container-custom">
         {!! $page->content !!}
 
     </div>
