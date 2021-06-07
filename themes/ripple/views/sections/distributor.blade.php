@@ -1,6 +1,6 @@
-<section x-data='distributor()' class="distributor antialiased py-16">
+<section x-data='distributor()' class="section-custom distributor antialiased">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
-        <h2 class="text-3xl font-bold">Hệ thống phân phối</h2>
+        <h2 class="text-xl md:text-2xl font-bold">Hệ thống phân phối</h2>
         <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
     </div>
     <div class="container-custom">

@@ -4,67 +4,75 @@
 <div class="slide-home owl-carousel owl-theme relative">
     @if(!empty($banner) && is_array($banner))
         @foreach($banner as $item)
-        <div class="item">
-            <img src="{{ $item->img }}">
-        </div>
+            <div class="item">
+                <img src="{{ $item->img }}">
+            </div>
         @endforeach
     @endif
 </div>
 <script>
     $(document).ready(function () {
-        $('.owl-carousel').owlCarousel({
-            loop: true,
+        $('.slide-home').owlCarousel({
+            loop: false,
             dots: true,
             nav: false,
             animateOut: 'fadeOut',
-            autoPlay: 2000,
+            autoPlay: 3000,
             items: 1,
             margin: 0,
         })
     });
 
 </script>
-<style lang="scss">
-    .owl-carousel:not(.owl-loaded){
+<style>
+    .owl-carousel:not(.owl-loaded) {
         opacity: 0;
-        visibility:hidden;
-        height:354px;
+        visibility: hidden;
+        height: 354px;
     }
-    .slide-home .owl-dots {
+
+    .owl-carousel .owl-dots {
         position: absolute;
         bottom: 0px;
         width: 100%;
     }
-    .owl-nav{
-        font-size: 4rem;
+
+    .owl-nav {
+        font-size: 3rem;
     }
+
     .owl-prev:focus,
-    .owl-next:focus{
+    .owl-next:focus {
         outline: none;
     }
-    .owl-prev{
+
+    .owl-prev {
         position: absolute;
         top: 50%;
         left: 5px;
         transform: translateY(-50%);
 
     }
-    .owl-next{
+
+    .owl-next {
         position: absolute;
         top: 50%;
         right: 5px;
         transform: translateY(-50%);
     }
+
     .owl-prev span,
-    .owl-next span{
+    .owl-next span {
         color: grey;
     }
+
     .owl-prev span:hover,
-    .owl-next span:hover{
+    .owl-next span:hover {
         color: black;
     }
 
-    .owl-dot:focus{
+    .owl-carousel button:hover, .owl-carousel button:focus, .owl-carousel button:focus-visible {
         outline: none;
+        background: none !important;
     }
 </style>

@@ -1,4 +1,4 @@
-<section class="sec-about antialiased font-sans py-16">
+<section class="hidden lg:block section-custom sec-about antialiased font-sans">
     <div class="sec-heading text-center max-w-3xl mx-auto px-4 sm:px-6 mb-4">
         <h2 class="text-xl md:text-2xl font-bold mb-2">How It Works?</h2>
         <p class="text-gray-600">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores</p>
