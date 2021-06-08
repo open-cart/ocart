@@ -2,7 +2,7 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
-use Ocart\Ecommerce\Models\Customer;
+use App\Models\User;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Prettus\Repository\Eloquent\BaseRepository;
 
@@ -24,7 +24,7 @@ class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepos
      */
     public function model()
     {
-        return Customer::class;
+        return User::class;
     }
 
     /**

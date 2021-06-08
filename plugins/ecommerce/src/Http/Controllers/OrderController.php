@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
 use Ocart\Ecommerce\Enums\ShippingMethodEnum;
@@ -113,6 +114,8 @@ class OrderController extends BaseController
 
     function store(OrderCreateRequest $request, BaseHttpResponse $response)
     {
+        DB::beginTransaction();
+
         $data = [
             'amount'               => $request->input('amount') + $request->input('shipping_amount') - $request->input('discount_amount'),
             'currency_id'          => get_application_currency_id(),
@@ -191,6 +194,8 @@ class OrderController extends BaseController
                 $this->orderProductRepository->create($data);
             }
         }
+
+        DB::commit();
 
         return $response->setData($order);
     }

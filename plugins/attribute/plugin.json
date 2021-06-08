@@ -1,6 +1,6 @@
 {
     "name": "Multiple Attribute",
-    "namespace": "Ocart\\Blog\\",
+    "namespace": "Ocart\\Attribute\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
@@ -10,6 +10,8 @@
     "configKey": "blog",
     "version": "1.0",
     "providers": [
-        "Ocart\\Blog\\Providers\\BlogServiceProvider"
+        "Ocart\\Attribute\\Providers\\MultipleAttributeServiceProvider",
+        "Ocart\\Attribute\\Providers\\HookServiceProvider"
+
     ]
 }
