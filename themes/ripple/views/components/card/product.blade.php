@@ -8,9 +8,18 @@
         </div>
         <div class="p-2 md:p-3">
             @if(count($data->categories)>0)
-                <a href={!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!} class="hidden md:inline-block leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700">
-                {{ Arr::get($data->categories->first(), 'name') }}
-                </a>
+                <div class="hidden md:inline-block">
+                    <div class="line-clamp-1">
+                        @foreach($data->categories as $key=>$item)
+                            <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => $item->slug]) !!}" class="leading-none text-gray-500 tracking-wide text-xs hover:text-blue-700" >
+                                {{ $item->name }}
+                            </a>
+                            @if(count($data->categories) != $key + 1)
+                                <span>, </span>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
             @endif
             <a href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $data->slug]) !!}" class="hover:text-blue-700">
                 <h3 class="text-xs md:text-base font-bold line-clamp-2">{{ $data->name }}</h3>

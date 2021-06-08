@@ -346,6 +346,12 @@ if (!function_exists('get_phone')) {
     }
 }
 
+if (!function_exists('get_address')) {
+    function get_address(){
+        return setting('address', null);
+    }
+}
+
 if (!function_exists('get_fb_chat')) {
     function get_fb_chat(){
         return setting('fb_chat', null);

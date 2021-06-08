@@ -1,7 +1,7 @@
-@php
-    $category_product = parent_recursive(get_categories());
-@endphp
-@if(is_active_plugin('ecommerce') && in_array('category_product', $sections->value) && $category_product)
+@if(is_active_plugin('ecommerce') && in_array('category_product', $sections->value))
+    @php
+        $category_product = parent_recursive(get_categories_feature());
+    @endphp
     @foreach($category_product as $item_category)
         <section class="section-custom sec-product antialiased text-gray-900 font-sans">
             <div class="container-custom">

@@ -1,16 +1,15 @@
 <x-guest-layout xmlns:x-theme="http://www.w3.org/1999/html">
     @php
         $sections = get_config_sections();
-        $categories = get_categories();
     @endphp
 
     @include(Theme::getThemeNamespace('config/base/sec-slide'))
 
-    @if(is_active_plugin('ecommerce') && !empty($categories) && $sections != null && in_array('categories_product', $sections->value))
+    @if(is_active_plugin('ecommerce') && !empty(get_categories_feature()) && $sections != null && in_array('categories_product', $sections->value))
         <section class="section-custom sec-categories-product bg-white lg:bg-auto antialiased font-sans">
             <div class="container-custom">
                 <div class="flex flex-wrap -mx-2">
-                    @foreach(parent_recursive($categories) as $category)
+                    @foreach(parent_recursive(get_categories_feature()) as $category)
                     <div class="w-1/3 xl:w-1/6 p-2 lg:p-4 hover:shadow-xl text-center">
                         <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="p-1 lg:p-3 border border-gray-300 inline-block w-full">
                             <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full lg:p-2">
