@@ -49,7 +49,7 @@ if (!function_exists('apply_filters')) {
     /**
      * @return mixed
      */
-    function apply_filters()
+    function apply_filters(string $name, $result, ...$args)
     {
         $args = func_get_args();
         return \Ocart\Core\Facades\FilterFacade::fire(array_shift($args), $args);

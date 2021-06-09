@@ -15,8 +15,14 @@ class ProductTable extends TableAbstract
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->paginate();
+        $this->data = $this->query();
         $this->ajax();
+    }
+
+    public function query()
+    {
+        $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
+        return $res->paginate();
     }
 
     public function ajax()
@@ -27,7 +33,7 @@ class ProductTable extends TableAbstract
                 'title' => 'image',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<img src="' . TnMedia::url($item->image ?? '/images/no-image.jpg') . '" alt="' . $item->title . '" class="w-14"/>';
+                    return '<img src="' . TnMedia::url($item->image ?? asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
             'name' => [

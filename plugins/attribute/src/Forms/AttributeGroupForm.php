@@ -28,7 +28,7 @@ class AttributeGroupForm extends FormAbstract
                     'title' => trans('plugins/attribute::attributes.attribute_list'),
                     'content' => apply_filters(
                         'table_attributes',
-                        view('plugins.attribute::attributes', ['group' => $this->model, 'form' => $this]),
+                        view('plugins.attribute::table_attributes', ['group' => $this->model, 'form' => $this]),
                         $this
                     )
                 ],

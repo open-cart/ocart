@@ -36,3 +36,7 @@ if (!defined('BASE_FILTER_PUBLIC_SINGLE_DATA')) {
 if (!defined('FILTER_SLUG_PREFIX')) {
     define('FILTER_SLUG_PREFIX', 'slug-prefix-filter');
 }
+
+if (!defined('BASE_FILTER_TABLE_QUERY')) {
+    define('BASE_FILTER_TABLE_QUERY', 'BASE_FILTER_TABLE_QUERY');
+}

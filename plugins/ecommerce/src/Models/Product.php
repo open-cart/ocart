@@ -2,6 +2,7 @@
 
 namespace Ocart\Ecommerce\Models;
 
+use App\Casts\Json;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;

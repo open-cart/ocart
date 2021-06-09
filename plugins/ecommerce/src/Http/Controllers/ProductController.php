@@ -4,6 +4,8 @@ namespace Ocart\Ecommerce\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Ocart\Core\Events\CreatedContentEvent;
+use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Ecommerce\Forms\ProductForm;
 use Ocart\Ecommerce\Http\Requests\ProductRequest;
 use Ocart\Ecommerce\Http\Requests\ProductUpdateRequest;
@@ -73,12 +75,18 @@ class ProductController extends BaseController
 
         $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
 
+        \DB::beginTransaction();
+
         $product = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
+        event(new CreatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
+
         $categoryService->execute($request, $product);
+
+        \DB::commit();
 
         return $response->setPreviousUrl(route('ecommerce.products.index'))
             ->setNextUrl(route('ecommerce.products.show', $product->id));
@@ -107,6 +115,8 @@ class ProductController extends BaseController
         $product = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
+
+        event(new UpdatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 
         $categoryService->execute($request, $product);
 

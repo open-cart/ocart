@@ -6,7 +6,11 @@ use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Kris\LaravelFormBuilder\Form;
-use Ocart\EcLocation\Forms\ProductLocationForm;
+use Ocart\Attribute\Listeners\AddAttributeProductListener;
+use Ocart\Attribute\Models\AttributeGroup;
+use Ocart\Attribute\Repositories\Interfaces\AttributeGroupRepository;
+use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
+use Ocart\Core\Events\CreatedContentEvent;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -16,15 +20,12 @@ class HookServiceProvider extends ServiceProvider
         if (is_active_plugin('ecommerce')) {
             \Ocart\Ecommerce\Models\Product::fire(function ($model) {
                 $model->mergeFillable([
-                    'district_id',
-                    'province_id',
-                    'address',
-                    'location',
-                    'acreage',
-                    'bds_type',
+                    'is_variation',
                 ]);
             });
         }
+
+        Event::listen(CreatedContentEvent::class, AddAttributeProductListener::class);
     }
 
     public function boot()
@@ -36,7 +37,6 @@ class HookServiceProvider extends ServiceProvider
 
     protected function registerMenu()
     {
-
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id' => 'cms-store-attributes',
@@ -66,8 +66,49 @@ class HookServiceProvider extends ServiceProvider
         }
 
         if (!$model->id) {
+            /** @var AttributeGroupRepository $attributeGroupRepository */
+            $attributeGroupRepository = app(AttributeGroupRepository::class);
+
+            $form->addMetaBoxes([
+                'attributes' => [
+                    'title' => trans('plugins/attribute::attributes.attributes'),
+                    'content' => apply_filters(
+                        'variations',
+                        view('plugins.attribute::products.add-product-attributes', [
+                            'group' => $attributeGroupRepository->with('attributes')->all(),
+                            'form' => $form,
+                        ]),
+                        $form
+                    ),
+                    'wrap' => false
+                ],
+            ]);
             return $form;
         }
+
+        /** @var ProductWithAttributeGroupRepository $productWithAttributeGroupRepository */
+        $productWithAttributeGroupRepository = app(ProductWithAttributeGroupRepository::class);
+
+        $group = $productWithAttributeGroupRepository
+            ->with('attributeGroup.attributes')
+            ->findWhere([
+                'product_id' => $model->id
+            ]);
+
+        $form->addMetaBoxes([
+            'variations' => [
+                'title' => trans('plugins/attribute::attributes.product_has_variations'),
+                'content' => apply_filters(
+                    'variations',
+                    view('plugins.attribute::products.configurable', [
+                        'group' => $group,
+                        'form' => $form,
+                    ]),
+                    $form
+                ),
+                'wrap' => false
+            ],
+        ]);
 
         $form->removeMetaBox('overview');
         $form->remove('images[]');
