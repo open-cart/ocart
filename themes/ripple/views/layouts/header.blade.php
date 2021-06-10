@@ -187,9 +187,9 @@
     </div>
 
     <!-- Mobile menu, show/hide based on mobile menu state. -->
-    <div x-show="openMobile" class="absolute top-0 inset-x-0 transition transform origin-top-right z-50 h-screen overflow-y-auto"
+    <div x-show="openMobile" class="absolute top-0 inset-x-0 transition transform origin-top-right z-50"
          style="display:none;">
-        <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50">
+        <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 h-screen overflow-y-auto">
             <div class="pt-5 pb-6 px-5">
                 <div class="flex items-center justify-between">
                     <div>
@@ -232,7 +232,7 @@
                                             <a href="{{ $subitem->slug }}"
                                                class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                                                 <span class="ml-3 text-base font-medium text-gray-900">
-                                            {{ $subitem->name }}
+                                            - {{ $subitem->name }}
                                             </span>
                                         @endforeach
                                     </nav>

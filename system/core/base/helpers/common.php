@@ -357,3 +357,9 @@ if (!function_exists('get_fb_chat')) {
         return setting('fb_chat', null);
     }
 }
+
+if (!function_exists('get_products_menu')) {
+    function get_products_menu(){
+        return json_decode(setting('products_menu', null));
+    }
+}

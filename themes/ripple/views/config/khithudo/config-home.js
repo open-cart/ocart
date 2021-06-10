@@ -141,4 +141,52 @@ const configMenuFooter = {
     ]
 }
 
-console.log(JSON.stringify(configMenuFooter))
+const configSections = {
+    "name": "khithudo",
+    "value": [
+        "about",
+        "feedback",
+        "partner",
+        "contact",
+        "categories_product",
+        "products_feture",
+        "products_menu",
+    ]
+}
+
+const configProductsMenu = {
+    "data": [
+        {
+            "name" : "Phòng ngủ",
+            "slug": "danh-muc-con-3",
+            "id": "1",
+            "children": [
+                {
+                    "name" : "Giường",
+                    "slug": "giuong",
+                },
+                {
+                    "name" : "Tủ quần áo",
+                    "slug": "tu-quan-ao",
+                }
+            ]
+        },
+        {
+            "name" : "Phòng khách",
+            "slug": "danh-muc-con-3",
+            "id": "2",
+            "children": [
+                {
+                    "name" : "Bàn Ghế",
+                    "slug": "ban-ghe",
+                },
+                {
+                    "name" : "Kệ tivi",
+                    "slug": "ke-ti-vi",
+                }
+            ]
+        },
+    ]
+}
+
+console.log(JSON.stringify(configProductsMenu))
