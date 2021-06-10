@@ -7,10 +7,13 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Kris\LaravelFormBuilder\Form;
 use Ocart\Attribute\Listeners\AddAttributeProductListener;
+use Ocart\Attribute\Listeners\UpdateVariationProductListener;
 use Ocart\Attribute\Models\AttributeGroup;
 use Ocart\Attribute\Repositories\Interfaces\AttributeGroupRepository;
+use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
 use Ocart\Core\Events\CreatedContentEvent;
+use Ocart\Core\Events\UpdatedContentEvent;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -26,6 +29,7 @@ class HookServiceProvider extends ServiceProvider
         }
 
         Event::listen(CreatedContentEvent::class, AddAttributeProductListener::class);
+        Event::listen(UpdatedContentEvent::class, UpdateVariationProductListener::class);
     }
 
     public function boot()
@@ -89,11 +93,18 @@ class HookServiceProvider extends ServiceProvider
         /** @var ProductWithAttributeGroupRepository $productWithAttributeGroupRepository */
         $productWithAttributeGroupRepository = app(ProductWithAttributeGroupRepository::class);
 
+        /** @var ProductVariationRepository $productVariationRepository */
+        $productVariationRepository = app(ProductVariationRepository::class);
+
         $group = $productWithAttributeGroupRepository
             ->with('attributeGroup.attributes')
             ->findWhere([
                 'product_id' => $model->id
             ]);
+
+        $productRelated = $productVariationRepository
+            ->with(['product','items.attribute'])
+            ->findByField('configurable_product_id', $model->id);
 
         $form->addMetaBoxes([
             'variations' => [
@@ -102,6 +113,7 @@ class HookServiceProvider extends ServiceProvider
                     'variations',
                     view('plugins.attribute::products.configurable', [
                         'group' => $group,
+                        'productRelated' => $productRelated,
                         'form' => $form,
                     ]),
                     $form
@@ -110,8 +122,10 @@ class HookServiceProvider extends ServiceProvider
             ],
         ]);
 
-        $form->removeMetaBox('overview');
-        $form->remove('images[]');
+        if ($productRelated->isNotEmpty()) {
+            $form->removeMetaBox('overview');
+            $form->remove('images[]');
+        }
 
         return $form;
     }

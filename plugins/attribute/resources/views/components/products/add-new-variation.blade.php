@@ -1,4 +1,6 @@
-@props(['group' => []])
+@php
+    $group = $form->getFormOption('group');
+@endphp
 <x-modal content_classes="w-auto" target="add-new-variation-modal">
     <x-slot name="header">
         <div>
@@ -27,23 +29,12 @@
                     </div>
                 @endforeach
             </div>
-            <div class="flex flex-row space-x-4">
-                <div class="flex flex-col">
-                    <label for="customer_address_name">Name</label>
-                    <x-input class="w-64"
-                             id="customer_address_name"/>
-                </div>
-                <div class="flex flex-col">
-                    <label for="customer_address_phone">Phone</label>
-                    <x-input class="w-64"
-                             id="customer_address_phone"/>
-                </div>
-                <div class="flex flex-col">
-                    <label for="customer_address_phone">Phone</label>
-                    <x-input class="w-64"
-                             id="customer_address_phone"/>
-                </div>
-            </div>
+            @foreach ($form->getMetaBoxes() as $key => $metaBox)
+                {!! $form->getMetaBox($key) !!}
+            @endforeach
+            @if($showFields)
+                {!! $form->getField('images[]')->render() !!}
+            @endif
         </div>
     </x-slot>
     <x-slot name="footer">

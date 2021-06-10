@@ -32,4 +32,9 @@ class ProductVariationItem extends BaseModel
     {
         parent::boot();
     }
+
+    public function attribute()
+    {
+        return $this->belongsTo(Attribute::class, 'attribute_id');
+    }
 }

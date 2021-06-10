@@ -3,7 +3,7 @@
 @endif
 
 @if (Arr::get($meta_box, 'wrap', true))
-    <div class="rounded-md bg-white dark:text-gray-300 dark:bg-gray-800" {{ Html::attributes(Arr::get($meta_box, 'attributes', [])) }}>
+    <div class="rounded-md border border-white bg-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700" {{ Html::attributes(Arr::get($meta_box, 'attributes', [])) }}>
         <div class="border-b px-6 py-3 flex justify-between dark:border-gray-700">
             <h4>
                 <span> {{ Arr::get($meta_box, 'title') }}</span>
