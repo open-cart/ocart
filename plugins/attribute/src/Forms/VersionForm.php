@@ -6,9 +6,9 @@ use Ocart\Attribute\Models\AttributeGroup;
 use Ocart\Core\Forms\FormAbstract;
 use Ocart\Ecommerce\Forms\ProductOverviewForm;
 
-class AddVersionForm extends FormAbstract
+class VersionForm extends FormAbstract
 {
-    protected $template = 'plugins.attribute::components.products.add-version';
+    protected $template = 'plugins.attribute::components.products.form-version';
 
     public function buildForm()
     {

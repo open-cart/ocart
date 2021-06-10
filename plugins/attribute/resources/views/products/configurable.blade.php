@@ -60,7 +60,9 @@
                            name="variation_default_id"/>
                 </th>
                 <th class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700">
-                    <a href="#" class="text-blue-500">Edit</a>
+                    <a href="javascript:void(0)"
+                       x-on:click.prevent="$store.variation_related.showUpdate()"
+                       class="text-blue-500">Edit</a>
                     &nbsp;
                     <a href="#" class="text-red-500">Delete</a>
                 </th>
@@ -69,13 +71,13 @@
             </tbody>
         </table>
         <br>
-        <a data-toggle="modal" data-target="#add-new-variation-modal"
+        <a x-on:click.prevent="$store.variation_related.showCreate()"
            href="javascript:void(0)">{{ trans('plugins/attribute::attributes.add_new_variation') }}</a>
     </div>
 </div>
 @section('form_end')
 {!! $form->getFormBuilder()
-->create(\Ocart\Attribute\Forms\AddVersionForm::class, [
+->create(\Ocart\Attribute\Forms\VersionForm::class, [
     'form' => $form,
     'group' => $group
 ])

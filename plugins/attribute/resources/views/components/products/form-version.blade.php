@@ -3,8 +3,8 @@
     $parent = $form->getFormOption('form');
     $product = $parent->getModel();
 @endphp
-<div x-data="dataAddVariationModel()">
-    <x-modal content_classes="w-auto" target="add-new-variation-modal">
+<div>
+    <x-modal content_classes="w-auto" target="form-version-modal">
         <x-slot name="header">
             <div>
                 <h3 class="text-2xl pb-3">
@@ -50,6 +50,13 @@
         productId: {!! $product->id !!},
         groups: @json($groups),
         loading: false,
+        showCreate() {
+            console.log('show popup')
+            $('#form-version-modal').click();
+        },
+        showUpdate() {
+            console.log('show update')
+        },
         save() {
             const attributes = this.groups.map(x => {
                 if (!x.attribute_group.attribute_group_id) {
