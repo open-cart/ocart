@@ -13,6 +13,10 @@ Route::group([
             Route::resource('', 'ProductAttributeGroupController')->parameters(['' => 'id']);
         });
 
-        Route::post('product/add_version', 'ProductController@storeVariation')->name('ecommerce.attribute_groups.add_version');
+        Route::post('product/add_version', 'ProductController@addVersion')
+            ->name('ecommerce.attribute_groups.add_version');
+        Route::post('product/update_version', 'ProductController@updateVersion')
+            ->name('ecommerce.attribute_groups.update_version');
+
     });
 });

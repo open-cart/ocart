@@ -3,13 +3,12 @@ namespace Ocart\Attribute\Forms;
 
 use Kris\LaravelFormBuilder\Field;
 use Ocart\Attribute\Models\AttributeGroup;
-use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
 use Ocart\Ecommerce\Forms\ProductOverviewForm;
 
-class AddNewVariationForm extends FormAbstract
+class AddVersionForm extends FormAbstract
 {
-    protected $template = 'plugins.attribute::components.products.add-new-variation';
+    protected $template = 'plugins.attribute::components.products.add-version';
 
     public function buildForm()
     {

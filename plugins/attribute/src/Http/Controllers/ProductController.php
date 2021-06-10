@@ -4,7 +4,7 @@ namespace Ocart\Attribute\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Ocart\Attribute\Http\Requests\ProductVariationCreateRequest;
+use Ocart\Attribute\Http\Requests\ProductAddVersionRequest;
 use Ocart\Attribute\Repositories\Interfaces\AttributeRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationItemRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
@@ -52,10 +52,10 @@ class ProductController extends BaseController
 
     /**
      * Thêm mới biến thể.
-     * @param ProductVariationCreateRequest $request
+     * @param ProductAddVersionRequest $request
      */
-    public function storeVariation(
-        ProductVariationCreateRequest $request,
+    public function addVersion(
+        ProductAddVersionRequest $request,
         BaseHttpResponse $response
     )
     {

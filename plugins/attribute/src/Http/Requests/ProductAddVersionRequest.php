@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Ocart\Ecommerce\Models\Product;
 
-class ProductVariationCreateRequest extends FormRequest
+class ProductAddVersionRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.

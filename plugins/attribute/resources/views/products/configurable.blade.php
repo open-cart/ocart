@@ -75,7 +75,7 @@
 </div>
 @section('form_end')
 {!! $form->getFormBuilder()
-->create(\Ocart\Attribute\Forms\AddNewVariationForm::class, [
+->create(\Ocart\Attribute\Forms\AddVersionForm::class, [
     'form' => $form,
     'group' => $group
 ])
