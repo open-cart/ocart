@@ -2,6 +2,7 @@
 
 namespace Ocart\Attribute\Listeners;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Attribute\Models\ProductVariation;
 use Ocart\Attribute\Models\ProductVariationItem;
@@ -83,10 +84,12 @@ class UpdateVariationProductListener
             'configurable_product_id' => $product->id
         ],['is_default' => 1]);
 
+        $productNewDefault = $this->productRepository->find($e->request->input('variation_default_id'));
         $data = [];
 
-        $data['price'] = $productDefault->product->price;
-        $data['sale_price'] = $productDefault->product->sale_price;
+        $data['price'] = $productNewDefault->price;
+        $data['sale_price'] = $productNewDefault->sale_price;
+
 
         $this->productRepository->update($data, $product->id);
     }

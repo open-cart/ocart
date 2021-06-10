@@ -12,5 +12,7 @@ Route::group([
         Route::group(['prefix'=>'attribute_groups', 'as' => 'ecommerce.attribute_groups.'], function () {
             Route::resource('', 'ProductAttributeGroupController')->parameters(['' => 'id']);
         });
+
+        Route::post('product/add_version', 'ProductController@storeVariation')->name('ecommerce.attribute_groups.create_variation');
     });
 });

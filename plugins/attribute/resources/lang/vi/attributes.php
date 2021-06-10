@@ -18,5 +18,6 @@ return [
     'variation_description' => 'Việc thêm các thuộc tính mới giúp sản phẩm có nhiều lựa chọn, chẳng hạn như kích thước hoặc màu sắc.',
     'attribute_name' => 'Tên thuộc tính',
     'value' => 'Giá trị',
-    'add_more_attribute' => 'Thêm thuộc tính khác'
+    'add_more_attribute' => 'Thêm thuộc tính khác',
+    'variation_existed' => 'Biến thể này đã tồn tại.'
 ];

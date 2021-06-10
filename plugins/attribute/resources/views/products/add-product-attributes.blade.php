@@ -56,7 +56,7 @@
             </x-button>
         </div>
     </div>
-    <input type="hidden" name="variations" x-bind:value="JSON.stringify(data)">
+    <input type="hidden" name="variations" x-bind:value="variations()">
     <input type="hidden" name="is_added_attributes" x-bind:value="addAttribute ? 1 : 0">
 </div>
 <script>
@@ -65,6 +65,17 @@
             addAttribute: false,
             groups: @json($group),
             data: [],
+            variations() {
+                const data = this.data.map(x => {
+                    return {
+                        id: x.id,
+                        group_id: x.group_id,
+                        attribute_id: x.attribute_id
+                    }
+                });
+
+                return JSON.stringify(data);
+            },
             toggle(e) {
                 this.addAttribute = !this.addAttribute;
                 const txt = e.target.getAttribute("data-toggle-text");

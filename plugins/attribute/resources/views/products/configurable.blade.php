@@ -48,11 +48,14 @@
                     </td>
                 @endforeach
                 <th class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700">
-                    {{ $productItem->product->sell_price }}
+                    {{ format_price($productItem->product->sell_price) }}
+                    @if($productItem->product->price && $productItem->product->price > $productItem->product->sell_price)
+                        <span class="line-through text-red-500">{{ format_price($productItem->product->price) }}</span>
+                    @endif
                 </th>
                 <th class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700">
                     <input type="radio"
-                           checked="{{ $productItem->is_default }}"
+                           {{ $productItem->is_default == 1 ? 'checked' : '' }}
                            value="{{ $productItem->product_id }}"
                            name="variation_default_id"/>
                 </th>

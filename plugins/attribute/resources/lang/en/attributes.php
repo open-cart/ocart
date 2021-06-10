@@ -15,5 +15,9 @@ return [
     'variations' => 'Validation',
     'cancel' => 'cancel',
     'add_new_attributes' => 'Add new attributes',
-    'variation_description' => 'Adding new attributes helps the product to have many options, such as size or color.'
+    'variation_description' => 'Adding new attributes helps the product to have many options, such as size or color.',
+    'attribute_name' => 'Attribute name',
+    'value' => 'Value',
+    'add_more_attribute' => 'Add more attribute',
+    'variation_existed' => 'This variation is existed.'
 ];
