@@ -19,5 +19,6 @@ return [
     'attribute_name' => 'Attribute name',
     'value' => 'Value',
     'add_more_attribute' => 'Add more attribute',
-    'variation_existed' => 'This variation is existed.'
+    'variation_existed' => 'This variation is existed.',
+    'added_variation_success' => 'Added variation success.',
 ];

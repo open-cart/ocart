@@ -19,5 +19,6 @@ return [
     'attribute_name' => 'Tên thuộc tính',
     'value' => 'Giá trị',
     'add_more_attribute' => 'Thêm thuộc tính khác',
-    'variation_existed' => 'Biến thể này đã tồn tại.'
+    'variation_existed' => 'Biến thể này đã tồn tại.',
+    'added_variation_success' => 'Đã thêm biến thể thành công.'
 ];

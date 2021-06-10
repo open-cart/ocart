@@ -49,6 +49,7 @@
     Spruce.store('variation_related', {
         productId: {!! $product->id !!},
         groups: @json($groups),
+        loading: false,
         save() {
             const attributes = this.groups.map(x => {
                 if (!x.attribute_group.attribute_group_id) {
@@ -81,8 +82,24 @@
                 images,
                 product_id: this.productId
             };
-
-            axios.post('{{ route('ecommerce.attribute_groups.create_variation') }}', data);
+            this.loading = true;
+            if (this.loading) {
+                return;
+            }
+            bodyLoading.show();
+            axios.post('{{ route('ecommerce.attribute_groups.add_version') }}', data).then(res => {
+                if (!res.error) {
+                    toast.success(res.message)
+                    $.pjax.reload('#body');
+                } else {
+                    toast.error(res.message)
+                }
+            }).catch(e => {
+                toast.error(e.message);
+            }).finally(() => {
+                this.loading = false;
+                bodyLoading.hide();
+            });
         }
     })
     function dataAddVariationModel() {
