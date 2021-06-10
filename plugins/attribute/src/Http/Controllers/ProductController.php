@@ -208,4 +208,23 @@ class ProductController extends BaseController
 
         return $response->setMessage(trans('plugins/attribute::attributes.updated_variation_success'));
     }
+
+    public function deleteVersion(Request $request, BaseHttpResponse $response)
+    {
+        DB::beginTransaction();
+
+        $this->productRepository->delete($request->input('id'));
+
+        $this->productVariationRepository->deleteWhere([
+            'product_id' => $request->input('id')
+        ]);
+
+        $this->productVariationItemRepository->deleteWhere([
+            'product_id' => $request->input('id')
+        ]);
+
+        DB::commit();
+
+        return $response->setMessage('success');
+    }
 }

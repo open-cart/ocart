@@ -24,5 +24,8 @@ Route::group([
             ->name('ecommerce.attribute_groups.get_version');
         Route::get('product_version/get_version/{id}', 'ProductController@getVersion');
 
+        Route::delete('product_version/delete_version', 'ProductController@deleteVersion')
+            ->name('ecommerce.attribute_groups.delete_version');
+
     });
 });
