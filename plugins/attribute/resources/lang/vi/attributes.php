@@ -20,5 +20,6 @@ return [
     'value' => 'Giá trị',
     'add_more_attribute' => 'Thêm thuộc tính khác',
     'variation_existed' => 'Biến thể này đã tồn tại.',
-    'added_variation_success' => 'Đã thêm biến thể thành công.'
+    'added_variation_success' => 'Đã thêm biến thể thành công.',
+    'updated_variation_success' => 'Đã cập nhật biến thể thành công.'
 ];

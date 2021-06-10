@@ -2,6 +2,7 @@
 
 namespace Ocart\Attribute\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Attribute\Http\Requests\ProductAddVersionRequest;
@@ -13,6 +14,7 @@ use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Media\Facades\TnMedia;
 
 class ProductController extends BaseController
 {
@@ -137,5 +139,73 @@ class ProductController extends BaseController
         DB::commit();
 
         return $response->setMessage(trans('plugins/attribute::attributes.added_variation_success'));
+    }
+
+    public function getVersion($id, BaseHttpResponse $response)
+    {
+        $product = $this->productRepository->find($id);
+
+        $images = array_map(function ($item) {
+            return TnMedia::url($item);
+        }, $product->images);
+
+        $attributes = $this->productVariationItemRepository->with('attribute')->findByField('product_id', $id);
+
+        return $response->setData(compact('attributes', 'product', 'images'))
+            ->setMessage('success');
+    }
+
+    public function updateVersion($id, Request $request, BaseHttpResponse $response)
+    {
+        DB::beginTransaction();
+
+        $addedAttributes = $request->input('attributes', []);
+
+        /** @var Product $product */
+        $product = $this->productRepository->find($request->get('product_id'));
+
+        $allVersions = $this->productVariationRepository
+            ->with(['items'])
+            ->findWhere([
+                [
+                    'product_id',
+                    '<>',
+                    $id
+                ],
+                'configurable_product_id' => $product->id
+            ]);
+
+        $allVersionsPluck = $allVersions->pluck('items.*.attribute_id', 'product_id');
+
+        $newVersionAttr = array_map(function ($item) {
+            return $item['attribute_id'];
+        }, $addedAttributes);
+
+        foreach ($allVersionsPluck as $version) {
+            $a = array_diff($newVersionAttr, $version);
+            $b = array_diff($version, $newVersionAttr);
+            if (!$a && !$b) {
+                return $response->setError()->setMessage(trans('plugins/attribute::attributes.variation_existed'));
+            }
+        }
+
+        $data = $request->only('price', 'sku', 'sale_price');
+        $data['images'] = json_encode($request->input('images', []));
+
+        $productRelatedVariation = $this->productRepository->update($data, $id);
+
+        foreach ($addedAttributes as $item) {
+            $this->productVariationItemRepository->updateOrCreate([
+                'id' => $item['item_id'],
+                'product_id' => $productRelatedVariation->id,
+            ],[
+                'attribute_id' => $item['attribute_id'],
+                'product_id' => $productRelatedVariation->id,
+            ]);
+        }
+
+        DB::commit();
+
+        return $response->setMessage(trans('plugins/attribute::attributes.updated_variation_success'));
     }
 }
