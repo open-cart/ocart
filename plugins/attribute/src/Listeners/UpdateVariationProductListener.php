@@ -89,7 +89,7 @@ class UpdateVariationProductListener
 
         $data['price'] = $productNewDefault->price;
         $data['sale_price'] = $productNewDefault->sale_price;
-
+        $data['images'] = json_encode($productNewDefault->images);
 
         $this->productRepository->update($data, $product->id);
     }
