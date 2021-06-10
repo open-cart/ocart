@@ -3,48 +3,46 @@
     $parent = $form->getFormOption('form');
     $product = $parent->getModel();
 @endphp
-<div x-data="dataAddVariationModel()">
-    <x-modal content_classes="w-auto" target="add-new-variation-modal">
-        <x-slot name="header">
-            <div>
-                <h3 class="text-2xl pb-3">
-                    {{ trans('plugins/attribute::attributes.add_new_variation') }}
-                </h3>
+<x-modal content_classes="w-auto" target="add-new-variation-modal">
+    <x-slot name="header">
+        <div>
+            <h3 class="text-2xl pb-3">
+                {{ trans('plugins/attribute::attributes.add_new_variation') }}
+            </h3>
+        </div>
+    </x-slot>
+    <x-slot name="content">
+        <div class="py-4 pb-6 space-y-4">
+            <div class="grid grid-cols-3 gap-4">
+                <template x-for="(group, id) in $store.variation_related.groups" :key="id">
+                    <div class="flex flex-col">
+                        <label for="customer_address_name" x-text="group.attribute_group.title"></label>
+                        <input type="hidden" x-model="group.attribute_group.attribute_group_id">
+                        <x-select class="w-64" x-model="group.attribute_group.attribute_id">
+                            <template x-for="(attribute, id) in group.attribute_group.attributes" :key="id">
+                                <option x-bind:value="attribute.id"
+                                        x-text="attribute.title"></option>
+                            </template>
+                        </x-select>
+                    </div>
+                </template>
             </div>
-        </x-slot>
-        <x-slot name="content">
-            <div class="py-4 pb-6 space-y-4">
-                <div class="grid grid-cols-3 gap-4">
-                    <template x-for="(group, id) in $store.variation_related.groups" :key="id">
-                        <div class="flex flex-col">
-                            <label for="customer_address_name" x-text="group.attribute_group.title"></label>
-                            <input type="hidden" x-model="group.attribute_group.attribute_group_id">
-                            <x-select class="w-64" x-model="group.attribute_group.attribute_id">
-                                <template x-for="(attribute, id) in group.attribute_group.attributes" :key="id">
-                                    <option x-bind:value="attribute.id"
-                                            x-text="attribute.title"></option>
-                                </template>
-                            </x-select>
-                        </div>
-                    </template>
-                </div>
-                @foreach ($form->getMetaBoxes() as $key => $metaBox)
-                    {!! $form->getMetaBox($key) !!}
-                @endforeach
-                @if($showFields)
-                    {!! $form->getField('images[]')->render() !!}
-                @endif
-            </div>
-        </x-slot>
-        <x-slot name="footer">
-            <div class="flex justify-end pt-2">
-                <x-button x-on:click="$store.variation_related.save()">
-                    Save changes
-                </x-button>
-            </div>
-        </x-slot>
-    </x-modal>
-</div>
+            @foreach ($form->getMetaBoxes() as $key => $metaBox)
+                {!! $form->getMetaBox($key) !!}
+            @endforeach
+            @if($showFields)
+                {!! $form->getField('images[]')->render() !!}
+            @endif
+        </div>
+    </x-slot>
+    <x-slot name="footer">
+        <div class="flex justify-end pt-2">
+            <x-button x-on:click="$store.variation_related.save()">
+                Save changes
+            </x-button>
+        </div>
+    </x-slot>
+</x-modal>
 <script>
     Spruce.store('variation_related', {
         productId: {!! $product->id !!},
@@ -82,12 +80,10 @@
                 images,
                 product_id: this.productId
             };
+            this.loading = true;
             if (this.loading) {
                 return;
             }
-
-            this.loading = true;
-
             bodyLoading.show();
             axios.post('{{ route('ecommerce.attribute_groups.add_version') }}', data).then(res => {
                 if (!res.error) {
@@ -104,7 +100,4 @@
             });
         }
     })
-    function dataAddVariationModel() {
-        return {};
-    }
 </script>

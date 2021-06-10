@@ -31,7 +31,7 @@
             @foreach($productRelated as $productItem)
             <tr>
                 <td class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700">
-                    <img src="{{ TnMedia::url($productItem->image ?? asset('/images/no-image.jpg')) }}"
+                    <img src="{{ TnMedia::url($productItem->product->image ?? asset('/images/no-image.jpg')) }}"
                          class="w-14"
                          alt="{{ $productItem->product->name }}">
                 </td>

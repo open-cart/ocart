@@ -53,6 +53,8 @@ class ProductController extends BaseController
     /**
      * Thêm mới biến thể.
      * @param ProductAddVersionRequest $request
+     * @param BaseHttpResponse $response
+     * @return BaseHttpResponse
      */
     public function addVersion(
         ProductAddVersionRequest $request,
