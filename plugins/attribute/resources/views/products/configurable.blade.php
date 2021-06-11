@@ -10,8 +10,8 @@
                href="javascript:void(0)">{{ trans('plugins/attribute::attributes.edit_attribute') }}</a>
         </div>
     </div>
-    <div class="p-4">
-        <table class="w-full">
+    <div class="p-4" id="table-configuration">
+        <table class="w-full" >
             <thead>
             <tr>
                 <th class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700">
@@ -60,7 +60,7 @@
                            name="variation_default_id"/>
                 </th>
                 <th class="border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700"
-                    x-data="tableActions()">
+                    x-data="tableConfigurationActions()">
                     <a href="javascript:void(0)"
                        x-on:click.prevent="$store.variation_related.showUpdate({{ $productItem->product_id }})"
                        class="text-blue-500">Edit</a>
@@ -79,6 +79,28 @@
     </div>
 </div>
 @section('form_end')
+    <script>
+        function tableConfigurationActions() {
+            return {
+                destroy(id, url) {
+                    confirmDelete.show(() => {
+                        bodyLoading.show();
+                        axios.delete(url, {data: {id}})
+                            .then(res => {
+                                toast.success('Deleted successfully')
+                                return $.pjax.reload('#table-configuration', {});
+                            })
+                            .catch(e => {
+                                toast.error(e.message);
+                            })
+                            .finally(() => {
+                                bodyLoading.hide();
+                            })
+                    })
+                },
+            }
+        }
+    </script>
 {!! $form->getFormBuilder()
 ->create(\Ocart\Attribute\Forms\VersionForm::class, [
     'form' => $form,

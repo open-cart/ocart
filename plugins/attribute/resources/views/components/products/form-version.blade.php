@@ -181,8 +181,7 @@
             bodyLoading.show();
             return axios.post('{{ route('ecommerce.attribute_groups.add_version') }}', data).then(res => {
                 toast.success(res.message)
-                $.pjax.reload('#body');
-                return res;
+                return $.pjax.reload('#table-configuration');
             }).catch(e => {
                 showError(e);
                 throw e;
@@ -233,8 +232,7 @@
             bodyLoading.show();
             return axios.post('{{ route('ecommerce.attribute_groups.update_version') }}/' + this.updateId, data).then(res => {
                 toast.success(res.message)
-                $.pjax.reload('#body');
-                return res;
+                return $.pjax.reload('#table-configuration');
             }).catch(e => {
                 showError(e);
                 throw e;
