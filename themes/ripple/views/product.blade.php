@@ -3,12 +3,14 @@
         <ol class="list-reset py-4 flex text-xs md:text-base text-grey">
             <li class="pr-2"><a href="{!! route('home') !!}" class="no-underline text-blue-600">Home</a></li>
             <li>/</li>
+            @if(count($product->categories)>0)
             <li class="px-2 line-clamp-1"><a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="no-underline text-blue-600">{{ Arr::get($product->categories->first(), 'name') }}</a></li>
             <li>/</li>
+            @endif
             <li class="px-2 line-clamp-1"><span class="no-underline text-gray-500">{{ $product->name }}</span></li>
         </ol>
     </div>
-    <section x-data="imageData({{ $product }})" class="section-custom product-library text-gray-700 body-font overflow-hidden bg-white">
+    <section x-data="imageData({{ $product }})" class="section-custom pt-0 product-library text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full ">
@@ -24,9 +26,11 @@
                     </div>
                 </div>
                 <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    @if(count($product->categories)>0)
                     <h2 class="text-sm title-font text-gray-500">
                         <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
+                    @endif
                     <h1 class="text-gray-900 text-xl lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
                         <div class="text-sm text-gray-500">
@@ -224,17 +228,18 @@
 
             <div class="fb-comments mb-7" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5" style="background: white;display: block;"></div>
 
-            <div>
-                <div class="text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
-                <div class="flex flex-wrap -mx-2 md:-mx-4">
-                    @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
-                        <div class="w-1/2 xl:w-1/3 p-2 md:p-4">
-                            <x-theme::card.product :data="$product"/>
-                        </div>
-                    @endforeach
+            @if(count($product->categories)>0)
+                <div>
+                    <div class="text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
+                    <div class="flex flex-wrap -mx-2 md:-mx-4">
+                        @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
+                            <div class="w-1/2 xl:w-1/3 p-2 md:p-4">
+                                <x-theme::card.product :data="$product"/>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
-            </div>
-
+            @endif
         </div>
     </div>
 

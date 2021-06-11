@@ -10,7 +10,7 @@
                     <svg class="absolute h-full text-white w-24 -ml-12" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none">
                         <polygon points="50,0 100,0 50,100 0,100"/>
                     </svg>
-                    <div class="relative py-12 lg:py-24 px-8 lg:px-16 text-gray-700 leading-relaxed">
+                    <div class="relative py-4 lg:py-24 px-4 lg:px-16 text-gray-700 leading-relaxed">
                         <p>
                             Công ty TNHH Thương mại và kỹ thuật Thủ Đô Xanh <strong class="text-gray-900 font-medium">là</strong> đơn vị có thâm niên trong lĩnh vực tư vấn môi trường, đã thực hiện nhiều dự án trọng điểm. Các khách hàng có thể kể đến như Geleximco, Tập đoàn BĐS Tây Bắc, Cảng Quy Nhơn, Greenity Nam Định và nhiều chủ dự án là các công ty FDI tại nhiều Khu công nghiệp tại Bắc Ninh, Hà Nội, Hưng Yên, Thái Bình, Hà Nam...
                         </p>

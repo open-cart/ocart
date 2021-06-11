@@ -37,8 +37,10 @@ if (!function_exists('get_blog_categories')) {
 
         $repo = app(CategoryRepository::class);
 
-        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
-        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+//        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
+//        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('name'), 'ASC');
+
         $categories = $repo->all();
 
         $categories = sort_item_with_children($categories);

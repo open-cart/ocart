@@ -9,15 +9,19 @@
 
     <div class="container-custom flex flex-wrap pb-2">
         <div class="lg:w-3/4 w-full md:order-last">
-            <div class="flex flex-wrap -mx-2">
-                @foreach($products as $product)
-                    <div class="w-1/2 xl:w-1/3 p-2 pt-0">
-                        <x-theme::card.product :data="$product"/>
-                    </div>
-                @endforeach
-            </div>
-            @if(method_exists($products, 'links'))
-                <div>{!! $products->links() !!}</div>
+            @if(count($products)>0)
+                <div class="flex flex-wrap -mx-2">
+                    @foreach($products as $product)
+                        <div class="w-1/2 xl:w-1/3 p-2 pt-0">
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+                @if(method_exists($products, 'links'))
+                    <div>{!! $products->links() !!}</div>
+                @endif
+            @else
+                <div class="p-2 md:p-4 mb-2 bg-gray-100">Chưa có sản phẩm nào!</div>
             @endif
         </div>
 

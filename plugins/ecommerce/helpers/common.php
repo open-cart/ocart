@@ -15,9 +15,41 @@ if (!function_exists('get_categories')) {
 
         $repo = app(CategoryRepository::class);
 
-        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
-        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+//        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
+//        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('name'), 'ASC');
         $categories = $repo->all();
+
+        $categories = sort_item_with_children($categories);
+
+        foreach ($categories as $category) {
+            $indentText = '';
+            $depth = (int)$category->depth;
+            for ($i = 0; $i < $depth; $i++) {
+                $indentText .= $indent;
+            }
+            $category->indent_text = $indentText;
+        }
+
+        return $categories;
+    }
+}
+
+if (!function_exists('get_categories_feature')) {
+    /**
+     * @param array $args
+     * @return array|mixed
+     */
+    function get_categories_feature(array $args = [])
+    {
+        $indent = Arr::get($args, 'indent', '——');
+
+        $repo = app(CategoryRepository::class);
+
+        $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
+        $categories = $repo->getFeature()->all();
 
         $categories = sort_item_with_children($categories);
 
@@ -60,6 +92,16 @@ if (!function_exists('get_list_products_relate')) {
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
         $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
         return $repo->getRelate($categoryId, $limit);
+    }
+}
+
+if (!function_exists('get_list_products_category')) {
+    function get_list_products_category($categoryId = 1, $limit = 9)
+    {
+        /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
+        /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        return $repo->getFetureCategory($categoryId, $limit);
     }
 }
 

@@ -10,27 +10,27 @@ const configMenu = {
             "children":[
                 {
                     "name":"Khí công nghiệp",
-                    "slug":"#",
+                    "slug":"/product-category/khi-cong-nghiep",
                 },
                 {
                     "name":"Khí đặc biệt",
-                    "slug":"#",
+                    "slug":"/product-category/khi-dac-biet",
                 },
                 {
                     "name":"Khí chuẩn",
-                    "slug":"#",
+                    "slug":"/product-category/khi-chuan",
                 },
                 {
                     "name":"Khí y tế",
-                    "slug":"#",
+                    "slug":"/product-category/khi-y-te",
                 },
                 {
                     "name":"Thiết bị ngành khí",
-                    "slug":"#",
+                    "slug":"/product-category/thiet-bi-nganh-khi",
                 },
                 {
                     "name":"Các sản phẩm - dịch vụ khác",
-                    "slug":"#",
+                    "slug":"/product-category/khac",
                 }
             ]
         },
@@ -40,19 +40,19 @@ const configMenu = {
             "children":[
                 {
                     "name":"Hoạt động của công ty",
-                    "slug":"/khicongnghiep",
+                    "slug":"/post-category/hoat-dong-cua-cong-ty",
                 },
                 {
                     "name":"Kiến thức ngành khí",
-                    "slug":"/khicongnghiep",
+                    "slug":"/post-category/kien-thuc-nganh-khi",
                     "children": [
                         {
                             "name":"Ứng dụng khí",
-                            "slug":"#",
+                            "slug":"/post-category/ung-dung-khi",
                         },
                         {
                             "name":"Các kiến thức khác",
-                            "slug":"#",
+                            "slug":"/post-category/cac-kien-thuc-khac",
                         }
                     ]
                 }
@@ -60,7 +60,7 @@ const configMenu = {
         },
         {
             "name": "Liên hệ",
-            "slug": "/about.html"
+            "slug": "/contact.html"
         }
     ]
 }
@@ -72,27 +72,27 @@ const configMenuFooter = {
             "menu": [
                 {
                     "name":"Khí công nghiệp",
-                    "slug":"#",
+                    "slug":"/product-category/khi-cong-nghiep",
                 },
                 {
                     "name":"Khí đặc biệt",
-                    "slug":"#",
+                    "slug":"/product-category/khi-dac-biet",
                 },
                 {
                     "name":"Khí chuẩn",
-                    "slug":"#",
+                    "slug":"/product-category/khi-chuan",
                 },
                 {
                     "name":"Khí y tế",
-                    "slug":"#",
+                    "slug":"/product-category/khi-y-te",
                 },
                 {
                     "name":"Thiết bị ngành khí",
-                    "slug":"#",
+                    "slug":"/product-category/thiet-bi-nganh-khi",
                 },
                 {
                     "name":"Các sản phẩm - dịch vụ khác",
-                    "slug":"#",
+                    "slug":"/product-category/khac",
                 }
             ]
         },
@@ -101,48 +101,92 @@ const configMenuFooter = {
             "menu": [
                 {
                     "name":"Hoạt động của công ty",
-                    "slug":"/khicongnghiep",
+                    "slug":"/post-category/hoat-dong-cua-cong-ty",
                 },
                 {
                     "name":"Kiến thức ngành khí",
-                    "slug":"/khicongnghiep",
+                    "slug":"/post-category/kien-thuc-nganh-khi",
                 },
                 {
                     "name":"Ứng dụng khí",
-                    "slug":"#",
+                    "slug":"/post-category/ung-dung-khi",
                 },
                 {
                     "name":"Các kiến thức khác",
-                    "slug":"#",
-                },
+                    "slug":"/post-category/cac-kien-thuc-khac",
+                }
             ]
         },
         {
             "title": "Liên kết",
             "menu": [
                 {
-                    "name": "Trang chủ",
-                    "slug": "#"
-                },
-                {
                     "name": "Giới thiệu",
-                    "slug": "#"
+                    "slug": "/about.html"
                 },
                 {
                     "name": "Liên hệ",
-                    "slug": "#"
+                    "slug": "/contact.html"
                 },
                 {
                     "name": "Facebook",
-                    "slug": "#"
+                    "slug": "https://www.facebook.com/Doanh-nghiệp-kh%C3%AD-Thủ-Đô-Xanh-110401501245965"
                 },
                 {
                     "name": "Zalo",
-                    "slug": "#"
+                    "slug": "https://zalo.me/0912110941 "
                 },
             ]
         }
     ]
 }
 
-console.log(JSON.stringify(configMenuFooter))
+const configSections = {
+    "name": "khithudo",
+    "value": [
+        "about",
+        "feedback",
+        "partner",
+        "contact",
+        "categories_product",
+        "products_feture",
+        "products_menu",
+    ]
+}
+
+const configProductsMenu = {
+    "data": [
+        {
+            "name" : "Phòng ngủ",
+            "slug": "danh-muc-con-3",
+            "id": "1",
+            "children": [
+                {
+                    "name" : "Giường",
+                    "slug": "giuong",
+                },
+                {
+                    "name" : "Tủ quần áo",
+                    "slug": "tu-quan-ao",
+                }
+            ]
+        },
+        {
+            "name" : "Phòng khách",
+            "slug": "danh-muc-con-3",
+            "id": "2",
+            "children": [
+                {
+                    "name" : "Bàn Ghế",
+                    "slug": "ban-ghe",
+                },
+                {
+                    "name" : "Kệ tivi",
+                    "slug": "ke-ti-vi",
+                }
+            ]
+        },
+    ]
+}
+
+console.log(JSON.stringify(configProductsMenu))
