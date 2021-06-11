@@ -227,16 +227,18 @@ class ProductController extends BaseController
             $variation = $this->productVariationRepository
                 ->findByField('configurable_product_id', $variation->configurable_product_id)
                 ->first();
-            $this->productVariationRepository->update(['is_default' => 1], $variation->id);
+            if ($variation) {
+                $this->productVariationRepository->update(['is_default' => 1], $variation->id);
 
-            $data = [];
-            $productNewDefault = $this->productRepository->find($variation->product_id);
+                $data = [];
+                $productNewDefault = $this->productRepository->find($variation->product_id);
 
-            $data['price'] = $productNewDefault->price;
-            $data['sale_price'] = $productNewDefault->sale_price;
-            $data['images'] = json_encode($productNewDefault->images);
+                $data['price'] = $productNewDefault->price;
+                $data['sale_price'] = $productNewDefault->sale_price;
+                $data['images'] = json_encode($productNewDefault->images);
 
-            $this->productRepository->update($data, $variation->configurable_product_id);
+                $this->productRepository->update($data, $variation->configurable_product_id);
+            }
         }
 
         $this->productVariationItemRepository->deleteWhere([
