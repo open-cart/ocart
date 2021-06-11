@@ -56,6 +56,14 @@
     </x-modal>
 </div>
 <script>
+    function showError(e) {
+        if (e?.errors) {
+            toast.error(Object.values(e.errors).find(Boolean));
+        } else {
+            toast.error(e.message);
+        }
+        throw e;
+    }
     Spruce.store('variation_related', {
         productId: {!! $product->id !!},
         oldProduct: @json($product),
@@ -70,7 +78,7 @@
             this.groups = JSON.parse(JSON.stringify(this.oldGroups));
             const {oldProduct} =this;
 
-            $("#sku").val(oldProduct.sku);
+            $("#sku").val('');
             $("#price").val(oldProduct.price);
             $("#sale_price").val(oldProduct.sale_price);
 
@@ -176,7 +184,7 @@
                 $.pjax.reload('#body');
                 return res;
             }).catch(e => {
-                toast.error(e.message);
+                showError(e);
                 throw e;
             }).finally(() => {
                 this.loading = false;
@@ -228,7 +236,7 @@
                 $.pjax.reload('#body');
                 return res;
             }).catch(e => {
-                toast.error(e.message);
+                showError(e);
                 throw e;
             }).finally(() => {
                 bodyLoading.hide();

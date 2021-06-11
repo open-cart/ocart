@@ -213,31 +213,42 @@ class ProductController extends BaseController
     {
         DB::beginTransaction();
 
-        $this->productRepository->delete($request->input('id'));
+        $productId = $request->input('id');
+
+        $this->productRepository->delete($productId);
 
         $variation = $this->productVariationRepository
-            ->findByField('product_id', $request->input('id'))
+            ->findByField('product_id', $productId)
             ->first();
 
         $this->productVariationRepository->deleteWhere([
-            'product_id' => $request->input('id')
+            'product_id' => $productId
         ]);
 
+        /**
+         * Nếu xóa phiên bản mặc định, thì sẽ tự động chuyển phiên bản mặc định cho một
+         * phiên bản khác trong sản phẩm, nếu không còn phiên bản nào khác, thì chuyển sản phẩm
+         * về sản phẩm thường. và xóa luôn nhóm thuộc tính của sản phẩm.
+         */
         if ($variation->is_default == 1) {
-            $variation = $this->productVariationRepository
+            $version = $this->productVariationRepository
                 ->findByField('configurable_product_id', $variation->configurable_product_id)
                 ->first();
-            if ($variation) {
-                $this->productVariationRepository->update(['is_default' => 1], $variation->id);
+            if ($version) {
+                $this->productVariationRepository->update(['is_default' => 1], $version->id);
 
                 $data = [];
-                $productNewDefault = $this->productRepository->find($variation->product_id);
+                $productNewDefault = $this->productRepository->find($version->product_id);
 
                 $data['price'] = $productNewDefault->price;
                 $data['sale_price'] = $productNewDefault->sale_price;
                 $data['images'] = json_encode($productNewDefault->images);
 
-                $this->productRepository->update($data, $variation->configurable_product_id);
+                $this->productRepository->update($data, $version->configurable_product_id);
+            } else {
+                $this->productWithAttributeGroupRepository->deleteWhere([
+                    'product_id' => $variation->configurable_product_id
+                ]);
             }
         }
 

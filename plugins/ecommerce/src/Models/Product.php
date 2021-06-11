@@ -81,6 +81,9 @@ class Product extends BaseModel
      */
     public function getImagesAttribute($value)
     {
+        if (is_array($value)) {
+            return $value;
+        }
         try {
             if ($value === '[null]') {
                 return [];

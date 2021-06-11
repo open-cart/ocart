@@ -96,11 +96,11 @@ class ProductController extends BaseController
     function show($id, FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/ecommerce::products.edit'));
-        $page = $this->repo->skipCriteria()->find($id);
+        $product = $this->repo->skipCriteria()->find($id);
 
-        return $formBuilder->create(ProductForm::class, ['model' => $page])
+        return $formBuilder->create(ProductForm::class, ['model' => $product])
             ->setMethod('PUT')
-            ->setUrl(route('ecommerce.products.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.products.update', ['id' => $product->id]))
             ->renderForm();
     }
 

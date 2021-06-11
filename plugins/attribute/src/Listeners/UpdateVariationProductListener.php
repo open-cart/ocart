@@ -1,55 +1,23 @@
 <?php
 
 namespace Ocart\Attribute\Listeners;
-
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Ocart\Attribute\Models\ProductVariation;
-use Ocart\Attribute\Models\ProductVariationItem;
-use Ocart\Attribute\Models\ProductWithAttributeGroup;
-use Ocart\Attribute\Repositories\Interfaces\AttributeRepository;
-use Ocart\Attribute\Repositories\Interfaces\ProductVariationItemRepository;
-use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
-use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
+use Ocart\Attribute\Services\StoreProductVersionService;
 use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Ecommerce\Models\Product;
-use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 
 class UpdateVariationProductListener
 {
-
-    protected $productRepository;
-
-    protected $attributeRepository;
-
-    protected $productVariationRepository;
-
-    protected $productVariationItemRepository;
-
-    protected $productWithAttributeGroupRepository;
+    protected $storeProductVersionService;
 
     /**
      * Create the event listener.
-     *
-     * @param ProductRepository $productRepository
-     * @param ProductVariationRepository $productVariationRepository
-     * @param ProductVariationItemRepository $productVariationItemRepository
-     * @param ProductWithAttributeGroupRepository $productWithAttributeGroupRepository
-     * @param AttributeRepository $attributeRepository
+     * @param StoreProductVersionService $storeProductVersionService
      */
     public function __construct(
-        ProductRepository $productRepository,
-        ProductVariationRepository $productVariationRepository,
-        ProductVariationItemRepository $productVariationItemRepository,
-        ProductWithAttributeGroupRepository $productWithAttributeGroupRepository,
-        AttributeRepository $attributeRepository
+        StoreProductVersionService $storeProductVersionService
     )
     {
-        $this->productRepository = $productRepository;
-        $this->attributeRepository = $attributeRepository;
-        $this->productVariationRepository = $productVariationRepository;
-        $this->productVariationItemRepository = $productVariationItemRepository;
-        $this->productWithAttributeGroupRepository = $productWithAttributeGroupRepository;
+        $this->storeProductVersionService = $storeProductVersionService;
     }
 
     /**
@@ -68,29 +36,6 @@ class UpdateVariationProductListener
         /** @var Product $product */
         $product = $e->data;
 
-        $productRelated = $this->productVariationRepository
-            ->with('product')
-            ->findByField('configurable_product_id', $product->id);
-        $productDefault = $productRelated->where('is_default', 1)->first();
-
-        if ($productDefault->product_id == $e->request->input('variation_default_id')) {
-            return;
-        }
-
-        $this->productVariationRepository->update(['is_default' => 0], $productDefault->id);
-
-        $this->productVariationRepository->updateOrCreate([
-            'product_id' => $e->request->input('variation_default_id'),
-            'configurable_product_id' => $product->id
-        ],['is_default' => 1]);
-
-        $productNewDefault = $this->productRepository->find($e->request->input('variation_default_id'));
-        $data = [];
-
-        $data['price'] = $productNewDefault->price;
-        $data['sale_price'] = $productNewDefault->sale_price;
-        $data['images'] = json_encode($productNewDefault->images);
-
-        $this->productRepository->update($data, $product->id);
+        $this->storeProductVersionService->execute($e->request, $product);
     }
 }

@@ -69,10 +69,22 @@ class HookServiceProvider extends ServiceProvider
             return $form;
         }
 
-        if (!$model->id) {
-            /** @var AttributeGroupRepository $attributeGroupRepository */
-            $attributeGroupRepository = app(AttributeGroupRepository::class);
+        /** @var ProductWithAttributeGroupRepository $productWithAttributeGroupRepository */
+        $productWithAttributeGroupRepository = app(ProductWithAttributeGroupRepository::class);
 
+        /** @var ProductVariationRepository $productVariationRepository */
+        $productVariationRepository = app(ProductVariationRepository::class);
+
+        /** @var AttributeGroupRepository $attributeGroupRepository */
+        $attributeGroupRepository = app(AttributeGroupRepository::class);
+
+        $hasVariation = false;
+
+        if ($model->id) {
+            $hasVariation = !!$productVariationRepository->findByField('configurable_product_id', $model->id)->first();
+        }
+
+        if (!$hasVariation) {
             $form->addMetaBoxes([
                 'attributes' => [
                     'title' => trans('plugins/attribute::attributes.attributes'),
@@ -89,12 +101,6 @@ class HookServiceProvider extends ServiceProvider
             ]);
             return $form;
         }
-
-        /** @var ProductWithAttributeGroupRepository $productWithAttributeGroupRepository */
-        $productWithAttributeGroupRepository = app(ProductWithAttributeGroupRepository::class);
-
-        /** @var ProductVariationRepository $productVariationRepository */
-        $productVariationRepository = app(ProductVariationRepository::class);
 
         $group = $productWithAttributeGroupRepository
             ->with('attributeGroup.attributes')
