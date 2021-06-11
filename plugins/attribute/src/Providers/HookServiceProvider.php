@@ -84,6 +84,8 @@ class HookServiceProvider extends ServiceProvider
             $hasVariation = !!$productVariationRepository->findByField('configurable_product_id', $model->id)->first();
         }
 
+        $allGroup = $attributeGroupRepository->with('attributes')->all();
+
         if (!$hasVariation) {
             $form->addMetaBoxes([
                 'attributes' => [
@@ -91,7 +93,7 @@ class HookServiceProvider extends ServiceProvider
                     'content' => apply_filters(
                         'variations',
                         view('plugins.attribute::products.add-product-attributes', [
-                            'group' => $attributeGroupRepository->with('attributes')->all(),
+                            'group' => $allGroup,
                             'form' => $form,
                         ]),
                         $form
@@ -119,6 +121,7 @@ class HookServiceProvider extends ServiceProvider
                     'variations',
                     view('plugins.attribute::products.configurable', [
                         'group' => $group,
+                        'allGroup' => $allGroup,
                         'productRelated' => $productRelated,
                         'form' => $form,
                     ]),

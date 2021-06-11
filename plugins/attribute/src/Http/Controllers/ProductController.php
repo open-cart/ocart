@@ -3,6 +3,7 @@
 namespace Ocart\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Attribute\Http\Requests\ProductAddVersionRequest;
@@ -196,9 +197,9 @@ class ProductController extends BaseController
 
         foreach ($addedAttributes as $item) {
             $this->productVariationItemRepository->updateOrCreate([
-                'id' => $item['item_id'],
+                'id' => isset($item['item_id']) ? $item['item_id'] : null,
                 'product_id' => $productRelatedVariation->id,
-            ],[
+            ], [
                 'attribute_id' => $item['attribute_id'],
                 'product_id' => $productRelatedVariation->id,
             ]);
@@ -255,6 +256,62 @@ class ProductController extends BaseController
         $this->productVariationItemRepository->deleteWhere([
             'product_id' => $request->input('id')
         ]);
+
+        DB::commit();
+
+        return $response->setMessage('success');
+    }
+
+    public function updateAttribute(Request $request, BaseHttpResponse $response)
+    {
+        $attributeGroupIds = $request->input('attribute_group_id', []);
+        $product_id = $request->input('product_id', null);
+
+        DB::beginTransaction();
+
+        $allAttributeGroups = $this->productWithAttributeGroupRepository
+            ->findByField('product_id', $product_id)
+            ->pluck('attribute_group_id')->toArray();
+
+        $idDelete = array_values(array_diff($allAttributeGroups, $attributeGroupIds));
+
+        $idInsert = array_values(array_diff($attributeGroupIds, $allAttributeGroups));
+
+        // Các nhóm thuộc tính bị xóa khỏi sản phẩm
+        if (count($idDelete)) {
+            $this->productWithAttributeGroupRepository->scopeQuery(function ($q) use ($idDelete) {
+                return $q->whereIn('attribute_group_id', $idDelete);
+            })->deleteWhere([
+                'product_id' => $product_id,
+            ]);
+
+            /** @var Collection $allVersions */
+            $allVersions = $this->productVariationRepository
+                ->with('items.attribute')
+                ->findByField('configurable_product_id', $product_id)
+                ->pluck('items')->flatten();
+
+            $idVariationItem = $allVersions->filter(function ($item) use ($idDelete) {
+                return in_array($item->attribute->attribute_group_id, $idDelete);
+            })->pluck('id')->toArray();
+
+            if (count($idVariationItem)) {
+                $this->productVariationItemRepository->scopeQuery(function ($q) use ($idVariationItem) {
+                    return $q->whereIn('id', $idVariationItem);
+                })->deleteWhere([]);
+            }
+        }
+
+        // Các nhóm thuộc tính được thêm vào sản phẩm
+        if (count($idInsert)) {
+            foreach ($idInsert as $item) {
+                $this->productWithAttributeGroupRepository->create([
+                    'product_id' => $product_id,
+                    'attribute_group_id' => $item,
+                    'order' => 0
+                ]);
+            }
+        }
 
         DB::commit();
 

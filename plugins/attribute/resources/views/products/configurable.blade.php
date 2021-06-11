@@ -6,7 +6,9 @@
             <span> {{ trans('plugins/attribute::attributes.product_has_variations') }}</span>
         </h4>
         <div>
-            <a x-on:click="toggle"
+            <a class=""
+               data-toggle="modal"
+               data-target="#form-edit-attribute-modal"
                href="javascript:void(0)">{{ trans('plugins/attribute::attributes.edit_attribute') }}</a>
         </div>
     </div>
@@ -65,9 +67,15 @@
                        x-on:click.prevent="$store.variation_related.showUpdate({{ $productItem->product_id }})"
                        class="text-blue-500">Edit</a>
                     &nbsp;
+                    @if(count($productRelated) > 1)
                     <a href="javascript:void(0)"
                        x-on:click="destroy('{!! $productItem->product_id !!}', '{!! route('ecommerce.attribute_groups.delete_version') !!}', {id: 'table-configuration'})"
                        class="text-red-500">Delete</a>
+                    @else
+                        <a href="javascript:void(0)"
+                           x-on:click="destroy('{!! $productItem->product_id !!}', '{!! route('ecommerce.attribute_groups.delete_version') !!}')"
+                           class="text-red-500">Delete</a>
+                    @endif
                 </th>
             </tr>
             @endforeach
@@ -79,6 +87,12 @@
     </div>
 </div>
 @push('form_end')
+    @php
+        $groupsId = $group->pluck('attributeGroup.id')->toArray();
+        $product = $form->getModel();
+    @endphp
+<x-plugins.attribute::products.edit-attribute :product="$product" :groups="$groupsId" :allGroups="$allGroup"/>
+
 {!! $form->getFormBuilder()
 ->create(\Ocart\Attribute\Forms\VersionForm::class, [
     'form' => $form,

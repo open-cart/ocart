@@ -27,5 +27,7 @@ Route::group([
         Route::delete('product_version/delete_version', 'ProductController@deleteVersion')
             ->name('ecommerce.attribute_groups.delete_version');
 
+        Route::post('product_version/update_atribute', 'ProductController@updateAttribute')
+            ->name('ecommerce.attribute_groups.update_atribute');
     });
 });
