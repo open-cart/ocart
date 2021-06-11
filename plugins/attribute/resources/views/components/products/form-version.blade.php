@@ -38,6 +38,12 @@
         </x-slot>
         <x-slot name="footer">
             <div class="flex justify-end pt-2">
+                <x-button color="bg-red-500 hover:bg-red-400"
+                          x-on:click="close()"
+                          class="flex justify-center mr-2">
+                    {{ trans('admin.cancel') }}
+                </x-button>
+
                 <template x-if="$store.variation_related.loading">
                     <x-button type="button" class="w-40 flex justify-center">
                         <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -47,8 +53,9 @@
                     </x-button>
                 </template>
                 <template x-if="!$store.variation_related.loading">
-                    <x-button class="w-40 flex justify-center" x-on:click="$store.variation_related.save().then(() => close())">
-                        Save changes
+                    <x-button class="w-40 flex justify-center"
+                              x-on:click="$store.variation_related.save().then(() => close())">
+                        {{ trans('admin.save_changes') }}
                     </x-button>
                 </template>
             </div>
