@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('PRODUCT_MODULE_SCREEN_NAME')) {
+    define('PRODUCT_MODULE_SCREEN_NAME', 'product');
+}
+
 if (!defined('ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME')) {
     define('ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME', 'ecommerce_product');
 }
@@ -43,3 +47,12 @@ if (!defined('ROUTE_REMOVE_TO_CART_NAME')) {
 if (!defined('ROUTE_UPDATE_TO_CART_NAME')) {
     define('ROUTE_UPDATE_TO_CART_NAME', 'update-to-cart');
 }
+
+if (!defined('ORDER_RENDER_TABLE_ORDER_CREATE')) {
+    define('ORDER_RENDER_TABLE_ORDER_CREATE', 'order-render-table-create');
+}
+
+if (!defined('ORDER_RENDER_TABLE_ORDER_UPDATE')) {
+    define('ORDER_RENDER_TABLE_ORDER_UPDATE', 'order-render-table-update');
+}
+

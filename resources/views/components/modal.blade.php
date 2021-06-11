@@ -10,7 +10,7 @@
             style="display:none"
             x-show="open"
     >
-        <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"  x-on:click="close"></div>
+        <div class="modal-overlay absolute w-full h-full bg-gray-900 dark:bg-gray-500 opacity-50"  x-on:click="close"></div>
 
         <div class="modal-container bg-white dark:bg-gray-800 dark:text-gray-300 mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
             <div

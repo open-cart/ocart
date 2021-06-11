@@ -3,7 +3,10 @@ namespace Ocart\Ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Ocart\Core\Events\CreatedContentEvent;
+use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Ecommerce\Forms\ProductForm;
 use Ocart\Ecommerce\Http\Requests\ProductRequest;
 use Ocart\Ecommerce\Http\Requests\ProductUpdateRequest;
@@ -73,12 +76,18 @@ class ProductController extends BaseController
 
         $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
 
+        DB::beginTransaction();
+
         $product = $this->repo->create($data + [
                 'user_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
+        event(new CreatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
+
         $categoryService->execute($request, $product);
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('ecommerce.products.index'))
             ->setNextUrl(route('ecommerce.products.show', $product->id));
@@ -87,11 +96,11 @@ class ProductController extends BaseController
     function show($id, FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/ecommerce::products.edit'));
-        $page = $this->repo->skipCriteria()->find($id);
+        $product = $this->repo->skipCriteria()->find($id);
 
-        return $formBuilder->create(ProductForm::class, ['model' => $page])
+        return $formBuilder->create(ProductForm::class, ['model' => $product])
             ->setMethod('PUT')
-            ->setUrl(route('ecommerce.products.update', ['id' => $page->id]))
+            ->setUrl(route('ecommerce.products.update', ['id' => $product->id]))
             ->renderForm();
     }
 
@@ -104,11 +113,17 @@ class ProductController extends BaseController
     {
         $data = $request->all();
 
+        DB::beginTransaction();
+
         $product = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
+        event(new UpdatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
+
         $categoryService->execute($request, $product);
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('ecommerce.products.index'))
             ->setNextUrl(route('ecommerce.products.show', $product->id));

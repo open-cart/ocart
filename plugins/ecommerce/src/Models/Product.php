@@ -2,12 +2,14 @@
 
 namespace Ocart\Ecommerce\Models;
 
+use App\Casts\Json;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
+use Ocart\Media\Facades\TnMedia;
 
 class Product extends BaseModel
 {
@@ -42,6 +44,11 @@ class Product extends BaseModel
         'sale_type',
         'sale_at',
         'end_sale_at'
+    ];
+
+    protected $appends = [
+        'image',
+        'sell_price'
     ];
 
     /**
@@ -80,6 +87,9 @@ class Product extends BaseModel
      */
     public function getImagesAttribute($value)
     {
+        if (is_array($value)) {
+            return $value;
+        }
         try {
             if ($value === '[null]') {
                 return [];

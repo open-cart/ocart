@@ -34,6 +34,7 @@ return [
     'status_off'       => 'Off',
     'max_c'            => 'Max :max char',
     'save'             => 'Save',
+    'save_changes'     => 'Save changes',
     'save_and_edit'    => 'Save & Edit',
     'cancel'           => 'Cancel',
     'title'            => 'Title',
