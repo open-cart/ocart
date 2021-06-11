@@ -28,7 +28,9 @@ class UpdateVariationProductListener
      */
     public function handle(UpdatedContentEvent $event)
     {
-        $this->{'updateVariation'. ucfirst(PRODUCT_MODULE_SCREEN_NAME)}($event);
+        if (method_exists($this, 'updateVariation' . ucfirst($event->screen))) {
+            $this->{'updateVariation'. ucfirst($event->screen)}($event);
+        }
     }
 
     protected function updateVariationProduct(UpdatedContentEvent $e)

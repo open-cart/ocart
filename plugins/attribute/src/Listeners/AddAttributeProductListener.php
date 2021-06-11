@@ -30,7 +30,9 @@ class AddAttributeProductListener
      */
     public function handle(CreatedContentEvent $event)
     {
-        $this->{'addAttribute' . ucfirst(PRODUCT_MODULE_SCREEN_NAME)}($event);
+        if (method_exists($this, 'addAttribute' . ucfirst($event->screen))) {
+            $this->{'addAttribute' . ucfirst($event->screen)}($event);
+        }
     }
 
     protected function addAttributeProduct(CreatedContentEvent $e)
