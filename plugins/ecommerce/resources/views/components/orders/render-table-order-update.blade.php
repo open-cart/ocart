@@ -6,11 +6,12 @@
                 <div class="flex flex-col flex-1">
                     <div class="flex space-x-2">
                         <x-link href="javascript:void(0)">
-                            {!! $product->product->name !!}
+                            {!! $product->product_name !!}
                         </x-link>
-                        <span>(SKU: <strong class="uppercase">{!! $product->product->sku !!}</strong>)</span>
+                        @if($product->product->sku)
+                            <span>(SKU: <strong class="uppercase">{!! $product->product->sku !!}</strong>)</span>
+                        @endif
                     </div>
-                    {{--                                            <span>attr</span>--}}
                 </div>
             </div>
             <x-link class="flex-1 max-w-24 text-right">

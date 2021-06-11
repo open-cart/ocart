@@ -6,9 +6,11 @@
                 <div class="flex flex-col flex-1">
                     <div class="flex space-x-2">
                         <x-link href="javascript:void(0)">
-                            {!! $product->product->name !!}
+                            {!! $product->product_name !!}
                         </x-link>
+                        @if($product->product->sku)
                         <span>(SKU: <strong class="uppercase">{!! $product->product->sku !!}</strong>)</span>
+                        @endif
                     </div>
                     @php
                         $a = $product->product->attributes->pluck('attribute.title');
