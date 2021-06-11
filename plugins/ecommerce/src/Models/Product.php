@@ -9,6 +9,7 @@ use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
+use Ocart\Media\Facades\TnMedia;
 
 class Product extends BaseModel
 {
@@ -43,6 +44,11 @@ class Product extends BaseModel
         'sale_type',
         'sale_at',
         'end_sale_at'
+    ];
+
+    protected $appends = [
+        'image',
+        'sell_price'
     ];
 
     /**

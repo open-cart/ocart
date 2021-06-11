@@ -15,6 +15,7 @@ use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
 use Ocart\Core\Events\CreatedContentEvent;
 use Ocart\Core\Events\UpdatedContentEvent;
+use Ocart\Ecommerce\Models\Order;
 use Ocart\Ecommerce\Models\Product;
 
 class HookServiceProvider extends ServiceProvider
@@ -45,6 +46,15 @@ class HookServiceProvider extends ServiceProvider
     public function boot()
     {
         add_filter(BASE_FILTER_BEFORE_RENDER_FORM, [$this, 'addMetaBoxeLocation'], 150, 3);
+
+        add_filter(ORDER_RENDER_TABLE_ORDER_CREATE, function() {
+            return view('plugins.attribute::orders.render-table-order');
+        });
+
+        add_filter(ORDER_RENDER_TABLE_ORDER_UPDATE, function($res, Order $order) {
+            $products = $order->products()->with('product.version.product.attributes.attribute')->get();
+            return view('plugins.attribute::orders.render-table-order-update', compact('order', 'products'));
+        }, 1, 2);
 
         $this->registerMenu();
     }

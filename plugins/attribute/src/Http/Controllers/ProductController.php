@@ -327,8 +327,6 @@ class ProductController extends BaseController
             ->with(['version.product.attributes.attribute'])
             ->paginate(5);
 
-//        dd($products->toArray());
-
         return view('plugins.attribute::products.get-search-products', compact('products'));
     }
 }
