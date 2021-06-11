@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Attribute\Http\Requests\ProductAddVersionRequest;
+use Ocart\Attribute\Repositories\Criteria\IsVariationCriteria;
 use Ocart\Attribute\Repositories\Interfaces\AttributeRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationItemRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
@@ -316,5 +317,18 @@ class ProductController extends BaseController
         DB::commit();
 
         return $response->setMessage('success');
+    }
+
+
+    public function getSearchProducts()
+    {
+        $products = $this->productRepository
+            ->pushCriteria(IsVariationCriteria::class)
+            ->with(['version.product.attributes.attribute'])
+            ->paginate(5);
+
+//        dd($products->toArray());
+
+        return view('plugins.attribute::products.get-search-products', compact('products'));
     }
 }

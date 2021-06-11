@@ -29,5 +29,8 @@ Route::group([
 
         Route::post('product_version/update_atribute', 'ProductController@updateAttribute')
             ->name('ecommerce.attribute_groups.update_atribute');
+
+
+        Route::get('search-product', 'ProductController@getSearchProducts')->name('ecommerce.products.search');
     });
 });

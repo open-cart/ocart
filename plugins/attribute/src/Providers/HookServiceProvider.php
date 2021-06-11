@@ -8,12 +8,14 @@ use Illuminate\Support\ServiceProvider;
 use Kris\LaravelFormBuilder\Form;
 use Ocart\Attribute\Listeners\AddAttributeProductListener;
 use Ocart\Attribute\Listeners\UpdateVariationProductListener;
-use Ocart\Attribute\Models\AttributeGroup;
+use Ocart\Attribute\Models\ProductVariation;
+use Ocart\Attribute\Models\ProductVariationItem;
 use Ocart\Attribute\Repositories\Interfaces\AttributeGroupRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
 use Ocart\Core\Events\CreatedContentEvent;
 use Ocart\Core\Events\UpdatedContentEvent;
+use Ocart\Ecommerce\Models\Product;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -21,7 +23,15 @@ class HookServiceProvider extends ServiceProvider
     public function register()
     {
         if (is_active_plugin('ecommerce')) {
-            \Ocart\Ecommerce\Models\Product::fire(function ($model) {
+            Product::resolveRelationUsing('version', function (Product $q) {
+                return $q->hasMany(ProductVariation::class, 'configurable_product_id');
+            });
+
+            Product::resolveRelationUsing('attributes', function (Product $q) {
+                return $q->hasMany(ProductVariationItem::class, 'product_id');
+            });
+
+            Product::fire(function ($model) {
                 $model->mergeFillable([
                     'is_variation',
                 ]);
