@@ -90,4 +90,18 @@ class ProductRepositoryEloquent extends BaseRepository implements ProductReposit
 
         return $this->parserResult($results);
     }
+
+    public function getFetureCategory($categoryId, $limit)
+    {
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+        $this->whereHas('categories', function ($query) use ($categoryId) {
+            return $query->where($query->qualifyColumn('id'), $categoryId);
+        });
+        $this->orderBy('created_at', 'desc');
+        $results = $this->limit($limit);
+
+        return $this->parserResult($results);
+    }
 }

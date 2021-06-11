@@ -1,17 +1,19 @@
 <footer class="text-gray-300 dark-footer skin-dark-footer">
     <div class="bg-gray-800">
-        <div class="container-custom py-20">
+        <div class="container-custom py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 <div class="footer-widget">
                     <a href="{!! route('home') !!}">
                         @php
                         $logo = get_logo();
                         @endphp
-                        <img src="{{ $logo }}" class="img-footer w-2/3 mb-3" alt="">
+                        <img src="{{ $logo }}" class="img-footer w-2/4 mb-3" alt="">
                     </a>
                     <div class="footer-add">
                         {!! get_deps_footer() !!}
                     </div>
+                    <p>Đ/c: {!! get_address() !!}</p>
+                    <p>Hotline: {!! get_phone() !!}</p>
                 </div>
                 @php
                     $menuFooter = get_menu_footer();

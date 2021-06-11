@@ -50,4 +50,14 @@ class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepos
 
         return $this->applyBeforeExecuteQuery($data)->get();
     }
+
+    public function getFeature()
+    {
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+        $results = $this;
+
+        return $this->parserResult($results);
+    }
 }

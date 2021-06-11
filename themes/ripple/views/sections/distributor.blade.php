@@ -268,23 +268,26 @@
                     <div id="loading-distri" class="text-center p-6" style="display: none">
                         <x-theme::icons.loading class="animate-spin -ml-1 mr-3 text-blue-500"/>
                     </div>
-                    <div class="pr-3">
-                        <template x-for="(item, index) in distributor" :key="index">
-                            <li class="py-4 border-b-2">
-                                <h5 class="text-blue-500 font-bold text-lg" x-text="(index + 1)+ '. ' + item.name"></h5>
-                                <div class="flex flex-wrap text-base font-medium text-gray-500">
-                                    <div class="w-full md:w-3/4" x-text="item.address"></div>
-                                    <div class="w-full md:w-1/4 text-right" x-text="item.phone"></div>
-                                </div>
-                            </li>
-                        </template>
-                        <template x-if="!distributor.length">
+                    <template x-if="!distributor.length">
+                        <div>
                             <li class="py-4 border-b-2">
                                 Chưa có đại lý nào.
                             </li>
-                        </template>
-
-                    </div>
+                        </div>
+                    </template>
+                    <template x-else>
+                        <div class="pr-3">
+                            <template x-for="(item, index) in distributor" :key="index">
+                                <li class="py-4 border-b-2">
+                                    <h5 class="text-blue-500 font-bold text-lg" x-text="(index + 1)+ '. ' + item.name"></h5>
+                                    <div class="flex flex-wrap text-base font-medium text-gray-500">
+                                        <div class="w-full md:w-3/4" x-text="item.address"></div>
+                                        <div class="w-full md:w-1/4 text-right" x-text="item.phone"></div>
+                                    </div>
+                                </li>
+                            </template>
+                        </div>
+                    </template>
                 </ul>
             </div>
         </div>
