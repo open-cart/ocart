@@ -69,7 +69,7 @@
             @if($showEnd)
                 {!! Form::close() !!}
             @endif
-            @yield('form_end')
+            @stack('form_end')
         </div>
     </div>
     <script>

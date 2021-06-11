@@ -66,13 +66,16 @@
             }
             function tableActions() {
                 return {
-                    destroy(id, url) {
+                    destroy(id, url, options = {}) {
                         confirmDelete.show(() => {
                             bodyLoading.show();
                             axios.delete(url, {data: {id}})
                                 .then(res => {
                                     toast.success('Deleted successfully')
-                                    $.pjax.reload('#body', {});
+                                    if (options.id) {
+                                        return $.pjax.reload('#' + options.id, {});
+                                    }
+                                    return $.pjax.reload('#body', {});
                                 })
                                 .catch(e => {
                                     toast.error(e.message);
