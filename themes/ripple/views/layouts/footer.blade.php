@@ -25,7 +25,11 @@
                             @if(!empty($item->menu) && is_array($item->menu))
                                 <ul class="footer-menu">
                                     @foreach($item->menu as $i)
-                                        <li><a href="{{ $i->slug }}">{{ $i->name }}</a></li>
+                                        @if(!empty($i->slug))
+                                            <li><a href="{{ $i->slug }}">{{ $i->name }}</a></li>
+                                        @else
+                                            <li>{{ $i->name }}</li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             @endif
