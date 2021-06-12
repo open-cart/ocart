@@ -32,7 +32,8 @@
                 <div class="py-4 border-b border-gray-100">
                     Chuyên mục:
                     @foreach($post->categories as $category)
-                        <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => $category->slug]) !!}">{{ $category->name }}</a><span> , </span>
+                        <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => $category->slug]) !!}">{{ $category->name }}</a>
+                        <span> , </span>
                     @endforeach
                 </div>
             @endif
@@ -41,10 +42,12 @@
             </div>
             <div class="py-4 border-b border-gray-100 flex">
                 Chia sẻ: <span class="flex ml-3 border-gray-200">
-                            <a class="text-white bg-blue-500 px-4 rounded-sm" href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
+                            <a class="text-white bg-blue-500 px-4 rounded-sm"
+                               href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
                                 Facebook
                             </a>
-                            <a class="ml-2 text-white bg-green-500 px-4 rounded-sm" href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
+                            <a class="ml-2 text-white bg-green-500 px-4 rounded-sm"
+                               href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
                                 Twitter
                             </a>
                         </span>
@@ -54,7 +57,8 @@
                     <li class="mb-5 border-b border-dotted">
                         <div class="pb-6">
                             <div class="float-left w-16">
-                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
+                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt=""
+                                     class="rounded-full m-w-16">
                             </div>
                             <div class="pl-6 flex flex-wrap">
                                 <div class="comment-meta">
@@ -64,7 +68,8 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 text-gray-500">
-                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt mollit anim laborumab.
                                         perspiciatis unde omnis iste natus error
                                         perspiciatis unde omnis iste natus error.</p>
                                 </div>
@@ -74,7 +79,8 @@
                     <li class="mb-5">
                         <div class="pb-6">
                             <div class="float-left w-16">
-                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">
+                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt=""
+                                     class="rounded-full m-w-16">
                             </div>
                             <div class="pl-6 flex flex-wrap">
                                 <div class="comment-meta">
@@ -84,7 +90,8 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 text-gray-500">
-                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.
+                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+                                        deserunt mollit anim laborumab.
                                         perspiciatis unde omnis iste natus error
                                         perspiciatis unde omnis iste natus error.</p>
                                 </div>
@@ -94,15 +101,19 @@
                 </ul>
                 <div>
                     <form>
-                        <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none" placeholder="Viết bình luận..." rows="5"></textarea>
+                        <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none"
+                                  placeholder="Viết bình luận..." rows="5"></textarea>
                         <div class="my-2">
-                            <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded" type="submit">Submit Review</button>
+                            <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded"
+                                    type="submit">Submit Review
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
 
-            <div class="fb-comments" data-href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}" data-width="100%" data-numposts="5"></div>
+            <div class="fb-comments" data-href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $post->slug]) !!}"
+                 data-width="100%" data-numposts="5"></div>
 
             @if(count($post->categories)>0)
                 <div class="py-4">
