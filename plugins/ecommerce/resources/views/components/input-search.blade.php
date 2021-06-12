@@ -35,7 +35,9 @@
                 parent.find(".container-loading-search").html('loading');
                 parent.find(".container-result-search").html('');
                 const url = parent.attr('data-source');
-                axios.get(url).then(res => {
+                axios.get(url, {params: {
+                        name: value
+                    }}).then(res => {
                     parent.find(".container-result-search").html(res)
                 }).finally(() => {
                     parent.find(".container-loading-search").html('')

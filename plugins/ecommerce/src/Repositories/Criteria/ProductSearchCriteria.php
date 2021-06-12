@@ -30,14 +30,12 @@ class ProductSearchCriteria implements CriteriaInterface
         /** @var Request $request */
         $request = $this->request;
 
-        if ($request->get('submit') == 'search') {
-            if ($request->get('name')) {
-                $name = $request->get('name');
-                $model = $model->where(function($q) use ($name){
-                    $q->orWhere('name', 'like', "%$name%");
-                    $q->orWhere('description', 'like', "%$name%");
-                });
-            }
+        if ($request->get('name')) {
+            $name = $request->get('name');
+            $model = $model->where(function($q) use ($name){
+                $q->orWhere('name', 'like', "%$name%");
+                $q->orWhere('description', 'like', "%$name%");
+            });
         }
 
         if ($request->get('order')) {

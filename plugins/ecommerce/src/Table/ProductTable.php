@@ -22,7 +22,7 @@ class ProductTable extends TableAbstract
 
     public function query()
     {
-        $this->repository->pushCriteria(app(ProductSearchCriteria::class));
+        $this->repository->pushCriteria(ProductSearchCriteria::class);
         $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
         return $res->paginate();
     }
