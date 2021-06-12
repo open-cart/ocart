@@ -318,7 +318,7 @@ if (!function_exists('get_partner')) {
 
 if (!function_exists('get_config_sections')) {
     function get_config_sections(){
-        return json_decode(setting('config_sections', null));
+        return json_decode(setting('config_sections', '[]'), true);
     }
 }
 
