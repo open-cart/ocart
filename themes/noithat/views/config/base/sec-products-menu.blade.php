@@ -46,32 +46,19 @@
                         @endif
 
                     </div>
-
-{{--                    <div class="flex flex-wrap -mx-2 md:-mx-2">--}}
-{{--                        @foreach(get_list_products_category($item_menu->id, 8) as $product)--}}
-{{--                            <div class="w-1/2 lg:w-1/4 p-2 md:p-2">--}}
-{{--                                <x-theme::card.product :data="$product"/>--}}
-{{--                            </div>--}}
-
-{{--                        @endforeach--}}
-{{--                    </div>--}}
-                </div>
-            </section>
-
-            <section class="container-custom">
-                <div class="grid grid-cols-4 gap-4">
-                    @foreach(get_list_products_category($item_menu->id, 7) as $key=>$product)
-                    @if($key == 1)
-                            <div class="p-2 md:p-2 col-span-2">
-                            <x-theme::card.product-horizontal-big :data="$product"/>
-                            </div>
-                    @else
-                            <div class="p-2 md:p-2">
-
-                            <x-theme::card.product :data="$product"/>
-                            </div>
-                        @endif
-                    @endforeach
+                    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
+                        @foreach(get_list_products_category($item_menu->id, 7) as $key=>$product)
+                            @if($key == 1)
+                                <div class="hidden lg:block col-span-2">
+                                    <x-theme::card.product-horizontal-big :data="$product"/>
+                                </div>
+                            @else
+                                <div>
+                                    <x-theme::card.product :data="$product"/>
+                                </div>
+                            @endif
+                        @endforeach
+                    </div>
                 </div>
             </section>
 

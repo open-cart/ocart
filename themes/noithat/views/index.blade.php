@@ -8,16 +8,27 @@
     @if(is_active_plugin('ecommerce') && $sections != null && in_array('categories_product', Arr::get($sections, 'value', [])) && !empty(get_categories_feature()))
         <section class="section-custom sec-categories-product bg-white lg:bg-auto antialiased font-sans">
             <div class="container-custom">
-                <div class="flex flex-wrap -mx-2 lg:-mx-4">
+                <div class="w-full grid grid-cols-6 lg:grid-cols-9 gap-2 lg:gap-4">
                     @foreach(parent_recursive(get_categories_feature()) as $category)
-                    <div class="w-1/4 xl:w-1/6 p-1 lg:p-4 hover:shadow-xl text-center">
-                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="inline-block w-full">
-                            <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full lg:p-4">
-                            <div class="text-gray-600 font-bold line-clamp-2 text-xs md:text-base">{{ $category->name }}</div>
-                        </a>
-                    </div>
+                        <div class="text-center hover:shadow-xl">
+                            <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="inline-block w-full">
+                                <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full lg:p-3" style="background-image: linear-gradient(180deg, #ffffff, #f8f8f800);">
+                                <div class="text-gray-600 font-bold line-clamp-2 text-xs md:text-base">{{ $category->name }}</div>
+                            </a>
+                        </div>
                     @endforeach
                 </div>
+{{--                --}}
+{{--                <div class="flex flex-wrap -mx-2 lg:-mx-4">--}}
+{{--                    @foreach(parent_recursive(get_categories_feature()) as $category)--}}
+{{--                    <div class="w-1/4 xl:w-1/6 p-1 lg:p-4 hover:shadow-xl text-center">--}}
+{{--                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug'=> $category->slug]) !!}" class="inline-block w-full">--}}
+{{--                            <img src="{{ TnMedia::url(empty($category->image) ? asset('/images/no-image.jpg') : $category->image) }}" class="w-full block m-auto rounded-full lg:p-4">--}}
+{{--                            <div class="text-gray-600 font-bold line-clamp-2 text-xs md:text-base">{{ $category->name }}</div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                    @endforeach--}}
+{{--                </div>--}}
             </div>
         </section>
     @endif
@@ -38,10 +49,9 @@
 {{--                        và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>--}}
                 </div>
                 <div class="container-custom">
-
-                    <div class="flex flex-wrap -mx-2 md:-mx-2">
+                    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                         @foreach($products as $product)
-                            <div class="w-1/2 lg:w-1/4 p-2 md:p-2">
+                            <div>
                                 <x-theme::card.product :data="$product"/>
                             </div>
                         @endforeach
@@ -63,10 +73,9 @@
                     {{--                        và bị hư hỏng bởi những lời xu nịnh của hiện tại, và những nỗi đau này, thú vui đã xóa bỏ</p>--}}
                 </div>
                 <div class="container-custom">
-
-                    <div class="flex flex-wrap -mx-2 md:-mx-2">
+                    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                         @foreach($products as $product)
-                            <div class="w-1/2 lg:w-1/4 p-2 md:p-2">
+                            <div>
                                 <x-theme::card.product :data="$product"/>
                             </div>
                         @endforeach
@@ -99,9 +108,9 @@
                 @php
                     $posts = get_list_posts_feature(6);
                 @endphp
-                <div class="flex flex-wrap -mx-2 md:-mx-4">
+                <div class="w-full grid grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4">
                     @foreach($posts as $post)
-                        <div class="w-1/2 lg:w-1/3 p-2 md:p-4">
+                        <div>
                             <x-theme::card.post :data="$post"/>
                         </div>
                     @endforeach

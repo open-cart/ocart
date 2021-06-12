@@ -279,6 +279,11 @@ if (!function_exists('get_logo')) {
         return setting('logo', '/images/logo-default.jpg');
     }
 }
+if (!function_exists('get_logo_footer')) {
+    function get_logo_footer(){
+        return setting('logo_footer', null);
+    }
+}
 
 if (!function_exists('get_favicon')) {
     function get_favicon(){
