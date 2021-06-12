@@ -3,7 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Language;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -11,7 +11,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class LanguageRepositoryEloquent extends BaseRepository implements LanguageRepository
+class LanguageRepositoryEloquent extends RepositoriesAbstract implements LanguageRepository
 {
     /**
      * @var

@@ -1,9 +1,9 @@
 <?php
 
 namespace Ocart\Distributor\Repositories;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Distributor\Models\Distributor;
 use Ocart\Distributor\Repositories\Interfaces\DistributorRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -11,7 +11,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class DistributorRepositoryEloquent extends BaseRepository implements DistributorRepository
+class DistributorRepositoryEloquent extends RepositoriesAbstract implements DistributorRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

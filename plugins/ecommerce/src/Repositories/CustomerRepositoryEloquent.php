@@ -3,15 +3,15 @@
 namespace Ocart\Ecommerce\Repositories;
 
 use App\Models\User;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class PageRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class CustomerRepositoryEloquent extends BaseRepository implements CustomerRepository
+class CustomerRepositoryEloquent extends RepositoriesAbstract implements CustomerRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

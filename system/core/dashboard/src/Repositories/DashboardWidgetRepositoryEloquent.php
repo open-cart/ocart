@@ -2,8 +2,8 @@
 
 namespace Ocart\Dashboard\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Dashboard\Models\DashboardWidget;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -12,7 +12,7 @@ use Prettus\Repository\Traits\CacheableRepository;
  *
  * @package namespace App\Repositories\Ocart\Setting;
  */
-class DashboardWidgetRepositoryEloquent extends BaseRepository implements DashboardWidgetRepository
+class DashboardWidgetRepositoryEloquent extends RepositoriesAbstract implements DashboardWidgetRepository
 {
 
     use CacheableRepository;

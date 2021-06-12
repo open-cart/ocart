@@ -2,16 +2,16 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Order;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class PageRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class OrderRepositoryEloquent extends BaseRepository implements OrderRepository
+class OrderRepositoryEloquent extends RepositoriesAbstract implements OrderRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

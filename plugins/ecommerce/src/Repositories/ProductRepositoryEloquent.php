@@ -2,9 +2,8 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Product;
-use Prettus\Repository\Eloquent\BaseRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Hashids\Hashids;
 
@@ -13,7 +12,7 @@ use Hashids\Hashids;
  *
  * @package namespace App\Repositories;
  */
-class ProductRepositoryEloquent extends BaseRepository implements ProductRepository
+class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

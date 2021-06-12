@@ -3,7 +3,7 @@
 namespace Ocart\Acl\Repositories;
 
 use App\Models\Admin;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -11,7 +11,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository
+class UserRepositoryEloquent extends RepositoriesAbstract implements UserRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

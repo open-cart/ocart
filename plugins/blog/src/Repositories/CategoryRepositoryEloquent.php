@@ -4,7 +4,7 @@ namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Category;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -12,7 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class CategoryRepositoryEloquent extends BaseRepository implements CategoryRepository
+class CategoryRepositoryEloquent extends RepositoriesAbstract implements CategoryRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

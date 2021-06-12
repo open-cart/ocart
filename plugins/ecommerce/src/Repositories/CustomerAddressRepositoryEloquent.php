@@ -2,16 +2,16 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\CustomerAddress;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerAddressRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 /**
  * Class PageRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class CustomerAddressRepositoryEloquent extends BaseRepository implements CustomerAddressRepository
+class CustomerAddressRepositoryEloquent extends RepositoriesAbstract implements CustomerAddressRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

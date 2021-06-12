@@ -3,9 +3,9 @@ namespace Ocart\Attribute\Repositories;
 
 use Ocart\Attribute\Models\ProductVariationItem;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationItemRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 
-class ProductVariationItemRepositoryEloquent  extends BaseRepository implements ProductVariationItemRepository
+class ProductVariationItemRepositoryEloquent  extends RepositoriesAbstract implements ProductVariationItemRepository
 {
 
     public function model()
