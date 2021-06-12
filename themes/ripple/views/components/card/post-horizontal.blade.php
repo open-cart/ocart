@@ -11,7 +11,7 @@
                 </div>
                 @if(count($data->categories)>0)
                     <div>
-                        <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => Arr::get([$data->categories->first()], 'slug')]) !!}" class="text-sm text-green-500 hover:text-blue-600 line-clamp-1">{{ Arr::get($data->categories->first(), 'name') }}</a>
+                        <a href="{!! route(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($data->categories->first(), 'slug')]) !!}" class="text-sm text-green-500 hover:text-blue-600 line-clamp-1">{{ Arr::get($data->categories->first(), 'name') }}</a>
                     </div>
                 @endif
             </div>
