@@ -4,7 +4,7 @@ namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Tag;
 use Ocart\Blog\Repositories\Interfaces\TagRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -12,7 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class TagRepositoryEloquent extends BaseRepository implements TagRepository
+class TagRepositoryEloquent extends RepositoriesAbstract implements TagRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

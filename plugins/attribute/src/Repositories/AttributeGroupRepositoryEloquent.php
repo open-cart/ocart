@@ -3,9 +3,9 @@ namespace Ocart\Attribute\Repositories;
 
 use Ocart\Attribute\Models\AttributeGroup;
 use Ocart\Attribute\Repositories\Interfaces\AttributeGroupRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 
-class AttributeGroupRepositoryEloquent  extends BaseRepository implements AttributeGroupRepository
+class AttributeGroupRepositoryEloquent  extends RepositoriesAbstract implements AttributeGroupRepository
 {
 
     public function model()

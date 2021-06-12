@@ -10,6 +10,7 @@ use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Ecommerce\Forms\ProductForm;
 use Ocart\Ecommerce\Http\Requests\ProductRequest;
 use Ocart\Ecommerce\Http\Requests\ProductUpdateRequest;
+use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Services\StoreCategoryService;
 use Ocart\Ecommerce\Table\ProductTable;
@@ -138,6 +139,7 @@ class ProductController extends BaseController
 
     function getSearchProducts()
     {
+        $this->repo->pushCriteria(ProductSearchCriteria::class);
         $products = $this->repo->paginate(5);
 
         return view('plugins.ecommerce::products.get-search-products', compact('products'));

@@ -3,6 +3,7 @@ namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
 use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Media\Facades\TnMedia;
 use Ocart\Table\Abstracts\TableAbstract;
@@ -21,6 +22,7 @@ class ProductTable extends TableAbstract
 
     public function query()
     {
+        $this->repository->pushCriteria(ProductSearchCriteria::class);
         $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
         return $res->paginate();
     }

@@ -2,7 +2,7 @@
 
 namespace Ocart\Core\Repositories;
 
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Models\MetaBox;
 
@@ -11,7 +11,7 @@ use Ocart\Core\Models\MetaBox;
  *
  * @package namespace App\Repositories;
  */
-class MetaBoxRepositoryEloquent extends BaseRepository implements MetaBoxRepository
+class MetaBoxRepositoryEloquent extends RepositoriesAbstract implements MetaBoxRepository
 {
     /**
      * Specify Model class name

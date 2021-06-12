@@ -2,12 +2,12 @@
 
 namespace Ocart\Media\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Media\Models\MediaFolder;
 use Ocart\Media\Repositories\Interfaces\MediaFolderRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Eloquent\BaseRepository;
 
-class MediaFolderRepositoryEloquent extends BaseRepository implements MediaFolderRepository
+class MediaFolderRepositoryEloquent extends RepositoriesAbstract implements MediaFolderRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

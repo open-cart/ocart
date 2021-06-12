@@ -15,9 +15,9 @@ use Ocart\Attribute\Repositories\ProductVariationItemRepositoryEloquent;
 use Ocart\Attribute\Repositories\ProductVariationRepositoryEloquent;
 use Ocart\Attribute\Repositories\ProductWithAttributeGroupRepositoryEloquent;
 use Ocart\Core\Library\Helper;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Ocart\Ecommerce\Models\Product;
-use Prettus\Repository\Eloquent\BaseRepository;
 
 class MultipleAttributeServiceProvider extends ServiceProvider
 {
@@ -45,7 +45,7 @@ class MultipleAttributeServiceProvider extends ServiceProvider
             ->loadAndPublishTranslations()
             ->loadMigrations();
 
-        add_filter(BASE_FILTER_TABLE_QUERY, function(BaseRepository $repo) {
+        add_filter(BASE_FILTER_TABLE_QUERY, function(RepositoriesAbstract $repo) {
             if ($repo->getModel() instanceof Product) {
                 $repo->pushCriteria(app(IsVariationCriteria::class));
             }

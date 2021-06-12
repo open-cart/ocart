@@ -4,7 +4,7 @@ namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Post;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
@@ -13,7 +13,7 @@ use Prettus\Validator\Contracts\ValidatorInterface;
  *
  * @package namespace App\Repositories;
  */
-class PostRepositoryEloquent extends BaseRepository implements PostRepository
+class PostRepositoryEloquent extends RepositoriesAbstract implements PostRepository
 {
     protected $fieldSearchable = [
         'name' => 'like',

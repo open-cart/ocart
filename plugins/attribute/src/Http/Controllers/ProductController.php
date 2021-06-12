@@ -15,6 +15,7 @@ use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Media\Facades\TnMedia;
 
@@ -323,6 +324,7 @@ class ProductController extends BaseController
     public function getSearchProducts()
     {
         $products = $this->productRepository
+            ->pushCriteria(ProductSearchCriteria::class)
             ->pushCriteria(IsVariationCriteria::class)
             ->with(['version.product.attributes.attribute'])
             ->paginate(5);

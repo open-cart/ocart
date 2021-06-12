@@ -2,9 +2,9 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -12,7 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class BrandRepositoryEloquent extends BaseRepository implements BrandRepository
+class BrandRepositoryEloquent extends RepositoriesAbstract implements BrandRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',

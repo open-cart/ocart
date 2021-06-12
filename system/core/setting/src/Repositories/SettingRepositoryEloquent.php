@@ -2,9 +2,8 @@
 
 namespace Ocart\Setting\Repositories;
 
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Setting\Setting;
-use Prettus\Repository\Contracts\RepositoryInterface;
-use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -13,7 +12,7 @@ use Prettus\Repository\Traits\CacheableRepository;
  *
  * @package namespace App\Repositories\Ocart\Setting;
  */
-class SettingRepositoryEloquent extends BaseRepository implements SettingRepository
+class SettingRepositoryEloquent extends RepositoriesAbstract implements SettingRepository
 {
 
     use CacheableRepository;

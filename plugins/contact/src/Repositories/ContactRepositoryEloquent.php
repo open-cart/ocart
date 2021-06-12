@@ -4,7 +4,7 @@ namespace Ocart\Contact\Repositories;
 
 use Ocart\Contact\Models\Contact;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
-use Prettus\Repository\Eloquent\BaseRepository;
+use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
 /**
@@ -12,7 +12,7 @@ use Prettus\Repository\Criteria\RequestCriteria;
  *
  * @package namespace App\Repositories;
  */
-class ContactRepositoryEloquent extends BaseRepository implements ContactRepository
+class ContactRepositoryEloquent extends RepositoriesAbstract implements ContactRepository
 {
     protected $fieldSearchable = [
         'alias' => 'like',
