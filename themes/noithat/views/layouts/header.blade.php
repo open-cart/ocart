@@ -120,8 +120,8 @@
                     @endforeach
 
                 </nav>
-        @endif
-        <!-- End Menu Main -->
+            @endif
+            <!-- End Menu Main -->
 
             <!-- Login/Cart -->
             <div class="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0">
