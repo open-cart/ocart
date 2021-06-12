@@ -1,4 +1,4 @@
-<div class="rounded-md bg-white dark:text-gray-300 dark:bg-gray-800"
+<div class="rounded-md bg-white border border-white dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700"
      x-data="dataAddNewAttribute()"
 >
     <div class="border-b px-6 py-3 flex justify-between dark:border-gray-700">
