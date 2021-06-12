@@ -15,12 +15,12 @@
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full ">
                     <div class="mb-4">
-                        <img class="w-full h-full object-cover object-center rounded" :src="images.length ? '/' + images[index] : '/no-images'" alt="ecommerce">
+                        <img class="w-full h-full object-cover object-center rounded" x-bind:src="images.length ? '/storage/' + images[index] : '/no-images'" alt="ecommerce">
                     </div>
                     <div class="owl-carousel owl-theme mt-2 relative">
                         <template x-for="(item, i) in images" :key="index">
                             <div x-on:click="index = i" class="item">
-                                <img :src="'/' + item" alt="" class="w-full h-full object-cover">
+                                <img x-bind:src="'/storage/' + item" alt="" class="w-full h-full object-cover">
                             </div>
                         </template>
                     </div>

@@ -152,52 +152,40 @@ const configMenu = {
 const configMenuFooter = {
     "data": [
         {
-            "title": "Sản phẩm",
+            "title": "Đặt hàng và thanh toán",
             "menu": [
                 {
-                    "name":"Khí công nghiệp",
-                    "slug":"/product-category/khi-cong-nghiep",
+                    "name":"Chủ tk:",
+                    "slug":"",
                 },
                 {
-                    "name":"Khí đặc biệt",
-                    "slug":"/product-category/khi-dac-biet",
+                    "name":"Số tk:",
+                    "slug":"",
                 },
                 {
-                    "name":"Khí chuẩn",
-                    "slug":"/product-category/khi-chuan",
-                },
-                {
-                    "name":"Khí y tế",
-                    "slug":"/product-category/khi-y-te",
-                },
-                {
-                    "name":"Thiết bị ngành khí",
-                    "slug":"/product-category/thiet-bi-nganh-khi",
-                },
-                {
-                    "name":"Các sản phẩm - dịch vụ khác",
-                    "slug":"/product-category/khac",
+                    "name":"Ngân hàng",
+                    "slug":"",
                 }
             ]
         },
         {
-            "title": "Tin tức",
+            "title": "Chính sách",
             "menu": [
                 {
-                    "name":"Hoạt động của công ty",
-                    "slug":"/post-category/hoat-dong-cua-cong-ty",
+                    "name":"Đặt hàng online",
+                    "slug":"dat-hang-online.html",
                 },
                 {
-                    "name":"Kiến thức ngành khí",
-                    "slug":"/post-category/kien-thuc-nganh-khi",
+                    "name":"Hướng dẫn thanh toán",
+                    "slug":"huong-dan-thanh-toan.html",
                 },
                 {
-                    "name":"Ứng dụng khí",
-                    "slug":"/post-category/ung-dung-khi",
+                    "name":"Chính sách bán hàng",
+                    "slug":"chinh-sach-ban-hang.html",
                 },
                 {
-                    "name":"Các kiến thức khác",
-                    "slug":"/post-category/cac-kien-thuc-khac",
+                    "name":"Hình thức vận chuyển",
+                    "slug":"hinh-thuc-van-chuyen.html",
                 }
             ]
         },
@@ -214,11 +202,11 @@ const configMenuFooter = {
                 },
                 {
                     "name": "Facebook",
-                    "slug": "https://www.facebook.com/Doanh-nghiệp-kh%C3%AD-Thủ-Đô-Xanh-110401501245965"
+                    "slug": "https://www.facebook.com/thietkethicongnoithat.hb/"
                 },
                 {
                     "name": "Zalo",
-                    "slug": "https://zalo.me/0912110941 "
+                    "slug": "https://zalo.me/0961697044 "
                 },
             ]
         }
@@ -385,4 +373,4 @@ const configProductsMenu = {
     ]
 }
 
-console.log(JSON.stringify(configProductsMenu))
+console.log(JSON.stringify(configMenuFooter))
