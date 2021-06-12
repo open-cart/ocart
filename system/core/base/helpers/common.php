@@ -352,6 +352,12 @@ if (!function_exists('get_address')) {
     }
 }
 
+if (!function_exists('get_address2')) {
+    function get_address2(){
+        return setting('address2', null);
+    }
+}
+
 if (!function_exists('get_fb_chat')) {
     function get_fb_chat(){
         return setting('fb_chat', null);
