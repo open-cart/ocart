@@ -5,7 +5,7 @@
 
     @include(Theme::getThemeNamespace('config/base/sec-slide'))
 
-    @if(is_active_plugin('ecommerce') && $sections != null && in_array('categories_product', $sections->value) && !empty(get_categories_feature()))
+    @if(is_active_plugin('ecommerce') && $sections != null && in_array('categories_product', Arr::get($sections, 'value', [])) && !empty(get_categories_feature()))
         <section class="section-custom sec-categories-product bg-white lg:bg-auto antialiased font-sans">
             <div class="container-custom">
                 <div class="flex flex-wrap -mx-2 lg:-mx-4">
@@ -22,11 +22,11 @@
         </section>
     @endif
 
-    @if(!empty($sections) && in_array('about', $sections->value))
-        @include(Theme::getThemeNamespace('config/' . $sections->name . '/section/sec-about'))
+    @if(!empty($sections) && in_array('about', Arr::get($sections, 'value', [])))
+        @include(Theme::getThemeNamespace('config/' . Arr::get($sections, 'name', '') . '/section/sec-about'))
     @endif
 
-    @if(is_active_plugin('ecommerce') && in_array('products_feture', $sections->value))
+    @if(is_active_plugin('ecommerce') && in_array('products_feture', Arr::get($sections, 'value', [])))
         @php
             $products = get_list_products_feature(8);
         @endphp
@@ -51,7 +51,7 @@
         @endif
     @endif
 
-    @if(is_active_plugin('ecommerce') && in_array('products_new', $sections->value))
+    @if(is_active_plugin('ecommerce') && in_array('products_new', Arr::get($sections, 'value', [])))
         @php
             $products = get_list_products_new(8);
         @endphp
@@ -76,15 +76,15 @@
         @endif
     @endif
 
-    @if(!empty($sections) && in_array('feedback', $sections->value))
-        @include(Theme::getThemeNamespace('config/' . $sections->name . '/section/sec-feedback'))
+    @if(!empty($sections) && in_array('feedback', Arr::get($sections, 'value', [])))
+        @include(Theme::getThemeNamespace('config/' . Arr::get($sections, 'name', '') . '/section/sec-feedback'))
     @endif
 
-    @if(is_active_plugin('ecommerce') && in_array('products_category', $sections->value))
+    @if(is_active_plugin('ecommerce') && in_array('products_category', Arr::get($sections, 'value', [])))
         @include(Theme::getThemeNamespace('config.base.sec-products-category'))
     @endif
 
-    @if(is_active_plugin('ecommerce') && in_array('products_menu', $sections->value))
+    @if(is_active_plugin('ecommerce') && in_array('products_menu', Arr::get($sections, 'value', [])))
         @include(Theme::getThemeNamespace('config.base.sec-products-menu'))
     @endif
 
@@ -110,15 +110,15 @@
 
         </section>
     @endif
-    @if(!empty($sections) && in_array('partner', $sections->value))
-        @include(Theme::getThemeNamespace('config/' . $sections->name . '/section/sec-partner'))
+    @if(!empty($sections) && in_array('partner', Arr::get($sections, 'value', [])))
+        @include(Theme::getThemeNamespace('config/' . Arr::get($sections, 'name', '') . '/section/sec-partner'))
     @endif
     @if(is_active_plugin('distributor'))
         @include(Theme::getThemeNamespace('sections.distributor'))
     @endif
 
-    @if(is_active_plugin('contact') && !empty($sections) && in_array('contact', $sections->value))
-        @include(Theme::getThemeNamespace('config/' . $sections->name . '/section/sec-contact'))
+    @if(is_active_plugin('contact') && !empty($sections) && in_array('contact', Arr::get($sections, 'value', [])))
+        @include(Theme::getThemeNamespace('config/' . Arr::get($sections, 'name', '') . '/section/sec-contact'))
     @endif
 
     <style>
