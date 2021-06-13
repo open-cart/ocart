@@ -26,16 +26,22 @@
             </a>
 {{--            <div class="hidden md:block text-sm text-gray-500 md:line-clamp-3">{!! $data->description !!}</div>--}}
             <div class="flex justify-between items-center md:mt-2">
-                <div class="flex text-red-600">
-                    <span class="font-bold text-sm md:text-base">{{ format_price($data->sell_price) }}</span>
-                    &nbsp;
-                    <span class="text-sm font-semibold">đ</span>
-                    @if($data->price > $data->sell_price)
-                        <span class="hidden md:block font-medium line-through text-gray-300 text-sm ml-2">{{ format_price($data->price) }}</span>
+                @if(!empty($data->sell_price) && $data->sell_price > 0)
+                    <div class="flex text-red-600">
+                        <span class="font-bold text-sm md:text-base">{{ format_price($data->sell_price) }}</span>
                         &nbsp;
-                        <span class="hidden md:block text-xs font-semibold text-gray-300 line-through">đ</span>
-                    @endif
-                </div>
+                        <span class="text-sm font-semibold">đ</span>
+                        @if($data->price > $data->sell_price)
+                            <span class="hidden md:block font-medium line-through text-gray-300 text-sm ml-2">{{ format_price($data->price) }}</span>
+                            &nbsp;
+                            <span class="hidden md:block text-xs font-semibold text-gray-300 line-through">đ</span>
+                        @endif
+                    </div>
+                @else
+                    <div class="flex text-red-600">
+                        <span class="font-bold text-sm md:text-base">Liên hệ</span>
+                    </div>
+                @endif
                 <button onclick="addToCart({{ $data->id }})" class="hidden md:block flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
                     <x-theme::icons.shopping-cart class="w-7"/>
                 </button>
