@@ -2,7 +2,7 @@
     <ul class="list-sharing-ul">
         @if(!empty(get_phone()))
             <li class="list-sharing-item">
-                <a :href="tel:{{ preg_replace( '/[^0-9]/', '', get_phone() )}}" rel="nofollow"
+                <a href="tel:{{ preg_replace( '/[^0-9]/', '', get_phone() )}}" rel="nofollow"
                    class="list-sharing-item-icon">
                     <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="22" cy="22" r="22" fill="url(#paint2_linear)"></circle>

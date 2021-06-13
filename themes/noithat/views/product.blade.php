@@ -15,12 +15,12 @@
             <div class="lg:w-full mx-auto flex flex-wrap">
                 <div class="lg:w-1/2 w-full ">
                     <div class="mb-4">
-                        <img class="w-full h-full object-cover object-center rounded" :src="images.length ? '/' + images[index] : '/no-images'" alt="ecommerce">
+                        <img class="w-full h-full object-cover object-center rounded" x-bind:src="images.length ? '/storage/' + images[index] : '/no-images'" alt="ecommerce">
                     </div>
                     <div class="owl-carousel owl-theme mt-2 relative">
-                        <template x-for="(item, i) in images" :key="index">
+                        <template x-for="(item, i) in images" :key="i">
                             <div x-on:click="index = i" class="item">
-                                <img :src="'/' + item" alt="" class="w-full h-full object-cover">
+                                <img x-bind:src="'/storage/' + item" alt="" class="w-full h-full object-cover">
                             </div>
                         </template>
                     </div>
@@ -230,16 +230,30 @@
 
             @if(count($product->categories)>0)
                 <div>
-                    <div class="text-left outline-none focus:outline-none font-bold">Sản phẩm liên quan</div>
-                    <div class="flex flex-wrap -mx-2 md:-mx-4">
+                    <div class="text-left outline-none focus:outline-none font-bold mb-2 lg:mb-4">Sản phẩm liên quan</div>
+                    <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
                         @foreach(get_list_products_relate(Arr::get($product->categories->first(), 'id'), 6) as $product)
-                            <div class="w-1/2 xl:w-1/3 p-2 md:p-4">
+                        <div>
                                 <x-theme::card.product :data="$product"/>
                             </div>
                         @endforeach
                     </div>
                 </div>
             @endif
+
+            <div>
+                @php
+                    $products_feature = get_list_products_feature(8);
+                @endphp
+                <div class="text-left outline-none focus:outline-none font-bold my-2 lg:my-4">Sản phẩm bán chạy</div>
+                <div class="w-full grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
+                    @foreach($products_feature as $product)
+                        <div>
+                            <x-theme::card.product :data="$product"/>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
 

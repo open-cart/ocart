@@ -26,6 +26,16 @@
     <link rel="stylesheet" href="{!! asset('access/owlcarousel/dist/assets/owl.theme.default.css?v=1') !!}">
     <script defer src="{!! asset('access/owlcarousel/dist/owl.carousel.js?v=1') !!}"></script>
 
+    <script>
+        const bodyLoading = {
+            show() {
+                $('#loading').show();
+            },
+            hide() {
+                $('#loading').hide();
+            }
+        }
+    </script>
     <!-- Meta Head -->
     {!! get_meta_head() !!}
     <!-- End Meta Head -->
@@ -35,7 +45,7 @@
     @stack('head')
 
 </head>
-<body>
+<body id="body">
 <div id="fb-root"></div>
 @stack('body')
 
@@ -45,15 +55,6 @@
     @include(Theme::getThemeNamespace('layouts.footer'))
 
     @include(Theme::getThemeNamespace('components.layout.list-sharing'))
-
-    <div x-data="confirmDelete">
-        <x-confirm-delete
-            id="confirmDelete"
-            @close="hide()"
-            @accept="accept()"
-            class="z-50"
-        ></x-confirm-delete>
-    </div>
 
     <!-- This example requires Tailwind CSS v2.0+ -->
     <div x-data="{ modal : false }" class="hidden fixed z-10 inset-0 overflow-y-auto" aria-labelledby="modal-title"
@@ -128,30 +129,48 @@
 
 </div>
 
+<div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
+    <div class="relative inline-flex">
+            <span class="flex items-center justify-center h-24 w-24">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-0 w-0 bg-purple-500"></span>
+            </span>
+    </div>
+</div>
+
 @stack('bodybelow')
 
-<script>
-    // $(document).on('click', 'a:not(no-pjax)', function(event) {
-    //     // event.preventDefault();
-    //     const container = $(this).attr('data-body');
-    //     const containerSelector = '#' + container;
-    //     if ($(containerSelector).length) {
-    //         $.pjax.click(event, {container: containerSelector})
-    //     } else {
-    //         $.pjax.click(event, {container: '#body'})
-    //     }
-    // })
-    $(document).pjax('a', '#body');
-    $.pjax.defaults.timeout = 1200;
+<script>$(function(){
+        $(document).pjax('a:not(.blank)', '#body');
+        $.pjax.defaults.timeout = 1200;
 
-    $(document).on('pjax:complete', function () {
-        if (typeof FB != 'undefined') {
-            FB.XFBML.parse();
-        }
+        let loading;
+
+        $(document).on('pjax:send', function() {
+            loading =  new Promise((resolve, reject) => {
+                setTimeout(function() {
+                    resolve(true)
+                }, 120)
+            });
+            bodyLoading.show();
+        })
+        $(document).on('pjax:complete', function() {
+            if (typeof FB != 'undefined') {
+                FB.XFBML.parse();
+            }
+            feather.replace({'stroke-width': 1.5})
+            Alpine.start();
+            loading.then(() => {
+                bodyLoading.hide();
+            })
+            $('img').on("error", function (e) {
+                e.target.src = '/images/no-image.jpg';
+            });
+        })
     })
 
     function addToCart(productId) {
-        axios.post('add-to-cart', {
+        axios.post('/add-to-cart', {
             productId: productId
         }).then((res) => {
             toast.success(res.message);
@@ -163,27 +182,6 @@
         });
     }
 
-    const confirmDelete = {
-        callback: () => {
-        },
-        close: () => {
-        },
-        show(accept = () => {
-        }, close = () => {
-        }) {
-            $('#confirmDelete').show();
-            this.callback = accept;
-            this.close = close;
-        },
-        hide() {
-            $('#confirmDelete').hide();
-            this.close(this);
-        },
-        accept() {
-            $('#confirmDelete').hide();
-            this.callback(this);
-        }
-    }
     $(function () {
         $(document).on('click', '[data-toggle=modal]', function () {
             const idModal = $(this).attr('data-target');

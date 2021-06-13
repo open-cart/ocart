@@ -3,12 +3,14 @@
         <div class="container-custom py-12">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:justify-items-end">
                 <div class="footer-widget">
-                    <a href="{!! route('home') !!}">
-                        @php
-                            $logo = get_logo_footer();
-                        @endphp
-                        <img src="{{ $logo }}" class="img-footer w-2/4 mb-3" alt="">
-                    </a>
+                    @php
+                        $logo = get_logo_footer();
+                    @endphp
+                    @if(!empty($logo))
+                        <a href="{!! route('home') !!}">
+                            <img src="{{ $logo }}" class="img-footer w-2/4 mb-3" alt="">
+                        </a>
+                    @endif
                     <h4 class="widget-title mb-3 font-bold text-lg text-white">{!! get_deps_footer() !!}</h4>
                     <p>Văn phòng đại diện: {!! get_address() !!}</p>
                     <p>Xưởng sản xuất: {!! get_address2() !!}</p>
