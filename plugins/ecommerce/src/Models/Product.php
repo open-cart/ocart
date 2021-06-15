@@ -86,7 +86,7 @@ class Product extends BaseModel
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class, 'blog_post_tags', 'post_id', 'tag_id');
+        return $this->belongsToMany(Tag::class, 'ecommerce_product_tags', 'product_id', 'tag_id');
     }
 
     /**
