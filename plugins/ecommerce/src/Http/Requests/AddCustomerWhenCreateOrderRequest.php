@@ -17,6 +17,15 @@ class AddCustomerWhenCreateOrderRequest extends FormRequest
     {
         return [
             'name'    => 'required|max:120',
+            'email' => [
+                'required',
+                'email'
+            ],
+            'phone' => [
+                'required',
+            ],
+            'address' => ['required'],
+            'country' => 'required',
         ];
     }
 }
