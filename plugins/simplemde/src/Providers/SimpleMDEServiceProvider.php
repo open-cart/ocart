@@ -15,7 +15,7 @@ class SimpleMDEServiceProvider extends ServiceProvider
 //        $this->publishAssets(['js']);
 
         add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($a,$b,$c) {
-            if ($b === 'blog_post') {
+            if (in_array($b, ['blog_post', 'blog_category'])) {
                 $a->add('content', Field::TEXTAREA, [
                     'label' => trans('plugins/blog::posts.content'),
                     'attr' => [
