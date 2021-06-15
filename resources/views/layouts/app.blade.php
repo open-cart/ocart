@@ -122,11 +122,11 @@
             @stack('scripts')
         </div>
     </body>
-    <div id="loading" style="display:none" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
+    <div id="loading" style="display:none; background: rgba(189,191,191,0.38)" class="fixed w-full h-full top-0 left-0 z-50 flex items-center justify-center">
         <div class="relative inline-flex">
             <span class="flex items-center justify-center h-24 w-24">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
-              <span class="relative inline-flex rounded-full h-0 w-0 bg-purple-500"></span>
+              <span class="relative inline-flex rounded-full h-6 w-6 bg-purple-500"></span>
             </span>
         </div>
     </div>

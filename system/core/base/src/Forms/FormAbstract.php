@@ -214,4 +214,16 @@ abstract class FormAbstract extends Form
 
         return parent::setupModel($model);
     }
+
+    /**
+     * @param string $name
+     * @param string $class
+     * @return $this|Form
+     */
+    public function addCustomField($name, $class)
+    {
+        parent::addCustomField($name, $class);
+
+        return $this;
+    }
 }

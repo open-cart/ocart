@@ -5,7 +5,9 @@ namespace Ocart\Blog\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Ocart\Blog\Models\PostTag;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Blog\Tables\PostTable;
 use Ocart\Core\Forms\FormBuilder;
@@ -71,12 +73,18 @@ class PostController extends BaseController
         $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
         $data['slug_md5'] = md5($data['slug']);
 
+        DB::beginTransaction();
+
         $post = $this->repo->create($data + [
                 'author_id'     => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
+        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+
         $categoryService->execute($request, $post);
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('blog.posts.index'))
             ->setNextUrl(route('blog.posts.show', $post->id));
@@ -85,7 +93,7 @@ class PostController extends BaseController
     function show($id, FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/blog::posts.edit'));
-        $page = $this->repo->skipCriteria()->find($id);
+        $page = $this->repo->with('tags')->skipCriteria()->find($id);
 
         return $formBuilder->create(PostForm::class, ['model' => $page])
             ->setMethod('PUT')
@@ -102,11 +110,17 @@ class PostController extends BaseController
     {
         $data = $request->all();
 
+        DB::beginTransaction();
+
         $post = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
+        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+
         $categoryService->execute($request, $post);
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('blog.posts.index'))
             ->setNextUrl(route('blog.posts.show', $post->id));
