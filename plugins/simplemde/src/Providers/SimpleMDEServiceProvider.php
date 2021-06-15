@@ -21,7 +21,6 @@ class SimpleMDEServiceProvider extends ServiceProvider
         $that = $this;
 
         add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($a,$b,$c) use($that) {
-
             if (method_exists($that, 'addFilterRenderForm' . Str::ucfirst(Str::camel($b)))) {
                 $that->{'addFilterRenderForm' . Str::ucfirst(Str::camel($b))}($a);
             }
@@ -62,8 +61,8 @@ class SimpleMDEServiceProvider extends ServiceProvider
 
     public function addFilterRenderFormBlogPost(PostForm $form)
     {
-        $form->add('description', Field::TEXTAREA, [
-            'label'      => trans('plugins/blog::categories.description'),
+        $form->add('content', Field::TEXTAREA, [
+            'label' => trans('plugins/blog::posts.content'),
             'attr' => [
                 'id' => 'editor-simplemde'
             ]
@@ -72,8 +71,8 @@ class SimpleMDEServiceProvider extends ServiceProvider
 
     public function addFilterRenderFormBlogCategory(CategoryForm $form)
     {
-        $form->add('content', Field::TEXTAREA, [
-            'label' => trans('plugins/blog::posts.content'),
+        $form->add('description', Field::TEXTAREA, [
+            'label'      => trans('plugins/blog::categories.description'),
             'attr' => [
                 'id' => 'editor-simplemde'
             ]
