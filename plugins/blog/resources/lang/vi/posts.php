@@ -10,5 +10,6 @@ return [
     'image' => 'Ảnh đại diện',
     'create_tag' => 'Tạo mới tag',
     'manage_tag' => 'Quản lý tag',
-    'search_tag' => 'Tìm kiếm...'
+    'search_tag' => 'Tìm kiếm...',
+    'name_new_tag' => 'Tên tag mới'
 ];

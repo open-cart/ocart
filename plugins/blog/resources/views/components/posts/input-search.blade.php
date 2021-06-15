@@ -20,6 +20,10 @@
             open: false,
             oldValue: undefined,
             selected: @json($options['value']),
+            showForm: false,
+            loading: false,
+            parent: null,
+            tagName: '',
             change(data) {
                 if (this.selected.some(x => x.id == data.id)) {
                     this.selected = this.selected.filter(x => x.id !== data.id);
@@ -32,8 +36,12 @@
                 }
             },
             openSearch: function (e) {
+                this.showForm = false;
                 const parent = $(this.$el);
                 this.open = true;
+                this.$nextTick(() => {
+                    this.$refs['input-search'].focus()
+                })
 
                 parent.find(".container-loading-search").html('loading');
                 parent.find(".container-result-search").html('');
@@ -65,6 +73,32 @@
                 }).finally(() => {
                     parent.find(".container-loading-search").html('')
                 });
+            },
+            createTag() {
+                if (this.loading) {
+                    return;
+                }
+                this.loading = true;
+                axios.post('{{ route('blog.tags.store') }}', {
+                    name: this.tagName
+                }).finally(() => {
+                    this.loading = false;
+                    this.showForm = false;
+                    this.openSearch()
+                })
+            },
+            showFormCreate() {
+                this.showForm = true;
+                this.tagName = '';
+                this.$nextTick(() => {
+                    this.$refs['tag-new-name'].focus()
+                })
+            },
+            closeForm() {
+                this.showForm = false;
+                this.$nextTick(() => {
+                    this.$refs['input-search'].focus()
+                })
             },
             toPage(url) {
                 const parent = $(this.$el);
@@ -105,9 +139,6 @@
         <x-icons.plus class="w-6 h-8"/>
         <span class="">&nbsp;</span>
     </div>
-{{--    <x-input {{ $attributes->merge(['class' => 'w-full']) }}--}}
-{{--             x-on:input.debounce.250="fetchSomething($event)"--}}
-{{--             x-on:focus="fetchSomething($event)"/>--}}
     <div x-show="open"
          x-on:click.away="open = false"
          @close.stop="open = false"
@@ -121,13 +152,35 @@
           dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300
           w-full rounded-md shadow-lg {{ $alignmentClasses }}"
          style="display: none;">
-        @if(isset($first))
-            {{ $first }}
-        @endif
-        <div class="container-loading-search px-3"></div>
-        <div class="container-result-search"></div>
-        @if(isset($last))
-            {{ $last }}
-        @endif
+        <div x-show="!showForm">
+            @if(isset($first))
+                {{ $first }}
+            @endif
+            <div class="container-loading-search px-3"></div>
+            <div class="container-result-search" style="overflow: auto; height: 200px;"></div>
+            @if(isset($last))
+                {{ $last }}
+            @endif
+        </div>
+        <div x-show="showForm"
+             class="p-3">
+            <span >
+                <x-input x-ref="tag-new-name"
+                         x-model="tagName"
+                         id="tag-new-name"
+                         disabled="disabled"
+                         placeholder="{{ trans('plugins/blog::posts.name_new_tag') }}"
+                         class="w-full"/>
+            </span>
+            <div class="pt-3">
+                <x-button type="button" x-on:click="createTag">
+                    <span x-show="loading">...</span>
+                    {{ trans('admin.add_new') }}
+                </x-button>
+                <button type="button" x-on:click="closeForm">
+                    {{ trans('admin.cancel') }}
+                </button>
+            </div>
+        </div>
     </div>
 </div>

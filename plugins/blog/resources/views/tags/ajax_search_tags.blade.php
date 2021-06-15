@@ -11,9 +11,9 @@
             <span class="pl-2">{!! $tag->name !!}</span>
         </div>
     </div>
-    @if($loop->last)
-        <hr class="-mx-3 dark:border-gray-600">
-    @else
-        <hr class="dark:border-gray-600">
-    @endif
+{{--    @if($loop->last)--}}
+{{--        <hr class="-mx-3 dark:border-gray-600">--}}
+{{--    @else--}}
+{{--        <hr class="dark:border-gray-600">--}}
+{{--    @endif--}}
 @endforeach
