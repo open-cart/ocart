@@ -32,7 +32,7 @@ class PostForm extends FormAbstract
         $this
             ->setupModel(new Post())
             ->withCustomFields()
-            ->setModuleName('blog')
+            ->setModuleName('blog_post')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
             ->addCustomField('tags', TagField::class)
