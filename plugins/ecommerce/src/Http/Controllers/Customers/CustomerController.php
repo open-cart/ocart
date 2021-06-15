@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\TagForm;
 use Ocart\Ecommerce\Http\Requests\AddCustomerWhenCreateOrderRequest;
 use Ocart\Ecommerce\Http\Requests\TagRequest;
+use Ocart\Ecommerce\Repositories\Criteria\CustomerSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
@@ -117,7 +118,9 @@ class CustomerController extends BaseController
 
     public function getSearchCustomers()
     {
-        $customers = $this->customerRepository->paginate(5);
+        $customers = $this->customerRepository
+            ->pushCriteria(CustomerSearchCriteria::class)
+            ->paginate(5);
 
         return view('plugins.ecommerce::customers.get-search-customers', compact('customers'));
     }

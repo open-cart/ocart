@@ -17,7 +17,15 @@ class AddressRequest extends FormRequest
     {
         return [
             'name'    => 'required|max:120',
-            'email' => 'email'
+            'email' => [
+                'required',
+                'email'
+            ],
+            'phone' => [
+                'required',
+            ],
+            'address' => ['required'],
+            'country' => 'required',
         ];
     }
 }
