@@ -82,6 +82,14 @@ class Product extends BaseModel
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class, 'blog_post_tags', 'post_id', 'tag_id');
+    }
+
+    /**
      * @param string $value
      * @return array
      */

@@ -106,4 +106,14 @@ class TagController extends BaseController
 
         return response()->json([]);
     }
+
+    public function ajaxSearchTags(Request $request)
+    {
+        $tags = $this->repo->scopeQuery(function ($query) use ($request) {
+            $txt = $request->input('name', '');
+            return $query->where('name', 'like', "%$txt%");
+        })->limit(50);
+
+        return view('plugins.ecommerce::tags.ajax_search_tags', compact('tags',));
+    }
 }

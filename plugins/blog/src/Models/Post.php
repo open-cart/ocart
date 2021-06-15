@@ -52,6 +52,9 @@ class Post extends BaseModel
         return $this->belongsToMany(Category::class, 'blog_post_categories');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'blog_post_tags', 'post_id', 'tag_id');
