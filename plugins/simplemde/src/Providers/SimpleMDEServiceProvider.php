@@ -15,13 +15,15 @@ class SimpleMDEServiceProvider extends ServiceProvider
 //        $this->publishAssets(['js']);
 
         add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($a,$b,$c) {
-            $a->add('content', Field::TEXTAREA, [
-                'label' => trans('plugins/blog::posts.content'),
-                'attr' => [
+            if ($b === 'blog') {
+                $a->add('content', Field::TEXTAREA, [
+                    'label' => trans('plugins/blog::posts.content'),
+                    'attr' => [
 //            'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
-                    'id' => 'editor-simplemde'
-                ]
-            ], true);
+                        'id' => 'editor-simplemde'
+                    ]
+                ], true);
+            }
             return $a;
         },1, 3);
 
