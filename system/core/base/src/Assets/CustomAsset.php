@@ -30,8 +30,7 @@ class CustomAsset extends Assets
             $styles = array_merge($styles, $this->getSource($configName));
         }
 
-
-        return array_merge($styles, Arr::get($this->appendedStyles, $location, []));
+        return array_merge($styles, $this->appendedStyles);
     }
 
     /**

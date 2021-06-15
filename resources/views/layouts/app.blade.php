@@ -137,6 +137,7 @@
             @accept="accept()"></x-confirm-delete>
     </div>
     <div id="tnmedia-root"></div>
+    {!! Assets::renderFooter() !!}
     <script>
         $(function(){
             // pjax

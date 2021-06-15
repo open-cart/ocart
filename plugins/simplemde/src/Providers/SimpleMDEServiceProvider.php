@@ -1,6 +1,7 @@
 <?php
 
 namespace Ocart\SimpleMDE\Providers;
+use Botble\Assets\Facades\AssetsFacade;
 use Illuminate\Support\Str;
 use Ocart\Blog\Forms\CategoryForm;
 use Ocart\Blog\Forms\PostForm;
@@ -12,14 +13,9 @@ class SimpleMDEServiceProvider extends ServiceProvider
 {
     use LoadAndPublishDataTrait;
 
-
-
     public function register()
     {
-
-//        $this->publishAssets(['js']);
         $that = $this;
-
         add_filter(BASE_FILTER_BEFORE_RENDER_FORM, function ($a,$b,$c) use($that) {
             if (method_exists($that, 'addFilterRenderForm' . Str::ucfirst(Str::camel($b)))) {
                 $that->{'addFilterRenderForm' . Str::ucfirst(Str::camel($b))}($a);
@@ -32,31 +28,18 @@ class SimpleMDEServiceProvider extends ServiceProvider
             if ($b != 'side') {
                 return;
             }
-
             $that->addActionMetaBoxes();
         }, 999, 3);
 
-        $scripts = config('assets.scripts');
-        $styles = config('assets.styles');
-
-        $scripts[] = 'simplemde';
-        $scripts[] = 'simplemde_custom';
-        $scripts[] = 'prismjs';
-        $styles[] = 'simplemde';
-        $styles[] = 'prismjs';
-
-        $resourceScript = config('assets.resources.scripts');
-        $resourceScript['simplemde_custom'] = [
-            'use_cdn'  => true,
-            'location' => 'header',
-            'src'      => [
-                'local' => 'access/simplemde/custom.js',
-            ]
-        ];
-
-        config()->set('assets.resources.scripts', $resourceScript);
-        config()->set('assets.scripts', $scripts);
-        config()->set('assets.styles', $styles);
+        AssetsFacade::addStylesDirectly([
+            'access/simplemde/simplemde.min.css',
+            'access/prismjs/prism.css'
+        ])
+            ->addScriptsDirectly([
+                'access/simplemde/simplemde.min.js',
+                'access/prismjs/prism.js',
+                'access/simplemde/custom.js'
+            ]);
     }
 
     public function addFilterRenderFormBlogPost(PostForm $form)
@@ -82,9 +65,6 @@ class SimpleMDEServiceProvider extends ServiceProvider
     public function addActionMetaBoxes()
     {
         echo '
-<script>
-renderSimplemde("editor-simplemde");
-</script>
 <style>
 .CodeMirror .cm-spell-error:not(.cm-url):not(.cm-comment):not(.cm-tag):not(.cm-word) {
 background: none !important;
