@@ -1,8 +1,8 @@
 <!-- This example requires Tailwind CSS v2.0+ -->
-<header x-data="{ openMobile : false }" id="header" class="relative bg-white sticky top-0 z-40">
+<header x-data="{ openMobile : false }" id="header" class="relative bg-white sticky top-0 z-40 shadow">
     <div class="container-custom">
-        <div class="flex justify-between items-center border-b-2 border-gray-100 py-2 lg:justify-start lg:space-x-10">
-            <div class="flex justify-start lg:w-0 lg:flex-1">
+        <div class="flex justify-between items-center py-2 lg:space-x-4">
+            <div class="flex justify-start">
                 <a href="{!! route('home') !!}">
                     <span class="sr-only">Workflow</span>
                     @php
@@ -124,7 +124,7 @@
             <!-- End Menu Main -->
 
             <!-- Login/Cart -->
-            <div class="hidden lg:flex items-center justify-end lg:flex-1 lg:w-0">
+            <div class="hidden lg:flex items-center justify-end">
                 @if(is_active_plugin('ecommerce'))
                     <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="relative z-20 mr-8">
                         <x-theme::icons.shopping-cart class="w-6"/>
@@ -190,7 +190,7 @@
     <div x-show="openMobile" class="absolute top-0 inset-x-0 transition transform origin-top-right z-50"
          style="display:none;">
         <div class="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-white divide-y-2 divide-gray-50 h-screen overflow-y-auto">
-            <div class="pt-5 pb-6 px-5">
+            <div class="pt-1 pb-4 px-4">
                 <div class="flex items-center justify-between">
                     <div>
                         <img class="h-8 w-auto" src="{{ $logo }}"

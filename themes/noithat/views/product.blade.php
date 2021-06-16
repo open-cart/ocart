@@ -13,7 +13,7 @@
     <section x-data="imageData({{ $product }})" class="section-custom pt-0 product-library text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <div class="lg:w-1/2 w-full ">
+                <div class="lg:w-2/5 w-full ">
                     <div class="mb-4">
                         <img class="w-full h-full object-cover object-center rounded" x-bind:src="images.length ? '/storage/' + images[index] : '/no-images'" alt="ecommerce">
                     </div>
@@ -25,13 +25,13 @@
                         </template>
                     </div>
                 </div>
-                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                <div class="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                     @if(count($product->categories)>0)
                     <h2 class="text-sm title-font text-gray-500">
                         <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
                     </h2>
                     @endif
-                    <h1 class="text-gray-900 text-xl lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
+                    <h1 class="text-gray-900 text-lg lg:text-2xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
                         <div class="text-sm text-gray-500">
                             <span class="flex items-center">
@@ -57,13 +57,20 @@
                             </a>
                         </span>
                     </div>
+                    @if(!empty($product->description))
+                        <div class="leading-relaxed text-sm md:text-base pt-4 border-t border-gray-200">{!! $product->description !!}</div>
+                    @endif
                     <div class="mb-4 pt-4 border-t border-gray-200">
-                        <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->sell_price) }}đ</span>
-                        @if($product->price > $product->sell_price)
-                            <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
+                        @if(!empty($product->sell_price) && $product->sell_price > 0)
+                            <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->sell_price) }}đ</span>
+                            @if($product->price > $product->sell_price)
+                                <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
+                            @endif
+                        @else
+                            <span class="title-font font-bold text-2xl text-red-600">Liên hệ</span>
                         @endif
+
                     </div>
-                    <div class="leading-relaxed text-sm md:text-base pt-4 border-t border-gray-200">{!! $product->description !!}</div>
                     <div class="flex items-center pt-4 border-t border-gray-200 my-4">
 {{--                        <div class="flex mr-6">--}}
 {{--                            <span class="mr-3">Color</span>--}}
@@ -132,99 +139,6 @@
 
                 </ul>
             </div>
-
-{{--            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">--}}
-{{--                <ul class="shadow-box">--}}
-
-{{--                    <li class="relative">--}}
-
-{{--                        <button type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none" x-on:click="selected !== 1 ? selected = 1 : selected = null">--}}
-{{--                            <div class="flex items-center justify-between">--}}
-{{--                                <span class="font-bold">Bình Luận</span>--}}
-{{--                                <x-theme::icons.chevron-down/>--}}
-{{--                            </div>--}}
-{{--                        </button>--}}
-
-{{--                        <div class="relative overflow-hidden transition-all max-h-0 duration-700" style="" x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''">--}}
-{{--                            <div class="px-6 pb-4">--}}
-{{--                                <ul>--}}
-{{--                                    <li class="mb-5 border-b border-dotted">--}}
-{{--                                        <div class="pb-6">--}}
-{{--                                            <div class="float-left w-16">--}}
-{{--                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="pl-6 flex flex-wrap">--}}
-{{--                                                <div class="comment-meta">--}}
-{{--                                                    <div class="comment-left-meta">--}}
-{{--                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>--}}
-{{--                                                        <div class="mt-1 text-green-500">19th May 2018</div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="mt-4 text-gray-500">--}}
-{{--                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.--}}
-{{--                                                        perspiciatis unde omnis iste natus error--}}
-{{--                                                        perspiciatis unde omnis iste natus error.</p>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-{{--                                    <li class="mb-5">--}}
-{{--                                        <div class="pb-6">--}}
-{{--                                            <div class="float-left w-16">--}}
-{{--                                                <img src="https://themezhub.net/resido-live/resido/assets/img/user-1.jpg" alt="" class="rounded-full m-w-16">--}}
-{{--                                            </div>--}}
-{{--                                            <div class="pl-6 flex flex-wrap">--}}
-{{--                                                <div class="comment-meta">--}}
-{{--                                                    <div class="comment-left-meta">--}}
-{{--                                                        <h4 class="font-2xl font-bold">Rosalina Kelian</h4>--}}
-{{--                                                        <div class="mt-1 text-green-500">19th May 2018</div>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                                <div class="mt-4 text-gray-500">--}}
-{{--                                                    <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim laborumab.--}}
-{{--                                                        perspiciatis unde omnis iste natus error--}}
-{{--                                                        perspiciatis unde omnis iste natus error.</p>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-{{--                                    </li>--}}
-
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </li>--}}
-
-{{--                </ul>--}}
-{{--            </div>--}}
-
-{{--            <div x-data="{selected:1}" class="hidden bg-white rounded-md mb-7">--}}
-{{--                <ul class="shadow-box">--}}
-
-{{--                    <li class="relative">--}}
-
-{{--                        <button x-on:click="selected !== 1 ? selected = 1 : selected = null" type="button" class="w-full px-6 py-4 text-left outline-none focus:outline-none">--}}
-{{--                            <div class="flex items-center justify-between">--}}
-{{--                                <span class="font-bold">Viết Bình Luận</span>--}}
-{{--                                <x-theme::icons.chevron-down/>--}}
-{{--                            </div>--}}
-{{--                        </button>--}}
-
-{{--                        <div x-ref="container1" x-bind:style="selected == 1 ? 'max-height: ' + $refs.container1.scrollHeight + 'px' : ''" class="relative overflow-hidden transition-all max-h-0 duration-700">--}}
-{{--                            <div class="px-6 pb-4">--}}
-{{--                                <form>--}}
-{{--                                    <textarea class="p-3 bg-indigo-50 w-full rounded-md outline-none" placeholder="Viết bình luận..." rows="5"></textarea>--}}
-{{--                                    <div class="my-2">--}}
-{{--                                        <button class="flex text-white bg-green-500 border-0 py-4 px-6 focus:outline-none hover:bg-green-700 rounded" type="submit">Submit Review</button>--}}
-{{--                                    </div>--}}
-{{--                                </form>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                    </li>--}}
-
-{{--                </ul>--}}
-{{--            </div>--}}
 
             <div class="fb-comments mb-7" data-href="{!! route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $product->slug]) !!}" data-width="100%" data-numposts="5" style="background: white;display: block;"></div>
 
