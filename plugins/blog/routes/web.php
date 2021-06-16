@@ -18,6 +18,8 @@ Route::group([
         Route::group(['prefix'=>'categories', 'as' => 'blog.categories.'], function () {
             Route::resource('', 'CategoryController')->parameters(['' => 'id']);
         });
+
+        Route::get('ajax_search_tags', 'TagController@ajaxSearchTags')->name('ajax_search_tags');
     });
 
     Route::group([

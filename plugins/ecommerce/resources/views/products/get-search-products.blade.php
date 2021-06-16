@@ -13,9 +13,9 @@
 {{--    </div>--}}
 {{--</div>--}}
 @foreach($products as $product)
-<div class="cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600" x-on:click="change($dispatch, JSON.parse('{{ json_encode($product) }}'))">
+<div class="cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600" x-on:click='change($dispatch, @json($product))'>
     <div class="flex items-center h-12">
-        <img src="{!! TnMedia::url($product->image ?? null) ?? '/images/no-image.jpg' !!}" class="w-12 px-2" alt="img" />
+        <img src="{!! TnMedia::url($product->image ?? null) ?? asset('/images/no-image.jpg') !!}" class="w-12 px-2" alt="img" />
         <span class="pl-2">{!! $product->name !!}</span>
     </div>
 </div>

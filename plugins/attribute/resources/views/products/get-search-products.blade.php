@@ -2,14 +2,14 @@
     @if(count($product->version))
         <div class="">
             <div class="flex items-center h-12">
-                <img src="{!! TnMedia::url($product->image ?? null) ?? '/images/no-image.jpg' !!}"
+                <img src="{!! TnMedia::url($product->image ?? null) ?? asset('/images/no-image.jpg') !!}"
                      class="w-12 px-2" alt="img" />
                 <span class="pl-2">{!! $product->name !!}</span>
             </div>
             @foreach($product->version as $version)
                 <div class="attr pl-10">
                     <div class="cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600"
-                         x-on:click="change($dispatch, JSON.parse('{{ json_encode($version->product) }}'))">
+                         x-on:click='change($dispatch, @json($version->product))'>
                         <div class="py-3 px-2">
                             @php
                                 $a = $version->product->attributes->pluck('attribute.title');
@@ -26,7 +26,7 @@
         </div>
     @else
         <div class="cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-600"
-             x-on:click="change($dispatch, JSON.parse('{{ json_encode($product) }}'))">
+             x-on:click='change($dispatch, @json($product))'>
             <div class="flex items-center h-12">
                 <img src="{!! TnMedia::url($product->image ?? null) ?? '/images/no-image.jpg' !!}"
                      class="w-12 px-2" alt="img" />

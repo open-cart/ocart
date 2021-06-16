@@ -6,11 +6,13 @@ namespace Ocart\Ecommerce\Http\Controllers\Customers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Ocart\Ecommerce\Forms\TagForm;
 use Ocart\Ecommerce\Http\Requests\AddCustomerWhenCreateOrderRequest;
 use Ocart\Ecommerce\Http\Requests\TagRequest;
+use Ocart\Ecommerce\Repositories\Criteria\CustomerSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
@@ -22,17 +24,17 @@ use Ocart\Core\Http\Responses\BaseHttpResponse;
 class CustomerController extends BaseController
 {
     /**
-     * @var TagRepository
+     * @var CustomerRepository
      */
-    protected $repo;
+    protected $customerRepository;
 
     protected $addressRepository;
 
-    public function __construct(CustomerRepository $repo, CustomerAddressRepository $addressRepository)
+    public function __construct(CustomerRepository $customerRepository, CustomerAddressRepository $addressRepository)
     {
-        $this->repo = $repo;
+        $this->customerRepository = $customerRepository;
         $this->addressRepository = $addressRepository;
-        $this->authorizeResource($repo->getModel(), 'id');
+        $this->authorizeResource($customerRepository->getModel(), 'id');
     }
 
     /**
@@ -75,7 +77,7 @@ class CustomerController extends BaseController
         $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
         $data['slug_md5'] = md5($data['slug']);
 
-        $page = $this->repo->create($data + [
+        $page = $this->customerRepository->create($data + [
                 'author_id' => Auth::user()->getKey(),
                 'is_featured' => $request->input('is_featured', false),
             ]);
@@ -87,7 +89,7 @@ class CustomerController extends BaseController
     function show($id, FormBuilder $formBuilder)
     {
         page_title()->setTitle(trans('plugins/ecommerce::tags.edit'));
-        $page = $this->repo->skipCriteria()->find($id);
+        $page = $this->customerRepository->skipCriteria()->find($id);
 
         return $formBuilder->create(TagForm::class, ['model' => $page])
             ->setMethod('PUT')
@@ -99,7 +101,7 @@ class CustomerController extends BaseController
     {
         $data = $request->all();
 
-        $page = $this->repo->update($data + [
+        $page = $this->customerRepository->update($data + [
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
@@ -109,14 +111,16 @@ class CustomerController extends BaseController
 
     function destroy(Request $request)
     {
-        $this->repo->delete($request->input('id'));
+        $this->customerRepository->delete($request->input('id'));
 
         return response()->json([]);
     }
 
     public function getSearchCustomers()
     {
-        $customers = $this->repo->paginate(5);
+        $customers = $this->customerRepository
+            ->pushCriteria(CustomerSearchCriteria::class)
+            ->paginate(5);
 
         return view('plugins.ecommerce::customers.get-search-customers', compact('customers'));
     }
@@ -132,8 +136,10 @@ class CustomerController extends BaseController
         AddCustomerWhenCreateOrderRequest $request,
         BaseHttpResponse $response
     ) {
+        DB::beginTransaction();
+
         $request->merge(['password' => Hash::make(time())]);
-        $customer = $this->repo->create($request->input());
+        $customer = $this->customerRepository->create($request->input());
         $customer->avatar = (string)$customer->avatar_url;
 
         $request->merge([
@@ -142,6 +148,8 @@ class CustomerController extends BaseController
         ]);
 
         $address = $this->addressRepository->create($request->input());
+
+        DB::commit();
 
         return $response
             ->setData(compact('address', 'customer'))

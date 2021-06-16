@@ -84,6 +84,8 @@ class ProductController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
+        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+
         event(new CreatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 
         $categoryService->execute($request, $product);
@@ -119,6 +121,8 @@ class ProductController extends BaseController
         $product = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
+
+        $this->repo->sync($product->id, 'tags', $request->input('tags'));
 
         event(new UpdatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 

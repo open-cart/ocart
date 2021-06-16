@@ -52,12 +52,12 @@ class CreateOrderTable extends Migration
         Schema::create('ecommerce_order_addresses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone');
+            $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('country', 120)->nullable();
             $table->string('state', 120)->nullable();
             $table->string('city', 120)->nullable();
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->integer('order_id')->unsigned();
         });
 

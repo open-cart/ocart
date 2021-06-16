@@ -3,6 +3,7 @@ namespace Ocart\Ecommerce\Forms;
 
 use Ocart\Core\Forms\Field;
 use Ocart\Ecommerce\Forms\Fields\CategoryMultiField;
+use Ocart\Ecommerce\Forms\Fields\TagField;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
@@ -42,6 +43,7 @@ class ProductForm extends FormAbstract
             ->setModuleName('ecommerce_product')
             ->setFormOption('class', 'space-y-4')
             ->setFormOption('id', 'from-builder')
+            ->addCustomField('tags', TagField::class)
             ->add('name', Field::TEXT, [
                 'label'      => trans('plugins/ecommerce::products.forms.name'),
                 'rules' => 'min:5',
@@ -98,6 +100,9 @@ class ProductForm extends FormAbstract
                 'label'      =>'Category',
                 'choices'    => get_categories(),
                 'value'      => old('categories', $selectedCategories),
+            ])
+            ->add('tags[]', 'tags', [
+                'label'      => trans('Tags')
             ])
             ->add('brand_id', 'select', [
                 'label'      =>'Brand',

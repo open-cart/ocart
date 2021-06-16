@@ -1,4 +1,10 @@
 // Most options demonstrate the non-default behavior
+renderSimplemde("editor-simplemde");
+if (typeof $.pjax === 'function') {
+    $(document).on('pjax:complete', function() {
+        renderSimplemde("editor-simplemde");
+    })
+}
 
 function renderSimplemde(id) {
     new SimpleMDE({
