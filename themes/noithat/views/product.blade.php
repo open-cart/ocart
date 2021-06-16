@@ -13,7 +13,7 @@
     <section x-data="imageData({{ $product }})" class="section-custom pt-0 product-library text-gray-700 body-font overflow-hidden bg-white">
         <div class="container-custom">
             <div class="lg:w-full mx-auto flex flex-wrap">
-                <div class="lg:w-2/5 w-full ">
+                <div class="lg:w-1/2 w-full ">
                     <div class="mb-4">
                         <img class="w-full h-full object-cover object-center rounded" x-bind:src="images.length ? '/storage/' + images[index] : '/no-images'" alt="ecommerce">
                     </div>
@@ -25,13 +25,8 @@
                         </template>
                     </div>
                 </div>
-                <div class="lg:w-3/5 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-                    @if(count($product->categories)>0)
-                    <h2 class="text-sm title-font text-gray-500">
-                        <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => Arr::get($product->categories->first(), 'slug')]) !!}" class="hover:text-blue-700">{{ Arr::get($product->categories->first(), 'name') }}</a>
-                    </h2>
-                    @endif
-                    <h1 class="text-gray-900 text-lg lg:text-2xl title-font font-medium mb-2">{{ $product->name }}</h1>
+                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                    <h1 class="text-gray-900 text-lg lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
                         <div class="text-sm text-gray-500">
                             <span class="flex items-center">
@@ -39,38 +34,35 @@
                             </span>
                         </div>
                     @endif
-                    <div class="flex mb-4">
-                        <a href="#comment-list" class="flex items-center">
-                            <x-theme::icons.star class="text-yellow-500"/>
-                            <x-theme::icons.star class="text-yellow-500"/>
-                            <x-theme::icons.star class="text-yellow-500"/>
-                            <x-theme::icons.star class="text-yellow-500"/>
-                            <x-theme::icons.star class="text-gray-400"/>
-                            <span class="text-gray-600 ml-3">4 Reviews</span>
-                        </a>
-                        <span class="flex ml-3 pl-3 py-2 border-l-2 border-gray-200">
-                            <a class="text-gray-500 hover:text-blue-700" href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
-                                <x-theme::icons.facebook/>
-                            </a>
-                            <a class="ml-2 text-gray-500 hover:text-blue-700" href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
-                                <x-theme::icons.twitter/>
-                            </a>
+                    <div class="flex items-center mb-4">
+                        @if(!empty($product->sku))
+                        <span class="text-gray-400 border-r-2 border-gray-200 mr-3 pr-3">
+                            Sku: {{ $product->sku }}
                         </span>
+                        @endif
+                        <a href="#comment-list" class="flex items-center">
+                            <x-theme::icons.star class="text-yellow-300"/>
+                            <x-theme::icons.star class="text-yellow-300"/>
+                            <x-theme::icons.star class="text-yellow-300"/>
+                            <x-theme::icons.star class="text-yellow-400"/>
+                            <x-theme::icons.star class="text-yellow-500"/>
+                            <span class="text-gray-500 ml-1">(10 Đánh giá)</span>
+                        </a>
                     </div>
-                    @if(!empty($product->description))
-                        <div class="leading-relaxed text-sm md:text-base pt-4 border-t border-gray-200">{!! $product->description !!}</div>
-                    @endif
                     <div class="mb-4 pt-4 border-t border-gray-200">
                         @if(!empty($product->sell_price) && $product->sell_price > 0)
-                            <span class="title-font font-bold text-2xl text-red-600">{{ format_price($product->sell_price) }}đ</span>
+                            <span class="title-font font-bold text-3xl text-red-600">{{ format_price($product->sell_price) }}đ</span>
                             @if($product->price > $product->sell_price)
                                 <span class="title-font font-medium text-lg text-gray-300 line-through ml-4">{{ format_price($product->price) }}đ</span>
                             @endif
                         @else
-                            <span class="title-font font-bold text-2xl text-red-600">Liên hệ</span>
+                            <span class="title-font font-bold text-3xl text-red-600">Liên hệ</span>
                         @endif
 
                     </div>
+                    @if(!empty($product->description))
+                        <div class="leading-relaxed text-sm md:text-base pt-4 mb-4 border-t border-gray-200">{!! $product->description !!}</div>
+                    @endif
                     <div class="flex items-center pt-4 border-t border-gray-200 my-4">
 {{--                        <div class="flex mr-6">--}}
 {{--                            <span class="mr-3">Color</span>--}}
@@ -101,15 +93,51 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex pt-4 border-t border-gray-200 ">
-                        <button onclick="addToCart({{ $product->id }})" class="flex text-white bg-blue-600 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded">Thêm vào giỏ</button>
-
-                        <button class="ml-auto rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">
-                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
-                            </svg>
+                    <div class="pt-4 border-t border-gray-200 ">
+                        <button onclick="addToCart({{ $product->id }})"
+                                class="items-center whitespace-nowrap inline-flex w-full text-white bg-blue-600 border-0 py-3 px-6 focus:outline-none hover:bg-red-600 rounded">
+                            <x-theme::icons.shopping-cart class="w-8"/>
+                            <span class="w-full text-xl">Thêm vào giỏ</span>
                         </button>
+                        @if(!empty(get_phone()))
+                            <a href="tel:{{ preg_replace( '/[^0-9]/', '', get_phone() )}}"
+                               class="items-center whitespace-nowrap inline-flex w-full text-white bg-green-500 border-0 py-3 px-6 mt-3 focus:outline-none hover:bg-red-600 rounded">
+                                <x-theme::icons.phone class="w-8"/>
+                                <span class="w-full text-xl text-center">{{ get_phone() }}</span>
+                            </a>
+                        @endif
+
+{{--                        <button class="ml-auto rounded-full w-10 h-10 bg-gray-200 p-0 border-0 inline-flex items-center justify-center text-gray-500 ml-4">--}}
+{{--                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">--}}
+{{--                                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>--}}
+{{--                            </svg>--}}
+{{--                        </button>--}}
                     </div>
+
+                    <div class="pt-4 border-t border-gray-200 flex items-center justify-between">
+                        @if(count($product->categories)>0)
+                        <h2 class="text-base title-font text-gray-500 line-clamp-1">
+                            @foreach($product->categories as $key=>$item)
+                                <a href="{!! route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => $item->slug]) !!}" class="hover:text-blue-700">{{ $item->name }}</a>
+
+                            @if(count($product->categories) != $key + 1)
+                                    <span>, </span>
+                                @endif
+                            @endforeach
+                        </h2>
+                        @endif
+
+                        <div class="flex">
+                            <a class="ml-2 p-0.5 text-white bg-blue-700 rounded-md hover:bg-blue-900" href="javascript:void(window.open('https://www.facebook.com/sharer.php?u=' + encodeURIComponent(document.location) + '?t=' + encodeURIComponent(document.title),'_blank'))">
+                                <x-theme::icons.facebook/>
+                            </a>
+                            <a class="ml-2 p-0.5 text-white bg-blue-400 rounded-md hover:bg-blue-700" href="javascript:void(window.open('https://twitter.com/share?url=' + encodeURIComponent(document.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=fabienb&amp;hashtags=koandesign','_blank'))">
+                                <x-theme::icons.twitter/>
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

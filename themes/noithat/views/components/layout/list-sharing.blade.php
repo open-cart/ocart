@@ -1,4 +1,4 @@
-<div id="list-sharing-desktop" class="list-sharing md:opacity-0 z-50 block md:inline-block">
+<div id="list-sharing-desktop" class="list-sharing opacity-0 z-50 block md:inline-block">
     <ul class="list-sharing-ul">
         @if(!empty(get_phone()))
             <li class="list-sharing-item">
@@ -144,7 +144,7 @@
     .list-sharing-ul .list-sharing-item {
         width: 44px;
         margin-bottom: 5px;
-        margin-right: 24px;
+        margin-right: 10px;
     }
 
     .list-sharing-ul .list-sharing-item .list-sharing-item-icon {
