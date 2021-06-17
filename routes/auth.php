@@ -16,11 +16,11 @@ Route::group([
     'as' => 'admin.'
 ], function() {
     Route::get('/login', [AdminLoginController::class, 'create'])
-        ->middleware('guest:admin')
+        ->middleware('admin')
         ->name('login');
 
     Route::post('/login', [AdminLoginController::class, 'store'])
-        ->middleware('guest:admin');
+        ->middleware('admin');
 
     Route::post('/logout', [AdminLoginController::class, 'destroy'])
         ->middleware('auth:admin')

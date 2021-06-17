@@ -1,5 +1,5 @@
 <div x-data="tableActions()">
-    @if(Auth::user()->can($edit))
+    @if($edit && Auth::user()->can($edit))
         <x-button-link-icon
                 href="{!! route($edit, ['id' => $item->id]) !!}"
                 title="{!! __('admin.edit') !!}"
@@ -7,7 +7,7 @@
             <i data-feather="edit" width="18" height="18"></i>
         </x-button-link-icon>
     @endif
-    @if(Auth::user()->can($delete))
+    @if($delete && Auth::user()->can($delete))
         <x-button-icon
                 x-on:click="destroy('{!! $item->id !!}', '{!! route($delete) !!}')"
                 title="{!! __('admin.delete') !!}"
