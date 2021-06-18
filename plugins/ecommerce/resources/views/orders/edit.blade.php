@@ -10,7 +10,6 @@
                      dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300
                      p-4 rounded-md space-y-4"
                     >
-                        <a href="">Reload</a>
                         <div class="title">
                             <h3 class="text-2xl">Order Infomation {!! $order->code !!}</h3>
                         </div>

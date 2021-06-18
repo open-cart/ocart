@@ -145,6 +145,17 @@ class HookServiceProvider extends ServiceProvider
                     ],
                     'active'      => false,
                 ])->registerItem([
+                    'id'          => 'cms-store-shipping-methods',
+                    'priority'    => 1,
+                    'parent_id'   => 'cms-store',
+                    'name'        => 'Shipping',
+                    'icon'        => null,
+                    'url'         => route('ecommerce.shipping.shipping_methods'),
+                    'permissions' => [
+                        'ecommerce.brands.index',
+                    ],
+                    'active'      => false,
+                ])->registerItem([
                     'id'          => 'cms-store-settings-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',

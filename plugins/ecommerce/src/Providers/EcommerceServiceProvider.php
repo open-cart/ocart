@@ -22,11 +22,21 @@ use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ShipmentHistoryRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ShipmentRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ShippingRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ShippingRuleRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\StoreRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\OrderAddressRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\ShipmentHistoryRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\ShipmentRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\ShippingRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\ShippingRuleRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\StoreRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
@@ -45,7 +55,8 @@ class EcommerceServiceProvider extends ServiceProvider {
             ->loadRoutes([
                 'web',
                 'order',
-                'customer'
+                'customer',
+                'shipping'
             ])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
@@ -64,6 +75,12 @@ class EcommerceServiceProvider extends ServiceProvider {
 
         $this->app->bind(CustomerRepository::class, CustomerRepositoryEloquent::class);
         $this->app->bind(CustomerAddressRepository::class, CustomerAddressRepositoryEloquent::class);
+
+        $this->app->bind(StoreRepository::class, StoreRepositoryEloquent::class);
+        $this->app->bind(ShippingRepository::class, ShippingRepositoryEloquent::class);
+        $this->app->bind(ShippingRuleRepository::class, ShippingRuleRepositoryEloquent::class);
+        $this->app->bind(ShipmentRepository::class, ShipmentRepositoryEloquent::class);
+        $this->app->bind(ShipmentHistoryRepository::class, ShipmentHistoryRepositoryEloquent::class);
 
         AliasLoader::getInstance(['EcommerceHelper' => EcommerceHelper::class]);
     }
