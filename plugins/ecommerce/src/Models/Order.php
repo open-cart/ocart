@@ -86,4 +86,9 @@ class Order extends BaseModel
     {
         return $this->hasMany(OrderProduct::class, 'order_id')->with(['product']);
     }
+
+    public function getCodeAttribute($value)
+    {
+        return '#' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
+    }
 }

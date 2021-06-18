@@ -26,11 +26,11 @@ class OrderTable extends TableAbstract
         $data = $this->table->columns([
             'id' => [
                 'name' => 'id',
-                'title' => 'ID',
+                'title' => 'Order',
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->id;
+                    return '<a href="'.route('ecommerce.orders.update', ['id' => $item->id]).'" class="text-blue-500 font-bold">' . $item->code . '</a>';
                 }
             ],
             'customer' => [

@@ -12,7 +12,7 @@
                     >
                         <a href="">Reload</a>
                         <div class="title">
-                            <h3 class="text-2xl">Order Infomation #{!! str_pad($order->id, 8, '1000000000', STR_PAD_LEFT) !!}</h3>
+                            <h3 class="text-2xl">Order Infomation {!! $order->code !!}</h3>
                         </div>
 {{--                        <div>--}}
 {{--                            .... Completed--}}

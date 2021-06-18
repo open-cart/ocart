@@ -14,7 +14,7 @@ return [
         'enable_cart' => 'Enable cart',
         'enable_tax' => 'Enable tax',
     ],
-    'list_order' => 'List order',
+    'list_order' => 'Danh sách đơn hàng',
     'statuses'                            => [
         'pending'    => 'Chưa xử lý',
         'processing' => 'Đang xử lý',
