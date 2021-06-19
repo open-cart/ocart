@@ -153,7 +153,7 @@
                                                         class="bg-gray-100 rounded border border-gray-400
                                                  leading-normal resize-none w-full h-14 py-2 px-3 font-medium
                                                   placeholder-gray-700 focus:outline-none focus:bg-white"></textarea>
-                                                <div class="absolute bottom-0 right-0 py-3 pr-2">
+                                                <div class="absolute bottom-0 right-0 py-2 pr-2">
                                                     <x-button type="button" x-on:click="postComment()">Post</x-button>
                                                 </div>
                                             </div>
@@ -163,7 +163,7 @@
                                         @if($history->action === 'comment')
                                             <li class="mb-2">
                                                 <div class="flex items-center mb-1">
-                                                    <div class="flex bg-white shadow-md py-3 rounded pr-4 z-10 w-full">
+                                                    <div class="flex bg-white shadow-md pt-3 pb-6 rounded pr-4 z-10 w-full">
                                                         <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
                                                             <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
                                                                 <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">

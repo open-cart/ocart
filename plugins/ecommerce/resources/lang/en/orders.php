@@ -12,5 +12,5 @@ return [
     'confirm_order_success'                          => 'Confirm order successfully!',
     'error_when_sending_email'                       => 'There is an error when sending email',
     'sent_confirmation_email_success'                => 'Sent confirmation email successfully!',
-    'order_was_sent_to_shipping_team'                => 'Order was sent to shipping team',
+    'order_was_sent_to_shipping_team_by_username'    => 'Order was sent to shipping team by %user_name%',
 ];

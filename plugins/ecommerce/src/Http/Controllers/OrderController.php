@@ -167,6 +167,15 @@ class OrderController extends BaseController
                 'user_id'     => Auth::user()->getKey(),
             ]);
 
+            if ($order->description) {
+                $this->orderHistoryRepository->create([
+                    'action'      => 'added_note',
+                    'description' => '%user_name% added a note to this order',
+                    'order_id'    => $order->id,
+                    'user_id'     => \Auth::user()->getKey(),
+                ]);
+            }
+
             $payment = $this->paymentRepository->create([
                 'amount'          => $order->amount,
                 'currency'        => get_application_currency()->title,
@@ -294,6 +303,8 @@ class OrderController extends BaseController
     {
         $id = $request->input('id');
 
+        DB::beginTransaction();
+
         $order = $this->repo->find($id);
 
         if ($order->status === OrderStatusEnum::PENDING) {
@@ -307,6 +318,17 @@ class OrderController extends BaseController
         $payment->status = PaymentStatusEnum::COMPLETED;
 
         $payment->save();
+
+        $this->orderHistoryRepository->create([
+            'action'      => 'confirm_payment',
+            'description' => trans('plugins/ecommerce::orders.payment_was_confirmed_by', [
+                'money' => format_price($order->amount, $order->currency_id),
+            ]),
+            'order_id'    => $order->id,
+            'user_id'     => Auth::user()->getKey(),
+        ]);
+
+        DB::commit();
 
         return $response->setMessage('successfully');
     }
@@ -343,6 +365,13 @@ class OrderController extends BaseController
         BaseHttpResponse $response
     ) {
         $this->repo->update(['status' => OrderStatusEnum::COMPLETED], $id);
+
+        $this->orderHistoryRepository->create([
+            'action'      => 'create_shipment',
+            'description' => trans('plugins/ecommerce::orders.order_was_sent_to_shipping_team_by_username'),
+            'order_id'    => $id,
+            'user_id'     => Auth::user()->getKey(),
+        ]);
 
         return $response->setMessage('successfully');
     }
