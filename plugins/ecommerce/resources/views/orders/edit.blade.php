@@ -2,7 +2,7 @@
     <x-slot name="header">
         123
     </x-slot>
-    <div class="py-12 pb-28">
+    <div class="py-12 pb-28 max-w-screen-xl mx-auto">
         <div class="sm:px-6 lg:px-8">
             <div class="grid grid-cols-12 gap-4" x-data="orderUpdateData()">
                 <div class="col-span-9 space-y-4">
@@ -123,30 +123,98 @@
 
                     </div>
 
-                    <div class="bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
+                    <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <h3 class=" p-4">History</h3>
                         <hr>
                         <div class="p-6">
                             <div class="relative w-full">
-                                <div style="left: 6px" class="border-r-4 border-gray-300 absolute h-full top-0 z-0"></div>
+                                <div style="left: 30px" class="border-r-4 border-gray-300 absolute h-full top-0 z-0"></div>
                                 <ul class="list-none m-0 p-0 space-y-8">
-                                    @foreach($order->histories as $history)
                                     <li class="mb-2">
                                         <div class="flex items-center mb-1">
-                                            <div class="bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10">
+                                            <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
+                                                <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
+                                                    <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
+                                                        {{ Str::ucfirst(Auth::user()->name[0]) }}
+                                                    </text>
+                                                </svg>
                                             </div>
-                                            <div class="flex justify-between w-full">
-                                                <div class="flex-1 ml-4 font-medium">
-                                                    {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
+                                            <div class="relative flex flex-grow ml-3">
+                                                <textarea x-init="resize"
+                                                          x-data="{
+                                                              resize() {
+                                                                $el.style.height = '60px';
+                                                                $el.style.height = $el.scrollHeight + 'px';
+                                                              }
+                                                          }"
+                                                          placeholder="Comment"
+                                                          x-on:input="resize"
+                                                          id="order-comment"
+                                                        class="bg-gray-100 rounded border border-gray-400
+                                                 leading-normal resize-none w-full h-14 py-2 px-3 font-medium
+                                                  placeholder-gray-700 focus:outline-none focus:bg-white"></textarea>
+                                                <div class="absolute bottom-0 right-0 py-3 pr-2">
+                                                    <x-button type="button" x-on:click="postComment()">Post</x-button>
                                                 </div>
-                                                <time>
-                                                    <span>
-                                                        {{ $history->created_at }}
-                                                    </span>
-                                                </time>
                                             </div>
                                         </div>
                                     </li>
+                                    @foreach($order->histories as $history)
+                                        @if($history->action === 'comment')
+                                            <li class="mb-2">
+                                                <div class="flex items-center mb-1">
+                                                    <div class="flex bg-white shadow-md py-3 rounded pr-4 z-10 w-full">
+                                                        <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
+                                                            <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
+                                                                <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
+                                                                    {{ Str::ucfirst($history->user->name[0]) }}
+                                                                </text>
+                                                            </svg>
+                                                        </div>
+                                                        <div class="flex flex-grow pl-4">
+                                                            <div class="w-full">
+                                                                <div class="flex justify-between">
+                                                                    <div>
+                                                                        <strong>
+                                                                            {{ Str::ucfirst($history->user->name) }}
+                                                                        </strong>
+                                                                        <span>
+                                                                    {{ $history->created_at->diffForHumans() }}
+                                                                </span>
+                                                                    </div>
+                                                                    <div class="cursor-pointer flex flex-col items-center text-md ">
+                                                                        <svg class="fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                                                                            <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+                                                                        </svg>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="font-medium">
+                                                                    {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
+                                        @else
+                                        <li class="mb-2 pr-4">
+                                            <div class="flex items-center mb-1">
+                                                <div class="bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                </div>
+                                                <div class="flex justify-between flex-grow">
+                                                    <div class="flex-1 ml-4 font-medium">
+                                                        {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
+                                                    </div>
+                                                    <time>
+                                                        <span>
+                                                            {{ $history->created_at->diffForHumans() }}
+                                                        </span>
+                                                    </time>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        @endif
                                     @endforeach
                                 </ul>
                             </div>
@@ -305,6 +373,21 @@
                         .catch(showError)
                         .finally(() => {
                             $.pjax.reload('#body');
+                        })
+                },
+                postComment() {
+                    bodyLoading.show();
+                    axios.post('{!! route('ecommerce.orders.post_comment') !!}', {
+                        order_id: {{ $order->id }},
+                        comment: $("#order-comment").val()
+                    })
+                        .then(res => {
+                            $.pjax.reload('#body');
+                            toast.success('Mark as fulfilled success');
+                        })
+                        .catch(showError)
+                        .finally(() => {
+                            bodyLoading.hide();
                         })
                 }
             };

@@ -476,4 +476,16 @@ class OrderController extends BaseController
 
         return $response->setData($shipping);
     }
+
+    public function postComment(Request $request, BaseHttpResponse $response)
+    {
+        $this->orderHistoryRepository->create([
+            'action'      => 'comment',
+            'description' => $request->comment,
+            'order_id'    => $request->order_id,
+            'user_id'     => Auth::user()->getAuthIdentifier(),
+        ]);
+
+        return $response->setMessage('successfully');
+    }
 }
