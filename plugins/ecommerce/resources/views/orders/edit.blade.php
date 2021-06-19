@@ -216,6 +216,7 @@
             email: ''
         })
         Spruce.store('order', {})
+        Spruce.reset('order', {})
         function showError(e) {
             if (e?.errors) {
                 toast.error(Object.values(e.errors).find(Boolean));

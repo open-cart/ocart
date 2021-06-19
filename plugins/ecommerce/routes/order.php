@@ -24,6 +24,9 @@ Route::group([
 
 
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
+
+                Route::post('get-available-shipping-methods', 'OrderController@getAvailableShippingMethods')
+                ->name('get_available_shipping_methods');
             });
         });
         Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);

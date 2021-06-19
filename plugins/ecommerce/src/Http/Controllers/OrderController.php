@@ -21,6 +21,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Services\HandleShippingFeeService;
 use Ocart\Ecommerce\Table\BrandTable;
 use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Controllers\BaseController;
@@ -389,5 +390,45 @@ class OrderController extends BaseController
         }
 
         return $response->setData($order);
+    }
+
+    public function getAvailableShippingMethods(
+        Request $request,
+        BaseHttpResponse $response,
+        HandleShippingFeeService $shippingFeeService
+    )
+    {
+
+        $weight = 0;
+        $orderAmount = 0;
+
+        foreach ($request->input('products', []) as $p) {
+            $product = $this->productRepository->find($p['id']);
+            if ($product) {
+                $weight += $product->weight;
+                $orderAmount += ($product->sell_price * $p['qty']);
+            }
+        }
+
+        $weight = $weight > 0.1 ? $weight : 0.1;
+
+        $shippingData = [
+            'address'     => $request->input('address'),
+            'country'     => $request->input('country'),
+            'state'       => $request->input('state'),
+            'city'        => $request->input('city'),
+            'weight'      => $weight,
+            'order_total' => $orderAmount,
+        ];
+
+        $shipping = $shippingFeeService->execute($shippingData);
+
+        $shipping[] = [
+            'value' => '',
+            'name' => 'Free shipping',
+            'price' => '0'
+        ];
+
+        return $response->setData($shipping);
     }
 }

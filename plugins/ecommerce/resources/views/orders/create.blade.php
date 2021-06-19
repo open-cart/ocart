@@ -41,8 +41,11 @@
                                         <x-link href="javascript:void(0)"
                                                 data-toggle="modal"
                                                 data-target="#order-discount-modal"
-                                                class="font-medium">
-                                            Add discount
+                                                x-bind:class="{
+                                                    'selected:text-gray-400 pointer-events-none': !data.length,
+                                                }"
+                                                class="hover:underline font-medium">
+                                            {{ trans('plugins/ecommerce::orders.add_discount') }}
                                         </x-link>
                                         <div class="text-sm" x-text="discount_description"></div>
                                     </div>
@@ -51,17 +54,23 @@
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">
                                         <x-link data-toggle="modal"
-                                                data-target="#order-discount-modal"
+                                                data-target="#order-shipping-fee-modal"
                                                 href="javascript:void(0)"
+                                                x-bind:class="{
+                                                    'selected:text-gray-400 pointer-events-none': !data.length,
+                                                }"
                                                 class="font-medium">
-                                            Add shipping fee
+                                            {{ trans('plugins/ecommerce::orders.add_shipping_fee') }}
                                         </x-link>
+                                        <div class="-mt-2">
+                                            <span class="text-xs" x-text="$store.order.shipping_method_name">&nbsp;</span>
+                                        </div>
                                     </div>
-                                    <div class="text-right w-36">{!! format_price(10000) !!}</div>
+                                    <div class="text-right w-36 flex items-end justify-end" x-text="$store.order.shipping_amount">{!! format_price(0) !!}</div>
                                 </div>
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">Total</div>
-                                    <div class="text-right w-36" x-text="totalAmount()">{!! format_price(10000) !!}</div>
+                                    <div class="text-right w-36" x-text="totalAmount()">{!! format_price(0) !!}</div>
                                 </div>
                             </div>
                         </div>
@@ -177,17 +186,55 @@
                 <div x-on:accept="changeDiscount" x-on:close="closeDiscount">
                    <x-plugins.ecommerce::orders.discount-modal/>
                 </div>
+
+                <div x-on:before-show="openShippingFee()">
+                    <x-plugins.ecommerce::orders.shipping-fee-modal/>
+                </div>
             </div>
         </div>
     </div>
     <script>
+        function clone(data) {
+            return JSON.parse(JSON.stringify(data));
+        }
         Spruce.store('customer', {
             name: ''
         })
-        Spruce.store('order', {
+        const storeOrder = {
             total: '',
             payment_method: 'cod',
-            payment_status: null
+            payment_status: null,
+            shipping_option: null,
+            shipping_method_name: 'Default',
+            shipping_amount: 0,
+            changeShippingMethod(shipping_method) {
+                this.shipping_option = shipping_method.value;
+                this.shipping_method_name = shipping_method.name;
+                this.shipping_amount = shipping_method.price;
+                return Promise.resolve();
+            }
+        };
+        Spruce.store('order', storeOrder)
+        Spruce.reset('order', storeOrder)
+        Spruce.store('shipping_methods', {
+            data: [
+                {
+                    value: '',
+                    name: 'Free shipping',
+                    price: 0
+                }
+            ],
+            selected: {
+                value: '',
+                name: 'Default',
+            },
+            changeShippingMethod(shipping_method) {
+                this.selected = {
+                    value: shipping_method.value + '',
+                    name: shipping_method.name,
+                    price: shipping_method.price
+                }
+            }
         })
         function showError(e) {
             if (e?.errors) {
@@ -214,6 +261,20 @@
                 discount_amount: 0,
                 discount_type: 0,
                 discount_description: null,
+                openShippingFee() {
+                    this.$store.shipping_methods.selected = {
+                        value: this.$store.order.shipping_option,
+                        name: this.$store.order.shipping_method_name,
+                        price: this.$store.order.shipping_amount,
+                    }
+                    axios.post('{{ route('ecommerce.orders.get_available_shipping_methods') }}', {
+                        // country: 'VN',
+                        ...this.customer_address,
+                        products: this.data.map(product => ({id: product.id, qty: product.qty})),
+                    }).then((res) => {
+                        this.$store.shipping_methods.data = res.data;
+                    })
+                },
                 changeDiscount() {
                     const discount = Number($("#discount").val());
                     const discount_type = $("#discount_type").val();
@@ -248,6 +309,7 @@
                     return axios.post('{!! route('ecommerce.customers.create-customer-when-creating-order') !!}', this.$store.customer)
                         .then(res => {
                             this.customer = res.data?.customer;
+                            this.$store.order.customerExists = true;
                             toast.success('Customer saved');
                             return this.loadCustomerAddress();
                         })
@@ -258,6 +320,7 @@
                 },
                 changeCustomer(e) {
                     this.customer = e.detail;
+                    this.$store.order.customerExists = true;
                     this.loadCustomerAddress();
                 },
                 loadCustomerAddress() {
@@ -283,6 +346,7 @@
                     return Promise.resolve();
                 },
                 removeCustomer() {
+                    this.$store.order.customerExists = false;
                     this.customer = null;
                 },
                 removeProduct(item) {
@@ -317,6 +381,8 @@
                         discount_amount: this.discount_amount,
                         payment_method: this.$store.order.payment_method,
                         payment_status: this.$store.order.payment_status,
+                        shipping_option: this.$store.order.shipping_option,
+                        shipping_amount: this.$store.order.shipping_amount,
                         products: this.data.map(product => ({id: product.id, qty: product.qty})),
                     }).then((res) => {
                         $.pjax.reload('#body', {
