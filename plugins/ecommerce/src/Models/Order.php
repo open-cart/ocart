@@ -53,6 +53,21 @@ class Order extends BaseModel
     protected static function boot()
     {
         parent::boot();
+
+        static::updating(function (Order $order) {
+            if ($order->isDirty('description')) {
+                $history = new OrderHistory();
+
+                $history->fill([
+                    'action'      => 'added_note',
+                    'description' => '%user_name% added a note to this order',
+                    'order_id'    => $order->id,
+                    'user_id'     => \Auth::user()->getKey(),
+                ]);
+
+                $history->save();
+            }
+        });
     }
 
     /**

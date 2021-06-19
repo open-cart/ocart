@@ -56,3 +56,6 @@ if (!defined('ORDER_RENDER_TABLE_ORDER_UPDATE')) {
     define('ORDER_RENDER_TABLE_ORDER_UPDATE', 'order-render-table-update');
 }
 
+if (!defined('ORDER_MODULE_SCREEN_NAME')) {
+    define('ORDER_MODULE_SCREEN_NAME', 'plugin-order');
+}

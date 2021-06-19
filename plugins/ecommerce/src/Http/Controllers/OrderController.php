@@ -7,6 +7,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
 use Ocart\Ecommerce\Enums\ShippingMethodEnum;
 use Ocart\Ecommerce\Forms\BrandForm;
@@ -15,6 +16,7 @@ use Ocart\Ecommerce\Http\Requests\BrandRequest;
 use Ocart\Ecommerce\Http\Requests\CreateShipmentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
+use Ocart\Ecommerce\Models\Order;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
@@ -263,10 +265,13 @@ class OrderController extends BaseController
     {
         $data = $request->all();
 
-        $page = $this->repo->update($data, $id);
+        /** @var Order $order */
+        $order = $this->repo->update($data, $id);
+
+        event(new UpdatedContentEvent(ORDER_MODULE_SCREEN_NAME, $request, $order));
 
         return $response->setPreviousUrl(route('ecommerce.orders.index'))
-            ->setNextUrl(route('ecommerce.orders.show', $page->id));
+            ->setNextUrl(route('ecommerce.orders.show', $order->id));
     }
 
     function destroy(Request $request)
