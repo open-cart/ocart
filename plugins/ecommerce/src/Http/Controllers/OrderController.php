@@ -415,19 +415,54 @@ class OrderController extends BaseController
         $order = $this->repo->create($data);
 
         if ($order) {
-
-            $payment = $this->paymentRepository->create([
-                'amount'          => $order->amount,
-                'currency'        => get_application_currency()->title,
-                'payment_channel' => $request->input('payment_method', 'cod'),
-                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING),
-                'payment_type'    => 'confirm',
-                'order_id'        => $order->id,
-                'charge_id'       => Str::upper(Str::random(10)),
-                'user_id'         => Auth::user()->getAuthIdentifier(),
+            $this->orderHistoryRepository->create([
+                'action'      => 'create_order_from_payment_page',
+                'description' => __('Order is created from checkout page'),
+                'order_id'    => $order->id,
             ]);
 
-            $order->payment_id = $payment->id;
+            $this->orderHistoryRepository->create([
+                'action'      => 'create_order',
+                'description' => trans('plugins/ecommerce::orders.new_order_from',
+                    [
+                        'order_id' => $order->code,
+                        'customer' => $order->user->name
+                    ]),
+                'order_id'    => $order->id,
+            ]);
+
+            if ($order->description) {
+                $this->orderHistoryRepository->create([
+                    'action'      => 'added_note',
+                    'description' => '%user_name% added a note to this order',
+                    'order_id'    => $order->id,
+                    'user_id'     => $order->user_id,
+                ]);
+            }
+
+//            if ($request->input('payment_status') === PaymentStatusEnum::COMPLETED) {
+//                $this->orderHistoryRepository->create([
+//                    'action'      => 'confirm_payment',
+//                    'description' => trans('plugins/ecommerce::orders.payment_was_confirmed_by', [
+//                        'money' => format_price($order->amount, $order->currency_id),
+//                    ]),
+//                    'order_id'    => $order->id,
+//                    'user_id'     => Auth::user()->getKey(),
+//                ]);
+//            }
+//
+//            $payment = $this->paymentRepository->create([
+//                'amount'          => $order->amount,
+//                'currency'        => get_application_currency()->title,
+//                'payment_channel' => $request->input('payment_method', 'cod'),
+//                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING),
+//                'payment_type'    => 'confirm',
+//                'order_id'        => $order->id,
+//                'charge_id'       => Str::upper(Str::random(10)),
+//                'user_id'         => Auth::user()->getAuthIdentifier(),
+//            ]);
+//
+//            $order->payment_id = $payment->id;
             $order->save();
 
             $this->orderAddressRepository->create([
