@@ -123,18 +123,33 @@
 
                     </div>
 
-                    <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
+                    <div class="bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <h3 class=" p-4">History</h3>
                         <hr>
-                        <div class="p-4">
-                            <ul>
-                                <li>
-                                    <div class="flex justify-between">
-                                        <div>name</div>
-                                        <div>time</div>
-                                    </div>
-                                </li>
-                            </ul>
+                        <div class="p-6">
+                            <div class="relative w-full">
+                                <div style="left: 6px" class="border-r-4 border-gray-300 absolute h-full top-0 z-0"></div>
+                                <ul class="list-none m-0 p-0 space-y-8">
+                                    @foreach($order->histories as $history)
+                                    <li class="mb-2">
+                                        <div class="flex items-center mb-1">
+                                            <div class="bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10">
+                                            </div>
+                                            <div class="flex justify-between w-full">
+                                                <div class="flex-1 ml-4 font-medium">
+                                                    {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
+                                                </div>
+                                                <time>
+                                                    <span>
+                                                        {{ $history->created_at }}
+                                                    </span>
+                                                </time>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

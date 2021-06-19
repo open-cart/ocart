@@ -19,6 +19,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\CurrencyRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerAddressRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderHistoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
@@ -29,6 +30,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\ShippingRuleRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\StoreRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\OrderAddressRepositoryEloquent;
+use Ocart\Ecommerce\Repositories\OrderHistoryRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderProductRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
@@ -72,6 +74,7 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this->app->bind(OrderRepository::class, OrderRepositoryEloquent::class);
         $this->app->bind(OrderAddressRepository::class, OrderAddressRepositoryEloquent::class);
         $this->app->bind(OrderProductRepository::class, OrderProductRepositoryEloquent::class);
+        $this->app->bind(OrderHistoryRepository::class, OrderHistoryRepositoryEloquent::class);
 
         $this->app->bind(CustomerRepository::class, CustomerRepositoryEloquent::class);
         $this->app->bind(CustomerAddressRepository::class, CustomerAddressRepositoryEloquent::class);

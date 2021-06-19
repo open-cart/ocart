@@ -18,6 +18,7 @@ use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderAddressRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderHistoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
@@ -62,10 +63,16 @@ class OrderController extends BaseController
      */
     protected $customerRepository;
 
+    /**
+     * @var OrderHistoryRepository
+     */
+    protected $orderHistoryRepository;
+
     public function __construct(
         OrderRepository $repo,
         OrderAddressRepository $orderAddressRepository,
         OrderProductRepository $orderProductRepository,
+        OrderHistoryRepository $orderHistoryRepository,
         PaymentRepository $paymentRepository,
         CustomerRepository $customerRepository,
         ProductRepository $productRepository
@@ -77,6 +84,7 @@ class OrderController extends BaseController
         $this->productRepository = $productRepository;
         $this->paymentRepository = $paymentRepository;
         $this->customerRepository = $customerRepository;
+        $this->orderHistoryRepository = $orderHistoryRepository;
 
         $this->authorizeResource($repo->getModel(), 'id');
     }
@@ -137,6 +145,25 @@ class OrderController extends BaseController
         $order = $this->repo->create($data);
 
         if ($order) {
+            $this->orderHistoryRepository->create([
+                'action'      => 'create_order_from_payment_page',
+                'description' => trans('plugins/ecommerce::orders.create_order_from_payment_page'),
+                'order_id'    => $order->id,
+            ]);
+
+            $this->orderHistoryRepository->create([
+                'action'      => 'create_order',
+                'description' => trans('plugins/ecommerce::orders.new_order',
+                    ['order_id' => $order->code]),
+                'order_id'    => $order->id,
+            ]);
+
+            $this->orderHistoryRepository->create([
+                'action'      => 'confirm_order',
+                'description' => trans('plugins/ecommerce::orders.order_was_verified_by'),
+                'order_id'    => $order->id,
+                'user_id'     => Auth::user()->getKey(),
+            ]);
 
             $payment = $this->paymentRepository->create([
                 'amount'          => $order->amount,
@@ -151,6 +178,17 @@ class OrderController extends BaseController
 
             $order->payment_id = $payment->id;
             $order->save();
+
+            if ($request->input('payment_status') === PaymentStatusEnum::COMPLETED) {
+                $this->orderHistoryRepository->create([
+                    'action'      => 'confirm_payment',
+                    'description' => trans('plugins/ecommerce::orders.payment_was_confirmed_by', [
+                        'money' => format_price($order->amount, $order->currency_id),
+                    ]),
+                    'order_id'    => $order->id,
+                    'user_id'     => Auth::user()->getKey(),
+                ]);
+            }
 
             if ($request->input('customer_address.name')) {
                 $this->orderAddressRepository->create([
@@ -206,7 +244,9 @@ class OrderController extends BaseController
         page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
 
         $order = $this->repo
-            ->with(['products', 'user', 'address'])
+            ->with(['products', 'user', 'address', 'histories' => function($q) {
+                return $q->orderBy('id', 'desc');
+            }])
             ->skipCriteria()
             ->find($id);
 
