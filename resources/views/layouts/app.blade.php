@@ -48,6 +48,7 @@
             };
             var theme = {{ session('theme', 'themes.blue') }};
             const confirmDelete = {
+                loading: false,
                 callback: () => {},
                 close: () => {},
                 show(accept = () => {}, close = () => {}) {
@@ -60,28 +61,39 @@
                     this.close(this);
                 },
                 accept() {
-                    $('#confirmDelete').hide();
-                    this.callback(this);
+                    if (this.loading) {
+                        return Promise.reject();
+                    }
+
+                    this.loading = true;
+                    return this.callback(this).then(() => {
+                        $('#confirmDelete').hide();
+                    }).finally(() => {
+                        this.loading = false;
+                    })
                 }
             }
             function tableActions() {
                 return {
                     destroy(id, url, options = {}) {
                         confirmDelete.show(() => {
-                            bodyLoading.show();
-                            axios.delete(url, {data: {id}})
+                            // bodyLoading.show();
+                            return axios.delete(url, {data: {id}})
                                 .then(res => {
                                     toast.success('Deleted successfully')
                                     if (options.id) {
-                                        return $.pjax.reload('#' + options.id, {});
+                                        $.pjax.reload('#' + options.id, {});
+                                    } else {
+                                        $.pjax.reload('#body', {});
                                     }
-                                    return $.pjax.reload('#body', {});
+
+                                    return res;
                                 })
                                 .catch(e => {
                                     toast.error(e.message);
                                 })
                                 .finally(() => {
-                                    bodyLoading.hide();
+                                    // bodyLoading.hide();
                                 })
                         })
                     },

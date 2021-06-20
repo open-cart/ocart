@@ -5,7 +5,9 @@ namespace Ocart\Ecommerce\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ocart\Core\Models\BaseModel;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
+use Ocart\Ecommerce\Repositories\Interfaces\ShipmentRepository;
 use Ocart\Payment\Models\Payment;
+use Ocart\Payment\Repositories\PaymentRepository;
 
 class Order extends BaseModel
 {
@@ -68,6 +70,15 @@ class Order extends BaseModel
 
                 $history->save();
             }
+        });
+
+        self::deleting(function (Order $order) {
+            app(ShipmentRepository::class)->deleteWhere(['order_id' => $order->id]);
+            Shipment::where('order_id', $order->id)->delete();
+            OrderHistory::where('order_id', $order->id)->delete();
+            OrderProduct::where('order_id', $order->id)->delete();
+            OrderAddress::where('order_id', $order->id)->delete();
+            app(PaymentRepository::class)->deleteWhere(['order_id' => $order->id]);
         });
     }
 

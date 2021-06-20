@@ -716,7 +716,6 @@
                         })
                 },
                 postComment() {
-                    bodyLoading.show();
                     axios.post('{!! route('ecommerce.orders.comment') !!}', {
                         order_id: {{ $order->id }},
                         comment: $("#order-comment").val()
@@ -724,25 +723,20 @@
                         .then(res => {
                             $.pjax.reload('#body');
                             toast.success('Mark as fulfilled success');
+                            return res;
                         })
-                        .catch(showError)
-                        .finally(() => {
-                            bodyLoading.hide();
-                        })
+                        .catch(showError);
                 },
                 deleteComment(id) {
                     confirmDelete.show(() => {
-                        bodyLoading.show();
-                        axios.delete('{{ route('ecommerce.orders.delete_comment') }}', {data: {id}})
+                        return axios.delete('{{ route('ecommerce.orders.delete_comment') }}', {data: {id}})
                             .then(res => {
                                 toast.success('Deleted successfully')
-                                return $.pjax.reload('#body', {});
+                                $.pjax.reload('#body', {});
+                                return res;
                             })
                             .catch(e => {
                                 toast.error(e.message);
-                            })
-                            .finally(() => {
-                                bodyLoading.hide();
                             })
                     })
                 }
