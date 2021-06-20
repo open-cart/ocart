@@ -355,7 +355,7 @@
                                                     <div x-bind:class="{'shadow-sm rounded bg-white': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
-                                                            <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                            <div class="flex-none @if($history->user_id) bg-indigo-600 @endif rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
                                                             </div>
                                                             <div class="flex-grow">
                                                                 <div class="flex justify-between">
@@ -498,7 +498,7 @@
                                         @else
                                         <li class="mb-2 pr-4">
                                             <div class="flex items-center mb-1">
-                                                <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                <div class="flex-none @if($history->user_id) bg-indigo-600 @else bg-gray-400 @endif rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
                                                 </div>
                                                 <div class="flex-grow">
                                                     <div class="flex justify-between">
