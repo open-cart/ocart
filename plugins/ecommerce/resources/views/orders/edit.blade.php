@@ -131,30 +131,51 @@
                                 <div style="left: 30px" class="border-r-4 border-gray-300 absolute h-full top-0 z-0"></div>
                                 <ul class="list-none m-0 p-0 space-y-8">
                                     <li class="mb-2">
-                                        <div class="flex items-center mb-1">
-                                            <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
+                                        <div class="flex items-top mb-1">
+                                            <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2 mt-1">
                                                 <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
                                                     <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
                                                         {{ Str::ucfirst(Auth::user()->name[0]) }}
                                                     </text>
                                                 </svg>
                                             </div>
-                                            <div class="relative flex flex-grow ml-3">
-                                                <textarea x-init="resize"
-                                                          x-data="{
+                                            <div class="flex-grow ml-3">
+                                                <div>
+                                                    <textarea wrap="off"
+                                                              style="position: fixed; left: 9999px;"
+                                                              id="nguyen1232"
+                                                              x-text="$store.order.comment"></textarea>
+                                                </div>
+                                                <div class="relative w-full">
+                                                    <textarea x-init="resize"
+                                                              x-data="{
                                                               resize() {
-                                                                $el.style.height = '60px';
+                                                                $el.style.height = '55px';
                                                                 $el.style.height = $el.scrollHeight + 'px';
+                                                                this.$store.order.comment = $el.value;
+                                                                const w = $el.scrollWidth - 100;
+                                                                const m = document.getElementById('nguyen1232').scrollWidth;
+                                                                if (m > w) {
+                                                                    $el.style.height = ($el.scrollHeight + 40) + 'px';
+                                                                }
+                                                                console.log(w, m)
                                                               }
                                                           }"
-                                                          placeholder="Comment"
-                                                          x-on:input="resize"
-                                                          id="order-comment"
-                                                        class="bg-gray-100 rounded border border-gray-400
-                                                 leading-normal resize-none w-full h-14 py-2 px-3 font-medium
+                                                              placeholder="Leave a comment..."
+                                                              x-on:input="resize"
+                                                              id="order-comment"
+                                                              class="bg-gray-100 rounded border border-gray-400
+                                                 leading-normal resize-none w-full h-14 py-3 px-3 font-medium
                                                   placeholder-gray-700 focus:outline-none focus:bg-white"></textarea>
-                                                <div class="absolute bottom-0 right-0 py-2 pr-2">
-                                                    <x-button type="button" x-on:click="postComment()">Post</x-button>
+                                                    <div class="absolute bottom-0 right-0 py-3 pr-2">
+                                                        <x-button type="button"
+                                                                  color=""
+                                                                  x-bind:class="{
+                                                                'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment.trim(),
+                                                                'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment.trim()
+                                                              }"
+                                                                  x-on:click="postComment()">Post</x-button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -164,14 +185,14 @@
                                             <li class="mb-2">
                                                 <div class="flex items-center mb-1">
                                                     <div class="flex bg-white shadow-md pt-3 pb-6 rounded pr-4 z-10 w-full">
-                                                        <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
+                                                        <div class="flex-none bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
                                                             <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
                                                                 <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
                                                                     {{ Str::ucfirst($history->user->name[0]) }}
                                                                 </text>
                                                             </svg>
                                                         </div>
-                                                        <div class="flex flex-grow pl-4">
+                                                        <div class="flex-grow pl-4">
                                                             <div class="w-full">
                                                                 <div class="flex justify-between">
                                                                     <div>
@@ -188,9 +209,9 @@
                                                                         </svg>
                                                                     </div>
                                                                 </div>
-                                                                <div class="font-medium">
+                                                                <p class="font-medium break-words flex-shrink">
                                                                     {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
-                                                                </div>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -200,17 +221,19 @@
                                         @else
                                         <li class="mb-2 pr-4">
                                             <div class="flex items-center mb-1">
-                                                <div class="bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
                                                 </div>
-                                                <div class="flex justify-between flex-grow">
-                                                    <div class="flex-1 ml-4 font-medium">
-                                                        {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
-                                                    </div>
-                                                    <time>
+                                                <div class="flex-grow">
+                                                    <div class="flex justify-between">
+                                                        <div class="flex-1 ml-4 font-medium">
+                                                            {!! \Ocart\Ecommerce\Facades\OrderHelper::processHistoryVariables($history) !!}
+                                                        </div>
+                                                        <time>
                                                         <span>
                                                             {{ $history->created_at->diffForHumans() }}
                                                         </span>
-                                                    </time>
+                                                        </time>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </li>
@@ -299,7 +322,9 @@
             email: ''
         })
         Spruce.store('order', {})
-        Spruce.reset('order', {})
+        Spruce.reset('order', {
+            comment: ''
+        })
         function showError(e) {
             if (e?.errors) {
                 toast.error(Object.values(e.errors).find(Boolean));

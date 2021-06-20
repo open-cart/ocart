@@ -14,6 +14,7 @@ use Ocart\Ecommerce\Forms\BrandForm;
 use Ocart\Ecommerce\Http\Requests\AddressRequest;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
 use Ocart\Ecommerce\Http\Requests\CreateShipmentRequest;
+use Ocart\Ecommerce\Http\Requests\OrderCommentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
 use Ocart\Ecommerce\Models\Order;
@@ -541,7 +542,7 @@ class OrderController extends BaseController
         return $response->setData($shipping);
     }
 
-    public function postComment(Request $request, BaseHttpResponse $response)
+    public function postComment(OrderCommentRequest $request, BaseHttpResponse $response)
     {
         $this->orderHistoryRepository->create([
             'action'      => 'comment',
