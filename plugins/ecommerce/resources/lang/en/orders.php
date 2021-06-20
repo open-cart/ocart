@@ -57,4 +57,6 @@ return [
     'mark_payment_as_confirmed'                      => 'Mark <span>:method</span> as confirmed',
     'confirm'                                        => 'Confirm',
     'note'                                           => 'Note',
+    'post'                                           => 'Post',
+    'leave_a_comment'                                => 'Leave a comment...',
 ];

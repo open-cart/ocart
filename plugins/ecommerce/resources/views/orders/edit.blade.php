@@ -142,7 +142,9 @@
                     </div>
 
                     <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
-                        <h3 class=" p-4">History</h3>
+                        <h3 class=" p-4">
+                            {{ trans('plugins/ecommerce::orders.history') }}
+                        </h3>
                         <hr>
                         <div class="p-6">
                             <div class="relative w-full">
@@ -179,7 +181,7 @@
                                                                 console.log(w, m)
                                                               }
                                                           }"
-                                                              placeholder="Leave a comment..."
+                                                              placeholder="{{ trans('plugins/ecommerce::orders.leave_a_comment') }}"
                                                               x-on:input="resize"
                                                               id="order-comment"
                                                               class="bg-gray-100 rounded border border-gray-400
@@ -192,7 +194,19 @@
                                                                 'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment?.trim(),
                                                                 'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment?.trim()
                                                               }"
-                                                                  x-on:click="postComment()">Post</x-button>
+                                                                  x-on:click="postComment()">
+                                                            <template x-if="true">
+                                                                <span x-show="!loadingComment">
+                                                                    {{ trans('plugins/ecommerce::orders.post') }}
+                                                                </span>
+                                                            </template>
+                                                            <template x-if="true">
+                                                                <span x-show="loadingComment">
+                                                                    <x-icons.loading/>
+                                                                </span>
+                                                            </template>
+
+                                                        </x-button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -652,6 +666,7 @@
                 order: @json($order),
                 customer: @json($order->user),
                 customer_address: @json($order->address),
+                loadingComment: false,
                 // note: '',
                 updateNote() {
                     bodyLoading.show();
@@ -716,6 +731,12 @@
                         })
                 },
                 postComment() {
+                    if (this.loadingComment) {
+                        return Promise.reject();
+                    }
+
+                    this.loadingComment = true;
+
                     axios.post('{!! route('ecommerce.orders.comment') !!}', {
                         order_id: {{ $order->id }},
                         comment: $("#order-comment").val()
@@ -725,7 +746,9 @@
                             toast.success('Mark as fulfilled success');
                             return res;
                         })
-                        .catch(showError);
+                        .catch(showError).finally(() => {
+                            this.loadingComment = false;
+                        })
                 },
                 deleteComment(id) {
                     confirmDelete.show(() => {
