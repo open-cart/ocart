@@ -364,7 +364,7 @@
                 showCreateModal() {
                     this.$store.order.submit = this.submit.bind(this);
                     this.$store.order.total = this.totalAmount();
-                    this.$store.order.payment_status = null
+                    this.$store.order.payment_status = '{!! \Ocart\Payment\Enums\PaymentStatusEnum::PENDING !!}'
                 },
                 showCreatePaidModal() {
                     this.$store.order.submit = this.submit.bind(this);

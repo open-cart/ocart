@@ -78,8 +78,9 @@
                             </template>
                         </div>
                         <hr class="-mx-4">
-                        <template x-if="order?.payment?.status !== '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'">
-                            <div class="flex justify-between items-center">
+                        <template x-if="true">
+                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::PENDING !!}'"
+                                 class="flex justify-between items-center">
                                 <div class="flex space-x-2">
                                     <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><g><path d="M23.6 10H.4c-.2 0-.4.5-.4.7v7.7c0 .7.6 1.6 1.3 1.6h21.4c.7 0 1.3-.9 1.3-1.6v-7.7c0-.2-.2-.7-.4-.7zM20 16.6c0 .2-.2.4-.4.4h-4.1c-.2 0-.4-.2-.4-.4v-2.1c0-.2.2-.4.4-.4h4.1c.2 0 .4.2.4.4v2.1zM22.7 4H1.3C.6 4 0 4.9 0 5.6v1.7c0 .2.2.7.4.7h23.1c.3 0 .5-.5.5-.7V5.6c0-.7-.6-1.6-1.3-1.6z"></path></g></svg>
                                     <span class="uppercase">Pendding payment</span>
@@ -89,15 +90,32 @@
                                 </div>
                             </div>
                         </template>
-                        <template x-if="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'">
-                            <div class="flex justify-between items-center">
+                        <template x-if="true">
+                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'" class="flex justify-between items-center">
                                 <div class="flex space-x-2">
                                     <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
                                     <span class="uppercase">Payment <span>{!! format_price($order->payment->amount) !!}</span> was accepted</span>
                                 </div>
-{{--                                <div>--}}
-{{--                                    <x-button data-toggle="modal" data-target="#order-confirm-payment-modal">Refund</x-button>--}}
-{{--                                </div>--}}
+                                <div>
+                                    <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
+                                </div>
+                            </div>
+                        </template>
+                        <template x-if="true">
+                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDING !!}'" class="flex justify-between items-center">
+                                <div class="flex space-x-2">
+                                    <span class="uppercase">Payment was refunded</span>
+                                </div>
+                                <div>
+                                    <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
+                                </div>
+                            </div>
+                        </template>
+                        <template x-if="true">
+                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDED !!}'" class="flex justify-between items-center">
+                                <div class="flex space-x-2">
+                                    <span class="uppercase">Payment was refunded</span>
+                                </div>
                             </div>
                         </template>
                         <hr class="-mx-4">
@@ -171,8 +189,8 @@
                                                         <x-button type="button"
                                                                   color=""
                                                                   x-bind:class="{
-                                                                'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment.trim(),
-                                                                'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment.trim()
+                                                                'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment?.trim(),
+                                                                'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment?.trim()
                                                               }"
                                                                   x-on:click="postComment()">Post</x-button>
                                                     </div>
@@ -313,6 +331,10 @@
                 <div x-on:before-show="openModelEditAdress()">
                     <x-plugins.ecommerce::orders.update-address-modal/>
                 </div>
+
+                <div>
+                    <x-plugins.ecommerce::orders.refund-modal :order="$order"/>
+                </div>
             </div>
         </div>
     </div>
@@ -325,6 +347,50 @@
         Spruce.reset('order', {
             comment: ''
         })
+        var refundStoreOption = {
+            data: @json($order->products).map(x => {
+                return {
+                    ...x,
+                    quantity: x.qty - x.restock_quantity,
+                }
+            }),
+            sumQuantity() {
+                return this.data.reduce((total, p) => {
+                    return total + Number(p.quantity);
+                }, 0);
+            },
+            refund_amount: {{ ($order->payment->amount - $order->payment->refunded_amount) }},
+            refund_note: '',
+            loading: false,
+            save() {
+                if (this.loading) {
+                    return Promise.reject();
+                }
+
+                this.loading = true;
+
+                return axios.post('{{ route('ecommerce.orders.refund', ['id' => $order->id]) }}', {
+                    products: this.data.map(x => {
+                        return {
+                            quantity: x.quantity,
+                            id: x.product_id,
+                        }
+                    }),
+                    refund_amount: this.refund_amount,
+                    refund_note: this.refund_note
+                }).then(res => {
+                    toast.success('Address saved');
+                    $.pjax.reload('#body');
+                    return res;
+                }).catch(showError).finally(() => {
+                    this.loading = false;
+                })
+            }
+        }
+
+        Spruce.store('refund', refundStoreOption)
+        Spruce.reset('refund', refundStoreOption)
+
         function showError(e) {
             if (e?.errors) {
                 toast.error(Object.values(e.errors).find(Boolean));
@@ -385,6 +451,7 @@
                     }).then(res => {
                         $.pjax.reload('#body');
                         toast.success('Confirm payment success');
+                        return res;
                     }).catch(showError).finally(() => {
                         this.$store.order.loading = false;
                     })

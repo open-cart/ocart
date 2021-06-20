@@ -2,12 +2,12 @@
 
 return [
     'statuses'                              => [
-        'pending'   => 'Chưa hoàn tất',
-        'completed' => 'Đã hoàn thành',
-        'refunding' => 'Đã hoàn một phần',
-        'refunded'  => 'Đã hoàn tiền',
-        'fraud'     => 'Gian lận',
-        'failed'    => 'Thất bại',
+        'pending'   => 'Pending',
+        'completed' => 'Completed',
+        'refunding' => 'Partially refunded',
+        'refunded'  => 'Refunded',
+        'fraud'     => 'Fraud',
+        'failed'    => 'Failed',
     ],
     'methods'                               => [
         'paypal'        => 'PayPal',

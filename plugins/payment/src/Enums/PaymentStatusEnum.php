@@ -31,9 +31,10 @@ class PaymentStatusEnum extends Enum
                      text-white bg-green-600 rounded dark:text-gray-300',
                 ]);
             case self::REFUNDING:
+            case self::REFUNDED:
                 return Html::tag('span', $this->getLabel($this->value), [
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none
-                     text-white bg-blue-500 rounded dark:text-gray-300',
+                     text-white bg-yellow-500 rounded dark:text-gray-300',
                 ]);
             case self::PENDING:
                 return Html::tag('span', $this->getLabel($this->value), [
@@ -41,7 +42,7 @@ class PaymentStatusEnum extends Enum
                      text-white bg-yellow-400 rounded dark:bg-yellow-600 dark:text-gray-300',
                 ]);
             default:
-                return '';
+                return "<label>{$this->value}</label>";
                 break;
         }
 

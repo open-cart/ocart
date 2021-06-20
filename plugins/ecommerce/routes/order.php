@@ -20,6 +20,8 @@ Route::group([
                     ->name('update-shipping-address');
                 Route::post('mark-as-fulfilled/{id}', 'OrderController@postMarkAsFulfilled')
                     ->name('mark-as-fulfilled');
+                Route::post('refund/{id}', 'OrderController@postRefund')
+                    ->name('refund');
 
 
 

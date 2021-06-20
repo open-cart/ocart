@@ -17,6 +17,7 @@ use Ocart\Ecommerce\Http\Requests\CreateShipmentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCommentRequest;
 use Ocart\Ecommerce\Http\Requests\OrderCreateRequest;
 use Ocart\Ecommerce\Http\Requests\OrderUpdateRequest;
+use Ocart\Ecommerce\Http\Requests\RefundRequest;
 use Ocart\Ecommerce\Models\Order;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CustomerRepository;
@@ -31,7 +32,9 @@ use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Ecommerce\Table\OrderTable;
+use Ocart\Payment\Enums\PaymentMethodEnum;
 use Ocart\Payment\Enums\PaymentStatusEnum;
+use Ocart\Payment\Models\Payment;
 use Ocart\Payment\Repositories\PaymentRepository;
 
 class OrderController extends BaseController
@@ -39,7 +42,7 @@ class OrderController extends BaseController
     /**
      * @var OrderRepository
      */
-    protected $repo;
+    protected $orderRepository;
 
     /**
      * @var OrderProductRepository
@@ -72,7 +75,7 @@ class OrderController extends BaseController
     protected $orderHistoryRepository;
 
     public function __construct(
-        OrderRepository $repo,
+        OrderRepository $orderRepository,
         OrderAddressRepository $orderAddressRepository,
         OrderProductRepository $orderProductRepository,
         OrderHistoryRepository $orderHistoryRepository,
@@ -81,7 +84,7 @@ class OrderController extends BaseController
         ProductRepository $productRepository
     )
     {
-        $this->repo = $repo;
+        $this->orderRepository = $orderRepository;
         $this->orderAddressRepository = $orderAddressRepository;
         $this->orderProductRepository = $orderProductRepository;
         $this->productRepository = $productRepository;
@@ -89,7 +92,7 @@ class OrderController extends BaseController
         $this->customerRepository = $customerRepository;
         $this->orderHistoryRepository = $orderHistoryRepository;
 
-        $this->authorizeResource($repo->getModel(), 'id');
+        $this->authorizeResource($orderRepository->getModel(), 'id');
     }
 
     /**
@@ -128,8 +131,12 @@ class OrderController extends BaseController
     {
         DB::beginTransaction();
 
+        $amount = $request->get('amount');
+        $shipping_amount = $request->get('shipping_amount');
+        $discount_amount = $request->get('discount_amount');
+
         $data = [
-            'amount'               => $request->input('amount') + $request->input('shipping_amount') - $request->input('discount_amount'),
+            'amount'               => $amount + $shipping_amount - $discount_amount,
             'currency_id'          => get_application_currency_id(),
             'user_id'              => $request->input('customer_id') ?? 0,
             'shipping_method'      => $request->input('shipping_method', ShippingMethodEnum::DEFAULT),
@@ -145,7 +152,7 @@ class OrderController extends BaseController
             'status'               => OrderStatusEnum::PROCESSING,
         ];
 
-        $order = $this->repo->create($data);
+        $order = $this->orderRepository->create($data);
 
         if ($order) {
             $this->orderHistoryRepository->create([
@@ -255,7 +262,7 @@ class OrderController extends BaseController
     {
         page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
 
-        $order = $this->repo
+        $order = $this->orderRepository
             ->with(['products', 'user', 'address', 'histories' => function($q) {
                 return $q->orderBy('id', 'desc');
             }])
@@ -263,7 +270,7 @@ class OrderController extends BaseController
             ->find($id);
 
         return view('plugins.ecommerce::orders.edit', compact('order'));
-//        $page = $this->repo->skipCriteria()->find($id);
+//        $page = $this->orderRepository->skipCriteria()->find($id);
 //
 //        return $formBuilder->create(BrandForm::class, ['model' => $page])
 //            ->setMethod('PUT')
@@ -276,7 +283,7 @@ class OrderController extends BaseController
         $data = $request->all();
 
         /** @var Order $order */
-        $order = $this->repo->update($data, $id);
+        $order = $this->orderRepository->update($data, $id);
 
         event(new UpdatedContentEvent(ORDER_MODULE_SCREEN_NAME, $request, $order));
 
@@ -286,14 +293,14 @@ class OrderController extends BaseController
 
     function destroy(Request $request)
     {
-        $this->repo->delete($request->input('id'));
+        $this->orderRepository->delete($request->input('id'));
 
         return response()->json([]);
     }
 
     function postConfirmOrder(Request $request, BaseHttpResponse $response)
     {
-        $order = $this->repo->update([
+        $order = $this->orderRepository->update([
             'is_confirmed' => 1
         ], $request->input('id'));
 
@@ -306,7 +313,7 @@ class OrderController extends BaseController
 
         DB::beginTransaction();
 
-        $order = $this->repo->find($id);
+        $order = $this->orderRepository->find($id);
 
         if ($order->status === OrderStatusEnum::PENDING) {
             $order->status = OrderStatusEnum::PROCESSING;
@@ -344,7 +351,7 @@ class OrderController extends BaseController
 
         return $response
             ->setData($address)
-            ->setMessage(trans('plugins/ecommerce::order.update_shipping_address_success'));
+            ->setMessage(trans('plugins/ecommerce::orders.update_shipping_address_success'));
     }
 
     public function postCreateShipment(
@@ -365,7 +372,7 @@ class OrderController extends BaseController
         CreateShipmentRequest $request,
         BaseHttpResponse $response
     ) {
-        $this->repo->update(['status' => OrderStatusEnum::COMPLETED], $id);
+        $this->orderRepository->update(['status' => OrderStatusEnum::COMPLETED], $id);
 
         $this->orderHistoryRepository->create([
             'action'      => 'create_shipment',
@@ -413,7 +420,7 @@ class OrderController extends BaseController
             'status'               => OrderStatusEnum::PROCESSING,
         ];
 
-        $order = $this->repo->create($data);
+        $order = $this->orderRepository->create($data);
 
         if ($order) {
             $this->orderHistoryRepository->create([
@@ -552,5 +559,94 @@ class OrderController extends BaseController
         ]);
 
         return $response->setMessage('successfully');
+    }
+
+    public function postRefund($id, RefundRequest $request, BaseHttpResponse $response)
+    {
+        $order = $this->orderRepository->find($id);
+        if ($request->input('refund_amount') > ($order->payment->amount - $order->payment->refunded_amount)) {
+            return $response
+                ->setError()
+                ->setMessage(trans('plugins/ecommerce::orders.refund_amount_invalid', [
+                    'price' => format_price($order->payment->amount - $order->payment->refunded_amount,
+                        get_application_currency()),
+                ]));
+        }
+
+        $hasError = false;
+        foreach ($request->input('products', []) as $p) {
+            $orderProduct = $this->orderProductRepository->findWhere([
+                'product_id' => $p['id'],
+                'order_id'   => $id,
+            ])->first();
+
+            if ($p['quantity'] > ($orderProduct->qty - $orderProduct->restock_quantity)) {
+                $hasError = true;
+                $response
+                    ->setError()
+                    ->setMessage(trans('plugins/ecommerce::orders.number_of_products_invalid'));
+                break;
+            }
+        }
+
+        if ($hasError) {
+            return $response;
+        }
+
+        $payment = $order->payment;
+        if (!$payment) {
+            return $response
+                ->setError()
+                ->setMessage(trans('plugins/ecommerce::orders.cannot_found_payment_for_this_order'));
+        }
+
+        DB::beginTransaction();
+
+        $payment->refunded_amount += $request->input('refund_amount');
+
+        $payment->status = PaymentStatusEnum::REFUNDING;
+
+        if ($payment->refunded_amount == $payment->amount) {
+            $payment->status = PaymentStatusEnum::REFUNDED;
+        }
+
+        $payment->refund_note = $request->input('refund_note');
+        $this->paymentRepository->update($payment->toArray(), $payment->id);
+
+        foreach ($request->input('products', []) as $productId => $p) {
+            DB::table('ecommerce_order_product')->where([
+                'product_id' => $p['id'],
+                'order_id'   => $id,
+            ])->increment('restock_quantity', $p['quantity']);
+
+//            $orderProduct = $this->orderProductRepository->findWhere([
+//                'product_id' => $productId,
+//                'order_id'   => $id,
+//            ])->first();
+//
+//            if ($orderProduct) {
+//                $orderProduct->restock_quantity += $quantity;
+//                $this->orderProductRepository->update($orderProduct->toArray(), $orderProduct->id);
+//            }
+        }
+
+        if ($request->input('refund_amount', 0) > 0) {
+            $this->orderHistoryRepository->create([
+                'action'      => 'refund',
+                'description' => trans('plugins/ecommerce::orders.refund_success_with_price', [
+                    'price' => format_price($request->input('refund_amount')),
+                ]),
+                'order_id'    => $order->id,
+                'user_id'     => Auth::user()->getKey(),
+                'extras'      => json_encode([
+                    'amount' => $request->input('refund_amount'),
+                    'method' => $payment->payment_channel ?? PaymentMethodEnum::COD,
+                ]),
+            ]);
+        }
+
+        DB::commit();
+
+        return $response->setMessage(trans('plugins/ecommerce::orders.refund_success'));
     }
 }
