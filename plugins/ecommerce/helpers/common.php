@@ -326,4 +326,17 @@ if (!function_exists('createSku')) {
     }
 }
 
+if (!function_exists('get_order_id')) {
+    function get_order_id($code = '')
+    {
+        if (Str::startsWith($code, '#')) {
+            $code = Str::of($code)->trim('#');
+        }
+
+        return Str::of($code)->ltrim('0');
+    }
+}
+
+
+
 

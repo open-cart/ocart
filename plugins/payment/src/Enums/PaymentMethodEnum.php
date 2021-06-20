@@ -43,7 +43,7 @@ class PaymentMethodEnum extends Enum
 //                break;
 //        }
 
-        return "<label>{$this->value}</label>";
+        return "<label>{$this->getLabel($this->value)}</label>";
     }
 
     static function getLabel($value) {
