@@ -63,6 +63,7 @@ class Order extends BaseModel
                     'description' => '%user_name% added a note to this order',
                     'order_id'    => $order->id,
                     'user_id'     => \Auth::user()->getKey(),
+                    'extras' => json_encode(['note' => $order->description])
                 ]);
 
                 $history->save();

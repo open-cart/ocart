@@ -6,6 +6,7 @@ use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Ocart\Core\Models\BaseModel;
+use Exception;
 
 class OrderHistory extends BaseModel
 {
@@ -45,5 +46,18 @@ class OrderHistory extends BaseModel
     public function order()
     {
         return $this->belongsTo(Order::class, 'order_id', 'id')->withDefault();
+    }
+
+    /**
+     * @param string $value
+     * @return array
+     */
+    public function getExtrasAttribute($value)
+    {
+        try {
+            return json_decode($value, true) ?: [];
+        } catch (Exception $exception) {
+            return [];
+        }
     }
 }

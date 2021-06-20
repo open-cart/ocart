@@ -2,6 +2,7 @@
 
 namespace Ocart\Payment\Models;
 
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Routing\UrlGenerator;
 use Ocart\Core\Enums\BaseStatusEnum;
@@ -51,5 +52,10 @@ class Payment extends BaseModel
     protected static function boot()
     {
         parent::boot();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(Admin::class, 'user_id')->withDefault();
     }
 }

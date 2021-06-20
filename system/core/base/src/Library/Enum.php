@@ -161,4 +161,12 @@ class Enum implements CastsAttributes, \JsonSerializable, \Stringable
     static function getLabel($value) {
         return trans('core/base::enums.statuses.'.$value);
     }
+
+    /**
+     * @return string
+     */
+    public function label(): ?string
+    {
+        return static::getLabel($this->getValue());
+    }
 }

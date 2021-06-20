@@ -181,6 +181,7 @@ class OrderController extends BaseController
                     'description' => '%user_name% added a note to this order',
                     'order_id'    => $order->id,
                     'user_id'     => \Auth::user()->getKey(),
+                    'extras' => json_encode(['note' => $order->description])
                 ]);
             }
 
@@ -445,6 +446,7 @@ class OrderController extends BaseController
                     'description' => '%user_name% added a note to this order',
                     'order_id'    => $order->id,
                     'user_id'     => $order->user_id,
+                    'extras' => json_encode(['note' => $order->description])
                 ]);
             }
 

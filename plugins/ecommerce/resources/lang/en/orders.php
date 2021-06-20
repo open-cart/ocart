@@ -23,4 +23,38 @@ return [
     'refund_success_with_price'                      => 'Refund success :price',
     'refund_success'                                 => 'Refund successfully!',
     'order_is_not_existed'                           => 'Order is not existed!',
+
+    'order_number'                                   => 'Order number',
+
+    'description'                                    => 'Description',
+    'from'                                           => 'from',
+    'status'                                         => 'Status',
+
+    'refund'                                         => 'Refund',
+    'all_products_are_not_delivered'                 => 'All products are not delivered',
+    'delivery'                                       => 'Delivery',
+    'history'                                        => 'History',
+
+    'successfully'                                   => 'Successfully',
+    'transaction_type'                               => 'Transaction\'s type',
+    'staff'                                          => 'Staff',
+    'refund_date'                                    => 'Refund date',
+    'n_a'                                            => 'N\A',
+    'payment_date'                                   => 'Payment date',
+    'payment_gateway'                                => 'Payment gateway',
+    'transaction_amount'                             => 'Transaction amount',
+    'resend'                                         => 'Resend',
+    'orders'                                         => 'Orders',
+
+    'amount'                                         => 'Amount',
+    'tax_amount'                                     => 'Tax Amount',
+
+    'shipping_amount'                                => 'Shipping amount',
+    'payment_method'                                 => 'Payment method',
+    'payment_status_label'                           => 'Payment status',
+    'manage_orders'                                  => 'Manage orders',
+
+    'mark_payment_as_confirmed'                      => 'Mark <span>:method</span> as confirmed',
+    'confirm'                                        => 'Confirm',
+    'note'                                           => 'Note',
 ];
