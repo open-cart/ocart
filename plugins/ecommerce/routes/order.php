@@ -30,8 +30,12 @@ Route::group([
                 Route::post('get-available-shipping-methods', 'OrderController@getAvailableShippingMethods')
                 ->name('get_available_shipping_methods');
 
-                Route::post('post-comment', 'OrderController@postComment')
-                    ->name('post_comment');
+                Route::post('comment', 'OrderController@postComment')
+                    ->name('comment');
+
+                Route::delete('delete-comment', 'OrderController@postDeleteComment')
+                    ->name('delete_comment');
+
             });
         });
         Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);

@@ -221,7 +221,8 @@
                                                                     {{ $history->created_at->diffForHumans() }}
                                                                 </span>
                                                                     </div>
-                                                                    <div class="cursor-pointer flex flex-col items-center text-md ">
+                                                                    <div x-on:click="deleteComment({{ $history->id }})"
+                                                                         class="cursor-pointer flex flex-col items-center text-md">
                                                                         <svg class="fill-current text-gray-400" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
                                                                             <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
                                                                         </svg>
@@ -716,7 +717,7 @@
                 },
                 postComment() {
                     bodyLoading.show();
-                    axios.post('{!! route('ecommerce.orders.post_comment') !!}', {
+                    axios.post('{!! route('ecommerce.orders.comment') !!}', {
                         order_id: {{ $order->id }},
                         comment: $("#order-comment").val()
                     })
@@ -728,6 +729,22 @@
                         .finally(() => {
                             bodyLoading.hide();
                         })
+                },
+                deleteComment(id) {
+                    confirmDelete.show(() => {
+                        bodyLoading.show();
+                        axios.delete('{{ route('ecommerce.orders.delete_comment') }}', {data: {id}})
+                            .then(res => {
+                                toast.success('Deleted successfully')
+                                return $.pjax.reload('#body', {});
+                            })
+                            .catch(e => {
+                                toast.error(e.message);
+                            })
+                            .finally(() => {
+                                bodyLoading.hide();
+                            })
+                    })
                 }
             };
         }

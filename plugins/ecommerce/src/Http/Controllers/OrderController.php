@@ -560,7 +560,17 @@ class OrderController extends BaseController
             'user_id'     => Auth::user()->getAuthIdentifier(),
         ]);
 
-        return $response->setMessage('successfully');
+        return $response->setMessage(trans('plugins/ecommerce::orders.successfully'));
+    }
+
+    public function postDeleteComment(Request $request, BaseHttpResponse $response)
+    {
+        $this->orderHistoryRepository->deleteWhere([
+            'action'      => 'comment',
+            'id'          => $request->id,
+        ]);
+
+        return $response->setMessage(trans('plugins/ecommerce::orders.successfully'));
     }
 
     public function postRefund($id, RefundRequest $request, BaseHttpResponse $response)
