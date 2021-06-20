@@ -233,7 +233,8 @@
                     }).catch(e => {
                         toast.error(e.message)
                     }).finally(() => {
-                        $.pjax.reload('#body', {});
+                        // $.pjax.reload('#body', {});
+                        window.location.reload();
                     })
                 },
                 disable(key) {
@@ -244,7 +245,8 @@
                     }).catch(e => {
                         toast.error(e.message)
                     }).finally(() => {
-                        $.pjax.reload('#body', {});
+                        // $.pjax.reload('#body', {});
+                        window.location.reload();
                     })
                 },
                 uninstall(key) {

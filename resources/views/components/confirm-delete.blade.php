@@ -39,8 +39,17 @@
                 <x-button
                     x-on:click="$dispatch('accept', { foo: 'bar' })"
                     type="button"
-                    color="bg-blue-500 hover:bg-blue-400 mr-2">
-                    {!! __('admin.action_admin.confirm_yes') !!}
+                    color="bg-blue-500 hover:bg-blue-400 mr-2 w-40 text-center">
+                    <template x-if="true">
+                        <span class="w-full flex justify-center" x-show="loading">
+                            <x-icons.loading/>
+                        </span>
+                    </template>
+                    <template x-if="true">
+                        <span x-show="!loading">
+                            {!! __('admin.action_admin.confirm_yes') !!}
+                        </span>
+                    </template>
                 </x-button>
                 <x-button
                     x-on:click="$dispatch('close', { foo: 'bar' })"

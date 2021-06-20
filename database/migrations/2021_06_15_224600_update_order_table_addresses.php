@@ -13,10 +13,12 @@ class UpdateOrderTableAddresses extends Migration
      */
     public function up()
     {
-        Schema::table('ecommerce_order_addresses', function ($table) {
-            $table->string('phone')->nullable()->change();
-            $table->string('address')->nullable()->change();
-        });
+        if (Schema::hasTable('ecommerce_order_addresses')) {
+            Schema::table('ecommerce_order_addresses', function ($table) {
+                $table->string('phone')->nullable()->change();
+                $table->string('address')->nullable()->change();
+            });
+        }
     }
 
     /**

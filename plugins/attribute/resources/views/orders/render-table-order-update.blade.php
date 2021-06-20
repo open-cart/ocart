@@ -12,13 +12,15 @@
                         <span>(SKU: <strong class="uppercase">{!! $product->product->sku !!}</strong>)</span>
                         @endif
                     </div>
-                    @php
-                        $a = $product->product->attributes->pluck('attribute.title');
-                        $a = $a->map(function ($txt){
-                            return '<span>'.$txt.'</span>';
-                        });
-                        echo join(' / ', $a->toArray());
-                    @endphp
+                    <div>
+                        @php
+                            $a = $product->product->attributes->pluck('attribute.title');
+                            $a = $a->map(function ($txt){
+                                return '<span>'.$txt.'</span>';
+                            });
+                            echo join(' / ', $a->toArray());
+                        @endphp
+                    </div>
                 </div>
             </div>
             <x-link class="flex-1 max-w-24 text-right">

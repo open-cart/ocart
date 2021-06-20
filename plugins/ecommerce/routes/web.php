@@ -40,7 +40,8 @@ Route::group([
             Route::resource('', 'CategoryController')->parameters(['' => 'id']);
         });
 
-        Route::get('product_ajax_search_tags', 'TagController@ajaxSearchTags')->name('product_ajax_search_tags');
+        Route::get('product_ajax_search_tags', 'TagController@ajaxSearchTags')
+            ->name('product_ajax_search_tags');
     });
 
     Route::get('product/{slug}', 'PublicController@product')->name(ROUTE_PRODUCT_SCREEN_NAME);

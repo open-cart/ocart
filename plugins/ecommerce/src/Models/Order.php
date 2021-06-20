@@ -5,7 +5,9 @@ namespace Ocart\Ecommerce\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ocart\Core\Models\BaseModel;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
+use Ocart\Ecommerce\Repositories\Interfaces\ShipmentRepository;
 use Ocart\Payment\Models\Payment;
+use Ocart\Payment\Repositories\PaymentRepository;
 
 class Order extends BaseModel
 {
@@ -53,6 +55,31 @@ class Order extends BaseModel
     protected static function boot()
     {
         parent::boot();
+
+        static::updating(function (Order $order) {
+            if ($order->isDirty('description')) {
+                $history = new OrderHistory();
+
+                $history->fill([
+                    'action'      => 'added_note',
+                    'description' => '%user_name% added a note to this order',
+                    'order_id'    => $order->id,
+                    'user_id'     => \Auth::user()->getKey(),
+                    'extras' => json_encode(['note' => $order->description])
+                ]);
+
+                $history->save();
+            }
+        });
+
+        self::deleting(function (Order $order) {
+            app(ShipmentRepository::class)->deleteWhere(['order_id' => $order->id]);
+            Shipment::where('order_id', $order->id)->delete();
+            OrderHistory::where('order_id', $order->id)->delete();
+            OrderProduct::where('order_id', $order->id)->delete();
+            OrderAddress::where('order_id', $order->id)->delete();
+            app(PaymentRepository::class)->deleteWhere(['order_id' => $order->id]);
+        });
     }
 
     /**
@@ -85,5 +112,18 @@ class Order extends BaseModel
     public function products()
     {
         return $this->hasMany(OrderProduct::class, 'order_id')->with(['product']);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function histories()
+    {
+        return $this->hasMany(OrderHistory::class, 'order_id');
+    }
+
+    public function getCodeAttribute($value)
+    {
+        return '#' . str_pad($this->id, 6, '0', STR_PAD_LEFT);
     }
 }

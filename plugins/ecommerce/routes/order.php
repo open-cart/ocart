@@ -20,10 +20,22 @@ Route::group([
                     ->name('update-shipping-address');
                 Route::post('mark-as-fulfilled/{id}', 'OrderController@postMarkAsFulfilled')
                     ->name('mark-as-fulfilled');
+                Route::post('refund/{id}', 'OrderController@postRefund')
+                    ->name('refund');
 
 
 
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
+
+                Route::post('get-available-shipping-methods', 'OrderController@getAvailableShippingMethods')
+                ->name('get_available_shipping_methods');
+
+                Route::post('comment', 'OrderController@postComment')
+                    ->name('comment');
+
+                Route::delete('delete-comment', 'OrderController@postDeleteComment')
+                    ->name('delete_comment');
+
             });
         });
         Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
