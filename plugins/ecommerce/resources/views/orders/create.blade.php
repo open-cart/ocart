@@ -200,7 +200,7 @@
         Spruce.store('customer', {
             name: ''
         })
-        const storeOrder = {
+        var storeOrder = {
             total: '',
             payment_method: 'cod',
             payment_status: null,
