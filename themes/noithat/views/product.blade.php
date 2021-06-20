@@ -25,7 +25,7 @@
                         </template>
                     </div>
                 </div>
-                <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
+                <div class="lg:w-1/2 w-full lg:pl-10 lg:pb-6 mt-6 lg:mt-0">
                     <h1 class="text-gray-900 text-lg lg:text-3xl title-font font-medium mb-2">{{ $product->name }}</h1>
                     @if($product->address)
                         <div class="text-sm text-gray-500">
