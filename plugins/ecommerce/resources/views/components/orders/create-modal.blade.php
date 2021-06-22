@@ -19,7 +19,7 @@
                           x-model="$store.order.payment_method"
                           class="w-full" name="payment_method">
                     <option value="cod">Cash on delivery (Cod)</option>
-                    <option value="bank">Bank transfer</option>
+                    <option value="bank_transfer">Bank transfer</option>
                 </x-select>
             </div>
             <p>

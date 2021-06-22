@@ -10,6 +10,7 @@
     "configKey": "blog",
     "version": "1.0",
     "providers": [
-        "Ocart\\Payment\\Providers\\PaymentServiceProvider"
+        "Ocart\\Payment\\Providers\\PaymentServiceProvider",
+        "Ocart\\Payment\\Providers\\HookServiceProvider"
     ]
 }

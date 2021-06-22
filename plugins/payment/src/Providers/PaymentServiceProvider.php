@@ -20,6 +20,8 @@ class PaymentServiceProvider extends ServiceProvider
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/payment')
+            ->loadRoutes(['web'])
+            ->loadAndPublishViews()
             ->loadAndPublishTranslations();
     }
 }

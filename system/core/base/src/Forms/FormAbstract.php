@@ -226,4 +226,14 @@ abstract class FormAbstract extends Form
 
         return $this;
     }
+
+    public function processVariable($field)
+    {
+        $values = \Arr::wrap($field->getValue());
+        $res = [];
+        foreach ($values as $val) {
+            $res[] = $field->getOption('labels')[$val];
+        }
+        return join(',', $res);
+    }
 }
