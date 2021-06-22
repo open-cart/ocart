@@ -43,5 +43,6 @@ return [
     'alias'            => 'Alias',
     'publish'          => 'Publish',
     'reload'           => 'Reload',
-    'phone'       => 'Phone'
+    'phone'       => 'Phone',
+    'featured'         => 'Featured'
 ];

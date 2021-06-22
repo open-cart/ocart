@@ -122,7 +122,7 @@ class OrderController extends BaseController
 
     function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::brands.create'));
+        page_title()->setTitle(trans('plugins/ecommerce::orders.create'));
 
         return view('plugins.ecommerce::orders.create');
     }
@@ -261,7 +261,7 @@ class OrderController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
+        page_title()->setTitle(trans('plugins/ecommerce::orders.edit'));
 
         $order = $this->orderRepository
             ->with(['products', 'user', 'address', 'histories' => function($q) {
