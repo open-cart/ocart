@@ -8,6 +8,8 @@ use Illuminate\Routing\ResourceRegistrar;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Assets\CustomAsset;
+use Ocart\Core\Library\Action;
+use Ocart\Core\Library\Filter;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -32,6 +34,9 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->bind(MetaBoxRepository::class, MetaBoxRepositoryEloquent::class);
         $this->app->bind(RequestCriteria::class, \Ocart\Core\Criteria\RequestCriteria::class);
         $this->app->bind(Assets::class, CustomAsset::class);
+
+        $this->app->singleton('action_hook.filter', Filter::class);
+        $this->app->singleton('action_hook.action', Action::class);
 
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'core');
