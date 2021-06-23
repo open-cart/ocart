@@ -188,9 +188,13 @@
                         }
                     });
 
+                    $(e.target).addClass('button-loading')
+
                     axios.post('{{ route('payments.methods.update') }}', o).then(res => {
                         toast.success(res.message);
-                    }).catch(showError).finally(() => {})
+                    }).catch(showError).finally(() => {
+                        $(e.target).removeClass('button-loading')
+                    })
                 },
                 postActivate(e) {
                     const form = $(this.$el).find('form');
@@ -207,7 +211,7 @@
                             o[this.name] = this.value || '';
                         }
                     });
-
+                    $(e.target).addClass('button-loading')
                     axios.post('{{ route('payments.methods.update') }}', o).then(res => {
                         toast.success(res.message);
                         const items = form.find('.toggle-payment-item');
@@ -219,9 +223,11 @@
                                 item.addClass('hidden');
                             }
                         });
-                    }).catch(showError).finally(() => {})
+                    }).catch(showError).finally(() => {
+                        $(e.target).removeClass('button-loading')
+                    })
                 },
-                postDeactivate() {
+                postDeactivate(e) {
                     const form = $(this.$el).find('form');
 
                     const cf = confirm('Do you really want to deactivate this payment method?');
@@ -229,6 +235,7 @@
                     if (!cf) {
                         return;
                     }
+                    $(e.target).addClass('button-loading')
                     axios.post('{{ route('payments.methods.update_status') }}', {
                         type: form.find('[name=type]').val(),
                     }).then(res => {
@@ -242,7 +249,9 @@
                                 item.addClass('hidden');
                             }
                         });
-                    }).catch(showError).finally(() => {});
+                    }).catch(showError).finally(() => {
+                        $(e.target).removeClass('button-loading')
+                    });
                 },
             }
         }
