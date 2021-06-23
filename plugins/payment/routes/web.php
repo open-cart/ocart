@@ -15,6 +15,8 @@ Route::group([
             });
 //            Route::get('transactions', 'PaymentTransactionController@index')->name('transactions.index');
             Route::get('methods', 'PaymentMethodController@index')->name('methods.index');
+            Route::post('methods', 'PaymentMethodController@postUpdate')->name('methods.update');
+            Route::post('method_status', 'PaymentMethodController@postUpdateMethodStatus')->name('methods.update_status');
         });
     });
 });

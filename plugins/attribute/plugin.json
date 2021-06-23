@@ -12,6 +12,5 @@
     "providers": [
         "Ocart\\Attribute\\Providers\\MultipleAttributeServiceProvider",
         "Ocart\\Attribute\\Providers\\HookServiceProvider"
-
     ]
 }

@@ -43,6 +43,10 @@ return [
     'alias'            => 'Alias',
     'publish'          => 'Publish',
     'reload'           => 'Reload',
-    'phone'       => 'Phone',
-    'featured'         => 'Featured'
+    'phone'            => 'Phone',
+    'featured'         => 'Featured',
+    'deactivate'       => 'Deactivate',
+    'update'           => 'Update',
+    'activate'         => 'Activate',
+    'settings'         => 'Settings',
 ];
