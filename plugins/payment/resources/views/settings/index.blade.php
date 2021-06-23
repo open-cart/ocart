@@ -9,25 +9,24 @@
                     <h3 class="text-2xl">{{ trans('plugins/payment::payment.payment_methods') }}</h3>
                     <p>{{ trans('plugins/payment::payment.setup_payment_method_for_website') }}</p>
                 </div>
+
                 <div class="col-span-9 space-y-4">
-                    <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div x-data="paymentMethodAlpine()" class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="p-6 border-b border-gray-200 space-y-2">
                             <div class="flex flex-col">
                                 @php $paymentMethods = \Ocart\Payment\Enums\PaymentMethodEnum::toArray() @endphp
-
                                 <label>
                                     <span>{{ trans('plugins/payment::payment.default_payment_method') }}</span>
-                                    <x-select name="" id="" class="w-full">
+                                    <x-select name="default_payment_method" id="default_payment_method" class="w-full">
                                         @foreach($paymentMethods as $key => $paymentMethod)
                                             <option value="{{ $key }}">{{ $paymentMethod }}</option>
                                         @endforeach
                                     </x-select>
                                 </label>
                             </div>
-                            <x-button>{{ trans('admin.save') }}</x-button>
+                            <x-button x-on:click.prevent="postSaveSetting">{{ trans('admin.save') }}</x-button>
                         </div>
                     </div>
-
                     <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
                         <div class="border-b border-gray-200">
                             <div class="flex space-x-2">
@@ -253,6 +252,17 @@
                         $(e.target).removeClass('button-loading')
                     });
                 },
+                postSaveSetting(e) {
+                    $(e.target).addClass('button-loading')
+                    axios.post('{{ route('payments.methods.update_setting')}}', {
+                        default_payment_method: $("#default_payment_method").val()
+                    })
+                    .then(res => {
+                        toast.success(res.message);
+                    }).catch(showError).finally(() => {
+                        $(e.target).removeClass('button-loading')
+                    })
+                }
             }
         }
     </script>

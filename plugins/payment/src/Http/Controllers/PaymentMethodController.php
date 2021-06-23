@@ -67,4 +67,15 @@ class PaymentMethodController extends BaseController
 
         return $response->setMessage(trans('plugins/payment::payment.turn_off_success'));
     }
+
+    public function postUpdateSetting(Request $request, BaseHttpResponse $response)
+    {
+        $data = $request->except(['_token']);
+
+        foreach ($data as $key => $value) {
+            setting()->set($key, $value)->save();
+        }
+
+        return $response->setMessage(trans('plugins/payment::payment.saved_payment_settings_success'));
+    }
 }
