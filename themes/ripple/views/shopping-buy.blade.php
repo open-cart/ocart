@@ -3,34 +3,88 @@
         @if(get_cart_count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div>
-                    <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Đặt hàng</h2>
-                    <div x-data="{name: '', phone: '', email: '', address: ''}" class="mb-4 form-order-buy">
-                        <div class="mb-4">
-                            <div class="relative">
-                                <x-theme::form.input x-model="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
-                                <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                    <div x-data="{name: '', phone: '', email: '', address: ''}" class="mb-4 form-order-buy space-y-8">
+                        <div>
+                            <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Đặt hàng</h2>
+                            <div class="mb-4">
+                                <div class="relative">
+                                    <x-theme::form.input x-model="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
+                                    <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="relative">
+                                    <x-theme::form.input x-model="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
+                                    <x-theme::icons.phone class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="relative">
+                                    <x-theme::form.input x-model="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
+                                    <x-theme::icons.mail class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <div class="relative">
+                                    <x-theme::form.input x-model="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
+                                    <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                                </div>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <div class="relative">
-                                <x-theme::form.input x-model="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
-                                <x-theme::icons.phone class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                        <div>
+                            <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Shipping method</h2>
+                            <div>
+                                ...
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <div class="relative">
-                                <x-theme::form.input x-model="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
-                                <x-theme::icons.mail class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
+                        <div>
+                            <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Paymment method</h2>
+                            <div>
+                                <ul x-data="{tab: ''}">
+                                    @if (setting('payment_cod_status') == 1)
+                                    <li class="border-b p-2" x-on:click="tab = 'cod'">
+                                        <label>
+                                            <input name="payment_method" value="cod" type="radio" />
+                                            <span>Cod</span>
+                                        </label>
+                                        <template x-if="true">
+                                            <div x-show="tab === 'cod'">
+                                                Trả tiền mặt khi giao hàng
+                                            </div>
+                                        </template>
+                                    </li>
+                                    @endif
+                                    @if (setting('payment_bank_transfer_status') == 1)
+                                    <li class="p-2" x-on:click="tab = 'bank_transfer'">
+                                        <label class="">
+                                            <input name="payment_method" value="bank_transfer" type="radio">
+                                            <span>Bank transfer</span>
+                                        </label>
+                                        <template x-if="true">
+                                            <div x-show="tab === 'bank_transfer'">
+
+                                                Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi.
+                                                Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán.
+                                                Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.
+                                            </div>
+                                        </template>
+                                    </li>
+                                    @endif
+                                    @php
+                                        $payload = [
+        'amount' => get_cart_pricetotal(),
+        'currency' => Str::upper(get_application_currency()->title),
+        'name' => null];
+                                        echo apply_filters(PAYMENT_FILTER_ADDITIONAL_PAYMENT_METHODS, null, $payload)
+                                    @endphp
+                                </ul>
                             </div>
                         </div>
-                        <div class="mb-4">
-                            <div class="relative">
-                                <x-theme::form.input x-model="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
-                                <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
-                            </div>
-                        </div>
+
                         <div class="hero-search-action">
-                            <button type="button" onclick="submit({{ $cart }})" class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Đặt hàng</button>
+                            <button type="button"
+                                    onclick="submit({{ $cart }})"
+                                    class="btn block text-xl text-white bg-blue-600 p-5 w-full text-center rounded-md">Đặt hàng</button>
                         </div>
                         <div class="mt-2 text-base text-gray-500">
                             Bằng cách nhấp vào 'Đặt hàng', bạn đồng ý với chúng tôi <a href="#" class="underline" title="Chính sách bảo mật" target="_blank">Chính sách bảo mật</a> và <a href="#" class="underline" title="điều khoản dịch vụ" target="_blank">điều khoản dịch vụ</a>. Bạn cũng đồng ý nhận cập nhật email định kỳ, giảm giá và ưu đãi đặc biệt.
