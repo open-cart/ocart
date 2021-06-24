@@ -74,7 +74,7 @@
                             <span>
                                {{ trans('Stripe Private Key') }}
                             </span>
-                            <x-input name="stripe_private_key" value="{{ setting('stripe_private_key', '') }}"/>
+                            <x-input name="stripe_private_key" type="password" placeholder="******" value="{{ setting('stripe_private_key', '') }}"/>
                         </label>
                     </div>
                     <div class="w-full flex justify-between">

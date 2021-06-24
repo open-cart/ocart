@@ -3,7 +3,9 @@
     <label class="flex justify-between">
         <span>
             <input name="payment_method" @if(setting('default_payment_method') == STRIPE_PAYMENT_METHOD_NAME) checked @endif value="{{ STRIPE_PAYMENT_METHOD_NAME }}" type="radio">
-            <span>Stripe</span>
+            <span>
+                {{ get_payment_setting('name', STRIPE_PAYMENT_METHOD_NAME) }}
+            </span>
         </span>
         <span class="flex">
                 <img class="stripe-card-icon amex" src="{{asset('images/amex.svg')}}">
@@ -13,7 +15,6 @@
             </span>
     </label>
     <div style="display: none" x-show="tab === '{{ STRIPE_PAYMENT_METHOD_NAME }}'">
-
         <div id="form-cart-stripe" class="mt-4">
         </div>
         {!! get_payment_setting('description', STRIPE_PAYMENT_METHOD_NAME) !!}
