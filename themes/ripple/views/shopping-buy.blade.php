@@ -55,11 +55,13 @@
                                             <li class="border-b p-2" x-on:click="tab = 'cod'">
                                                 <label>
                                                     <input name="payment_method" @if(setting('default_payment_method') == 'cod') checked @endif value="cod" type="radio" />
-                                                    <span>Cod</span>
+                                                    <span>
+                                                        {{ get_payment_setting('name', 'cod', trans('Cash on delivery (COD)')) }}
+                                                    </span>
                                                 </label>
                                                 <template x-if="true">
                                                     <div x-show="tab === 'cod'">
-                                                        Trả tiền mặt khi giao hàng
+                                                        {{ get_payment_setting('description', 'cod', trans('Please pay money directly to the postman, if you choose cash on delivery method (COD).')) }}
                                                     </div>
                                                 </template>
                                             </li>
@@ -68,14 +70,13 @@
                                             <li class="p-2" x-on:click="tab = 'bank_transfer'">
                                                 <label class="">
                                                     <input name="payment_method" @if(setting('default_payment_method') == 'bank_transfer') checked @endif value="bank_transfer" type="radio">
-                                                    <span>Bank transfer</span>
+                                                    <span>
+                                                        {{ get_payment_setting('name', 'bank_transfer', trans('Bank transfer')) }}
+                                                    </span>
                                                 </label>
                                                 <template x-if="true">
                                                     <div x-show="tab === 'bank_transfer'">
-
-                                                        Thực hiện thanh toán vào ngay tài khoản ngân hàng của chúng tôi.
-                                                        Vui lòng sử dụng Mã đơn hàng của bạn trong phần Nội dung thanh toán.
-                                                        Đơn hàng sẽ đươc giao sau khi tiền đã chuyển.
+                                                        {{ get_payment_setting('description', 'bank_transfer', trans('Please send money to our bank account: VCB - 0011004423412')) }}
                                                     </div>
                                                 </template>
                                             </li>
