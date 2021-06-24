@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Facade;
 use Ocart\Payment\PaymentManager;
 use Ocart\Payment\Services\ProduceServiceInterface;
+use Closure;
 
 /**
  * Class Payment
@@ -12,6 +13,7 @@ use Ocart\Payment\Services\ProduceServiceInterface;
  *
  * @method static ProduceServiceInterface driver(string $name)
  * @method static mixed execute(Request $request)
+ * @method static PaymentManager extend($driver, Closure $callback)
  *
  * @see PaymentManager
  * @see ProduceServiceInterface

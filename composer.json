@@ -34,6 +34,7 @@
         "prettus/l5-repository": "^2.7",
         "spatie/laravel-permission": "^4.0",
         "spatie/laravel-pjax": "^2.1",
+        "stripe/stripe-php": "^7.85",
         "yajra/laravel-datatables-html": "^4.36"
     },
     "require-dev": {

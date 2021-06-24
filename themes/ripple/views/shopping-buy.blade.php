@@ -18,25 +18,25 @@
                                 <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Đặt hàng</h2>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="name" name="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
+                                        <x-theme::form.input x-model="name" value="{{ old('name') }}" name="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
                                         <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="phone" name="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
+                                        <x-theme::form.input x-model="phone" value="{{ old('phone') }}" name="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
                                         <x-theme::icons.phone class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="email" name="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
+                                        <x-theme::form.input x-model="email" value="{{ old('email') }}" name="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
                                         <x-theme::icons.mail class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="address" name="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
+                                        <x-theme::form.input x-model="address" value="{{ old('address') }}" name="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
                                         <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>

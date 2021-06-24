@@ -5,6 +5,8 @@ use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Ocart\Payment\Enums\PaymentMethodEnum;
+use Ocart\Payment\Facades\Payment;
+use Ocart\Stripe\StripePaymentService;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -16,7 +18,7 @@ class HookServiceProvider extends ServiceProvider
 
         add_filter(BASE_FILTER_ENUM_ARRAY, function ($values, $class) {
             if ($class == PaymentMethodEnum::class) {
-                $values['STRIPE'] = 'stripe';
+                $values['STRIPE'] = STRIPE_PAYMENT_METHOD_NAME;
             }
 
             return $values;
@@ -24,6 +26,10 @@ class HookServiceProvider extends ServiceProvider
 
         add_filter(PAYMENT_FILTER_ADDITIONAL_PAYMENT_METHODS, [$this, 'registerStripeMethod'], 17, 2);
         add_filter(PAYMENT_METHODS_SETTINGS_PAGE, [$this, 'addPaymentSettings'], 99);
+
+        Payment::extend('stripe', function () {
+            return app(StripePaymentService::class);
+        });
     }
 
     public function boot()

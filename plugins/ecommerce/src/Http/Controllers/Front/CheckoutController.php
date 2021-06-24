@@ -16,6 +16,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\OrderHistoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Payment\Enums\PaymentStatusEnum;
 use Ocart\Payment\Facades\Payment;
 use Ocart\Payment\Repositories\PaymentRepository;
 use Ocart\Theme\Facades\Theme;
@@ -112,7 +113,7 @@ class CheckoutController extends BaseController
             $request->merge([
                 'order_id' => $order->id,
                 'amount'   => $data['amount'],
-                'currency' => $data['currency_id']
+                'currency' => get_application_currency()->title
             ]);
 
             $this->orderHistoryRepository->create([
@@ -147,6 +148,19 @@ class CheckoutController extends BaseController
                 $payment = $this->paymentRepository->findByField('charge_id', $result)->first();
 
                 $order->payment_id = $payment->id;
+
+                if ($payment->status == PaymentStatusEnum::COMPLETED) {
+                    $this->orderHistoryRepository->create([
+                        'action' => 'confirm_payment',
+                        'description' => trans('plugins/ecommerce::orders.payment_was_confirmed_by', [
+                            'money' => format_price($order->amount, $order->currency_id),
+                        ]),
+                        'order_id' => $order->id,
+                        'extras' => json_encode([
+                            'payment_id' => $payment->id,
+                        ])
+                    ]);
+                }
             }
 
             $order->save();
