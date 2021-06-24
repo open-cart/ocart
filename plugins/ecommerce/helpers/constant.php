@@ -32,6 +32,10 @@ if (!defined('ROUTE_SHOPPING_BUY_SCREEN_NAME')) {
     define('ROUTE_SHOPPING_BUY_SCREEN_NAME', 'shopping-buy');
 }
 
+if (!defined('ROUTE_SHOPPING_BUY_INFORMATION')) {
+    define('ROUTE_SHOPPING_BUY_INFORMATION', 'shopping-buy-infomation');
+}
+
 if (!defined('ROUTE_SHOPPING_THANK_SCREEN_NAME')) {
     define('ROUTE_SHOPPING_THANK_SCREEN_NAME', 'shopping-thank');
 }

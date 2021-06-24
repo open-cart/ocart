@@ -13,38 +13,58 @@
             @endif
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
                     <div>
-                        <div x-data="{name: '', phone: '', email: '', address: ''}" class="mb-4 form-order-buy space-y-8">
+                        <div class="mb-4 form-order-buy space-y-8">
                             <div>
                                 <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Đặt hàng</h2>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="name" value="{{ old('name') }}" name="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
+                                        <x-theme::form.input value="{{ Arr::get($info, 'name') }}" name="name" id="name" type="text" class="pl-12" placeholder="Họ tên" required/>
                                         <x-theme::icons.user-circle class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="phone" value="{{ old('phone') }}" name="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
+                                        <x-theme::form.input value="{{ Arr::get($info, 'phone') }}" name="phone" id="phone" type="tel" class="pl-12" placeholder="Số điện thoại" required/>
                                         <x-theme::icons.phone class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="email" value="{{ old('email') }}" name="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
+                                        <x-theme::form.input value="{{ Arr::get($info, 'email') }}" name="email" id="email" type="text" class="pl-12" placeholder="Email" required/>
                                         <x-theme::icons.mail class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
                                 <div class="mb-4">
                                     <div class="relative">
-                                        <x-theme::form.input x-model="address" value="{{ old('address') }}" name="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
+                                        <x-theme::form.input value="{{ Arr::get($info, 'address') }}" name="address" id="address" type="text" class="pl-12" placeholder="Địa chỉ giao hàng" required/>
                                         <x-theme::icons.location-marker class="w-5 text-gray-400 absolute top-7 left-4 transform -translate-y-2/4"/>
                                     </div>
                                 </div>
+                                <input type="hidden" name="country" value="VN">
                             </div>
                             <div>
-                                <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Shipping method</h2>
+                                <h2  class="text-4xl font-bold text-blue-600 capitalize mb-4">Shipping method</h2>
                                 <div>
-                                    ...
+                                    <ul class="border-l border-r border-b">
+                                        @foreach($shippingMethods as $shippingMethod)
+                                            <li >
+                                                <label class="block border-t p-3">
+                                                    <input type="radio"
+                                                           onclick="reloadInfomation()"
+                                                           name="shipping_option"
+                                                           @if(Arr::get($info, 'shipping_option') == $shippingMethod['value']) checked @endif
+                                                           value="{{ $shippingMethod['value'] }}">
+                                                    <span>{{ $shippingMethod['name'] }}</span>
+                                                    -
+                                                    @if ($shippingMethod['price'] > 0)
+                                                        {{ format_price($shippingMethod['price']) }}
+                                                    @else
+                                                        <strong>{{ trans('Free shipping') }}</strong>
+                                                    @endif
+                                                </label>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                             <div>
@@ -103,7 +123,7 @@
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div id="information-order-checkout">
                         <div class="flex justify-between items-center border-b pb-4">
                             <h1 class="font-semibold text-2xl">Thông tin đơn hàng</h1>
                             <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="font-semibold text-sm text-blue-600 hover:text-blue-700">Chỉnh sửa đơn hàng</a>
@@ -124,9 +144,19 @@
                                 </div>
                             @endforeach
                         </div>
+                        <hr>
+                        <div class="flex justify-between items-center">
+                            <div class="font-bold text-xl">{{ trans('Subtotal') }}</div>
+                            <div class="font-bold text-2xl text-red-600">{{ format_price(get_cart_subtotal()) }}</div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div class="font-bold text-xl">{{ trans('Shipping fee') }}</div>
+                            <div class="font-bold text-2xl text-red-600">{{ format_price($shippingAmount) }}</div>
+                        </div>
+                        <hr>
                         <div class="flex justify-between items-center">
                             <div class="font-bold text-2xl">Tổng cộng</div>
-                            <div href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="font-bold text-2xl text-red-600">{{ format_price(get_cart_pricetotal()) }} đ</div>
+                            <div class="font-bold text-2xl text-red-600">{{ format_price($amount) }}</div>
                         </div>
 
                     </div>
@@ -157,38 +187,35 @@
             }
         }
 
-        // document.getElementById('payment-checkout-btn').addEventListener('click', async (event) => {
-        //     console.log('alert');
-        // });
-        function submit(order) {
-            if (order.length < 1) {
-                return;
+        if (typeof reloadInfomation === 'undefined') {
+            function reloadInfomation() {
+                const name = $("#name").val();
+                const phone = $("#phone").val();
+                const email = $("#email").val();
+                const address = $("#address").val();
+                const shipping_option = $("[name=shipping_option]:checked").val();
+                const shipping_method = $("[name=shipping_method]").val();
+
+                axios.get('{!! route(ROUTE_SHOPPING_BUY_SCREEN_NAME) !!}', {
+                    params: {
+                        name: name,
+                        phone: phone,
+                        email: email,
+                        address: address,
+                        shipping_option: shipping_option,
+                        country: 'VN',
+                        shipping_method,
+                        _pjax: '#information-order-checkout'
+                    },
+                    headers: {
+                        'X-PJAX': 'true',
+                        'X-PJAX-Container': '#information-order-checkout'
+                    }
+                }).then((res) => {
+                    console.log('render html')
+                    document.getElementById('information-order-checkout').innerHTML = res;
+                });
             }
-            const name = $("#name").val();
-            const phone = $("#phone").val();
-            const email = $("#email").val();
-            const address = $("#address").val();
-
-            $(".form-order-buy input").removeClass('text-red-600 border border-red-500 error:focus:border-red-500');
-
-            data = Object.values(order);
-            this.data = this.data.map(product => ({id: product.id, qty: product.qty}));
-
-            {{--return axios.post('{!! route(ROUTE_SHOPPING_BUY_SCREEN_NAME) !!}', {--}}
-            {{--    name: name,--}}
-            {{--    phone: phone,--}}
-            {{--    email: email,--}}
-            {{--    address: address,--}}
-            {{--    products: this.data--}}
-            {{--}).then((res) => {--}}
-            {{--    $(".cart-count").text(0);--}}
-            {{--    $.pjax.reload('#body', {--}}
-            {{--        url: '{!! route(ROUTE_SHOPPING_THANK_SCREEN_NAME) !!}'--}}
-            {{--    });--}}
-            {{--    toast.success('Đặt mua hàng thành công.');--}}
-            {{--}).catch(showError).finally(() => {--}}
-            {{--});--}}
         }
     </script>
-
 </x-guest-layout>

@@ -16,6 +16,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\OrderHistoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Services\HandleShippingFeeService;
 use Ocart\Payment\Enums\PaymentStatusEnum;
 use Ocart\Payment\Facades\Payment;
 use Ocart\Payment\Repositories\PaymentRepository;
@@ -77,26 +78,106 @@ class CheckoutController extends BaseController
         $this->orderHistoryRepository = $orderHistoryRepository;
     }
 
-    public function getCheckout()
+    public function getCheckout(Request $request, HandleShippingFeeService $shippingFeeService)
     {
         $cart = get_cart_content();
 
-        return Theme::scope('shopping-buy', compact('cart'), 'packages/ecommerce::shopping-buy');
+        $info = session('checkout_information');
+
+        $weight = 0;
+        $orderAmount = 0;
+
+        foreach ($cart as $p) {
+            $product = $this->productRepository->find($p->id);
+            if ($product) {
+                $weight += $product->weight;
+                $orderAmount += ($product->sell_price * $p->qty);
+            }
+        }
+
+        $weight = $weight > 0.1 ? $weight : 0.1;
+
+        $shippingData = [
+            'country'     => 'VN',
+            'weight'      => $weight,
+            'order_total' => $orderAmount,
+        ];
+
+        $shippingMethods = $shippingFeeService->execute($shippingData);
+
+        $shippingMethods[] = [
+            'value' => '',
+            'name' => 'Free shipping',
+            'price' => '0'
+        ];
+
+        $shippingAmount = 0;
+
+        if ($request->has('shipping_option') || Arr::get($info, 'shipping_option')) {
+            session(['checkout_information' => $request->all()]);
+            $shippingData = [
+                'address'     => $request->input('address'),
+                'country'     => $request->input('country'),
+                'state'       => $request->input('state'),
+                'city'        => $request->input('city'),
+                'weight'      => 0,
+                'order_total' => get_cart_pricetotal()
+            ];
+
+            $shippingMethod = $shippingFeeService->execute($shippingData, $request->input('shipping_method'),
+                $request->input('shipping_option', Arr::get($info, 'shipping_option')));
+
+            $shippingAmount = Arr::get(Arr::first($shippingMethod), 'price', 0);
+        }
+
+        $amount = get_cart_pricetotal();
+
+        return Theme::scope('shopping-buy',
+            compact('cart', 'shippingMethods', 'amount', 'shippingAmount', 'info'),
+            'packages/ecommerce::shopping-buy');
     }
 
-    public function postCheckout(CheckoutRequest $request, BaseHttpResponse $response)
+    public function postCheckout(Request $request,
+                                 BaseHttpResponse $response,
+                                 HandleShippingFeeService $shippingFeeService)
     {
+        session(['checkout_information' => $request->all()]);
+
+        $request = app(CheckoutRequest::class);
+        $request->validateResolved();
+
         $products = get_cart_content();
 
         DB::beginTransaction();
+
+
+
+        $shippingAmount = 0;
+
+        if ($request->has('shipping_method') && !setting('free_ship', $request->input('shipping_method'))) {
+
+            $shippingData = [
+                'address'     => $request->input('address'),
+                'country'     => $request->input('country'),
+                'state'       => $request->input('state'),
+                'city'        => $request->input('city'),
+                'weight'      => 0,
+                'order_total' => get_cart_pricetotal()
+            ];
+
+            $shippingMethod = $shippingFeeService->execute($shippingData, $request->input('shipping_method'),
+                $request->input('shipping_option'));
+
+            $shippingAmount = Arr::get(Arr::first($shippingMethod), 'price', 0);
+        }
 
         $data = [
             'amount' => get_cart_pricetotal(),
             'currency_id' => get_application_currency_id(),
             'user_id' => 0,
-            'shipping_method' => ShippingMethodEnum::DEFAULT,
-            'shipping_option' => '',
-            'shipping_amount' => 0,
+            'shipping_method' => $request->input('shipping_method', ShippingMethodEnum::DEFAULT),
+            'shipping_option' => $request->input('shipping_option'),
+            'shipping_amount' => $shippingAmount,
             'tax_amount' => 0,
             'sub_total' => get_cart_subtotal(),
             'coupon_code' => '',
@@ -112,7 +193,7 @@ class CheckoutController extends BaseController
         if ($order) {
             $request->merge([
                 'order_id' => $order->id,
-                'amount'   => $data['amount'],
+                'amount'   => $data['amount'] + $shippingAmount,
                 'currency' => get_application_currency()->title
             ]);
 
@@ -194,6 +275,8 @@ class CheckoutController extends BaseController
 
             destroy_to_cart();
         }
+
+        session(['checkout_information' => []]);
 
         return $response->setData($order);
     }

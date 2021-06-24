@@ -122,60 +122,52 @@ class HandleShippingFeeService
         $result = [];
 
         if ($address) {
-            $rules = $this->shippingRuleRepository
+            $rule = $this->shippingRuleRepository
                 ->getModel()
-                ->where(function (Builder $query) use ($orderTotal, $address) {
-                    $query
-                        ->where('shipping_id', $address->id)
-                        ->where('type', 'base_on_price')
-                        ->where('from', '<=', $orderTotal)
-                        ->where(function (Builder $sub) use ($orderTotal) {
-                            $sub
-                                ->whereNull('to')
-                                ->orWhere('to', '<=', 0)
-                                ->orWhere('to', '>=', $orderTotal);
-                        });
-                })
-                ->orWhere(function (Builder $query) use ($weight, $address) {
-                    $query
-                        ->where('shipping_id', $address->id)
-                        ->where('type', 'base_on_weight')
-                        ->where('from', '<=', $weight)
-                        ->where(function (Builder $sub) use ($weight) {
-                            $sub
-                                ->whereNull('to')
-                                ->orWhere('to', '<=', 0)
-                                ->orWhere('to', '>=', $weight);
-                        });
-                })
-                ->get();
+                ->where('id', $option)->first();
 
-            foreach ($rules as $rule) {
-                /**
-                 * @var ShippingRule $rule
-                 */
-//                $ruleDetail = $rule
-//                    ->items()
-//                    ->where('city', $city)
-//                    ->where('is_enabled', 1)
-//                    ->first();
-//                if ($ruleDetail) {
-//                    $result[$rule->id] = [
-//                        'name'  => $rule->name,
-//                        'price' => $rule->price + $ruleDetail->adjustment_price,
-//                    ];
-//                } else {
-//                    $result[$rule->id] = [
-//                        'name'  => $rule->name,
-//                        'price' => $rule->price,
-//                    ];
-//                }
-
+            if ($rule) {
                 $result[] = [
                     'value' => $rule->id,
                     'name'  => $rule->name,
                     'price' => $rule->price,
                 ];
+            } else {
+                $rules = $this->shippingRuleRepository
+                    ->getModel()
+                    ->where(function (Builder $query) use ($orderTotal, $address) {
+                        $query
+                            ->where('shipping_id', $address->id)
+                            ->where('type', 'base_on_price')
+                            ->where('from', '<=', $orderTotal)
+                            ->where(function (Builder $sub) use ($orderTotal) {
+                                $sub
+                                    ->whereNull('to')
+                                    ->orWhere('to', '<=', 0)
+                                    ->orWhere('to', '>=', $orderTotal);
+                            });
+                    })
+                    ->orWhere(function (Builder $query) use ($weight, $address) {
+                        $query
+                            ->where('shipping_id', $address->id)
+                            ->where('type', 'base_on_weight')
+                            ->where('from', '<=', $weight)
+                            ->where(function (Builder $sub) use ($weight) {
+                                $sub
+                                    ->whereNull('to')
+                                    ->orWhere('to', '<=', 0)
+                                    ->orWhere('to', '>=', $weight);
+                            });
+                    })
+                    ->get();
+
+                foreach ($rules as $rule) {
+                    $result[] = [
+                        'value' => $rule->id,
+                        'name'  => $rule->name,
+                        'price' => $rule->price,
+                    ];
+                }
             }
         }
 
