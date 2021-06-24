@@ -17,9 +17,13 @@
                                 @php $paymentMethods = \Ocart\Payment\Enums\PaymentMethodEnum::toArray() @endphp
                                 <label>
                                     <span>{{ trans('plugins/payment::payment.default_payment_method') }}</span>
-                                    <x-select name="default_payment_method" id="default_payment_method" class="w-full">
-                                        @foreach($paymentMethods as $key => $paymentMethod)
-                                            <option value="{{ $key }}">{{ $paymentMethod }}</option>
+                                    <x-select name="default_payment_method"
+                                              id="default_payment_method"
+                                              class="w-full">
+                                        @foreach($paymentMethods as $key)
+                                            <option value="{{ $key }}" @if(setting('default_payment_method') == $key) selected @endif>
+                                                {{ \Ocart\Payment\Enums\PaymentMethodEnum::getLabel($key) }}
+                                            </option>
                                         @endforeach
                                     </x-select>
                                 </label>

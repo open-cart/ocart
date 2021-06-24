@@ -168,6 +168,7 @@
         },
         close: () => {
         },
+        loading: false,
         show(accept = () => {
         }, close = () => {
         }) {

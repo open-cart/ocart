@@ -17,12 +17,12 @@ class PaymentManager extends Manager
 
     public function createCodDriver()
     {
-        return new CodPaymentService();
+        return $this->container->make(CodPaymentService::class);
     }
 
-    public function createBankTransfer()
+    public function createBankTransferDriver()
     {
-        return new BankTransferPaymentService();
+        return $this->container->make(BankTransferPaymentService::class);
     }
 }
 

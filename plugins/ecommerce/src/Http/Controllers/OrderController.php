@@ -385,6 +385,10 @@ class OrderController extends BaseController
         return $response->setMessage('successfully');
     }
 
+    /**
+     * @deprecated buy không được dùng nữa. sử dụng checkout trong CheckoutController thay thế.
+     * @return mixed
+     */
     public function buy(Request $request, BaseHttpResponse $response)
     {
         $validatedData = $request->validate([

@@ -40,3 +40,7 @@ if (!defined('FILTER_SLUG_PREFIX')) {
 if (!defined('BASE_FILTER_TABLE_QUERY')) {
     define('BASE_FILTER_TABLE_QUERY', 'BASE_FILTER_TABLE_QUERY');
 }
+
+if (!defined('BASE_FILTER_ENUM_ARRAY')) {
+    define('BASE_FILTER_ENUM_ARRAY', 'BASE_FILTER_ENUM_ARRAY');
+}
