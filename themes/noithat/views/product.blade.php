@@ -369,13 +369,12 @@
             const listattr = {};
             let active_attr = [];
 
+            const paramOrigin = getParamAttrs();
+
             for(const p of product.product_related) {
                 if (p.is_default == 1){
-
                     const active_attr_default = p.items.map(x => x.attribute);
-                    console.log('active_attr_default', active_attr_default);
-
-                    if (active_attr_default?.length == attribute_groups?.length){
+                    if ((paramOrigin?.length != attribute_groups?.length) && (active_attr_default?.length == attribute_groups?.length)){
                         postParamAttrs(active_attr_default);
                     }
                 }
@@ -391,8 +390,8 @@
                 }
             }
 
-            const attrs = getParamAttrs();
-            active_attr = attrs;
+            active_attr = getParamAttrs();
+            console.log('active_attr', active_attr);
 
             for (const item of attribute_groups) {
                 item.attribute = listattr[item.attribute_group_id];
@@ -473,7 +472,6 @@
                 }
             }
         }
-
 
     </script>
     <style>
