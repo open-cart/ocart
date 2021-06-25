@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "649a13ed2149ec610c083a9ca49acc9f",
+    "content-hash": "51577e033c44e9bc8a7bb57d420f7a31",
     "packages": [
         {
             "name": "appstract/laravel-opcache",
@@ -2913,6 +2913,41 @@
             "autoload": {
                 "psr-4": {
                     "Ocart\\Media\\": "src"
+                }
+            },
+            "license": [
+                "proprietary"
+            ],
+            "authors": [
+                {
+                    "name": "Phan Trung Nguyên",
+                    "email": "nguyenpl117@gmail.com"
+                }
+            ],
+            "description": "description",
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "ocart/menu",
+            "version": "dev-dev",
+            "dist": {
+                "type": "path",
+                "url": "./system/packages/menu",
+                "reference": "117f1fbbb3dc46ffeaffcf1a88dc90b14210b6c6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Ocart\\Menu\\Providers\\MenuServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Ocart\\Menu\\": "src"
                 }
             },
             "license": [
@@ -9608,7 +9643,8 @@
         "ocart/plugin-management": 20,
         "ocart/seo-helper": 20,
         "ocart/shortcode": 20,
-        "ocart/theme": 20
+        "ocart/theme": 20,
+        "ocart/menu": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

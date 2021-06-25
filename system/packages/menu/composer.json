@@ -1,0 +1,26 @@
+{
+  "name": "ocart/menu",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "autoload": {
+    "psr-4": {
+      "Ocart\\Menu\\": "src"
+    }
+  },
+  "authors": [
+    {
+      "name": "Phan Trung Nguyên",
+      "email": "nguyenpl117@gmail.com"
+    }
+  ],
+  "extra":{
+    "laravel":{
+      "providers":[
+        "Ocart\\Menu\\Providers\\MenuServiceProvider"
+      ]
+    }
+  },
+  "require": {
+  }
+}
