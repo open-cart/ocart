@@ -324,8 +324,9 @@
         function findProductActive(active_attr = [], attribute_groups = [], product_related = [], product_slug = null){
             if (active_attr?.length == attribute_groups?.length){
                 active_attr.sort(function (a, b){
-                    return a.group - b.group
+                    return a.attribute_group_id - b.attribute_group_id
                 });
+
                 const keyactive = active_attr.map(x => x.id).join(',');
 
                 const product_new = product_related.find(x => x.key.indexOf(keyactive) !== -1)
@@ -391,7 +392,6 @@
             }
 
             active_attr = getParamAttrs();
-            console.log('active_attr', active_attr);
 
             for (const item of attribute_groups) {
                 item.attribute = listattr[item.attribute_group_id];
@@ -431,22 +431,20 @@
 
                     at = this.active.find(x=>x.attribute_group_id == b.attribute_group_id);
 
-                    if (!b.id) {
-                        this.active = this.active.filter(x => x != at);
-                    }
-
                     if (at){
                         at.id = b.id;
                     }else {
                         this.active.push(b)
                     }
 
-                    console.log('active', JSON.stringify(this.active));
-                    if (this.active?.length == this.product?.attribute_groups?.length){
-                        postParamAttrs(this.active);
+                    if (!b.id) {
+                        this.active = this.active.filter(x => x != at);
                     }
 
-                    this.active = getParamAttrs();
+                    if (this.active?.length == this.product?.attribute_groups?.length){
+                        postParamAttrs(this.active);
+                        this.active = getParamAttrs();
+                    }
 
                     const active_attr = this.active;
 
