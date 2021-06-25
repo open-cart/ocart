@@ -169,7 +169,7 @@
         })
     })
 
-    function addToCart(productId) {
+    function addToCart(productId, quantity) {
         axios.post('/add-to-cart', {
             productId: productId
         }).then((res) => {

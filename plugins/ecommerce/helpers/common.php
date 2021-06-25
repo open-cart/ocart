@@ -91,7 +91,7 @@ if (!function_exists('get_list_products_new')) {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
         $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
-        return $repo->orderBy('created_at', 'desc')->limit($limit);
+        return $repo->getNews($limit);
     }
 }
 

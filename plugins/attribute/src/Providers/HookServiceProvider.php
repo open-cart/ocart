@@ -64,8 +64,19 @@ class HookServiceProvider extends ServiceProvider
 
         add_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, function ($screen, $product) {
             if ($screen === ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME) {
+                /** @var ProductVariationRepository $productVariationRepository */
+                $productVariationRepository = app(ProductVariationRepository::class);
+
                 $attributeGroup = $product->attribute_groups()->with('attributeGroup')->get();
+                $productVariation = $product->version()->with('items')->get();
+
+                $productRelated = $productVariationRepository
+                    ->with(['product','items.attribute'])
+                    ->findByField('configurable_product_id', $product->id);
+
                 $product->attribute_groups = $attributeGroup;
+                $product->product_variation = $productVariation;
+                $product->product_related = $productRelated;
             }
         }, 1, 2);
 
