@@ -94,7 +94,10 @@
                                                     <x-select x-on:change="changeSelected(item)"
                                                               x-model="item.selected"
                                                               class="rounded appearance-none bg-blue-50 py-2 focus:outline-none text-base pl-3 pr-10">
-                                                        <option x-bind:value="[0, item.attribute_group.id].join(',')">Lựa chọn</option>
+                                                        <option
+                                                            x-bind:value="[0, item.attribute_group.id].join(',')">
+                                                            Lựa chọn
+                                                        </option>
                                                         <template x-for="(itemAttr, indexAttr) in item.attribute" :key="indexAttr">
                                                             <option x-text="itemAttr.title" :key="itemAttr.id"
                                                                     x-bind:value="[itemAttr.id, itemAttr.attribute_group_id].join(',')"
@@ -410,6 +413,7 @@
 
             const product_active = findProductActive(active_attr, attribute_groups, product_related, product.slug);
             if (product_active){
+                product.id = product_active.product.id;
                 product.price = product_active.product.price;
                 product.sale_price = product_active.product.sale_price;
                 product.sell_price = product_active.product.sell_price;
@@ -452,14 +456,13 @@
 
                     this.product_active = findProductActive(active_attr, this.product.attribute_groups, this.product_related, this.product.slug);
                     if (this.product_active){
+                        this.product.id = this.product_active.product.id;
                         this.product.price = this.product_active.product.price;
                         this.product.sale_price = this.product_active.product.sale_price;
                         this.product.sell_price = this.product_active.product.sell_price;
                         this.product.sku = this.product_active.product.sku;
                         this.product.images = this.product_active.product.images;
                     }
-
-                    // history.pushState({}, '', 'san-pham-11?')
                 },
                 clickAddToCart(product_id, quantity){
                     if (this.active.length < product?.attribute_groups?.length){
