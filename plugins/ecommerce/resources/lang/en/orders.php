@@ -59,4 +59,7 @@ return [
     'note'                                           => 'Note',
     'post'                                           => 'Post',
     'leave_a_comment'                                => 'Leave a comment...',
+
+    'create'                                         => 'Create order',
+    'edit'                                           => 'Edit order',
 ];

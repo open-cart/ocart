@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Ocart\Ecommerce\Http\Controllers;
+namespace Ocart\Ecommerce\Http\Controllers\Front;
 
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Theme\Facades\Theme;
@@ -24,6 +24,10 @@ class ShoppingController
         return Theme::scope('shopping-cart', compact('cart'),'packages/ecommerce::shopping-cart');
     }
 
+    /**
+     * @deprecated buy không được dùng nữa. sử dụng checkout trong CheckoutController thay thế.
+     * @return mixed
+     */
     public function buy()
     {
         $cart = get_cart_content();

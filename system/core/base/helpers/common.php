@@ -52,7 +52,7 @@ if (!function_exists('apply_filters')) {
     function apply_filters(string $name, $result, ...$args)
     {
         $args = func_get_args();
-        return \Ocart\Core\Facades\FilterFacade::fire(array_shift($args), $args);
+        return app('action_hook.filter')->fire(array_shift($args), $args);
     }
 }
 
@@ -65,7 +65,7 @@ if (!function_exists('add_filter')) {
      */
     function add_filter($hook, $callback, $priority = 20, $arguments = 1)
     {
-        \Ocart\Core\Facades\FilterFacade::addListener($hook, $callback, $priority, $arguments);
+        app('action_hook.filter')->addListener($hook, $callback, $priority, $arguments);
     }
 }
 
@@ -78,7 +78,7 @@ if (!function_exists('add_action')) {
      */
     function add_action($hook, $callback, $priority = 20, $arguments = 1)
     {
-        \Ocart\Core\Facades\ActionFacade::addListener($hook, $callback, $priority, $arguments);
+        app('action_hook.action')->addListener($hook, $callback, $priority, $arguments);
     }
 }
 
@@ -86,7 +86,7 @@ if (!function_exists('do_action')) {
     function do_action()
     {
         $args = func_get_args();
-        return \Ocart\Core\Facades\ActionFacade::fire(array_shift($args), $args);
+        return app('action_hook.action')->fire(array_shift($args), $args);
     }
 }
 if (!function_exists('page_title')) {

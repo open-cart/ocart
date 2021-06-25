@@ -122,7 +122,7 @@ class OrderController extends BaseController
 
     function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::brands.create'));
+        page_title()->setTitle(trans('plugins/ecommerce::orders.create'));
 
         return view('plugins.ecommerce::orders.create');
     }
@@ -261,7 +261,7 @@ class OrderController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('plugins/ecommerce::brands.edit'));
+        page_title()->setTitle(trans('plugins/ecommerce::orders.edit'));
 
         $order = $this->orderRepository
             ->with(['products', 'user', 'address', 'histories' => function($q) {
@@ -385,6 +385,10 @@ class OrderController extends BaseController
         return $response->setMessage('successfully');
     }
 
+    /**
+     * @deprecated buy không được dùng nữa. sử dụng checkout trong CheckoutController thay thế.
+     * @return mixed
+     */
     public function buy(Request $request, BaseHttpResponse $response)
     {
         $validatedData = $request->validate([

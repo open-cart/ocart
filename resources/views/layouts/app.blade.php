@@ -106,6 +106,32 @@
                 })
             })
         </script>
+        <style>
+            .button-loading {
+                border: 1px solid #c4cdd5;
+                cursor: default;
+                text-shadow: none;
+                color: transparent!important;
+                position: relative;
+                transition: border-color .2s ease-out;
+                background: #f4f6f8;
+            }
+            .button-loading::before {
+                content: "";
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                border-radius: 50%;
+                border: 3px solid #919eab;
+                border-bottom-color: transparent;
+                margin-top: -9px;
+                margin-left: -9px;
+                width: 18px;
+                height: 18px;
+                -webkit-animation: spin .7s linear infinite;
+                animation: spin 1s linear infinite;
+            }
+        </style>
         @stack('head')
     </head>
     <body class="font-sans antialiased dark:bg-gray-800">

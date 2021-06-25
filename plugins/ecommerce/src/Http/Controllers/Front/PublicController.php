@@ -1,6 +1,6 @@
 <?php
 
-namespace Ocart\Ecommerce\Http\Controllers;
+namespace Ocart\Ecommerce\Http\Controllers\Front;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;

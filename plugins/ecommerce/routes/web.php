@@ -43,17 +43,23 @@ Route::group([
         Route::get('product_ajax_search_tags', 'TagController@ajaxSearchTags')
             ->name('product_ajax_search_tags');
     });
+});
 
+Route::group([
+    'middleware' => 'web',
+    'namespace' => 'Ocart\Ecommerce\Http\Controllers\Front',
+], function () {
     Route::get('product/{slug}', 'PublicController@product')->name(ROUTE_PRODUCT_SCREEN_NAME);
     Route::get('product-category/{slug}', 'PublicController@productCategory')->name(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME);
     Route::get('shop', 'PublicController@shop')->name(ROUTE_SHOP_SCREEN_NAME);
     Route::get('shopping-cart', 'ShoppingController@cart')->name(ROUTE_SHOPPING_CART_SCREEN_NAME);
-    Route::get('shopping-buy', 'ShoppingController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
+
+    Route::get('shopping-buy', 'CheckoutController@getCheckout')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
+    Route::post('shopping-buy', 'CheckoutController@postCheckout');
+
     Route::get('shopping-thank', 'ShoppingController@thank')->name(ROUTE_SHOPPING_THANK_SCREEN_NAME);
 
     Route::post('add-to-cart', 'ShoppingController@add')->name(ROUTE_ADD_TO_CART_NAME);
     Route::post('remove-to-cart', 'ShoppingController@remove')->name(ROUTE_REMOVE_TO_CART_NAME);
     Route::post('update-to-cart', 'ShoppingController@update')->name(ROUTE_UPDATE_TO_CART_NAME);
-
 });
-

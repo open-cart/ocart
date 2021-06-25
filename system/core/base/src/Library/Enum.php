@@ -125,7 +125,7 @@ class Enum implements CastsAttributes, \JsonSerializable, \Stringable
             unset($result['__default']);
         }
 
-        return $result;
+        return apply_filters(BASE_FILTER_ENUM_ARRAY, $result, get_called_class());;
     }
 
     /**

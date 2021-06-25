@@ -38,6 +38,5 @@ Route::group([
 
             });
         });
-        Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
-
+//        Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
     });

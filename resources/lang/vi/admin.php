@@ -43,5 +43,6 @@ return [
     'alias'            => 'URL tùy chỉnh',
     'publish'          => 'Publish',
     'reload'           => 'Làm mới',
-    'phone'            => 'Số điện thoại'
+    'phone'            => 'Số điện thoại',
+    'featured'         => 'Nổi bật'
 ];

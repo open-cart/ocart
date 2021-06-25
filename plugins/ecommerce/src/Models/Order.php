@@ -2,6 +2,7 @@
 
 namespace Ocart\Ecommerce\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Ocart\Core\Models\BaseModel;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
@@ -103,7 +104,7 @@ class Order extends BaseModel
      */
     public function user()
     {
-        return $this->belongsTo(Customer::class, 'user_id', 'id')->withDefault();
+        return $this->belongsTo(User::class, 'user_id', 'id')->withDefault();
     }
 
     /**

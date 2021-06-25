@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="pb-12 pt-3">
+    <div class="pb-12 pt-3 max-w-screen-xl mx-auto">
         <div class="sm:px-6 lg:px-8">
             <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
                 <div x-data="{tab: 1}" class="p-6 border-b border-gray-200">

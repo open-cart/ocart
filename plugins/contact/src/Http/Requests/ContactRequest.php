@@ -20,7 +20,7 @@ class ContactRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'phone' => 'required|min:8|max:12',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255',
             'content' => 'required',
             'status'    => Rule::in(ContactStatusEnum::toArray()),
         ];

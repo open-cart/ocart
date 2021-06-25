@@ -6,8 +6,8 @@ use Ocart\Core\Library\Enum;
 
 class PaymentMethodEnum extends Enum
 {
-    public const STRIPE = 'stripe';
-    public const PAYPAL = 'paypal';
+//    public const STRIPE = 'stripe';
+//    public const PAYPAL = 'paypal';
     public const COD = 'cod';
     public const BANK_TRANSFER = 'bank_transfer';
 
@@ -43,7 +43,7 @@ class PaymentMethodEnum extends Enum
 //                break;
 //        }
 
-        return "<label>{$this->value}</label>";
+        return "<label>{$this->getLabel($this->value)}</label>";
     }
 
     static function getLabel($value) {

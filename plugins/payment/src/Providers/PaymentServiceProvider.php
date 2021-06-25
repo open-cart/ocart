@@ -2,6 +2,7 @@
 namespace Ocart\Payment\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Ocart\Payment\Repositories\PaymentRepository;
 use Ocart\Payment\Repositories\PaymentRepositoryEloquent;
@@ -12,6 +13,8 @@ class PaymentServiceProvider extends ServiceProvider
 
     public function register()
     {
+        Helper::autoload(__DIR__ . '/../../helpers');
+
         $this->app->bind(PaymentRepository::class, PaymentRepositoryEloquent::class);
     }
 
@@ -20,6 +23,8 @@ class PaymentServiceProvider extends ServiceProvider
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/payment')
+            ->loadRoutes(['web'])
+            ->loadAndPublishViews()
             ->loadAndPublishTranslations();
     }
 }

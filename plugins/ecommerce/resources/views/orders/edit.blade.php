@@ -11,11 +11,12 @@
                      p-4 rounded-md space-y-4"
                     >
                         <div class="title">
-                            <h3 class="text-2xl">Order Infomation {!! $order->code !!}</h3>
+                            <h3 class="text-xl">Order Infomation {!! $order->code !!}</h3>
                         </div>
-{{--                        <div>--}}
-{{--                            .... Completed--}}
-{{--                        </div>--}}
+                        <div class="flex items-center">
+                            <x-icons.box class="fill-current text-gray-500"/>
+                            <span class="ml-2">Completed</span>
+                        </div>
                         <hr class="-mx-4">
                         <div class="container-list-order-products">
                             {{ apply_filters(ORDER_RENDER_TABLE_ORDER_UPDATE, view('plugins.ecommerce::components.orders.render-table-order-update', compact('order')), $order) }}

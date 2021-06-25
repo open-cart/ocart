@@ -1,24 +1,33 @@
 <?php
+
 namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
+use Kris\LaravelFormBuilder\FormBuilder;
 use Ocart\Ecommerce\Models\Tag;
+use Ocart\Ecommerce\Repositories\Criteria\OrderSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
+use Ocart\Ecommerce\Forms\OrderFilterForm;
 use Ocart\Table\Abstracts\TableAbstract;
 use Ocart\Table\DataTables;
 
 class OrderTable extends TableAbstract
 {
-    public function __construct(DataTables $table, OrderRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, OrderRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->orderBy('id', 'desc')->with([
-            'payment',
-            'user'
-        ])->paginate();
+        $this->data = $repo->orderBy('id', 'desc')
+            ->pushCriteria(OrderSearchCriteria::class)
+            ->with([
+                'payment',
+                'user'
+            ])->paginate();
         $this->ajax();
+
+        $this->searchForm = $formBuilder->create(OrderFilterForm::class, ['model' => request()->all()])
+            ->renderForm();
     }
 
     public function ajax()
@@ -30,7 +39,7 @@ class OrderTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<a href="'.route('ecommerce.orders.update', ['id' => $item->id]).'" class="text-blue-500 font-bold">' . $item->code . '</a>';
+                    return '<a href="' . route('ecommerce.orders.update', ['id' => $item->id]) . '" class="text-blue-500 font-bold">' . $item->code . '</a>';
                 }
             ],
             'customer' => [
@@ -70,7 +79,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Payment method',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->payment->payment_channel;
+                    return $item->payment->payment_channel->toHtml();
                 }
             ],
             'payment_status' => [
