@@ -2935,13 +2935,14 @@
             "dist": {
                 "type": "path",
                 "url": "./system/packages/menu",
-                "reference": "117f1fbbb3dc46ffeaffcf1a88dc90b14210b6c6"
+                "reference": "6bef22c414cd945c20f99a971e23cfd8736656aa"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Ocart\\Menu\\Providers\\MenuServiceProvider"
+                        "Ocart\\Menu\\Providers\\MenuServiceProvider",
+                        "Ocart\\Menu\\Providers\\HookServiceProvider"
                     ]
                 }
             },

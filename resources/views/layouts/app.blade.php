@@ -191,6 +191,11 @@
 
             let loading;
 
+            // window.onpopstate = function(event) {
+            //     // alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+            //     window.location.reload();
+            // };
+
             $(document).on('pjax:send', function() {
                 loading =  new Promise((resolve, reject) => {
                     setTimeout(function() {
@@ -202,6 +207,7 @@
             $(document).on('pjax:complete', function() {
                 feather.replace({'stroke-width': 1.5})
                 Alpine.start();
+                console.log('complete pjax');
                 loading.then(() => {
                     bodyLoading.hide();
                 })

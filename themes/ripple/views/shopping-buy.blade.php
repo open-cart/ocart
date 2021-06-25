@@ -69,8 +69,10 @@
                             </div>
                             <div>
                                 <h2 class="text-4xl font-bold text-blue-600 capitalize mb-4">Paymment method</h2>
+
                                 <div>
                                     <ul x-data="{tab: '{{ setting('default_payment_method') }}'}">
+                                        <li x-text="tab"></li>
                                         @if (setting('payment_cod_status') == 1)
                                             <li class="border-b p-2" x-on:click="tab = 'cod'">
                                                 <label>
@@ -79,11 +81,9 @@
                                                         {{ get_payment_setting('name', 'cod', trans('Cash on delivery (COD)')) }}
                                                     </span>
                                                 </label>
-                                                <template x-if="true">
-                                                    <div x-show="tab === 'cod'">
-                                                        {{ get_payment_setting('description', 'cod', trans('Please pay money directly to the postman, if you choose cash on delivery method (COD).')) }}
-                                                    </div>
-                                                </template>
+                                                <div style="display: none" x-show="tab === 'cod'">
+                                                    {{ get_payment_setting('description', 'cod', trans('Please pay money directly to the postman, if you choose cash on delivery method (COD).')) }}
+                                                </div>
                                             </li>
                                         @endif
                                         @if (setting('payment_bank_transfer_status') == 1)
@@ -94,11 +94,9 @@
                                                         {{ get_payment_setting('name', 'bank_transfer', trans('Bank transfer')) }}
                                                     </span>
                                                 </label>
-                                                <template x-if="true">
-                                                    <div x-show="tab === 'bank_transfer'">
-                                                        {{ get_payment_setting('description', 'bank_transfer', trans('Please send money to our bank account: VCB - 0011004423412')) }}
-                                                    </div>
-                                                </template>
+                                                <div style="display: none" x-show="tab === 'bank_transfer'">
+                                                    {{ get_payment_setting('description', 'bank_transfer', trans('Please send money to our bank account: VCB - 0011004423412')) }}
+                                                </div>
                                             </li>
                                         @endif
                                         @php

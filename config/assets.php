@@ -12,6 +12,8 @@ return [
         'pjax',
         'tnmedia',
         'tinymce',
+        'nestable',
+        'nestable-menu'
     ],
     'styles'         => [
         'app',
@@ -95,6 +97,20 @@ return [
                 'location' => 'header',
                 'src'      => [
                     'local' => 'access/prismjs/prism.js',
+                ],
+            ],
+            'nestable' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/nestable/jquery.nestable.js',
+                ],
+            ],
+            'nestable-menu' => [
+                'use_cdn'  => true,
+                'location' => 'header',
+                'src'      => [
+                    'local' => 'access/nestable/nestable.menu.js',
                 ],
             ],
         ],

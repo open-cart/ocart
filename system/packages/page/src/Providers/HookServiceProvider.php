@@ -45,6 +45,8 @@ class HookServiceProvider extends ServiceProvider
                 'page' => $page
             ];
         });
+
+        add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'addMenuAction']);
     }
 
     public function boot()
@@ -54,5 +56,10 @@ class HookServiceProvider extends ServiceProvider
                 $view->withShortcodes();
             });
         }
+    }
+
+    public function addMenuAction()
+    {
+        echo view('packages.page::menu-action');
     }
 }

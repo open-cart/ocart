@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>-->
+<script src="alpine.js" defer></script>
+
+<div id="body">
+    <div x-data="{item: [1,2,3,5,5,7,8,9]}">
+        <template x-for="i in item">
+            <span x-text="i"></span>
+        </template>
+    </div>
+</div>
+<a onclick="test()">test</a>
+<script>
+    function test() {
+        // history.replaceState({page: 3}, "title 3", "?page=3");
+        window.history.pushState({page: 3}, "title 3", "?page=3")
+        // history.replaceState(null, "", "index.html");
+        // window.location.replace('http://localhost:63342/ocart/public/access/nestable/alp.html?page=1')
+        setTimeout(function() {
+            document.getElementById("body").innerHTML = '....';
+            Alpine.start()
+        }, 500)
+
+    }
+</script>
+</body>
+</html>
