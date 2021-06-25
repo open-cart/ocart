@@ -1,5 +1,11 @@
 $(document).ready(function () {
     function load() {
+        const parent = $("#nestable");
+
+        if (!parent.length) {
+            return;
+        }
+
         const menu_nodes = $("#nestable-input").data('input');
 
         function recursive(data) {
@@ -24,8 +30,6 @@ $(document).ready(function () {
         }
 
         const nodes = recursive(menu_nodes);
-
-        const parent = $("#nestable");
 
         const templates = `
 <div>

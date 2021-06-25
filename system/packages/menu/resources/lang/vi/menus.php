@@ -6,4 +6,5 @@ return [
     'target' => 'Target',
     'add_to_menu' => 'Add to menu',
     'url' => 'Url',
+    'content' => 'Menus',
 ];
