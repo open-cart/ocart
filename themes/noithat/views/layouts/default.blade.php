@@ -169,9 +169,12 @@
         })
     })
 
-    function addToCart(productId, quantity) {
+    function addToCart(productId, slug = null, quantity = 1, optionAttrs = []) {
         axios.post('/add-to-cart', {
-            productId: productId
+            productId: productId,
+            slug: slug,
+            quantity: quantity,
+            optionAttrs: optionAttrs,
         }).then((res) => {
             toast.success(res.message);
             $(".cart-count").text(res.count);

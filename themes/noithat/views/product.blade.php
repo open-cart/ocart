@@ -19,9 +19,9 @@
                             <img class="w-full h-full object-cover object-center rounded" x-bind:src="product.images.length ? product.images[index] : '/no-images'" alt="ecommerce">
                         </div>
                         <div class="mt-2">
-                            <template x-for="(item, i) in product.images" :key="item">
+                            <template x-for="(item, i) in product?.images" :key="item">
                                 <div x-on:click="index = i" class="inline-block w-12 h-12 mr-1">
-                                    <img x-bind:src="item"
+                                    <img x-bind:src="item || '/images/no-image.jpg'"
                                          alt=""
                                          class="w-full h-full object-cover border border-solid"
                                          :class="index == i && 'border-red-400'"
@@ -29,14 +29,6 @@
                                 </div>
                             </template>
                         </div>
-
-                        {{--                        <div class="owl-carousel owl-theme mt-2 relative">--}}
-                        {{--                            <template x-for="(item, i) in images" :key="item">--}}
-                        {{--                                <div x-on:click="index = i" class="item">--}}
-                        {{--                                    <img x-bind:src="item" alt="" class="w-full h-full object-cover">--}}
-                        {{--                                </div>--}}
-                        {{--                            </template>--}}
-                        {{--                        </div>--}}
                     </div>
                     <div class="lg:w-1/2 w-full lg:pl-10 lg:pb-6 mt-6 lg:mt-0">
                         <h1 class="text-gray-900 text-lg lg:text-2xl title-font font-medium mb-2" x-text="product.name">{{ $product->name }}</h1>
@@ -139,7 +131,7 @@
                             </div>
                         </div>
                         <div class="pt-4 border-t border-gray-200 ">
-                            <button x-on:click="clickAddToCart(product.id, quantity)"
+                            <button x-on:click="clickAddToCart()"
                                     class="items-center whitespace-nowrap inline-flex w-full text-white bg-blue-600 border-0 py-3 px-6 focus:outline-none hover:bg-red-600 rounded">
                                 <x-theme::icons.shopping-cart class="w-8"/>
                                 <span class="w-full text-xl">Thêm vào giỏ</span>
@@ -246,15 +238,6 @@
     </div>
 
     <script>
-        $(document).ready(function() {
-            $('.owl-carousel').owlCarousel({
-                margin: 10,
-                nav: true,
-                items:5,
-                dots:false,
-            })
-        });
-
         function groupBy(objectArray, property) {
             return objectArray.reduce(function (acc, obj) {
                 let key = obj[property]
@@ -427,7 +410,7 @@
                 product: product,
                 product_active: product_active,
                 product_related: product_related,
-                active: active_attr.map(x => ({id:x.id, attribute_group_id: x.attribute_group_id})),
+                active: active_attr,
                 changeSelected(item) {
                     const a = item.selected.split(',');
 
@@ -464,12 +447,24 @@
                         this.product.images = this.product_active.product.images;
                     }
                 },
-                clickAddToCart(product_id, quantity){
-                    if (this.active.length < product?.attribute_groups?.length){
-                        console.log('Vui lòng chọn thuộc tính', product_id, quantity);
+                clickAddToCart(){
+                    if (this.product?.attribute_groups?.length && this.active.length < this.product?.attribute_groups?.length){
+                        console.log('Vui lòng chọn thuộc tính');
+                        toast.error('Vui lòng chọn thuộc tính');
                         return;
                     }
-                    console.log('click', product_id, quantity);
+
+                    const product_attrs = this.product?.product_related?.find(x=> x.product_id == this.product.id);
+                    const optionAttrs = product_attrs?.items || [];
+
+                    for(const item of optionAttrs) {
+                        const group_id = item?.attribute?.attribute_group_id || '---';
+                        const attrsNew = this.product?.attribute_groups?.find(x=>x.attribute_group_id == group_id);
+                        item.attribute_group = attrsNew?.attribute_group;
+                    }
+                    const slug = this.product.slug + window.location.search;
+
+                    addToCart(this.product.id, slug, this.quantity, optionAttrs);
                 }
             }
         }
