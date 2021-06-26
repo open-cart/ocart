@@ -1,4 +1,4 @@
-<div id="list-sharing-desktop" class="list-sharing opacity-0 z-50 hidden md:inline-block">
+<div id="list-sharing-desktop" class="list-sharing opacity-0 z-50 block md:inline-block">
     <ul class="list-sharing-ul">
         @if(!empty(get_phone()))
             <li class="list-sharing-item">
@@ -144,7 +144,7 @@
     .list-sharing-ul .list-sharing-item {
         width: 44px;
         margin-bottom: 5px;
-        margin-right: 24px;
+        margin-right: 10px;
     }
 
     .list-sharing-ul .list-sharing-item .list-sharing-item-icon {
@@ -209,6 +209,37 @@
     .list-sharing-ul .list-sharing-item .list-sharing-item-icon:hover .tooltip-list-sharing-item-text {
         opacity: 1;
         visibility: visible;
+    }
+    @media (max-width: 991px) {
+        .list-sharing{
+            bottom: -1px;
+            left: 0;
+            border-top: 1px solid #e7e7e7;
+        }
+        .list-sharing-ul{
+            display: flex;
+            align-items: center;
+            background: white;
+        }
+        .list-sharing-ul .list-sharing-item{
+            margin-bottom: 7px;
+            margin-top: 5px;
+            flex: 1;
+            text-align: center;
+        }
+        .list-sharing-ul .list-sharing-item .list-sharing-item-icon{
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+        }
+        .list-sharing-ul .list-sharing-item .list-sharing-item-icon svg{
+            display: unset;
+        }
+        .list-sharing-ul .list-sharing-item{
+            width: auto;
+            margin-right: 0;
+        }
+
     }
 
 </style>

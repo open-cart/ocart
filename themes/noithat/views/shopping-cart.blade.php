@@ -20,8 +20,18 @@
                                     <img class="h-24" src="{{ TnMedia::url($item->options->image ?? asset('/images/no-image.jpg')) }}" alt="">
                                 </div>
                                 <div class="flex flex-col justify-between ml-4 flex-grow">
-                                    <a href="/product/{{ $item->slug }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
+                                    <a href="/product/{{ $item->options->slug }}" class="font-bold text-sm hover:text-blue-700 line-clamp-2">{{ $item->name }}</a>
                                     <div class="text-red-500 text-xs">{{ format_price($item->price) }} đ</div>
+                                    <div class="text-gray-500 text-xs">
+                                        @if($item->options->attrs)
+                                        @foreach($item->options->attrs as $key => $iitem)
+                                            <span>{{ $iitem['attribute_group']['title'] }}:{{ $iitem['attribute']['title'] }}</span>
+                                            @if(count($item->options->attrs) != $key+1)
+                                                <span>, </span>
+                                            @endif
+                                        @endforeach
+                                        @endif
+                                    </div>
                                     <button x-on:click="removeProduct()" class="w-5 text-gray-400 rounded-full hover:text-red-500 focus:outline-none focus:text-red-500" title="Xóa sản phẩm">
                                         <x-theme::icons.trash class="w-5"/>
                                     </button>

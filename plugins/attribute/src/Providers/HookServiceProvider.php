@@ -8,8 +8,10 @@ use Illuminate\Support\ServiceProvider;
 use Kris\LaravelFormBuilder\Form;
 use Ocart\Attribute\Listeners\AddAttributeProductListener;
 use Ocart\Attribute\Listeners\UpdateVariationProductListener;
+use Ocart\Attribute\Models\AttributeGroup;
 use Ocart\Attribute\Models\ProductVariation;
 use Ocart\Attribute\Models\ProductVariationItem;
+use Ocart\Attribute\Models\ProductWithAttributeGroup;
 use Ocart\Attribute\Repositories\Interfaces\AttributeGroupRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
@@ -30,6 +32,10 @@ class HookServiceProvider extends ServiceProvider
 
             Product::resolveRelationUsing('attributes', function (Product $q) {
                 return $q->hasMany(ProductVariationItem::class, 'product_id');
+            });
+
+            Product::resolveRelationUsing('attribute_groups', function (Product $q) {
+                return $q->hasMany(ProductWithAttributeGroup::class, 'product_id');
             });
 
             Product::fire(function ($model) {
@@ -54,6 +60,24 @@ class HookServiceProvider extends ServiceProvider
         add_filter(ORDER_RENDER_TABLE_ORDER_UPDATE, function($res, Order $order) {
             $products = $order->products()->with('product.version.product.attributes.attribute')->get();
             return view('plugins.attribute::orders.render-table-order-update', compact('order', 'products'));
+        }, 1, 2);
+
+        add_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, function ($screen, $product) {
+            if ($screen === ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME) {
+                /** @var ProductVariationRepository $productVariationRepository */
+                $productVariationRepository = app(ProductVariationRepository::class);
+
+                $attributeGroup = $product->attribute_groups()->with('attributeGroup')->get();
+                $productVariation = $product->version()->with('items')->get();
+
+                $productRelated = $productVariationRepository
+                    ->with(['product','items.attribute'])
+                    ->findByField('configurable_product_id', $product->id);
+
+                $product->attribute_groups = $attributeGroup;
+                $product->product_variation = $productVariation;
+                $product->product_related = $productRelated;
+            }
         }, 1, 2);
 
         $this->registerMenu();

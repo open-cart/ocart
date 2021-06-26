@@ -45,11 +45,14 @@ class ShoppingController
         $params = $request->all();
         if (!empty($params)) {
             $productId       = $params['productId'];
+            $slug            = $params['slug'];
+            $quantity       = $params['quantity'];
+            $optionAttrs       = $params['optionAttrs'];
         }
 
         $product = $this->repo->with('categories')->find($productId);
 
-        add_to_cart($product);
+        add_to_cart($product, $slug, $quantity, $optionAttrs);
         $cart_count = get_cart_count();
         return json_encode(['status' => 1, 'data' => $product, 'count' => $cart_count, 'message' => "Thêm sản phẩm thành công"]);
     }

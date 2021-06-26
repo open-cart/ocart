@@ -91,7 +91,7 @@ if (!function_exists('get_list_products_new')) {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
         $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
-        return $repo->orderBy('created_at', 'desc')->limit($limit);
+        return $repo->getNews($limit);
     }
 }
 
@@ -279,18 +279,19 @@ if (!function_exists('get_cart_subtotal')) {
 }
 
 if (!function_exists('add_to_cart')) {
-    function add_to_cart($data)
+    function add_to_cart($data, $slug = null, $quantity = 1, $optionAttrs = [])
     {
         Cart::add([
             'id' => $data->id,
             'name' => $data->name,
             'price' => $data->sell_price,
             'weight' => 500,
-            'qty' => 1,
+            'qty' => $quantity,
             'options' => [
                 'image' => head($data->images),
                 'categories' => $data->categories,
-                'slug' => $data->slug
+                'slug' => $slug != null ? $slug : $data->slug,
+                'attrs' => $optionAttrs,
             ]
         ]);
     }
