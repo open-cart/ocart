@@ -1,6 +1,6 @@
 <div class="bg-white rounded" x-data="{open: false}">
     <div class="px-4 py-3 flex justify-between cursor-pointer" x-on:click="open = !open">
-        <h3>Page</h3>
+        <h3>{{ trans('packages/page::pages.menu') }}</h3>
         <span>
                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path fill-rule="evenodd"
@@ -30,7 +30,9 @@
         </div>
         <div class="flex justify-between">
             <div></div>
-            <x-button type="button" class="btn-add-to-menu">Add menu</x-button>
+            <x-button type="button" class="btn-add-to-menu">
+                {{ trans('packages/menu::menus.add_to_menu') }}
+            </x-button>
         </div>
     </div>
 </div>
