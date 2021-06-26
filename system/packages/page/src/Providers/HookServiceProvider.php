@@ -46,7 +46,7 @@ class HookServiceProvider extends ServiceProvider
             ];
         });
 
-        add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'addMenuAction']);
+        add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'registerMenuOptions']);
     }
 
     public function boot()
@@ -58,8 +58,8 @@ class HookServiceProvider extends ServiceProvider
         }
     }
 
-    public function addMenuAction()
+    public function registerMenuOptions()
     {
-        echo view('packages.page::menu-action');
+        echo view('packages.page::menu-option');
     }
 }

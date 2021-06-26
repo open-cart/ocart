@@ -12,6 +12,7 @@
     "require": [
     ],
     "providers": [
-        "Ocart\\Blog\\Providers\\BlogServiceProvider"
+        "Ocart\\Blog\\Providers\\BlogServiceProvider",
+        "Ocart\\Blog\\Providers\\HookServiceProvider"
     ]
 }
