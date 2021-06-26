@@ -8,6 +8,19 @@ $(document).ready(function () {
 
         const menu_nodes = $("#nestable-input").data('input');
 
+        var updateOutput = function(e)
+        {
+            var list   = e.length ? e : $(e.target),
+                output = list.data('output');
+            if (output) {
+                if (window.JSON) {
+                    output.val(window.JSON.stringify(list.nestable('serialize')));//, null, 2));
+                } else {
+                    output.val('JSON browser support required for this demo.');
+                }
+            }
+        };
+
         function recursive(data) {
             const refs = {0: []};
             for (const item of data) {
@@ -81,17 +94,19 @@ $(document).ready(function () {
                 li.addClass("dd-item block relative");
                 li.data('id', node.id)
                 li.data('title', node.title);
-                li.data('url', node.url);
+                // li.data('url', node.url);
                 li.data('reference_type', node.reference_type);
                 li.data('reference_id', node.reference_id);
                 li.data('target', node.target);
 
                 li.find('[name=title]').val(node.title);
-                li.find('[name=url]').val(node.url);
+                // li.find('[name=url]').val(node.url);
                 li.find('[name=target]').val(node.target);
                 li.find('.dd-handle').html(node.title);
                 if (node.reference_type === 'custom-link') {
                     li.find('label.hidden').first().removeClass('hidden');
+                    li.find('[name=url]').val(node.url);
+                    li.data('url', node.url);
                 }
 
                 parent.children('ol').append(li);
@@ -112,14 +127,7 @@ $(document).ready(function () {
 
             li.data(name, value);
 
-            if (parent.length < 1) {
-                $('#nestable-output').val('[]');
-            } else {
-                let nestable_obj_returned = parent.nestable('serialize');
-                // let the_obj = that.updatePositionForSerializedObj(nestable_obj_returned);
-                $('#nestable-output').val(JSON.stringify(nestable_obj_returned));
-                console.log(JSON.stringify(nestable_obj_returned))
-            }
+            updateOutput(parent.data('output', $('#nestable-output')));
         });
         parent.on('click', '.show-item-details', function (e) {
             const _self = $(this);
@@ -138,14 +146,7 @@ $(document).ready(function () {
 
             li.remove();
 
-            if (parent.length < 1) {
-                $('#nestable-output').val('[]');
-            } else {
-                let nestable_obj_returned = parent.nestable('serialize');
-                // let the_obj = that.updatePositionForSerializedObj(nestable_obj_returned);
-                $('#nestable-output').val(JSON.stringify(nestable_obj_returned));
-                console.log(JSON.stringify(nestable_obj_returned))
-            }
+            updateOutput(parent.data('output', $('#nestable-output')));
         })
 
         $('.btn-add-to-menu').click(function () {
@@ -195,31 +196,16 @@ $(document).ready(function () {
                 });
             }
 
-            if (parent.length < 1) {
-                $('#nestable-output').val('[]');
-            } else {
-                let nestable_obj_returned = parent.nestable('serialize');
-                // let the_obj = that.updatePositionForSerializedObj(nestable_obj_returned);
-                $('#nestable-output').val(JSON.stringify(nestable_obj_returned));
-                console.log(JSON.stringify(nestable_obj_returned))
-            }
+            updateOutput(parent.data('output', $('#nestable-output')));
         })
 
         renderRecursive(nodes, parent);
 
-        $('#nestable').nestable({
+        parent.nestable({
             group: 1
-        }).on('change', () => {
-            // console.log($('.dd').nestable('serialize'));
-            if (parent.length < 1) {
-                $('#nestable-output').val('[]');
-            } else {
-                let nestable_obj_returned = parent.nestable('serialize');
-                // let the_obj = that.updatePositionForSerializedObj(nestable_obj_returned);
-                $('#nestable-output').val(JSON.stringify(nestable_obj_returned));
-            }
-        })
+        }).on('change', updateOutput)
 
+        updateOutput(parent.data('output', $('#nestable-output')));
     }
 
     load();

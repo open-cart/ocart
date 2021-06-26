@@ -11,5 +11,10 @@ return [
     'edit' => 'Chỉnh sửa',
     'forms' => [
         'name' => 'Tên menu'
-    ]
+    ],
+    'menu_settings' => 'Cài đặt menu',
+    'display_location' => 'Vị trí hiển thị',
+    'main_navigation' => 'Main navigation',
+    'header_navigation' => 'Header navigation',
+    'footer_navigation' => 'Footer navigation',
 ];

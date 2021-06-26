@@ -55,6 +55,6 @@ class Page extends BaseModel
     {
         $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
 
-        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
+        return url($prefix ? $prefix . '/' . $this->slug .'.html' : $this->slug .'.html');
     }
 }

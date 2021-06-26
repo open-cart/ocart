@@ -13,6 +13,6 @@ use \Illuminate\Support\Facades\Route;
         Route::get('{slug?}.html', [
             'as'   => 'public.single',
             'uses' => 'PublicController@getView',
-        ]);
+        ])->name('public_page');
     });
 });

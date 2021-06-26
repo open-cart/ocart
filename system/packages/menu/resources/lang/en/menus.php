@@ -10,5 +10,8 @@ return [
     'edit' => 'Edit',
     'forms' => [
         'name' => 'Name'
-    ]
+    ],
+    'menu_settings' => 'Menu settings',
+    'display_location' => 'Display location',
+    'main_navigation' => 'Main navigation',
 ];

@@ -40,12 +40,14 @@
 
             <!-- Menu Main -->
             @php
-                $menuMain = get_menu_main();
+                $menuMain = main_navigation();
+
+
             @endphp
 
-            @if(!empty($menuMain))
+            @if($menuMain->isNotEmpty())
                 <nav class="hidden lg:flex space-x-10">
-                    @foreach($menuMain->data as $item)
+                    @foreach($menuMain as $item)
                         @if(!empty($item->children))
                             <div class="group inline-block relative">
                                 <button type="button"
@@ -113,14 +115,14 @@
                                 </div>
                             </div>
                         @else
-                            <a href="{{ $item->slug }}" class="text-base font-medium text-gray-500 hover:text-gray-900">
-                                {{ $item->name }}
+                            <a href="{{ $item->url }}" class="text-base font-medium text-gray-500 hover:text-gray-900">
+                                {{ $item->title }}
                             </a>
                         @endif
                     @endforeach
 
                 </nav>
-        @endif
+            @endif
         <!-- End Menu Main -->
 
             <!-- Login/Cart -->
@@ -209,11 +211,11 @@
                         </button>
                     </div>
                 </div>
-                @if(!empty($menuMain))
+                @if($menuMain->isNotEmpty())
                     <div class="mt-6">
                         <nav>
-                            @foreach($menuMain->data as $item)
-                                <a href="{{ $item->slug }}"
+                            @foreach($menuMain as $item)
+                                <a href="{{ $item->url }}"
                                    class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                                     <!-- Heroicon name: outline/cursor-click -->
                                     <svg class="flex-shrink-0 h-6 w-6 text-indigo-600"
@@ -223,7 +225,7 @@
                                               d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                                     </svg>
                                     <span class="ml-3 text-base font-medium text-gray-900">
-                                            {{ $item->name }}
+                                            {{ $item->title }}
                                         </span>
                                 </a>
                                 @if(!empty($item->children))
@@ -232,7 +234,7 @@
                                             <a href="{{ $subitem->slug }}"
                                                class="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50">
                                                 <span class="ml-3 text-base font-medium text-gray-900">
-                                            - {{ $subitem->name }}
+                                            - {{ $subitem->title }}
                                             </span>
                                         @endforeach
                                     </nav>

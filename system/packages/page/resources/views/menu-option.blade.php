@@ -18,7 +18,7 @@
         <div class="border px-3 py-2 mb-3">
             <ul>
                 @foreach($pages as $page)
-                    <li class="menu-item-insert" data-type="{{ \Ocart\Page\Repositories\PageRepository::class }}" data-item='@json($page)'>
+                    <li class="menu-item-insert" data-type="{{ \Ocart\Page\Models\Page::class }}" data-item='@json($page)'>
                         <label class="flex items-center space-x-3">
                             <input class="rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                    type="checkbox" value="{{ $page->id }}"/>

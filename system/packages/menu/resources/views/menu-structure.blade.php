@@ -50,6 +50,46 @@
                     </ol>
                 </div>
             </div>
+            <hr>
+            <h3 class="text-2xl py-3 px-4">{{ trans('packages/menu::menus.menu_settings') }}</h3>
+            <div class="flex px-4">
+                <div class="flex-none w-40">
+                    <span>{{ trans('packages/menu::menus.display_location') }}</span>
+                </div>
+                <div class="flex-grow space-y-3">
+                    <label class="flex items-center space-x-3">
+                        <input type="checkbox"
+                               name="navigation[]"
+                               @if(setting('header_navigation') == $menu->id) checked @endif
+                               value="header_navigation"
+                               class="rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <span class="text-gray-900 font-medium dark:text-gray-300">
+                            {{ trans('packages/menu::menus.header_navigation') }}
+                        </span>
+                    </label>
+                    <label class="flex items-center space-x-3">
+                        <input type="checkbox"
+                               name="navigation[]"
+                               @if(setting('main_navigation') == $menu->id) checked @endif
+                               value="main_navigation"
+                               class="rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <span class="text-gray-900 font-medium dark:text-gray-300">
+                            {{ trans('packages/menu::menus.main_navigation') }}
+                        </span>
+                    </label>
+                    <label class="flex items-center space-x-3">
+                        <input type="checkbox"
+                               name="navigation[]"
+                               @if(setting('footer_navigation') == $menu->id) checked @endif
+                               value="footer_navigation"
+                               class="rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                        <span class="text-gray-900 font-medium dark:text-gray-300">
+                            {{ trans('packages/menu::menus.footer_navigation') }}
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <div class="pb-6"></div>
         </div>
     </div>
 </div>

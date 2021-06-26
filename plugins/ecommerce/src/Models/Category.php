@@ -58,6 +58,7 @@ class Category extends BaseModel
     {
         $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
 
-        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
+        return route(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME, ['slug' => $this->slug]);
+//        return url($prefix ? $prefix . '/product-category' . $this->slug : 'product-category/' .$this->slug);
     }
 }

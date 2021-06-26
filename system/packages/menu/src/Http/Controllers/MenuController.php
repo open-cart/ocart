@@ -98,6 +98,12 @@ class MenuController extends BaseController
 
         $menu = $this->menuRepository->update($data, $id);
 
+        $settings = $request->input('navigation', []);
+
+        foreach ($settings as $key) {
+            setting()->set($key, $menu->id)->save();
+        }
+
         $deletedNodes = ltrim($request->input('deleted_nodes', ''));
         if ($deletedNodes) {
             $deletedNodes = explode(',', ltrim($request->input('deleted_nodes', '')));
