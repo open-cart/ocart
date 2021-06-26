@@ -30,12 +30,6 @@
                         <span>{{ trans('packages/menu::menus.url') }}</span>
                         <x-input id="node-url" name="url" class="w-full"/>
                     </label>
-{{--                    <label class="block">--}}
-{{--                        <span>{{ trans('packages/menu::menus.target') }}</span>--}}
-{{--                        <x-select id="node-target" name="target" class="w-full">--}}
-{{--                            <option value="">....</option>--}}
-{{--                        </x-select>--}}
-{{--                    </label>--}}
                 </div>
                 <div class="flex justify-between">
                     <div></div>
@@ -84,8 +78,4 @@
 
     .dd-dragel { position: absolute; pointer-events: none; z-index: 9999; }
     .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
-    .dd-dragel .dd-handle {
-        -webkit-box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
-        box-shadow: 2px 4px 6px 0 rgba(0,0,0,.1);
-    }
 </style>

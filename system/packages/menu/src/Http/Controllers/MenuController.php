@@ -56,13 +56,13 @@ class MenuController extends BaseController
 
     public function index(MenuTable $table)
     {
-        page_title()->setTitle(trans('packages/page::menus.menu'));
+        page_title()->setTitle(trans('packages/menu::menus.menu'));
         return $table->render();
     }
 
     function create(FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('packages/page::menus.create'));
+        page_title()->setTitle(trans('packages/menu::menus.create'));
         return $formBuilder->create(MenuForm::class)
             ->setMethod('POST')
             ->setUrl(route('menus.store'))
@@ -81,7 +81,7 @@ class MenuController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
-        page_title()->setTitle(trans('packages/page::menus.edit'));
+        page_title()->setTitle(trans('packages/menu::menus.edit'));
         $menu = $this->menuRepository->skipCriteria()->find($id);
 
         return $formBuilder->create(MenuForm::class, ['model' => $menu])
