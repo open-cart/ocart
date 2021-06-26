@@ -5,9 +5,13 @@ namespace Ocart\Ecommerce\Providers;
 
 
 use Illuminate\Routing\Events\RouteMatched;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Widgets\ProductStatsWidget;
 
 class HookServiceProvider extends ServiceProvider
@@ -26,6 +30,8 @@ class HookServiceProvider extends ServiceProvider
             ->create(ProductStatsWidget::class);
 
         $this->registerMenu();
+
+        add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'registerMenuOptions']);
     }
 
     protected function registerMenu()
@@ -168,5 +174,28 @@ class HookServiceProvider extends ServiceProvider
                     'active'      => false,
                 ]);
         });
+    }
+
+    public function registerMenuOptions()
+    {
+        if (Gate::allows('ecommerce.categories.index', Auth::user())) {
+            $type = BrandRepository::class;
+            $name = trans('plugins/ecommerce::ecommerce.brand');
+            $list = app($type)->all();
+
+            if ($list->isNotEmpty()) {
+                echo view('plugins.ecommerce::menu', compact('list', 'name', 'type'));
+            }
+        }
+
+        if (Gate::allows('ecommerce.brands.index', Auth::user())) {
+            $type = CategoryRepository::class;
+            $name = trans('plugins/ecommerce::ecommerce.categories');
+            $list = app($type)->all();
+
+            if ($list->isNotEmpty()) {
+                echo view('plugins.ecommerce::menu', compact('list', 'name', 'type'));
+            }
+        }
     }
 }

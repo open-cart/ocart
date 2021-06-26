@@ -65,7 +65,8 @@ $(document).ready(function () {
  appearance-none inline-block focus:text-gray-900 rounded py-2 px-3 focus:outline-none 
   dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300 dark:focus:text-gray-300
   w-full">
-                            <option value="">Open link directly</option>
+                            <option value="_self">Open link directly</option>
+                            <option value="_blank">Open link new tab</option>
                         </select>
                     </label>
                 </div>
@@ -75,7 +76,6 @@ $(document).ready(function () {
 
         function renderRecursive(nodes, parent) {
             for (const node of nodes) {
-                console.log($("#node-template-nestable").html())
                 const li = $(document.createElement('li'))
                 li.html($(templates));
                 li.addClass("dd-item block relative");
@@ -84,9 +84,11 @@ $(document).ready(function () {
                 li.data('url', node.url);
                 li.data('reference_type', node.reference_type);
                 li.data('reference_id', node.reference_id);
+                li.data('target', node.target);
 
                 li.find('[name=title]').val(node.title);
                 li.find('[name=url]').val(node.url);
+                li.find('[name=target]').val(node.target);
                 li.find('.dd-handle').html(node.title);
                 if (node.reference_type === 'custom-link') {
                     li.find('label.hidden').first().removeClass('hidden');
@@ -102,7 +104,7 @@ $(document).ready(function () {
             }
         }
 
-        parent.on('keyup', 'input[type="text"]', function (e) {
+        parent.on('change keyup', 'input[type="text"], select', function (e) {
             const _self = $(this);
             const li = _self.closest('li');
             const name = _self.attr('name');

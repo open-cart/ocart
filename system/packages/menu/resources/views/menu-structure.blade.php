@@ -44,7 +44,7 @@
         <div class="bg-white rounded">
             <h3 class=" px-4 py-3">{{ trans('Menu structure') }}</h3>
             <hr>
-            <div class=" p-4">
+            <div class="nestable-menu p-4">
                 <div class="dd" id="nestable">
                     <ol class="dd-list">
                     </ol>

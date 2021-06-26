@@ -16,7 +16,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function registerMenuOptions()
     {
-        if (Gate::allows('categories.index', Auth::user())) {
+        if (Gate::allows('blog.categories.index', Auth::user())) {
             $type = \Ocart\Blog\Repositories\Interfaces\CategoryRepository::class;
             $name = trans('plugins/blog::menu.categories');
             $list = app($type)->all();
@@ -26,7 +26,7 @@ class HookServiceProvider extends ServiceProvider
             }
         }
 
-        if (Gate::allows('tags.index', Auth::user())) {
+        if (Gate::allows('blog.tags.index', Auth::user())) {
             $type = \Ocart\Blog\Repositories\Interfaces\TagRepository::class;
             $name = trans('plugins/blog::menu.tags');
             $list = app($type)->all();

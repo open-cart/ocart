@@ -24,4 +24,6 @@ return [
         'canceled'   => 'Bị huỷ',
         'default'    => 'Mặc định'
     ],
+    'categories' => 'Danh mục sản phẩm',
+    'brand' => 'Brand'
 ];
