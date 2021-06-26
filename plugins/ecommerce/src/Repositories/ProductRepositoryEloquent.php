@@ -61,6 +61,9 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
 
     public function productForCategory($categoryId, $paginate = 9)
     {
+        $this->applyConditions([
+            'is_variation' => 0
+        ]);
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
@@ -73,15 +76,30 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
     public function getFeature($limit)
     {
         $this->applyConditions([
-            'is_featured' => 1
+            'is_featured' => 1,
+            'is_variation' => 0
         ]);
         $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
 
+    public function getNews($limit)
+    {
+        $this->applyConditions([
+            'is_variation' => 0
+        ]);
+
+        $results = $this->orderBy('created_at', 'desc')->limit($limit);
+
+        return $this->parserResult($results);
+    }
+
     public function getRelate($categoryId, $limit)
     {
+        $this->applyConditions([
+            'is_variation' => 0
+        ]);
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
@@ -93,7 +111,8 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
     public function getFetureCategory($categoryId, $limit)
     {
         $this->applyConditions([
-            'is_featured' => 1
+            'is_featured' => 1,
+            'is_variation' => 0
         ]);
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);

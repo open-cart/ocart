@@ -144,17 +144,16 @@
                             </div>
                         @endforeach
                     </div>
-                    <hr>
-                    <div class="flex justify-between items-center">
-                        <div class="font-bold text-xl">{{ trans('Subtotal') }}</div>
-                        <div class="font-bold text-2xl text-red-600">{{ format_price(get_cart_subtotal()) }}</div>
+                    <div class="flex justify-between items-center mt-2">
+                        <div class="font-bold text-lg">{{ trans('Subtotal') }}</div>
+                        <div class="font-bold text-xl text-red-600">{{ format_price(get_cart_subtotal()) }}</div>
                     </div>
-                    <div class="flex justify-between items-center">
-                        <div class="font-bold text-xl">{{ trans('Shipping fee') }}</div>
-                        <div class="font-bold text-2xl text-red-600">{{ format_price($shippingAmount) }}</div>
+                    <div class="flex justify-between items-center mt-2 mb-4">
+                        <div class="font-bold text-lg">{{ trans('Shipping fee') }}</div>
+                        <div class="font-bold text-xl text-red-600">{{ format_price($shippingAmount) }}</div>
                     </div>
                     <hr>
-                    <div class="flex justify-between items-center">
+                    <div class="flex justify-between items-center mt-2">
                         <div class="font-bold text-2xl">Tổng cộng</div>
                         <div class="font-bold text-2xl text-red-600">{{ format_price($amount) }}</div>
                     </div>

@@ -11,7 +11,7 @@
     {!! SeoHelper::render() !!}
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap">
 
     <!-- Styles -->
     {{--<link rel="stylesheet" href="{{ asset('css/app.css') }}">--}}
@@ -169,9 +169,12 @@
         })
     })
 
-    function addToCart(productId) {
+    function addToCart(productId, slug = null, quantity = 1, optionAttrs = []) {
         axios.post('/add-to-cart', {
-            productId: productId
+            productId: productId,
+            slug: slug,
+            quantity: quantity,
+            optionAttrs: optionAttrs,
         }).then((res) => {
             toast.success(res.message);
             $(".cart-count").text(res.count);
