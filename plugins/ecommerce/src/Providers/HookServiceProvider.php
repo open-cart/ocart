@@ -189,6 +189,8 @@ class HookServiceProvider extends ServiceProvider
             }
         }
 
+
+
 //        if (Gate::allows('ecommerce.brands.index', Auth::user())) {
 //            $type = Brand::class;
 //            $name = trans('plugins/ecommerce::ecommerce.brand');
