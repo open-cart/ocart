@@ -103,13 +103,13 @@ class OrderController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'ecommerce.brands.index',
-            'show' => 'ecommerce.brands.update',
-            'create' => 'ecommerce.brands.create',
-            'store' => 'ecommerce.brands.create',
-            'edit' => 'ecommerce.brands.update',
-            'update' => 'ecommerce.brands.update',
-            'destroy' => 'ecommerce.brands.destroy',
+            'index' => 'ecommerce.orders.index',
+            'show' => 'ecommerce.orders.update',
+            'create' => 'ecommerce.orders.create',
+            'store' => 'ecommerce.orders.create',
+            'edit' => 'ecommerce.orders.update',
+            'update' => 'ecommerce.orders.update',
+            'destroy' => 'ecommerce.orders.destroy',
         ];
     }
 

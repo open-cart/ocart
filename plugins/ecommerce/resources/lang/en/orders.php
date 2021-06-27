@@ -62,4 +62,7 @@ return [
 
     'create'                                         => 'Create order',
     'edit'                                           => 'Edit order',
+
+    'new_order_notice'                               => 'You have <span class="bold">:count</span> New Order(s)',
+    'view_all'                                       => 'View all',
 ];

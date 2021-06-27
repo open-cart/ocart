@@ -44,10 +44,10 @@ class ShoppingController
     {
         $params = $request->all();
         if (!empty($params)) {
-            $productId       = $params['productId'];
-            $slug            = $params['slug'];
-            $quantity       = $params['quantity'];
-            $optionAttrs       = $params['optionAttrs'];
+            $productId       = $request->input('productId');
+            $slug            = $request->input('slug');
+            $quantity       = $request->input('quantity', 1);
+            $optionAttrs       = $request->input('optionAttrs', []);
         }
 
         $product = $this->repo->with('categories')->find($productId);

@@ -5,18 +5,27 @@ namespace Ocart\Ecommerce\Providers;
 
 
 use Illuminate\Routing\Events\RouteMatched;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Contact\Repositories\Interfaces\ContactRepository;
+use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Widgets\ProductStatsWidget;
 
 class HookServiceProvider extends ServiceProvider
 {
+
+    /**
+     * @var Collection
+     */
+    protected $pendingOrders = [];
 
     public function register()
     {
@@ -33,6 +42,10 @@ class HookServiceProvider extends ServiceProvider
         $this->registerMenu();
 
         add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'registerMenuOptions']);
+
+        $this->booted(function () {
+            add_filter(BASE_FILTER_TOP_HEADER_LAYOUT, [$this, 'registerTopHeaderNotification'], 120);
+        });
     }
 
     protected function registerMenu()
@@ -200,5 +213,33 @@ class HookServiceProvider extends ServiceProvider
 //                echo view('plugins.ecommerce::menu', compact('list', 'name', 'type'));
 //            }
 //        }
+    }
+
+    public function registerTopHeaderNotification($options)
+    {
+        if (Gate::allows('ecommerce.orders.update', Auth::user())) {
+            $orders = $this->setPendingOrder();
+
+            if ($orders->count() == 0) {
+                return $options;
+            }
+
+            return $options . view('plugins.ecommerce::partials.notification', compact('orders'))->render();
+        }
+
+        return $options;
+    }
+
+    protected function setPendingOrder()
+    {
+        if (!$this->pendingOrders) {
+            $this->pendingOrders = $this->app->make(OrderRepository::class)
+                ->findWhere([
+                    'status'                => BaseStatusEnum::PENDING,
+                    'is_finished' => 1,
+                ]);
+        }
+
+        return $this->pendingOrders;
     }
 }

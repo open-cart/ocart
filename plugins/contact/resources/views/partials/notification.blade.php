@@ -12,7 +12,7 @@
         <x-slot name="content">
             <ul class="text-sm -mt-1">
                 <li class="flex justify-between px-3 py-5 bg-gray-100">
-                    <h3>{!! trans('plugins/contact::contact.new_msg_notice', ['count' => count($contacts)]) !!}</h3>
+                    <h3 class="font-bold">{!! trans('plugins/contact::contact.new_msg_notice', ['count' => count($contacts)]) !!}</h3>
                     <a class="text-blue-500 hover:text-blue-600" href="{{ route('contacts.index') }}">{{ trans('plugins/contact::contact.view_all') }}</a>
                 </li>
                 <li>

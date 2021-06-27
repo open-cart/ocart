@@ -185,7 +185,7 @@ class CheckoutController extends BaseController
             'discount_description' => '',
             'description' => '',
             'is_confirmed' => 1,
-            'status' => OrderStatusEnum::PROCESSING,
+            'status' => OrderStatusEnum::PENDING,
         ];
 
         $order = $this->orderRepository->create($data);
