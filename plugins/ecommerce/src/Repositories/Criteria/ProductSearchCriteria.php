@@ -34,8 +34,17 @@ class ProductSearchCriteria implements CriteriaInterface
             $name = $request->get('name');
             $model = $model->where(function($q) use ($name){
                 $q->orWhere('name', 'like', "%$name%");
+                $q->orWhere('sku', 'like', "%$name%");
                 $q->orWhere('description', 'like', "%$name%");
             });
+        }
+
+        if ($request->get('status')) {
+            $model = $model->where('status', $request->get('status'));
+        }
+
+        if ($request->get('is_featured')) {
+            $model = $model->where('is_featured', $request->get('is_featured'));
         }
 
         if ($request->get('order')) {

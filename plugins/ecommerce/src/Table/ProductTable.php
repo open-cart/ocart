@@ -2,6 +2,9 @@
 namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Ecommerce\Forms\OrderFilterForm;
+use Ocart\Ecommerce\Forms\ProductFilterForm;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
@@ -11,13 +14,16 @@ use Ocart\Table\DataTables;
 
 class ProductTable extends TableAbstract
 {
-    public function __construct(DataTables $table, ProductRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, ProductRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
         $this->data = $this->query();
         $this->ajax();
+
+        $this->searchForm = $formBuilder->create(ProductFilterForm::class, ['model' => request()->all()])
+            ->renderForm();
     }
 
     public function query()
