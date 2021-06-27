@@ -2,6 +2,7 @@
 namespace Ocart\Ecommerce\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -17,6 +18,7 @@ use Ocart\Ecommerce\Table\ProductTable;
 use Ocart\Core\Forms\FormBuilder;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Media\Facades\TnMedia;
 
 class ProductController extends BaseController
 {
@@ -75,7 +77,11 @@ class ProductController extends BaseController
         $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
         $data['slug_md5'] = md5($data['slug']);
 
-        $data['images'] = json_encode(array_values(array_filter($request->input('images', []))));
+        $data['images'] = array_values(array_filter($request->input('images', [])));
+
+        $data['images'] = json_encode(array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($data['images'])));
 
         DB::beginTransaction();
 
@@ -117,6 +123,17 @@ class ProductController extends BaseController
         $data = $request->all();
 
         DB::beginTransaction();
+
+//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+//        $data['slug_md5'] = md5($data['slug']);
+
+        $data['images'] = array_values(array_filter($request->input('images', [])));
+
+        $data['images'] = array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($data['images']));
+
+        $data['images'] = json_encode($data['images']);
 
         $product = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),

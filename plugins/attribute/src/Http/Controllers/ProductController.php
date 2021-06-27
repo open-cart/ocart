@@ -3,6 +3,7 @@
 namespace Ocart\Attribute\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -120,7 +121,11 @@ class ProductController extends BaseController
         $productRelatedVariation->is_variation = 1;
 
         $productRelatedVariation = $productRelatedVariation->toArray();
-        $productRelatedVariation['images'] = json_encode($request->input('images', $productRelatedVariation['images']));
+
+        $productRelatedVariation['images'] = json_encode(array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($request->input('images', $productRelatedVariation['images']))));
+
         $productRelatedVariation['price'] = $request->input('price', $productRelatedVariation['price']);
         $productRelatedVariation['sale_price'] = $request->input('sale_price', $productRelatedVariation['sale_price']);
 
@@ -193,7 +198,9 @@ class ProductController extends BaseController
         }
 
         $data = $request->only('price', 'sku', 'sale_price');
-        $data['images'] = json_encode($request->input('images', []));
+        $data['images'] = json_encode(array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($request->input('images', []))));
 
         $productRelatedVariation = $this->productRepository->update($data, $id);
 

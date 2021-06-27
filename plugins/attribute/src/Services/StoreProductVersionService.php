@@ -3,6 +3,7 @@
 namespace Ocart\Attribute\Services;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Ocart\Attribute\Repositories\Interfaces\AttributeRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductVariationItemRepository;
@@ -10,6 +11,7 @@ use Ocart\Attribute\Repositories\Interfaces\ProductVariationRepository;
 use Ocart\Attribute\Repositories\Interfaces\ProductWithAttributeGroupRepository;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Media\Facades\TnMedia;
 
 class StoreProductVersionService
 {
@@ -85,7 +87,11 @@ class StoreProductVersionService
         $productRelatedVariation->is_variation = 1;
 
         $productRelatedVariation = $productRelatedVariation->toArray();
-        $productRelatedVariation['images'] = json_encode($product->images);
+
+        $productRelatedVariation['images'] = json_encode(array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($product->images)));
+
 
         $productRelatedVariation = $this->productRepository->create($productRelatedVariation);
 
@@ -132,7 +138,11 @@ class StoreProductVersionService
 
         $data['price'] = $productNewDefault->price;
         $data['sale_price'] = $productNewDefault->sale_price;
-        $data['images'] = json_encode($productNewDefault->images);
+        $data['images'] = array_map(function ($image) {
+            return TnMedia::url($image);
+        }, Arr::wrap($productNewDefault->images));
+        dd($data['images']);
+        $data['images'] = json_encode($data['images']);
 
         $this->productRepository->update($data, $product->id);
     }
