@@ -44,3 +44,7 @@ if (!defined('BASE_FILTER_TABLE_QUERY')) {
 if (!defined('BASE_FILTER_ENUM_ARRAY')) {
     define('BASE_FILTER_ENUM_ARRAY', 'BASE_FILTER_ENUM_ARRAY');
 }
+
+if (!defined('BASE_FILTER_TOP_HEADER_LAYOUT')) {
+    define('BASE_FILTER_TOP_HEADER_LAYOUT', 'base_filter_top_header_layout');
+}

@@ -2,6 +2,7 @@
 
 namespace Ocart\Contact\Repositories;
 
+use Ocart\Contact\Enums\ContactStatusEnum;
 use Ocart\Contact\Models\Contact;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
@@ -38,4 +39,17 @@ class ContactRepositoryEloquent extends RepositoriesAbstract implements ContactR
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
+    public function getUnread($select = ['*'])
+    {
+        $data = $this->model->where('status', ContactStatusEnum::UNREAD)->orderBy('id', 'desc')->select($select)->get();
+        $this->resetModel();
+        return $data;
+    }
+
+    public function countUnread()
+    {
+        $data = $this->model->where('status', ContactStatusEnum::UNREAD)->count();
+        $this->resetModel();
+        return $data;
+    }
 }

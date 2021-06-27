@@ -6,5 +6,14 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 
 interface ContactRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
+    /**
+     * @param array $select
+     * @return mixed
+     */
+    public function getUnread($select = ['*']);
 
+    /**
+     * @return int
+     */
+    public function countUnread();
 }

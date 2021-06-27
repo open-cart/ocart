@@ -34,13 +34,13 @@ class ContactController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'blog.tags.index',
-            'show' => 'blog.tags.update',
-            'create' => 'blog.tags.create',
-            'store' => 'blog.tags.create',
-            'edit' => 'blog.tags.update',
-            'update' => 'blog.tags.update',
-            'destroy' => 'blog.tags.destroy',
+            'index' => 'contacts.index',
+            'show' => 'contacts.update',
+            'create' => 'contacts.create',
+            'store' => 'contacts.create',
+            'edit' => 'contacts.update',
+            'update' => 'contacts.update',
+            'destroy' => 'contacts.destroy',
         ];
     }
 
@@ -66,8 +66,8 @@ class ContactController extends BaseController
 //                'is_featured' => $request->input('is_featured', false),
 //            ]);
 //
-//        return $response->setPreviousUrl(route('blog.tags.index'))
-//            ->setNextUrl(route('blog.tags.show', $page->id));
+//        return $response->setPreviousUrl(route('contacts.index'))
+//            ->setNextUrl(route('contacts.show', $page->id));
         return $response->setMessage('successfully');
     }
 
