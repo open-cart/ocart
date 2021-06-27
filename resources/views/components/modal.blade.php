@@ -1,6 +1,7 @@
 @props(['contentClasses' => 'w-11/12', 'target' => ''])
 
-<span x-data="{open: false, show() {this.open = true}, close() {this.open = false},}">
+<span x-data="{open: false, show() {this.open = true}, close() {this.open = false},}"
+      x-init="$watch('open', value => {if(value) {$('html').addClass('overflow-hidden')} else {$('html').removeClass('overflow-hidden')} })">
     <div id="{!! $target !!}" class="hidden" x-on:click="$dispatch('before-show');show()"></div>
     <div
             {{ $attributes->merge(['class' => 'z-10 fixed w-full h-full top-0 left-0 flex items-center justify-center']) }}
@@ -12,7 +13,7 @@
     >
         <div class="modal-overlay absolute w-full h-full bg-gray-900 dark:bg-gray-500 opacity-50"  x-on:click="close"></div>
 
-        <div class="modal-container bg-white dark:bg-gray-800 dark:text-gray-300 mx-auto rounded shadow-lg z-50 overflow-y-auto {{ $contentClasses }}">
+        <div class="modal-container bg-white dark:bg-gray-800 dark:text-gray-300 mx-auto rounded shadow-lg z-50 max-h-screen overflow-y-auto {{ $contentClasses }}">
             <div
                     x-on:click="close"
                     class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">
