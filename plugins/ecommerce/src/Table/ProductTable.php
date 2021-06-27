@@ -33,9 +33,10 @@ class ProductTable extends TableAbstract
             'image' => [
                 'name' => 'id',
                 'title' => 'image',
-                'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
+                'width' => '70',
+                'class' => 'border text-center px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<img src="' . TnMedia::url($item->image ?? asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14"/>';
+                    return '<img src="' . TnMedia::url($item->image ?? asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14 m-auto"/>';
                 }
             ],
             'name' => [
@@ -44,7 +45,7 @@ class ProductTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->name;
+                    return '<a class="text-blue-500" href="'.route('ecommerce.products.update', ['id' => $item->id]).'">'.$item->name.'</a>';
                 }
             ],
             'price' => [
