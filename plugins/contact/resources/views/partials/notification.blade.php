@@ -1,13 +1,13 @@
 <div class="flex items-center">
     <x-dropdown align="right" width="60">
         <x-slot name="trigger">
-            <div class="cursor-pointer">
+            <x-link href="javascript:void(0)" class="cursor-pointer px-3">
                 <span class="relative inline-block">
-  <img src="/images/email.svg" class="w-5 h-5 mx-3"/>
+  <img src="/images/email.svg" class="w-5 h-5"/>
    <span class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none
     text-red-100 transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full">{{ $contacts->count() }}</span>
 </span>
-            </div>
+            </x-link>
         </x-slot>
         <x-slot name="content">
             <ul class="text-sm -mt-1">
@@ -18,7 +18,7 @@
                 <li>
                     <ul class="overflow-auto" style="max-height: 440px; {{ count($contacts) * 72 }}px;" data-handle-color="#637283">
                         @foreach($contacts as $contact)
-                            <li>
+                            <li class="border-t">
                                 <a class="flex space-x-3 py-4 px-3 hover:bg-gray-50" href="{{ route('contacts.update', $contact->id) }}">
                                     <span class="flex-none items-center">
                                         <div class="h-10 w-10 bg-green-500 rounded-full">

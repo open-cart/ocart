@@ -90,7 +90,7 @@
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="flex">
+            <div class="flex space-x-4">
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('home')" class="blank" target="_blank">
                         View website
