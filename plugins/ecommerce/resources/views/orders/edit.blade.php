@@ -64,19 +64,18 @@
                         <hr class="-mx-4">
                         <div class="flex justify-between items-center" id="body-confirmed">
                             <div class="flex space-x-2">
-                                <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
-                                <template x-if="order.is_confirmed == 1">
+                                <svg class="w-6 h-6 @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING) text-green-500 @endif fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
+                                @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
                                     <span class="uppercase">Order was confirm</span>
-                                </template>
-                                <template x-if="order.is_confirmed != 1">
+                               @else
                                     <span class="uppercase">Confirm order</span>
-                                </template>
+                                @endif
                             </div>
-                            <template x-if="order.is_confirmed != 1">
+                            @if($order->status == \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
                                 <div>
                                     <x-button x-on:click="confirmOrder">Confirm</x-button>
                                 </div>
-                            </template>
+                            @endif
                         </div>
                         <hr class="-mx-4">
                         <template x-if="true">
@@ -694,15 +693,15 @@
                         this.$store.order.loading = false;
                     })
                 },
-                confirmOrder() {
-                    bodyLoading.show();
+                confirmOrder(e) {
+                    $(e.target).addClass('button-loading')
                     axios.post('{!! route('ecommerce.orders.confirm') !!}', {
                         id: {!! $order->id !!}
                     }).then(res => {
-                        this.order.is_confirmed = 1;
+                        $.pjax.reload('#body-confirmed')
                         toast.success('Confirm success');
                     }).catch(showError).finally(() => {
-                        bodyLoading.hide();
+                        $(e.target).removeClass('button-loading')
                     })
                 },
                 openConfirmPayment() {

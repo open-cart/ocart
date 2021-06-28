@@ -302,7 +302,7 @@ class OrderController extends BaseController
     function postConfirmOrder(Request $request, BaseHttpResponse $response)
     {
         $order = $this->orderRepository->update([
-            'is_confirmed' => 1
+            'status' => OrderStatusEnum::PROCESSING
         ], $request->input('id'));
 
         return $response->setMessage('success');
