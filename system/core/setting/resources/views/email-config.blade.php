@@ -102,40 +102,6 @@
                     </div>
                 </div>
             </div>
-            <div>
-                <hr>
-            </div>
-            <div class="grid grid-cols-12 gap-4">
-                <div class="col-span-3 pt-6">
-                    <h3 class="text-2xl">{{ trans('core/setting::setting.email_templates') }}</h3>
-                    <p>{{ trans('core/setting::setting.base_template_for_all_emails') }}</p>
-                </div>
-                <div class="col-span-9 space-y-4">
-                    <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 border-b border-gray-200 space-y-4">
-                            <table class="table-auto w-full">
-                                <thead>
-                                <tr class="border-t">
-                                    <th class="text-left py-2">{{ trans('core/setting::setting.template') }}</th>
-                                    <th class="text-left py-2">{{ trans('core/setting::setting.description') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="border-t">
-                                    <td class=" py-2">{{ trans('core/setting::setting.email_template_header') }}</td>
-                                    <td class=" py-2">{{ trans('core/setting::setting.template_for_header_of_emails') }}</td>
-                                </tr>
-                                <tr class="border-t">
-                                    <td class=" py-2">{{ trans('core/setting::setting.email_template_footer') }}</td>
-                                    <td class=" py-2">{{ trans('core/setting::setting.template_for_footer_of_emails') }}</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             {!! apply_filters(BASE_FILTER_AFTER_SETTING_EMAIL_CONTENT, null) !!}
 
             <div class="grid grid-cols-12 gap-4">

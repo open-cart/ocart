@@ -1,4 +1,4 @@
-@props(['checked', 'color' => 'bg-indigo-600', 'name' => ''])
+@props(['checked', 'color' => 'bg-indigo-600', 'name' => '', 'valueTrue' => 1, 'valueFalse' => 2])
 <span class="flex items-center"
       x-data="{ isOn: {!! $checked !!} }"
 >
@@ -10,7 +10,7 @@
         x-bind:checked="isOn"
         {{ $attributes }}
     />
-    <input type="hidden" :value="isOn ? 1 : 2" name="{!! $name !!}"/>
+    <input type="hidden" :value="isOn ? {{ $valueTrue }} : {{ $valueFalse }}" name="{!! $name !!}"/>
     <label
         :aria-checked="isOn"
         :class="{'{!! $color !!}': isOn, 'bg-gray-200': !isOn }"

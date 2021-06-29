@@ -2,6 +2,8 @@
 
 namespace Ocart\Contact\Providers;
 
+use Illuminate\Routing\Events\RouteMatched;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Contact\Repositories\ContactRepositoryEloquent;
 use Ocart\Contact\Repositories\Interfaces\ContactReplyRepository;
@@ -25,7 +27,7 @@ class ContactServiceProvider extends ServiceProvider
             ])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations(['general'])
+            ->loadAndPublishConfigurations(['general', 'email'])
             ->loadMigrations();
 
         $this->app->bind(ContactRepository::class, ContactRepositoryEloquent::class);
@@ -34,11 +36,15 @@ class ContactServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        EmailHandler::module('askfmksa')
-            ->preview()
-            ->setVariableValues([
-                'site_logo' => asset('/images/logo-default.jpg')
-            ])
-            ->sendUsingTemplate('plugins.contact::emails.e-contact');
+        Event::listen(RouteMatched::class, function () {
+            EmailHandler::addTemplateSettings('contact', config('plugins.contact.email', []));
+        });
+
+//        EmailHandler::module('contact')
+//            ->preview()
+//            ->setVariableValues([
+//                'site_logo' => asset('/images/logo-default.jpg')
+//            ])
+//            ->sendUsingTemplate('plugins.contact::emails.e-contact');
     }
 }

@@ -27,4 +27,9 @@ return [
     'email_templates' => 'Email templates',
     'base_template_for_all_emails' => 'Base template for all emails',
     'send_mail_test' => 'Send mail test',
+    'enable' => 'Enable',
+    'email' => [
+        'title' => 'Setting for email template',
+        'description' => 'Email template using HTML & system variables.',
+    ]
 ];

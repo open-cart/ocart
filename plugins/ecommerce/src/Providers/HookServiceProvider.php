@@ -234,6 +234,7 @@ class HookServiceProvider extends ServiceProvider
     {
         if (!$this->pendingOrders) {
             $this->pendingOrders = $this->app->make(OrderRepository::class)
+                ->with('address')
                 ->findWhere([
                     'status'                => BaseStatusEnum::PENDING,
                     'is_finished' => 1,

@@ -21,6 +21,16 @@ Route::group(
                     'as'   => 'settings.email.edit',
                     'uses' => 'SettingController@postEditEmailConfig',
                 ]);
+
+                Route::get('templates/edit/{name}', [
+                    'as'   => 'settings.email.template.edit',
+                    'uses' => 'SettingController@getEditEmailTemplate',
+                ]);
+
+                Route::post('templates/edit/{name}', [
+                    'as'   => 'settings.email.template.store',
+                    'uses' => 'SettingController@postEditEmailTemplate',
+                ]);
             });
         });
     }

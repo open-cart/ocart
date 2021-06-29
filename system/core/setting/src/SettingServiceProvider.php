@@ -7,6 +7,7 @@ namespace Ocart\Setting;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Core\Facades\EmailHandler;
 use Ocart\Setting\Repositories\SettingRepository;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
@@ -32,7 +33,7 @@ class SettingServiceProvider extends ServiceProvider
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations([])
+            ->loadAndPublishConfigurations(['email'])
             ->loadMigrations()
             ->publishAssets();
 
@@ -60,6 +61,18 @@ class SettingServiceProvider extends ServiceProvider
                 ],
                 'active' => false,
             ]);
+
+//            dd(get_setting_email_status('plugins_contact::emails_e-contact'));
+
+            EmailHandler::addTemplateSettings('base', config('core.setting.email', []));
         });
+    }
+
+    protected function providers()
+    {
+        return [
+            SettingStore::class,
+            SettingManager::class,
+        ];
     }
 }

@@ -24,3 +24,25 @@ if (!function_exists('setting')) {
         return Setting::getFacadeRoot();
     }
 }
+
+if (!function_exists('get_setting_email_status_key')) {
+    /**
+     * @param $templateKey
+     * @return string
+     */
+    function get_setting_email_status_key($templateKey)
+    {
+        return str_replace('.', '_', $templateKey . '_' . 'status');
+    }
+}
+
+if (!function_exists('get_setting_email_status')) {
+    /**
+     * @param $templateKey
+     * @return array|\Ocart\Setting\SettingStore|string|null
+     */
+    function get_setting_email_status($templateKey)
+    {
+        return setting(get_setting_email_status_key($templateKey), 1);
+    }
+}
