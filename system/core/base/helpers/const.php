@@ -48,3 +48,16 @@ if (!defined('BASE_FILTER_ENUM_ARRAY')) {
 if (!defined('BASE_FILTER_TOP_HEADER_LAYOUT')) {
     define('BASE_FILTER_TOP_HEADER_LAYOUT', 'base_filter_top_header_layout');
 }
+
+if (!defined('BASE_FILTER_EMAIL_TEMPLATE_HEADER')) {
+    define('BASE_FILTER_EMAIL_TEMPLATE_HEADER', 'base_filter_email_template_header');
+}
+
+if (!defined('BASE_FILTER_EMAIL_TEMPLATE_FOOTER')) {
+    define('BASE_FILTER_EMAIL_TEMPLATE_FOOTER', 'base_filter_email_template_footer');
+}
+
+
+if (!defined('BASE_FILTER_EMAIL_TEMPLATE')) {
+    define('BASE_FILTER_EMAIL_TEMPLATE', 'base_filter_email_template');
+}

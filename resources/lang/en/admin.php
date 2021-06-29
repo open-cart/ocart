@@ -35,6 +35,7 @@ return [
     'max_c'            => 'Max :max char',
     'save'             => 'Save',
     'save_changes'     => 'Save changes',
+    'save_settings'     => 'Save settings',
     'save_and_edit'    => 'Save & Edit',
     'cancel'           => 'Cancel',
     'title'            => 'Title',

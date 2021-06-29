@@ -35,6 +35,7 @@ return [
     'max_c'            => 'Tối đa :max kí tự',
     'save'             => 'Lưu',
     'save_changes'     => 'Lưu thay đổi',
+    'save_settings'     => 'Lưu cài đặt',
     'save_and_edit'    => 'Lưu & sửa',
     'cancel'           => 'Hủy bỏ',
     'title'            => 'Tiêu đề',
