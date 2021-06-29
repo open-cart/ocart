@@ -50,7 +50,7 @@ class EmailHandler
             'footer'           => apply_filters(BASE_FILTER_EMAIL_TEMPLATE_FOOTER, $this->getTemplateContent('core::emails.footer')),
             'site_title'       => setting('admin_title'),
             'site_url'         => url(''),
-            'site_logo'        => asset('/images/logo-default.jpg'),//setting('admin_logo') ? TnMedia::url(setting('admin_logo')) : url(config('core.base.general.logo', '')),
+            'site_logo'        => TnMedia::url(setting('admin_logo', '/images/logo-default.jpg')),
             'date_time'        => now()->toDateTimeString(),
             'date_year'        => now()->format('Y'),
             'site_admin_email' => setting('admin_email', ''),

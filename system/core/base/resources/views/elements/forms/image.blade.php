@@ -17,6 +17,8 @@
         </a>
     </div>
 </div>
+@once
+@push('bodyAppend')
 <script>
     function removeImageHandler(e) {
         const parent = $(e).closest('.image-box');
@@ -49,3 +51,5 @@
         })
     })
 </script>
+@endpush
+@endonce

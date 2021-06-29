@@ -5,11 +5,40 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Ocart\Core\Facades\EmailHandler;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
+use Ocart\Setting\Http\Requests\SendTestRequest;
+use Ocart\Setting\Http\Requests\SettingRequest;
 
 class SettingController
 {
 
-    function getEmailConfig()
+    public function getOptions()
+    {
+        page_title()->setTitle(trans('core/setting::setting.title'));
+
+//        Assets::addScriptsDirectly('vendor/core/core/setting/js/setting.js');
+
+        return view('core.setting::index');
+    }
+
+    public function postEdit(SettingRequest $request, BaseHttpResponse $response)
+    {
+        $this->saveSettings($request->except(['_token', 'locale']));
+
+//        $locale = $request->input('locale');
+//        if ($locale != false && array_key_exists($locale, Language::getAvailableLocales())) {
+//            session()->put('site-locale', $locale);
+//        }
+
+//        if (!app()->environment('demo')) {
+//            setting()->set('locale', $locale)->save();
+//        }
+
+        return $response
+            ->setPreviousUrl(route('settings.options'))
+            ->setMessage(trans('core/base::notices.update_success_message'));
+    }
+
+    public function getEmailConfig()
     {
         return view('core.setting::email-config');
     }
@@ -73,7 +102,7 @@ class SettingController
      * @return BaseHttpResponse
      * @throws Throwable
      */
-    public function postSendTestEmail(BaseHttpResponse $response, Request $request)
+    public function postSendTestEmail(BaseHttpResponse $response, SendTestRequest $request)
     {
         try {
             EmailHandler::send(

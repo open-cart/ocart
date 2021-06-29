@@ -53,9 +53,9 @@ class SettingServiceProvider extends ServiceProvider
                     'parent_id' => 'cms-core-settings',
                     'name' => 'General',
                     'icon' => null,
-                    'url' => route('settings.email'),
+                    'url' => route('settings.options'),
                     'permissions' => [
-                        'settings.general'
+                        'settings.options'
                     ],
                     'active' => false,
                 ])
