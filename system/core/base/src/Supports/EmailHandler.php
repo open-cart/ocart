@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\ViewFinderInterface;
 use Ocart\Media\Facades\TnMedia;
+use Ocart\Setting\SettingStore;
 
 class EmailHandler
 {
@@ -143,7 +144,24 @@ class EmailHandler
 
     public function sendUsingTemplate($template, $data = [])
     {
+        if (!$this->templateEnabled($template)) {
+            return false;
+        }
+
         $this->send($this->getTemplateContent($template), $this->getTemplateSubject($template));
+
+        return true;
+    }
+
+
+    /**
+     * @param string $template
+     * @param string $type
+     * @return array|SettingStore|string|null
+     */
+    public function templateEnabled(string $template)
+    {
+        return get_setting_email_status($template);
     }
 
     /**

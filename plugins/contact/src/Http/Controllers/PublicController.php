@@ -32,15 +32,16 @@ class PublicController extends BaseController
 
             event(new SentContactEvent($contact));
 
-           EmailHandler::create(Mail::to($contact))
-               ->sendUsingTemplate('plugins.contact::emails.contact', [
+           EmailHandler::module('contact')
+               ->setVariableValues([
                    'contact_name'    => $contact->name ?? 'N/A',
                    'contact_subject' => $contact->subject ?? 'N/A',
                    'contact_email'   => $contact->email ?? 'N/A',
                    'contact_phone'   => $contact->phone ?? 'N/A',
                    'contact_address' => $contact->address ?? 'N/A',
                    'contact_content' => $contact->content ?? 'N/A',
-               ]);
+               ])
+               ->sendUsingTemplate('plugins.contact::emails.e-contact');
 
             return $response->setMessage(__('Send message successfully!'));
         } catch (Exception $exception) {

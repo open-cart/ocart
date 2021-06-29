@@ -60,7 +60,7 @@
                 const name = $(id + " input[name=name]").val();
                 const phone = $(id + " input[name=phone]").val();
                 const email = $(id + " input[name=email]").val();
-                const content = $(id + " input[name=content]").val() || 'Nội dung';
+                const content = $(id + " textarea[name=content]").val() || 'Nội dung';
 
                 $(".form-contact input").removeClass('text-red-600 border border-red-500 error:focus:border-red-500');
 
@@ -71,6 +71,7 @@
                     content: content,
                 }).then((res) => {
                     $(".form-contact input").val("");
+                    $(".form-contact textarea").val("");
                     toast.success(res.message);
                 }).catch(this.showError).finally(() => {
                     $(".loading-icon").hide();
