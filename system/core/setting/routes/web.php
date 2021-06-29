@@ -11,19 +11,19 @@ Route::group(
         Route::group([
             'prefix' => ADMIN_PREFIX,
         ], function() {
+            Route::get('general', [
+                'as'         => 'settings.options',
+                'uses'       => 'SettingController@getOptions',
+                'permission' => 'settings.options',
+            ]);
+
+            Route::post('general/edit', [
+                'as'         => 'settings.edit',
+                'uses'       => 'SettingController@postEdit',
+                'permission' => 'settings.options',
+            ]);
+
             Route::group(['prefix' => 'email', 'permission' => 'settings.email'], function () {
-                Route::get('general', [
-                    'as'         => 'settings.options',
-                    'uses'       => 'SettingController@getOptions',
-                    'permission' => 'settings.options',
-                ]);
-
-                Route::post('general/edit', [
-                    'as'         => 'settings.edit',
-                    'uses'       => 'SettingController@postEdit',
-                    'permission' => 'settings.options',
-                ]);
-
                 Route::get('', [
                     'as'   => 'settings.email',
                     'uses' => 'SettingController@getEmailConfig',
