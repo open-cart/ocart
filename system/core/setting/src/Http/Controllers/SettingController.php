@@ -66,4 +66,27 @@ class SettingController
     {
 
     }
+
+    /**
+     * @param BaseHttpResponse $response
+     * @param SendTestEmailRequest $request
+     * @return BaseHttpResponse
+     * @throws Throwable
+     */
+    public function postSendTestEmail(BaseHttpResponse $response, Request $request)
+    {
+        try {
+            EmailHandler::send(
+                EmailHandler::getTemplateContent('core.setting::emails.test'),
+                'Test',
+                $request->input('email'),
+                []
+            );
+
+            return $response->setMessage(trans('core/setting::setting.test_email_send_success'));
+        } catch (\Exception $exception) {
+            return $response->setError()
+                ->setMessage($exception->getMessage());
+        }
+    }
 }

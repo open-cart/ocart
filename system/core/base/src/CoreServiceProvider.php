@@ -11,6 +11,7 @@ use Ocart\Core\Assets\CustomAsset;
 use Ocart\Core\Library\Action;
 use Ocart\Core\Library\Filter;
 use Ocart\Core\Library\Helper;
+use Ocart\Core\Providers\EmailConfigServiceProvider;
 use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Library\CustomResourceRegistrar;
@@ -44,6 +45,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->register(BreadcrumsServiceProvider::class);
         $this->app->register(FormServiceProvider::class);
+        $this->app->register(EmailConfigServiceProvider::class);
 
         Builder::defaultStringLength(191);
     }

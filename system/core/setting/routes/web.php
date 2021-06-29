@@ -31,6 +31,11 @@ Route::group(
                     'as'   => 'settings.email.template.store',
                     'uses' => 'SettingController@postEditEmailTemplate',
                 ]);
+
+                Route::post('test/send', [
+                    'as'   => 'setting.email.send.test',
+                    'uses' => 'SettingController@postSendTestEmail',
+                ]);
             });
         });
     }

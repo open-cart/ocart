@@ -94,7 +94,7 @@
                                          value="{{ setting('email_from_address', config('mail.from.address')) }}"/>
                             </div>
                             <div class="">
-                                <x-button type="button">
+                                <x-button type="button" data-target="#test-email-modal" data-toggle="modal">
                                     {{ trans('core/setting::setting.send_mail_test') }}
                                 </x-button>
                             </div>
@@ -114,6 +114,7 @@
         </div>
     </div>
     {!! Form::close() !!}
+    <x-core.setting::test-email></x-core.setting::test-email>
     <script>
         (function() {
             $("#email_driver").change(function() {
