@@ -142,13 +142,16 @@ class EmailHandler
         return $this;
     }
 
-    public function sendUsingTemplate($template, $data = [])
+    public function sendUsingTemplate($template, $email = null, $data = [])
     {
         if (!$this->templateEnabled($template)) {
             return false;
         }
 
-        $this->send($this->getTemplateContent($template), $this->getTemplateSubject($template));
+        $content = $this->getTemplateContent($template);
+        $subject = $this->getTemplateSubject($template);
+
+        $this->send($content, $subject, $email, $data);
 
         return true;
     }
@@ -206,7 +209,7 @@ class EmailHandler
             echo $content; die;
         }
 
-        $mailable = new EmailAbstract($content, $title, []);
+        $mailable = new EmailAbstract($content, $title, $args);
 
         $this->mailer->to($to)->send($mailable);
     }
