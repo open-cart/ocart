@@ -21,7 +21,7 @@ class HookServiceProvider extends ServiceProvider
             ])->registerItem([
                 'id' => 'cms-core-content-menu',
                 'parent_id' => 'cms-core-menu',
-                'name' => 'packages/menu::menus.menu',
+                'name' => trans('packages/menu::menus.menu'),
                 'icon' => null,
                 'url' => route('menus.index'),
                 'permissions' => [

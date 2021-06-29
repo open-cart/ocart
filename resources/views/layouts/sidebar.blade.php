@@ -30,7 +30,7 @@
                                 href="{{ isset($level1['children']) && count($level1['children']) ? 'javascript: void(0)' : $level1['url'] }}"
                                 class="pl-5 pr-3 py-3 cursor-pointer flex items-center hover:bg-gray-100 block dark:hover:bg-gray-700 dark:text-gray-300">
                                 <i class="{{ $level1['icon'] }}"></i>
-                                {{ trans($level1['name']) }}
+                                {{ $level1['name'] }}
                             </a>
                             @if (isset($level1['children']) && count($level1['children']))
                                 <ul

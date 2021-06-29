@@ -46,7 +46,7 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
             ])->registerItem([
                 'id' => 'cms-core-content-page',
                 'parent_id' => 'cms-core-content',
-                'name' => 'packages/page::pages.menu',
+                'name' => trans('packages/page::pages.menu'),
                 'icon' => null,
                 'url' => route('pages.index'),
                 'permissions' => [

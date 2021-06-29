@@ -21,7 +21,7 @@ class SettingServiceProvider extends ServiceProvider
         $this->setNamespace('core/setting')
             ->loadAndPublishConfigurations(['general']);
 
-        $this->app->bind(SettingRepository::class, );
+        $this->app->bind(SettingRepository::class,);
 
         Helper::autoload(__DIR__ . '/../helpers');
     }
@@ -40,29 +40,39 @@ class SettingServiceProvider extends ServiceProvider
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id' => 'cms-core-settings',
-                'priority'    => 998,
+                'priority' => 998,
                 'parent_id' => null,
                 'name' => 'Settings',
                 'icon' => null,
                 'url' => '',
                 'permissions' => [],
                 'active' => false,
-            ])->registerItem([
-                'id' => 'cms-core-settings-email',
-                'parent_id' => 'cms-core-settings',
-                'name' => 'Email',
-                'icon' => null,
-                'url' => route('settings.email'),
-                'permissions' => [
-                    'pages.index',
-                    'pages.create',
-                    'pages.update',
-                    'pages.destroy',
-                ],
-                'active' => false,
-            ]);
-
-//            dd(get_setting_email_status('plugins_contact::emails_e-contact'));
+            ])
+                ->registerItem([
+                    'id' => 'cms-core-settings-general',
+                    'parent_id' => 'cms-core-settings',
+                    'name' => 'General',
+                    'icon' => null,
+                    'url' => route('settings.email'),
+                    'permissions' => [
+                        'settings.general'
+                    ],
+                    'active' => false,
+                ])
+                ->registerItem([
+                    'id' => 'cms-core-settings-email',
+                    'parent_id' => 'cms-core-settings',
+                    'name' => 'Email',
+                    'icon' => null,
+                    'url' => route('settings.email'),
+                    'permissions' => [
+                        'pages.index',
+                        'pages.create',
+                        'pages.update',
+                        'pages.destroy',
+                    ],
+                    'active' => false,
+                ]);
 
             EmailHandler::addTemplateSettings('base', config('core.setting.email', []));
         });

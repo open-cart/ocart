@@ -38,7 +38,7 @@ class PluginManagementServiceProvider extends ServiceProvider
                 'id'          => 'cms-plugins',
                 'parent_id'   => null,
                 'priority'    => 200,
-                'name'        => 'packages/plugin-management::plugin.menu',
+                'name'        => trans('packages/plugin-management::plugin.menu'),
                 'icon'        => null,
                 'url'         => '',
                 'permissions' => [],
@@ -46,7 +46,7 @@ class PluginManagementServiceProvider extends ServiceProvider
             ])->registerItem([
                 'id'          => 'cms-plugins-plugin',
                 'parent_id'   => 'cms-plugins',
-                'name'        => 'packages/plugin-management::plugin.index',
+                'name'        => trans('packages/plugin-management::plugin.index'),
                 'icon'        => null,
                 'url'         => route('admin::plugin'),
                 'permissions' => [
