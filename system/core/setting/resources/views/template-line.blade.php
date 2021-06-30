@@ -32,7 +32,7 @@
                             <td class="py-2">
                                 {{ trans($template['description']) }}
                             </td>
-                            @if($module != 'base')
+                            @if($module != 'base' && Arr::get($template, 'can_off', false))
                                 <td class="py-2">
                                     <x-switch
                                             checked="{!! get_setting_email_status($key, $module) == 1 ? 'true' : 'false' !!}"

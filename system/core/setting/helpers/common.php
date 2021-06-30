@@ -44,7 +44,7 @@ if (!function_exists('get_setting_email_status')) {
      */
     function get_setting_email_status($templateKey, $module)
     {
-        $default = \Ocart\Core\Facades\EmailHandler::module($module)->getConfig($templateKey, 'enabled');
+        $default = \Ocart\Core\Facades\EmailHandler::module($module)->getConfig($templateKey, 'enabled', true);
         return setting(get_setting_email_status_key($templateKey), $default);
     }
 }

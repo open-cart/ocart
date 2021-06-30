@@ -9,6 +9,7 @@ return [
             'description' => 'plugins/contact::contact.settings.email.templates.notice_description',
             'subject' => 'New contact from {{ site_title }}123',
             'enabled' => true,
+            'can_off' => true
         ],
     ],
     'variables' => [
