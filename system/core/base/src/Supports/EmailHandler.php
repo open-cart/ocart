@@ -164,7 +164,7 @@ class EmailHandler
      */
     public function templateEnabled(string $template)
     {
-        return get_setting_email_status($template);
+        return get_setting_email_status($template, $this->module);
     }
 
     /**
