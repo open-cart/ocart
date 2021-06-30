@@ -1,5 +1,9 @@
 <?php
 
+if (!defined('ECOMMERCE_MODULE_SCREEN_NAME')) {
+    define('ECOMMERCE_MODULE_SCREEN_NAME', 'ecommerce');
+}
+
 if (!defined('PRODUCT_MODULE_SCREEN_NAME')) {
     define('PRODUCT_MODULE_SCREEN_NAME', 'product');
 }

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Ocart\Core\Events\UpdatedContentEvent;
+use Ocart\Core\Facades\EmailHandler;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
 use Ocart\Ecommerce\Enums\ShippingMethodEnum;
 use Ocart\Ecommerce\Forms\BrandForm;
@@ -305,7 +306,13 @@ class OrderController extends BaseController
             'status' => OrderStatusEnum::PROCESSING
         ], $request->input('id'));
 
-        return $response->setMessage('success');
+        $this->setEmailVariables($order);
+
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.order_confirm',
+                $order->user->email ? $order->user->email : $order->address->email);
+
+        return $response->setMessage(trans('plugins/ecommerce::order.confirm_order_success'));
     }
 
     function postConfirmPayment(Request $request, BaseHttpResponse $response)
@@ -664,5 +671,23 @@ class OrderController extends BaseController
         DB::commit();
 
         return $response->setMessage(trans('plugins/ecommerce::orders.refund_success'));
+    }
+
+    protected function setEmailVariables($order)
+    {
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)->setVariableValues([
+            'store_address'    => get_ecommerce_setting('store_address'),
+            'store_phone'      => get_ecommerce_setting('store_phone'),
+            'order_id'         => str_replace('#', '', $order->code),
+            'order_token'      => $order->token,
+            'customer_name'    => $order->user->name ? $order->user->name : $order->address->name,
+            'customer_email'   => $order->user->email ? $order->user->email : $order->address->email,
+            'customer_phone'   => $order->user->phone ? $order->user->phone : $order->address->phone,
+            'customer_address' => $order->address->address . ', ' . $order->address->city . ', ' . $order->address->country_name,
+            'product_list'     => view('plugins.ecommerce::emails.partials.order-detail',
+                compact('order'))->render(),
+            'shipping_method'  => $order->shipping_method_name,
+            'payment_method'   => $order->payment->payment_channel->label(),
+        ]);
     }
 }

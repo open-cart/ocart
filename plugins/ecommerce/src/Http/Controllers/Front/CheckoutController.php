@@ -277,7 +277,23 @@ class CheckoutController extends BaseController
             destroy_to_cart();
         }
 
-        EmailHandler::module('ecommerce')->setVariableValues([
+        $this->setEmailVariables($order);
+
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.admin_new_order');
+
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.customer_new_order',
+                $order->user->email ? $order->user->email : $order->address->email);
+
+        session(['checkout_information' => []]);
+
+        return $response->setData($order);
+    }
+
+    protected function setEmailVariables($order)
+    {
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)->setVariableValues([
             'store_address'    => get_ecommerce_setting('store_address'),
             'store_phone'      => get_ecommerce_setting('store_phone'),
             'order_id'         => str_replace('#', '', $order->code),
@@ -291,16 +307,5 @@ class CheckoutController extends BaseController
             'shipping_method'  => $order->shipping_method_name,
             'payment_method'   => $order->payment->payment_channel->label(),
         ]);
-
-        EmailHandler::module('ecommerce')
-            ->sendUsingTemplate('plugins.ecommerce::emails.admin_new_order');
-
-        EmailHandler::module('ecommerce')
-            ->sendUsingTemplate('plugins.ecommerce::emails.customer_new_order',
-                $order->user->email ? $order->user->email : $order->address->email);
-
-        session(['checkout_information' => []]);
-
-        return $response->setData($order);
     }
 }
