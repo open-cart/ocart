@@ -36,6 +36,9 @@ Route::group([
                 Route::delete('delete-comment', 'OrderController@postDeleteComment')
                     ->name('delete_comment');
 
+                Route::post('cancel-order/{id}', 'OrderController@postCancelOrder')
+                    ->name('cancel_order');
+
             });
         });
 //        Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);

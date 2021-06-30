@@ -61,84 +61,97 @@
                                 </div>
                             </div>
                         </div>
-                        <hr class="-mx-4">
-                        <div class="flex justify-between items-center" id="body-confirmed">
-                            <div class="flex space-x-2">
-                                <svg class="w-6 h-6 @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING) text-green-500 @endif fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
-                                @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
-                                    <span class="uppercase">Order was confirm</span>
-                               @else
-                                    <span class="uppercase">Confirm order</span>
+                        <div id="body-confirmed" class="space-y-4">
+                            <hr class="-mx-4">
+                            <div class="flex justify-between items-center">
+                                <div class="flex space-x-2">
+                                    <svg class="w-6 h-6 @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING) text-green-500 @endif fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
+                                    @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
+                                        <span class="uppercase">Order was confirm</span>
+                                    @else
+                                        <span class="uppercase">Confirm order</span>
+                                    @endif
+                                </div>
+                                @if($order->status == \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
+                                    <div>
+                                        <x-button x-on:click="confirmOrder">Confirm</x-button>
+                                    </div>
                                 @endif
                             </div>
-                            @if($order->status == \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING)
-                                <div>
-                                    <x-button x-on:click="confirmOrder">Confirm</x-button>
-                                </div>
-                            @endif
-                        </div>
-                        <hr class="-mx-4">
-                        <template x-if="true">
-                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::PENDING !!}'"
-                                 class="flex justify-between items-center">
-                                <div class="flex space-x-2">
-                                    <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><g><path d="M23.6 10H.4c-.2 0-.4.5-.4.7v7.7c0 .7.6 1.6 1.3 1.6h21.4c.7 0 1.3-.9 1.3-1.6v-7.7c0-.2-.2-.7-.4-.7zM20 16.6c0 .2-.2.4-.4.4h-4.1c-.2 0-.4-.2-.4-.4v-2.1c0-.2.2-.4.4-.4h4.1c.2 0 .4.2.4.4v2.1zM22.7 4H1.3C.6 4 0 4.9 0 5.6v1.7c0 .2.2.7.4.7h23.1c.3 0 .5-.5.5-.7V5.6c0-.7-.6-1.6-1.3-1.6z"></path></g></svg>
-                                    <span class="uppercase">Pendding payment</span>
-                                </div>
-                                <div>
-                                    <x-button data-toggle="modal" data-target="#order-confirm-payment-modal">Confirm payment</x-button>
-                                </div>
-                            </div>
-                        </template>
-                        <template x-if="true">
-                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED !!}'" class="flex justify-between items-center">
-                                <div class="flex space-x-2">
-                                    <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
-                                    <span class="uppercase">Payment <span>{!! format_price($order->payment->amount) !!}</span> was accepted</span>
-                                </div>
-                                <div>
-                                    <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
-                                </div>
-                            </div>
-                        </template>
-                        <template x-if="true">
-                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDING !!}'" class="flex justify-between items-center">
-                                <div class="flex space-x-2">
-                                    <span class="uppercase">Payment was refunded</span>
-                                </div>
-                                <div>
-                                    <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
-                                </div>
-                            </div>
-                        </template>
-                        <template x-if="true">
-                            <div x-show="order?.payment?.status === '{!! \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDED !!}'" class="flex justify-between items-center">
-                                <div class="flex space-x-2">
-                                    <span class="uppercase">Payment was refunded</span>
-                                </div>
-                            </div>
-                        </template>
-                        <hr class="-mx-4">
-                        <div class="flex justify-between items-center">
-                            @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::COMPLETED)
-                            <div class="flex space-x-2">
-                                <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M18.5 8h1.6c.3 0 .7 0 .9.3l2.7 2.6c.2.2.4.5.4.9v5c0 .2-.1.2-.3.2h-.3c-.2 0-.5-.1-.6-.3-.6-1.3-1.9-2.1-3.4-2.1-.6 0-1.3.2-1.9.5-.2.1-.5 0-.5-.2v-5.8c-.1-.7.7-1.1 1.4-1.1zm-17.2-4h12.9c.7 0 .8 1 .8 1.7v10.2c0 .7-.1 1.1-.8 1.1h-3.8c-.2 0-.3 0-.4-.2-.6-1.4-1.9-2.2-3.5-2.2s-2.9.9-3.5 2.2c0 .2-.2.2-.4.2h-1.3c-.7 0-1.3-.4-1.3-1.1v-10.2c0-.7.6-1.7 1.3-1.7z"></path><circle cx="19.3" cy="18.5" r="2.1"></circle><circle cx="6.5" cy="18.5" r="2.1"></circle></svg>
-                                <span class="uppercase">Delivery</span>
-                            </div>
-                            <div>
-                                <x-button x-on:click="markAsFulfilled">Mark as fulfilled</x-button>
-                            </div>
+                            <hr class="-mx-4">
+                            @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
+                                @if($order->payment->status == \Ocart\Payment\Enums\PaymentStatusEnum::PENDING)
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex space-x-2">
+                                            <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><g><path d="M23.6 10H.4c-.2 0-.4.5-.4.7v7.7c0 .7.6 1.6 1.3 1.6h21.4c.7 0 1.3-.9 1.3-1.6v-7.7c0-.2-.2-.7-.4-.7zM20 16.6c0 .2-.2.4-.4.4h-4.1c-.2 0-.4-.2-.4-.4v-2.1c0-.2.2-.4.4-.4h4.1c.2 0 .4.2.4.4v2.1zM22.7 4H1.3C.6 4 0 4.9 0 5.6v1.7c0 .2.2.7.4.7h23.1c.3 0 .5-.5.5-.7V5.6c0-.7-.6-1.6-1.3-1.6z"></path></g></svg>
+                                            <span class="uppercase">Pendding payment</span>
+                                        </div>
+                                        <div>
+                                            <x-button data-toggle="modal" data-target="#order-confirm-payment-modal">Confirm payment</x-button>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if($order->payment->status == \Ocart\Payment\Enums\PaymentStatusEnum::COMPLETED)
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex space-x-2">
+                                            <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
+                                            <span class="uppercase">Payment <span>{!! format_price($order->payment->amount) !!}</span> was accepted</span>
+                                        </div>
+                                        <div>
+                                            <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if($order->payment->status == \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDING)
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex space-x-2">
+                                            <span class="uppercase">Payment was refunded</span>
+                                        </div>
+                                        <div>
+                                            <x-button data-toggle="modal" data-target="#order-refund-modal">Refund</x-button>
+                                        </div>
+                                    </div>
+                                @endif
+                                @if($order->payment->status == \Ocart\Payment\Enums\PaymentStatusEnum::REFUNDED)
+                                    <div class="flex justify-between items-center">
+                                        <div class="flex space-x-2">
+                                            <span class="uppercase">Payment was refunded</span>
+                                        </div>
+                                    </div>
+                                @endif
                             @else
-                                <div class="flex space-x-2">
-                                    <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
-                                    <span class="uppercase">Delivery</span>
+                                <div class="flex justify-between items-center">
+                                    <div class="flex space-x-2">
+                                        <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm0 4c1.4 0 2.7.4 3.9 1L12 8.8 8.8 12 5 15.9c-.6-1.1-1-2.5-1-3.9 0-4.4 3.6-8 8-8zm0 16c-1.4 0-2.7-.4-3.9-1l3.9-3.9 3.2-3.2L19 8.1c.6 1.1 1 2.5 1 3.9 0 4.4-3.6 8-8 8z"></path></svg>
+                                        <span class="uppercase">{{ trans('Order was cancelled') }}</span>
+                                    </div>
                                 </div>
                             @endif
-{{--                            <div>--}}
-{{--                                <x-button data-toggle="modal" data-target="#order-create-paid-modal">Delivery</x-button>--}}
-{{--                            </div>--}}
+                            <hr class="-mx-4">
+                            <div class="flex justify-between items-center">
+                                @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::COMPLETED)
+                                    @if($order->status == \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
+                                        <div class="flex space-x-2">
+                                            <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
+                                            <span class="uppercase">{{ trans('All products are not delivered') }}</span>
+                                        </div>
+                                    @else
+                                        <div class="flex space-x-2">
+                                            <svg class="w-6 h-6 text-gray-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M18.5 8h1.6c.3 0 .7 0 .9.3l2.7 2.6c.2.2.4.5.4.9v5c0 .2-.1.2-.3.2h-.3c-.2 0-.5-.1-.6-.3-.6-1.3-1.9-2.1-3.4-2.1-.6 0-1.3.2-1.9.5-.2.1-.5 0-.5-.2v-5.8c-.1-.7.7-1.1 1.4-1.1zm-17.2-4h12.9c.7 0 .8 1 .8 1.7v10.2c0 .7-.1 1.1-.8 1.1h-3.8c-.2 0-.3 0-.4-.2-.6-1.4-1.9-2.2-3.5-2.2s-2.9.9-3.5 2.2c0 .2-.2.2-.4.2h-1.3c-.7 0-1.3-.4-1.3-1.1v-10.2c0-.7.6-1.7 1.3-1.7z"></path><circle cx="19.3" cy="18.5" r="2.1"></circle><circle cx="6.5" cy="18.5" r="2.1"></circle></svg>
+                                            <span class="uppercase">Delivery</span>
+                                        </div>
+                                        <div>
+                                            <x-button x-on:click="markAsFulfilled($event)">Mark as fulfilled</x-button>
+                                        </div>
+                                    @endif
+                                @else
+                                    <div class="flex space-x-2">
+                                        <svg class="w-6 h-6 text-green-500 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
+                                        <span class="uppercase">Delivery</span>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
-
                     </div>
 
                     <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
@@ -586,6 +599,17 @@
                             </div>
                         </div>
                     </div>
+                    @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
+                    <div class="rounded-md bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
+                        <div class="px-6 py-4 space-y-2">
+                            <div class="space-y-4">
+                                <div>
+                                    <x-button data-toggle="modal" data-target="#order-confirm-cancel-modal">Cancel</x-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
                 <div x-on:before-show="openConfirmPayment()">
                     <x-plugins.ecommerce::orders.confirm-payment-modal/>
@@ -597,6 +621,9 @@
                 <div>
                     <x-plugins.ecommerce::orders.refund-modal :order="$order"/>
                 </div>
+                <div>
+                    <x-plugins.ecommerce::orders.confirm-cancel-modal/>
+                </div>
             </div>
         </div>
     </div>
@@ -605,10 +632,25 @@
             name: '',
             email: ''
         })
-        Spruce.store('order', {})
-        Spruce.reset('order', {
-            comment: ''
-        })
+
+        var orderStore = {
+            comment: '',
+            cancel_order(el) {
+                const btn = buttonLoading($(el.target));
+                btn.show();
+                return axios.post('{{ route('ecommerce.orders.cancel_order', ['id' => $order->id]) }}')
+                    .then(res => {
+                        toast.success(res.message);
+                        $.pjax.reload('#body')
+                        return res;
+                    }).catch(showError).finally(() => {
+                        btn.hide();
+                    })
+            }
+        };
+
+        Spruce.store('order', orderStore)
+        Spruce.reset('order', orderStore)
         var refundStoreOption = {
             data: @json($order->products).map(x => {
                 return {
@@ -624,12 +666,14 @@
             refund_amount: {{ ($order->payment->amount - $order->payment->refunded_amount) }},
             refund_note: '',
             loading: false,
-            save() {
+            save(el) {
                 if (this.loading) {
                     return Promise.reject();
                 }
 
                 this.loading = true;
+                const btn = buttonLoading($(el.target));
+                btn.show();
 
                 return axios.post('{{ route('ecommerce.orders.refund', ['id' => $order->id]) }}', {
                     products: this.data.map(x => {
@@ -641,11 +685,12 @@
                     refund_amount: this.refund_amount,
                     refund_note: this.refund_note
                 }).then(res => {
-                    toast.success('Address saved');
-                    $.pjax.reload('#body');
+                    toast.success(res.message);
+                    $.pjax.reload('#body-confirmed');
                     return res;
                 }).catch(showError).finally(() => {
                     this.loading = false;
+                    btn.hide();
                 })
             }
         }
@@ -707,27 +752,31 @@
                 openConfirmPayment() {
                     this.$store.order.confirmPayment = this.confirmPayment.bind(this);
                 },
-                confirmPayment() {
-                    this.$store.order.loading = true;
-                    axios.post('{!! route('ecommerce.orders.confirm-payment') !!}', {
+                confirmPayment(el) {
+                    const btn = buttonLoading($(el.target));
+                    btn.show();
+                    return axios.post('{!! route('ecommerce.orders.confirm-payment') !!}', {
                         id: {!! $order->id !!}
                     }).then(res => {
-                        $.pjax.reload('#body');
-                        toast.success('Confirm payment success');
+                        $.pjax.reload('#body-confirmed');
+                        toast.success(res.message);
                         return res;
                     }).catch(showError).finally(() => {
-                        this.$store.order.loading = false;
+                        btn.hide();
                     })
                 },
-                markAsFulfilled() {
-                    bodyLoading.show();
-                    axios.post('{!! route('ecommerce.orders.mark-as-fulfilled', ['id' => $order->id]) !!}')
+                markAsFulfilled(el) {
+                    const btn = buttonLoading($(el.target));
+                    btn.show();
+                    return axios.post('{!! route('ecommerce.orders.mark-as-fulfilled', ['id' => $order->id]) !!}')
                         .then(res => {
-                            toast.success('Mark as fulfilled success');
+                            $.pjax.reload('#body-confirmed');
+                            toast.success(res.message);
+                            return res;
                         })
                         .catch(showError)
                         .finally(() => {
-                            $.pjax.reload('#body');
+                            btn.hide();
                         })
                 },
                 postComment() {

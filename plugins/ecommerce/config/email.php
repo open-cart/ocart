@@ -42,12 +42,12 @@ return [
             'subject' => 'Payment for order {{ order_id }} was confirmed',
             'can_off' => true
         ],
-        'plugins.ecommerce::emails.order_recover' => [
-            'title' => 'plugins/ecommerce::ecommerce.settings.email.order_recover_title',
-            'description' => 'plugins/ecommerce::ecommerce.settings.email.order_recover_description',
-            'subject' => 'Incomplete order',
-            'can_off' => true
-        ],
+//        'plugins.ecommerce::emails.order_recover' => [
+//            'title' => 'plugins/ecommerce::ecommerce.settings.email.order_recover_title',
+//            'description' => 'plugins/ecommerce::ecommerce.settings.email.order_recover_description',
+//            'subject' => 'Incomplete order',
+//            'can_off' => true
+//        ],
     ],
     'variables' => [
         'store_address'    => 'plugins/ecommerce::ecommerce.store_address',

@@ -684,6 +684,26 @@ class OrderController extends BaseController
         return $response->setMessage(trans('plugins/ecommerce::orders.refund_success'));
     }
 
+    public function postCancelOrder($id, BaseHttpResponse $response)
+    {
+        $order = $this->orderRepository->update(['status' => OrderStatusEnum::CANCELED, 'is_confirmed' => true], $id);
+
+        $this->orderHistoryRepository->create([
+            'action'      => 'cancel_order',
+            'description' => trans('plugins/ecommerce::order.order_was_canceled_by'),
+            'order_id'    => $order->id,
+            'user_id'     => Auth::user()->getKey(),
+        ]);
+
+        $this->setEmailVariables($order);
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.customer_cancel_order',
+                $order->user->email ? $order->user->email : $order->address->email
+            );
+
+        return $response->setMessage(trans('plugins/ecommerce::order.customer.messages.cancel_success'));
+    }
+
     protected function setEmailVariables($order)
     {
         EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)->setVariableValues([

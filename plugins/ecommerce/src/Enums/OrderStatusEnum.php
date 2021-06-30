@@ -41,8 +41,12 @@ class OrderStatusEnum extends Enum
                     'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none
                      text-white bg-yellow-400 rounded dark:text-gray-300',
                 ]);
+            case self::CANCELED:
+                return Html::tag('span', $this->getLabel($this->value), [
+                    'class' => 'inline-flex items-center justify-center px-2 py-1 mr-2 text-xs font-bold leading-none
+                     text-white bg-red-400 rounded dark:text-gray-300',
+                ]);
             default:
-                return '';
                 break;
         }
 

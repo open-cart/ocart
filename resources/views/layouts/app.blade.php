@@ -105,6 +105,16 @@
                     $(idModal).click();
                 })
             })
+            const buttonLoading = (el) => {
+                return {
+                    show() {
+                        el.addClass('button-loading');
+                    },
+                    hide() {
+                        el.removeClass('button-loading');
+                    }
+                }
+            }
         </script>
         <style>
             .button-loading {
