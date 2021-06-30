@@ -272,8 +272,9 @@ class EmailHandler
      */
     public function getTemplateSubject($template)
     {
-        $config = Arr::get($this->templates, $this->module);
-        return setting($this->getTemplateSubjectKey($template), Arr::get($config, $template)['subject']);
+        $key = $this->getTemplateSubjectKey($template);
+        $default = $this->getConfig($template, 'subject', 'subject');
+        return setting($key, $default);
     }
 
     public function saveTemplateSubject($template, $content)
