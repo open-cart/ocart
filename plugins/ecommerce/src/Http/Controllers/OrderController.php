@@ -690,7 +690,7 @@ class OrderController extends BaseController
 
         $this->orderHistoryRepository->create([
             'action'      => 'cancel_order',
-            'description' => trans('plugins/ecommerce::order.order_was_canceled_by'),
+            'description' => trans('plugins/ecommerce::orders.order_was_canceled_by'),
             'order_id'    => $order->id,
             'user_id'     => Auth::user()->getKey(),
         ]);

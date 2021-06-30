@@ -599,7 +599,7 @@
                             </div>
                         </div>
                     </div>
-                    @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
+                    @if(!in_array($order->status, [\Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED, \Ocart\Ecommerce\Enums\OrderStatusEnum::COMPLETED]))
                     <div class="rounded-md bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <div class="px-6 py-4 space-y-2">
                             <div class="space-y-4">
