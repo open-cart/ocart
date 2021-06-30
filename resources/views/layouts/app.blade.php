@@ -118,13 +118,11 @@
         </script>
         <style>
             .button-loading {
-                border: 1px solid #c4cdd5;
                 cursor: default;
                 text-shadow: none;
                 color: transparent!important;
                 position: relative;
                 transition: border-color .2s ease-out;
-                background: #f4f6f8;
             }
             .button-loading::before {
                 content: "";

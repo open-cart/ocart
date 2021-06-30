@@ -154,6 +154,7 @@
                         </div>
                     </div>
 
+{{--                    Start comments --}}
                     <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
                         <h3 class=" p-4">
                             {{ trans('plugins/ecommerce::orders.history') }}
@@ -207,7 +208,7 @@
                                                                 'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment?.trim(),
                                                                 'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment?.trim()
                                                               }"
-                                                                  x-on:click="postComment()">
+                                                                  x-on:click="postComment($event)">
                                                             <template x-if="true">
                                                                 <span x-show="!loadingComment">
                                                                     {{ trans('plugins/ecommerce::orders.post') }}
@@ -533,6 +534,7 @@
                             </div>
                         </div>
                     </div>
+{{--                    End comment--}}
                 </div>
                 <div class="col-span-3 space-y-4">
                     <div class="rounded-md bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
@@ -779,12 +781,14 @@
                             btn.hide();
                         })
                 },
-                postComment() {
+                postComment(el) {
                     if (this.loadingComment) {
                         return Promise.reject();
                     }
 
                     this.loadingComment = true;
+                    const btn = buttonLoading($(el.target));
+                    btn.show();
 
                     axios.post('{!! route('ecommerce.orders.comment') !!}', {
                         order_id: {{ $order->id }},
@@ -797,6 +801,7 @@
                         })
                         .catch(showError).finally(() => {
                             this.loadingComment = false;
+                            btn.hide();
                         })
                 },
                 deleteComment(id) {
