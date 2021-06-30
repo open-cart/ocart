@@ -151,7 +151,11 @@ class EmailHandler
         $content = $this->getTemplateContent($template);
         $subject = $this->getTemplateSubject($template);
 
-        $this->send($content, $subject, $email, $data);
+        $res = $this->send($content, $subject, $email, $data);
+
+        if ($this->preview) {
+            return $res;
+        }
 
         return true;
     }
@@ -206,7 +210,7 @@ class EmailHandler
         $title = $this->prepareData($title);
 
         if ($this->preview) {
-            echo $content; die;
+            return $content;
         }
 
         $mailable = new EmailAbstract($content, $title, $args);

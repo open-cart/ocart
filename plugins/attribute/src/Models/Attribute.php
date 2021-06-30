@@ -44,4 +44,9 @@ class Attribute extends BaseModel
     {
         parent::boot();
     }
+
+    public function attributeGroup()
+    {
+        return $this->belongsTo(AttributeGroup::class);
+    }
 }

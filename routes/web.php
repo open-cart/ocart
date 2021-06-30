@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Ocart\Core\Facades\EmailHandler;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,27 @@ Route::get('/notification', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+
+Route::get('testEamil', function () {
+    $order  = \Ocart\Ecommerce\Models\Order::first();
+    EmailHandler::module('ecommerce')->setVariableValues([
+        'store_address'    => get_ecommerce_setting('store_address'),
+        'store_phone'      => get_ecommerce_setting('store_phone'),
+        'order_id'         => str_replace('#', '', $order->code),
+        'order_token'      => $order->token,
+        'customer_name'    => $order->user->name ? $order->user->name : $order->address->name,
+        'customer_email'   => $order->user->email ? $order->user->email : $order->address->email,
+        'customer_phone'   => $order->user->phone ? $order->user->phone : $order->address->phone,
+        'customer_address' => $order->address->address . ', ' . $order->address->city . ', ' . $order->address->country_name,
+        'product_list'     => view('plugins.ecommerce::emails.partials.order-detail',
+            compact('order'))->render(),
+        'shipping_method'  => $order->shipping_method_name,
+        'payment_method'   => $order->payment->payment_channel->label(),
+    ]);
+
+    return EmailHandler::module('ecommerce')
+        ->preview()
+        ->sendUsingTemplate('plugins.ecommerce::emails.order_recover');
+});
 
 require __DIR__.'/auth.php';
