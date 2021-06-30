@@ -344,6 +344,11 @@ class OrderController extends BaseController
             'user_id'     => Auth::user()->getKey(),
         ]);
 
+        $this->setEmailVariables($order);
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.order_confirm_payment',
+                $order->user->email ? $order->user->email : $order->address->email);
+
         DB::commit();
 
         return $response->setMessage('successfully');
@@ -380,7 +385,13 @@ class OrderController extends BaseController
         CreateShipmentRequest $request,
         BaseHttpResponse $response
     ) {
-        $this->orderRepository->update(['status' => OrderStatusEnum::COMPLETED], $id);
+        $order = $this->orderRepository->update(['status' => OrderStatusEnum::COMPLETED], $id);
+
+        $this->setEmailVariables($order);
+
+        EmailHandler::module(ECOMMERCE_MODULE_SCREEN_NAME)
+            ->sendUsingTemplate('plugins.ecommerce::emails.delivery_order',
+                $order->user->email ? $order->user->email : $order->address->email);
 
         $this->orderHistoryRepository->create([
             'action'      => 'create_shipment',
