@@ -44,7 +44,7 @@
                             @endforeach
                             @foreach(\Ocart\Core\Facades\EmailHandler::getVariables($pluginData['name']) as $moduleKey => $moduleVariable)
                                 <p>
-                                    <code class="text-red-500 shadow text-xs">{{ $moduleKey }}</code>: {{ $moduleVariable }}
+                                    <code class="text-red-500 shadow text-xs">{{ $moduleKey }}</code>: {{ trans($moduleVariable) }}
                                 </p>
                             @endforeach
                         </div>
@@ -56,7 +56,7 @@
                             <div class="flex flex-col">
                                 <label for="subject">{{ trans('Subject') }}</label>
                                 <x-input name="subject" id="subject"
-                                         value="{{ \Ocart\Core\Facades\EmailHandler::getTemplateSubject(request()->input('template')) }}"></x-input>
+                                         value="{{ $emailSubject }}"></x-input>
                             </div>
                             <div>
                                 <label for="email_content">{{ trans('Content') }}</label>

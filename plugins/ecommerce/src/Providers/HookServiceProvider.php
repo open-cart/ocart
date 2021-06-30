@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Enums\BaseStatusEnum;
+use Ocart\Core\Facades\EmailHandler;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
@@ -40,6 +41,8 @@ class HookServiceProvider extends ServiceProvider
             ->create(ProductStatsWidget::class);
 
         $this->registerMenu();
+
+        $this->registerSettingEmails();
 
         add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'registerMenuOptions']);
 
@@ -187,6 +190,13 @@ class HookServiceProvider extends ServiceProvider
                     ],
                     'active'      => false,
                 ]);
+        });
+    }
+
+    protected function registerSettingEmails()
+    {
+        Event::listen(RouteMatched::class, function () {
+            EmailHandler::addTemplateSettings('ecommerce', config('plugins.ecommerce.email', []));
         });
     }
 

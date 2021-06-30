@@ -69,16 +69,21 @@ class SettingController
     {
         page_title()->setTitle(trans('core/setting::setting.email.title'));
 
-        $emailContent = EmailHandler::getTemplateContent($request->input('template'));
+        $key = $request->input('template');
+
+        $emailContent = EmailHandler::module($module)->getTemplateContent($key);
+
+        $emailSubject = EmailHandler::module($module)->getTemplateSubject($key);
 
         $pluginData = [
             'name'          => $module,
-            'template_file' => $request->input('template'),
+            'template_file' => $key,
         ];
 
         return view('core.setting::email-template-edit', [
             'pluginData' => $pluginData,
-            'emailContent' => $emailContent
+            'emailContent' => $emailContent,
+            'emailSubject' => $emailSubject
         ]);
     }
 

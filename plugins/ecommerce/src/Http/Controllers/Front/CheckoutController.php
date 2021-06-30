@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Http\Controllers\Front;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Ocart\Core\Facades\EmailHandler;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
@@ -275,6 +276,28 @@ class CheckoutController extends BaseController
 
             destroy_to_cart();
         }
+
+        EmailHandler::module('ecommerce')->setVariableValues([
+            'store_address'    => get_ecommerce_setting('store_address'),
+            'store_phone'      => get_ecommerce_setting('store_phone'),
+            'order_id'         => str_replace('#', '', $order->code),
+            'order_token'      => $order->token,
+            'customer_name'    => $order->user->name ? $order->user->name : $order->address->name,
+            'customer_email'   => $order->user->email ? $order->user->email : $order->address->email,
+            'customer_phone'   => $order->user->phone ? $order->user->phone : $order->address->phone,
+            'customer_address' => $order->address->address . ', ' . $order->address->city . ', ' . $order->address->country_name,
+            'product_list'     => view('plugins.ecommerce::emails.partials.order-detail',
+                compact('order'))->render(),
+            'shipping_method'  => $order->shipping_method_name,
+            'payment_method'   => $order->payment->payment_channel->label(),
+        ]);
+
+        EmailHandler::module('ecommerce')
+            ->sendUsingTemplate('plugins.ecommerce::emails.admin_new_order');
+
+        EmailHandler::module('ecommerce')
+            ->sendUsingTemplate('plugins.ecommerce::emails.customer_new_order',
+                $order->user->email ? $order->user->email : $order->address->email);
 
         session(['checkout_information' => []]);
 

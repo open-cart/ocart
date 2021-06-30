@@ -39,10 +39,12 @@ if (!function_exists('get_setting_email_status_key')) {
 if (!function_exists('get_setting_email_status')) {
     /**
      * @param $templateKey
+     * @param $module
      * @return array|\Ocart\Setting\SettingStore|string|null
      */
-    function get_setting_email_status($templateKey)
+    function get_setting_email_status($templateKey, $module)
     {
-        return setting(get_setting_email_status_key($templateKey), 1);
+        $default = \Ocart\Core\Facades\EmailHandler::module($module)->getConfig($templateKey, 'enabled');
+        return setting(get_setting_email_status_key($templateKey), $default);
     }
 }

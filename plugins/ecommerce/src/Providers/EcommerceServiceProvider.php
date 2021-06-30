@@ -62,7 +62,7 @@ class EcommerceServiceProvider extends ServiceProvider {
             ])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations(['ecommerce', 'general'])
+            ->loadAndPublishConfigurations(['ecommerce', 'general', 'email'])
             ->loadMigrations();
 
         $this->app->bind(ProductRepository::class, ProductRepositoryEloquent::class);

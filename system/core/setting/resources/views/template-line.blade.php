@@ -35,7 +35,7 @@
                             @if($module != 'base')
                                 <td class="py-2">
                                     <x-switch
-                                            checked="{!! get_setting_email_status($key) == 1 ? 'true' : 'false' !!}"
+                                            checked="{!! get_setting_email_status($key, $module) == 1 ? 'true' : 'false' !!}"
                                             name="{{ get_setting_email_status_key($key) }}"
                                             value_false="0"
                                             color="bg-green-600"

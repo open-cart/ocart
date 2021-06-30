@@ -267,11 +267,13 @@ class EmailHandler
 
     /**
      * @param $template
+     * @param string $default
      * @return array|string|null
      */
     public function getTemplateSubject($template)
     {
-        return setting($this->getTemplateSubjectKey($template), 'subject');
+        $config = Arr::get($this->templates, $this->module);
+        return setting($this->getTemplateSubjectKey($template), Arr::get($config, $template)['subject']);
     }
 
     public function saveTemplateSubject($template, $content)
@@ -282,6 +284,12 @@ class EmailHandler
     protected function getTemplateSubjectKey($template)
     {
         return 'email-subject::' .$template;
+    }
+
+    public function getConfig($template, $key, $default = null)
+    {
+        $config = Arr::get($this->templates, $this->module);
+        return Arr::get(Arr::get($config, $template, []), $key, $default);
     }
 
     /**
@@ -295,7 +303,7 @@ class EmailHandler
             return $this;
         }
 
-        $this->templates = $data['templates'];
+        $this->templates[$module] = $data['templates'];
 
         if (Arr::get($data, 'variables')) {
             $this->addVariables($data['variables'], $module);

@@ -7,8 +7,8 @@ return [
         'plugins.contact::emails.e-contact' => [
             'title' => 'plugins/contact::contact.settings.email.templates.notice_title',
             'description' => 'plugins/contact::contact.settings.email.templates.notice_description',
-            'subject' => 'New contact from {{ site_title }}',
-            'can_off' => true,
+            'subject' => 'New contact from {{ site_title }}123',
+            'enabled' => true,
         ],
     ],
     'variables' => [
