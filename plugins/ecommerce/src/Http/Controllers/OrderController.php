@@ -351,7 +351,7 @@ class OrderController extends BaseController
 
         DB::commit();
 
-        return $response->setMessage('successfully');
+        return $response->setMessage(trans('plugins/ecommerce::orders.confirm_payment_success'));
     }
 
     public function postUpdateShippingAddress($id, AddressRequest $request, BaseHttpResponse $response)
@@ -400,7 +400,7 @@ class OrderController extends BaseController
             'user_id'     => Auth::user()->getKey(),
         ]);
 
-        return $response->setMessage('successfully');
+        return $response->setMessage(trans('successfully'));
     }
 
     /**
@@ -701,7 +701,7 @@ class OrderController extends BaseController
                 $order->user->email ? $order->user->email : $order->address->email
             );
 
-        return $response->setMessage(trans('plugins/ecommerce::order.customer.messages.cancel_success'));
+        return $response->setMessage(trans('plugins/ecommerce::orders.customer.messages.cancel_success'));
     }
 
     protected function setEmailVariables($order)

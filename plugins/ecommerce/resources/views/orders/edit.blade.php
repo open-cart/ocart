@@ -155,7 +155,7 @@
                     </div>
 
 {{--                    Start comments --}}
-                    <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300">
+                    <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300" id="body-comment">
                         <h3 class=" p-4">
                             {{ trans('plugins/ecommerce::orders.history') }}
                         </h3>
@@ -795,7 +795,7 @@
                         comment: $("#order-comment").val()
                     })
                         .then(res => {
-                            $.pjax.reload('#body');
+                            $.pjax.reload('#body-comment');
                             toast.success('Mark as fulfilled success');
                             return res;
                         })

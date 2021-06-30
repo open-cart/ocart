@@ -65,4 +65,11 @@ return [
 
     'new_order_notice'                               => 'You have <span class="bold">:count</span> New Order(s)',
     'view_all'                                       => 'View all',
+
+    'customer'                                       => [
+        'messages' => [
+            'cancel_error'   => 'The order is delivering or completed',
+            'cancel_success' => 'You do cancel the order successful',
+        ],
+    ],
 ];

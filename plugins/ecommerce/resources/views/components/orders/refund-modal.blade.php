@@ -8,7 +8,7 @@
         <div class="py-4 space-y-3">
             <table>
                 <thead>
-                <tr>
+                <tr class="border-b">
                     <th class="w-96 text-left">Product</th>
                     <th class="text-center p-3">Price</th>
                     <th class="text-center p-3">Quantity</th>
@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 @foreach($order->products as $key => $product)
-                    <tr>
+                    <tr class="border-b">
                         <td class="text-left">
                             {!! $product->product_name !!}
                         </td>
@@ -43,9 +43,9 @@
             <div class="flex justify-between">
                 <div>&nbsp;</div>
                 <div>
-                    <label>
-                        <x-input type="checkbox"/>
-                        Return <span x-text="$store.refund.sumQuantity()"></span> product
+                    <label class="flex items-center space-x-3 mb-3">
+                        <input checked type="checkbox" class="rounded-md h-5 w-5 border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"/>
+                        <span>Return <span x-text="$store.refund.sumQuantity()"></span> product</span>
                     </label>
                     <div class="flex justify-between">
                         <div class="flex justify-end">Shipping fee:</div>
