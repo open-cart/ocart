@@ -223,6 +223,9 @@
                     e.target.src = '/images/no-image.jpg';
                 });
             })
+            $('img').on("error", function (e) {
+                e.target.src = '/images/no-image.jpg';
+            });
         })
     </script>
     @stack('bodyAppend')
