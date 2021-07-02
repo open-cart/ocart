@@ -20,5 +20,10 @@ Route::group([
             'uses'       => 'ThemeController@postActivateTheme',
             'permission' => 'theme.index',
         ]);
+        Route::post('update', [
+            'as'         => 'themes.update',
+            'uses'       => 'ThemeController@postUpdateTheme',
+            'permission' => 'theme.index',
+        ]);
     });
 });

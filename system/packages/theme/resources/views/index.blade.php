@@ -15,7 +15,7 @@
                     <div class="grid grid-cols-4 gap-4">
                         @foreach ($themes as $key => $theme)
                         <div class="rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="/themes/{!! $key !!}/screenshot.png" alt="Forest">
+                            <img class="w-full" src="{{ asset("/themes/{$key}/screenshot.png") }}" alt="Forest">
                             <div class="px-6 py-4">
                                 <div class="font-bold text-3xl mb-2 capitalize">
                                     {!! $theme->name !!}
@@ -27,24 +27,35 @@
                             <div
                                 x-data="themeActions()"
                                 class="px-6 pt-4 pb-2">
-                                    @if($theme->active)
+                                @if($theme->active)
                                     <a
                                         href="javascript:void(0)"
-                                        x-on:click="activate('{!! $key !!}')"
+                                        x-on:click="activate($event, '{!! $key !!}')"
                                         class="inline-block bg-blue-500 hover:bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
                                         <span class="flex">
-                                            <i data-feather="check" width="18" height="18"></i>
-                                            Activated
+{{--                                            <i data-feather="check" width="18" height="18"></i>--}}
+                                            {{ trans('Activated') }}
                                         </span>
                                     </a>
-                                    @else
+                                @endif
+                                @if(isset($theme->update) && $theme->update)
                                     <a
                                         href="javascript:void(0)"
-                                        x-on:click="activate('{!! $key !!}')"
-                                        class="inline-block bg-gray-500 hover:bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
-                                        Activate
+                                        x-on:click="update($event, '{!! $key !!}', '{{ $theme->reference }}')"
+                                        class="inline-block bg-yellow-500 hover:bg-yellow-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
+                                        <span class="flex">
+                                            {{ trans('Update') }}
+                                        </span>
                                     </a>
-                                    @endif
+                                @endif
+                                @if(!$theme->active)
+                                    <a
+                                        href="javascript:void(0)"
+                                        x-on:click="activate($event, '{!! $key !!}')"
+                                        class="inline-block bg-gray-500 hover:bg-gray-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
+                                        {{ trans('Activate') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                         @endforeach
@@ -57,13 +68,33 @@
         function themeActions() {
             return {
                 activate(theme) {
+                    const btnLoading = buttonLoading($(e.target));
+
+                    btnLoading.show();
                     axios.post('{!! route('themes.activate') !!}', {
                         theme
-                    }).then(() => {
-                        toast.success('Your work has been saved');
+                    }).then((res) => {
+                        toast.success(res.message);
                     }).catch(e => {
                         toast.error(e.message);
                     }).finally(() => {
+                        btnLoading.hide();
+                        $.pjax.reload('#body', {});
+                    })
+                },
+                update(e, theme, reference) {
+                    const btnLoading = buttonLoading($(e.target));
+
+                    btnLoading.show();
+                    axios.post('{!! route('themes.update') !!}', {
+                        theme,
+                        reference
+                    }).then((res) => {
+                        toast.success(res.message);
+                    }).catch(e => {
+                        toast.error(e.message);
+                    }).finally(() => {
+                        btnLoading.hide();
                         $.pjax.reload('#body', {});
                     })
                 }
