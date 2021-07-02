@@ -51,10 +51,10 @@ class ThemeController extends BaseController
                             $res = $client->request('GET', $uri) ;
                             $con = json_decode($res->getBody()->getContents(), true);
                             $reference = setting('theme_'.$content->name.'reference');
-                            if ($reference != $con['reference']) {
+                            if ($reference != Arr::get($con, 'reference')) {
                                 $content->update = true;
                             }
-                            $content->reference = $con['reference'];
+                            $content->reference = Arr::get($con, 'reference');
                         }
                     }
 
