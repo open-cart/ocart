@@ -15,7 +15,7 @@
                     <div class="grid grid-cols-4 gap-4">
                         @foreach ($themes as $key => $theme)
                         <div class="rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="{{ asset("/themes/{$key}/screenshot.png") }}" alt="Forest">
+                            <img class="w-full" src="{{ asset("/themes/{$key}/screenshot.png") }}?v={{ time() }}" alt="Forest">
                             <div class="px-6 py-4">
                                 <div class="font-bold text-3xl mb-2 capitalize">
                                     {!! $theme->name !!}
