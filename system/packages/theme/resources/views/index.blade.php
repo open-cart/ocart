@@ -67,7 +67,7 @@
     <script>
         function themeActions() {
             return {
-                activate(theme) {
+                activate(e, theme) {
                     const btnLoading = buttonLoading($(e.target));
 
                     btnLoading.show();
