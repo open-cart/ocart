@@ -224,7 +224,7 @@
                 });
             })
             $('img').on("error", function (e) {
-                e.target.src = '/images/no-image.jpg';
+                e.target.src = '{{ asset('/images/no-image.jpg') }}';
             });
         })
     </script>
