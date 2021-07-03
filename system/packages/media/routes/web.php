@@ -42,6 +42,7 @@ Route::get('storage/images/{img}', function ($img) {
 
     $req = request();
     $req->merge(['fm' => $fm]);
+    //$req->merge(['fit' => 'crop']);
 
     $server->outputImage($img, $req->all());
 });

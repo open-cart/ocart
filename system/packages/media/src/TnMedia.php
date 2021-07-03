@@ -2,6 +2,7 @@
 
 namespace Ocart\Media;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -188,6 +189,38 @@ class TnMedia
         return Storage::url($path);
     }
 
+    protected function convertUrl($url)
+    {
+        return str_replace(Storage::url('upload'), Storage::url('images'), $url);
+    }
+
+    public function getImageUrl($url, $size = null, $default = null)
+    {
+        if (empty($url)) {
+            return $this->convertUrl($default);
+        }
+
+        if (empty($size) || $url == '__value__') {
+            return $this->convertUrl($this->url($url));
+        }
+
+        if ($url == $this->getDefaultImage()) {
+            return $this->convertUrl($url);
+        }
+
+        if ($size && array_key_exists($size, $this->getSizes())) {
+            [$w, $h] = explode('x', $this->getSize($size));
+            $url = $url . "?w=$w&h=$h";
+        }
+
+        return $this->convertUrl($this->url($url));
+    }
+
+    public function getDefaultImage()
+    {
+        return $this->url(config('packages.media.media.default_image'));
+    }
+
     /**
      * @return array
      */
@@ -202,5 +235,32 @@ class TnMedia
     public function getSize(string $name): ?string
     {
         return config('packages.media.media.sizes.' . $name);
+    }
+
+    /**
+     * @param string $name
+     * @param int $width
+     * @param int $height
+     * @return $this
+     */
+    public function addSize(string $name, int $width, int $height)
+    {
+        config(['packages.media.media.sizes.' . $name => $width . 'x' . $height]);
+
+        return $this;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function removeSize(string $name)
+    {
+        $sizes = $this->getSizes();
+        Arr::forget($sizes, $name);
+
+        config(['packages.media.media.sizes' => $sizes]);
+
+        return $this;
     }
 }

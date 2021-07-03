@@ -92,8 +92,9 @@ class MediaFile extends BaseModel
      */
     public function canGenerateThumbnails(): bool
     {
-        return is_image($this->mime_type) &&
-            !in_array($this->mime_type, ['image/svg+xml', 'image/x-icon']) &&
-            Storage::exists($this->url);
+        return false;
+//        return is_image($this->mime_type) &&
+//            !in_array($this->mime_type, ['image/svg+xml', 'image/x-icon']) &&
+//            Storage::exists($this->url);
     }
 }
