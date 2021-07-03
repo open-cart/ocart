@@ -1,5 +1,7 @@
 <?php
 use \Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 
 Route::group([
     'prefix' => config('packages.media.media.route.prefix'),
@@ -22,4 +24,23 @@ Route::group([
             'uses' => 'MediaFolderController@store',
         ]);
     });
+});
+
+Route::get('storage/images/{img}', function ($img) {
+    $fm = '';
+    if( strpos( $_SERVER['HTTP_ACCEPT'], 'image/webp' ) !== false ) {
+        // webp is supported!
+        $fm = 'webp';
+    }
+
+    $server = League\Glide\ServerFactory::create([
+        'source' => Storage::path('upload'),
+        'cache' => storage_path('framework/cache/images'),
+//        'driver' => 'imagick',
+    ]);
+
+    $req = request();
+    $req->merge(['fm' => $fm]);
+
+    $server->outputImage($img, $req->all());
 });
