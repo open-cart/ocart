@@ -28,6 +28,7 @@ Route::group([
 
 Route::get('storage/images/{img}', function ($img) {
     $fm = '';
+
     if( strpos( $_SERVER['HTTP_ACCEPT'], 'image/webp' ) !== false ) {
         // webp is supported!
         $fm = 'webp';
