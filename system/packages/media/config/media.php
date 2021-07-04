@@ -6,8 +6,8 @@ return [
         'thumb' => '150x150',
     ],
     'route'                   => [
-//        'prefix'     => ADMIN_PREFIX . '/media',
-        'prefix'     => 'api/media',
+        'prefix'     => ADMIN_PREFIX . '/media',
+//        'prefix'     => 'api/media',
         'middleware' => ['web', 'auth'],
         'options'    => [
             'permission' => 'media.index',

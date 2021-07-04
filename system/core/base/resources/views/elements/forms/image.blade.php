@@ -34,6 +34,9 @@
                 popup: true,
                 uploadAPI: '{!! route('media.files.upload') !!}',
                 listAPI: '{!! route('media.list') !!}',
+                createFolderAPI: '{!! route('media.folders.create') !!}',
+                deleteAPI: '{{ route('media.delete') }}',
+                renameAPI: '{{ route('media.rename') }}',
                 insert: (items) => {
                     const parent = $(this).closest('.image-box');
 

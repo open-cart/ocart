@@ -6,8 +6,8 @@ use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 
 Route::group([
     'prefix' => config('packages.media.media.route.prefix'),
-    'middleware' => ['web'],
-//    'middleware' => ADMIN_MIDDLEWARE,
+//    'middleware' => ['web'],
+    'middleware' => ADMIN_MIDDLEWARE,
     'namespace' => 'Ocart\Media\Http\Controllers',
 ], function () {
     Route::get('', 'MediaController@index')->name('media.index');

@@ -19,7 +19,8 @@
             uploadAPI: '{!! route('media.files.upload') !!}',
             listAPI: '{!! route('media.list') !!}',
             createFolderAPI: '{!! route('media.folders.create') !!}',
-            deleteAPI: {{ route('media.delete') }}
+            deleteAPI: '{{ route('media.delete') }}',
+            renameAPI: '{{ route('media.rename') }}',
         })
         // $(document).on('pjax:send', function() {
         // })

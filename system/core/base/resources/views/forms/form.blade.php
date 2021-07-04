@@ -110,6 +110,9 @@
                         popup: true,
                         uploadAPI: '{!! route('media.files.upload') !!}',
                         listAPI: '{!! route('media.list') !!}',
+                        createFolderAPI: '{!! route('media.folders.create') !!}',
+                        deleteAPI: '{{ route('media.delete') }}',
+                        renameAPI: '{{ route('media.rename') }}',
                         insert: (items) => {
                             cb(items[0].full_url, {name: items[0].name, alt: items[0].name})
                         }
@@ -148,6 +151,9 @@
                         popup: true,
                         uploadAPI: '{!! route('media.files.upload') !!}',
                         listAPI: '{!! route('media.list') !!}',
+                        createFolderAPI: '{!! route('media.folders.create') !!}',
+                        deleteAPI: '{{ route('media.delete') }}',
+                        renameAPI: '{{ route('media.rename') }}',
                         insert: (items) => {
                             cb(items[0].full_url, {name: items[0].name, alt: items[0].name})
                         }

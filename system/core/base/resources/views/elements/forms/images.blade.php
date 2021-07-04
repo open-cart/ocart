@@ -79,14 +79,19 @@
                 popup: true,
                 uploadAPI: '{!! route('media.files.upload') !!}',
                 listAPI: '{!! route('media.list') !!}',
+                createFolderAPI: '{!! route('media.folders.create') !!}',
+                deleteAPI: '{{ route('media.delete') }}',
+                renameAPI: '{{ route('media.rename') }}',
                 insert: (items) => {
                     if (!items.length) return;
 
                     const list = $('.list-gallery-media-images');
+                    const parent = $(this).closest('.image-box');
 
-                    if ($(this).hasClass('default-placeholder-gallery-image')) {
-                        $(this).addClass('hidden');
-                    }
+                    parent.find('.default-placeholder-gallery-image').addClass('hidden');
+                    // if (parent.find('default-placeholder-gallery-image')) {
+                    //     $(this).addClass('hidden');
+                    // }
 
                     for (const image of items) {
                         const item = $('.template-image').clone().attr('class', '');
