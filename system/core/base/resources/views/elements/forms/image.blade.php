@@ -27,7 +27,8 @@
     }
     $(function() {
         const img = $('.preview-image-wrapper').clone();
-        $("[data-action]").click(function(e) {
+
+        $(document).on('click', "[data-action]", function(e) {
             e.preventDefault();
             TnMedia.default({
                 id: 'tnmedia-root',
@@ -41,7 +42,7 @@
                     const parent = $(this).closest('.image-box');
 
                     const name = $(this).data('result');
-                    parent.find(`input[name=${name}]`).val(items[0].url);
+                    parent.find(`input[name=${name}]`).val(items[0].full_url);
                     if (!parent.find('.preview-image-wrapper img').length) {
                         const newImg = img.clone();
                         newImg.find('img').attr('src', items[0].full_url);
