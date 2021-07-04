@@ -5,6 +5,7 @@ namespace Ocart\Media\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Media\Facades\TnMedia;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 use Ocart\Media\Repositories\Interfaces\MediaFolderRepository;
@@ -27,7 +28,6 @@ class MediaController extends BaseController
         $this->fileRepository = $fileRepository;
         $this->folderRepository = $mediaFolderRepository;
     }
-
 
     public function index(Request $request){
         $folder = $this->fileRepository->getModel();
@@ -65,21 +65,61 @@ class MediaController extends BaseController
         if ($slug = $request->get('folder', 0)) {
             $name = \Arr::last(explode(DIRECTORY_SEPARATOR, $slug));
 
-            $folder = $this->fileRepository->findByField('name', $name)->first();
+            $folder = $this->fileRepository->findByField('id', $name)->first();
         }
 
         $files = $this->fileRepository->scopeQuery(function($q) use ($folder, $request){
-            $q->orderBy('is_folder', 'DESC');
+            $q = $q->orderBy('is_folder', 'DESC');
 
-            $q->where('folder_id', $folder->id ?? 0);
+            $q = $q->where('folder_id', $folder->id ?? 0);
+
+            switch ($request->input('type', null)) {
+                case 'image':
+                    $q = $q->whereIn('mime_type', config('packages.media.media.mime_types.image'));
+                    break;
+                case 'video':
+                    $q = $q->whereIn('mime_type', config('packages.media.media.mime_types.video'));
+                    break;
+                case 'document':
+                    $q = $q->whereIn('mime_type', config('packages.media.media.mime_types.document'));
+                    break;
+                default:
+                    break;
+            }
+
+            switch($request->input('sort', null)) {
+                case 'name_asc':
+                    $q = $q->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $q = $q->orderBy('name', 'desc');
+                    break;
+                case 'created_at_asc':
+                    $q = $q->orderBy('created_at', 'asc');
+                    break;
+                case 'created_at_desc':
+                    $q = $q->orderBy('created_at', 'desc');
+                    break;
+                case 'size_asc':
+                    $q = $q->orderBy('size', 'asc');
+                    break;
+                case 'size_desc':
+                    $q = $q->orderBy('size', 'desc');
+                    break;
+                default:
+                    break;
+            }
 
             return $q;
-        })->paginate(18);
+        })->paginate(40);
+
         $list = collect($files->items());
         $items = $list->where('is_folder', 0)->map(function($file) {
             return $this->getResponseFileData($file);
         });
-        $folders = $list->where('is_folder', 1);
+        $items = $items->values();
+
+        $folders = $list->where('is_folder', 1)->values();
 
         $breadcrumbs = $this->getBreadcrumbs($folder);
 
@@ -91,8 +131,33 @@ class MediaController extends BaseController
                 'error' => null,
                 'data' => [],
         ] + compact('files', 'items', 'folders', 'breadcrumbs'));
+    }
 
-        return view('packages/media::index', compact('files', 'items', 'folders', 'breadcrumbs'));
+    public function delete(Request $request, BaseHttpResponse $response)
+    {
+        $id = $request->get('id');
+
+        $this->fileRepository->delete($id);
+
+        return $response->setMessage(trans('Delete file successfully'));
+    }
+
+    public function postRename(Request $request, BaseHttpResponse $response)
+    {
+        $id = $request->get('id');
+        $name = $request->input('name');
+
+        $file = $this->fileRepository->find($id);
+
+        if ($name == $file->name) {
+            return $response->setMessage(trans('Rename successfully'));
+        }
+
+        $name = $this->fileRepository->createName(File::name($name), $file->folder_id);
+
+        $this->fileRepository->update(['name' => $name], $id);
+
+        return $response->setMessage(trans('Rename successfully'));
     }
 
     protected function getBreadcrumbs($folder)
@@ -137,10 +202,11 @@ class MediaController extends BaseController
             'name'       => $file->name,
             'basename'   => File::basename($file->url),
             'url'        => $file->url,
-            'full_url'   => TnMedia::url($file->url),
+            'full_url'   => TnMedia::getImageUrl($file->url_file),
+            'download_url'   => TnMedia::url($file->url),
             'type'       => $file->type,
             'icon'       => $file->icon,
-            'thumb'      => $file->type == 'image' ? get_image_url($file->url, 'thumb') : null,
+            'thumb'      => $file->type == 'image' ? get_image_url($file->url_file, 'thumb') : null,
             'size'       => $file->human_size,
             'mime_type'  => $file->mime_type,
             'is_folder' => $file->is_folder,

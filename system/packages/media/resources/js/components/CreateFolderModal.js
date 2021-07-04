@@ -1,6 +1,20 @@
+import Button from "../common/Button";
+import {useDispatch} from "react-redux";
+import {createFolder} from "../actions"
+import {useState} from "react";
+
 export default function CreateFolderModal({visible, setVisible = () => {}, children}) {
+    const dispatch = useDispatch();
+    const [name, setName] = useState('');
+
     const close = () => {
         setVisible(false)
+    }
+
+    const createFolderHandler = () => {
+        dispatch(createFolder(name, 0)).then(() => {
+            close();
+        })
     }
 
     if (!visible) {
@@ -30,8 +44,26 @@ export default function CreateFolderModal({visible, setVisible = () => {}, child
                     <span className="text-sm">(Esc)</span>
                 </div>
 
-                <div className="modal-content py-4 text-left px-6">
-                    <input type="text"/>
+                <div className="modal-content model-create-folder-content text-left px-6">
+                    <div className="py-3">
+                        <h3 className="text-2xl">Tạo mới thư mục</h3>
+                    </div>
+                    <hr className="-mx-6"/>
+                    <div className="py-3">
+                        <input className="border border-gray-300 focus:border-blue-500 focus:ring-0 bg-white text-gray-900
+ appearance-none inline-block focus:text-gray-900 rounded py-2 px-3 focus:outline-none w-full"
+                               placeholder="Tên thư mục"
+                               value={name}
+                               onChange={e => setName(e.target.value)}
+                               type="text"/>
+                    </div>
+                    <hr className="-mx-6"/>
+                    <div className="py-3">
+                        <div className="flex justify-between">
+                            <div></div>
+                            <Button onClick={createFolderHandler}>Tạo mới</Button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

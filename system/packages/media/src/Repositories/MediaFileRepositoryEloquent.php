@@ -29,8 +29,31 @@ class MediaFileRepositoryEloquent extends RepositoriesAbstract implements MediaF
     public function boot()
     {
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
-        $this->pushCriteria(app(RequestCriteria::class));
+//        $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
+    public function createName($name, $folder)
+    {
+        $index = 1;
+        $baseName = $name;
+        while ($this->checkIfExistsName($name, $folder)) {
+            $name = $baseName . '-' . $index++;
+        }
+        return $name;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function checkIfExistsName($name, $folder)
+    {
+        $count = $this->model
+            ->where('name', $name)
+            ->where('folder_id', $folder)
+            ->withTrashed()
+            ->count();
+
+        return $count > 0;
+    }
 }

@@ -18,6 +18,8 @@
             popup: false,
             uploadAPI: '{!! route('media.files.upload') !!}',
             listAPI: '{!! route('media.list') !!}',
+            createFolderAPI: '{!! route('media.folders.create') !!}',
+            deleteAPI: {{ route('media.delete') }}
         })
         // $(document).on('pjax:send', function() {
         // })

@@ -3,11 +3,12 @@ import React from 'react';
 import Icon from "../common/Icon";
 import Button from "../common/Button";
 import withConfig from "../common/WithConfig";
-import {UploadController} from "../controllers/UploadController";
-import EventEmitter from "../common/EventEmitter";
+import {useDispatch} from "react-redux";
+import {uploadFile} from "../actions"
 
 function ButtonUpload({config, name}) {
     const inputRef = React.useRef(null);
+    const dispatch = useDispatch();
 
     const onChange = (e) => {
         const files = e.target.files;
@@ -17,13 +18,7 @@ function ButtonUpload({config, name}) {
                 listFiles.push(file);
             }
 
-            EventEmitter.emit('before');
-            Promise.all(listFiles.map(file => UploadController.upload(file))).then(() => {
-                console.log('upload success');
-                EventEmitter.emit('refresh');
-            }).finally(() => {
-                EventEmitter.emit('after');
-            })
+            dispatch(uploadFile(listFiles));
         }
     }
 

@@ -5,6 +5,7 @@ use Botble\Media\Services\UploadsManager;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Ocart\Core\Models\BaseModel;
 
@@ -85,6 +86,15 @@ class MediaFile extends BaseModel
         }
 
         return $type;
+    }
+
+    public function getUrlFileAttribute()
+    {
+        if (File::extension($this->name)) {
+            return 'upload/' . $this->name;
+        }
+
+        return 'upload/' . $this->name . '.' . File::extension($this->url);
     }
 
     /**

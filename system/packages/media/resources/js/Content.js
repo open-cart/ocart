@@ -7,19 +7,22 @@ import {classNames} from "./common/utils";
 import Dropdown from "./common/Dropdown";
 import ContextMenu from "./common/ContextMenu";
 import ButtonUpload from "./components/ButtonUpload";
-import EventEmitter from "./common/EventEmitter";
 import CreateFolderModal from "./components/CreateFolderModal";
 import RenameModal from "./components/RenameModal";
-import {UploadController} from "./controllers/UploadController";
 import withConfig from "./common/WithConfig";
+import { useSelector, useDispatch } from 'react-redux'
+import { getListFiles } from './actions'
 
 function Content({onChange = () => {}, onLastSelected = () => {}, popup = false, config}) {
-    const [listFiles, setListFiles] = useState([]);
+    const dispatch = useDispatch();
+
+    const listFiles = useSelector((state) => state.store.value)
+    const loading = useSelector((state) => state.store.loading)
+
     const [typeView, setTypeView] = useState('gird');
     const [selected, setSelected] = useState([]);
     const [lastSelected, setLastSelected] = useState([]);
     const [visible, setVisible] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [fileMenu, setFileMenu] = useState({});
     const [folderMenu, setFolderMenu] = useState({});
     const [visibleCreate, setVisibleCreate] = useState(false);
@@ -94,13 +97,7 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
     }
 
     const fetchList = () => {
-        EventEmitter.emit('before');
-        UploadController.list().then(res => {
-            console.log(res)
-            setListFiles(res.items);
-        }).finally(() => {
-            EventEmitter.emit('after');
-        })
+        dispatch(getListFiles());
     }
 
     useEffect(() => {
@@ -110,33 +107,6 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
     useEffect(() => {
         onLastSelected(lastSelected);
     }, [lastSelected])
-
-    useEffect(() => {
-        const subscribes = [
-            EventEmitter.subscribe('before', () => {
-                setLoading(true);
-            }),
-            EventEmitter.subscribe('after', () => {
-                setLoading(false);
-            }),
-            EventEmitter.subscribe('refresh', event => {
-                console.log("button pressed inside child");
-                console.log(event);
-                fetchList()
-            }),
-
-            EventEmitter.subscribe('rename-modal', event => {
-                setVisibleRename(true);
-                fetchList();
-            }),
-        ]
-
-        return () => {
-            subscribes.forEach(item => {
-                item.remove();
-            })
-        }
-    }, [])
 
     useEffect(() => {
         fetchList()
@@ -187,7 +157,7 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
                             icon={<Icon name="folder"/>}>
                             Tạo thư mục
                         </Button>
-                        <Button onClick={() => EventEmitter.emit('refresh')}
+                        <Button onClick={() => fetchList()}
                                 icon={<Icon name="refresh"/>}>
                             Làm mới
                         </Button>
@@ -253,7 +223,8 @@ function Content({onChange = () => {}, onLastSelected = () => {}, popup = false,
                                             <div className={{active: selected.includes(item)}}>
                                                 <div className="file-item">
                                                     <div className="thumbnail">
-                                                        <img src={item.full_url} alt=""/>
+                                                        <Icon name="folder"/>
+                                                        {/*<img src={item.full_url} alt=""/>*/}
                                                     </div>
                                                     <div className="font-weight-regular text-center text-truncate">
                                                         {item.name}

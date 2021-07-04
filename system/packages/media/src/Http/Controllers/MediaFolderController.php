@@ -27,7 +27,7 @@ class MediaFolderController extends BaseController
             'folder_id' => $parent_id,
             'is_folder' => '1',
             'parent_folder' => $parent ? $parent->parent_folder . DIRECTORY_SEPARATOR . $parent->name : '',
-            'user_id' => Auth::user()->id,
+            'user_id' => 1, //Auth::user()->id,
         ];
 
         $folder = $mediaFolderRepository->create($data);

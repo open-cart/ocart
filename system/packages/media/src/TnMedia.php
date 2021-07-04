@@ -73,7 +73,7 @@ class TnMedia
 
         $fileExtension = $fileUpload->getClientOriginalExtension();
 
-        $file->name = $fileUpload->getClientOriginalName();
+        $file->name = $this->fileRepository->createName(File::name($fileUpload->getClientOriginalName()), $folderId);
 
         $folderPath = 'upload';
 

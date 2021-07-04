@@ -306,3 +306,6 @@ li.media-list-title {
     overflow: hidden!important;
     text-overflow: ellipsis!important;
 }
+.model-create-folder-content{
+    width: 400px;
+}
