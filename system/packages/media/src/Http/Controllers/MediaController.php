@@ -4,9 +4,11 @@ namespace Ocart\Media\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Media\Facades\TnMedia;
+use Ocart\Media\Models\MediaFile;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 use Ocart\Media\Repositories\Interfaces\MediaFolderRepository;
 
@@ -137,9 +139,48 @@ class MediaController extends BaseController
     {
         $id = $request->get('id');
 
-        $this->fileRepository->delete($id);
+        \DB::beginTransaction();
 
-        return $response->setMessage(trans('Delete file successfully'));
+        $file = $this->fileRepository->find($id);
+
+        $server = \League\Glide\ServerFactory::create([
+            'source' => Storage::path('upload'),
+            'cache' => storage_path('framework/cache/images'),
+//        'driver' => 'imagick',
+        ]);
+
+        if ($file->is_folder == '1') {
+            if (!$file->parent_folder) {
+                $folders = MediaFile::where('parent_folder', 'like', '/'.$file->name.'%')->where('is_folder', '1')->get();
+            } else {
+                $folders = MediaFile::where('parent_folder', 'like', $file->parent_folder.'/'.$file->name.'%')->where('is_folder', '1')->get();
+            }
+
+            $values = $folders->pluck('id')->values();
+            $values[] = $file->id;
+
+            $files = MediaFile::whereIn('folder_id', $values)->get();
+
+            MediaFile::whereIn('folder_id', $values)->forceDelete();
+
+            foreach ($files as $item) {
+                Storage::delete($item->url);
+                $server->deleteCache(str_replace('upload/', '', $item->url));
+            }
+        } else {
+            Storage::delete($file->url);
+            $server->deleteCache(str_replace('upload/', '', $file->url));
+        }
+
+//        $this->fileRepository->delete($id);
+
+        $file->forceDelete();
+
+        \DB::commit();
+
+        return response()->json([]);
+
+//        return $response->setMessage(trans('Delete file successfully'));
     }
 
     public function postRename(Request $request, BaseHttpResponse $response)
