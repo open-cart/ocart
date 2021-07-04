@@ -75,6 +75,10 @@ class MediaController extends BaseController
 
             $q = $q->where('folder_id', $folder->id ?? 0);
 
+            if ($text = $request->input('text')) {
+                $q = $q->where('name','like', '%' . $text . '%');
+            }
+
             switch ($request->input('type', null)) {
                 case 'image':
                     $q = $q->whereIn('mime_type', config('packages.media.media.mime_types.image'));
