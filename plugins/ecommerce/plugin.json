@@ -1,5 +1,6 @@
 {
     "name": "Ecommerce",
+    "description": "Thương mại điện tử, quản lý sản phẩm, đơn hàng",
     "namespace": "Ocart\\Ecommerce\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
