@@ -22,7 +22,8 @@ class OrderTable extends TableAbstract
             ->pushCriteria(OrderSearchCriteria::class)
             ->with([
                 'payment',
-                'user'
+                'user',
+                'address'
             ])->paginate();
         $this->ajax();
 
