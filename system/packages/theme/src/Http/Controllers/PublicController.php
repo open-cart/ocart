@@ -7,6 +7,7 @@ namespace Ocart\Theme\Http\Controllers;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Str;
 use Ocart\SeoHelper\Facades\SeoHelper;
+use Ocart\Theme\Facades\Theme;
 
 class PublicController
 {
@@ -21,6 +22,7 @@ class PublicController
         $meta->setTitle($title);
         $meta->setDescription(strip_tags($description));
         $meta->setType('home');
+
         return \Theme::scope('index');
     }
 

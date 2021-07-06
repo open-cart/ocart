@@ -36,10 +36,12 @@ class ThemeConfig
      */
     protected $adminConfig;
 
+    protected $attributes = array();
+
     public function __construct(Factory $view)
     {
         $this->view = $view;
-        self::uses(setting('theme', 'default'))->layout(setting('layout', 'default'));
+        self::uses($this->getThemeName())->layout(setting('layout', 'default'));
     }
 
     /**
@@ -49,7 +51,17 @@ class ThemeConfig
      */
     public function getThemeName()
     {
-        return $this->theme;
+        if ($this->theme) {
+            return $this->theme;
+        }
+
+        return setting('theme', 'default');
+
+//        if (setting('theme')) {
+//            return setting('theme', 'default');
+//        }
+//
+//        return Arr::first(scan_folder(theme_path()));
     }
 
     /**
@@ -163,6 +175,17 @@ class ThemeConfig
     public function asset($path, $secure = null)
     {
         $path = trim($path, DIRECTORY_SEPARATOR);
-        return app('url')->asset('themes/' . $this->theme . DIRECTORY_SEPARATOR . $path, $secure);
+        return asset('themes/' . $this->theme . DIRECTORY_SEPARATOR . $path .'?v' . $this->getVersion(), $secure);
+    }
+
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    public function getVersion()
+    {
+        return Arr::get($this->attributes, 'version');
     }
 }
