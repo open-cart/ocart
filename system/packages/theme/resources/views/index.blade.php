@@ -18,16 +18,16 @@
                             <img class="w-full" src="{{ asset("/themes/{$key}/screenshot.png") }}?v={{ time() }}" alt="Forest">
                             <div class="px-6 py-4">
                                 <div class="font-bold text-3xl mb-2 capitalize">
-                                    {!! $theme->name !!}
+                                    {!! $theme['name'] !!}
                                 </div>
                                 <p class="text-gray-700 text-base">
-                                    {!! $theme->description !!}
+                                    {!! Arr::get($theme, 'description') !!}
                                 </p>
                             </div>
                             <div
                                 x-data="themeActions()"
                                 class="px-6 pt-4 pb-2">
-                                @if($theme->active)
+                                @if($theme['active'])
                                     <a
                                         href="javascript:void(0)"
                                         x-on:click="activate($event, '{!! $key !!}')"
@@ -38,17 +38,17 @@
                                         </span>
                                     </a>
                                 @endif
-                                @if(isset($theme->update) && $theme->update)
+                                @if(Arr::get($theme, 'update'))
                                     <a
                                         href="javascript:void(0)"
-                                        x-on:click="update($event, '{!! $key !!}', '{{ $theme->reference }}')"
+                                        x-on:click="update($event, '{!! $key !!}', '{{ $theme['reference'] }}')"
                                         class="inline-block bg-yellow-500 hover:bg-yellow-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
                                         <span class="flex">
                                             {{ trans('Update') }}
                                         </span>
                                     </a>
                                 @endif
-                                @if(!$theme->active)
+                                @if(!$theme['active'])
                                     <a
                                         href="javascript:void(0)"
                                         x-on:click="activate($event, '{!! $key !!}')"

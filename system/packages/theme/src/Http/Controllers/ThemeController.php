@@ -42,20 +42,20 @@ class ThemeController extends BaseController
                 $content = get_file_data($themePath . '/theme.json');
 
                 if (!empty($content)) {
-                    $content->active = false;
-                    if ($content->name === \setting('theme', 'default')) {
-                        $content->active = true;
+                    $content['active'] = false;
+                    if ($content['name'] === \setting('theme', 'default')) {
+                        $content['active'] = true;
                         if (env('CHECK_UPDATE_THEME') == true) {
                             $client = new \GuzzleHttp\Client();
                             $uriDefault = 'http://171.244.23.101:8001/theme';
-                            $uri = env('URL_CHECK_THEME', $uriDefault) . '?name=' . $content->name;
+                            $uri = env('URL_CHECK_THEME', $uriDefault) . '?name=' . $content['name'];
                             $res = $client->request('GET', $uri) ;
                             $con = json_decode($res->getBody()->getContents(), true);
-                            $reference = setting('theme_'.$content->name.'reference');
+                            $reference = setting('theme_'.$content['name'].'reference');
                             if ($reference != Arr::get($con, 'reference')) {
-                                $content->update = true;
+                                $content['update'] = true;
                             }
-                            $content->reference = Arr::get($con, 'reference');
+                            $content['reference'] = Arr::get($con, 'reference');
                         }
                     }
 
