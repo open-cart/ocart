@@ -127,7 +127,7 @@
     <template x-for="(item, index) in selected" :key="index">
         <div class="bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden">
             <input type="hidden" name="{{ $options['real_name'] }}" x-bind:value="item.id">
-            <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1" x-text="item.name"></span>
+            <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1 dark:text-gray-600" x-text="item.name"></span>
             <button type="button"
                     title="{{ trans('admin.delete') }}"
                     x-on:click="change(item)"
