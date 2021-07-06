@@ -2,6 +2,7 @@
 use \Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
+use League\Glide\Responses\LaravelResponseFactory;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 
 Route::group([
@@ -59,5 +60,11 @@ Route::get('storage/images/{img}', function ($img) {
     $req->merge(['fm' => $fm]);
     //$req->merge(['fit' => 'crop']);
 
-    $server->outputImage($img, $req->all());
+    $factory = new LaravelResponseFactory();
+
+    $path = $server->makeImage($img, $req->all());
+
+    return $factory->create($server->getCache(), '');
+
+//    $server->outputImage($img, $req->all());
 });
