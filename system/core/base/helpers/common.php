@@ -374,3 +374,17 @@ if (!function_exists('get_products_menu')) {
         return json_decode(setting('products_menu', null));
     }
 }
+
+if (!function_exists('get_cms_version')) {
+    /**
+     * @return string
+     */
+    function get_cms_version(): string
+    {
+        try {
+            return trim(get_file_data(platform_path('core/VERSION'), false));
+        } catch (Exception $exception) {
+            return '1.0';
+        }
+    }
+}
