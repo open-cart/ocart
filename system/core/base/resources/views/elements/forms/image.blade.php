@@ -17,43 +17,40 @@
         </a>
     </div>
 </div>
-@once
-@push('bodyAppend')
 <script>
-    function removeImageHandler(e) {
-        const parent = $(e).closest('.image-box');
-        parent.find('.preview-image-wrapper').remove();
-        parent.find('input').val('');
-    }
-    $(function() {
-        const img = $('.preview-image-wrapper').clone();
+    if (typeof removeImageHandler === 'undefined') {
+        function removeImageHandler(e) {
+            const parent = $(e).closest('.image-box');
+            parent.find('.preview-image-wrapper').remove();
+            parent.find('input').val('');
+        }
+        $(function() {
+            const img = $('.preview-image-wrapper').clone();
+            $(document).on('click', "[data-action]", function(e) {
+                e.preventDefault();
+                TnMedia.default({
+                    id: 'tnmedia-root',
+                    popup: true,
+                    uploadAPI: '{!! route('media.files.upload') !!}',
+                    listAPI: '{!! route('media.list') !!}',
+                    createFolderAPI: '{!! route('media.folders.create') !!}',
+                    deleteAPI: '{{ route('media.delete') }}',
+                    renameAPI: '{{ route('media.rename') }}',
+                    insert: (items) => {
+                        const parent = $(this).closest('.image-box');
 
-        $(document).on('click', "[data-action]", function(e) {
-            e.preventDefault();
-            TnMedia.default({
-                id: 'tnmedia-root',
-                popup: true,
-                uploadAPI: '{!! route('media.files.upload') !!}',
-                listAPI: '{!! route('media.list') !!}',
-                createFolderAPI: '{!! route('media.folders.create') !!}',
-                deleteAPI: '{{ route('media.delete') }}',
-                renameAPI: '{{ route('media.rename') }}',
-                insert: (items) => {
-                    const parent = $(this).closest('.image-box');
-
-                    const name = $(this).data('result');
-                    parent.find(`input[name=${name}]`).val(items[0].full_url);
-                    if (!parent.find('.preview-image-wrapper img').length) {
-                        const newImg = img.clone();
-                        newImg.find('img').attr('src', items[0].full_url);
-                        parent.prepend(newImg);
-                    } else {
-                        parent.find('.preview_image').attr('src', items[0].full_url);
+                        const name = $(this).data('result');
+                        parent.find(`input[name=${name}]`).val(items[0].full_url);
+                        if (!parent.find('.preview-image-wrapper img').length) {
+                            const newImg = img.clone();
+                            newImg.find('img').attr('src', items[0].full_url);
+                            parent.prepend(newImg);
+                        } else {
+                            parent.find('.preview_image').attr('src', items[0].full_url);
+                        }
                     }
-                }
+                })
             })
         })
-    })
+    }
 </script>
-@endpush
-@endonce
