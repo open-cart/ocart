@@ -42,12 +42,14 @@ class Manager
     {
         $this->openGraph()->setTitle($title);
         $this->metaTags()->setTitle($title);
+        $this->jsonLd()->setTitle($title);
     }
 
     public function setDescription($description)
     {
         $this->openGraph()->setDescription($description);
         $this->metaTags()->setDescription($description);
+        $this->jsonLd()->setDescription($description);
     }
 
     /**

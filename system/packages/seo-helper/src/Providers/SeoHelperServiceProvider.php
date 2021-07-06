@@ -4,19 +4,27 @@
 namespace Ocart\SeoHelper\Providers;
 
 
+use Artesaos\SEOTools\Providers\SEOToolsServiceProvider;
+use Artesaos\SEOTools\TwitterCards;
 use Illuminate\Foundation\AliasLoader;
-use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Library\Helper;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
-class SeoHelperServiceProvider extends ServiceProvider
+class SeoHelperServiceProvider extends SEOToolsServiceProvider
 {
     use LoadAndPublishDataTrait;
 
     public function register()
     {
+        parent::register();
+
         Helper::autoload(__DIR__ . '/../../helpers');
+
+        $this->app->bind('seotools.twitter', function ($app) {
+            return new TwitterCards($app['config']->get('seotools.twitter.defaults', []));
+        });
+
         $this->app->register(EventServiceProvider::class);
 
         add_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, [$this, 'setSeoMeta'], 1, 2);
@@ -25,6 +33,8 @@ class SeoHelperServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        parent::boot();
+
         $this->setNamespace('packages/seo-helper')
             ->loadAndPublishConfigurations(['general'])
             ->loadAndPublishViews()

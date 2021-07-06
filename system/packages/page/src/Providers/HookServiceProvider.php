@@ -4,7 +4,9 @@
 namespace Ocart\Page\Providers;
 
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Shortcode\View\View;
@@ -26,14 +28,18 @@ class HookServiceProvider extends ServiceProvider
                 return [];
             }
 
+            $description = Str::limit(strip_tags($page->description), 250);
+
             SeoHelper::setTitle($page->name);
-            SeoHelper::setDescription($page->description);
+            SeoHelper::setDescription($description);
 
             $meta = SeoHelper::openGraph();
             $meta->setTitle($page->name);
-            $meta->setDescription($page->description);
+            $meta->setDescription($description);
             $meta->setUrl($page->url);
             $meta->setType('article');
+            SeoTools::jsonLd()->setUrl(null);
+//            SeoTools::jsonLd()->addValue('auth', 'nguyenpl117@gmail.com');
 
             if ($page->template) {
                 Theme::layout($page->template);
