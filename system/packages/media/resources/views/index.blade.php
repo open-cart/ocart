@@ -4,7 +4,9 @@
 {{--    {!! TnMedia::renderContent(compact('files', 'items', 'folders')) !!}--}}
 
 {{--    {!! TnMedia::renderFooter() !!}--}}
-    <div id="root"></div>
+    <div class="p-6">
+        <div id="root" class="bg-white"></div>
+    </div>
     <link rel="stylesheet" href="/tnmedia/app.css"/>
 
 
