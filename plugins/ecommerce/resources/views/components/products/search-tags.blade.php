@@ -136,7 +136,7 @@
             </button>
         </div>
     </template>
-    <div class="cursor-pointer bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden"
+    <div class="cursor-pointer bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden text-gray-600"
          title="Add"
          x-on:click="openSearch($event)">
         <span class="">&nbsp;</span>
