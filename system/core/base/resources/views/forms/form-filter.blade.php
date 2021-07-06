@@ -6,7 +6,7 @@
         <nav>
             <ul class="flex">
                 <li class="py-2 px-4 cursor-pointer border-b-2 border-indigo-600">
-                    <a href="{{ URL::current() }}"><span>All</span></a>
+                    <a class="dark:text-white" href="{{ URL::current() }}"><span>All</span></a>
                 </li>
             </ul>
         </nav>
