@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Session;
+use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Setting\Facades\Setting;
@@ -94,6 +95,8 @@ class ThemeController extends BaseController
         $this->files->copyDirectory($resourcePath, $publishPath);
         $this->files->copy($this->getPath('screenshot.png', $theme), $publishPath . '/screenshot.png');
 
+        event(new UpdatedContentEvent(SYSTEM_MODULE_THEME_ACTIVE_SCREEN_NAME, $request, $theme));
+
         return $response->setMessage(trans('Activated theme successfully'));
     }
 
@@ -116,6 +119,8 @@ class ThemeController extends BaseController
 
         $this->files->copyDirectory($resourcePath, $publishPath);
         $this->files->copy($this->getPath('screenshot.png', $theme), $publishPath . '/screenshot.png');
+
+        event(new UpdatedContentEvent(SYSTEM_MODULE_THEME_UPDATE_SCREEN_NAME, $request, $theme));
 
         return $response->setMessage(trans('update theme successfully'));
     }

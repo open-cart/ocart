@@ -1,10 +1,10 @@
 <?php
 namespace Ocart\PluginManagement\Http\Controllers;
 
-use Composer\Autoload\ClassLoader;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\File;
+use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\PluginManagement\Plugin;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 
@@ -81,6 +81,8 @@ class PluginManagementController extends Controller
             } else {
                 $pluginManager->deactivate($plugin);
             }
+
+            event(new UpdatedContentEvent(SYSTEM_MODULE_PLUGIN_MANAGEMENT_SCREEN_NAME, request(), $plugin));
 
             return $response->setMessage(trans('packages/plugin-management::plugin.update_plugin_status_success'));
         } catch (\Exception $ex) {
