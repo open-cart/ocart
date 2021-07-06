@@ -1,7 +1,7 @@
 {
     "name": "Payment",
     "namespace": "Ocart\\Payment\\",
-    "image": "images/momo.png",
+    "image": "images/money.svg",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
     "link": "https://phantrungnguyen.com",

@@ -17,15 +17,15 @@ class Plugin
     {
         $content = get_file_data(plugin_path($plugin . '/plugin.json'));
 
-        $content->namespaceConfig = $content->namespace . 'AppConfig';
+        $content['namespaceConfig'] = $content['namespace'] . 'AppConfig';
 
         $activatedPlugins = get_active_plugins();
 
-        if (!class_exists($content->namespaceConfig)) {
+        if (!class_exists($content['namespaceConfig'])) {
             $loader = new ClassLoader();
-            $namespace = $content->namespace;
+            $namespace = $content['namespace'];
 
-            $loader->setPsr4($namespace, plugin_path($content->configKey . '/src'));
+            $loader->setPsr4($namespace, plugin_path($content['configKey'] . '/src'));
             $loader->register(true);
         }
 
@@ -36,18 +36,18 @@ class Plugin
         /**
          * Yêu cầu bật các plugins đã được khai báo trước khi bật plugin này
          */
-        if (!empty($content->require)) {
-            $valid = count(array_intersect($content->require,
-                    $activatedPlugins)) == count($content->require);
+        if (!empty($content['require'])) {
+            $valid = count(array_intersect($content['require'],
+                    $activatedPlugins)) == count($content['require']);
             if (!$valid) {
                 throw new \Exception(trans('packages/plugin-management::plugin.missing_required_plugins', [
-                    'plugins' => implode(',', $content->require),
+                    'plugins' => implode(',', $content['require']),
                 ]));
             }
         }
 
-        if (class_exists($content->namespaceConfig)) {
-            call_user_func([$content->namespaceConfig, 'activate']);
+        if (class_exists($content['namespaceConfig'])) {
+            call_user_func([$content['namespaceConfig'], 'activate']);
         }
 
         if (File::isDirectory(plugin_path($plugin . '/public'))) {
@@ -74,7 +74,7 @@ class Plugin
     public function deactivate($plugin)
     {
         $content = get_file_data(plugin_path($plugin . '/plugin.json'));
-        $content->namespaceConfig = $content->namespace . 'AppConfig';
+        $content['namespaceConfig'] = $content['namespace'] . 'AppConfig';
 
         $activatedPlugins = get_active_plugins();
 
@@ -82,8 +82,8 @@ class Plugin
             throw new \Exception('This plugin is deactivated already!');
         }
 
-        if (class_exists($content->namespaceConfig)) {
-            call_user_func([$content->namespaceConfig, 'deactivate']);
+        if (class_exists($content['namespaceConfig'])) {
+            call_user_func([$content['namespaceConfig'], 'deactivate']);
         }
 
         if (($key = array_search($plugin, $activatedPlugins)) !== false) {

@@ -1,7 +1,7 @@
 {
     "name": "Octane",
     "namespace": "Ocart\\Octane\\",
-    "image": "images/momo.png",
+    "image": "images/octane.svg",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
     "link": "https://phantrungnguyen.com",
@@ -11,5 +11,6 @@
     "version": "1.0",
     "providers": [
         "Ocart\\Octane\\Providers\\OctaneServiceProvider"
-    ]
+    ],
+    "description": "Support octane services"
 }

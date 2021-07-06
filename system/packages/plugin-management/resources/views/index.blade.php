@@ -72,21 +72,26 @@
                                 <tr>
                                     <td class="border p-2">
 {{--                                        <img src="/images/no-image.jpg" class="w-14"/>--}}
-                                        <img src="{!! $plugin->image !!}" class="w-14"/>
-                                    </td>
-                                    <td class="border p-2">{!! $plugin->name !!}</td>
-                                    <td class="border p-2">{!! $plugin->version !!}</td>
-                                    <td class="border p-2">
-                                        {!! $plugin->auth !!}
+                                        <img src="{!! asset(Arr::get($plugin, 'image')) !!}" class="w-14"/>
                                     </td>
                                     <td class="border p-2">
-                                        <a href="{!! $plugin->link !!}" target="_blank">Link</a>
+                                        {!! Arr::get($plugin, 'name') !!}
+                                        <div>
+                                            <small>{{ Arr::get($plugin, 'description') }}</small>
+                                        </div>
+                                    </td>
+                                    <td class="border p-2">{!! Arr::get($plugin, 'version') !!}</td>
+                                    <td class="border p-2">
+                                        {!! Arr::get($plugin, 'auth') !!}
+                                    </td>
+                                    <td class="border p-2">
+                                        <a href="{!! Arr::get($plugin, 'link') !!}" target="_blank">Link</a>
                                     </td>
                                     <td class="border p-2">0</td>
                                     <td class="border p-2">
                                         @if(true)
                                             <div class="flex">
-                                                @if($plugin->status === 1)
+                                                @if(Arr::get($plugin, 'status') === 1)
                                                     <a href="javascript:void(0)"
                                                        title="{!! __('admin.plugins.action_disable_title') !!}"
                                                        x-on:click="disable('{{ $key }}')">
@@ -103,7 +108,7 @@
                                                        </div>
                                                     </a>
                                                 @endif
-                                                @if($plugin->config)
+                                                @if(Arr::get($plugin, 'config'))
                                                     <a href="#"
                                                        title="{!! __('admin.plugins.action_settings_title') !!}"
                                                     >

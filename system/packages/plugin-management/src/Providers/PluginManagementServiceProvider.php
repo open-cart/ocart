@@ -73,15 +73,15 @@ class PluginManagementServiceProvider extends ServiceProvider
         foreach ($activatedPlugins as $plugin) {
             $config = get_file_data(plugin_path($plugin . '/plugin.json'), true);
 
-            $namespace = $config->namespace;
+            $namespace = $config['namespace'];
 
-            if (!isset($config->require) || count($config->require) == 0) {
+            if (!isset($config['require']) || count($config['require']) == 0) {
                 $namespaces[plugin_path($plugin . '/src')] = $namespace;
-                $providers = array_merge($providers, $config->providers);
+                $providers = array_merge($providers, $config['providers']);
             } else {
-                if ($this->checkRequirePlugin($activatedPlugins, $config->require)) {
+                if ($this->checkRequirePlugin($activatedPlugins, $config['require'])) {
                     $namespaces[plugin_path($plugin . '/src')] = $namespace;
-                    $providers = array_merge($providers, $config->providers);
+                    $providers = array_merge($providers, $config['providers']);
                 }
             }
         }

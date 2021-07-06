@@ -28,21 +28,21 @@ class PluginManagementController extends Controller
                     continue;
                 }
 
-                $content = get_file_data($pluginPath . '/plugin.json');
+                $content = get_file_data($pluginPath . '/plugin.json', true);
 
                 if (!empty($content)) {
-                    $content->status = 0;
-                    $content->config = 0;
-                    $content->namespaceConfig = $content->namespace . 'AppConfig';
-                    $content->path = $pluginPath;
+                    $content['status'] = 0;
+                    $content['config'] = 0;
+                    $content['namespaceConfig'] = $content['namespace'] . 'AppConfig';
+                    $content['path'] = $pluginPath;
 
                     if (in_array($plugin, $activatedPlugins)) {
-                        $content->status = 1;
+                        $content['status'] = 1;
                     }
 
-                    if (class_exists($content->namespaceConfig)) {
+                    if (class_exists($content['namespaceConfig'])) {
 //                        $content->status = 1;
-                        $content->config = (new $content->namespaceConfig)->config();
+                        $content['config'] = (new $content['namespaceConfig'])->config();
                     }
                     $list[$plugin] = $content;
 ;                }

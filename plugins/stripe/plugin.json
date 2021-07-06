@@ -1,7 +1,7 @@
 {
     "name": "Stripe Payment",
     "namespace": "Ocart\\Stripe\\",
-    "image": "images/momo.png",
+    "image": "images/stripe_logo.svg",
     "auth": "Trung Nguyên",
     "email": "nguyenpl117@gmail.com",
     "link": "https://phantrungnguyen.com",

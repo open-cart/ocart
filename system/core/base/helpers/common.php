@@ -24,7 +24,7 @@ if (!function_exists('get_file_data')) {
         $file = \Illuminate\Support\Facades\File::get($file);
         if (!empty($file)) {
             if ($toArray) {
-                return json_decode($file, false);
+                return json_decode($file, true);
             }
             return $file;
         }
