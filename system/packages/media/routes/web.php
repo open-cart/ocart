@@ -64,7 +64,7 @@ Route::get('storage/images/{img}', function ($img) {
 
     $path = $server->makeImage($img, $req->all());
 
-    return $factory->create($server->getCache(), '');
+    return $factory->create($server->getCache(), $path);
 
 //    $server->outputImage($img, $req->all());
 });
