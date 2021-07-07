@@ -12,7 +12,7 @@ class EcommerceController extends BaseController
 {
     public function getSettings()
     {
-        page_title()->setTitle(trans('plugins/ecommerce::ecommerce.settings'));
+        page_title()->setTitle(trans('plugins/ecommerce::ecommerce.settings_title'));
 
         return view('plugins.ecommerce::settings.index');
     }

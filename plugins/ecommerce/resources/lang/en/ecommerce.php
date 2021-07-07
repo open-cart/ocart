@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'settings_title' => 'Settings',
     'settings' => [
         'email' => [
             'title' => 'Ecommerce',
