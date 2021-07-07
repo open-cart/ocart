@@ -17,8 +17,8 @@
     </x-slot>
     <div class="pb-12 pt-3">
         <div class="sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div x-data="{tab: 1}" class="p-6 bg-white border-b border-gray-200">
+            <div class="overflow-hidden">
+                <div x-data="{tab: 1}" class="p-6 bg-white dark:bg-gray-800 shadow-sm sm:rounded-lg">
                     <div>
                         <nav>
                             <ul class="flex">
@@ -39,56 +39,57 @@
                     <div x-show="tab === 1">
                         <div class="flex justify-between">
                             <div>
-                                <x-button
-                                    title="Làm mới"
-                                    class="bg-blue-500 hover:bg-blue-600">
-                                    <i data-feather="rotate-ccw"></i>
-                                </x-button>
-                                <x-input/>
+{{--                                <x-button--}}
+{{--                                    title="Làm mới"--}}
+{{--                                    class="bg-blue-500 hover:bg-blue-600">--}}
+{{--                                    <i data-feather="rotate-ccw"></i>--}}
+{{--                                </x-button>--}}
+{{--                                <x-input/>--}}
                             </div>
                             <div>
-                                <x-button
-                                    title="Thêm mới"
-                                    class="bg-green-500 hover:bg-green-600">
+                                <a class="space-x-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center"
+                                    title="Làm mới"
+                                   href=""
+                                >
                                     <i data-feather="rotate-ccw"></i>
-                                </x-button>
+                                </a>
                             </div>
                         </div>
                         <div class="h-3"></div>
                         <table class="w-full border-collapse border">
                             <thead>
                             <tr>
-                                <th class="border text-left px-2 py-2">Hình ảnh</th>
-                                <th class="border text-left px-2 py-2">Tên chức năng</th>
-                                <th class="border text-left px-2 py-2">Phiên bản</th>
-                                <th class="border text-left px-2 py-2">Tác giả</th>
-                                <th class="border text-left px-2 py-2">Liên kết</th>
-                                <th class="border text-left px-2 py-2">Thứ tự</th>
-                                <th class="border text-left px-2 py-2">Hành động</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Hình ảnh</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Tên chức năng</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Phiên bản</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Tác giả</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Liên kết</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Thứ tự</th>
+                                <th class="border dark:border-gray-700 text-left px-2 py-2">Hành động</th>
                             </tr>
                             </thead>
                             <tbody x-data="pluginActions()">
                             @foreach($plugins as $key => $plugin)
                                 <tr>
-                                    <td class="border p-2">
+                                    <td class="border dark:border-gray-700 p-2">
 {{--                                        <img src="/images/no-image.jpg" class="w-14"/>--}}
                                         <img src="{!! asset(Arr::get($plugin, 'image')) !!}" class="w-14"/>
                                     </td>
-                                    <td class="border p-2">
+                                    <td class="border dark:border-gray-700 p-2">
                                         {!! Arr::get($plugin, 'name') !!}
                                         <div>
                                             <small>{{ Arr::get($plugin, 'description') }}</small>
                                         </div>
                                     </td>
-                                    <td class="border p-2">{!! Arr::get($plugin, 'version') !!}</td>
-                                    <td class="border p-2">
+                                    <td class="border dark:border-gray-700 p-2">{!! Arr::get($plugin, 'version') !!}</td>
+                                    <td class="border dark:border-gray-700 p-2">
                                         {!! Arr::get($plugin, 'auth') !!}
                                     </td>
-                                    <td class="border p-2">
+                                    <td class="border dark:border-gray-700 p-2">
                                         <a href="{!! Arr::get($plugin, 'link') !!}" target="_blank">Link</a>
                                     </td>
-                                    <td class="border p-2">0</td>
-                                    <td class="border p-2">
+                                    <td class="border dark:border-gray-700 p-2">0</td>
+                                    <td class="border dark:border-gray-700 p-2">
                                         @if(true)
                                             <div class="flex">
                                                 @if(Arr::get($plugin, 'status') === 1)
