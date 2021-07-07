@@ -7,20 +7,22 @@
 
     <div class="py-12">
         <div class="sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
+            <div class="overflow-hidden">
+                <div class="p-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm sm:rounded-lg">
                     @if(Session::has('message'))
                         <p class="alert alert-danger">{{ Session::get('message') }}</p>
                     @endif
                     <div class="grid grid-cols-4 gap-4">
                         @foreach ($themes as $key => $theme)
-                        <div class="rounded overflow-hidden shadow-lg">
-                            <img class="w-full" src="{{ asset("/themes/{$key}/screenshot.png") }}?v={{ time() }}" alt="Forest">
+                        <div class="rounded overflow-hidden shadow-lg dark:bg-gray-700">
+                            <div class="relative pb-72 md:pb-80 overflow-hidden">
+                                <img class="absolute inset-0 h-full w-full object-cover" src="{{ asset("/themes/{$key}/screenshot.png") }}?v={{ time() }}" alt="Forest">
+                            </div>
                             <div class="px-6 py-4">
                                 <div class="font-bold text-3xl mb-2 capitalize">
                                     {!! $theme['name'] !!}
                                 </div>
-                                <p class="text-gray-700 text-base">
+                                <p class="text-base">
                                     {!! Arr::get($theme, 'description') !!}
                                 </p>
                             </div>
