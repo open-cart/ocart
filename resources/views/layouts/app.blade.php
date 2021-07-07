@@ -142,7 +142,7 @@
         </style>
         @stack('head')
     </head>
-    <body class="font-sans antialiased dark:bg-gray-800">
+    <body class="font-sans antialiased dark:bg-gray-800 dark:text-gray-300">
         @stack('bodyPrepend')
         <div>
             <div x-data class="min-h-screen bg-gray-100 dark:bg-gray-800">

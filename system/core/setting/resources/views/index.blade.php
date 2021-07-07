@@ -11,7 +11,7 @@
                 </div>
                 <div class="col-span-8 space-y-4">
                     <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 border-b border-gray-200 space-y-4">
+                        <div class="p-6 border-b border-gray-200 dark:border-gray-400 space-y-4">
                             <div class="flex flex-col">
                                 <label for="admin_email" class>
                                     {{ trans('core/setting::setting.general.admin_email') }}
@@ -24,7 +24,7 @@
                     </div>
                 </div>
             </div>
-            <div><hr></div>
+            <div><hr class="dark:border-gray-500"></div>
             <div class="grid grid-cols-12 gap-4">
                 <div class="col-span-4 pt-6">
                     <h3 class="text-2xl">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-span-8 space-y-4">
                     <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 border-b border-gray-200 space-y-4">
+                        <div class="p-6 border-b border-gray-200 dark:border-gray-400 space-y-4">
                             <div class="flex flex-col">
                                 <label for="admin_logo" class>
                                     {{ trans('core/setting::setting.general.admin_logo') }}
