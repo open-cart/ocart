@@ -26,13 +26,17 @@ class PageTitle
     public function getTitle($full = true)
     {
         if (empty($this->title)) {
-            return config('app.name', 'Laravel');
+            return $this->defaultTitle();
         }
 
         if (!$full) {
             return $this->title;
         }
 
-        return $this->title . ' | ' . config('app.name', 'Laravel');
+        return $this->title . ' | ' . $this->defaultTitle();
+    }
+
+    public function defaultTitle(){
+        return setting('admin_title', config('app.name', 'Laravel'));
     }
 }

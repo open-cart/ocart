@@ -25,15 +25,15 @@
         </x-slot>
         <x-slot name="content">
             <ul class="text-sm -mt-1">
-                <li class="flex justify-between px-3 py-5 bg-gray-100">
+                <li class="flex justify-between px-3 py-5 bg-gray-100 dark:bg-gray-700">
                     <h3 class="font-bold">{!! trans('plugins/contact::contact.new_msg_notice', ['count' => count($contacts)]) !!}</h3>
                     <a class="text-blue-500 hover:text-blue-600" href="{{ route('contacts.index') }}">{{ trans('plugins/contact::contact.view_all') }}</a>
                 </li>
                 <li>
                     <ul class="overflow-auto" style="max-height: 440px; {{ count($contacts) * 72 }}px;" data-handle-color="#637283">
                         @foreach($contacts as $contact)
-                            <li class="border-t">
-                                <a class="flex space-x-3 py-4 px-3 hover:bg-gray-50" href="{{ route('contacts.update', $contact->id) }}">
+                            <li class="border-t dark:border-gray-500">
+                                <a class="flex space-x-3 py-4 px-3 hover:bg-gray-50 dark:hover:bg-gray-700" href="{{ route('contacts.update', $contact->id) }}">
                                     <span class="flex-none items-center">
                                         <div class="h-10 w-10 bg-green-500 rounded-full">
                                             <svg  viewBox="0 0 44 44">

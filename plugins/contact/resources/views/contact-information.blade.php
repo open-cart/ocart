@@ -27,7 +27,7 @@
     <p>
         Content:
     </p>
-    <pre class="whitespace-normal break-words bg-gray-100 p-3 text-sm rounded">
+    <pre class="whitespace-normal break-words bg-gray-100 dark:bg-gray-700 p-3 text-sm rounded">
         {!! $model->content !!}
     </pre>
 </div>
