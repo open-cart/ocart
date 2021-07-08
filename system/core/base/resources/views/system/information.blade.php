@@ -20,7 +20,7 @@
                                     @if($v)
                                         {{ trans('core/base::system.'.$k) }}: <i class="fa fa-check text-green-500"></i>
                                     @else
-                                        {{ trans('core/base::system.'.$k) }}: <i class="fa fa-close"></i>
+                                        {{ trans('core/base::system.'.$k) }}: <i class="fa fa-times text-red-500"></i>
                                     @endif
                                 @else
                                     {{ trans('core/base::system.'.$k) }}: {{ $v }}
@@ -44,7 +44,7 @@
                                     @if($v)
                                         {{ trans('core/base::system.'.$k) }}: <i class="fa fa-check text-green-500"></i>
                                     @else
-                                        {{ trans('core/base::system.'.$k) }}: <i class="fa fa-close"></i>
+                                        {{ trans('core/base::system.'.$k) }}: <i class="fa fa-times text-red-500"></i>
                                     @endif
                                 @else
                                     {{ trans('core/base::system.'.$k) }}: {{ $v }}
