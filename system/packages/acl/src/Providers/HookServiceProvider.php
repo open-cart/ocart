@@ -27,7 +27,22 @@ class HookServiceProvider extends ServiceProvider
                 'url' => '',
                 'permissions' => [],
                 'active' => false,
-            ])->registerItem([
+            ])
+                ->registerItem([
+                    'id' => 'cms-system-caches',
+                    'parent_id' => 'cms-system-content',
+                    'name' => trans('Cache'),
+                    'icon' => null,
+                    'url' => route('system.cache'),
+                    'permissions' => [
+                        'system.roles.index',
+                        'system.roles.create',
+                        'system.roles.update',
+                        'system.roles.destroy',
+                    ],
+                    'active' => false,
+                ])
+                ->registerItem([
                 'id' => 'cms-system-role-roles',
                 'parent_id' => 'cms-system-content',
                 'name' => trans('packages/acl::menu.role_manager'),

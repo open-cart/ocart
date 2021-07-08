@@ -7,6 +7,30 @@ Route::group(
         'middleware' => ADMIN_MIDDLEWARE,
         'namespace' => 'Ocart\\Core\\Http\\Controllers',
     ],
+    function () {
+        Route::group(['prefix' => 'system/cache'], function () {
+            Route::get('', [
+                'as'         => 'system.cache',
+                'uses'       => 'SystemController@getCacheManagement',
+//                'permission' => ACL_ROLE_SUPER_USER,
+            ]);
+
+            Route::post('clear', [
+                'as'         => 'system.cache.clear',
+                'uses'       => 'SystemController@postClearCache',
+//                'permission' => ACL_ROLE_SUPER_USER,
+//                'middleware' => 'preventDemo',
+            ]);
+        });
+    }
+);
+
+Route::group(
+    [
+        'prefix' => ADMIN_PREFIX,
+        'middleware' => ADMIN_MIDDLEWARE,
+        'namespace' => 'Ocart\\Core\\Http\\Controllers',
+    ],
     function() {
         Route::get('/mailable', function () {
             return \Ocart\Core\Facades\EmailHandler::create(\Illuminate\Support\Facades\Mail::to('nguyen@gmail.com'))

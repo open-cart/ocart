@@ -115,6 +115,14 @@
                     }
                 }
             }
+            function showError(e) {
+                if (e?.errors) {
+                    toast.error(Object.values(e.errors).find(Boolean));
+                } else {
+                    toast.error(e.message);
+                }
+                throw e;
+            }
         </script>
         <style>
             .button-loading {
