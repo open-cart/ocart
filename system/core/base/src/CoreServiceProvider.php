@@ -3,14 +3,13 @@
 namespace Ocart\Core;
 
 use Botble\Assets\Assets;
-use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Routing\ResourceRegistrar;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Assets\CustomAsset;
 use Ocart\Core\Library\Action;
 use Ocart\Core\Library\Filter;
 use Ocart\Core\Library\Helper;
+use Ocart\Core\Providers\BaseServiceProvider;
 use Ocart\Core\Providers\EmailConfigServiceProvider;
 use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -46,6 +45,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->register(BreadcrumsServiceProvider::class);
         $this->app->register(FormServiceProvider::class);
         $this->app->register(EmailConfigServiceProvider::class);
+        $this->app->register(BaseServiceProvider::class);
 
         Builder::defaultStringLength(191);
     }

@@ -22,6 +22,9 @@ Route::group(
 //                'middleware' => 'preventDemo',
             ]);
         });
+
+        Route::get('system/information', 'SystemController@getInformation')
+        ->name('system.information');
     }
 );
 

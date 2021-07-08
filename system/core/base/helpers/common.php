@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Ocart\Core\Library\Menu\Builder;
 
 if (!function_exists('platform_path')) {
@@ -386,5 +387,37 @@ if (!function_exists('get_cms_version')) {
         } catch (Exception $exception) {
             return '1.0';
         }
+    }
+}
+
+if (!function_exists('human_file_size')) {
+    /**
+     * @param int $bytes
+     * @param int $precision
+     * @return string
+     */
+    function human_file_size($bytes, $precision = 2): string
+    {
+        $units = ['B', 'kB', 'MB', 'GB', 'TB'];
+
+        $bytes = max($bytes, 0);
+        $pow = floor(($bytes ? log($bytes) : 0) / log(1024));
+        $pow = min($pow, count($units) - 1);
+
+        $bytes /= pow(1024, $pow);
+
+        return number_format($bytes, $precision, ',', '.') . ' ' . $units[$pow];
+    }
+}
+
+if (!function_exists('folder_size')) {
+    function folder_size($directory): int
+    {
+        $size = 0;
+        foreach (File::glob(rtrim($directory, '/') . '/*', GLOB_NOSORT) as $each) {
+            $size += File::isFile($each) ? File::size($each) : folder_size($each);
+        }
+
+        return $size;
     }
 }

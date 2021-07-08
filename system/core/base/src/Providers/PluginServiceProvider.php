@@ -2,7 +2,6 @@
 
 namespace Ocart\Core\Providers;
 
-use Ocart\Core\Admin\Models\AdminConfig;
 use Illuminate\Support\ServiceProvider;
 
 class PluginServiceProvider extends ServiceProvider
