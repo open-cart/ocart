@@ -18,7 +18,7 @@ class EcommerceHelper
      */
     public function isTaxEnabled()
     {
-        return get_ecommerce_setting('ecommerce_tax_enabled', '1') == 1;
+        return get_ecommerce_setting('tax_enabled', '1') == 1;
     }
 
     /**

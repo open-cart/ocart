@@ -28,25 +28,25 @@ class EcommerceController extends BaseController
 
         $settingStore->save();
 
-        $currencies = $request->get('currencies', []);
-        $dataCurrencies = [];
-        foreach ($currencies['title'] as $key => $value) {
-            if (empty($value) || empty($currencies['symbol'][$key])) {
-                continue;
-            }
+//        $currencies = $request->get('currencies', []);
+//        $dataCurrencies = [];
+//        foreach ($currencies['title'] as $key => $value) {
+//            if (empty($value) || empty($currencies['symbol'][$key])) {
+//                continue;
+//            }
+//
+//            $currency['order'] = $key;
+//            $currency['title'] = $value;
+//            $currency['id'] = \Arr::get($currencies, 'id.'.$key);
+//            $currency['symbol'] = $currencies['symbol'][$key];
+//            $currency['decimals'] = $currencies['decimals'][$key];
+//            $currency['exchange_rate'] = $currencies['exchange_rate'][$key];
+//            $currency['is_prefix_symbol'] = $currencies['is_prefix_symbol'][$key];
+//
+//            $dataCurrencies[] = $currency;
+//        }
 
-            $currency['order'] = $key;
-            $currency['title'] = $value;
-            $currency['id'] = \Arr::get($currencies, 'id.'.$key);
-            $currency['symbol'] = $currencies['symbol'][$key];
-            $currency['decimals'] = $currencies['decimals'][$key];
-            $currency['exchange_rate'] = $currencies['exchange_rate'][$key];
-            $currency['is_prefix_symbol'] = $currencies['is_prefix_symbol'][$key];
-
-            $dataCurrencies[] = $currency;
-        }
-
-        dd($dataCurrencies);
+//        dd($dataCurrencies);
 
         return $response->setNextUrl(route('ecommerce.settings'));
     }
