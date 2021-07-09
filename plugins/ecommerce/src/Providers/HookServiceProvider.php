@@ -179,6 +179,20 @@ class HookServiceProvider extends ServiceProvider
                     ],
                     'active'      => false,
                 ])->registerItem([
+                    'id'          => 'cms-store-taxes',
+                    'priority'    => 1,
+                    'parent_id'   => 'cms-store',
+                    'name'        => trans('plugins/ecommerce::tax.taxes'),
+                    'icon'        => null,
+                    'url'         => route('ecommerce.taxes.index'),
+                    'permissions' => [
+                        'ecommerce.taxes.index',
+                        'ecommerce.taxes.create',
+                        'ecommerce.taxes.update',
+                        'ecommerce.taxes.destroy',
+                    ],
+                    'active'      => false,
+                ])->registerItem([
                     'id'          => 'cms-store-settings-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',

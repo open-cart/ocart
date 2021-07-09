@@ -33,7 +33,7 @@
                         </td>
                         <td class="text-center">
                             @if($product->qty - $product->restock_quantity > 0)
-                            <x-input type="number" x-model="$store.refund.data[{{ $key }}].quantity"/>
+                            <x-input type="number" x-model="$store.refund.data[{{ $key }}]?.quantity"/>
                             @endif
                         </td>
                     </tr>

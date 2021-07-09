@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Facade;
 /**
  * @method static boolean isCartEnabled()
  * @method static boolean isTaxEnabled()
+ * @method static boolean isDisplayProductIncludingTaxes()
  *
  * @see \Ocart\Ecommerce\Supports\EcommerceHelper
  */

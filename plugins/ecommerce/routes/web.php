@@ -36,6 +36,10 @@ Route::group([
             Route::resource('', 'BrandController')->parameters(['' => 'id']);
         });
 
+        Route::group(['prefix'=>'product-taxes', 'as' => 'taxes.'], function () {
+            Route::resource('', 'TaxController')->parameters(['' => 'id']);
+        });
+
         Route::group(['prefix'=>'product-categories', 'as' => 'categories.'], function () {
             Route::resource('', 'CategoryController')->parameters(['' => 'id']);
         });

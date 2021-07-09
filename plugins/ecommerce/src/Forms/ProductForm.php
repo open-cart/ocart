@@ -1,6 +1,7 @@
 <?php
 namespace Ocart\Ecommerce\Forms;
 
+use Illuminate\Support\Collection;
 use Ocart\Core\Forms\Field;
 use Ocart\Ecommerce\Forms\Fields\CategoryMultiField;
 use Ocart\Ecommerce\Forms\Fields\TagField;
@@ -9,6 +10,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Forms\FormAbstract;
+use Ocart\Ecommerce\Repositories\Interfaces\TaxRepository;
 
 class ProductForm extends FormAbstract
 {
@@ -36,6 +38,11 @@ class ProductForm extends FormAbstract
             $brands[$row->id] = $row->indent_text . ' ' . $row->name;
         }
         $brands = [0 => 'No brand'] + $brands;
+
+        $taxRepository = app(TaxRepository::class);
+        /** @var Collection $list */
+        $list = $taxRepository->all();
+        $taxes = $list->pluck('title', 'id')->prepend('-- select --', '')->toArray();
 
         $this
             ->setupModel(new Product())
@@ -100,6 +107,10 @@ class ProductForm extends FormAbstract
                 'label'      =>'Category',
                 'choices'    => get_categories(),
                 'value'      => old('categories', $selectedCategories),
+            ])
+            ->add('tax_id', 'select', [
+                'label' => 'Tax',
+                'choices'    => $taxes
             ])
             ->add('tags[]', 'tags', [
                 'label'      => trans('Tags')

@@ -20,4 +20,16 @@ class EcommerceHelper
     {
         return get_ecommerce_setting('ecommerce_tax_enabled', '1') == 1;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDisplayProductIncludingTaxes(): bool
+    {
+        if (!$this->isTaxEnabled()) {
+            return false;
+        }
+
+        return get_ecommerce_setting('display_product_price_including_taxes', '0') == '1';
+    }
 }

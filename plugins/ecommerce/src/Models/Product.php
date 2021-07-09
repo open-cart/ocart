@@ -3,10 +3,12 @@
 namespace Ocart\Ecommerce\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
+use Ocart\Ecommerce\Facades\EcommerceHelper;
 
 class Product extends BaseModel
 {
@@ -40,12 +42,15 @@ class Product extends BaseModel
         'sale_price',
         'sale_type',
         'sale_at',
-        'end_sale_at'
+        'end_sale_at',
+        'tax_id'
     ];
 
     protected $appends = [
         'image',
-        'sell_price'
+        'sell_price',
+        'sell_price_with_taxes',
+        'price_with_taxes',
     ];
 
     /**
@@ -54,6 +59,13 @@ class Product extends BaseModel
     protected $casts = [
         'status' => BaseStatusEnum::class,
     ];
+
+    /**
+     * The relations to eager load on every query.
+     *
+     * @var array
+     */
+    protected $with = ['tax'];
 
     protected static function boot()
     {
@@ -88,6 +100,14 @@ class Product extends BaseModel
     public function tags()
     {
         return $this->belongsToMany(Tag::class, 'ecommerce_product_tags', 'product_id', 'tag_id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function tax()
+    {
+        return $this->belongsTo(Tax::class, 'tax_id')->withDefault();
     }
 
     /**
@@ -140,5 +160,41 @@ class Product extends BaseModel
     public function getOriginPriceAttribute()
     {
         return $this->sell_price ?? $this->price ?? 0;
+    }
+
+    /**
+     * Get product sale price including taxes
+     * Lấy giá bán sản phẩm bao gồm thuế
+     * @return float|int|mixed
+     */
+    public function getSellPriceWithTaxesAttribute()
+    {
+        if (!EcommerceHelper::isDisplayProductIncludingTaxes()) {
+            return $this->sell_price;
+        }
+
+        if (!$this->tax->percentage) {
+            return $this->sell_price;
+        }
+
+        return $this->sell_price + $this->sell_price * ($this->tax->percentage / 100);
+    }
+
+    /**
+     * Get product sale price including taxes
+     * Lấy giá bán sản phẩm bao gồm thuế
+     * @return float|int|mixed
+     */
+    public function getPriceWithTaxesAttribute()
+    {
+        if (!EcommerceHelper::isDisplayProductIncludingTaxes()) {
+            return $this->price;
+        }
+
+        if (!$this->tax->percentage) {
+            return $this->price;
+        }
+
+        return $this->price + $this->price * ($this->tax->percentage / 100);
     }
 }

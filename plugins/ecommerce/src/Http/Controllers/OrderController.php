@@ -133,17 +133,18 @@ class OrderController extends BaseController
         DB::beginTransaction();
 
         $amount = $request->get('amount');
+        $tax_amount = $request->get('tax_amount', 0);
         $shipping_amount = $request->get('shipping_amount');
         $discount_amount = $request->get('discount_amount');
 
         $data = [
-            'amount'               => $amount + $shipping_amount - $discount_amount,
+            'amount'               => $amount + $shipping_amount - $discount_amount + $tax_amount,
+            'tax_amount'           => $tax_amount,
             'currency_id'          => get_application_currency_id(),
             'user_id'              => $request->input('customer_id') ?? 0,
             'shipping_method'      => $request->input('shipping_method', ShippingMethodEnum::DEFAULT),
             'shipping_option'      => $request->input('shipping_option'),
             'shipping_amount'      => $request->input('shipping_amount'),
-            'tax_amount'           => session('tax_amount', 0),
             'sub_total'            => $request->input('amount'),
             'coupon_code'          => $request->input('coupon_code'),
             'discount_amount'      => $request->input('discount_amount'),
@@ -190,7 +191,7 @@ class OrderController extends BaseController
                 'amount'          => $order->amount,
                 'currency'        => get_application_currency()->title,
                 'payment_channel' => $request->input('payment_method'),
-                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING),
+                'status'          => $request->input('payment_status', PaymentStatusEnum::PENDING) ?: PaymentStatusEnum::PENDING,
                 'payment_type'    => 'confirm',
                 'order_id'        => $order->id,
                 'charge_id'       => Str::upper(Str::random(10)),
@@ -246,8 +247,8 @@ class OrderController extends BaseController
                     'product_name' => $product->name,
                     'qty'          => Arr::get($productItem, 'qty', 1),
                     'weight'       => $product->weight,
-                    'price'        => $product->price,
-                    'tax_amount'   => 0,
+                    'price'        => $product->sell_price,
+                    'tax_amount'   => $product->sell_price_with_taxes - $product->sell_price,
                     'options'      => [],
                 ];
 

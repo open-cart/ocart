@@ -9,7 +9,7 @@
                     {{--                                            <span>attr</span>--}}
                 </div>
             </div>
-            <x-link class="flex-1 max-w-24 text-right" x-text="item.price">
+            <x-link class="flex-1 max-w-24 text-right" x-text="item.sell_price">
 
             </x-link>
             <div class="flex-1 max-w-8 flex justify-center">
