@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Repositories;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Tax;
 use Ocart\Ecommerce\Repositories\Interfaces\TaxRepository;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class TaxRepositoryEloquent.
@@ -13,6 +14,8 @@ use Ocart\Ecommerce\Repositories\Interfaces\TaxRepository;
  */
 class TaxRepositoryEloquent extends RepositoriesAbstract implements TaxRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

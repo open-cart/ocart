@@ -80,7 +80,7 @@ if (!function_exists('get_list_products_feature')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getFeature($limit);
     }
 }
@@ -90,7 +90,7 @@ if (!function_exists('get_list_products_new')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getNews($limit);
     }
 }
@@ -100,7 +100,7 @@ if (!function_exists('get_list_products_relate')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getRelate($categoryId, $limit);
     }
 }
@@ -110,7 +110,7 @@ if (!function_exists('get_list_products_category')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getFetureCategory($categoryId, $limit);
     }
 }

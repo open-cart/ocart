@@ -6,6 +6,7 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -14,6 +15,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class BrandRepositoryEloquent extends RepositoriesAbstract implements BrandRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

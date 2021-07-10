@@ -6,6 +6,7 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -14,6 +15,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class TagRepositoryEloquent extends RepositoriesAbstract implements TagRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

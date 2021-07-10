@@ -43,7 +43,7 @@ class CurrencySupport
             }
 
             if (!$currency) {
-                $currency = app(CurrencyRepository::class)->first();
+                $currency = app(CurrencyRepository::class)->limit(1)->first();
             }
 
             if (!$currency) {

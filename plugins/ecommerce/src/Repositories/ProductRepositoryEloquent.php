@@ -6,6 +6,7 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Hashids\Hashids;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -14,6 +15,8 @@ use Hashids\Hashids;
  */
 class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
@@ -68,9 +71,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
 
-        $results = $this->paginate($paginate);
-
-        return $this->parserResult($results);
+        return $this->paginate($paginate);
     }
 
     public function getFeature($limit)
@@ -79,9 +80,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_featured' => 1,
             'is_variation' => 0
         ]);
-        $results = $this->limit($limit);
-
-        return $this->parserResult($results);
+        return $this->with('categories')->limit($limit);
     }
 
     public function getNews($limit)
@@ -90,9 +89,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_variation' => 0
         ]);
 
-        $results = $this->orderBy('created_at', 'desc')->limit($limit);
-
-        return $this->parserResult($results);
+        return $this->with('categories')->orderBy('created_at', 'desc')->limit($limit);
     }
 
     public function getRelate($categoryId, $limit)
@@ -103,9 +100,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $results = $this->limit($limit);
-
-        return $this->parserResult($results);
+        return $this->with('categories')->limit($limit);
     }
 
     public function getFetureCategory($categoryId, $limit)
@@ -118,8 +113,6 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
         $this->orderBy('created_at', 'desc');
-        $results = $this->limit($limit);
-
-        return $this->parserResult($results);
+        return $this->with('categories')->limit($limit);
     }
 }

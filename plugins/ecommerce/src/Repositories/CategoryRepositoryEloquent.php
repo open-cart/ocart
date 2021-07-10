@@ -6,6 +6,7 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -14,6 +15,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class CategoryRepositoryEloquent extends RepositoriesAbstract implements CategoryRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
