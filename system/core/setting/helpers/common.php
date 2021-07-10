@@ -48,3 +48,10 @@ if (!function_exists('get_setting_email_status')) {
         return setting(get_setting_email_status_key($templateKey), $default);
     }
 }
+
+if (!function_exists('is_enable_cache')) {
+    function is_enable_cache()
+    {
+        return setting('enable_cache') == '1';
+    }
+}
