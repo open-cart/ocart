@@ -95,7 +95,7 @@
 
                     for (const image of items) {
                         const item = $('.template-image').clone().attr('class', '');
-                        item.find('input').val(image.url);
+                        item.find('input').val(image.full_url);
                         item.find('.preview_image').attr('src', image.full_url);
                         list.append(item);
                     }

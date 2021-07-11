@@ -141,7 +141,7 @@ class StoreProductVersionService
         $data['images'] = array_map(function ($image) {
             return TnMedia::url($image);
         }, Arr::wrap($productNewDefault->images));
-        dd($data['images']);
+
         $data['images'] = json_encode($data['images']);
 
         $this->productRepository->update($data, $product->id);
