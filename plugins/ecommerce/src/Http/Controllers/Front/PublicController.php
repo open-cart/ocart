@@ -33,7 +33,7 @@ class PublicController extends BaseController
      */
     public function product($slug)
     {
-        $product = $this->repo->with(['categories'])->findByField('slug', $slug)->first();
+        $product = $this->repo->with(['categories'])->with(['tags'])->findByField('slug', $slug)->first();
         if (empty($product)) {
             abort(404);
         }
