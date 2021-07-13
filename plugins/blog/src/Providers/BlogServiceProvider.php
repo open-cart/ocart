@@ -16,9 +16,11 @@ use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Blog\Repositories\Interfaces\TagRepository;
 use Ocart\Blog\Repositories\PostRepositoryEloquent;
 use Ocart\Blog\Repositories\TagRepositoryEloquent;
+use Ocart\Core\Facades\Slug;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Ocart\SeoHelper\Facades\SeoHelper;
+
 
 class BlogServiceProvider extends ServiceProvider
 {
@@ -31,6 +33,17 @@ class BlogServiceProvider extends ServiceProvider
         $this->app->bind(PostRepository::class, PostRepositoryEloquent::class);
         $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
         $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
+
+        Slug::registerPrefix(Post::class, [
+            'label' => 'Blog Posts',
+            'value' => 'post',
+        ])->registerPrefix(Category::class, [
+            'label' => 'Blog Categories',
+            'value' => 'post-category',
+        ])->registerPrefix(Tag::class, [
+            'label' => 'Blog Tags',
+            'value' => 'tag',
+        ]);
     }
 
     public function boot()

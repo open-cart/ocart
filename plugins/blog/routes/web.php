@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Ocart\Core\Facades\Slug;
+use \Ocart\Blog\Models\Post;
+use Ocart\Blog\Models\Category;
+use Ocart\Blog\Models\Tag;
 
 Route::group([
     'namespace' => 'Ocart\Blog\Http\Controllers',
@@ -29,12 +33,17 @@ Route::group([
     });
 });
 
+// Route frontend
 Route::group([
     'middleware' => ['web'],
     'namespace' => 'Ocart\Blog\Http\Controllers',
 ], function () {
-    Route::get('post/{slug}', 'PublicController@post')->name(ROUTE_BLOG_POST_SCREEN_NAME);
-    Route::get('post-category/{slug}', 'PublicController@postCategory')->name(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME);
-    Route::get('blog', 'PublicController@blog')->name(ROUTE_BLOG_PAGE_SCREEN_NAME);
+    Route::get(Slug::getPrefix(Post::class, 'post').'/{slug}', 'PublicController@post')
+        ->name(ROUTE_BLOG_POST_SCREEN_NAME);
 
+    Route::get(Slug::getPrefix(Category::class, 'post-category').'/{slug}', 'PublicController@postCategory')
+        ->name(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME);
+
+    Route::get(Slug::getPrefix(Post::class, 'post'), 'PublicController@blog')
+        ->name(ROUTE_BLOG_PAGE_SCREEN_NAME);
 });
