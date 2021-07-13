@@ -123,4 +123,14 @@ class SettingController
                 ->setMessage($exception->getMessage());
         }
     }
+
+    public function getPermalink()
+    {
+        return view('core.setting::slug-settings');
+    }
+
+    public function postPermalink(Request $request, BaseHttpResponse $response)
+    {
+
+    }
 }

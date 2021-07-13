@@ -3,6 +3,8 @@ namespace Ocart\Page\Providers;
 
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
+use Ocart\Core\Facades\Slug;
+use Ocart\Page\Models\Page;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\Page\Repositories\PageRepositoryEloquent;
 use Ocart\Core\Library\Helper;
@@ -18,6 +20,11 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
         Helper::autoload(__DIR__ . '/../../helpers');
 
         $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
+
+        Slug::registerPrefix(Page::class, [
+            'label' => 'Pages',
+            'value' => ''
+        ]);
     }
 
     public function boot()

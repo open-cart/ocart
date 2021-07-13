@@ -76,6 +76,19 @@ class SettingServiceProvider extends ServiceProvider
                         'pages.destroy',
                     ],
                     'active' => false,
+                ])->registerItem([
+                    'id' => 'cms-core-settings-slug',
+                    'parent_id' => 'cms-core-settings',
+                    'name' => 'Permalink',
+                    'icon' => null,
+                    'url' => route('slug.settings'),
+                    'permissions' => [
+                        'pages.index',
+                        'pages.create',
+                        'pages.update',
+                        'pages.destroy',
+                    ],
+                    'active' => false,
                 ]);
 
             EmailHandler::addTemplateSettings('base', config('core.setting.email', []));

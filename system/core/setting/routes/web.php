@@ -23,6 +23,17 @@ Route::group(
                 'permission' => 'settings.options',
             ]);
 
+            Route::get('permalink', [
+                'as' => 'slug.settings',
+                'uses' => 'SettingController@getPermalink',
+                'permission' => 'settings.options'
+            ]);
+
+            Route::post('permalink', [
+                'uses' => 'SettingController@postPermalink',
+                'permission' => 'settings.options'
+            ]);
+
             Route::group(['prefix' => 'email', 'permission' => 'settings.email'], function () {
                 Route::get('', [
                     'as'   => 'settings.email',

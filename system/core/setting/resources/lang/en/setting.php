@@ -82,5 +82,9 @@ return [
         'locale'                                => 'Site language',
         'locale_direction'                      => 'Language direction',
         'admin_login_screen_backgrounds'        => 'Login screen backgrounds (~1366x768)',
+    ],
+    'permalink' => [
+        'title' => 'Permalink settings',
+        'description' => 'Manage permalink for all modules.'
     ]
 ];
