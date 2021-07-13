@@ -8,7 +8,7 @@
     "configGroup": "Plugins",
     "configCode": "Payment",
     "configKey": "blog",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "require": [
     ],
     "providers": [

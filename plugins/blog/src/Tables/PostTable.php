@@ -2,6 +2,9 @@
 namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
+use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Blog\Forms\PostFilterForm;
+use Ocart\Blog\Repositories\Criteria\BlogSearchCriteria;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Media\Facades\TnMedia;
 use Ocart\Page\Models\Page;
@@ -10,13 +13,23 @@ use Ocart\Table\DataTables;
 
 class PostTable extends TableAbstract
 {
-    public function __construct(DataTables $table, PostRepository $repo, HtmlBuilder $html)
+    public function __construct(DataTables $table, PostRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->paginate();
+        $this->data = $this->query();
         $this->ajax();
+
+        $this->searchForm = $formBuilder->create(PostFilterForm::class, ['model' => request()->all()])
+            ->renderForm();
+    }
+
+    public function query()
+    {
+        $this->repository->pushCriteria(BlogSearchCriteria::class);
+        $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
+        return $res->paginate();
     }
 
     public function ajax()
