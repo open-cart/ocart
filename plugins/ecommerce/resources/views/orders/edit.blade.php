@@ -154,7 +154,7 @@
                         </div>
                     </div>
 
-{{--                    Start comments --}}
+                    <!-- Start comments -->
                     <div class="dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300" id="body-comment">
                         <h3 class=" p-4">
                             {{ trans('plugins/ecommerce::orders.history') }}
@@ -162,12 +162,12 @@
                         <hr>
                         <div class="p-6">
                             <div class="relative w-full">
-                                <div style="left: 30px" class="border-r-4 border-gray-300 absolute h-full top-0 z-0"></div>
+                                <div style="left: 30px" class="border-r-4 border-gray-300 dark:border-gray-600 absolute h-full top-0 z-0"></div>
                                 <ul class="list-none m-0 p-0 space-y-8">
                                     <li class="mb-2">
                                         <div class="flex items-top mb-1">
-                                            <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2 mt-1">
-                                                <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
+                                            <div class="bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 dark:border-gray-400 border-2 z-10 ml-2 mt-1">
+                                                <svg class="fill-current text-white dark:text-gray-200" viewBox="0 0 44 44">
                                                     <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
                                                         {{ Str::ucfirst(Auth::user()->name[0]) }}
                                                     </text>
@@ -200,13 +200,16 @@
                                                               id="order-comment"
                                                               class="bg-gray-100 rounded border border-gray-400
                                                  leading-normal resize-none w-full h-14 py-3 px-3 font-medium
-                                                  placeholder-gray-700 focus:outline-none focus:bg-white"></textarea>
+                                                  placeholder-gray-700 focus:outline-none focus:bg-white
+                                                   dark:bg-gray-700 dark:focus:bg-gray-700 dark:placeholder-gray-300
+                                                   dark:border-gray-600
+                                                    "></textarea>
                                                     <div class="absolute bottom-0 right-0 py-3 pr-2">
                                                         <x-button type="button"
                                                                   color=""
                                                                   x-bind:class="{
-                                                                'bg-gray-200 text-gray-500 pointer-events-none': !$store.order.comment?.trim(),
-                                                                'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment?.trim()
+                                                                'bg-gray-200 text-gray-500 dark:bg-gray-800 dark:text-gray-400 pointer-events-none': !$store.order.comment?.trim(),
+                                                                'bg-indigo-500 hover:bg-indigo-600': !!$store.order.comment?.trim(),
                                                               }"
                                                                   x-on:click="postComment($event)">
                                                             <template x-if="true">
@@ -230,9 +233,9 @@
                                         @if($history->action === 'comment')
                                             <li class="mb-2">
                                                 <div class="flex items-center mb-1">
-                                                    <div class="flex bg-white shadow-sm pt-3 pb-6 rounded pr-4 z-10 w-full">
-                                                        <div class="flex-none bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 border-2 z-10 ml-2">
-                                                            <svg class="Polaris-Avatar__Svg_375hu" viewBox="0 0 44 44">
+                                                    <div class="flex bg-white shadow-sm pt-3 pb-6 rounded pr-4 z-10 w-full dark:bg-gray-700">
+                                                        <div class="flex-none bg-indigo-600 text-white rounded-full h-12 w-12 border-gray-200 dark:border-gray-400 border-2 z-10 ml-2">
+                                                            <svg class="fill-current text-white dark:text-gray-200" viewBox="0 0 44 44">
                                                                 <text x="50%" y="50%" dy="0.35em" fill="currentColor" font-size="20" text-anchor="middle">
                                                                     {{ Str::ucfirst($history->user->name[0]) }}
                                                                 </text>
@@ -271,7 +274,7 @@
                                                     <div x-bind:class="{'shadow-sm rounded bg-white': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
-                                                            <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                            <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
                                                             </div>
                                                             <div class="flex-grow">
                                                                 <div class="flex justify-between">
@@ -369,7 +372,7 @@
                                                     <div x-bind:class="{'shadow-sm rounded bg-white': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
-                                                            <div class="flex-none @if($history->user_id) bg-indigo-600 @endif rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                            <div class="flex-none @if($history->user_id) bg-indigo-600 @endif rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
                                                             </div>
                                                             <div class="flex-grow">
                                                                 <div class="flex justify-between">
@@ -475,7 +478,7 @@
                                                     <div x-bind:class="{'shadow-sm rounded bg-white': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
-                                                            <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                            <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
                                                             </div>
                                                             <div class="flex-grow">
                                                                 <div class="flex justify-between">
@@ -512,7 +515,7 @@
                                         @else
                                         <li class="mb-2 pr-4">
                                             <div class="flex items-center mb-1">
-                                                <div class="flex-none @if($history->user_id) bg-indigo-600 @else bg-gray-400 @endif rounded-full h-4 w-4 border-gray-200 border-2 z-10 ml-6">
+                                                <div class="flex-none @if($history->user_id) bg-indigo-600 @else bg-gray-400 dark:bg-gray-600 @endif rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
                                                 </div>
                                                 <div class="flex-grow">
                                                     <div class="flex justify-between">

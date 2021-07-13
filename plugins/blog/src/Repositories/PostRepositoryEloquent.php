@@ -6,6 +6,7 @@ use Ocart\Blog\Models\Post;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Traits\CacheableRepository;
 use Prettus\Validator\Contracts\ValidatorInterface;
 
 /**
@@ -15,6 +16,8 @@ use Prettus\Validator\Contracts\ValidatorInterface;
  */
 class PostRepositoryEloquent extends RepositoriesAbstract implements PostRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'name' => 'like',
     ];

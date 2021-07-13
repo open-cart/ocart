@@ -50,6 +50,8 @@ class PostController extends BaseController
 
     public function index(PostTable $blog)
     {
+        page_title()->setTitle(trans('plugins/blog::posts.list'));
+
         return $blog->render();
     }
 

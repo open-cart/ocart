@@ -111,7 +111,17 @@
                                         </label>
                                         <x-switch
                                             checked="{!! EcommerceHelper::isTaxEnabled() ? 'true' : 'false' !!}"
-                                            name="ecommerce_tax_enabled"
+                                            name="tax_enabled"
+                                            color="bg-green-600"
+                                        />
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <label for="ecommerce_tax_enabled">
+                                            {!! trans('plugins/ecommerce::ecommerce.setting.display_product_price_including_taxes') !!}
+                                        </label>
+                                        <x-switch
+                                            checked="{!! EcommerceHelper::isDisplayProductIncludingTaxes() ? 'true' : 'false' !!}"
+                                            name="display_product_price_including_taxes"
                                             color="bg-green-600"
                                         />
                                     </div>

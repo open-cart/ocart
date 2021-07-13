@@ -29,6 +29,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\ShippingRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ShippingRuleRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\StoreRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\TaxRepository;
 use Ocart\Ecommerce\Repositories\OrderAddressRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderHistoryRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\OrderProductRepositoryEloquent;
@@ -42,6 +43,7 @@ use Ocart\Ecommerce\Repositories\StoreRepositoryEloquent;
 use Ocart\Ecommerce\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
+use Ocart\Ecommerce\Repositories\TaxRepositoryEloquent;
 use Ocart\SeoHelper\Facades\SeoHelper;
 
 class EcommerceServiceProvider extends ServiceProvider {
@@ -84,6 +86,7 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this->app->bind(ShippingRuleRepository::class, ShippingRuleRepositoryEloquent::class);
         $this->app->bind(ShipmentRepository::class, ShipmentRepositoryEloquent::class);
         $this->app->bind(ShipmentHistoryRepository::class, ShipmentHistoryRepositoryEloquent::class);
+        $this->app->bind(TaxRepository::class, TaxRepositoryEloquent::class);
 
         AliasLoader::getInstance(['EcommerceHelper' => EcommerceHelper::class]);
     }

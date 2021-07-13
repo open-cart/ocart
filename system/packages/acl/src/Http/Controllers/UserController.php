@@ -1,6 +1,7 @@
 <?php
 namespace Ocart\Acl\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
@@ -29,7 +30,7 @@ class UserController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-//            'index' => 'pages.index',
+            'index' => 'pages.index',
             'show' => 'system.users.update',
             'create' => 'system.users.create',
             'store' => 'system.users.create',
@@ -63,13 +64,14 @@ class UserController extends BaseController
     function store(UserRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
-        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-        $data['slug_md5'] = md5($data['slug']);
+//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
+//        $data['slug_md5'] = md5($data['slug']);
 
-        $page = $this->repo->create($data + [
-                'user_id'     => Auth::user()->getKey(),
-                'is_featured' => $request->input('is_featured', false),
-            ]);
+        if ($request->input('password')) {
+            $data['password'] = Hash::make($request->input('password'));
+        }
+
+        $page = $this->repo->create($data);
 
         return $response->setPreviousUrl(route('system.users.index'))
             ->setNextUrl(route('system.users.show', $page->id));

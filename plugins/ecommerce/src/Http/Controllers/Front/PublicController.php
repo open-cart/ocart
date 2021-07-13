@@ -64,7 +64,7 @@ class PublicController extends BaseController
         $meta->setDescription($description);
         $meta->setType('Shop');
 
-        $products = $this->repo->paginate( 9);
+        $products = $this->repo->with('categories')->paginate( 9);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, []);
 

@@ -11,5 +11,8 @@ return [
     'create_tag' => 'Tạo mới tag',
     'manage_tag' => 'Quản lý tag',
     'search_tag' => 'Tìm kiếm...',
-    'name_new_tag' => 'Tên tag mới'
+    'name_new_tag' => 'Tên tag mới',
+    'create' => 'Tạo mới bài viết',
+    'edit' => 'Chỉnh sửa bài viết',
+    'list' => 'Danh sách bài viết'
 ];

@@ -46,6 +46,6 @@ class Admin extends Authenticatable
 
     public function isSuperAdmin()
     {
-        return true;
+        return $this->id == 1;
     }
 }

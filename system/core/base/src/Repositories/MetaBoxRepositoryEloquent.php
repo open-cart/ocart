@@ -5,6 +5,7 @@ namespace Ocart\Core\Repositories;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Models\MetaBox;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class MetaBoxRepositoryEloquent.
@@ -13,6 +14,8 @@ use Ocart\Core\Models\MetaBox;
  */
 class MetaBoxRepositoryEloquent extends RepositoriesAbstract implements MetaBoxRepository
 {
+    use CacheableRepository;
+
     /**
      * Specify Model class name
      *

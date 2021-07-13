@@ -1,5 +1,6 @@
 {
     "name": "Multiple Attribute",
+    "description": "Thêm nhiều thuộc tính cho sản phẩm",
     "namespace": "Ocart\\Attribute\\",
     "image": "images/momo.png",
     "auth": "Trung Nguyên",
@@ -8,7 +9,7 @@
     "configGroup": "Plugins",
     "configCode": "Payment",
     "configKey": "blog",
-    "version": "1.0",
+    "version": "1.0.1",
     "providers": [
         "Ocart\\Attribute\\Providers\\MultipleAttributeServiceProvider",
         "Ocart\\Attribute\\Providers\\HookServiceProvider"

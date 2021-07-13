@@ -24,8 +24,12 @@ class SettingServiceProvider extends ServiceProvider
         $this->app->bind(SettingRepository::class,);
 
         Helper::autoload(__DIR__ . '/../helpers');
-    }
 
+        config()->set('core.setting.general.cache.enabled', is_enable_cache());
+
+        config()->set('repository.cache.enabled', is_enable_cache());
+        config()->set('repository.cache.minutes', setting('cache_time', 10) * 60);
+    }
 
     public function boot()
     {

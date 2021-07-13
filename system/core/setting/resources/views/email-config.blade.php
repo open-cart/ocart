@@ -12,7 +12,7 @@
                 </div>
                 <div class="col-span-9 space-y-4">
                     <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 border-b border-gray-200 space-y-4">
+                        <div class="p-6 border-b border-gray-200 dark:border-gray-400 space-y-4">
                             <div class="flex flex-col">
                                 <label for="email_driver">
                                     {{ trans('core/setting::setting.mailer') }}

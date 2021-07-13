@@ -122,6 +122,15 @@ class StoreProductVersionService
             ->findByField('configurable_product_id', $product->id);
         $productDefault = $productRelated->where('is_default', 1)->first();
 
+        foreach ($productRelated as $item) {
+            // if change tax id
+            if ($product->tax_id != $request->input('tax_id')) {
+                $this->productRepository->update([
+                    'tax_id' => $product->tax_id,
+                ], $item->product_id);
+            }
+        }
+
         if ($productDefault->product_id == $request->input('variation_default_id')) {
             return;
         }
@@ -141,7 +150,7 @@ class StoreProductVersionService
         $data['images'] = array_map(function ($image) {
             return TnMedia::url($image);
         }, Arr::wrap($productNewDefault->images));
-        dd($data['images']);
+
         $data['images'] = json_encode($data['images']);
 
         $this->productRepository->update($data, $product->id);

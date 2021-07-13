@@ -28,7 +28,7 @@ class SettingManager extends Manager
      */
     public function createJsonDriver()
     {
-        return new JsonSettingStore($this->app['files']);
+        return new JsonSettingStore($this->container['files']);
     }
 
     /**

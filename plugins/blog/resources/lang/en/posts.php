@@ -7,5 +7,7 @@ return [
     'is_featured' => 'Is featured',
     'categories' => 'Categories',
     'type' => 'Type',
-    'image' => 'Image'
+    'image' => 'Image',
+    'create' => 'Create post',
+    'edit' => 'Edit post',
 ];

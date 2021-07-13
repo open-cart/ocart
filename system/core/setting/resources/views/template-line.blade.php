@@ -1,5 +1,5 @@
 <div>
-    <hr>
+    <hr class="dark:border-gray-500">
 </div>
 <div class="grid grid-cols-12 gap-4">
     <div class="col-span-3 pt-6">
@@ -8,10 +8,10 @@
     </div>
     <div class="col-span-9 space-y-4">
         <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 border-b border-gray-200 space-y-4">
+            <div class="p-6 border-b border-gray-200 dark:border-gray-400 space-y-4">
                 <table class="table-auto w-full">
                     <thead>
-                    <tr class="border-t">
+                    <tr class="border-t dark:border-gray-700">
                         <th class="text-left py-2">{{ trans('core/setting::setting.template') }}</th>
                         <th class="text-left py-2">{{ trans('core/setting::setting.description') }}</th>
                         @if($module != 'base')
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                     @foreach ($data['templates'] as $key => $template)
-                        <tr class="border-t">
+                        <tr class="border-t dark:border-gray-700">
                             <td class="py-2">
                                 <x-link href="{{ route('settings.email.template.edit', ['name' => $module, 'template' => $key]) }}">
                                     {{ trans($template['title']) }}

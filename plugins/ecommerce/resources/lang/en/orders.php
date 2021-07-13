@@ -72,4 +72,5 @@ return [
             'cancel_success' => 'You do cancel the order successful',
         ],
     ],
+    'tax' => 'Tax'
 ];

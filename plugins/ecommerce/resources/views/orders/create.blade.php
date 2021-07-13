@@ -51,6 +51,7 @@
                                     </div>
                                     <div class="text-right w-36" x-text="discount_amount"></div>
                                 </div>
+                                <!-- Start Shipping -->
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">
                                         <x-link data-toggle="modal"
@@ -68,6 +69,25 @@
                                     </div>
                                     <div class="text-right w-36 flex items-end justify-end" x-text="$store.order.shipping_amount">{!! format_price(0) !!}</div>
                                 </div>
+                                <!-- End Shipping -->
+
+                                <!-- Start Tax -->
+                                <div class="flex justify-between">
+                                    <div class="text-right w-full">
+                                        <x-link href="javascript:void(0)"
+{{--                                                data-toggle="modal"--}}
+{{--                                                data-target="#order-discount-modal"--}}
+                                                x-bind:class="{
+                                                    'selected:text-gray-400 pointer-events-none': !data.length,
+                                                }"
+                                                class="hover:underline font-medium">
+                                            {{ trans('plugins/ecommerce::orders.tax') }}
+                                        </x-link>
+{{--                                        <div class="text-sm" x-text="discount_description"></div>--}}
+                                    </div>
+                                    <div class="text-right w-36" x-text="tax_amount()"></div>
+                                </div>
+                                <!-- End Tax -->
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">Total</div>
                                     <div class="text-right w-36" x-text="totalAmount()">{!! format_price(0) !!}</div>
@@ -247,8 +267,11 @@
         function orderData() {
             function productItem(product) {
                 product.total = () => {
-                    return product.qty * product.price;
+                    return product.qty * product.sell_price;
                 };
+                product.tax_amount = () => {
+                    return (product.sell_price_with_taxes - product.sell_price) * product.qty;
+                }
                 return product;
             }
 
@@ -261,6 +284,8 @@
                 discount_amount: 0,
                 discount_type: 0,
                 discount_description: null,
+                is_tax_enabled: {{ var_export(\Ocart\Ecommerce\Facades\EcommerceHelper::isTaxEnabled(), true) }},
+                is_display_product_including_taxes: {{ var_export(\Ocart\Ecommerce\Facades\EcommerceHelper::isDisplayProductIncludingTaxes(), true) }},
                 openShippingFee() {
                     this.$store.shipping_methods.selected = {
                         value: this.$store.order.shipping_option,
@@ -357,9 +382,14 @@
                         return total + item.total();
                     }, 0);
                 },
+                tax_amount() {
+                    return this.data.reduce((total, item) => {
+                        return total + item.tax_amount();
+                    }, 0);
+                },
                 totalAmount() {
                     this.changeDiscount()
-                    return this.amount() - this.discount_amount;
+                    return this.amount() + this.tax_amount() - this.discount_amount;
                 },
                 showCreateModal() {
                     this.$store.order.submit = this.submit.bind(this);
@@ -378,6 +408,7 @@
                         customer_address: this.customer_address,
                         note: this.note,
                         amount: this.amount(),
+                        tax_amount: this.tax_amount(),
                         discount_amount: this.discount_amount,
                         payment_method: this.$store.order.payment_method,
                         payment_status: this.$store.order.payment_status,

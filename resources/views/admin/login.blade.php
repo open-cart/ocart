@@ -16,7 +16,7 @@
                 <div class="fixed left-0 bottom-0">
                     <div class="p-12 text-white">
                         <h1 class="text-4xl">Open Cart</h1>
-                        <p>Copyright © Phan Trung Nguyên. Version 1.0</p>
+                        <p>Copyright © Phan Trung Nguyên. Version {{ get_cms_version() }}</p>
                     </div>
                 </div>
             </div>

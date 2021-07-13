@@ -49,6 +49,8 @@ class OrderSearchCriteria implements CriteriaInterface
             $model = $model->where('status', $request->get('status'));
         }
 
+        $model = $model->where('id', '>', '1');
+
         if ($request->get('order')) {
 
         } else {

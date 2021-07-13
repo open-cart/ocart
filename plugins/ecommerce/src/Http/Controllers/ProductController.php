@@ -127,13 +127,15 @@ class ProductController extends BaseController
 //        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
 //        $data['slug_md5'] = md5($data['slug']);
 
-        $data['images'] = array_values(array_filter($request->input('images', [])));
+        if ($request->input('images')) {
+            $data['images'] = array_values(array_filter($request->input('images', [])));
 
-        $data['images'] = array_map(function ($image) {
-            return TnMedia::url($image);
-        }, Arr::wrap($data['images']));
+            $data['images'] = array_map(function ($image) {
+                return TnMedia::url($image);
+            }, Arr::wrap($data['images']));
 
-        $data['images'] = json_encode($data['images']);
+            $data['images'] = json_encode($data['images']);
+        }
 
         $product = $this->repo->update($data + [
                 'is_featured' => $request->input('is_featured', false),

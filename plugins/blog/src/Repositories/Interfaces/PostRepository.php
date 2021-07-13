@@ -2,6 +2,7 @@
 
 namespace Ocart\Blog\Repositories\Interfaces;
 
+use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Contracts\RepositoryCriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -10,7 +11,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  *
  * @package namespace App\Repositories;
  */
-interface PostRepository extends RepositoryInterface, RepositoryCriteriaInterface
+interface PostRepository extends RepositoryInterface, RepositoryCriteriaInterface, CacheableInterface
 {
     //
 }

@@ -6,7 +6,8 @@
 @if (!Arr::get($attributes, 'allow_thumb', true)) preview-image-wrapper-not-allow-thumb @endif">
 {{--        <img src="{{ get_object_image($value, Arr::get($attributes, 'allow_thumb', true) == true ? 'thumb' : null) }}" alt="{{ __('preview image') }}" class="preview_image" @if (Arr::get($attributes, 'allow_thumb', true)) width="150" @endif>--}}
         <img src="{{ TnMedia::url($value) ?? '/images/placeholder.png' }}" alt="{{ __('preview image') }}" class="preview_image" @if (Arr::get($attributes, 'allow_thumb', true)) width="150" @endif>
-        <a onclick="removeImageHandler(this)" class="btn_remove_image absolute flex items-center justify-center right-0 top-0 rounded-full w-7 h-7 bg-gray-300 hover:bg-gray-200"
+        <a onclick="removeImageHandler(this)"
+           class="btn_remove_image absolute flex items-center justify-center right-0 top-0 rounded-full w-7 h-7 bg-gray-300 text-gray-600 hover:bg-gray-200"
            title="{{ trans('core/base::forms.remove_image') }}">
             <i class="fa fa-times"></i>
         </a>

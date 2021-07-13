@@ -133,12 +133,12 @@
     <template x-for="(item, index) in selected" :key="index">
         <div class="bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden">
             <input type="hidden" name="{{ $options['real_name'] }}" x-bind:value="item.id">
-            <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1" x-text="item.name"></span>
+            <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1 dark:text-gray-600" x-text="item.name"></span>
             <button type="button"
                     title="{{ trans('admin.delete') }}"
                     x-on:click="change(item)"
                     class="w-6 h-8 inline-block align-middle text-gray-500 bg-blue-200 focus:outline-none">
-                <svg class="w-6 h-6 fill-current mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"></path></svg>
+                <svg class="w-6 h-6 text-gray-600 fill-current mx-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M15.78 14.36a1 1 0 0 1-1.42 1.42l-2.82-2.83-2.83 2.83a1 1 0 1 1-1.42-1.42l2.83-2.82L7.3 8.7a1 1 0 0 1 1.42-1.42l2.83 2.83 2.82-2.83a1 1 0 0 1 1.42 1.42l-2.83 2.83 2.83 2.82z"></path></svg>
             </button>
         </div>
     </template>
@@ -146,7 +146,7 @@
          title="Add"
          x-on:click="openSearch($event)">
         <span class="">&nbsp;</span>
-        <x-icons.plus class="w-6 h-8"/>
+        <x-icons.plus class="w-6 h-8 dark:text-gray-600"/>
         <span class="">&nbsp;</span>
     </div>
     <div x-show="open"

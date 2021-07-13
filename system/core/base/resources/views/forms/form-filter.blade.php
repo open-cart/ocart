@@ -6,7 +6,7 @@
         <nav>
             <ul class="flex">
                 <li class="py-2 px-4 cursor-pointer border-b-2 border-indigo-600">
-                    <a href="{{ URL::current() }}"><span>All</span></a>
+                    <a class="dark:text-white" href="{{ URL::current() }}"><span>All</span></a>
                 </li>
             </ul>
         </nav>
@@ -29,12 +29,12 @@
 {{--                   type="text">--}}
 
             <input type="hidden" name="submit" value="search"/>
-            <button class="inline-flex items-center px-4 py-1.5 bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-md text-white tracking-widest
-focus:border-transparent focus:outline-none
-  disabled:opacity-25 transition ease-in-out duration-150
-   w-32 dark:text-gray-300" id="searchButton">
-                <i class="zmdi zmdi-search">&nbsp;{{__('general.search')}}</i>
-            </button>
+{{--            <button class="inline-flex items-center px-4 py-1.5 bg-indigo-500 hover:bg-indigo-600 border border-transparent rounded-md text-white tracking-widest--}}
+{{--focus:border-transparent focus:outline-none--}}
+{{--  disabled:opacity-25 transition ease-in-out duration-150--}}
+{{--   w-32 dark:text-gray-300" id="searchButton">--}}
+{{--                <i class="zmdi zmdi-search">&nbsp;{{__('general.search')}}</i>--}}
+{{--            </button>--}}
         </div>
     </div>
         <div class="mb-2">
@@ -68,10 +68,13 @@ focus:border-transparent focus:outline-none
 
         const searchFn = function(event) {
             event.preventDefault();
-            console.log('click 1');
 
             $.pjax.submit(event, '#body');
         }
+
+        filterForm.on('change', 'select', () => {
+            filterForm.find('form').submit();
+        });
 
         filterForm.on('submit', 'form', searchFn)
     })

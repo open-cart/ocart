@@ -80,7 +80,7 @@ if (!function_exists('get_list_products_feature')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getFeature($limit);
     }
 }
@@ -90,7 +90,7 @@ if (!function_exists('get_list_products_new')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getNews($limit);
     }
 }
@@ -100,7 +100,7 @@ if (!function_exists('get_list_products_relate')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getRelate($categoryId, $limit);
     }
 }
@@ -110,7 +110,7 @@ if (!function_exists('get_list_products_category')) {
     {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
-        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class)->with('categories');
+        $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
         return $repo->getFetureCategory($categoryId, $limit);
     }
 }
@@ -118,12 +118,23 @@ if (!function_exists('get_list_products_category')) {
 if (!function_exists('get_ecommerce_setting')) {
     /**
      * @param string $key
-     * @param null $default
+     * @param string $default
      * @return string
      */
-    function get_ecommerce_setting($key, $default = '')
+    function get_ecommerce_setting(string $key, $default = '')
     {
-        return setting(config('plugins.ecommerce.general.prefix') . $key, $default);
+        return setting(get_ecommerce_setting_key($key), $default);
+    }
+}
+
+if (!function_exists('get_ecommerce_setting_key')) {
+    /**
+     * @param string $key
+     * @return string
+     */
+    function get_ecommerce_setting_key(string $key)
+    {
+        return config('plugins.ecommerce.general.prefix') . $key;
     }
 }
 
