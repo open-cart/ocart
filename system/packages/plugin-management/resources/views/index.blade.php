@@ -236,11 +236,12 @@
                         key
                     }).then((res) => {
                         toast.success('Your work has been saved');
+                        window.location.reload();
                     }).catch(e => {
                         toast.error(e.message)
                     }).finally(() => {
                         // $.pjax.reload('#body', {});
-                        window.location.reload();
+                        // window.location.reload();
                     })
                 },
                 disable(key) {
@@ -248,11 +249,11 @@
                         key
                     }).then((res) => {
                         toast.success('Your work has been saved');
+                        window.location.reload();
                     }).catch(e => {
                         toast.error(e.message)
                     }).finally(() => {
                         // $.pjax.reload('#body', {});
-                        window.location.reload();
                     })
                 },
                 uninstall(key) {
