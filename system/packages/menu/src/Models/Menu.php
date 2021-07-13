@@ -45,6 +45,6 @@ class Menu extends BaseModel
      */
     public function menuNodes()
     {
-        return $this->hasMany(MenuNode::class, 'menu_id');
+        return $this->hasMany(MenuNode::class, 'menu_id')->orderBy('position', 'ASC');
     }
 }

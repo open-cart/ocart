@@ -13,7 +13,7 @@ if (!function_exists('header_navigation')) {
     function header_navigation() {
         $menuRepository = app(MenuRepository::class);
 
-        return $menuRepository->with('menuNodes')->find(setting('header_navigation'));
+        return $menuRepository->with('menuNodes')->find(setting('header_navigation'))->menuNodes;
     }
 }
 
@@ -21,6 +21,6 @@ if (!function_exists('footer_navigation')) {
     function footer_navigation() {
         $menuRepository = app(MenuRepository::class);
 
-        return $menuRepository->with('menuNodes')->find(setting('footer_navigation'));
+        return $menuRepository->with('menuNodes')->find(setting('footer_navigation'))->menuNodes;
     }
 }

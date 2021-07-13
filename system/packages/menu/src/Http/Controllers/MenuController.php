@@ -124,11 +124,13 @@ class MenuController extends BaseController
     }
 
     public function recursiveSaveMenu($menuNodes, $menuId, $parentId) {
+        $i = 0;
         foreach ($menuNodes as $row) {
             $child = Arr::get($row, 'children', []);
 
             $row['parent_id'] = $parentId;
             $row['menu_id'] = $menuId;
+            $row['position'] = $i;
 
             $parent = null;
 
@@ -142,6 +144,7 @@ class MenuController extends BaseController
             if (!empty($parent)) {
                 $this->recursiveSaveMenu($child, $menuId, $parent->id);
             }
+            $i++;
         }
     }
 
