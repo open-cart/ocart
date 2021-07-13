@@ -3,6 +3,7 @@ namespace Ocart\Ecommerce\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
+use Ocart\Core\Facades\Slug;
 use Ocart\Ecommerce\Facades\EcommerceHelper;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Models\Category;
@@ -89,6 +90,20 @@ class EcommerceServiceProvider extends ServiceProvider {
         $this->app->bind(TaxRepository::class, TaxRepositoryEloquent::class);
 
         AliasLoader::getInstance(['EcommerceHelper' => EcommerceHelper::class]);
+
+        Slug::registerPrefix(Product::class, [
+            'label' => 'Product',
+            'value' => 'product',
+        ])->registerPrefix(Category::class, [
+            'label' => 'Product Categories',
+            'value' => 'product-category',
+        ])->registerPrefix(Brand::class, [
+            'label' => 'Brands',
+            'value' => 'brands',
+        ])->registerPrefix(Tag::class, [
+            'label' => 'Product Tags',
+            'value' => 'product-tag',
+        ]);
     }
 
     public function boot()

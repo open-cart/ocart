@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Ocart\Ecommerce\Models\Product;
+use Ocart\Ecommerce\Models\Category;
+use Ocart\Ecommerce\Models\Tag;
+use Ocart\Core\Facades\Slug;
+
 Route::group([
     'middleware' => 'web',
     'namespace' => 'Ocart\Ecommerce\Http\Controllers',
@@ -53,9 +58,19 @@ Route::group([
     'middleware' => 'web',
     'namespace' => 'Ocart\Ecommerce\Http\Controllers\Front',
 ], function () {
-    Route::get('product/{slug}', 'PublicController@product')->name(ROUTE_PRODUCT_SCREEN_NAME);
-    Route::get('product-category/{slug}', 'PublicController@productCategory')->name(ROUTE_PRODUCT_CATEGORY_SCREEN_NAME);
-    Route::get('shop', 'PublicController@shop')->name(ROUTE_SHOP_SCREEN_NAME);
+    Route::get(Slug::getPrefix(Product::class, 'product') . '/{slug}', [
+        'uses' => 'PublicController@product',
+        'as' => ROUTE_PRODUCT_SCREEN_NAME
+    ]);
+
+    Route::get(Slug::getPrefix(Category::class, 'product-category') .'/{slug}', [
+        'uses' => 'PublicController@productCategory',
+        'as' => ROUTE_PRODUCT_CATEGORY_SCREEN_NAME
+    ]);
+
+    Route::get(Slug::getPrefix(Product::class,'product'), 'PublicController@shop')
+        ->name(ROUTE_SHOP_SCREEN_NAME);
+
     Route::get('shopping-cart', 'ShoppingController@cart')->name(ROUTE_SHOPPING_CART_SCREEN_NAME);
 
     Route::get('shopping-buy', 'CheckoutController@getCheckout')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
