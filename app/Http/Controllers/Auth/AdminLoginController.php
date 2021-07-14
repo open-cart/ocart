@@ -17,8 +17,6 @@ class AdminLoginController extends Controller
      */
     public function create()
     {
-        session(['url.intended' => URL::previous()]);
-
         return view('admin.login');
     }
 
@@ -34,11 +32,7 @@ class AdminLoginController extends Controller
 
         $request->session()->regenerate();
 
-        if (!session()->has('url.intended')) {
-            session()->flash('url.intended', url()->current());
-        }
-
-        return redirect(session()->get('url.intended'));
+        return redirect()->intended(ADMIN_PREFIX);
     }
 
     /**
