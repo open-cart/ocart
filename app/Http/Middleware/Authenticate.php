@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Illuminate\Support\Facades\URL;
 
 class Authenticate extends Middleware
 {
@@ -16,6 +17,7 @@ class Authenticate extends Middleware
     {
         if (! $request->expectsJson()) {
             if ($request->is(ADMIN_PREFIX) || $request->is(ADMIN_PREFIX . '/*')) {
+//                dd('not login', URL::previous());
                 return route('admin.login');
             }
 
