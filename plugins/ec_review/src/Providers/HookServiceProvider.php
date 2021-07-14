@@ -18,7 +18,7 @@ class HookServiceProvider extends ServiceProvider
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
                 'id'          => 'cms-store-review',
-                'priority'    => 1,
+                'priority'    => 99,
                 'parent_id'   => 'cms-store',
                 'name'        => 'Reviews',
                 'icon'        => null,
