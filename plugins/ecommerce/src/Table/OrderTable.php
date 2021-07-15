@@ -32,7 +32,14 @@ class OrderTable extends TableAbstract
                 'payment',
                 'user',
                 'address'
-            ])->paginate();
+            ]);
+
+        if ($this->request()->input('action') === 'excel') {
+            $this->data = $this->data->get();
+        } else {
+            $this->data = $this->data->paginate();
+        }
+
         $this->ajax();
 
         $this->searchForm = $formBuilder->create(OrderFilterForm::class, ['model' => request()->all()])
