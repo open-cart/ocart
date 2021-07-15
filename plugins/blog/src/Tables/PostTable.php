@@ -3,6 +3,7 @@ namespace Ocart\Blog\Tables;
 
 use Collective\Html\HtmlBuilder;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Blog\Exports\PostExport;
 use Ocart\Blog\Forms\PostFilterForm;
 use Ocart\Blog\Repositories\Criteria\BlogSearchCriteria;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
@@ -13,6 +14,14 @@ use Ocart\Table\DataTables;
 
 class PostTable extends TableAbstract
 {
+    /**
+     * Export class handler.
+     *
+     * @var string
+     */
+    protected $exportClass = PostExport::class;
+
+
     public function __construct(DataTables $table, PostRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
@@ -41,6 +50,10 @@ class PostTable extends TableAbstract
                 'width' => '120px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') == 'excel') {
+                        return TnMedia::getImageUrl($item->image, 'thumb', asset('/images/no-image.jpg'));
+                    }
+
                     return '<img src="' . TnMedia::url($item->image ?? asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14"/>';
                 }
             ],
@@ -49,6 +62,10 @@ class PostTable extends TableAbstract
                 'title' => trans('plugins/blog::posts.name'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->name;
+                    }
+
                     $link = route('blog.posts.update', ['id' => $item->id]);
                     return "<a class='text-blue-400' href='$link'>$item->name</a>";
                 }
@@ -68,7 +85,7 @@ class PostTable extends TableAbstract
                 'width' => '180px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->created_at;
+                    return $item->created_at->format('Y-m-d H:i:s');
                 }
             ],
             'status' => [
@@ -77,6 +94,9 @@ class PostTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->status->getValue();
+                    }
                     return $item->status->toHtml();
                 }
             ]
@@ -86,6 +106,7 @@ class PostTable extends TableAbstract
                 'title' => __('admin.action'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
+                'exportable' => false,
                 'render' => function ($item) {
                     return $this->tableActions('blog.posts.update', 'blog.posts.destroy', $item);
                 }
@@ -97,5 +118,16 @@ class PostTable extends TableAbstract
         $buttons = $this->addCreateButton(route('blog.posts.create'), []);
 
         return apply_filters('base_table_action', $buttons, Page::class);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultButtons(): array
+    {
+        return [
+            'export',
+            'reload',
+        ];
     }
 }
