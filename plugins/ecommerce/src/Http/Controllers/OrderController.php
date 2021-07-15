@@ -11,6 +11,7 @@ use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Core\Facades\EmailHandler;
 use Ocart\Ecommerce\Enums\OrderStatusEnum;
 use Ocart\Ecommerce\Enums\ShippingMethodEnum;
+use Ocart\Ecommerce\Facades\OrderHelper;
 use Ocart\Ecommerce\Forms\BrandForm;
 use Ocart\Ecommerce\Http\Requests\AddressRequest;
 use Ocart\Ecommerce\Http\Requests\BrandRequest;
@@ -721,5 +722,19 @@ class OrderController extends BaseController
             'shipping_method'  => $order->shipping_method_name,
             'payment_method'   => $order->payment->payment_channel->label(),
         ]);
+    }
+
+    /**
+     * @param int $orderId
+     */
+    public function getGenerateInvoice($orderId)
+    {
+        $order = $this->orderRepository->find($orderId);
+
+//        return view('plugins.ecommerce::invoices.template', compact('order'));
+//
+        return OrderHelper::generateInvoice($order);
+
+//        return response()->file($in);
     }
 }

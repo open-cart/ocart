@@ -51,13 +51,21 @@
                                     <div class="text-right w-36">{!! format_price($order->tax_amount) !!}</div>
                                 </div>
                                 <div class="flex justify-between">
-                                    <div class="text-right w-full">Total amount</div>
+                                    <div class="text-right w-full">
+                                        {{ trans('plugins/ecommerce::products.form.total') }}
+                                    </div>
                                     <div class="text-right w-36">{!! format_price($order->amount) !!}</div>
                                 </div>
                                 <hr>
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">Paid amount</div>
                                     <div class="text-right w-36">{!! format_price($order->payment->amount) !!}</div>
+                                </div>
+                                <div class="text-right pt-6"
+                                     x-data="{print() {document.getElementById('myFrame').contentWindow.print()}}">
+                                    <x-button x-on:click="print">Print</x-button>
+                                    <iframe style="width: 0; height: 0" id="myFrame" src="{{ route('ecommerce.orders.generate-invoice', ['id' => $order->id]) }}">
+                                    </iframe>
                                 </div>
                             </div>
                         </div>

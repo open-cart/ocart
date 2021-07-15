@@ -23,7 +23,11 @@ Route::group([
                 Route::post('refund/{id}', 'OrderController@postRefund')
                     ->name('refund');
 
-
+                Route::get('generate-invoice/{id}', [
+                    'as'         => 'generate-invoice',
+                    'uses'       => 'OrderController@getGenerateInvoice',
+                    'permission' => 'orders.edit',
+                ]);
 
                 Route::resource('', 'OrderController')->parameters(['' => 'id']);
 
