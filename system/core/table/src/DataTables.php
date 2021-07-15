@@ -4,6 +4,8 @@
 namespace Ocart\Table;
 
 
+use Illuminate\Support\Arr;
+
 class DataTables
 {
     protected $_comlumns = array();
@@ -18,11 +20,13 @@ class DataTables
 
     public function columns($columns = [])
     {
-        $this->_comlumns = $columns;
+        $this->_comlumns =& $columns;
         $this->priorityEnd = $this->priorityStart;
         foreach ($columns as $key => &$column) {
             $column['priority'] = $this->priorityEnd;
-            $this->priorityEnd += $this->priorityEnd;
+            $column['exportable'] = Arr::get($column, 'exportable', true);
+            $column['printable'] = Arr::get($column, 'printable', true);
+            $this->priorityEnd++;
         }
 
         return $this;
@@ -35,15 +39,19 @@ class DataTables
 
     public function addColumn($name, $column)
     {
-        $this->priorityEnd -= $this->priorityEnd;
+        $this->priorityEnd++;
         $column['priority'] = $this->priorityEnd;
+        $column['exportable'] = Arr::get($column, 'exportable', true);
+        $column['printable'] = Arr::get($column, 'printable', true);
         $this->_comlumns[$name] = $column;
     }
 
     public function prependColumn($name, $column)
     {
-        $this->priorityStart -= $this->priorityStart;
+        $this->priorityStart --;
         $column['priority'] = $this->priorityStart;
+        $column['exportable'] = Arr::get($column, 'exportable', true);
+        $column['printable'] = Arr::get($column, 'printable', true);
 
         $this->_comlumns[$name] = $column;
     }
