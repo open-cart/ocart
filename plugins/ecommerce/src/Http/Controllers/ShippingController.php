@@ -58,6 +58,7 @@ class ShippingController extends BaseController
 
     public function index()
     {
+        page_title()->setTitle(trans('plugins/ecommerce::shipping.shipping_methods'));
         $shippings = $this->shippingRepository->with('rules')->all();
 
         return view('plugins.ecommerce::shipping.methods', compact('shippings'));

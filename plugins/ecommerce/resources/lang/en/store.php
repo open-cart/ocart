@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Stores',
     'settings' => [
         'title' => 'Shop information',
         'description' => 'Shop information',

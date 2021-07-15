@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Product',
     'form'                                 => [
         'name'                               => 'Name',
         'name_placeholder'                   => 'Product\'s name (Maximum 120 characters)',

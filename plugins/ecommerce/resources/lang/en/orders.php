@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Order',
     'add_discount' => 'Add discount',
     'add_shipping_fee' => 'Add shipping',
     'create_order_from_payment_page'                 => 'Order was created from checkout page',
