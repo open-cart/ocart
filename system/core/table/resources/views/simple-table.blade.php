@@ -19,7 +19,7 @@
                             {!! implode(PHP_EOL.PHP_EOL, (array) $table->buttons()) !!}
                             @if(in_array('export', $table->getDefaultButtons()))
                                 <a
-                                        href="{{ url(url()->current() .'?'. Arr::query(['action' => 'excel'])) }}"
+                                        href="{{ url(url()->current() .'?'. Arr::query(array_merge(request()->except(['_pjax']), ['action' => 'excel']))) }}"
                                         title="{!! __('admin.reload') !!}"
                                         download
                                         class="blank space-x-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center">

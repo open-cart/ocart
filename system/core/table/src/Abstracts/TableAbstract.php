@@ -227,15 +227,9 @@ abstract class TableAbstract
 
         $transformer = new DataArrayTransformer();
 
-        return array_map(function ($row) use ($columns, $transformer) {
+        return $this->data->map(function ($row) use ($columns, $transformer) {
             return $transformer->transform($row, $columns, 'exportable');
-//            $data = [];
-//            foreach($columns as $name => $row) {
-//                $data[] = isset($row['render']) ? $row['render']($item) : $item->{$row['name']};
-//            }
-//
-//            return $data;
-        }, $this->data->items());
+        });
     }
 
     /**
