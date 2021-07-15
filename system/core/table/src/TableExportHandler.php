@@ -123,6 +123,10 @@ class TableExportHandler implements FromCollection, WithHeadings, WithEvents
 
         $delegate->getRowDimension(1)->setRowHeight(20);
 
+        for ($index = 2; $index <= $totalColumns; $index++) {
+            $delegate->getColumnDimension($this->getNameFromNumber($index))->setWidth(25);
+        }
+
         $delegate
             ->getStyle('A1:Z' . ($this->collection->count() + 1))
             ->getAlignment()
@@ -193,10 +197,18 @@ class TableExportHandler implements FromCollection, WithHeadings, WithEvents
             return null;
         }
 
-        $imageUrl = url($imageUrl);
+//        $imageUrl = url($imageUrl);
 
         try {
             $content = @file_get_contents($imageUrl);
+//            $curl_handle=curl_init();
+//            curl_setopt($curl_handle, CURLOPT_URL, $imageUrl);
+//            curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+//            curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+//            curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+//            $content = curl_exec($curl_handle);
+//            curl_close($curl_handle);
+
             if (!$content) {
                 return null;
             }

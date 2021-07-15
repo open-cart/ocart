@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
+use League\Glide\Responses\LaravelResponseFactory;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 use Ocart\Media\Services\ThumbnailService;
 
@@ -214,6 +215,39 @@ class TnMedia
         }
 
         return $this->convertUrl($this->url($url));
+    }
+
+    public function getImagePath($url, $size = null, $default = null)
+    {
+        if (empty($url)) {
+            return $this->convertUrl($default);
+        }
+
+        $img = Arr::last(explode('/', $url));
+
+        $repo = app(MediaFileRepository::class);
+
+        $file = $repo->findByField('name', File::name($img))->first();
+        if (!$file) {
+            $file = $repo->findByField('name', $img)->first();
+        }
+        if ($file) {
+            $img = str_replace('upload/', '', $file->url);
+        }
+
+        $server = \League\Glide\ServerFactory::create([
+            'source' => Storage::path('upload'),
+            'cache' => storage_path('framework/cache/images'),
+        ]);
+
+        $args = [];
+        if ($size && array_key_exists($size, $this->getSizes())) {
+            $args = explode('x', $this->getSize($size));
+        }
+
+        $path = $server->makeImage($img, $args);
+
+        return storage_path('framework/cache/images/' . $path);
     }
 
     public function getDefaultImage()

@@ -21,7 +21,8 @@
                                 <a
                                         href="{{ url(url()->current() .'?'. Arr::query(['action' => 'excel'])) }}"
                                         title="{!! __('admin.reload') !!}"
-                                        class="space-x-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center">
+                                        download
+                                        class="blank space-x-2 focus:outline-none text-white text-sm py-2.5 px-5 rounded-md bg-green-500 hover:bg-green-600 hover:shadow-lg flex items-center">
                                     <i data-feather="download" width="16" height="16"></i>
                                     <span>{!! trans('admin.excel') !!}</span>
                                 </a>
