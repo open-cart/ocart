@@ -277,7 +277,7 @@ if (!function_exists('get_meta_footer')) {
 
 if (!function_exists('get_logo')) {
     function get_logo(){
-        return setting('logo', '/images/logo-default.jpg');
+        return get_image_url(theme_options()->getOption('logo', '/images/logo-default.jpg'));
     }
 }
 if (!function_exists('get_logo_footer')) {
@@ -288,7 +288,7 @@ if (!function_exists('get_logo_footer')) {
 
 if (!function_exists('get_favicon')) {
     function get_favicon(){
-        return setting('favicon', '/images/favicon-default.jpg');
+        return get_image_url(theme_options()->getOption('favicon', '/images/favicon-default.jpg'));
     }
 }
 

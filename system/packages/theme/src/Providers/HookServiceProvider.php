@@ -13,7 +13,6 @@ class HookServiceProvider extends ServiceProvider
             ->setSection([
                 'title' =>  trans('packages/theme::theme.theme_option_general'),
                 'desc' =>  trans('packages/theme::theme.theme_option_general_description'),
-                'priority' => 0,
                 'id' => 'opt-general',
                 'icon' => 'fa fa-home',
                 'fields' => [
@@ -21,7 +20,6 @@ class HookServiceProvider extends ServiceProvider
                         'id' => 'site_title',
                         'type' => Field::TEXT,
                         'name' => 'site_title',
-                        'priority' => 0,
                         'label' => trans('Site title'),
                         'attr' => [
                             'placeholder' => trans('Site title'),
@@ -31,7 +29,6 @@ class HookServiceProvider extends ServiceProvider
                         'id' => 'seo_title',
                         'type' => Field::TEXT,
                         'name' => 'seo_title',
-                        'priority' => 0,
                         'label' => trans('Seo title'),
                         'attr' => [
                             'placeholder' => trans('Seo title'),
@@ -41,7 +38,6 @@ class HookServiceProvider extends ServiceProvider
                         'id' => 'seo_description',
                         'type' => Field::TEXT,
                         'name' => 'seo_description',
-                        'priority' => 0,
                         'label' => trans('Seo description'),
                         'attr' => [
                             'placeholder' => trans('Seo description'),
@@ -51,7 +47,6 @@ class HookServiceProvider extends ServiceProvider
                         'id' => 'seo_og_image',
                         'type' => Field::MEDIA_IMAGE,
                         'name' => 'seo_og_image',
-                        'priority' => 0,
                         'label' => trans('SEO default Open Graph image'),
                     ],
                 ]
@@ -59,44 +54,7 @@ class HookServiceProvider extends ServiceProvider
             ->setSection([
                 'title' => 'Logo',
                 'desc' => 'Description',
-                'priority' => 0,
                 'id' => 'opt-logo',
-                'icon' => 'fa fa-image',
-                'fields' => [
-                    [
-                        'id' => 'favicon',
-                        'type' => Field::MEDIA_IMAGE,
-                        'name' => 'favicon',
-                    ],
-                    [
-                        'id' => 'logo',
-                        'type' => Field::MEDIA_IMAGE,
-                        'name' => 'logo',
-                    ]
-                ]
-            ])->setSection([
-                'title' => 'Logo',
-                'desc' => 'Description',
-                'priority' => 0,
-                'id' => 'opt-logo1',
-                'icon' => 'fa fa-image',
-                'fields' => [
-                    [
-                        'id' => 'favicon',
-                        'type' => Field::MEDIA_IMAGE,
-                        'name' => 'favicon',
-                    ],
-                    [
-                        'id' => 'logo',
-                        'type' => Field::MEDIA_IMAGE,
-                        'name' => 'logo',
-                    ]
-                ]
-            ])->setSection([
-                'title' => 'Logo',
-                'desc' => 'Description',
-                'priority' => 0,
-                'id' => 'opt-logo2',
                 'icon' => 'fa fa-image',
                 'fields' => [
                     [
