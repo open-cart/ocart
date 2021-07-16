@@ -51,7 +51,10 @@ class DocsServiceProvider extends ServiceProvider
                     'placeholder' => '--Select version--',
                 ]
             ]);
+            return $form;
         }
+
+        return $form;
     }
 
     public function registerTableQuery($repo, $data)
