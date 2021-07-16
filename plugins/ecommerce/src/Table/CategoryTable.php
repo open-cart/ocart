@@ -27,7 +27,7 @@ class CategoryTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->name;
+                    return '<a href="'.route('ecommerce.categories.update', ['id' => $item->id]).'" class="text-blue-600">' . $item->name .'</a>';
                 }
             ],
 //            'image' => [
