@@ -14,6 +14,7 @@ use Ocart\Core\Events\UpdatedContentEvent;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Core\Http\Responses\BaseHttpResponse;
 use Ocart\Setting\Facades\Setting;
+use Ocart\Theme\Facades\ThemeOption;
 
 class ThemeController extends BaseController
 {
@@ -68,6 +69,33 @@ class ThemeController extends BaseController
 
         return view('packages.theme::index')
             ->with('themes', $list);
+    }
+
+    public function getOptions()
+    {
+        page_title()->setTitle(trans('packages/theme::theme.theme_options'));
+        return view('packages.theme::options');
+    }
+
+    public function postOptions(Request $request, BaseHttpResponse $response)
+    {
+        foreach ($request->except(['_token', 'ref_lang']) as $key => $value) {
+            if (is_array($value)) {
+                $value = json_encode($value);
+
+//                $field = ThemeOption::getField($key);
+
+//                if ($field && Arr::get($field, 'clean_tags', true)) {
+//                    $value = clean(strip_tags($value));
+//                }
+            }
+
+            ThemeOption::setOption($key, $value);
+        }
+
+        ThemeOption::saveOptions();
+
+        return $response->setMessage(trans('core/base::notices.update_success_message'));
     }
 
     public function postActivateTheme(Request $request, BaseHttpResponse $response)

@@ -9,9 +9,19 @@ Route::group([
 ], function () {
     Route::group(['prefix'=>'theme'], function () {
 //        Route::resource('', 'ThemeController')->parameters(['' => 'id']);
-        Route::get('/', [
+        Route::get('/all', [
             'as'         => 'themes.index',
             'uses'       => 'ThemeController@index',
+            'permission' => 'theme.index',
+        ]);
+
+        Route::get('/options', [
+            'as'         => 'theme.options',
+            'uses'       => 'ThemeController@getOptions',
+            'permission' => 'theme.index',
+        ]);
+        Route::post('/options', [
+            'uses'       => 'ThemeController@postOptions',
             'permission' => 'theme.index',
         ]);
 
