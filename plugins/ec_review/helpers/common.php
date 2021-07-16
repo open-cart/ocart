@@ -52,3 +52,18 @@ if (!function_exists('get_average_star_of_product')) {
         return number_format($avg, 2);
     }
 }
+
+if (!function_exists('get_list_reviews_product')){
+    /**
+     * @param int $productId
+     * @return mixed
+     */
+    function get_list_reviews_product($productId, $limit = 10, $columns = ['*'])
+    {
+        $repo = app(ReviewRepository::class)->getModel()
+            ->where('product_id', $productId)
+            ->where('status', BaseStatusEnum::PUBLISHED)->with('customer')->paginate($limit, $columns);
+
+        return $repo;
+    }
+}
