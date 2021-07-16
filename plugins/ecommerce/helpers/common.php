@@ -42,6 +42,23 @@ if (!function_exists('get_categories_feature')) {
      */
     function get_categories_feature(array $args = [])
     {
+        $repo = app(CategoryRepository::class);
+
+        $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
+        $categories = $repo->getFeature()->all();
+
+        return $categories;
+    }
+}
+if (!function_exists('get_categories_feature_parent_main')) {
+    /**
+     * @param array $args
+     * @return array|mixed
+     */
+    function get_categories_feature_parent_main(array $args = [])
+    {
         $indent = Arr::get($args, 'indent', '——');
 
         $repo = app(CategoryRepository::class);
@@ -52,6 +69,7 @@ if (!function_exists('get_categories_feature')) {
         $categories = $repo->getFeature()->all();
 
         $categories = sort_item_with_children($categories);
+
 
         foreach ($categories as $category) {
             $indentText = '';
