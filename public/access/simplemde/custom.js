@@ -20,7 +20,7 @@ function renderSimplemde(id) {
         },
         element: document.getElementById(id),
         forceSync: true,
-        hideIcons: ["guide", "heading"],
+        hideIcons: ["guide"],
         indentWithTabs: false,
         insertTexts: {
             horizontalRule: ["", "\n\n-----\n\n"],
