@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Sản phẩm',
     'create' => 'Tạo mới sản phẩm',
     'forms' => [
         'name' => 'Tên'

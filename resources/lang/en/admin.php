@@ -50,4 +50,5 @@ return [
     'update'           => 'Update',
     'activate'         => 'Activate',
     'settings'         => 'Settings',
+    'excel'            => 'Excel',
 ];

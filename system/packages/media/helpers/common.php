@@ -1,4 +1,5 @@
 <?php
+use \Illuminate\Support\Facades\Storage;
 
 if (!function_exists('is_image')) {
     /**
@@ -23,6 +24,9 @@ if (!function_exists('get_image_url')) {
      */
     function get_image_url($url, $size = null, $relativePath = false, $default = null)
     {
+        if ($relativePath) {
+            return str_replace(Storage::url(''), '', TnMedia::getImageUrl($url, $size, $default));
+        }
         return TnMedia::getImageUrl($url, $size, $default);
     }
 }

@@ -4,6 +4,7 @@ namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Ecommerce\Exports\OrderExport;
 use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\Criteria\OrderSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
@@ -13,6 +14,13 @@ use Ocart\Table\DataTables;
 
 class OrderTable extends TableAbstract
 {
+    /**
+     * Export class handler.
+     *
+     * @var string
+     */
+    protected $exportClass = OrderExport::class;
+
     public function __construct(DataTables $table, OrderRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
@@ -24,7 +32,14 @@ class OrderTable extends TableAbstract
                 'payment',
                 'user',
                 'address'
-            ])->paginate();
+            ]);
+
+        if ($this->request()->input('action') === 'excel') {
+            $this->data = $this->data->get();
+        } else {
+            $this->data = $this->data->paginate();
+        }
+
         $this->ajax();
 
         $this->searchForm = $formBuilder->create(OrderFilterForm::class, ['model' => request()->all()])
@@ -40,6 +55,10 @@ class OrderTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->code;
+                    }
+
                     return '<a href="' . route('ecommerce.orders.update', ['id' => $item->id]) . '" class="text-blue-500 font-bold">' . $item->code . '</a>';
                 }
             ],
@@ -80,6 +99,10 @@ class OrderTable extends TableAbstract
                 'title' => 'Payment method',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->payment->payment_channel->getValue();
+                    }
+
                     return $item->payment->payment_channel->toHtml();
                 }
             ],
@@ -88,6 +111,10 @@ class OrderTable extends TableAbstract
                 'title' => 'Payment status',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->payment->status->getValue();
+                    }
+
                     return $item->payment->status->toHtml();
                 }
             ],
@@ -96,6 +123,10 @@ class OrderTable extends TableAbstract
                 'title' => __('admin.status'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->status->getValue();
+                    }
+
                     return $item->status->toHtml();
                 }
             ],
@@ -105,7 +136,7 @@ class OrderTable extends TableAbstract
                 'title' => 'Ngày tạo',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->created_at;
+                    return $item->created_at->format('Y-m-d H:i:s');
                 }
             ]
         ]);
@@ -114,6 +145,7 @@ class OrderTable extends TableAbstract
                 'title' => __('admin.action'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
+                'exportable' => false,
                 'render' => function ($item) {
                     return $this->tableActions('ecommerce.orders.update', 'ecommerce.orders.destroy', $item);
                 }
@@ -125,5 +157,16 @@ class OrderTable extends TableAbstract
         $buttons = $this->addCreateButton(route('ecommerce.orders.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Tag::class);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultButtons(): array
+    {
+        return [
+            'export',
+            'reload',
+        ];
     }
 }

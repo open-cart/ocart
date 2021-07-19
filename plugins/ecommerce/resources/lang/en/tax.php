@@ -14,5 +14,5 @@ return [
     'title' => 'List taxes',
     'edit' => 'Edit Tax',
     'create' => 'Create Tax',
-    'taxes' => 'Taxes',
+    'name' => 'Taxes',
 ];

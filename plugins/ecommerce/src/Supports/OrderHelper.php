@@ -3,9 +3,14 @@
 namespace Ocart\Ecommerce\Supports;
 
 use Html;
+use Illuminate\Support\Facades\File;
 
 class OrderHelper
 {
+    /**
+     * @param $history
+     * @return string|string[]|null
+     */
     public function processHistoryVariables($history)
     {
         if (empty($history)) {
@@ -33,5 +38,28 @@ class OrderHelper
         }
 
         return $content;
+    }
+
+    /**
+     * @param $order
+     * @return mixed
+     */
+    public function generateInvoice($order)
+    {
+        $folderPath = storage_path('app/public');
+        if (!File::isDirectory($folderPath)) {
+            File::makeDirectory($folderPath);
+        }
+
+        $invoice = $folderPath . '/invoice-order-' . $order->code . '.pdf';
+
+        if (File::exists($invoice)) {
+            return $invoice;
+        }
+
+        return \PDF::loadView('plugins.ecommerce::invoices.template', compact('order'))
+            ->setPaper('a4')
+            ->setWarnings(false)
+            ->stream('/invoice-order-' . $order->code . '.pdf');
     }
 }

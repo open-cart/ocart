@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'name' => 'Tiền tệ',
+
     'currencies' => 'Currencies',
     'setting_description' => 'Setting description',
     'new_currency' => 'Add new currency',

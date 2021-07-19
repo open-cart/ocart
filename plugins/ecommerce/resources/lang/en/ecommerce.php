@@ -1,22 +1,10 @@
 <?php
 
 return [
-    'settings_title' => 'Settings',
+    'settings'                        => 'Settings',
+
+    'name' => 'Ecommerce',
     'setting' => [
-        'separator_comma' => 'Comma (,)',
-        'separator_period' => 'Period (.)',
-        'separator_space' => 'Space ( )',
-        'thousands_separator' => 'Thousands separator',
-        'decimal_separator' => 'Decimal separator',
-
-        'other_settings' => 'Other settings',
-        'other_setting_descriptions' => 'Other settings description',
-
-        'enable_cart' => 'Enable cart',
-        'enable_tax' => 'Enable tax',
-        'display_product_price_including_taxes'                                  => 'Display product price including taxes?'
-    ],
-    'settings' => [
         'email' => [
             'title' => 'Ecommerce',
             'description' => 'Config email templates for Ecommerce',
@@ -40,6 +28,19 @@ return [
 
             'order_recover_title' => 'Incomplete order',
             'order_recover_description' => 'Send to custom to remind them about incomplete orders',
-        ]
+        ],
+
+        'separator_comma' => 'Comma (,)',
+        'separator_period' => 'Period (.)',
+        'separator_space' => 'Space ( )',
+        'thousands_separator' => 'Thousands separator',
+        'decimal_separator' => 'Decimal separator',
+
+        'other_settings' => 'Other settings',
+        'other_setting_descriptions' => 'Other settings description',
+
+        'enable_cart' => 'Enable cart',
+        'enable_tax' => 'Enable tax',
+        'display_product_price_including_taxes'                                  => 'Display product price including taxes?',
     ]
 ];

@@ -1,0 +1,16 @@
+{
+    "name": "docs",
+    "description": "Multiple version documentation",
+    "namespace": "Ocart\\Docs\\",
+    "image": "images/emails/edit.png",
+    "auth": "Trung Nguyên",
+    "email": "nguyenpl117@gmail.com",
+    "link": "https://phantrungnguyen.com",
+    "configGroup": "Plugins",
+    "configCode": "SimpleMDE",
+    "configKey": "blog",
+    "version": "1.0",
+    "providers": [
+        "Ocart\\Docs\\Providers\\DocsServiceProvider"
+    ]
+}

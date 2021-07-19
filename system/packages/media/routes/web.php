@@ -68,3 +68,17 @@ Route::get('storage/images/{img}', function ($img) {
 
 //    $server->outputImage($img, $req->all());
 });
+
+Route::get('/test_getcontent', function () {
+    $client = new \GuzzleHttp\Client();
+    $response = $client->get('https://ocart.test/storage/images/dam-mau-do.jpg?w=150&h=150');
+    dd($response);
+//    $curl_handle=curl_init();
+//    curl_setopt($curl_handle, CURLOPT_URL,'https://ocart.test/storage/images/dam-mau-do.jpg?w=150&h=150');
+//    curl_setopt($curl_handle, CURLOPT_CONNECTTIMEOUT, 2);
+//    curl_setopt($curl_handle, CURLOPT_RETURNTRANSFER, 1);
+//    curl_setopt($curl_handle, CURLOPT_USERAGENT, 'Your application name');
+//    $query = curl_exec($curl_handle);
+//    echo $query;
+//    curl_close($curl_handle);
+});

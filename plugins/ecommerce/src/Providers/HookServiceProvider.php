@@ -59,7 +59,7 @@ class HookServiceProvider extends ServiceProvider
                 'id'          => 'cms-store',
                 'priority'    => 1,
                 'parent_id'   => null,
-                'name'        => 'Cửa hàng',
+                'name'        => trans('plugins/ecommerce::ecommerce.name'),
                 'icon'        => null,
                 'url'         => '',
                 'permissions' => [],
@@ -79,7 +79,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-order',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Đơn hàng',
+                    'name'        => trans('plugins/ecommerce::orders.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.orders.index'),
                     'permissions' => [
@@ -101,7 +101,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-product-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Sản phẩm',
+                    'name'        => trans('plugins/ecommerce::products.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.products.index'),
                     'permissions' => [
@@ -115,7 +115,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-product-category-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Danh mục sản phẩm',
+                    'name'        => trans('plugins/ecommerce::product-categories.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.categories.index'),
                     'permissions' => [
@@ -129,7 +129,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-product-tag-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Product Tags',
+                    'name'        => trans('plugins/ecommerce::product-tags.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.tags.index'),
                     'permissions' => [
@@ -143,7 +143,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-brand-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Brands',
+                    'name'        => trans('plugins/ecommerce::brands.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.brands.index'),
                     'permissions' => [
@@ -157,7 +157,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-currency-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Currencies',
+                    'name'        => trans('plugins/ecommerce::currency.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.currencies.index'),
                     'permissions' => [
@@ -171,7 +171,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-shipping-methods',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Shipping',
+                    'name'        => trans('plugins/ecommerce::shipping.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.shipping.shipping_methods'),
                     'permissions' => [
@@ -182,7 +182,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-taxes',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => trans('plugins/ecommerce::tax.taxes'),
+                    'name'        => trans('plugins/ecommerce::tax.name'),
                     'icon'        => null,
                     'url'         => route('ecommerce.taxes.index'),
                     'permissions' => [
@@ -196,7 +196,7 @@ class HookServiceProvider extends ServiceProvider
                     'id'          => 'cms-store-settings-manager',
                     'priority'    => 1,
                     'parent_id'   => 'cms-store',
-                    'name'        => 'Settings',
+                    'name'        => trans('plugins/ecommerce::ecommerce.settings'),
                     'icon'        => null,
                     'url'         => route('ecommerce.settings'),
                     'permissions' => [

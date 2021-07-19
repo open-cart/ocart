@@ -2,7 +2,7 @@
     <x-slot name="header">
         <div>
             <h3 class="text-2xl pb-3">
-                {{ trans('plugins/ecommerce::orders.shipping_fee') }}
+                {{ trans('plugins/ecommerce::shipping.shipping_fee') }}
             </h3>
         </div>
     </x-slot>

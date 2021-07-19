@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Shipping',
     'shipping_rules' => 'Shipping Rules',
     'rule_to_calculate_fee' => 'Rules to calculate shipping fee.',
     'select_country' => 'Select Country',
@@ -13,4 +14,5 @@ return [
     'type' => 'Type',
     'based_on_product_of_the_price' => 'Based on product\'s price',
     'shipping_fee' => 'Shipping fee',
+    'shipping_methods' => 'Shipping methods',
 ];

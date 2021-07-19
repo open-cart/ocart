@@ -1,10 +1,13 @@
 <?php
+
 namespace Ocart\Table\Abstracts;
 
 use Collective\Html\HtmlBuilder;
 use Illuminate\Support\Arr;
 use Illuminate\View\ComponentAttributeBag;
+use Ocart\Table\DataArrayTransformer;
 use Ocart\Table\DataTables;
+use Ocart\Table\TableExportHandler;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
 abstract class TableAbstract
@@ -23,6 +26,8 @@ abstract class TableAbstract
 
     public $searchForm;
 
+    protected $request;
+
     /**
      * @var RepositoryInterface
      */
@@ -35,6 +40,22 @@ abstract class TableAbstract
      */
     protected $tableAttributes = [];
 
+    protected $actions = ['excel'];
+
+    /**
+     * Excel export type writer.
+     *
+     * @var string
+     */
+    protected $excelWriter = 'Xlsx';
+
+    /**
+     * Export class handler.
+     *
+     * @var string
+     */
+    protected $exportClass = TableExportHandler::class;
+
     public function __construct(DataTables $table, HtmlBuilder $html)
     {
         $this->table = $table;
@@ -44,7 +65,16 @@ abstract class TableAbstract
 
     public function render($view = null, $options = [])
     {
+        if ($action = $this->request()->get('action') and in_array($action, $this->actions)) {
+            if ($action == 'print') {
+                return app()->call([$this, 'printPreview']);
+            }
+
+            return app()->call([$this, $action]);
+        }
+
         $options['table'] = $this;
+
         return view($view ?? $this->view, $options);
     }
 
@@ -85,7 +115,7 @@ abstract class TableAbstract
                 isset($row['titleAttr']) ? ['title' => $row['titleAttr']] : []
             ));
 
-            $th[] = '<th '.$thAttr.'>' . $row['title'] . '</th>';
+            $th[] = '<th ' . $thAttr . '>' . $row['title'] . '</th>';
         }
 
         return $th;
@@ -93,7 +123,8 @@ abstract class TableAbstract
 
     protected $columnRefs = [];
 
-    protected function cb($column) {
+    protected function cb($column)
+    {
         if (isset($column['render']) && $column['render'] instanceof \Closure) {
             return $column['render'];
         }
@@ -118,7 +149,7 @@ abstract class TableAbstract
                     isset($row['titleAttr']) ? ['title' => $row['titleAttr']] : []
                 ));
 
-                $td[] = '<td '.$tdAttr.'>' . $this->cb($row)($item) . '</td>';
+                $td[] = '<td ' . $tdAttr . '>' . $this->cb($row)($item) . '</td>';
             }
 
             $tr[] = '<tr>' . implode('', $td) . '</tr>';
@@ -149,5 +180,65 @@ abstract class TableAbstract
     protected function tableActions($edit, $delete, $item)
     {
         return view('core::elements.tables.actions', compact('edit', 'delete', 'item'));
+    }
+
+    public function request()
+    {
+        return $this->request ?: $this->request = request();
+    }
+
+    /**
+     * Get export filename.
+     *
+     * @return string
+     */
+    public function getFilename()
+    {
+        return $this->filename();
+    }
+
+    /**
+     * Get filename for export.
+     *
+     * @return string
+     */
+    protected function filename()
+    {
+        return class_basename($this) . '_' . date('YmdHis');
+    }
+
+    public function excel()
+    {
+        $ext = '.' . strtolower($this->excelWriter);
+
+        return $this->buildExcelFile()->download($this->getFilename() . $ext, $this->excelWriter);
+    }
+
+    protected function buildExcelFile()
+    {
+        $dataForExport = collect($this->getDataForExport());
+
+        return new $this->exportClass($dataForExport);
+    }
+
+    protected function getDataForExport()
+    {
+        $columns = $this->columns();
+
+        $transformer = new DataArrayTransformer();
+
+        return $this->data->map(function ($row) use ($columns, $transformer) {
+            return $transformer->transform($row, $columns, 'exportable');
+        });
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultButtons(): array
+    {
+        return [
+            'reload',
+        ];
     }
 }

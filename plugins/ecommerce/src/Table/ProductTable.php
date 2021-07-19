@@ -3,6 +3,7 @@ namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Ocart\Ecommerce\Exports\ProductExport;
 use Ocart\Ecommerce\Forms\OrderFilterForm;
 use Ocart\Ecommerce\Forms\ProductFilterForm;
 use Ocart\Ecommerce\Models\Product;
@@ -14,6 +15,13 @@ use Ocart\Table\DataTables;
 
 class ProductTable extends TableAbstract
 {
+    /**
+     * Export class handler.
+     *
+     * @var string
+     */
+    protected $exportClass = ProductExport::class;
+
     public function __construct(DataTables $table, ProductRepository $repo, HtmlBuilder $html, FormBuilder $formBuilder)
     {
         parent::__construct($table, $html);
@@ -30,6 +38,11 @@ class ProductTable extends TableAbstract
     {
         $this->repository->pushCriteria(ProductSearchCriteria::class);
         $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
+
+        if ($this->request()->input('action') === 'excel') {
+            return $res->get();
+        }
+
         return $res->paginate();
     }
 
@@ -42,7 +55,11 @@ class ProductTable extends TableAbstract
                 'width' => '70',
                 'class' => 'border text-center px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<img src="' . TnMedia::url($item->image ?? asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14 m-auto"/>';
+                    if ($this->request()->input('action') === 'excel') {
+                        return TnMedia::getImagePath($item->image, 'thumb', asset('/images/no-image.jpg'));
+                    }
+
+                    return '<img src="' . TnMedia::getImageUrl($item->image, 'thumb', asset('/images/no-image.jpg')) . '" alt="' . $item->title . '" class="w-14 m-auto"/>';
                 }
             ],
             'name' => [
@@ -51,6 +68,10 @@ class ProductTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->name;
+                    }
+
                     return '<a class="text-blue-500" href="'.route('ecommerce.products.update', ['id' => $item->id]).'">'.$item->name.'</a>';
                 }
             ],
@@ -86,7 +107,7 @@ class ProductTable extends TableAbstract
                 'title' => 'Ngày tạo',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->created_at;
+                    return $item->created_at->format('Y-m-d H:i:s');
                 }
             ],
             'featured' => [
@@ -104,6 +125,10 @@ class ProductTable extends TableAbstract
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
                 'render' => function ($item) {
+                    if ($this->request()->input('action') === 'excel') {
+                        return $item->status->getValue();
+                    }
+
                     return $item->status->toHtml();
                 }
             ]
@@ -113,6 +138,7 @@ class ProductTable extends TableAbstract
                 'title' => __('admin.action'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'width' => '120px',
+                'exportable' => false,
                 'render' => function ($item) {
                     return $this->tableActions('ecommerce.products.update', 'ecommerce.products.destroy', $item);
                 }
@@ -124,5 +150,16 @@ class ProductTable extends TableAbstract
         $buttons = $this->addCreateButton(route('ecommerce.products.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Product::class);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getDefaultButtons(): array
+    {
+        return [
+            'export',
+            'reload',
+        ];
     }
 }

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'name' => 'Product',
     'form'                                 => [
         'name'                               => 'Name',
         'name_placeholder'                   => 'Product\'s name (Maximum 120 characters)',
@@ -25,7 +26,7 @@ return [
             'title' => 'Product type',
         ],
         'product'                            => 'Product',
-        'total'                              => 'Total',
+        'total'                              => 'Total amount',
         'sub_total'                          => 'Subtotal',
         'shipping_fee'                       => 'Shipping fee',
         'discount'                           => 'Discount',

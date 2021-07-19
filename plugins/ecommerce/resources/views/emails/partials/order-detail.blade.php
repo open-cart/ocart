@@ -71,7 +71,7 @@
         <tr>
             <td>&nbsp;</td>
             <td>&nbsp;</td>
-            <td>{{ trans('plugins/ecommerce::products.form.shipping_fee') }}
+            <td>{{ trans('plugins/ecommerce::shipping.shipping_fee') }}
             </td>
             <td>
                 {{ format_price($order->shipping_amount) }}

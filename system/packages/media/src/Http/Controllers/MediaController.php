@@ -246,7 +246,7 @@ class MediaController extends BaseController
             'id'         => $file->id,
             'name'       => $file->name,
             'basename'   => File::basename($file->url),
-            'url'        => $file->url,
+            'url'        => get_image_url($file->url_file, null, true),
             'full_url'   => TnMedia::getImageUrl($file->url_file),
             'download_url'   => TnMedia::url($file->url),
             'type'       => $file->type,
