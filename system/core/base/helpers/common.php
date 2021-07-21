@@ -414,3 +414,15 @@ if (!function_exists('folder_size')) {
         return $size;
     }
 }
+
+if (!function_exists('get_sec_about')) {
+    function get_sec_about(){
+        return json_decode(setting('sec_about', null));
+    }
+}
+
+if (!function_exists('get_sec_feedback')) {
+    function get_sec_feedback(){
+        return json_decode(setting('sec_feedback', null));
+    }
+}
