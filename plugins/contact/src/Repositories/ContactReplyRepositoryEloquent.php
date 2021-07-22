@@ -4,6 +4,7 @@ namespace Ocart\Contact\Repositories;
 
 use Ocart\Contact\Models\ContactReply;
 use Ocart\Contact\Repositories\Interfaces\ContactReplyRepository;
+use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 
@@ -14,6 +15,12 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class ContactReplyRepositoryEloquent extends RepositoriesAbstract implements ContactReplyRepository
 {
+    /**
+     * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
+     * @var string[]
+     */
+    public $tags = [ContactRepository::class];
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

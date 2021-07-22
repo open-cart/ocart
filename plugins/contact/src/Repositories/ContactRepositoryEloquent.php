@@ -7,6 +7,7 @@ use Ocart\Contact\Models\Contact;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -15,6 +16,8 @@ use Prettus\Repository\Criteria\RequestCriteria;
  */
 class ContactRepositoryEloquent extends RepositoriesAbstract implements ContactRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
@@ -41,15 +44,12 @@ class ContactRepositoryEloquent extends RepositoriesAbstract implements ContactR
 
     public function getUnread($select = ['*'])
     {
-        $data = $this->model->where('status', ContactStatusEnum::UNREAD)->orderBy('id', 'desc')->select($select)->get();
-        $this->resetModel();
-        return $data;
+        return $this->orderBy('id', 'desc')
+            ->findWhere(['status' => ContactStatusEnum::UNREAD]);
     }
 
     public function countUnread()
     {
-        $data = $this->model->where('status', ContactStatusEnum::UNREAD)->count();
-        $this->resetModel();
-        return $data;
+        return $this->count(['status' => ContactStatusEnum::UNREAD]);
     }
 }
