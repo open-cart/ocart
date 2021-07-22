@@ -1,7 +1,7 @@
 <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-    <div class="border-b border-gray-200">
+    <div>
         <div class="flex space-x-2">
-            <div class="flex-none border-r p-2">
+            <div class="flex-none border-r p-2 dark:border-gray-600">
                 <img src="{{ asset('images/dollar.svg') }}"
                      class="w-10 h-10"
                      alt="money"/>
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <hr>
+        <hr class="dark:border-gray-600">
         <div>
             {!! Form::open() !!}
             {!! Form::hidden('type', STRIPE_PAYMENT_METHOD_NAME, ['class' => 'payment_type']) !!}
@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="payment-content-item hidden">
-                <hr>
+                <hr class="dark:border-gray-600">
                 <div class="px-6 py-2 space-y-2">
                     <div>
                         <label class="flex flex-col">

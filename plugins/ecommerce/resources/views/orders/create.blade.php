@@ -153,7 +153,7 @@
                                             <x-link href="javascript:void(0)" x-text="customer.email"/>
                                         </div>
                                     </div>
-                                    <hr class="-mx-6">
+                                    <hr class="-mx-6 dark:border-gray-600">
                                     <div class="flex justify-between">
                                         <h3>Shipping Address</h3>
                                         <x-link href="javascript:void(0)"
