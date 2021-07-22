@@ -35,7 +35,10 @@ class ReviewTable extends TableAbstract
                 'title' => 'product',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<a href="'. route(ROUTE_PRODUCT_SCREEN_NAME, ['slug' => $item->product->slug]) .'" class="blank text-blue-500" target="_blank">' . $item->product->name . '</a>';
+                    if (!$item->product) {
+                        return '--';
+                    }
+                    return '<a href="'. $item->product->url .'" class="blank text-blue-500" target="_blank">' . $item->product->name . '</a>';
                 }
             ],
             'user' => [
