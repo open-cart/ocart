@@ -34,6 +34,8 @@ class DashboardWidget
      */
     public $permission;
 
+    public $setting;
+
     /**
      * @var array
      */
@@ -106,6 +108,16 @@ class DashboardWidget
     public function setOptions(array $options)
     {
         $this->options = $options;
+        return $this;
+    }
+
+    /**
+     * @param $setting
+     * @return $this
+     */
+    public function setSetting($setting)
+    {
+        $this->setting = $setting;
         return $this;
     }
 

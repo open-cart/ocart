@@ -6,7 +6,7 @@
     <div class="col-span-4 space-y-4">
         @php do_action(MENU_ACTION_SIDEBAR_OPTIONS) @endphp
 
-        <div class="bg-white rounded" x-data="{open: false}">
+        <div class="bg-white dark:bg-gray-800 border border-white dark:border-gray-700 rounded" x-data="{open: false}">
             <div class="px-4 py-3 flex justify-between cursor-pointer" x-on:click="open = !open">
                 <h3>{{ trans('packages/menu::menus.add_link') }}</h3>
                 <span>
@@ -41,16 +41,16 @@
         </div>
     </div>
     <div class="col-span-8 space-y-4">
-        <div class="bg-white rounded">
+        <div class="bg-white dark:bg-gray-800 border border-white dark:border-gray-700 rounded">
             <h3 class=" px-4 py-3">{{ trans('Menu structure') }}</h3>
-            <hr>
+            <hr class="dark:border-gray-700">
             <div class="nestable-menu p-4">
                 <div class="dd" id="nestable">
                     <ol class="dd-list">
                     </ol>
                 </div>
             </div>
-            <hr>
+            <hr class="dark:border-gray-700">
             <h3 class="text-2xl py-3 px-4">{{ trans('packages/menu::menus.menu_settings') }}</h3>
             <div class="flex px-4">
                 <div class="flex-none w-40">

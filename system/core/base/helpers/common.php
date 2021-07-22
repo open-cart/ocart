@@ -207,6 +207,7 @@ if (!function_exists('filter_form')) {
 }
 
 use Illuminate\Support\Collection;
+use Ocart\Core\Supports\SortItemsWithChildrenSupport;
 
 if (!function_exists('sort_item_with_children')) {
     /**
@@ -217,22 +218,13 @@ if (!function_exists('sort_item_with_children')) {
      * @param int $depth
      * @return array
      */
-    function sort_item_with_children($list, array &$result = [], $parent = null, $depth = 0): array
+    function sort_item_with_children($list, array &$result = [], $depth = 0): array
     {
-        if ($list instanceof Collection) {
-            $listArr = [];
-            foreach ($list as $item) {
-                $listArr[] = $item;
-            }
-            $list = $listArr;
-        }
-
-        foreach ($list as $key => $object) {
-            if ((int)$object->parent_id == (int)$parent) {
-                array_push($result, $object);
-                $object->depth = $depth;
-                unset($list[$key]);
-                sort_item_with_children($list, $result, $object->id, $depth + 1);
+        foreach ($list as $item) {
+            $item->depth = $depth;
+            array_push($result, $item);
+            if ($item->child_cats->count()) {
+                sort_item_with_children($item->child_cats, $result, $depth + 1);
             }
         }
 

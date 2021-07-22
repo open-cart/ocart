@@ -16,7 +16,7 @@ if (!function_exists('theme_path')) {
 if (!function_exists('theme_options')) {
     /**
      * @param array $options
-     * @return \Ocart\Theme\Facades\ThemeOption
+     * @return \Ocart\Theme\ThemeOption
      */
     function theme_options($options = array())
     {

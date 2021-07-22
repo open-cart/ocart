@@ -1,6 +1,7 @@
 <?php
 namespace Ocart\Menu\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Ocart\Core\Library\Helper;
 use \Ocart\Core\Traits\LoadAndPublishDataTrait;
 use \Illuminate\Support\ServiceProvider;

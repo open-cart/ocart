@@ -11,6 +11,7 @@ use Ocart\Core\Library\Filter;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Providers\BaseServiceProvider;
 use Ocart\Core\Providers\EmailConfigServiceProvider;
+use Ocart\Core\Providers\EventServiceProvider;
 use Ocart\Core\Providers\FormServiceProvider;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Ocart\Core\Library\CustomResourceRegistrar;
@@ -46,6 +47,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->register(FormServiceProvider::class);
         $this->app->register(EmailConfigServiceProvider::class);
         $this->app->register(BaseServiceProvider::class);
+        $this->app->register(EventServiceProvider::class);
 
         Builder::defaultStringLength(191);
     }

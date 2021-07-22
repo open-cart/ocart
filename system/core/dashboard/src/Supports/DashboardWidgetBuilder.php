@@ -2,6 +2,8 @@
 
 namespace Ocart\Dashboard\Supports;
 
+use Ocart\Dashboard\Repositories\DashboardWidgetRepository;
+
 class DashboardWidgetBuilder
 {
     /**
@@ -113,12 +115,37 @@ class DashboardWidgetBuilder
         $this->setUpWidget();
 
         $widget = $settings->where('name', $this->key)->first();
+        $widgetSetting = $widget ? $widget->settings->first() : null;
 
-        $widgets[$this->key] = [
+        if (!$widget) {
+            $widget = app(DashboardWidgetRepository::class)
+                ->create(['name' => $this->key]);
+        }
+
+        if ($widgetSetting && $widgetSetting->status != 1) {
+            return $widgets;
+        }
+
+        $this->widget->setSetting($widgetSetting);
+
+        $data = [
             'id' => $this->key,
             'view' => $this->widget->render(),
         ];
 
+        if (empty($widgetSetting) || array_key_exists($widgetSetting->order, $widgets)) {
+            $widgets[] = $data;
+        } else {
+            $widgets[$widgetSetting->order] = $data;
+        }
+
         return $widgets;
+
+//        $widgets[$this->key] = [
+//            'id' => $this->key,
+//            'view' => $this->widget->render(),
+//        ];
+//
+//        return $widgets;
     }
 }

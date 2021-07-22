@@ -27,13 +27,13 @@ class ThemeManagementServiceProvider extends ServiceProvider
         if (!empty($theme)) {
             Helper::autoload(theme_path($theme . '/functions'));
 
-                $themePath = theme_path($theme);
+            $themePath = theme_path($theme);
 
-                if (File::exists($themePath . '/theme.json')) {
-                    $attributes = get_file_data($themePath . '/theme.json');
+            if (File::exists($themePath . '/theme.json')) {
+                $attributes = get_file_data($themePath . '/theme.json');
 
-                    Theme::setAttributes($attributes);
-                }
+                Theme::setAttributes($attributes);
+            }
         }
     }
 }

@@ -8,7 +8,6 @@ use Ocart\Dashboard\Repositories\DashboardWidgetRepository;
 use Ocart\Dashboard\Repositories\DashboardWidgetRepositoryEloquent;
 use Ocart\Dashboard\Repositories\DashboardWidgetSettingRepository;
 use Ocart\Dashboard\Repositories\DashboardWidgetSettingRepositoryEloquent;
-use Ocart\Dashboard\Supports\DashboardWidgetBuilder;
 
 class DashboardServiceProvider extends ServiceProvider
 {
@@ -21,6 +20,10 @@ class DashboardServiceProvider extends ServiceProvider
 
         $this->app->bind(DashboardWidgetRepository::class, DashboardWidgetRepositoryEloquent::class);
         $this->app->bind(DashboardWidgetSettingRepository::class, DashboardWidgetSettingRepositoryEloquent::class);
+
+        \Assets::addScriptsDirectly([
+                'vendors/core/dashboard/js/dashboard.js'
+        ]);
     }
 
     public function boot()

@@ -46,7 +46,7 @@ $(document).ready(function () {
 
         const templates = `
 <div>
-            <div class="bg-white border flex justify-between">
+            <div class="bg-white border dark:bg-gray-800 dark:border-gray-700 flex justify-between">
                 <div class="dd-handle flex-grow flex justify-between px-3 py-2 cursor-move">
                     <div>Name</div>
                 </div>
@@ -56,7 +56,7 @@ $(document).ready(function () {
                     <a class="delete-item text-blue-500" href="javascript:void(0)">Delete</a>
                 </div>
             </div>
-            <div style="display: none" class="item-details p-6 bg-white border-l border-r border-b">
+            <div style="display: none" class="item-details p-6 bg-white border-l border-r border-b dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex flex-col space-y-3">
                     <label class="flex items-center">
                         <span class="w-40 inline-block">Title</span>
@@ -103,7 +103,7 @@ $(document).ready(function () {
                 // li.find('[name=url]').val(node.url);
                 li.find('[name=target]').val(node.target);
                 li.find('.dd-handle').html(node.title);
-                if (node.reference_type === 'custom-link') {
+                if (!node.reference_type) {
                     li.find('label.hidden').first().removeClass('hidden');
                     li.find('[name=url]').val(node.url);
                     li.data('url', node.url);
@@ -164,7 +164,7 @@ $(document).ready(function () {
                 li.addClass("dd-item block relative");
                 li.data('id', '')
                 li.data('title', title);
-                li.data('reference_type', 'custom-link');
+                // li.data('reference_type', 'custom-link');
                 li.data('reference_id', 0);
                 li.data('url', url);
 

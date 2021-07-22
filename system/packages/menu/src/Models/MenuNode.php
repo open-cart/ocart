@@ -44,6 +44,8 @@ class MenuNode extends BaseModel
         'status' => BaseStatusEnum::class,
     ];
 
+    protected $with = ['reference'];
+
     protected static function boot()
     {
         parent::boot();
@@ -55,6 +57,14 @@ class MenuNode extends BaseModel
     public function reference()
     {
         return $this->morphTo();
+    }
+
+    public function getReferenceTypeAttribute($value) {
+        if ($value == 'custom-link') {
+            return null;
+        }
+
+        return $value;
     }
 
     /**

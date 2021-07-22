@@ -2,10 +2,17 @@
 
 namespace Ocart\Core\Supports;
 
+use Illuminate\Container\Container as Application;
 use Prettus\Repository\Eloquent\BaseRepository;
 
 abstract class RepositoriesAbstract extends BaseRepository
 {
+    protected static $booted = [];
+
+    public function __construct(Application $app)
+    {
+        parent::__construct($app);
+    }
 
     /**
      * Specify Model class name

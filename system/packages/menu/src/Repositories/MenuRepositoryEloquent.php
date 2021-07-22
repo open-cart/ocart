@@ -4,6 +4,7 @@ namespace Ocart\Menu\Repositories;
 
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Menu\Models\Menu;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -12,6 +13,8 @@ use Ocart\Menu\Models\Menu;
  */
 class MenuRepositoryEloquent extends RepositoriesAbstract implements MenuRepository
 {
+    use CacheableRepository;
+
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

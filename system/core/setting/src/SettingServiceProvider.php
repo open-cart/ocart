@@ -25,10 +25,10 @@ class SettingServiceProvider extends ServiceProvider
 
         Helper::autoload(__DIR__ . '/../helpers');
 
-        config()->set('core.setting.general.cache.enabled', is_enable_cache());
-
-        config()->set('repository.cache.enabled', is_enable_cache());
-        config()->set('repository.cache.minutes', setting('cache_time', 10) * 60);
+        Event::listen(RouteMatched::class, function () {
+            config()->set('repository.cache.enabled', is_enable_cache());
+            config()->set('repository.cache.minutes', setting('cache_time', 10) * 60);
+        });
     }
 
     public function boot()
