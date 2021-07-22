@@ -91,7 +91,12 @@ if (!function_exists('get_categories_feature_parent_main')) {
         /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
         $categories = $repo->getFeature()->all();
 
-        $categories = sort_item_with_children($categories);
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
+
+        $categories = sort_item_with_children($list);
 
 
         foreach ($categories as $category) {

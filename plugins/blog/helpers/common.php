@@ -1,6 +1,7 @@
 <?php
 use Ocart\Blog\Supports\PostFormat;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
+use Ocart\Core\Supports\SortItemsWithChildrenSupport;
 
 if (!function_exists('register_post_format')) {
     /**
@@ -43,7 +44,12 @@ if (!function_exists('get_blog_categories')) {
 
         $categories = $repo->all();
 
-        $categories = sort_item_with_children($categories);
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
+
+        $categories = sort_item_with_children($list);
 
         foreach ($categories as $category) {
             $indentText = '';

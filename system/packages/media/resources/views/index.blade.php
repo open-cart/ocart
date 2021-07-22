@@ -5,7 +5,7 @@
 
 {{--    {!! TnMedia::renderFooter() !!}--}}
     <div class="p-6">
-        <div id="root" class="bg-white"></div>
+        <div id="root" class="bg-white dark:text-gray-600"></div>
     </div>
     <link rel="stylesheet" href="/tnmedia/app.css"/>
 
