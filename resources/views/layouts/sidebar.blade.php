@@ -5,6 +5,11 @@
         </a>
     </div>
     <div class="h-1"></div>
+{{--    <style>--}}
+{{--        #sidebar-menu > li:not(.active) >ul.sub-menu {--}}
+{{--            display: none;--}}
+{{--        }--}}
+{{--    </style>--}}
     <ul id="sidebar-menu" style="overflow: auto; height: calc(100vh - 80px)">
 {{--        <li class="nav-item">--}}
 {{--            <a href="{!! route('dashboard.index') !!}" class="px-3 py-3 block">--}}
@@ -13,14 +18,20 @@
 {{--            </a>--}}
 {{--        </li>--}}
     @foreach ($menus = dashboard_menu()->getAll() as $menu)
-        <li class="nav-item @if ($menu['active']) active @endif" id="{{ $menu['id'] }}">
-            <a :class="{[theme.bg]:true}" href="javascript:void(0)" class="px-3 py-3 block dark:bg-gray-900">
-                <i class="{{ $menu['icon'] }}"></i>
-                <span class="text-white">{{ trans($menu['name']) }} {!! apply_filters('BASE_FILTER_APPEND_MENU_NAME', null, $menu['id']) !!}</span>
-                @if (isset($menu['children']) && count($menu['children'])) <span class="arrow @if ($menu['active']) open @endif"></span> @endif
+        <li class="nav-item border-b dark:border-gray-700 @if ($menu['active']) active @endif" id="{{ $menu['id'] }}">
+            <a :class="{[theme.bg]:true}" href="javascript:void(0)" class="px-3 py-3 block dark:bg-gray-900 flex justify-between">
+                <span>
+                    <i class="{{ $menu['icon'] }}"></i>
+                    <span class="text-white">{{ trans($menu['name']) }} {!! apply_filters('BASE_FILTER_APPEND_MENU_NAME', null, $menu['id']) !!}</span>
+                </span>
+                <span>
+                    @if (isset($menu['children']) && count($menu['children']))
+                        <i class="arrow fa fa-chevron-left transition duration-500 @if ($menu['active']) -rotate-90 transform @endif"></i>
+                    @endif
+                </span>
             </a>
             @if (isset($menu['children']) && count($menu['children']))
-                <ul class="sub-menu @if (!$menu['active']) hidden-ul @endif">
+                <ul class="sub-menu transition-all ease-in-out @if (!$menu['active']) hidden-ul @endif">
                     @foreach ($menu['children'] as $level1)
                         <li
                             x-data="{ open: false }"
@@ -55,11 +66,44 @@
         <li style="height: 65px"></li>
     </ul>
 </aside>
+<style>
+    .hidden-ul{
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+    }
+</style>
 <script>
     var theme = {{ session('theme', 'themes.blue') }};
-    $("#sidebar-menu a").click(function(){
-        $("#sidebar-menu li").removeClass('bg-indigo-100 dark:bg-gray-700');
+    $("#sidebar-menu > li > ul a").click(function(){
+        const _self = $(this);
+        const li = $("#sidebar-menu li");
 
-        $(this).closest('li').addClass('bg-indigo-100 dark:bg-gray-700');
+        li.removeClass('bg-indigo-100 dark:bg-gray-700');
+        _self.closest('li').addClass('bg-indigo-100 dark:bg-gray-700');
+    })
+    $("#sidebar-menu > li > a").click(function(){
+        const _self = $(this);
+        const li = $("#sidebar-menu li");
+        const isActive = _self.closest('li').hasClass('active');
+
+       let height = 0;
+        _self.closest('li').find('ul').find('li').each(function(){
+            height += this.clientHeight;
+        })
+
+        li.removeClass('active');
+        li.find('ul').addClass('hidden-ul');
+        li.find('ul').each(function(){
+            this.style.height = 0;
+        })
+        li.find('.arrow').removeClass('-rotate-90 transform');
+
+        if (!isActive) {
+            _self.closest('li').addClass('active');
+            _self.closest('li').find('ul').removeClass('hidden-ul');
+            _self.closest('li').find('ul')[0].style.height = height + 'px';
+            _self.closest('li').find('.arrow').addClass('-rotate-90 transform');
+        }
     })
 </script>
