@@ -6,13 +6,19 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Blog\Models\Category;
-use Ocart\Blog\Models\Tag;
+use Ocart\Blog\Widgets\PostStatsWidget;
 
 class HookServiceProvider extends ServiceProvider
 {
 
     public function register()
     {
+        add_dashboard_widget()
+            ->setTitle('Posts')
+            ->setKey('post_stats_widget')
+            ->setIcon('fa fa-edit')
+            ->create(PostStatsWidget::class);
+
         add_action(MENU_ACTION_SIDEBAR_OPTIONS, [$this, 'registerMenuOptions']);
     }
 

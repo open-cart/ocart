@@ -36,7 +36,9 @@ class PostTable extends TableAbstract
 
     public function query()
     {
-        $this->repository->pushCriteria(BlogSearchCriteria::class);
+        $this->repository
+            ->with('categories:id,name')
+            ->pushCriteria(BlogSearchCriteria::class);
         $res = apply_filters(BASE_FILTER_TABLE_QUERY, $this->repository, []);
         if ($this->request()->input('action') === 'excel') {
             return $res->get();

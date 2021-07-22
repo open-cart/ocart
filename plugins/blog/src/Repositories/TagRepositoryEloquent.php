@@ -3,6 +3,7 @@
 namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Tag;
+use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Blog\Repositories\Interfaces\TagRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
@@ -16,6 +17,12 @@ use Prettus\Repository\Traits\CacheableRepository;
 class TagRepositoryEloquent extends RepositoriesAbstract implements TagRepository
 {
     use CacheableRepository;
+
+    /**
+     * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
+     * @var string[]
+     */
+    public $tags = [PostRepository::class];
 
     protected $fieldSearchable = [
         'alias' => 'like',

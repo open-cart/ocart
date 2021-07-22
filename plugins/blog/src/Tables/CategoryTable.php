@@ -35,7 +35,7 @@ class CategoryTable extends TableAbstract
                 'title' => trans('plugins/blog::categories.name'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->name;
+                    return '<a class="text-blue-500" href="'.route('blog.categories.update', ['id' => $item->id]).'">' .$item->name.'</a>';
                 }
             ],
             'created_at' => [

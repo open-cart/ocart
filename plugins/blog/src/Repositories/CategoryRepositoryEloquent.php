@@ -4,6 +4,7 @@ namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Category;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
+use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Traits\CacheableRepository;
@@ -16,6 +17,12 @@ use Prettus\Repository\Traits\CacheableRepository;
 class CategoryRepositoryEloquent extends RepositoriesAbstract implements CategoryRepository
 {
     use CacheableRepository;
+
+    /**
+     * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
+     * @var string[]
+     */
+    public $tags = [PostRepository::class];
 
     protected $fieldSearchable = [
         'alias' => 'like',
