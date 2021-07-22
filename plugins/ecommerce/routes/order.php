@@ -44,6 +44,14 @@ Route::group([
                     ->name('cancel_order');
 
             });
+
+            Route::group(['prefix' => 'reports', 'as' => 'report.'], function () {
+                Route::get('dashboard-general-report', [
+                    'as'         => 'dashboard-widget.general',
+                    'uses'       => 'ReportController@getDashboardWidgetGeneral',
+                    'permission' => 'ecommerce.report.index',
+                ]);
+            });
         });
 //        Route::post('shopping-buy', 'OrderController@buy')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);
     });

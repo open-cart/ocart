@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Repositories;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Traits\CacheableRepository;
 
@@ -16,6 +17,12 @@ use Prettus\Repository\Traits\CacheableRepository;
 class BrandRepositoryEloquent extends RepositoriesAbstract implements BrandRepository
 {
     use CacheableRepository;
+
+    /**
+     * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
+     * @var string[]
+     */
+    public $tags = [ProductRepository::class];
 
     protected $fieldSearchable = [
         'alias' => 'like',

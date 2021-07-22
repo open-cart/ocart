@@ -2,6 +2,7 @@
 
 namespace Ocart\Ecommerce\Repositories;
 
+use App\Criteria\BeforeQueryCriteria;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
@@ -38,7 +39,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
     {
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
 //        $this->pushCriteria(app(RequestCriteria::class));
-//        $this->pushCriteria(app(BeforeQueryCriteria::class));
+        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
     public function createSku(): string

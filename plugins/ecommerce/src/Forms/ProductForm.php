@@ -105,7 +105,7 @@ class ProductForm extends FormAbstract
             ])
             ->add('categories[]', 'categoryMulti', [
                 'label'      =>'Category',
-                'choices'    => get_categories(),
+                'choices'    => get_product_categories_children(),
                 'value'      => old('categories', $selectedCategories),
             ])
             ->add('tax_id', 'select', [

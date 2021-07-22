@@ -5,7 +5,7 @@
 $value = isset($value) ? (array)$value : [];
 @endphp
 @if($categories)
-    <ul class="space-y-3">
+    <ul class="space-y-3 pl-6">
         @foreach($categories as $category)
             @if($category->id != $currentId)
                 <li value="{{ $category->id ?? '' }}"

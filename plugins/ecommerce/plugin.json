@@ -9,7 +9,7 @@
     "configGroup": "Plugins",
     "configCode": "Payment",
     "configKey": "blog",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "providers": [
         "Ocart\\Ecommerce\\Providers\\EcommerceServiceProvider",
         "Ocart\\Ecommerce\\Providers\\HookServiceProvider"

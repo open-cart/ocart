@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Repositories;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Order;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
+use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.

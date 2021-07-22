@@ -2,6 +2,7 @@
 namespace Ocart\Ecommerce\Table;
 
 use Collective\Html\HtmlBuilder;
+use Ocart\Core\Supports\SortItemsWithChildrenSupport;
 use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Table\Abstracts\TableAbstract;
@@ -14,7 +15,28 @@ class CategoryTable extends TableAbstract
         parent::__construct($table, $html);
         $this->_table = $table;
         $this->repository = $repo;
-        $this->data = $repo->paginate();
+
+        $categories = $repo->orderBy($repo->getModel()->qualifyColumn('created_at'), 'ASC')->all();
+
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
+
+        $categories = sort_item_with_children($list);
+
+        $indent = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+
+        foreach ($categories as $category) {
+            $indentText = '';
+            $depth = (int)$category->depth;
+            for ($i = 0; $i < $depth; $i++) {
+                $indentText .= $indent;
+            }
+            $category->indent_text = $indentText;
+        }
+
+        $this->data = $categories;
         $this->ajax();
     }
 
@@ -27,7 +49,7 @@ class CategoryTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return '<a href="'.route('ecommerce.categories.update', ['id' => $item->id]).'" class="text-blue-600">' . $item->name .'</a>';
+                    return '<a href="'.route('ecommerce.categories.update', ['id' => $item->id]).'" class="text-blue-600">' . $item->indent_text .($item->depth > 0 ? '|--' : ''). $item->name .'</a>';
                 }
             ],
 //            'image' => [

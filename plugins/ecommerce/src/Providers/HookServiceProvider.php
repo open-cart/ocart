@@ -18,6 +18,8 @@ use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
+use Ocart\Ecommerce\Widgets\OrderReportWidget;
+use Ocart\Ecommerce\Widgets\OrderStatsWidget;
 use Ocart\Ecommerce\Widgets\ProductStatsWidget;
 
 class HookServiceProvider extends ServiceProvider
@@ -34,11 +36,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        add_dashboard_widget()
-            ->setTitle('Products')
-            ->setKey('product_stats_widget')
-            ->setIcon('fa fa-file-text')
-            ->create(ProductStatsWidget::class);
+        $this->registerWidgets();
 
         $this->registerMenu();
 
@@ -49,6 +47,27 @@ class HookServiceProvider extends ServiceProvider
         $this->booted(function () {
             add_filter(BASE_FILTER_TOP_HEADER_LAYOUT, [$this, 'registerTopHeaderNotification'], 120);
         });
+    }
+
+    protected function registerWidgets()
+    {
+        add_dashboard_widget()
+            ->setTitle('Products')
+            ->setKey('product_stats_widget')
+            ->setIcon('fab fa-product-hunt')
+            ->create(ProductStatsWidget::class);
+
+        add_dashboard_widget()
+            ->setTitle('Orders')
+            ->setKey('order_stats_widget')
+            ->setIcon('fa fa-shopping-cart')
+            ->create(OrderStatsWidget::class);
+
+        add_dashboard_widget()
+            ->setTitle(trans('plugins/ecommerce::ecommerce.name'))
+            ->setKey('widget_ecommerce_report_general')
+            ->setIcon('fa fa-shopping-cart')
+            ->create(OrderReportWidget::class);
     }
 
     protected function registerMenu()

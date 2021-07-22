@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Arr;
+use Ocart\Attribute\Models\ProductVariation;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
 use Ocart\Ecommerce\Facades\EcommerceHelper;
@@ -70,6 +71,11 @@ class Product extends BaseModel
     protected static function boot()
     {
         parent::boot();
+
+        self::deleting(function (Product $product) {
+            $product->categories()->detach();
+            $product->tags()->detach();
+        });
 
         self::updating(function($model) {
             $model->slug_md5 = md5($model->slug);

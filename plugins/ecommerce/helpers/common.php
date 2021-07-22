@@ -1,4 +1,6 @@
 <?php
+
+use Ocart\Core\Supports\SortItemsWithChildrenSupport;
 use \Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Illuminate\Support\Arr;
 use \Ocart\Ecommerce\Repositories\Interfaces\CurrencyRepository;
@@ -20,7 +22,12 @@ if (!function_exists('get_categories')) {
         $repo->orderBy($repo->getModel()->qualifyColumn('name'), 'ASC');
         $categories = $repo->all();
 
-        $categories = sort_item_with_children($categories);
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
+
+        $categories = sort_item_with_children($list);
 
         foreach ($categories as $category) {
             $indentText = '';
@@ -32,6 +39,22 @@ if (!function_exists('get_categories')) {
         }
 
         return $categories;
+    }
+}
+
+if (!function_exists('get_product_categories_with_children')) {
+    function get_product_categories_children()
+    {
+        /** @var CategoryRepository $repo */
+        $repo = app(CategoryRepository::class);
+
+        $repo->orderBy($repo->getModel()->qualifyColumn('name'), 'ASC');
+        $categories = $repo->all();
+
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        return $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
     }
 }
 
