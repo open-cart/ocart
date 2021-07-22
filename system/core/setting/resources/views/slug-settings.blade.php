@@ -19,7 +19,7 @@
                                 <div class="flex flex-col">
                                     <label for="">{{ Arr::get($prefix, 'label') }}</label>
                                     <x-input value="{{ \Ocart\Core\Facades\Slug::getPrefix($key, Arr::get($prefix, 'value')) }}"/>
-                                    <div class="bg-blue-100 p-2 my-1" role="alert">
+                                    <div class="bg-blue-100 p-2 my-1 dark:bg-gray-700" role="alert">
                                         <span>Preview: </span>
                                         <x-link href="javascript:void(0)">
                                             {{ url(\Ocart\Core\Facades\Slug::getPrefix($key, Arr::get($prefix, 'value')) .'/your-url-here') }}
