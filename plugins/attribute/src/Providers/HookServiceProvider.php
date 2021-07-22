@@ -8,6 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Kris\LaravelFormBuilder\Form;
 use Ocart\Attribute\Listeners\AddAttributeProductListener;
 use Ocart\Attribute\Listeners\UpdateVariationProductListener;
+use Ocart\Attribute\Models\Attribute;
 use Ocart\Attribute\Models\AttributeGroup;
 use Ocart\Attribute\Models\ProductVariation;
 use Ocart\Attribute\Models\ProductVariationItem;
@@ -34,6 +35,14 @@ class HookServiceProvider extends ServiceProvider
                 return $q->hasMany(ProductVariationItem::class, 'product_id');
             });
 
+            Product::resolveRelationUsing('productAttributes', function (Product $q) {
+                return $q->belongsToMany(Attribute::class, 'ecommerce_product_variation_items', 'product_id', 'attribute_id');
+            });
+
+            Product::resolveRelationUsing('productAttributeGroups', function (Product $q) {
+                return $q->belongsToMany(Attribute::class, 'ecommerce_product_with_attribute_groups', 'product_id', 'attribute_group_id');
+            });
+
             Product::resolveRelationUsing('attribute_groups', function (Product $q) {
                 return $q->hasMany(ProductWithAttributeGroup::class, 'product_id');
             });
@@ -42,6 +51,23 @@ class HookServiceProvider extends ServiceProvider
                 $model->mergeFillable([
                     'is_variation',
                 ]);
+
+                Product::deleting(function ($product) {
+                    $variation = ProductVariation::where('product_id', $product->id)->first();
+
+                    if ($variation) {
+                        $variation->delete();
+                    }
+
+                    $productVariations = ProductVariation::where('configurable_product_id', $product->id)->get();
+
+                    foreach ($productVariations as $productVariation) {
+                        $productVariation->delete();
+                    }
+
+                    $product->productAttributes()->detach();
+                    $product->productAttributeGroups()->detach();
+                });
             });
         }
 

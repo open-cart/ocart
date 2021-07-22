@@ -33,6 +33,12 @@ class ProductVariation extends BaseModel
     protected static function boot()
     {
         parent::boot();
+
+        self::deleted(function (ProductVariation $variation) {
+            if ($variation->product) {
+                $variation->product->delete();
+            }
+        });
     }
 
     public function product()
