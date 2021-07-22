@@ -272,12 +272,6 @@ if (!function_exists('get_logo')) {
         return get_image_url(theme_options()->getOption('logo', '/images/logo-default.jpg'));
     }
 }
-if (!function_exists('get_logo_footer')) {
-    function get_logo_footer(){
-        return setting('logo_footer', null);
-    }
-}
-
 if (!function_exists('get_favicon')) {
     function get_favicon(){
         return get_image_url(theme_options()->getOption('favicon', '/images/favicon-default.jpg'));
@@ -286,13 +280,19 @@ if (!function_exists('get_favicon')) {
 
 if (!function_exists('get_title')) {
     function get_title(){
-        return setting('title', 'Giới thiệu công ty');
+        return theme_options()->getOption('site_title', 'Giới thiệu công ty');
+    }
+}
+
+if (!function_exists('get_seo_title')) {
+    function get_seo_title(){
+        return theme_options()->getOption('seo_title', 'Giới thiệu công ty');
     }
 }
 
 if (!function_exists('get_deps')) {
     function get_deps(){
-        return setting('deps', 'Mô tả công ty');
+        return theme_options()->getOption('seo_description', 'Mô tả công ty');
     }
 }
 
@@ -334,25 +334,18 @@ if (!function_exists('get_menu_footer')) {
 
 if (!function_exists('get_deps_footer')) {
     function get_deps_footer(){
-        return setting('deps_footer', null);
-    }
-}
-
-if (!function_exists('get_phone')) {
-    function get_phone(){
-        return setting('phone', null);
+        return theme_options()->getOption('seo_description', null);
     }
 }
 
 if (!function_exists('get_address')) {
     function get_address(){
-        return setting('address', null);
+        return theme_options()->getOption('address1', null);
     }
 }
-
 if (!function_exists('get_address2')) {
     function get_address2(){
-        return setting('address2', null);
+        return theme_options()->getOption('address2', null);
     }
 }
 
@@ -411,5 +404,17 @@ if (!function_exists('folder_size')) {
         }
 
         return $size;
+    }
+}
+
+if (!function_exists('get_sec_about')) {
+    function get_sec_about(){
+        return json_decode(setting('sec_about', null));
+    }
+}
+
+if (!function_exists('get_sec_feedback')) {
+    function get_sec_feedback(){
+        return json_decode(setting('sec_feedback', null));
     }
 }
