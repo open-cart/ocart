@@ -3,7 +3,6 @@
 namespace Ocart\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Ocart\Core\Listeners\CleanCacheRepository;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,15 +12,6 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Prettus\Repository\Events\RepositoryEntityCreated' => [
-            CleanCacheRepository::class
-        ],
-        'Prettus\Repository\Events\RepositoryEntityUpdated' => [
-            CleanCacheRepository::class
-        ],
-        'Prettus\Repository\Events\RepositoryEntityDeleted' => [
-            CleanCacheRepository::class
-        ]
     ];
 
     /**
