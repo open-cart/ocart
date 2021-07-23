@@ -157,7 +157,7 @@ if (!function_exists('get_list_products_category')) {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
         $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
-        return $repo->getFetureCategory($categoryId, $limit);
+        return $repo->getFeatureCategory($categoryId, $limit);
     }
 }
 

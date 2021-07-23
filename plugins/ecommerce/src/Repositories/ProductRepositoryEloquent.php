@@ -81,7 +81,9 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_featured' => 1,
             'is_variation' => 0
         ]);
-        return $this->with('categories')->limit($limit);
+        return $this->with('categories')
+            ->take($limit)
+            ->all(['*'], $limit);
     }
 
     public function getNews($limit)
@@ -90,7 +92,10 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_variation' => 0
         ]);
 
-        return $this->with('categories')->orderBy('created_at', 'desc')->limit($limit);
+        return $this->with('categories')
+            ->orderBy('created_at', 'desc')
+            ->take($limit)
+            ->all(['*'], $limit);
     }
 
     public function getRelate($categoryId, $limit)
@@ -101,10 +106,13 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        return $this->with('categories')->limit($limit);
+
+        $this->with('categories')->take($limit);
+
+        return $this->all(['*'], $categoryId, $limit);
     }
 
-    public function getFetureCategory($categoryId, $limit)
+    public function getFeatureCategory($categoryId, $limit)
     {
         $this->applyConditions([
             'is_featured' => 1,
@@ -114,6 +122,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
         $this->orderBy('created_at', 'desc');
-        return $this->with('categories')->limit($limit);
+        $this->take($limit);
+        return $this->with('categories')->all(['*'], [$categoryId, $limit]);
     }
 }
