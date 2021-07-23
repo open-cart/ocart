@@ -4,7 +4,6 @@ namespace Ocart\Page\Repositories;
 
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Page\Models\Page;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -13,8 +12,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class PageRepositoryEloquent extends RepositoriesAbstract implements PageRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

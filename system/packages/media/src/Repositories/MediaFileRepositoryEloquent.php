@@ -5,13 +5,9 @@ namespace Ocart\Media\Repositories;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Media\Models\MediaFile;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
-use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 class MediaFileRepositoryEloquent extends RepositoriesAbstract implements MediaFileRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
