@@ -4,10 +4,8 @@ namespace Ocart\Blog\Repositories;
 
 use Ocart\Blog\Models\Category;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
-use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,14 +14,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class CategoryRepositoryEloquent extends RepositoriesAbstract implements CategoryRepository
 {
-    use CacheableRepository;
-
-    /**
-     * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
-     * @var string[]
-     */
-    public $tags = [PostRepository::class];
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
@@ -46,18 +36,5 @@ class CategoryRepositoryEloquent extends RepositoriesAbstract implements Categor
 //        $this->pushCriteria(app(LanguageCriteriaCriteria::class));
         $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategories(array $select, array $orderBy)
-    {
-        $data = $this->model->with('slugable')->select($select);
-        foreach ($orderBy as $by => $direction) {
-            $data = $data->orderBy($by, $direction);
-        }
-
-        return $this->applyBeforeExecuteQuery($data)->get();
     }
 }
