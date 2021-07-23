@@ -9,9 +9,9 @@ use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 use Ocart\Media\Facades\TnMedia;
+use Ocart\Media\Repositories\Caches\MediaFileCacheDecorator;
 use Ocart\Media\Repositories\Interfaces\MediaFileRepository;
 use Ocart\Media\Repositories\Interfaces\MediaFolderRepository;
-use Ocart\Media\Repositories\MediaFileRepositoryEloquent;
 use Ocart\Media\Repositories\MediaFolderRepositoryEloquent;
 
 class MediaServiceProvider extends ServiceProvider
@@ -24,7 +24,7 @@ class MediaServiceProvider extends ServiceProvider
 
         AliasLoader::getInstance(['TnMedia' => TnMedia::class,]);
 
-        $this->app->bind(MediaFileRepository::class, MediaFileRepositoryEloquent::class);
+        $this->app->bind(MediaFileRepository::class, MediaFileCacheDecorator::class);
         $this->app->bind(MediaFolderRepository::class, MediaFolderRepositoryEloquent::class);
     }
 
