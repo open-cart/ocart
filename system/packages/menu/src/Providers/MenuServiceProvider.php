@@ -1,14 +1,14 @@
 <?php
+
 namespace Ocart\Menu\Providers;
 
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Ocart\Core\Library\Helper;
 use \Ocart\Core\Traits\LoadAndPublishDataTrait;
 use \Illuminate\Support\ServiceProvider;
 use Ocart\Menu\Repositories\MenuNodeRepository;
-use Ocart\Menu\Repositories\MenuNodeRepositoryEloquent;
 use Ocart\Menu\Repositories\MenuRepository;
-use Ocart\Menu\Repositories\MenuRepositoryEloquent;
+use Ocart\Menu\Repositories\Caches\MenuCacheDecorator;
+use Ocart\Menu\Repositories\Caches\MenuNodeCacheDecorator;
 
 class MenuServiceProvider extends ServiceProvider
 {
@@ -18,8 +18,8 @@ class MenuServiceProvider extends ServiceProvider
     {
         Helper::autoload(__DIR__ . '/../../helpers');
 
-        $this->app->bind(MenuRepository::class, MenuRepositoryEloquent::class);
-        $this->app->bind(MenuNodeRepository::class, MenuNodeRepositoryEloquent::class);
+        $this->app->bind(MenuRepository::class, MenuCacheDecorator::class);
+        $this->app->bind(MenuNodeRepository::class, MenuNodeCacheDecorator::class);
 
     }
 
