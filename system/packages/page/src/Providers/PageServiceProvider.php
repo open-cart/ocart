@@ -1,16 +1,18 @@
 <?php
+
 namespace Ocart\Page\Providers;
 
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use Ocart\Core\Facades\Slug;
 use Ocart\Page\Models\Page;
+use Ocart\Page\Repositories\Caches\PageCacheDecorator;
 use Ocart\Page\Repositories\PageRepository;
-use Ocart\Page\Repositories\PageRepositoryEloquent;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
 
-class PageServiceProvider extends \Illuminate\Support\ServiceProvider
+class PageServiceProvider extends ServiceProvider
 {
 
     use  LoadAndPublishDataTrait;
@@ -19,7 +21,7 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
     {
         Helper::autoload(__DIR__ . '/../../helpers');
 
-        $this->app->bind(PageRepository::class, PageRepositoryEloquent::class);
+        $this->app->bind(PageRepository::class, PageCacheDecorator::class);
 
         Slug::registerPrefix(Page::class, [
             'label' => 'Pages',
@@ -35,7 +37,7 @@ class PageServiceProvider extends \Illuminate\Support\ServiceProvider
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
             ->loadMigrations();
-        $this->loadViewsFrom(__DIR__ . '/../../resources/views','blog');
+        $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'blog');
 
         add_filter(BEFORE_QUERY_CRITERIA, function ($query, $model) {
             return $query;
