@@ -116,7 +116,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $this->orderBy('created_at', 'desc');
+        $this->with('categories')->orderBy('created_at', 'desc');
         return $this->limit($limit);
     }
 }

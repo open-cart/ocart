@@ -205,20 +205,20 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function getDataIfExistCache($function, array $args)
     {
-        if (!$this->allowedCache($function) || $this->isSkippedCache()) {
-            return call_user_func_array([$this->repository, $function], $args);
-        }
-
-        $key = $this->getCacheKey($function, func_get_args());
-
-        $minutes = $this->getCacheMinutes();
-
         try {
+            if (!$this->allowedCache($function) || $this->isSkippedCache()) {
+                return call_user_func_array([$this->repository, $function], $args);
+            }
+
+            $key = $this->getCacheKey($function, func_get_args());
+
+            $minutes = $this->getCacheMinutes();
+
             return $this->getCacheRepository()->remember($key, $minutes, function () use ($function, $args) {
                 return call_user_func_array([$this->repository, $function], $args);
             });
         } catch (Exception $e) {
-            dd($this->repository, $function, $args);
+            dd($this->repository, $function, $args, $e);
         }
     }
 
@@ -399,7 +399,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function orderBy($column, $direction = 'asc')
     {
-        return $this->repository->orderBy($column, $direction);
+        $this->repository->orderBy($column, $direction);
+        return $this;
     }
 
     /**
@@ -431,7 +432,9 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function with($relations)
     {
-        return $this->repository->with($relations);
+        $this->repository->with($relations);
+
+        return $this;
     }
 
     /**
@@ -439,7 +442,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function whereHas($relation, $closure)
     {
-        return $this->repository->whereHas($relation, $closure);
+        $this->repository->whereHas($relation, $closure);
+        return $this;
     }
 
     /**
@@ -447,7 +451,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function withCount($relations)
     {
-        return $this->repository->withCount($relations);
+        $this->repository->withCount($relations);
+        return $this;
     }
 
     /**
@@ -455,7 +460,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function hidden(array $fields)
     {
-        return $this->repository->hidden($fields);
+        $this->repository->hidden($fields);
+        return $this;
     }
 
     /**
@@ -463,7 +469,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function visible(array $fields)
     {
-        return $this->repository->visible($fields);
+        $this->repository->visible($fields);
+        return $this;
     }
 
     /**
@@ -471,7 +478,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function scopeQuery(\Closure $scope)
     {
-        return $this->repository->scopeQuery($scope);
+        $this->repository->scopeQuery($scope);
+        return $this;
     }
 
     /**
@@ -479,7 +487,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function resetScope()
     {
-        return $this->repository->resetScope();
+        $this->repository->resetScope();
+        return $this;
     }
 
     /**
@@ -492,22 +501,26 @@ class CacheRepositoryDecorator implements RepositoryInterface
 
     public function setPresenter($presenter)
     {
-        return $this->repository->setPresenter($presenter);
+        $this->repository->setPresenter($presenter);
+        return $this;
     }
 
     public function skipPresenter($status = true)
     {
-        return $this->repository->skipPresenter($status);
+        $this->repository->skipPresenter($status);
+        return $this;
     }
 
     public function pushCriteria($criteria)
     {
-        return $this->repository->pushCriteria($criteria);
+        $this->repository->pushCriteria($criteria);
+        return $this;
     }
 
     public function popCriteria($criteria)
     {
-        return $this->repository->popCriteria($criteria);
+        $this->repository->popCriteria($criteria);
+        return $this;
     }
 
     public function getCriteria()
@@ -522,12 +535,14 @@ class CacheRepositoryDecorator implements RepositoryInterface
 
     public function skipCriteria($status = true)
     {
-        return $this->repository->skipCriteria($status);
+        $this->repository->skipCriteria($status);
+        return $this;
     }
 
     public function resetCriteria()
     {
-        return $this->repository->resetCriteria();
+        $this->repository->resetCriteria();
+        return $this;
     }
 
     /**
