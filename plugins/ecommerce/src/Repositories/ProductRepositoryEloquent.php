@@ -7,7 +7,6 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Hashids\Hashids;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,8 +15,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
@@ -82,8 +79,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_variation' => 0
         ]);
         return $this->with('categories')
-            ->take($limit)
-            ->all(['*'], $limit);
+            ->limit($limit);
     }
 
     public function getNews($limit)
@@ -94,8 +90,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
 
         return $this->with('categories')
             ->orderBy('created_at', 'desc')
-            ->take($limit)
-            ->all(['*'], $limit);
+            ->limit($limit);
     }
 
     public function getRelate($categoryId, $limit)
@@ -107,9 +102,9 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
 
-        $this->with('categories')->take($limit);
+        $this->with('categories');
 
-        return $this->all(['*'], $categoryId, $limit);
+        return $this->limit($limit);
     }
 
     public function getFeatureCategory($categoryId, $limit)
@@ -122,7 +117,6 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
         $this->orderBy('created_at', 'desc');
-        $this->take($limit);
-        return $this->with('categories')->all(['*'], [$categoryId, $limit]);
+        return $this->limit($limit);
     }
 }

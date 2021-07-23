@@ -2,7 +2,6 @@
 
 namespace Ocart\Ecommerce\Repositories\Interfaces;
 
-use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Contracts\RepositoryCriteriaInterface;
 use Prettus\Repository\Contracts\RepositoryInterface;
 
@@ -11,7 +10,7 @@ use Prettus\Repository\Contracts\RepositoryInterface;
  *
  * @package namespace App\Repositories;
  */
-interface ProductRepository extends RepositoryInterface, RepositoryCriteriaInterface, CacheableInterface
+interface ProductRepository extends RepositoryInterface, RepositoryCriteriaInterface
 {
     /**
      * Tạo ra 1 sku không trùng lặp cho sản phẩm
