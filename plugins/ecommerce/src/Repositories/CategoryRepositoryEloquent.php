@@ -48,18 +48,6 @@ class CategoryRepositoryEloquent extends RepositoriesAbstract implements Categor
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategories(array $select, array $orderBy)
-    {
-        $data = $this->model->with('slugable')->select($select);
-        foreach ($orderBy as $by => $direction) {
-            $data = $data->orderBy($by, $direction);
-        }
-
-        return $this->applyBeforeExecuteQuery($data)->get();
-    }
 
     public function getFeature()
     {

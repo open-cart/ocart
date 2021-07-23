@@ -276,7 +276,8 @@ class HookServiceProvider extends ServiceProvider
     protected function setPendingOrder()
     {
         if (!$this->pendingOrders) {
-            $this->pendingOrders = $this->app->make(OrderRepository::class)
+            $this->pendingOrders = collect([]);
+            $this->app->make(OrderRepository::class)
                 ->with('address')
                 ->findWhere([
                     'status'                => BaseStatusEnum::PENDING,

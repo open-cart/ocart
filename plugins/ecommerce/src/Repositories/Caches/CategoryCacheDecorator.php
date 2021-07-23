@@ -23,4 +23,12 @@ class CategoryCacheDecorator extends CacheRepositoryDecorator implements Categor
     {
         parent::__construct($repository);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function getFeature()
+    {
+        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+    }
 }

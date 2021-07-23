@@ -8,4 +8,8 @@ use Prettus\Repository\Contracts\RepositoryInterface;
 interface CategoryRepository extends RepositoryInterface, RepositoryCriteriaInterface, CacheableInterface
 {
 
+    /**
+     * @return mixed
+     */
+    public function getFeature();
 }
