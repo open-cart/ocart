@@ -213,9 +213,13 @@ class CacheRepositoryDecorator implements RepositoryInterface
 
         $minutes = $this->getCacheMinutes();
 
-        return $this->getCacheRepository()->remember($key, $minutes, function () use ($function, $args) {
-            return call_user_func_array([$this->repository, $function], $args);
-        });
+        try {
+            return $this->getCacheRepository()->remember($key, $minutes, function () use ($function, $args) {
+                return call_user_func_array([$this->repository, $function], $args);
+            });
+        } catch (Exception $e) {
+            dd($function);
+        }
     }
 
     public function flushCacheAndUpdateData($function, array $args, $flushCache = true)
@@ -321,7 +325,7 @@ class CacheRepositoryDecorator implements RepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function findByField($field, $value, $columns = ['*'])
+    public function findByField($field, $value = null, $columns = ['*'])
     {
         return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
     }
@@ -395,7 +399,7 @@ class CacheRepositoryDecorator implements RepositoryInterface
      */
     public function orderBy($column, $direction = 'asc')
     {
-        return $this->getDataIfExistCache(__FUNCTION__, func_get_args());
+        return $this->repository->orderBy($column, $direction);
     }
 
     /**

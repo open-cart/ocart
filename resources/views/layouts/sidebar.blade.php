@@ -35,7 +35,7 @@
                     @foreach ($menu['children'] as $level1)
                         <li
                             x-data="{ open: false }"
-                            class="nav-item @if ($level1['active']) bg-indigo-100 dark:bg-gray-700 @endif" id="{{ $level1['id'] }}">
+                            class="nav-item border-b border-white dark:border-gray-800 @if ($level1['active']) bg-indigo-100 dark:bg-gray-700 @endif" id="{{ $level1['id'] }}">
                             <a
                                 x-on:click="open = ! open"
                                 href="{{ isset($level1['children']) && count($level1['children']) ? 'javascript: void(0)' : $level1['url'] }}"
