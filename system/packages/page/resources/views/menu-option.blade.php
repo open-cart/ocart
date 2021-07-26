@@ -1,4 +1,4 @@
-<div class="bg-white rounded border bg-gray-800 dark:border-gray-700" x-data="{open: false}">
+<div class="bg-white rounded border dark:bg-gray-800 dark:border-gray-700" x-data="{open: false}">
     <div class="px-4 py-3 flex justify-between cursor-pointer" x-on:click="open = !open">
         <h3>{{ trans('packages/page::pages.menu') }}</h3>
         <span>

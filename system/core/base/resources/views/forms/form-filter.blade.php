@@ -41,7 +41,7 @@
             @foreach ($fields as $key => $field)
                 @if( ! in_array($field->getName(), $exclude) && $field->getValue() && $field->getType() != 'text')
                     <div class="bg-blue-100 inline-flex items-center text-sm rounded mt-2 mr-1 overflow-hidden">
-                        <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1">
+                        <span class="ml-2 mr-1 leading-relaxed truncate max-w-xs px-1 dark:text-gray-700">
                             {{ $form->processVariable($field) }}
                         </span>
                         <a type="button"

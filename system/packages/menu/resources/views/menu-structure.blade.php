@@ -6,7 +6,7 @@
     <div class="col-span-4 space-y-4">
         @php do_action(MENU_ACTION_SIDEBAR_OPTIONS) @endphp
 
-        <div class="bg-white dark:bg-gray-800 border border-white dark:border-gray-700 rounded" x-data="{open: false}">
+        <div class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded" x-data="{open: false}">
             <div class="px-4 py-3 flex justify-between cursor-pointer" x-on:click="open = !open">
                 <h3>{{ trans('packages/menu::menus.add_link') }}</h3>
                 <span>
@@ -20,7 +20,7 @@
             <div x-show="open"
                  style="display: none"
                  id="external_link"
-                 class="px-4 py-3 panel-group border-t">
+                 class="px-4 py-3 panel-group border-t dark:border-gray-700">
                 <div class="space-y-4 mb-3">
                     <label class="block ">
                         <span>{{ trans('packages/menu::menus.title') }}</span>
