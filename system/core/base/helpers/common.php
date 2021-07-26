@@ -223,7 +223,7 @@ if (!function_exists('sort_item_with_children')) {
         foreach ($list as $item) {
             $item->depth = $depth;
             array_push($result, $item);
-            if ($item->child_cats->count()) {
+            if ($item->child_cats) {
                 sort_item_with_children($item->child_cats, $result, $depth + 1);
             }
         }
