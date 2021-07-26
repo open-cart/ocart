@@ -7,7 +7,6 @@ use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,8 +15,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class CategoryRepositoryEloquent extends RepositoriesAbstract implements CategoryRepository
 {
-    use CacheableRepository;
-
     /**
      * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
      * @var string[]
@@ -48,25 +45,17 @@ class CategoryRepositoryEloquent extends RepositoriesAbstract implements Categor
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
 
+
     /**
-     * {@inheritdoc}
+     * @inheritDoc
      */
-    public function getCategories(array $select, array $orderBy)
-    {
-        $data = $this->model->with('slugable')->select($select);
-        foreach ($orderBy as $by => $direction) {
-            $data = $data->orderBy($by, $direction);
-        }
-
-        return $this->applyBeforeExecuteQuery($data)->get();
-    }
-
     public function getFeature()
     {
         $this->applyConditions([
             'is_featured' => 1
         ]);
-        $results = $this;
+
+        $results = $this->all();
 
         return $this->parserResult($results);
     }

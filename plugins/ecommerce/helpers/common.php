@@ -70,7 +70,7 @@ if (!function_exists('get_categories_feature')) {
         $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
         $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
         /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
-        $categories = $repo->getFeature()->all();
+        $categories = $repo->getFeature();
 
         return $categories;
     }
@@ -89,9 +89,14 @@ if (!function_exists('get_categories_feature_parent_main')) {
         $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
         $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
         /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
-        $categories = $repo->getFeature()->all();
+        $categories = $repo->getFeature();
 
-        $categories = sort_item_with_children($categories);
+        /** @var SortItemsWithChildrenSupport $sortSupport */
+        $sortSupport = app(SortItemsWithChildrenSupport::class);
+
+        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
+
+        $categories = sort_item_with_children($list);
 
 
         foreach ($categories as $category) {
@@ -152,7 +157,7 @@ if (!function_exists('get_list_products_category')) {
         /** @var \Ocart\Ecommerce\Repositories\Interfaces\ProductRepository $repo */
         /** @var \Ocart\Ecommerce\Repositories\ProductRepositoryEloquent $repo */
         $repo = app(\Ocart\Ecommerce\Repositories\Interfaces\ProductRepository::class);
-        return $repo->getFetureCategory($categoryId, $limit);
+        return $repo->getFeatureCategory($categoryId, $limit);
     }
 }
 

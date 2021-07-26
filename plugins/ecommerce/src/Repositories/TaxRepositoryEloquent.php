@@ -6,7 +6,6 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Tax;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TaxRepository;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class TaxRepositoryEloquent.
@@ -15,8 +14,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class TaxRepositoryEloquent extends RepositoriesAbstract implements TaxRepository
 {
-    use CacheableRepository;
-
     /**
      * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
      * @var string[]

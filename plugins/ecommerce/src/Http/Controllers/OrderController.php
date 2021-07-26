@@ -268,6 +268,7 @@ class OrderController extends BaseController
 
         $order = $this->orderRepository
             ->with(['products', 'user', 'address', 'histories' => function($q) {
+                $q = $q->with(['order', 'user']);
                 return $q->orderBy('id', 'desc');
             }])
             ->skipCriteria()

@@ -17,7 +17,7 @@
                             <x-icons.box class="fill-current text-gray-500"/>
                             <span class="ml-2">Completed</span>
                         </div>
-                        <hr class="-mx-4">
+                        <hr class="-mx-4 dark:border-gray-600">
                         <div class="container-list-order-products">
                             {{ apply_filters(ORDER_RENDER_TABLE_ORDER_UPDATE, view('plugins.ecommerce::components.orders.render-table-order-update', compact('order')), $order) }}
                         </div>
@@ -56,7 +56,7 @@
                                     </div>
                                     <div class="text-right w-36">{!! format_price($order->amount) !!}</div>
                                 </div>
-                                <hr>
+                                <hr class="dark:border-gray-600">
                                 <div class="flex justify-between">
                                     <div class="text-right w-full">Paid amount</div>
                                     <div class="text-right w-36">{!! format_price($order->payment->amount) !!}</div>
@@ -70,7 +70,7 @@
                             </div>
                         </div>
                         <div id="body-confirmed" class="space-y-4">
-                            <hr class="-mx-4">
+                            <hr class="-mx-4 dark:border-gray-600">
                             <div class="flex justify-between items-center">
                                 <div class="flex space-x-2">
                                     <svg class="w-6 h-6 @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::PENDING) text-green-500 @endif fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M7 18c-.265 0-.52-.105-.707-.293l-6-6c-.39-.39-.39-1.023 0-1.414s1.023-.39 1.414 0l5.236 5.236L18.24 2.35c.36-.42.992-.468 1.41-.11.42.36.47.99.11 1.41l-12 14c-.182.212-.444.338-.722.35H7z"></path></svg>
@@ -86,7 +86,7 @@
                                     </div>
                                 @endif
                             </div>
-                            <hr class="-mx-4">
+                            <hr class="-mx-4 dark:border-gray-600">
                             @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
                                 @if($order->payment->status == \Ocart\Payment\Enums\PaymentStatusEnum::PENDING)
                                     <div class="flex justify-between items-center">
@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                             @endif
-                            <hr class="-mx-4">
+                            <hr class="-mx-4 dark:border-gray-600">
                             <div class="flex justify-between items-center">
                                 @if($order->status != \Ocart\Ecommerce\Enums\OrderStatusEnum::COMPLETED)
                                     @if($order->status == \Ocart\Ecommerce\Enums\OrderStatusEnum::CANCELED)
@@ -167,7 +167,7 @@
                         <h3 class=" p-4">
                             {{ trans('plugins/ecommerce::orders.history') }}
                         </h3>
-                        <hr>
+                        <hr class="dark:border-gray-600">
                         <div class="p-6">
                             <div class="relative w-full">
                                 <div style="left: 30px" class="border-r-4 border-gray-300 dark:border-gray-600 absolute h-full top-0 z-0"></div>
@@ -570,7 +570,7 @@
                                         <x-link href="javascript:void(0)" x-text="customer.email || customer_address.email"/>
                                     </div>
                                 </div>
-                                <hr class="-mx-6">
+                                <hr class="-mx-6 dark:border-gray-600">
                                 <div class="flex justify-between">
                                     <h3>Shipping Address</h3>
                                     <x-link href="javascript:void(0)"

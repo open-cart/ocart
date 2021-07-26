@@ -7,7 +7,6 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Product;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Hashids\Hashids;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,8 +15,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];
@@ -81,7 +78,8 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_featured' => 1,
             'is_variation' => 0
         ]);
-        return $this->with('categories')->limit($limit);
+        return $this->with('categories')
+            ->limit($limit);
     }
 
     public function getNews($limit)
@@ -90,7 +88,9 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             'is_variation' => 0
         ]);
 
-        return $this->with('categories')->orderBy('created_at', 'desc')->limit($limit);
+        return $this->with('categories')
+            ->orderBy('created_at', 'desc')
+            ->limit($limit);
     }
 
     public function getRelate($categoryId, $limit)
@@ -101,10 +101,13 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        return $this->with('categories')->limit($limit);
+
+        $this->with('categories');
+
+        return $this->limit($limit);
     }
 
-    public function getFetureCategory($categoryId, $limit)
+    public function getFeatureCategory($categoryId, $limit)
     {
         $this->applyConditions([
             'is_featured' => 1,
@@ -113,7 +116,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $this->orderBy('created_at', 'desc');
-        return $this->with('categories')->limit($limit);
+        $this->with('categories')->orderBy('created_at', 'desc');
+        return $this->limit($limit);
     }
 }

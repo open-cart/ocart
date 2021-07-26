@@ -8,7 +8,7 @@
         <div class="py-4 space-y-3">
             <table>
                 <thead>
-                <tr class="border-b">
+                <tr class="border-b dark:border-gray-600">
                     <th class="w-96 text-left">Product</th>
                     <th class="text-center p-3">Price</th>
                     <th class="text-center p-3">Quantity</th>
@@ -18,7 +18,7 @@
                 </thead>
                 <tbody>
                 @foreach($order->products as $key => $product)
-                    <tr class="border-b">
+                    <tr class="border-b dark:border-gray-600">
                         <td class="text-left">
                             {!! $product->product_name !!}
                         </td>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <hr>
+            <hr class="dark:border-gray-600">
             <div class="flex justify-between">
                 <div>
                     Cash on delivery
@@ -66,7 +66,7 @@
                     <x-input x-model="$store.refund.refund_amount"/>
                 </div>
             </div>
-            <hr>
+            <hr class="dark:border-gray-600">
             <div class="flex flex-col">
                 <label for="refund-reason">Refund reason (optional)</label>
                 <x-input x-model="$store.refund.refund_note"/>

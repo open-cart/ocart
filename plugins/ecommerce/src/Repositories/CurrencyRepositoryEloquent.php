@@ -6,7 +6,6 @@ use Ocart\Core\Supports\RepositoriesAbstract;
 use Ocart\Ecommerce\Models\Currency;
 use Ocart\Ecommerce\Repositories\Interfaces\CurrencyRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -15,8 +14,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class CurrencyRepositoryEloquent extends RepositoriesAbstract implements CurrencyRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

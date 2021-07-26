@@ -7,7 +7,6 @@ use Ocart\Contact\Models\Contact;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Supports\RepositoriesAbstract;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,8 +15,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class ContactRepositoryEloquent extends RepositoriesAbstract implements ContactRepository
 {
-    use CacheableRepository;
-
     protected $fieldSearchable = [
         'alias' => 'like',
     ];

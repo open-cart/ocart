@@ -12,7 +12,7 @@
 
                 <div class="col-span-9 space-y-4" id="form-method-payment">
                     <div x-data="paymentMethodAlpine()" class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="p-6 border-b border-gray-200 space-y-2">
+                        <div class="p-6 border-gray-200 space-y-2">
                             <div class="flex flex-col">
                                 @php $paymentMethods = \Ocart\Payment\Enums\PaymentMethodEnum::toArray() @endphp
                                 <label>
@@ -35,9 +35,9 @@
                     {!! apply_filters(PAYMENT_METHODS_SETTINGS_PAGE, null) !!}
 
                     <div class="bg-white border dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div class="border-b border-gray-200">
+                        <div>
                             <div class="flex space-x-2">
-                                <div class="flex-none border-r p-2">
+                                <div class="flex-none border-r dark:border-gray-600 p-2">
                                     <img src="{{ asset('images/dollar.svg') }}"
                                          class="w-10 h-10"
                                          alt="money"/>
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <hr>
+                            <hr class="dark:border-gray-600">
                             <div>
                                 {!! Form::open() !!}
                                 {!! Form::hidden('type', 'cod', ['class' => 'payment_type']) !!}
@@ -103,7 +103,7 @@
                                 </div>
                                 {!! Form::close() !!}
                             </div>
-                            <hr>
+                            <hr class="dark:border-gray-600">
                             <div>
                                 {!! Form::open() !!}
                                 {!! Form::hidden('type', 'bank_transfer', ['class' => 'payment_type']) !!}

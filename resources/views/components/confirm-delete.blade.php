@@ -5,9 +5,9 @@
     aria-labelledby="modal-headline"
     style="display:none"
     >
-    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    <div class="modal-overlay absolute w-full h-full bg-gray-600 opacity-50"></div>
 
-    <div class="modal-container bg-white w-96 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
+    <div class="modal-container bg-white dark:bg-gray-800 w-96 md:max-w-md mx-auto rounded shadow-lg z-50 overflow-y-auto">
         <div
             x-on:click="$dispatch('close', { foo: 'bar' })"
             class="modal-close absolute top-0 right-0 cursor-pointer flex flex-col items-center mt-4 mr-4 text-white text-sm z-50">

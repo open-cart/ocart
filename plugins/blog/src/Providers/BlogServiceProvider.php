@@ -10,12 +10,12 @@ use Illuminate\Support\ServiceProvider;
 use Ocart\Blog\Models\Category;
 use Ocart\Blog\Models\Post;
 use Ocart\Blog\Models\Tag;
-use Ocart\Blog\Repositories\CategoryRepositoryEloquent;
+use Ocart\Blog\Repositories\Caches\CategoryCacheDecorator;
+use Ocart\Blog\Repositories\Caches\PostCacheDecorator;
+use Ocart\Blog\Repositories\Caches\TagCacheDecorator;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Blog\Repositories\Interfaces\TagRepository;
-use Ocart\Blog\Repositories\PostRepositoryEloquent;
-use Ocart\Blog\Repositories\TagRepositoryEloquent;
 use Ocart\Core\Facades\Slug;
 use Ocart\Core\Library\Helper;
 use Ocart\Core\Traits\LoadAndPublishDataTrait;
@@ -30,9 +30,9 @@ class BlogServiceProvider extends ServiceProvider
     {
         Helper::autoload(__DIR__ . '/../../helpers');
 
-        $this->app->bind(PostRepository::class, PostRepositoryEloquent::class);
-        $this->app->bind(CategoryRepository::class, CategoryRepositoryEloquent::class);
-        $this->app->bind(TagRepository::class, TagRepositoryEloquent::class);
+        $this->app->bind(PostRepository::class, PostCacheDecorator::class);
+        $this->app->bind(CategoryRepository::class, CategoryCacheDecorator::class);
+        $this->app->bind(TagRepository::class, TagCacheDecorator::class);
 
         Slug::registerPrefix(Post::class, [
             'label' => 'Blog Posts',

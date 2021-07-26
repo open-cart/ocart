@@ -7,7 +7,6 @@ use Ocart\Ecommerce\Models\Tag;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Prettus\Repository\Criteria\RequestCriteria;
-use Prettus\Repository\Traits\CacheableRepository;
 
 /**
  * Class PageRepositoryEloquent.
@@ -16,8 +15,6 @@ use Prettus\Repository\Traits\CacheableRepository;
  */
 class TagRepositoryEloquent extends RepositoriesAbstract implements TagRepository
 {
-    use CacheableRepository;
-
     /**
      * Chỉ định tên tags mô hình liên quan để xóa cache khi có cập nhật.
      * @var string[]
