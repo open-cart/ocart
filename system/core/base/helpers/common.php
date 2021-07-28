@@ -308,6 +308,12 @@ if (!function_exists('get_banner')) {
     }
 }
 
+if (!function_exists('get_banner_grid')) {
+    function get_banner_grid(){
+        return json_decode(setting('banner_grid', "[]"));
+    }
+}
+
 if (!function_exists('get_partner')) {
     function get_partner(){
         return json_decode(setting('partner', "[]"));
