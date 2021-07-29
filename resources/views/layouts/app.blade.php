@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        <meta http-equiv="x-pjax-version" content="{{ mix('/css/app.css') }}">
-        <meta http-equiv="x-pjax-version" content="{{ mix('/css/swal.css') }}">
+        <meta http-equiv="x-pjax-version" content="{{ mix('/css/app.css') }},{{ mix('/css/swal.css') }}">
 
         <title>{{ page_title()->getTitle() }}</title>
 
@@ -20,9 +19,9 @@
 {{--        <script src="{{ asset('js/app.js') }}" defer></script>--}}
 {{--        <script src="{!! asset('access/jquery/jquery.min.js') !!}"></script>--}}
 {{--        <script src="{!! asset('access/jquery.pjax.js') !!}"></script>--}}
+{{--        <script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>--}}
 
         {!! Assets::renderHeader(['core']) !!}
-
         <script>
             const bodyLoading = {
                 show() {
@@ -168,7 +167,7 @@
             @include('layouts.sidebar')
 
             <!-- Page Content -->
-                <main class="lg:ml-64" id="body" data-pjax-container="body">
+                <main class="lg:ml-64 the-content" id="body" data-pjax-container="body">
                     {{ $slot }}
                 </main>
             </div>
@@ -190,7 +189,9 @@
             @close="hide()"
             @accept="accept()"></x-confirm-delete>
     </div>
-    <div id="tnmedia-root"></div>
+    <div id="tnmedia-root" class="bg-white dark:text-gray-600"></div>
+
+    @routes
     {!! Assets::renderFooter() !!}
     <script>
         $(function(){
@@ -202,8 +203,11 @@
             //     console.log(container[0].id)
             //     $.pjax.click(event, {container: containerSelector})
             // })
-            $(document).pjax('a:not(.blank)', '#body');
-            $.pjax.defaults.timeout = 1200;
+            $(document).pjax('a:not(.blank)', '#body', {
+                fragment: '#js-check-all-container',
+                push: true
+            });
+            $.pjax.defaults.timeout = 11200;
 
             let loading;
 

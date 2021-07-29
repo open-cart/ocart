@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Ocart\Blog\Repositories\Caches\PostCacheDecorator;
 use Ocart\Core\Facades\EmailHandler;
 
 /*
@@ -13,6 +14,11 @@ use Ocart\Core\Facades\EmailHandler;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('nguyencache', function () {
+    $a = new PostCacheDecorator(app(\Ocart\Blog\Repositories\PostRepositoryEloquent::class));
+    dd($a->all());
+});
 
 Route::get('/install-migrate', function () {
 //    \Illuminate\Support\Facades\Artisan::call('migrate');

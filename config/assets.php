@@ -10,16 +10,12 @@ return [
         'jquery-ui',
         'app',
         'pjax',
-        'tnmedia',
         'tinymce',
-        'nestable',
-        'nestable-menu'
     ],
     'styles'         => [
         'app',
         'jquery-ui',
         'swal',
-        'tnmedia',
         'font',
     ],
     'resources'      => [
@@ -78,13 +74,6 @@ return [
                     'local' => 'access/jquery.pjax.js',
                 ],
             ],
-            'tnmedia' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'tnmedia/bundle.js',
-                ],
-            ],
             'simplemde' => [
                 'use_cdn'  => true,
                 'location' => 'header',
@@ -98,21 +87,7 @@ return [
                 'src'      => [
                     'local' => 'access/prismjs/prism.js',
                 ],
-            ],
-            'nestable' => [
-                'use_cdn'  => true,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/nestable/jquery.nestable.js',
-                ],
-            ],
-            'nestable-menu' => [
-                'use_cdn'  => true,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/nestable/nestable.menu.js',
-                ],
-            ],
+            ]
         ],
         'styles'  => [
             'jquery-ui' => [
@@ -133,13 +108,6 @@ return [
                 'location'   => 'header',
                 'src'        => [
                     'local' => 'css/swal.css',
-                ],
-            ],
-            'tnmedia' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'tnmedia/app.css',
                 ],
             ],
             'font' => [

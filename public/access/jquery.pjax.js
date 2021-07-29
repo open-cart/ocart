@@ -261,7 +261,7 @@ function pjax(options) {
 
     var latestVersion = xhr.getResponseHeader('X-PJAX-Version')
 
-    var container = extractContainer(data, xhr, options)
+    var container = extractContainerV2(data, xhr, options)
 
     var url = parseURL(container.url)
     if (hash) {
@@ -323,6 +323,9 @@ function pjax(options) {
     }
 
     executeScriptTags(container.scripts)
+    executeLinkTags(container.links)
+    executeReplaceAll(container.replace)
+    executeTransientAll(container.transient)
 
     var scrollTo = options.scrollTo
 
@@ -725,6 +728,78 @@ function extractContainer(data, xhr, options) {
   return obj
 }
 
+function extractContainerV2(data, xhr, options) {
+    var obj = {};
+
+    // Prefer X-PJAX-URL header if it was set, otherwise fallback to
+    // using the original requested url.
+    const serverUrl = xhr.getResponseHeader('X-PJAX-URL')
+    obj.url = serverUrl ? stripInternalParams(parseURL(serverUrl)) : options.requestUrl
+
+    let $head, $body, $replace, $transient
+    // Attempt to parse response html into elements
+
+    $body = $(parseHTML(data));
+
+    $head = findAll($body, '#pjax-head');
+
+    // If response data is empty, return fast
+    if ($body.length === 0)
+      return obj
+
+    obj.head = $head.contents();
+
+    $replace = findAll($body, '[data-pjax-replace]');
+    $transient = findAll($body, '[data-pjax-transient]');
+
+    obj.replace = $replace;
+    obj.transient = $transient;
+
+    // If there's a <title> tag in the header, use it as
+    // the page's title.
+    obj.title = findAll($head, 'title').last().text()
+
+    if (options.fragment) {
+      var $fragment = $body
+      // If they specified a fragment, look for it in the response
+      // and pull it out.
+      if (options.fragment !== 'body') {
+        $fragment = findAll($fragment, options.fragment).first()
+      }
+
+      if ($fragment.length) {
+        obj.contents = options.fragment === 'body' ? $fragment : $fragment.contents()
+
+        // If there's no title, look for data-title and title attributes
+        // on the fragment
+        if (!obj.title)
+          obj.title = $fragment.attr('title') || $fragment.data('title')
+      }
+    }
+
+    // Clean up any <title> tags
+    if (obj.contents) {
+      // Remove any parent title elements
+      obj.contents = obj.contents.not(function() { return $(this).is('title') })
+
+      // Then scrub any titles from their descendants
+      obj.contents.find('title').remove()
+
+      // Gather all script[src] elements
+      obj.scripts = findAll($body, 'script[src]').remove()
+      obj.contents = obj.contents.not(obj.scripts)
+
+      // Gather all link[href] elements
+      obj.links = findAll($body, 'link').remove();
+      obj.contents = obj.contents.not(obj.links)
+    }
+
+    // Trim any whitespace off the title
+    if (obj.title) obj.title = $.trim(obj.title)
+
+    return obj
+  }
+
 // Load an execute scripts using standard script request.
 //
 // Avoids jQuery's traditional $.getScript which does a XHR request and
@@ -749,7 +824,44 @@ function executeScriptTags(scripts) {
     var type = $(this).attr('type')
     if (type) script.type = type
     script.src = $(this).attr('src')
+
     document.head.appendChild(script)
+  })
+}
+
+function executeLinkTags(links) {
+  if (!links) return
+
+  const existingScripts = $('link[href]')
+
+  links.each(function() {
+    const href = this.href
+    const matchedScripts = existingScripts.filter(function() {
+      return this.href === href
+    })
+    if (matchedScripts.length) return
+
+    const link = document.createElement('link')
+    const type = $(this).attr('type')
+    if (type) link.type = type
+    link.href = $(this).attr('href')
+    const rel = $(this).attr('rel');
+    if (rel) link.rel = rel;
+    document.head.appendChild(link)
+  })
+}
+
+function executeReplaceAll(replaceAll) {
+  replaceAll.each(function() {
+    const id = this.id;
+    $("#" + id).html($(this).html());
+  })
+}
+
+function executeTransientAll(transientAll) {
+  $("meta[data-pjax-transient]").remove();
+  transientAll.each(function() {
+    document.head.appendChild(this);
   })
 }
 

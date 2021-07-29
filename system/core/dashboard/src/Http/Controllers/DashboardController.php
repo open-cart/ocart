@@ -28,6 +28,10 @@ class DashboardController extends BaseController
      */
     public function index(Request $request)
     {
+        \Assets::addScriptsDirectly([
+            'vendor/core/dashboard/js/dashboard.js'
+        ]);
+
         $widgets = $this->widgetRepository->with([
             'settings' => function(HasMany $query) use ($request) {
                 return $query->where('user_id', $request->user()->getKey())

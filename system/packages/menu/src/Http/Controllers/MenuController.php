@@ -1,6 +1,7 @@
 <?php
 namespace Ocart\Menu\Http\Controllers;
 
+use Botble\Assets\Facades\AssetsFacade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Arr;
@@ -81,6 +82,11 @@ class MenuController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
+        AssetsFacade::addScriptsDirectly([
+            'access/nestable/jquery.nestable.js',
+            'access/nestable/nestable.menu.js',
+        ]);
+
         page_title()->setTitle(trans('packages/menu::menus.edit'));
         $menu = $this->menuRepository->skipCriteria()->find($id);
 
