@@ -84,7 +84,9 @@ class MenuController extends BaseController
     {
         AssetsFacade::addScriptsDirectly([
             'access/nestable/jquery.nestable.js',
-            'access/nestable/nestable.menu.js',
+            'vendor/packages/menu/js/nestable.menu.js',
+        ])->addStylesDirectly([
+            'vendor/packages/menu/css/nestable.css'
         ]);
 
         page_title()->setTitle(trans('packages/menu::menus.edit'));

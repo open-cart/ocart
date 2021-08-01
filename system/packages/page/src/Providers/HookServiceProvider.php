@@ -7,6 +7,7 @@ namespace Ocart\Page\Providers;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use Ocart\Menu\Facades\Menu;
 use Ocart\Page\Repositories\PageRepository;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Shortcode\View\View;
@@ -66,6 +67,7 @@ class HookServiceProvider extends ServiceProvider
 
     public function registerMenuOptions()
     {
-        echo view('packages.page::menu-option');
+        $name = trans('packages/page::pages.menu');
+        Menu::registerMenuOptions(app(\Ocart\Page\Repositories\PageRepository::class), $name);
     }
 }

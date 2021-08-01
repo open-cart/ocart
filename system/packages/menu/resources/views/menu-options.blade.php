@@ -12,18 +12,8 @@
     <div x-show="open"
          style="display: none"
          class="px-4 py-3 panel-group border-t dark:border-gray-700">
-        <div class="border dark:border-gray-700 px-3 py-2 mb-3">
-            <ul>
-                @foreach($list as $item)
-                    <li class="menu-item-insert" data-type="{{ $type }}" data-item='@json($item)'>
-                        <label class="flex items-center space-x-3">
-                            <input class="rounded-md h-5 w-5 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
-                                   type="checkbox" value="{{ $item->id }}"/>
-                            <span class="text-gray-900 font-medium dark:text-gray-300">{{ $item->name }}</span>
-                        </label>
-                    </li>
-                @endforeach
-            </ul>
+        <div class="border dark:border-gray-700 px-3 py-2 mb-3 h-96 overflow-auto">
+            {!! $options !!}
         </div>
         <div class="flex justify-between">
             <div></div>

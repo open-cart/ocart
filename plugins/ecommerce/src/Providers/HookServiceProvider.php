@@ -13,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Ocart\Contact\Repositories\Interfaces\ContactRepository;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Facades\EmailHandler;
+use Ocart\Core\Supports\SortItemsWithChildrenSupport;
 use Ocart\Ecommerce\Models\Brand;
 use Ocart\Ecommerce\Models\Category;
 use Ocart\Ecommerce\Repositories\Interfaces\BrandRepository;
@@ -21,6 +22,7 @@ use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Widgets\OrderReportWidget;
 use Ocart\Ecommerce\Widgets\OrderStatsWidget;
 use Ocart\Ecommerce\Widgets\ProductStatsWidget;
+use Ocart\Menu\Facades\Menu;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -236,13 +238,8 @@ class HookServiceProvider extends ServiceProvider
     public function registerMenuOptions()
     {
         if (Gate::allows('ecommerce.categories.index', Auth::user())) {
-            $type = Category::class;
             $name = trans('plugins/ecommerce::ecommerce.categories');
-            $list = app(CategoryRepository::class)->all();
-
-            if ($list->isNotEmpty()) {
-                echo view('plugins.ecommerce::menu', compact('list', 'name', 'type'));
-            }
+            Menu::registerMenuOptions(app(CategoryRepository::class), $name);
         }
 
 

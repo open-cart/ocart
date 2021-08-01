@@ -157,8 +157,7 @@ $(document).ready(function () {
                     return;
                 }
 
-                const li = $(document.createElement('li'));
-                li.html($(templates));
+                const li = $(templates)
                 li.addClass("dd-item flex relative");
                 li.data('id', '')
                 li.data('title', title);
@@ -175,12 +174,13 @@ $(document).ready(function () {
                 parent.children('ol').append(li);
             } else {
                 panel.find('input:checked').each(function () {
-                    const item = $(this).closest('li');
+                    const _self = $(this);
+                    _self.click();
+                    const item = _self.closest('li');
                     const data = item.data('item');
                     const type = item.data('type');
 
-                    const li = $(document.createElement('li'))
-                    li.html($(templates));
+                    const li = $(templates);
                     li.addClass("dd-item block relative");
                     li.data('id', '')
                     li.data('title', data.name);
