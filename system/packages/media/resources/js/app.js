@@ -15,6 +15,8 @@ require('./bundle');
         }
     }
 
+    init();
+
     $(document).on('pjax:complete', function () {
         init();
     });

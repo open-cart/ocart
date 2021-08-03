@@ -309,3 +309,15 @@ li.media-list-title {
 .model-create-folder-content{
     width: 400px;
 }
+
+@media only screen and (max-width: 600px) {
+    .media-gird .media-list-title {
+        width: 24.5%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .media-gird .media-list-title {
+        width: 20%;
+    }
+}
