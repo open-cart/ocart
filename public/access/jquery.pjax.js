@@ -731,6 +731,8 @@ function extractContainer(data, xhr, options) {
 function extractContainerV2(data, xhr, options) {
     var obj = {};
 
+   options.fragment = options.fragment || '#js-check-all-container';
+
     // Prefer X-PJAX-URL header if it was set, otherwise fallback to
     // using the original requested url.
     const serverUrl = xhr.getResponseHeader('X-PJAX-URL')
