@@ -30,13 +30,13 @@ class PaymentMethodController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'payments.transactions.index',
-            'show' => 'payments.transactions.update',
-            'create' => 'payments.transactions.create',
-            'store' => 'payments.transactions.create',
-            'edit' => 'payments.transactions.update',
-            'update' => 'payments.transactions.update',
-            'destroy' => 'payments.transactions.destroy',
+            'index' => 'payments.settings',
+//            'show' => 'payments.transactions.update',
+//            'create' => 'payments.transactions.create',
+//            'store' => 'payments.transactions.create',
+//            'edit' => 'payments.transactions.update',
+//            'update' => 'payments.transactions.update',
+//            'destroy' => 'payments.transactions.destroy',
         ];
     }
 

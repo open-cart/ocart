@@ -30,7 +30,7 @@ class RoleTable extends TableAbstract
                 'with' => '20px',
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
-                    return $item->name;
+                    return '<a class="text-blue-500" href=" '.route('system.roles.update', $item->id).' ">' . $item->name . '</a>';
                 }
             ],
             'guard_name' => [

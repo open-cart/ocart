@@ -22,7 +22,7 @@ class ThemeServiceProvider extends ServiceProvider
         Helper::autoload(__DIR__ . '/../../helpers');
 
         $this->setNamespace('packages/theme')
-            ->loadAndPublishConfigurations([])
+            ->loadAndPublishConfigurations(['permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
@@ -52,7 +52,8 @@ class ThemeServiceProvider extends ServiceProvider
                     'icon'        => null,
                     'url'         => route('themes.index'),
                     'permissions' => [
-                        'themes.index'
+                        'themes.index',
+                        'themes.options'
                     ],
                     'active'      => false,
                 ])->registerItem([
@@ -63,7 +64,7 @@ class ThemeServiceProvider extends ServiceProvider
                     'icon'        => null,
                     'url'         => route('theme.options'),
                     'permissions' => [
-                        'themes.index'
+                        'themes.options'
                     ],
                     'active'      => false,
                 ]);

@@ -51,7 +51,7 @@ class BlogServiceProvider extends ServiceProvider
         $this
             ->setBasePath(base_path() .'/')
             ->setNamespace('plugins/blog')
-            ->loadAndPublishConfigurations([])
+            ->loadAndPublishConfigurations(['permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

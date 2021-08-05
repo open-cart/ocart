@@ -1,6 +1,5 @@
 <div class="flex flex-col space-y-4">
     <a href="">Reload</a>
-{{--    {{ dd($model) }}--}}
     <p>
         Time: {!! $model->created_at !!}
     </p>

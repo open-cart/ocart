@@ -17,3 +17,6 @@ Route::group([
         Route::resource('', 'RoleController')->parameters(['' => 'id']);
     });
 });
+
+//dd(\App\Models\Admin::first()->hasPermission('ads.index1'));
+//dd(\Ocart\Acl\Models\Role::first()->roles);

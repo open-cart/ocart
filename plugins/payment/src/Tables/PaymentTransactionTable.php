@@ -93,7 +93,7 @@ class PaymentTransactionTable extends TableAbstract
 
     public function buttons()
     {
-        $buttons = $this->addCreateButton(route('payments.transactions.create'), []);
+        $buttons = []; //$this->addCreateButton(route('payments.transactions.create'), []);
 
         return apply_filters(BASE_FILTER_TABLE_BUTTONS, $buttons, Payment::class);
     }

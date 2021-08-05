@@ -93,7 +93,7 @@ class HookServiceProvider extends ServiceProvider
 //                'name'        => 'Báo cáo',
 //                'icon'        => null,
 //                'url'         => '',
-//                'permissions' => [],
+//                'permissions' => ['ecommerce.reports'],
 //                'active'      => false,
 //            ])
                  ->registerItem([
@@ -196,7 +196,7 @@ class HookServiceProvider extends ServiceProvider
                     'icon'        => null,
                     'url'         => route('ecommerce.shipping.shipping_methods'),
                     'permissions' => [
-                        'ecommerce.brands.index',
+                        'ecommerce.shipping',
                     ],
                     'active'      => false,
                 ])->registerItem([
@@ -221,7 +221,7 @@ class HookServiceProvider extends ServiceProvider
                     'icon'        => null,
                     'url'         => route('ecommerce.settings'),
                     'permissions' => [
-                        'ecommerce.brands.index',
+                        'ecommerce.settings',
                     ],
                     'active'      => false,
                 ]);

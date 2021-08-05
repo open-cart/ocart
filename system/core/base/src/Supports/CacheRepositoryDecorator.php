@@ -218,7 +218,8 @@ class CacheRepositoryDecorator implements RepositoryInterface
                 return call_user_func_array([$this->repository, $function], $args);
             });
         } catch (Exception $e) {
-            dd($this->repository, $function, $args, $e);
+            throw $e;
+//            dd($this->repository, $function, $args, $e);
         }
     }
 

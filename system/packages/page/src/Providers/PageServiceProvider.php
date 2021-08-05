@@ -32,7 +32,7 @@ class PageServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setNamespace('packages/page')
-            ->loadAndPublishConfigurations(['general'])
+            ->loadAndPublishConfigurations(['general', 'permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

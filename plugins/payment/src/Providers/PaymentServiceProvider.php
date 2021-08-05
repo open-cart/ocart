@@ -26,6 +26,7 @@ class PaymentServiceProvider extends ServiceProvider
             ->setNamespace('plugins/payment')
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
+            ->loadAndPublishConfigurations(['permissions'])
             ->loadAndPublishTranslations();
     }
 }

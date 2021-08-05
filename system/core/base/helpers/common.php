@@ -418,3 +418,24 @@ if (!function_exists('get_sec_feedback')) {
         return json_decode(setting('sec_feedback', null));
     }
 }
+
+if (!function_exists('scan_folder')) {
+    /**
+     * @param string $path
+     * @param array $ignoreFiles
+     * @return array
+     */
+    function scan_folder($path, $ignoreFiles = [])
+    {
+        try {
+            if (File::isDirectory($path)) {
+                $data = array_diff(scandir($path), array_merge(['.', '..', '.DS_Store'], $ignoreFiles));
+                natsort($data);
+                return $data;
+            }
+            return [];
+        } catch (Exception $exception) {
+            return [];
+        }
+    }
+}

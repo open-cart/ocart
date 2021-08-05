@@ -25,6 +25,7 @@ class HookServiceProvider extends ServiceProvider
                 'url' => route('ec_review.reviews.index'),
                 'permissions' => [
                     'ec_review.reviews.index',
+                    'ec_review.reviews.destroy'
                 ],
                 'active'      => false,
             ]);

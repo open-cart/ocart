@@ -38,7 +38,7 @@ class MenuController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-//            'index' => 'menus.index',
+            'index' => 'menus.index',
             'show' => 'menus.update',
             'create' => 'menus.create',
             'store' => 'menus.create',

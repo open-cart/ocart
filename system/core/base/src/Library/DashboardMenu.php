@@ -7,6 +7,7 @@ namespace Ocart\Core\Library;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
@@ -145,7 +146,7 @@ class DashboardMenu
         $menus = [];
 
         foreach ($links as $key => &$link) {
-            if (!Gate::any($link['permissions'], Auth::user())) {
+            if (!$this->checkPermission($link['permissions'])) {
                 Arr::forget($links, $key);
                 continue;
             }
@@ -164,7 +165,7 @@ class DashboardMenu
             $link['children'] = collect($link['children'])->sortBy('priority')->toArray();
 
             foreach ($link['children'] as $sub_key => $sub_menu) {
-                if (!Gate::any($sub_menu['permissions'], Auth::user())) {
+                if (!$this->checkPermission($sub_menu['permissions'])) {
                     Arr::forget($link['children'], $sub_key);
                     continue;
                 }
@@ -183,5 +184,28 @@ class DashboardMenu
         }
 
         return collect($menus)->sortBy('priority');
+    }
+
+    protected function checkPermission($permission) {
+
+        $key = serialize($permission);
+
+//        start_measure('sidebar', $key);
+        $r = Auth::user()->hasAnyPermission($permission);
+
+//
+//        $r = Cache::store('array')->rememberForever($key, function () use ($permission) {
+//            if (is_string($permission)) {
+//                return Auth::user()->can($permission);
+//            }
+//
+//            foreach ($permission as $per) {
+//                if (Auth::user()->can($per)) {
+//                    return true;
+//                }
+//            }
+//        });
+//        stop_measure('sidebar');
+        return $r;
     }
 }

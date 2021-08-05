@@ -34,9 +34,5 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(10)->create();
-
-        $admin->assignRole(['owners']);
-
-        app()->make(\Spatie\Permission\PermissionRegistrar::class)->forgetCachedPermissions();
     }
 }

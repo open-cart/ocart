@@ -39,7 +39,7 @@ class MediaServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setNamespace('packages/media')
-            ->loadAndPublishConfigurations(['media'])
+            ->loadAndPublishConfigurations(['media', 'permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

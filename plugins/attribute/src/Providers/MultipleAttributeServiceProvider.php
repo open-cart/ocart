@@ -38,7 +38,7 @@ class MultipleAttributeServiceProvider extends ServiceProvider
         $this
             ->setBasePath(base_path() . '/')
             ->setNamespace('plugins/attribute')
-            ->loadAndPublishConfigurations([])
+            ->loadAndPublishConfigurations(['permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

@@ -120,7 +120,10 @@ class HookServiceProvider extends ServiceProvider
                 'icon' => null,
                 'url' => route('ecommerce.attribute_groups.index'),
                 'permissions' => [
-                    'ecommerce.orders.index',
+                    'ecommerce.attribute_groups.index',
+                    'ecommerce.attribute_groups.create',
+                    'ecommerce.attribute_groups.update',
+                    'ecommerce.attribute_groups.destroy',
                 ],
                 'active' => false,
             ]);

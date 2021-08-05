@@ -22,6 +22,8 @@ class PluginManagementServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
 
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'packages/plugin-management');
+
+        $this->mergeConfigFrom(__DIR__.'/../../config/permissions.php', 'packages.plugin-management.permissions');
     }
 
     /**
