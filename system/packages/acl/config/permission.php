@@ -1,6 +1,7 @@
 <?php
-
 return [
+    'superusers' => explode(',', env('SUPPER_USER', 1)),
+
     'models' => [
         /*
          * When using the "HasRoles" trait from this package, we need to know which

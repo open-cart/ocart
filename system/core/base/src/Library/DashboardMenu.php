@@ -34,15 +34,15 @@ class DashboardMenu
         }
 
         $defaultOptions = [
-            'id'          => '',
-            'priority'    => 99,
-            'parent_id'   => null,
-            'name'        => '',
-            'icon'        => null,
-            'url'         => '',
-            'children'    => [],
+            'id' => '',
+            'priority' => 99,
+            'parent_id' => null,
+            'name' => '',
+            'icon' => null,
+            'url' => '',
+            'children' => [],
             'permissions' => [],
-            'active'      => false,
+            'active' => false,
         ];
 
         $options = array_merge($defaultOptions, $options);
@@ -140,7 +140,7 @@ class DashboardMenu
 //                $links = cache($cache_key);
 //            }
 //        } else {
-            $links = $this->links;
+        $links = $this->links;
 //        }
 
         $menus = [];
@@ -186,26 +186,8 @@ class DashboardMenu
         return collect($menus)->sortBy('priority');
     }
 
-    protected function checkPermission($permission) {
-
-        $key = serialize($permission);
-
-//        start_measure('sidebar', $key);
-        $r = Auth::user()->hasAnyPermission($permission);
-
-//
-//        $r = Cache::store('array')->rememberForever($key, function () use ($permission) {
-//            if (is_string($permission)) {
-//                return Auth::user()->can($permission);
-//            }
-//
-//            foreach ($permission as $per) {
-//                if (Auth::user()->can($per)) {
-//                    return true;
-//                }
-//            }
-//        });
-//        stop_measure('sidebar');
-        return $r;
+    protected function checkPermission($permission)
+    {
+        return Auth::user()->hasAnyPermission($permission);
     }
 }

@@ -58,8 +58,6 @@ trait PermissionTrait
     {
         if (!$this->preparedPermissions) {
             $this->preparedPermissions = $this->createPreparedPermissions();
-
-            $this->preparedPermissions['superuser'] = $this->isSuperAdmin();
         }
 
         return $this->preparedPermissions;
@@ -70,7 +68,17 @@ trait PermissionTrait
      */
     protected function createPreparedPermissions()
     {
-        return $this->roles->pluck('permissions')->collapse()->toArray();
+        $allRoles = $this->roles->pluck('name')->toArray();
+
+        $roles = [];
+
+        foreach ($allRoles as $role) {
+            $roles[$role] = true;
+        }
+
+        $permissions = $this->roles->pluck('permissions')->collapse()->toArray();
+
+        return array_merge($roles, $permissions);
     }
 
     /**

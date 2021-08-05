@@ -3,7 +3,6 @@ namespace Ocart\Acl\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Ocart\Acl\Models\Role;
-use Spatie\Permission\Traits\HasRoles;
 
 trait RoleTrait
 {
@@ -28,7 +27,9 @@ trait RoleTrait
      */
     public function isSuperUser()
     {
-        return $this->id == 1;
+        $superusers = config('packages.acl.permission.superusers');
+
+        return in_array($this->id, $superusers) || $this->hasAccess('owners');
     }
 
     /**
