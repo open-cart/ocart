@@ -815,6 +815,8 @@ function executeScriptTags(scripts) {
 
   var existingScripts = $('script[src]')
 
+  const div = document.createElement('div');
+
   scripts.each(function() {
     var src = this.src
     var matchedScripts = existingScripts.filter(function() {
@@ -827,8 +829,10 @@ function executeScriptTags(scripts) {
     if (type) script.type = type
     script.src = $(this).attr('src')
 
-    document.head.appendChild(script)
+    div.appendChild(script);
   })
+
+  $(document.head).append(div.innerHTML)
 }
 
 function executeLinkTags(links) {

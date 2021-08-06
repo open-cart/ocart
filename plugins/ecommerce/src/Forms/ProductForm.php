@@ -65,11 +65,7 @@ class ProductForm extends FormAbstract
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
                 ]
             ])
-            ->add('content', Field::TEXTAREA, [
-                'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
-                ]
-            ])
+            ->add('content', Field::EDITOR, [])
             ->add('images[]', Field::MEDIA_IMAGES, [
                 'label'      =>'Images',
                 'value'     => $this->getModel() ? $this->getModel()->images : []

@@ -9,8 +9,7 @@ return [
         'jquery',
         'jquery-ui',
         'app',
-        'pjax',
-        'tinymce',
+        'pjax'
     ],
     'styles'         => [
         'app',
@@ -34,7 +33,7 @@ return [
                     'local' => '/js/app.js',
                 ],
                 'attributes' => [
-                    'defer' => true
+//                    'defer' => true
                 ]
             ],
             'modernizr' => [
@@ -58,13 +57,6 @@ return [
                 'src'      => [
                     'local' => 'access/jquery-ui/jquery-ui.js',
                     'cdn' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
-                ],
-            ],
-            'tinymce' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/tinymce/tinymce.min.js',
                 ],
             ],
             'pjax' => [
@@ -131,15 +123,6 @@ return [
                     'local' => 'access/prismjs/prism.css',
                 ],
             ],
-
-
-//            'tinymce' => [
-//                'use_cdn'  => false,
-//                'location' => 'header',
-//                'src'      => [
-//                    'local' => 'access/tinymce/tinymce.min.js',
-//                ],
-//            ],
         ],
     ],
 ];

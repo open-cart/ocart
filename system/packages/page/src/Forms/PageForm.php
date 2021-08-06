@@ -1,7 +1,7 @@
 <?php
 namespace Ocart\Page\Forms;
 
-use Kris\LaravelFormBuilder\Field;
+use Ocart\Core\Forms\Field;
 use Ocart\Page\Models\Page;
 use Ocart\Page\Supports\Template;
 use Ocart\Core\Enums\BaseStatusEnum;
@@ -30,11 +30,8 @@ class PageForm extends FormAbstract
                     'rows' => 3
                 ]
             ])
-            ->add('content', Field::TEXTAREA, [
-                'label'      => trans('packages/page::pages.forms.content'),
-                'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
-                ]
+            ->add('content', Field::EDITOR, [
+                'label'      => trans('packages/page::pages.forms.content')
             ])
 //            ->add('is_featured', 'onOff')
             ->add('status', 'select', [
