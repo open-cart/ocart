@@ -34,12 +34,8 @@ if (!function_exists('get_blog_categories')) {
      */
     function get_blog_categories(array $args = [])
     {
-        $indent = Arr::get($args, 'indent', '——');
-
         $repo = app(CategoryRepository::class);
 
-//        $repo->orderBy($repo->getModel()->qualifyColumn('is_default'), 'DESC');
-//        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
         $repo->orderBy($repo->getModel()->qualifyColumn('name'), 'ASC');
 
         $categories = $repo->all();
@@ -47,20 +43,7 @@ if (!function_exists('get_blog_categories')) {
         /** @var SortItemsWithChildrenSupport $sortSupport */
         $sortSupport = app(SortItemsWithChildrenSupport::class);
 
-        $list = $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
-
-        $categories = sort_item_with_children($list);
-
-        foreach ($categories as $category) {
-            $indentText = '';
-            $depth = (int)$category->depth;
-            for ($i = 0; $i < $depth; $i++) {
-                $indentText .= $indent;
-            }
-            $category->indent_text = $indentText;
-        }
-
-        return $categories;
+        return $sortSupport->setItems($categories)->setChildrenProperty('child_cats')->sort();
     }
 }
 
