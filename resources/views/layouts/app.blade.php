@@ -164,9 +164,7 @@
 {{--                </header>--}}
 
                 <!-- Page Sidebar -->
-            {{ start_measure('sidebar', 'layout sidebar') }}
             @include('layouts.sidebar')
-            {{ stop_measure('sidebar') }}
 
             <!-- Page Content -->
                 <main class="lg:ml-64 the-content" id="body" data-pjax-container="body">
