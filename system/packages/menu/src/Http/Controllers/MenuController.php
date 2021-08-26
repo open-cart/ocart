@@ -1,6 +1,7 @@
 <?php
 namespace Ocart\Menu\Http\Controllers;
 
+use Botble\Assets\Facades\AssetsFacade;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Arr;
@@ -37,7 +38,7 @@ class MenuController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-//            'index' => 'menus.index',
+            'index' => 'menus.index',
             'show' => 'menus.update',
             'create' => 'menus.create',
             'store' => 'menus.create',
@@ -81,6 +82,13 @@ class MenuController extends BaseController
 
     function show($id, FormBuilder $formBuilder)
     {
+        AssetsFacade::addScriptsDirectly([
+            'access/nestable/jquery.nestable.js',
+            'vendor/packages/menu/js/nestable.menu.js',
+        ])->addStylesDirectly([
+            'vendor/packages/menu/css/nestable.css'
+        ]);
+
         page_title()->setTitle(trans('packages/menu::menus.edit'));
         $menu = $this->menuRepository->skipCriteria()->find($id);
 

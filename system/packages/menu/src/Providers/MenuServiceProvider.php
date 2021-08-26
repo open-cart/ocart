@@ -26,7 +26,7 @@ class MenuServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->setNamespace('packages/menu')
-//            ->loadAndPublishConfigurations(['general'])
+            ->loadAndPublishConfigurations(['permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

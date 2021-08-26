@@ -30,7 +30,7 @@ class RoleController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-//            'index' => 'pages.index',
+            'index' => 'system.roles.index',
             'show' => 'system.roles.update',
             'create' => 'system.roles.create',
             'store' => 'system.roles.create',
@@ -65,11 +65,11 @@ class RoleController extends BaseController
     {
         $data = $request->all();
 
+        $data['guard_name'] = 'admin';
+
+        $data['permissions'] = $this->cleanPermission($request->input('permissions', []));
+
         $role = $this->repo->create($data);
-
-        $role->syncPermissions($request->permissions);
-
-        $role->forgetCachedPermissions();
 
         return $response->setPreviousUrl(route('system.roles.index'))
             ->setNextUrl(route('system.roles.show', $role->id));
@@ -90,13 +90,15 @@ class RoleController extends BaseController
     {
         $data = $request->all();
 
+        $data['permissions'] = $this->cleanPermission($request->input('permissions', []));
+
         /** @var Role $user */
         $role = $this->repo->update($data, $id);
 
 
-        $role->syncPermissions($request->permissions);
+//        $role->syncPermissions($request->permissions);
 
-        $role->forgetCachedPermissions();
+//        $role->forgetCachedPermissions();
 
         return $response->setPreviousUrl(route('system.roles.index'))
             ->setNextUrl(route('system.roles.show', $role->id));
@@ -107,5 +109,24 @@ class RoleController extends BaseController
         $this->repo->delete($request->input('id'));
 
         return response()->json([]);
+    }
+
+    /**
+     * Return a correctly type casted permissions array
+     * @param array $permissions
+     * @return array
+     */
+    protected function cleanPermission($permissions)
+    {
+        if (!$permissions) {
+            return [];
+        }
+
+        $cleanedPermissions = [];
+        foreach ($permissions as $permissionName) {
+            $cleanedPermissions[$permissionName] = true;
+        }
+
+        return $cleanedPermissions;
     }
 }

@@ -30,3 +30,9 @@ if (!function_exists('get_image_url')) {
         return TnMedia::getImageUrl($url, $size, $default);
     }
 }
+
+function sri($file)
+{
+    $data = file_get_contents($file);
+    return 'sha256-'. base64_encode(hash("sha256", $data, true));
+}

@@ -65,7 +65,7 @@ class EcommerceServiceProvider extends ServiceProvider {
             ])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations(['ecommerce', 'general', 'email'])
+            ->loadAndPublishConfigurations(['ecommerce', 'general', 'email', 'permissions'])
             ->loadMigrations();
 
         $this->app->bind(ProductRepository::class, ProductCacheDecorator::class);

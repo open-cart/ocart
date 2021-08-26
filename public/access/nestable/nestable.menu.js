@@ -45,16 +45,14 @@ $(document).ready(function () {
         const nodes = recursive(menu_nodes);
 
         const templates = `
-<div>
-            <div class="bg-white border dark:bg-gray-800 dark:border-gray-700 flex justify-between">
-                <div class="dd-handle flex-grow flex justify-between px-3 py-2 cursor-move">
-                    <div>Name</div>
-                </div>
-                <div class="flex-none flex flex justify-between items-center px-3">
-                    <a class="show-item-details text-blue-500" href="javascript:void(0)">Edit</a>
-                    <span>&nbsp;|&nbsp;</span>
-                    <a class="delete-item text-blue-500" href="javascript:void(0)">Delete</a>
-                </div>
+<li class="dd-item relative">
+            <div class="dd-handle flex-grow flex justify-between px-3 py-2 cursor-move border dark:bg-gray-800 dark:border-gray-700">
+                <div>Name</div>
+            </div>
+            <div class="flex-none flex flex justify-between items-center px-3 py-2 absolute top-0 right-0">
+                <a class="show-item-details text-blue-500" href="javascript:void(0)">Edit</a>
+                <span>&nbsp;|&nbsp;</span>
+                <a class="delete-item text-blue-500" href="javascript:void(0)">Delete</a>
             </div>
             <div style="display: none" class="item-details p-6 bg-white border-l border-r border-b dark:bg-gray-800 dark:border-gray-700">
                 <div class="flex flex-col space-y-3">
@@ -84,14 +82,14 @@ $(document).ready(function () {
                     </label>
                 </div>
             </div>
-        </div>
+        </li>
         `;
 
         function renderRecursive(nodes, parent) {
             for (const node of nodes) {
-                const li = $(document.createElement('li'))
-                li.html($(templates));
-                li.addClass("dd-item block relative");
+                const li = $(templates)
+                // li.html($(templates));
+                li.addClass("dd-item");
                 li.data('id', node.id)
                 li.data('title', node.title);
                 // li.data('url', node.url);
@@ -161,7 +159,7 @@ $(document).ready(function () {
 
                 const li = $(document.createElement('li'));
                 li.html($(templates));
-                li.addClass("dd-item block relative");
+                li.addClass("dd-item flex relative");
                 li.data('id', '')
                 li.data('title', title);
                 // li.data('reference_type', 'custom-link');

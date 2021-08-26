@@ -6,7 +6,7 @@
     <div class="col-span-4 space-y-4">
         @php do_action(MENU_ACTION_SIDEBAR_OPTIONS) @endphp
 
-        <div class="bg-white dark:bg-gray-800 border border-white dark:border-gray-700 rounded" x-data="{open: false}">
+        <div class="bg-white dark:bg-gray-800 border dark:border-gray-700 rounded" x-data="{open: false}">
             <div class="px-4 py-3 flex justify-between cursor-pointer" x-on:click="open = !open">
                 <h3>{{ trans('packages/menu::menus.add_link') }}</h3>
                 <span>
@@ -20,7 +20,7 @@
             <div x-show="open"
                  style="display: none"
                  id="external_link"
-                 class="px-4 py-3 panel-group border-t">
+                 class="px-4 py-3 panel-group border-t dark:border-gray-700">
                 <div class="space-y-4 mb-3">
                     <label class="block ">
                         <span>{{ trans('packages/menu::menus.title') }}</span>
@@ -93,29 +93,3 @@
         </div>
     </div>
 </div>
-<style type="text/css">
-    .dd-list { display: block; position: relative; margin: 0; padding: 0; list-style: none; }
-    .dd-list .dd-list { padding-left: 30px; }
-    .dd-collapsed .dd-list { display: none; }
-    .dd-item > button {
-        display: none;
-    }
-    .dd-item {
-        margin: 5px 0;
-    }
-    .dd-placeholder,
-    .dd-empty { margin: 5px 0; padding: 0; min-height: 30px; background: #f2fbff; border: 1px dashed #b6bcbf; box-sizing: border-box; -moz-box-sizing: border-box; }
-    .dd-empty { border: 1px dashed #bbb; min-height: 100px; background-color: #e5e5e5;
-        background-image: -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
-        -webkit-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-        background-image:    -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
-        -moz-linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-        background-image:         linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff),
-        linear-gradient(45deg, #fff 25%, transparent 25%, transparent 75%, #fff 75%, #fff);
-        background-size: 60px 60px;
-        background-position: 0 0, 30px 30px;
-    }
-
-    .dd-dragel { position: absolute; pointer-events: none; z-index: 9999; }
-    .dd-dragel > .dd-item .dd-handle { margin-top: 0; }
-</style>

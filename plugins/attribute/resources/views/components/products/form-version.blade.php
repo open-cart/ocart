@@ -64,6 +64,9 @@
             </div>
         </x-slot>
     </x-modal>
+
+    <div id="oldProduct" data-value='@json($product)'></div>
+    <div id="oldGroups" data-value='@json($groups)'></div>
 </div>
 <script>
     function showError(e) {
@@ -75,10 +78,12 @@
         throw e;
     }
 
+    function cloneObject(obj) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+
     var configs_variation_related = {
         productId: {!! $product->id !!},
-        oldProduct: @json($product),
-        oldGroups: @json($groups),
         groups: [],
         loading: false,
         loadingShow: false,
@@ -86,7 +91,8 @@
         isUpdate: false,
         showCreate() {
             this.isUpdate = false;
-            this.groups = JSON.parse(JSON.stringify(this.oldGroups));
+            this.groups = cloneObject($('#oldGroups').data('value'));
+            this.oldProduct = cloneObject($('#oldProduct').data('value'));
             const {oldProduct} = this;
 
             $("#sku").val('');
@@ -107,7 +113,7 @@
             $('.default-placeholder-gallery-image').removeClass('hidden');
 
             const list = $('.list-gallery-media-images').html('');
-            this.groups = JSON.parse(JSON.stringify(this.oldGroups));
+            this.groups = cloneObject($('#oldGroups').data('value'));
             axios.get('{{ route('ecommerce.attribute_groups.get_version') }}/' + id).then(res => {
                 const {attributes, product, images} = res.data;
                 for (const group of this.groups) {

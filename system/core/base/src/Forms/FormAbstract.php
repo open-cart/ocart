@@ -4,6 +4,7 @@ namespace Ocart\Core\Forms;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Kris\LaravelFormBuilder\Form;
+use Ocart\Core\Forms\Fields\EditorField;
 use Ocart\Core\Forms\Fields\MediaImageField;
 use Ocart\Core\Forms\Fields\MediaImagesField;
 use Ocart\Core\Forms\Fields\OnOffField;
@@ -73,9 +74,9 @@ abstract class FormAbstract extends Form
 //            $this->addCustomField('customSelect', CustomSelectField::class);
 //        }
 
-//        if (!$this->formHelper->hasCustomField('editor')) {
-//            $this->addCustomField('editor', EditorField::class);
-//        }
+        if (!$this->formHelper->hasCustomField('editor')) {
+            $this->addCustomField(Field::EDITOR, EditorField::class);
+        }
         if (!$this->formHelper->hasCustomField('onOff')) {
             $this->addCustomField('onOff', OnOffField::class);
         }

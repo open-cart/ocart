@@ -38,7 +38,7 @@ class HookServiceProvider extends ServiceProvider
                     'icon' => null,
                     'url' => route('contacts.index'),
                     'permissions' => [
-                        'ecommerce.orders.index',
+                        'contacts.index',
                     ],
                     'active' => false,
                 ]);

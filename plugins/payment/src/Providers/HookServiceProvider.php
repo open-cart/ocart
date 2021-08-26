@@ -36,7 +36,8 @@ class HookServiceProvider extends ServiceProvider
                 'icon'        => null,
                 'url'         => route('payments.transactions.index'),
                 'permissions' => [
-                    'ecommerce.orders.index',
+                    'payments.transactions.index',
+                    'payments.transactions.destroy',
                 ],
                 'active'      => false,
             ])->registerItem([
@@ -47,7 +48,7 @@ class HookServiceProvider extends ServiceProvider
                 'icon'        => null,
                 'url'         => route('payments.methods.index'),
                 'permissions' => [
-                    'ecommerce.orders.index',
+                    'payments.settings',
                 ],
                 'active'      => false,
             ]);

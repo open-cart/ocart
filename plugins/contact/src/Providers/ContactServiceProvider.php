@@ -27,7 +27,7 @@ class ContactServiceProvider extends ServiceProvider
             ])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations(['general', 'email'])
+            ->loadAndPublishConfigurations(['general', 'email', 'permissions'])
             ->loadMigrations();
 
         $this->app->bind(ContactRepository::class, ContactRepositoryEloquent::class);

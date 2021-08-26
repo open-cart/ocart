@@ -44,17 +44,14 @@ class PostForm extends FormAbstract
                 'label'      => trans('admin.alias'),
                 'rules' => 'min:3',
             ])
-            ->add('description', Field::TEXTAREA, [
+            ->add('description', Field::EDITOR, [
                 'label'      => trans('plugins/blog::posts.description'),
-//                'attr' => [
-//                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
-//                ]
-            ])
-            ->add('content', Field::TEXTAREA, [
-                'label'      => trans('plugins/blog::posts.content'),
                 'attr' => [
-                    'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-full'
+                    'inline' => true
                 ]
+            ])
+            ->add('content', Field::EDITOR, [
+                'label'      => trans('plugins/blog::posts.content'),
             ])
             ->add('is_featured', 'onOff', [
                 'label'      => trans('plugins/blog::posts.is_featured'),

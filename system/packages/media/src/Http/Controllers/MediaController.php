@@ -2,6 +2,7 @@
 
 namespace Ocart\Media\Http\Controllers;
 
+use Botble\Assets\Facades\AssetsFacade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -32,6 +33,15 @@ class MediaController extends BaseController
     }
 
     public function index(Request $request){
+        page_title()->setTitle(trans('File management'));
+
+        AssetsFacade::addStylesDirectly([
+            'vendor/packages/media/css/app.css',
+        ])
+            ->addScriptsDirectly([
+                'vendor/packages/media/js/app.js',
+            ]);
+
         $folder = $this->fileRepository->getModel();
 
         if ($slug = $request->get('folder', 0)) {

@@ -43,7 +43,7 @@ class BaseServiceProvider extends ServiceProvider
                     'icon' => null,
                     'url' => route('system.cache'),
                     'permissions' => [
-                        'superuser',
+                        ACL_ROLE_SUPER_USER,
                     ],
                     'active' => false,
                 ])->registerItem([
@@ -53,7 +53,7 @@ class BaseServiceProvider extends ServiceProvider
                     'icon' => null,
                     'url' => route('system.information'),
                     'permissions' => [
-                        'superuser',
+                        ACL_ROLE_SUPER_USER,
                     ],
                     'active' => false,
                 ]);

@@ -2,6 +2,7 @@
 
 namespace Ocart\Media\Providers;
 
+use Botble\Assets\Facades\AssetsFacade;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Support\Facades\Event;
@@ -26,12 +27,13 @@ class MediaServiceProvider extends ServiceProvider
 
         $this->app->bind(MediaFileRepository::class, MediaFileCacheDecorator::class);
         $this->app->bind(MediaFolderRepository::class, MediaFolderRepositoryEloquent::class);
+
     }
 
     public function boot()
     {
         $this->setNamespace('packages/media')
-            ->loadAndPublishConfigurations(['media'])
+            ->loadAndPublishConfigurations(['media', 'permissions'])
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()

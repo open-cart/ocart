@@ -11,16 +11,8 @@ class HookServiceProvider extends ServiceProvider
     {
         Event::listen(RouteMatched::class, function () {
             dashboard_menu()->registerItem([
-                'id' => 'cms-core-menu',
-                'parent_id' => null,
-                'name' => 'packages/menu::menus.content',
-                'icon' => null,
-                'url' => '',
-                'permissions' => [],
-                'active' => false,
-            ])->registerItem([
                 'id' => 'cms-core-content-menu',
-                'parent_id' => 'cms-core-menu',
+                'parent_id' => 'cms-plugins',
                 'name' => trans('packages/menu::menus.menu'),
                 'icon' => null,
                 'url' => route('menus.index'),

@@ -9,17 +9,12 @@ return [
         'jquery',
         'jquery-ui',
         'app',
-        'pjax',
-        'tnmedia',
-        'tinymce',
-        'nestable',
-        'nestable-menu'
+        'pjax'
     ],
     'styles'         => [
         'app',
         'jquery-ui',
         'swal',
-        'tnmedia',
         'font',
     ],
     'resources'      => [
@@ -38,7 +33,7 @@ return [
                     'local' => '/js/app.js',
                 ],
                 'attributes' => [
-                    'defer' => true
+//                    'defer' => true
                 ]
             ],
             'modernizr' => [
@@ -64,25 +59,11 @@ return [
                     'cdn' => 'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
                 ],
             ],
-            'tinymce' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/tinymce/tinymce.min.js',
-                ],
-            ],
             'pjax' => [
                 'use_cdn'  => false,
                 'location' => 'header',
                 'src'      => [
                     'local' => 'access/jquery.pjax.js',
-                ],
-            ],
-            'tnmedia' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'tnmedia/bundle.js',
                 ],
             ],
             'simplemde' => [
@@ -98,21 +79,7 @@ return [
                 'src'      => [
                     'local' => 'access/prismjs/prism.js',
                 ],
-            ],
-            'nestable' => [
-                'use_cdn'  => true,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/nestable/jquery.nestable.js',
-                ],
-            ],
-            'nestable-menu' => [
-                'use_cdn'  => true,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'access/nestable/nestable.menu.js',
-                ],
-            ],
+            ]
         ],
         'styles'  => [
             'jquery-ui' => [
@@ -133,13 +100,6 @@ return [
                 'location'   => 'header',
                 'src'        => [
                     'local' => 'css/swal.css',
-                ],
-            ],
-            'tnmedia' => [
-                'use_cdn'  => false,
-                'location' => 'header',
-                'src'      => [
-                    'local' => 'tnmedia/app.css',
                 ],
             ],
             'font' => [
@@ -163,15 +123,6 @@ return [
                     'local' => 'access/prismjs/prism.css',
                 ],
             ],
-
-
-//            'tinymce' => [
-//                'use_cdn'  => false,
-//                'location' => 'header',
-//                'src'      => [
-//                    'local' => 'access/tinymce/tinymce.min.js',
-//                ],
-//            ],
         ],
     ],
 ];

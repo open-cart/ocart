@@ -7,6 +7,7 @@ namespace Ocart\Core\Library;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
@@ -33,15 +34,15 @@ class DashboardMenu
         }
 
         $defaultOptions = [
-            'id'          => '',
-            'priority'    => 99,
-            'parent_id'   => null,
-            'name'        => '',
-            'icon'        => null,
-            'url'         => '',
-            'children'    => [],
+            'id' => '',
+            'priority' => 99,
+            'parent_id' => null,
+            'name' => '',
+            'icon' => null,
+            'url' => '',
+            'children' => [],
             'permissions' => [],
-            'active'      => false,
+            'active' => false,
         ];
 
         $options = array_merge($defaultOptions, $options);
@@ -139,13 +140,13 @@ class DashboardMenu
 //                $links = cache($cache_key);
 //            }
 //        } else {
-            $links = $this->links;
+        $links = $this->links;
 //        }
 
         $menus = [];
 
         foreach ($links as $key => &$link) {
-            if (!Gate::any($link['permissions'], Auth::user())) {
+            if (!$this->checkPermission($link['permissions'])) {
                 Arr::forget($links, $key);
                 continue;
             }
@@ -164,7 +165,7 @@ class DashboardMenu
             $link['children'] = collect($link['children'])->sortBy('priority')->toArray();
 
             foreach ($link['children'] as $sub_key => $sub_menu) {
-                if (!Gate::any($sub_menu['permissions'], Auth::user())) {
+                if (!$this->checkPermission($sub_menu['permissions'])) {
                     Arr::forget($link['children'], $sub_key);
                     continue;
                 }
@@ -183,5 +184,10 @@ class DashboardMenu
         }
 
         return collect($menus)->sortBy('priority');
+    }
+
+    protected function checkPermission($permission)
+    {
+        return Auth::user()->hasAnyPermission($permission);
     }
 }

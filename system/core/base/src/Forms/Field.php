@@ -41,4 +41,5 @@ class Field extends \Kris\LaravelFormBuilder\Field
     const ON_OFF = 'onOff';
     const MEDIA_IMAGE = 'mediaImage';
     const MEDIA_IMAGES = 'mediaImages';
+    const EDITOR = 'editor';
 }

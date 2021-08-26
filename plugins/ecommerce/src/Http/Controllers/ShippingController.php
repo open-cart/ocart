@@ -46,13 +46,13 @@ class ShippingController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'ecommerce.tags.index',
-            'show' => 'ecommerce.tags.update',
-            'create' => 'ecommerce.tags.create',
-            'store' => 'ecommerce.tags.create',
-            'edit' => 'ecommerce.tags.update',
-            'update' => 'ecommerce.tags.update',
-            'destroy' => 'ecommerce.tags.destroy',
+//            'index' => 'ecommerce.tags.index',
+//            'show' => 'ecommerce.tags.update',
+//            'create' => 'ecommerce.tags.create',
+//            'store' => 'ecommerce.tags.create',
+//            'edit' => 'ecommerce.tags.update',
+//            'update' => 'ecommerce.tags.update',
+//            'destroy' => 'ecommerce.tags.destroy',
         ];
     }
 

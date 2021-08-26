@@ -1,13 +1,11 @@
 <?php
 namespace Ocart\Acl\Http\Controllers;
 
-use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller as BaseController;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Ocart\Acl\Forms\UserForm;
 use Ocart\Acl\Http\Requests\UserRequest;
 use Ocart\Acl\Repositories\UserRepository;
@@ -30,7 +28,7 @@ class UserController extends BaseController
     protected function resourceAbilityMap()
     {
         return [
-            'index' => 'pages.index',
+            'index' => 'system.users.index',
             'show' => 'system.users.update',
             'create' => 'system.users.create',
             'store' => 'system.users.create',
@@ -43,7 +41,7 @@ class UserController extends BaseController
     public function __construct(UserRepository $repo)
     {
         $this->repo = $repo;
-        $this->authorizeResource(User::class, 'id');
+        $this->authorizeResource($repo->model(), 'id');
     }
 
     public function index(UserTable $table)
@@ -64,17 +62,21 @@ class UserController extends BaseController
     function store(UserRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
-//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-//        $data['slug_md5'] = md5($data['slug']);
 
         if ($request->input('password')) {
             $data['password'] = Hash::make($request->input('password'));
         }
 
-        $page = $this->repo->create($data);
+        DB::beginTransaction();
+
+        $user = $this->repo->create($data);
+
+        $user->syncRoles($request->roles);
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('system.users.index'))
-            ->setNextUrl(route('system.users.show', $page->id));
+            ->setNextUrl(route('system.users.show', $user->id));
     }
 
     function show($id, FormBuilder $formBuilder)
@@ -93,8 +95,6 @@ class UserController extends BaseController
     function update($id, UserRequest $request, BaseHttpResponse $response)
     {
         $data = $request->all();
-//        $data['slug'] = $request->input('slug') ?? Str::limit(Str::slug($request->input('name')));
-//        $data['slug_md5'] = md5($data['slug']);
 
         unset($data['password']);
 
@@ -102,11 +102,14 @@ class UserController extends BaseController
             $data['password'] = Hash::make($request['password']);
         }
 
+        DB::beginTransaction();
+
         /** @var User $user */
         $user = $this->repo->update($data, $id);
 
         $user->syncRoles($request->roles);
-        $user->forgetCachedPermissions();
+
+        DB::commit();
 
         return $response->setPreviousUrl(route('system.users.index'))
             ->setNextUrl(route('system.users.show', $user->id));

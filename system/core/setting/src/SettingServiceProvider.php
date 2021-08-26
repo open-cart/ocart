@@ -37,7 +37,7 @@ class SettingServiceProvider extends ServiceProvider
             ->loadRoutes(['web'])
             ->loadAndPublishViews()
             ->loadAndPublishTranslations()
-            ->loadAndPublishConfigurations(['email'])
+            ->loadAndPublishConfigurations(['email', 'permissions', 'general'])
             ->loadMigrations()
             ->publishAssets();
 
@@ -70,10 +70,7 @@ class SettingServiceProvider extends ServiceProvider
                     'icon' => null,
                     'url' => route('settings.email'),
                     'permissions' => [
-                        'pages.index',
-                        'pages.create',
-                        'pages.update',
-                        'pages.destroy',
+                        'settings.email'
                     ],
                     'active' => false,
                 ])->registerItem([
@@ -83,10 +80,7 @@ class SettingServiceProvider extends ServiceProvider
                     'icon' => null,
                     'url' => route('slug.settings'),
                     'permissions' => [
-                        'pages.index',
-                        'pages.create',
-                        'pages.update',
-                        'pages.destroy',
+                        'settings.slug'
                     ],
                     'active' => false,
                 ]);

@@ -34,5 +34,11 @@ class FormServiceProvider extends ServiceProvider
             'value'      => null,
             'attributes' => [],
         ]);
+
+        Form::component('tinymce', 'core/base::forms.partials.tinymce', [
+            'name',
+            'value'      => null,
+            'attributes' => [],
+        ]);
     }
 }

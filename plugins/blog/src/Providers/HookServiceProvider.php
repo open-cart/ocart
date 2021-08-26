@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Ocart\Blog\Models\Category;
 use Ocart\Blog\Widgets\PostStatsWidget;
+use Ocart\Menu\Facades\Menu;
 
 class HookServiceProvider extends ServiceProvider
 {
@@ -25,13 +26,8 @@ class HookServiceProvider extends ServiceProvider
     public function registerMenuOptions()
     {
         if (Gate::allows('blog.categories.index', Auth::user())) {
-            $type = Category::class;
             $name = trans('plugins/blog::menu.categories');
-            $list = app(\Ocart\Blog\Repositories\Interfaces\CategoryRepository::class)->all();
-
-            if ($list->isNotEmpty()) {
-                echo view('plugins.blog::menu', compact('list', 'name', 'type'));
-            }
+            Menu::registerMenuOptions(app(\Ocart\Blog\Repositories\Interfaces\CategoryRepository::class), $name);
         }
 
 //        if (Gate::allows('blog.tags.index', Auth::user())) {

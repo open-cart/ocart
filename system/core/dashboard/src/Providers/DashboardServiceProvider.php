@@ -20,10 +20,6 @@ class DashboardServiceProvider extends ServiceProvider
 
         $this->app->bind(DashboardWidgetRepository::class, DashboardWidgetRepositoryEloquent::class);
         $this->app->bind(DashboardWidgetSettingRepository::class, DashboardWidgetSettingRepositoryEloquent::class);
-
-        \Assets::addScriptsDirectly([
-                'vendors/core/dashboard/js/dashboard.js'
-        ]);
     }
 
     public function boot()
