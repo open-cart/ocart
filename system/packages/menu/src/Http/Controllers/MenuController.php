@@ -139,7 +139,7 @@ class MenuController extends BaseController
             $row['parent_id'] = $parentId;
             $row['menu_id'] = $menuId;
             $row['position'] = $i;
-            if ($row['reference_type'] == 'custom-link') {
+            if (Arr::get($row, 'reference_type') == 'custom-link') {
                 $row['reference_type'] = null;
             }
 
