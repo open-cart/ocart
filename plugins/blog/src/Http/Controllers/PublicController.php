@@ -37,12 +37,14 @@ class PublicController extends BaseController
         $title = $post->name;
 //        $description = Str::limit(strip_tags($post->description), 250);
         $description = Str::limit($post->description, 250);
+        $seo_og_image = \TnMedia::getImageUrl($post->image, asset('/images/no-image.jpg'));
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
         $meta = SeoHelper::openGraph();
         $meta->setTitle($title);
         $meta->setDescription($description);
         $meta->setType('article');
+        $meta->addImage($seo_og_image);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, POST_MODULE_SCREEN_NAME, $post);
 

@@ -223,7 +223,7 @@ if (!function_exists('sort_item_with_children')) {
         foreach ($list as $item) {
             $item->depth = $depth;
             array_push($result, $item);
-            if ($item->child_cats->count()) {
+            if ($item->child_cats) {
                 sort_item_with_children($item->child_cats, $result, $depth + 1);
             }
         }
@@ -295,6 +295,11 @@ if (!function_exists('get_deps')) {
         return theme_options()->getOption('seo_description', 'Mô tả công ty');
     }
 }
+if (!function_exists('get_seo_og_image')) {
+    function get_seo_og_image(){
+        return theme_options()->getOption('seo_og_image', '');
+    }
+}
 
 if (!function_exists('get_domain')) {
     function get_domain(){
@@ -305,6 +310,12 @@ if (!function_exists('get_domain')) {
 if (!function_exists('get_banner')) {
     function get_banner(){
         return json_decode(setting('banner', "[]"));
+    }
+}
+
+if (!function_exists('get_banner_grid')) {
+    function get_banner_grid(){
+        return json_decode(setting('banner_grid', "[]"));
     }
 }
 

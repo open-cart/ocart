@@ -16,12 +16,15 @@ class PublicController
     {
         $title = get_title();
         $description = get_deps();
+        $seo_og_image = \TnMedia::getImageUrl(get_seo_og_image(), asset('/images/no-image.jpg'));
+
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
         $meta = SeoHelper::openGraph();
         $meta->setTitle($title);
         $meta->setDescription(strip_tags($description));
         $meta->setType('home');
+        $meta->addImage($seo_og_image);
 
         return \Theme::scope('index');
     }

@@ -26,9 +26,9 @@
             <!-- Add margin if you want to see some of the overlay behind the modal-->
             <div class="modal-content py-4 text-left px-6">
                 {!! $header !!}
-                <x-divider class="-mx-6"/>
+{{--                <x-divider class="-mx-6"/>--}}
                 {!! $content !!}
-                <x-divider class="-mx-6"/>
+{{--                <x-divider class="-mx-6"/>--}}
                 <!--Footer-->
                 {!! $footer !!}
             </div>

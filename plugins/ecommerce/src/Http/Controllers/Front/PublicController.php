@@ -40,12 +40,14 @@ class PublicController extends BaseController
         $title = $product->name;
 //        $description = Str::limit(strip_tags($product->description), 250);
         $description = Str::limit($product->description, 250);
+        $seo_og_image = \TnMedia::getImageUrl($product->image, asset('/images/no-image.jpg'));
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
         $meta = SeoHelper::openGraph();
         $meta->setTitle($title);
         $meta->setDescription($description);
         $meta->setType('product');
+        $meta->addImage($seo_og_image);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_PRODUCT_MODULE_SCREEN_NAME, $product);
 
