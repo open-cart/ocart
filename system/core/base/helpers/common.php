@@ -295,6 +295,11 @@ if (!function_exists('get_deps')) {
         return theme_options()->getOption('seo_description', 'Mô tả công ty');
     }
 }
+if (!function_exists('get_seo_og_image')) {
+    function get_seo_og_image(){
+        return theme_options()->getOption('seo_og_image', '');
+    }
+}
 
 if (!function_exists('get_domain')) {
     function get_domain(){
