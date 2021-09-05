@@ -75,6 +75,7 @@ class ThemeOption
         foreach ($fields as $field) {
             $args = Arr::except($field, ['name', 'type']);
             $args['value'] = $this->getOption($field['name'], Arr::get($field, 'defaultValue'));
+            $args['selected'] = $this->getOption($field['name'], Arr::get($field, 'defaultValue'));
             $form->add($field['name'], $field['type'], $args);
         }
 

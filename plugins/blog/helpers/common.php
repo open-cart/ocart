@@ -86,3 +86,11 @@ if (!function_exists('get_list_posts_category')) {
         return $repo->getRelate($categoryId, $limit);
     }
 }
+
+if (!function_exists('get_post_category')) {
+    function get_post_category($categoryId = 1) {
+        $repo = app(CategoryRepository::class);
+        $category = $repo->findByField('id', $categoryId)->first();
+        return $category;
+    }
+}
