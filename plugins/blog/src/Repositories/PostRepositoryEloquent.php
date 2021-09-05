@@ -77,7 +77,7 @@ class PostRepositoryEloquent extends RepositoriesAbstract implements PostReposit
         $this->applyConditions([
             'is_featured' => 1
         ]);
-        $results = $this->limit($limit);
+        $results = $this->orderBy('updated_at', 'desc')->limit($limit);
 
         return $this->parserResult($results);
     }
@@ -87,7 +87,10 @@ class PostRepositoryEloquent extends RepositoriesAbstract implements PostReposit
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $results = $this->limit($limit);
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+        $results = $this->orderBy('updated_at', 'desc')->limit($limit);
 
         return $this->parserResult($results);
     }
