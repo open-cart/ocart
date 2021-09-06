@@ -5,6 +5,7 @@ namespace Ocart\Blog\Models;
 use App\Models\User;
 use Database\Factories\PostFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Routing\UrlGenerator;
 use Ocart\Core\Enums\BaseStatusEnum;
 use Ocart\Core\Models\BaseModel;
 
@@ -71,5 +72,17 @@ class Post extends BaseModel
     protected static function newFactory()
     {
         return new PostFactory();
+    }
+
+    /**
+     * @return UrlGenerator|string
+     */
+    public function getUrlAttribute()
+    {
+        $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
+
+        return route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $this->slug]);
+
+//        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
     }
 }
