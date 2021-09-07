@@ -41,9 +41,11 @@
                     <div>
                         {!! $table->table(['class' => 'w-full']) !!}
                     </div>
+                    @if(is_object($table->data) && method_exists($table->data, 'links'))
                     <div class="mt-2">
-                        {!! is_object($table->data) && method_exists($table->data, 'link') && $table->data->links() !!}
+                        {!! $table->data->links() !!}
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
