@@ -18,7 +18,7 @@
                             @foreach($prefixes as $key => $prefix)
                                 <div class="flex flex-col">
                                     <label for="">{{ Arr::get($prefix, 'label') }}</label>
-                                    <x-input value="{{ \Ocart\Core\Facades\Slug::getPrefix($key, Arr::get($prefix, 'value')) }}"/>
+                                    <x-input value="{{ \Ocart\Core\Facades\Slug::getPrefix($key, Arr::get($prefix, 'value')) }}" name="{{ \Ocart\Core\Facades\Slug::getPermalinkSettingKey($key) }}"/>
                                     <div class="bg-blue-100 p-2 my-1 dark:bg-gray-700" role="alert">
                                         <span>Preview: </span>
                                         <x-link href="javascript:void(0)">
