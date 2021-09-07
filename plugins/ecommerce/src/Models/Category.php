@@ -30,6 +30,7 @@ class Category extends BaseModel
         'slug_md5',
         'parent_id',
         'description',
+        'content',
         'status',
         'author_id',
         'author_type',
