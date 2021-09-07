@@ -55,6 +55,10 @@ class PostForm extends FormAbstract
             ->add('content', Field::EDITOR, [
                 'label'      => trans('plugins/blog::posts.content'),
             ])
+            ->add('code_video_youtube', Field::TEXT, [
+                'label'      => trans('Code Video Youtube'),
+                'rules' => 'min:3',
+            ])
             ->add('is_featured', 'onOff', [
                 'label'      => trans('plugins/blog::posts.is_featured'),
             ])

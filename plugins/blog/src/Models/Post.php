@@ -36,6 +36,7 @@ class Post extends BaseModel
         'format_type',
         'slug',
         'slug_md5',
+        'code_video_youtube'
     ];
 
     /**
