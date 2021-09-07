@@ -35,8 +35,7 @@ class PublicController extends BaseController
             abort(404);
         }
         $title = $post->name;
-//        $description = Str::limit(strip_tags($post->description), 250);
-        $description = Str::limit($post->description, 250);
+        $description = Str::limit(strip_tags($post->description), 250);
         $seo_og_image = \TnMedia::getImageUrl($post->image, asset('/images/no-image.jpg'));
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);

@@ -44,10 +44,12 @@ class PostForm extends FormAbstract
                 'label'      => trans('admin.alias'),
                 'rules' => 'min:3',
             ])
-            ->add('description', Field::EDITOR, [
+            ->add('description', Field::TEXTAREA, [
                 'label'      => trans('plugins/blog::posts.description'),
+                'rules' => 'max:5000',
                 'attr' => [
-                    'inline' => true
+                    'inline' => true,
+                    'rows' => 3,
                 ]
             ])
             ->add('content', Field::EDITOR, [
