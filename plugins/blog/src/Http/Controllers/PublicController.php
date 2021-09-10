@@ -47,7 +47,7 @@ class PublicController extends BaseController
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, POST_MODULE_SCREEN_NAME, $post);
 
-        return Theme::scope('post',  compact('post'),'packages/blog::post');
+        return Theme::scope('post',  compact('post'),'plugins/blog::post');
     }
 
     /**
