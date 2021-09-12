@@ -68,6 +68,11 @@ Route::group([
         'as' => ROUTE_PRODUCT_CATEGORY_SCREEN_NAME
     ]);
 
+    Route::get(Slug::getPrefix(Tag::class, 'product-tag') .'/{slug}', [
+        'uses' => 'PublicController@productTag',
+        'as' => ROUTE_PRODUCT_TAG_SCREEN_NAME
+    ]);
+
     Route::get(Slug::getPrefix(Product::class,'product'), 'PublicController@shop')
         ->name(ROUTE_SHOP_SCREEN_NAME);
 

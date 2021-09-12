@@ -34,7 +34,6 @@ class BlogSearchCriteria implements CriteriaInterface
             $name = $request->get('name');
             $model = $model->where(function($q) use ($name){
                 $q->orWhere('name', 'like', "%$name%");
-                $q->orWhere('sku', 'like', "%$name%");
                 $q->orWhere('description', 'like', "%$name%");
             });
         }

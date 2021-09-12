@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
@@ -20,11 +21,13 @@ class PublicController extends BaseController
      */
     protected $repo;
     protected $repoCategory;
+    protected $repoTag;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, TagRepository $tagRepository)
     {
         $this->repo = $productRepository;
         $this->repoCategory = $categoryRepository;
+        $this->repoTag = $tagRepository;
     }
 
     /**
@@ -97,5 +100,32 @@ class PublicController extends BaseController
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
+    }
+
+    /**
+     * Thẻ Tag san pham
+     * @return mixed
+     */
+    public function productTag($slug)
+    {
+        $tag = $this->repoTag->findByField('slug', $slug)->first();
+        if (empty($tag)) {
+            abort(404);
+       }
+
+        $title = $tag->name;
+        $description = Str::limit(strip_tags($tag->description), 250);
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('tag product');
+
+        $products = $this->repo->productForTag($tag->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $tag);
+
+        return Theme::scope('product-tag',  compact('tag', 'products'),'packages/ecommerce::product-tag');
     }
 }

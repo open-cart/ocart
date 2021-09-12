@@ -19,4 +19,14 @@ class StoreCategoryService extends StoreCategoryServiceAbstract
             }
         }
     }
+    public function executeTag(Request $request, Post $post)
+    {
+        $tags = $request->input('tags');
+        if (!empty($tags)) {
+            $post->tags()->detach();
+            foreach ($tags as $tag) {
+                $post->tags()->attach($tag);
+            }
+        }
+    }
 }

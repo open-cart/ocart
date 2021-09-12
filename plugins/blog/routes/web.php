@@ -44,6 +44,9 @@ Route::group([
     Route::get(Slug::getPrefix(Category::class, 'post-category').'/{slug}', 'PublicController@postCategory')
         ->name(ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME);
 
+    Route::get(Slug::getPrefix(Tag::class, 'post-tag').'/{slug}', 'PublicController@postTag')
+        ->name(ROUTE_BLOG_POST_TAG_SCREEN_NAME);
+
     Route::get(Slug::getPrefix(Post::class, 'post'), 'PublicController@blog')
         ->name(ROUTE_BLOG_PAGE_SCREEN_NAME);
 });

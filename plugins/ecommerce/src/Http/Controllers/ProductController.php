@@ -90,7 +90,8 @@ class ProductController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $product);
 
         event(new CreatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 
@@ -141,7 +142,8 @@ class ProductController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $product);
 
         event(new UpdatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 

@@ -82,7 +82,8 @@ class PostController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $post);
 
         $categoryService->execute($request, $post);
 
@@ -118,7 +119,8 @@ class PostController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($post->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $post);
 
         $categoryService->execute($request, $post);
 
