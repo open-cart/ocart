@@ -54,6 +54,7 @@ class Tag extends BaseModel
     {
         $prefix = apply_filters(FILTER_SLUG_PREFIX, '');
 
-        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
+        return route(ROUTE_PRODUCT_TAG_SCREEN_NAME, ['slug' => $this->slug]);
+//        return url($prefix ? $prefix . '/' . $this->slug : $this->slug);
     }
 }

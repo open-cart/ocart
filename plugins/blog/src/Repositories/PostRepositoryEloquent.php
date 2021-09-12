@@ -72,6 +72,16 @@ class PostRepositoryEloquent extends RepositoriesAbstract implements PostReposit
         return $this->parserResult($results);
     }
 
+    public function postForTag($tagId, $paginate = 9)
+    {
+        $this->whereHas('tags', function ($query) use ($tagId) {
+            return $query->where($query->qualifyColumn('id'), $tagId);
+        });
+        $results = $this->paginate($paginate);
+
+        return $this->parserResult($results);
+    }
+
     public function getFeature($limit)
     {
         $this->applyConditions([

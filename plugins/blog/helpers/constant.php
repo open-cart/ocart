@@ -16,6 +16,10 @@ if (!defined('ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME')) {
     define('ROUTE_BLOG_POST_CATEGORY_SCREEN_NAME', 'post-category');
 }
 
+if (!defined('ROUTE_BLOG_POST_TAG_SCREEN_NAME')) {
+    define('ROUTE_BLOG_POST_TAG_SCREEN_NAME', 'post-tag');
+}
+
 if (!defined('ROUTE_BLOG_PAGE_SCREEN_NAME')) {
     define('ROUTE_BLOG_PAGE_SCREEN_NAME', 'blog');
 }

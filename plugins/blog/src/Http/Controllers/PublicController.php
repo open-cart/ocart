@@ -4,6 +4,7 @@ namespace Ocart\Blog\Http\Controllers;
 
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
+use Ocart\Blog\Repositories\Interfaces\TagRepository;
 use Ocart\Core\Http\Controllers\BaseController;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
@@ -17,11 +18,13 @@ class PublicController extends BaseController
      */
     protected $repo;
     protected $repoCategory;
+    protected $repoTag;
 
-    public function __construct(PostRepository $postRepository, CategoryRepository $categoryRepository)
+    public function __construct(PostRepository $postRepository, CategoryRepository $categoryRepository, TagRepository $tagRepository)
     {
         $this->repo = $postRepository;
         $this->repoCategory = $categoryRepository;
+        $this->repoTag = $tagRepository;
     }
 
     /**
@@ -96,5 +99,31 @@ class PublicController extends BaseController
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('post-category',  compact('category', 'posts'),'packages/post::post-category');
+    }
+
+    /**
+     * Tag bai viet
+     * @return mixed
+     */
+    public function postTag($slug)
+    {
+        $tag = $this->repoTag->findByField('slug', $slug)->first();
+        if (empty($tag)) {
+            abort(404);
+        }
+        $title = $tag->name;
+        $description = Str::limit(strip_tags($tag->description), 250);
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('tag article');
+
+        $posts = $this->repo->postForTag($tag->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, $tag);
+
+        return Theme::scope('post-tag',  compact('tag', 'posts'),'packages/post::post-tag');
     }
 }
