@@ -5,6 +5,7 @@ namespace Ocart\Ecommerce\Http\Controllers\Front;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
@@ -68,7 +69,7 @@ class PublicController extends BaseController
         $meta->setDescription($description);
         $meta->setType('Shop');
 
-        $products = $this->repo->with('categories')->paginate( 9);
+        $products = $this->repo->with('categories')->pushCriteria(ProductSearchCriteria::class)->paginate(9);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, []);
 
@@ -96,7 +97,6 @@ class PublicController extends BaseController
         $meta->setType('category product');
 
         $products = $this->repo->productForCategory($category->id, 9);
-
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
