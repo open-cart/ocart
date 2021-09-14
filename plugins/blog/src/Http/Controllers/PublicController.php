@@ -70,10 +70,11 @@ class PublicController extends BaseController
         $meta->setType('Blog page');
 
         $posts = $this->repo->with('categories')->pushCriteria(BlogSearchCriteria::class)->paginate(9);
+        $total = $posts->total();
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, []);
 
-        return Theme::scope('blog',  compact( 'posts'),'packages/post::blog');
+        return Theme::scope('blog',  compact( 'posts', 'total'),'packages/post::blog');
     }
 
     /**

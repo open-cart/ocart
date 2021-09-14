@@ -70,10 +70,11 @@ class PublicController extends BaseController
         $meta->setType('Shop');
 
         $products = $this->repo->with('categories')->pushCriteria(ProductSearchCriteria::class)->paginate(9);
+        $total = $products->total();
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, []);
 
-        return Theme::scope('shop',  compact( 'products'),'packages/ecommerce::shop');
+        return Theme::scope('shop',  compact( 'products', 'total'),'packages/ecommerce::shop');
     }
 
     /**
