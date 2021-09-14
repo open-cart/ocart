@@ -2,6 +2,7 @@
 
 namespace Ocart\Blog\Http\Controllers;
 
+use Ocart\Blog\Repositories\Criteria\BlogSearchCriteria;
 use Ocart\Blog\Repositories\Interfaces\CategoryRepository;
 use Ocart\Blog\Repositories\Interfaces\PostRepository;
 use Ocart\Blog\Repositories\Interfaces\TagRepository;
@@ -68,7 +69,7 @@ class PublicController extends BaseController
         $meta->setDescription($description);
         $meta->setType('Blog page');
 
-        $posts = $this->repo->paginate(9);
+        $posts = $this->repo->with('categories')->pushCriteria(BlogSearchCriteria::class)->paginate(9);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, BLOG_CATEGORY_MODULE_SCREEN_NAME, []);
 
