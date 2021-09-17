@@ -2,14 +2,14 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
     darkMode: 'media',
-    // purge: [
-    //     './resources/**/*.blade.php',
-    //     './system/**/*.blade.php',
-    //     './plugins/**/*.blade.php',
-    //     './resources/**/*.js',
-    //     './resources/**/*.vue',
-    // ],
-    purge: false,
+    purge: [
+        './resources/**/*.blade.php',
+        './system/**/*.blade.php',
+        './plugins/**/*.blade.php',
+        './resources/**/*.js',
+        './resources/**/*.vue',
+    ],
+    //purge: false,
 
     theme: {
         extend: {
