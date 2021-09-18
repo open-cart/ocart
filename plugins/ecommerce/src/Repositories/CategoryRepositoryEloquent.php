@@ -49,13 +49,13 @@ class CategoryRepositoryEloquent extends RepositoriesAbstract implements Categor
     /**
      * @inheritDoc
      */
-    public function getFeature()
+    public function getFeature($limit = 9)
     {
         $this->applyConditions([
             'is_featured' => 1
         ]);
 
-        $results = $this->all();
+        $results = $this->limit($limit);
 
         return $this->parserResult($results);
     }
