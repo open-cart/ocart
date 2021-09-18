@@ -63,14 +63,14 @@ if (!function_exists('get_categories_feature')) {
      * @param array $args
      * @return array|mixed
      */
-    function get_categories_feature(array $args = [])
+    function get_categories_feature($limit)
     {
         $repo = app(CategoryRepository::class);
 
         $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
         $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
         /** @var \Ocart\Ecommerce\Repositories\CategoryRepositoryEloquent $repo */
-        $categories = $repo->getFeature();
+        $categories = $repo->getFeature($limit);
 
         return $categories;
     }
