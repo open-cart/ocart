@@ -287,8 +287,9 @@ class CheckoutController extends BaseController
                 $order->user->email ? $order->user->email : $order->address->email);
 
         session(['checkout_information' => []]);
+        $response->setData($order);
 
-        return $response->setData($order);
+        return $response->setNextUrl(route(ROUTE_SHOPPING_THANK_SCREEN_NAME));
     }
 
     protected function setEmailVariables($order)
