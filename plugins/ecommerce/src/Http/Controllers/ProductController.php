@@ -80,7 +80,7 @@ class ProductController extends BaseController
         $data['images'] = array_values(array_filter($request->input('images', [])));
 
         $data['images'] = json_encode(array_map(function ($image) {
-            return TnMedia::url($image);
+            return $image;
         }, Arr::wrap($data['images'])));
 
         DB::beginTransaction();
@@ -132,7 +132,7 @@ class ProductController extends BaseController
             $data['images'] = array_values(array_filter($request->input('images', [])));
 
             $data['images'] = array_map(function ($image) {
-                return TnMedia::url($image);
+                return $image;
             }, Arr::wrap($data['images']));
 
             $data['images'] = json_encode($data['images']);
