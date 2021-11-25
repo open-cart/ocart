@@ -92,6 +92,17 @@ class PostRepositoryEloquent extends RepositoriesAbstract implements PostReposit
         return $this->parserResult($results);
     }
 
+    public function getFeatureFormatType($type, $limit)
+    {
+        $this->applyConditions([
+            'is_featured' => 1,
+            'format_type' => $type
+        ]);
+        $results = $this->orderBy('updated_at', 'desc')->limit($limit);
+
+        return $this->parserResult($results);
+    }
+
     public function getRelate($categoryId, $limit)
     {
         $this->whereHas('categories', function ($query) use ($categoryId) {
