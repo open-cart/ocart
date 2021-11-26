@@ -18,6 +18,50 @@
     min-height: 200px;
 }
 
+.toast {
+    margin-bottom: 1rem;
+    padding: 0;
+}
+.toast-message {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+@media (min-width: 640px) {
+    .toast-message {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+.toast-top-right {
+    z-index: 50;
+    top: 4rem;
+    right: 1rem;
+    position: fixed;
+}
+@media (min-width: 768px) {
+    .toast-top-right {
+        top: 6rem;
+    }
+}
+.toast-success {
+    color: rgba(4, 120, 87, 1);
+    border-color: rgba(52, 211, 153, 1);
+    background-color: rgba(209, 250, 229, 1);
+    position: relative;
+    border-width: 1px;
+    border-radius: 0.25rem;
+}
+.toast-error {
+    color: rgba(185, 28, 28, 1);
+    border-color: rgba(248, 113, 113, 1);
+    background-color: rgba(254, 226, 226, 1);
+    position: relative;
+    border-width: 1px;
+    border-radius: 0.25rem;
+}
+
 @layer components{
     .container-custom {
         @apply max-w-7xl mx-auto px-4 sm:px-6;
