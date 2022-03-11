@@ -63,7 +63,7 @@ if (!function_exists('get_categories_feature')) {
      * @param array $args
      * @return array|mixed
      */
-    function get_categories_feature($limit)
+    function get_categories_feature($limit = 10)
     {
         $repo = app(CategoryRepository::class);
 
