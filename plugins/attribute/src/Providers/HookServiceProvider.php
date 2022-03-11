@@ -116,7 +116,7 @@ class HookServiceProvider extends ServiceProvider
                 'id' => 'cms-store-attributes',
                 'priority' => 1,
                 'parent_id' => 'cms-store',
-                'name' => 'Thuộc tính',
+                'name' => trans('plugins/attribute::attributes.attributes'),
                 'icon' => null,
                 'url' => route('ecommerce.attribute_groups.index'),
                 'permissions' => [

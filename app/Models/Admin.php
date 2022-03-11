@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Ocart\Acl\Traits\RoleTrait;
 use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, RoleTrait;
 

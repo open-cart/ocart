@@ -41,6 +41,41 @@ return [
 
         'enable_cart' => 'Enable cart',
         'enable_tax' => 'Enable tax',
-        'display_product_price_including_taxes'                                  => 'Display product price including taxes?',
-    ]
+        'display_product_price_including_taxes' => 'Display product price including taxes?',
+    ],
+
+    'list_order' => 'List orders',
+    'statuses'                            => [
+        'pending'    => 'Pending',
+        'processing' => 'Processing',
+        'delivering' => 'Delivering',
+        'delivered'  => 'Delivered',
+        'completed'  => 'Completed',
+        'canceled'   => 'Canceled',
+        'default'    => 'Default'
+    ],
+    'categories' => 'Categories',
+    'brand' => 'Brand',
+
+    'store_address'                   => 'Store address',
+    'store_phone'                     => 'Store phone',
+    'order_id'                        => 'Order code',
+    'order_token'                     => 'Order token',
+    'customer_name'                   => 'Customer name',
+    'customer_email'                  => 'Customer email',
+    'customer_phone'                  => 'Customer phone',
+    'customer_address'                => 'Customer address',
+    'product_list'                    => 'Product list',
+    'payment_detail'                  => 'Payment details',
+    'shipping_method'                 => 'Shipping method',
+    'payment_method'                  => 'Payment method',
+    'standard_and_format'             => 'Standard and format',
+    'standard_and_format_description' => 'Standards and formats are used to calculate things like product prices, shipping weight, and the time an order is placed.',
+    'change_order_format'             => 'Edit order code format (optional)',
+    'change_order_format_description' => 'The default order number starts at :number. You can change the start or end string to generate the order number as you like, for example "DH-:number" or ":number-A"',
+    'start_with'                      => 'Start with',
+    'end_with'                        => 'End with',
+    'order_will_be_shown'             => 'Your order number will be displayed in the form',
+    'weight_unit'                     => 'Weight unit',
+    'height_unit'                     => 'Height unit',
 ];
