@@ -29,6 +29,27 @@ return [
     ],
 
     [
+        'name' => "Customers",
+        'flag' => "ecommerce.customers.index",
+        'parent_flag' => 'ecommerce'
+    ],
+    [
+        'name' => "Create",
+        'flag' => "ecommerce.customers.create",
+        'parent_flag' => 'ecommerce.customers.index'
+    ],
+    [
+        'name' => "Edit",
+        'flag' => "ecommerce.customers.update",
+        'parent_flag' => 'ecommerce.customers.index'
+    ],
+    [
+        'name' => "Delete",
+        'flag' => "ecommerce.customers.destroy",
+        'parent_flag' => 'ecommerce.customers.index'
+    ],
+
+    [
         'name' => "Brands",
         'flag' => "ecommerce.brands.index",
         'parent_flag' => 'ecommerce'
