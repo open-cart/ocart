@@ -25,25 +25,6 @@ class TagController extends BaseController
     public function __construct(TagRepository $repo)
     {
         $this->repo = $repo;
-        $this->authorizeResource($repo->getModel(), 'id');
-    }
-
-    /**
-     * Get the map of resource methods to ability names.
-     *
-     * @return array
-     */
-    protected function resourceAbilityMap()
-    {
-        return [
-            'index' => 'ecommerce.tags.index',
-            'show' => 'ecommerce.tags.update',
-            'create' => 'ecommerce.tags.create',
-            'store' => 'ecommerce.tags.create',
-            'edit' => 'ecommerce.tags.update',
-            'update' => 'ecommerce.tags.update',
-            'destroy' => 'ecommerce.tags.destroy',
-        ];
     }
 
     public function index(TagTable $table)

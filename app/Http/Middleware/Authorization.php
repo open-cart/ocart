@@ -25,8 +25,9 @@ class Authorization
         }
 
         $flag = preg_replace('/.store$/', '.create', $flag);
-        $flag = preg_replace('/.update$/', '.edit', $flag);
-        $flag = preg_replace('/.destroy$/', '.delete', $flag);
+//        $flag = preg_replace('/.update$/', '.edit', $flag);
+        $flag = preg_replace('/.show$/', '.update', $flag);
+//        $flag = preg_replace('/.destroy$/', '.delete', $flag);
 
         if ($flag && !$request->user()->hasAnyPermission((array)$flag)) {
             throw new AuthorizationException(__('Authorization has been denied for this request.'));
