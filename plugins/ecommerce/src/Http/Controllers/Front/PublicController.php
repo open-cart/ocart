@@ -5,8 +5,10 @@ namespace Ocart\Ecommerce\Http\Controllers\Front;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
 use Ocart\SeoHelper\Facades\SeoHelper;
 use Ocart\Theme\Facades\Theme;
@@ -20,11 +22,13 @@ class PublicController extends BaseController
      */
     protected $repo;
     protected $repoCategory;
+    protected $repoTag;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, TagRepository $tagRepository)
     {
         $this->repo = $productRepository;
         $this->repoCategory = $categoryRepository;
+        $this->repoTag = $tagRepository;
     }
 
     /**
@@ -38,8 +42,7 @@ class PublicController extends BaseController
             abort(404);
         }
         $title = $product->name;
-//        $description = Str::limit(strip_tags($product->description), 250);
-        $description = Str::limit($product->description, 250);
+        $description = Str::limit(strip_tags($product->description), 250);
         $seo_og_image = \TnMedia::getImageUrl($product->image, asset('/images/no-image.jpg'));
         SeoHelper::setTitle($title);
         SeoHelper::setDescription($description);
@@ -66,7 +69,7 @@ class PublicController extends BaseController
         $meta->setDescription($description);
         $meta->setType('Shop');
 
-        $products = $this->repo->with('categories')->paginate( 9);
+        $products = $this->repo->with('categories')->pushCriteria(ProductSearchCriteria::class)->paginate(9);
 
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, []);
 
@@ -94,9 +97,35 @@ class PublicController extends BaseController
         $meta->setType('category product');
 
         $products = $this->repo->productForCategory($category->id, 9);
-
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $category);
 
         return Theme::scope('product-category',  compact('category', 'products'),'packages/ecommerce::product-category');
+    }
+
+    /**
+     * Thẻ Tag san pham
+     * @return mixed
+     */
+    public function productTag($slug)
+    {
+        $tag = $this->repoTag->findByField('slug', $slug)->first();
+        if (empty($tag)) {
+            abort(404);
+       }
+
+        $title = $tag->name;
+        $description = Str::limit(strip_tags($tag->description), 250);
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('tag product');
+
+        $products = $this->repo->productForTag($tag->id, 9);
+
+        do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $tag);
+
+        return Theme::scope('product-tag',  compact('tag', 'products'),'packages/ecommerce::product-tag');
     }
 }

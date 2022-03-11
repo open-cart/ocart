@@ -44,14 +44,20 @@ class PostForm extends FormAbstract
                 'label'      => trans('admin.alias'),
                 'rules' => 'min:3',
             ])
-            ->add('description', Field::EDITOR, [
+            ->add('description', Field::TEXTAREA, [
                 'label'      => trans('plugins/blog::posts.description'),
+                'rules' => 'max:5000',
                 'attr' => [
-                    'inline' => true
+                    'inline' => true,
+                    'rows' => 3,
                 ]
             ])
             ->add('content', Field::EDITOR, [
                 'label'      => trans('plugins/blog::posts.content'),
+            ])
+            ->add('code_video_youtube', Field::TEXT, [
+                'label'      => trans('Code Video Youtube'),
+                'rules' => 'min:3',
             ])
             ->add('is_featured', 'onOff', [
                 'label'      => trans('plugins/blog::posts.is_featured'),

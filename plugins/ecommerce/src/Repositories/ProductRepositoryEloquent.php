@@ -72,13 +72,25 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         return $this->paginate($paginate);
     }
 
+    public function productForTag($tagId, $paginate = 9)
+    {
+        $this->applyConditions([
+            'is_variation' => 0
+        ]);
+        $this->whereHas('tags', function ($query) use ($tagId) {
+            return $query->where($query->qualifyColumn('id'), $tagId);
+        });
+
+        return $this->paginate($paginate);
+    }
+
     public function getFeature($limit)
     {
         $this->applyConditions([
             'is_featured' => 1,
             'is_variation' => 0
         ]);
-        return $this->with('categories')
+        return $this->with('categories')->orderBy('updated_at', 'desc')
             ->limit($limit);
     }
 
@@ -102,7 +114,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
 
-        $this->with('categories');
+        $this->with('categories')->orderBy('updated_at', 'desc');;
 
         return $this->limit($limit);
     }
@@ -116,7 +128,7 @@ class ProductRepositoryEloquent extends RepositoriesAbstract implements ProductR
         $this->whereHas('categories', function ($query) use ($categoryId) {
             return $query->where($query->qualifyColumn('id'), $categoryId);
         });
-        $this->with('categories')->orderBy('created_at', 'desc');
+        $this->with('categories')->orderBy('updated_at', 'desc');
         return $this->limit($limit);
     }
 }

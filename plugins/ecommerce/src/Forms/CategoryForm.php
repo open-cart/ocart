@@ -45,7 +45,9 @@ class CategoryForm extends FormAbstract
                     'class' => $this->formHelper->getConfig('defaults.field_class') . ' editor-inline'
                 ]
             ])
-
+            ->add('content', \Ocart\Core\Forms\Field::EDITOR, [
+                'label'      => trans('plugins/blog::posts.content'),
+            ])
             ->add('status', 'select', [
                 'choices'    => BaseStatusEnum::labels()
             ])

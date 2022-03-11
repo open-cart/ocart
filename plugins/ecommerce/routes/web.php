@@ -68,8 +68,12 @@ Route::group([
         'as' => ROUTE_PRODUCT_CATEGORY_SCREEN_NAME
     ]);
 
-    Route::get(Slug::getPrefix(Product::class,'product'), 'PublicController@shop')
-        ->name(ROUTE_SHOP_SCREEN_NAME);
+    Route::get(Slug::getPrefix(Tag::class, 'product-tag') .'/{slug}', [
+        'uses' => 'PublicController@productTag',
+        'as' => ROUTE_PRODUCT_TAG_SCREEN_NAME
+    ]);
+
+    Route::get('shop', 'PublicController@shop')->name(ROUTE_SHOP_SCREEN_NAME);
 
     Route::get('shopping-cart', 'ShoppingController@cart')->name(ROUTE_SHOPPING_CART_SCREEN_NAME);
 

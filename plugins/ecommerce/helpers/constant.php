@@ -24,6 +24,10 @@ if (!defined('ROUTE_PRODUCT_CATEGORY_SCREEN_NAME')) {
     define('ROUTE_PRODUCT_CATEGORY_SCREEN_NAME', 'product_category');
 }
 
+if (!defined('ROUTE_PRODUCT_TAG_SCREEN_NAME')) {
+    define('ROUTE_PRODUCT_TAG_SCREEN_NAME', 'product-tag');
+}
+
 if (!defined('ROUTE_SHOP_SCREEN_NAME')) {
     define('ROUTE_SHOP_SCREEN_NAME', 'shop');
 }

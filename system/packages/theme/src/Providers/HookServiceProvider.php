@@ -68,6 +68,15 @@ class HookServiceProvider extends ServiceProvider
                         'name' => 'logo',
                     ]
                 ]
+            ])
+            ->setSection([
+                'title' => 'Section',
+                'desc' => 'Description',
+                'id' => 'opt-sections',
+                'icon' => 'fa fa-list',
+                'fields' => [
+
+                ]
             ]);
     }
 

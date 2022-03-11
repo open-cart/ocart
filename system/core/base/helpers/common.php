@@ -269,12 +269,12 @@ if (!function_exists('get_meta_footer')) {
 
 if (!function_exists('get_logo')) {
     function get_logo(){
-        return get_image_url(theme_options()->getOption('logo', '/images/logo-default.jpg'));
+        return get_image_url(theme_options()->getOption('logo', ''));
     }
 }
 if (!function_exists('get_favicon')) {
     function get_favicon(){
-        return get_image_url(theme_options()->getOption('favicon', '/images/favicon-default.jpg'));
+        return get_image_url(theme_options()->getOption('favicon', ''));
     }
 }
 

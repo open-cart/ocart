@@ -80,7 +80,7 @@ class ProductController extends BaseController
         $data['images'] = array_values(array_filter($request->input('images', [])));
 
         $data['images'] = json_encode(array_map(function ($image) {
-            return TnMedia::url($image);
+            return $image;
         }, Arr::wrap($data['images'])));
 
         DB::beginTransaction();
@@ -90,7 +90,8 @@ class ProductController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ]);
 
-        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $product);
 
         event(new CreatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 
@@ -131,7 +132,7 @@ class ProductController extends BaseController
             $data['images'] = array_values(array_filter($request->input('images', [])));
 
             $data['images'] = array_map(function ($image) {
-                return TnMedia::url($image);
+                return $image;
             }, Arr::wrap($data['images']));
 
             $data['images'] = json_encode($data['images']);
@@ -141,7 +142,8 @@ class ProductController extends BaseController
                 'is_featured' => $request->input('is_featured', false),
             ], $id);
 
-        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+//        $this->repo->sync($product->id, 'tags', $request->input('tags'));
+        $categoryService->executeTag($request, $product);
 
         event(new UpdatedContentEvent(PRODUCT_MODULE_SCREEN_NAME, $request, $product));
 
