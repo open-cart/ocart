@@ -14,3 +14,4 @@
         {{ trans('plugins/payment::payment.status') }}: <strong>{{ $transaction->status }}</strong>
     </p>
 </div>
+

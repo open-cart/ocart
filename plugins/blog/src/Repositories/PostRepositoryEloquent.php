@@ -92,6 +92,16 @@ class PostRepositoryEloquent extends RepositoriesAbstract implements PostReposit
         return $this->parserResult($results);
     }
 
+    public function getFeaturePaginate($limit = 8, $columns = ['*'])
+    {
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+        $results = $this->orderBy('updated_at', 'desc')->paginate($limit, $columns);
+
+        return $this->parserResult($results);
+    }
+
     public function getFeatureFormatType($type, $limit)
     {
         $this->applyConditions([

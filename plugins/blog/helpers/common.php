@@ -67,6 +67,17 @@ if (!function_exists('get_list_posts_feature')) {
     }
 }
 
+if (!function_exists('get_list_posts_feature_paginate')) {
+    function get_list_posts_feature_paginate($limit = 8, $columns = ['*'])
+    {
+        /** @var \Ocart\Blog\Repositories\Interfaces\PostRepository $repo */
+        /** @var \Ocart\Blog\Repositories\PostRepositoryEloquent $repo */
+        $repo = app(\Ocart\Blog\Repositories\Interfaces\PostRepository::class);
+
+        return $repo->getFeaturePaginate($limit, $columns);
+    }
+}
+
 if (!function_exists('get_list_posts_feature_format_type')) {
     function get_list_posts_feature_format_type($type, $limit = 9)
     {
@@ -102,5 +113,13 @@ if (!function_exists('get_post_category')) {
         $repo = app(CategoryRepository::class);
         $category = $repo->findByField('id', $categoryId)->first();
         return $category;
+    }
+}
+
+if (!function_exists('get_post_category_children')) {
+    function get_post_category_children($categoryId = 1) {
+        $repo = app(CategoryRepository::class);
+        $category_children = $repo->findByField('parent_id', $categoryId);
+        return $category_children;
     }
 }
