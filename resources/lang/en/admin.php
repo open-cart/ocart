@@ -13,8 +13,8 @@ return [
     ],
     'action_admin' => [
         'are_you_sure'   => 'Are you sure?',
-        'delete_warning' => 'Việc này sẽ không thể phục hồi',
-        'confirm_yes'    => 'Yes, tôi hiểu',
+        'delete_warning' => 'This will not be unrecoverable',
+        'confirm_yes'    => 'Yes,I understand',
         'cancel'         => 'Cancel',
     ],
     'status'           => 'Status',

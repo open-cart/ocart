@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Ocart\Acl\Traits\RoleTrait;
-use Spatie\Permission\Traits\HasRoles;
 
-class Admin extends Authenticatable
+class Admin extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, RoleTrait;
 
@@ -44,9 +43,4 @@ class Admin extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function isSuperAdmin()
-    {
-        return $this->id == 1;
-    }
 }

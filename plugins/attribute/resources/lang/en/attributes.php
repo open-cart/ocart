@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'attributes' => 'Attributes',
     'title' => 'Title',
     'slug' => 'Slug',
     'display_layout' => 'Display layout',

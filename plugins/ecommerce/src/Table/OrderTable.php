@@ -133,7 +133,7 @@ class OrderTable extends TableAbstract
 
             'created_at' => [
                 'name' => 'created_at',
-                'title' => 'Ngày tạo',
+                'title' => __('admin.created_at'),
                 'class' => 'border text-left px-2 py-2 dark:text-gray-300 dark:border-gray-700',
                 'render' => function ($item) {
                     return $item->created_at->format('Y-m-d H:i:s');

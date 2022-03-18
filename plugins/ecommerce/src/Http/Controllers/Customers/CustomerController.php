@@ -34,25 +34,6 @@ class CustomerController extends BaseController
     {
         $this->customerRepository = $customerRepository;
         $this->addressRepository = $addressRepository;
-        $this->authorizeResource($customerRepository->getModel(), 'id');
-    }
-
-    /**
-     * Get the map of resource methods to ability names.
-     *
-     * @return array
-     */
-    protected function resourceAbilityMap()
-    {
-        return [
-            'index' => 'ecommerce.customers.index',
-            'show' => 'ecommerce.customers.update',
-            'create' => 'ecommerce.customers.create',
-            'store' => 'ecommerce.customers.create',
-            'edit' => 'ecommerce.customers.update',
-            'update' => 'ecommerce.customers.update',
-            'destroy' => 'ecommerce.customers.destroy',
-        ];
     }
 
     public function index(TagTable $table)

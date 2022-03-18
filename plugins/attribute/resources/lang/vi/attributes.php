@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'attributes' => 'Thuộc tính',
     'title' => 'Tên thuộc tính',
     'slug' => 'Slug',
     'display_layout' => 'Hiển thị',

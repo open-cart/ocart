@@ -279,7 +279,7 @@
                                         @elseif($history->action === 'refund')
                                             <li class="mb-2">
                                                 <div class="flex flex-col mb-1">
-                                                    <div x-bind:class="{'shadow-sm rounded bg-white': open}"
+                                                    <div x-bind:class="{'shadow-sm rounded bg-white dark:bg-gray-700': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
                                                             <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
@@ -303,7 +303,7 @@
                                                             </div>
                                                         </div>
                                                         <template x-if="true">
-                                                            <div x-show="open" class="z-10 bg-gray-200 bg-opacity-70 pl-10">
+                                                            <div x-show="open" class="z-10 bg-gray-200 dark:bg-gray-800 bg-opacity-70 pl-10 pr-3">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.order_number') }}
@@ -312,7 +312,7 @@
                                                                         <x-link href="{{ route('ecommerce.orders.update', $order->id) }}" title="{{ $order->code }}">{{ $order->code }}</x-link>
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.description') }}
@@ -321,7 +321,7 @@
                                                                         {!! $history->description . ' ' . trans('plugins/ecommerce::orders.from') . ' ' . $order->payment->payment_channel->toHtml() !!}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.amount') }}
@@ -331,7 +331,7 @@
                                                                         {{ format_price(Arr::get($history->extras, 'amount', 0)) }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.status') }}
@@ -340,7 +340,7 @@
                                                                         {{ trans('plugins/ecommerce::orders.successfully') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.transaction_type') }}
@@ -349,7 +349,7 @@
                                                                         {{ trans('plugins/ecommerce::orders.refund') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.staff') }}
@@ -358,7 +358,7 @@
                                                                         {{ $order->payment->user->name ? $order->payment->user->name : trans('plugins/ecommerce::orders.n_a') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.refund_date') }}
@@ -367,8 +367,6 @@
                                                                         {{ $history->created_at }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
-
                                                             </div>
                                                         </template>
                                                     </div>
@@ -377,7 +375,7 @@
                                         @elseif($history->action === 'confirm_payment')
                                             <li class="mb-2">
                                                 <div class="flex flex-col mb-1">
-                                                    <div x-bind:class="{'shadow-sm rounded bg-white': open}"
+                                                    <div x-bind:class="{'shadow-sm rounded bg-white dark:bg-gray-700': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
                                                             <div class="flex-none @if($history->user_id) bg-indigo-600 @endif rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
@@ -401,7 +399,7 @@
                                                             </div>
                                                         </div>
                                                         <template x-if="true">
-                                                            <div x-show="open" class="z-10 bg-gray-200 bg-opacity-70 pl-10">
+                                                            <div x-show="open" class="z-10 bg-gray-200 dark:bg-gray-800 bg-opacity-70 pl-10 pr-3">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.order_number') }}
@@ -410,7 +408,7 @@
                                                                         <x-link href="{{ route('ecommerce.orders.update', $order->id) }}" title="{{ $order->code }}">{{ $order->code }}</x-link>
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.description') }}
@@ -419,7 +417,7 @@
                                                                         {!! trans('plugins/ecommerce::orders.mark_payment_as_confirmed', ['method' => $order->payment->payment_channel->toHtml()]) !!}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.transaction_amount') }}
@@ -428,7 +426,7 @@
                                                                         {{ format_price($order->payment->amount) }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.payment_gateway') }}
@@ -437,7 +435,7 @@
                                                                         {!! $order->payment->payment_channel->label() !!}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.status') }}
@@ -446,7 +444,7 @@
                                                                         {{ trans('plugins/ecommerce::orders.successfully') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.transaction_type') }}
@@ -455,7 +453,7 @@
                                                                         {{ trans('plugins/ecommerce::orders.confirm') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.staff') }}
@@ -464,7 +462,7 @@
                                                                         {{ $order->payment->user->name ? $order->payment->user->name : trans('plugins/ecommerce::orders.n_a') }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3 flex">
                                                                     <div class="w-1/2">
                                                                         {{ trans('plugins/ecommerce::orders.payment_date') }}
@@ -473,8 +471,6 @@
                                                                         {{ $history->created_at }}
                                                                     </div>
                                                                 </div>
-                                                                <hr>
-
                                                             </div>
                                                         </template>
                                                     </div>
@@ -483,7 +479,7 @@
                                         @elseif($history->action === 'added_note')
                                             <li class="mb-2">
                                                 <div class="flex flex-col mb-1">
-                                                    <div x-bind:class="{'shadow-sm rounded bg-white': open}"
+                                                    <div x-bind:class="{'shadow-sm rounded bg-white dark:bg-gray-700': open}"
                                                          x-data="{open: false}">
                                                         <div class="flex items-center mb-1 w-full py-3 pr-4">
                                                             <div class="flex-none bg-indigo-600 rounded-full h-4 w-4 border-gray-200 dark:border-gray-400 border-2 z-10 ml-6">
@@ -507,11 +503,11 @@
                                                             </div>
                                                         </div>
                                                         <template x-if="true">
-                                                            <div x-show="open" class="z-10 bg-gray-200 bg-opacity-70 pl-10">
+                                                            <div x-show="open" class="z-10 bg-gray-200 dark:bg-gray-800 bg-opacity-70 pl-10 pr-3">
                                                                 <div class="py-3 px-3">
                                                                     {{ trans('plugins/ecommerce::orders.note') }}
                                                                 </div>
-                                                                <hr>
+                                                                <hr class="dark:border-gray-600">
                                                                 <div class="py-3 px-3">
                                                                     {{ Arr::get($history->extras, 'note', '') }}
                                                                 </div>
