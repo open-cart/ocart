@@ -1,9 +1,9 @@
 @props(['data' => null, 'ratio' => 1])
 @if($data)
-    <div class="h-full block shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+    <div class="card-product h-full block shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <a
-            href="{!! $data->url !!}"
-            class="effect"
+            href="{!! !empty($data->slug) ? $data->url : 'javascript:void(0)' !!}"
+            class="effect calc"
             style="padding-bottom: calc( {{ $ratio }} * 100% );"
         >
             <img
@@ -15,9 +15,23 @@
             >
         </a>
         <div class="p-2 md:p-3">
-            <a href="{!! $data->url !!}" class="hover:text-blue-700">
+            <a
+                href="{!! !empty($data->slug) ? $data->url : 'javascript:void(0)' !!}"
+                class="hover:text-blue-700"
+            >
                 <h3 class="text-xs md:text-base font-semibold text-gray-700 line-clamp-2">{{ $data->name }}</h3>
             </a>
+
+            <div class="hidden md:flex pt-2 justify-between items-center text-sm text-gray-600">
+                <div class="flex">
+                    <x-theme::icons.star class="text-yellow-500"/>
+                    <x-theme::icons.star class="text-yellow-500"/>
+                    <x-theme::icons.star class="text-yellow-500"/>
+                    <x-theme::icons.star class="text-yellow-500"/>
+                    <x-theme::icons.star class="text-gray-400"/>
+                    <span class="ml-1">(34)</span>
+                </div>
+            </div>
 
             <div class="flex justify-between items-center">
                 @if(!empty($data->sell_price) && $data->sell_price > 0)
@@ -36,11 +50,12 @@
                         <span class="font-bold text-sm md:text-base">Liên hệ</span>
                     </div>
                 @endif
-                <button onclick="addToCart({{ $data->id, $data->slug }})" class="hidden md:block flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
+                <button onclick="addToCart({{ $data->id, !empty($data->slug) ? $data->url : 'javascript:void(0)' }})" class="hidden md:block flex text-blue-600 p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:text-green-500" title="Thêm vào giỏ hàng">
                     <x-theme::icons.shopping-cart class="w-7"/>
                 </button>
 
             </div>
+
         </div>
 
     </div>

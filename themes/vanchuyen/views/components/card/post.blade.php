@@ -1,19 +1,19 @@
 @props(['data' => null,'class' => '', 'type' => 'thumb-top', 'thumbnail' => true,'deps' => false, 'sizeImage' => 'medium', 'author' => false, 'postMeta' => true, 'classTitle' => 'md:text-base md:mb-2', 'categoryBg' => 'bg-red-500', 'ratio' => 0.594, 'contentgrow' => 1, 'categoryType' => 1, 'transform' => true, 'thumbRadius' => false, 'dark' => false, 'rounded' => 'rounded-md', 'video' => false ])
 @if($data)
-    <div class="card-post {{ $class }} @if($type === 'thumb-right' || $type === 'thumb-left') flex @endif @if($type === 'thumb-bottom') flex flex-col-reverse @endif @if($type === 'thumb-bg') thumb-bg flex relative @endif h-full relative overflow-hidden">
+    <div class="card-post {{ $class }} @if($type === 'thumb-right' || $type === 'thumb-left') flex @endif @if($type === 'thumb-bottom') flex flex-col-reverse @endif @if($type === 'thumb-bg') thumb-bg flex relative @endif h-full relative block overflow-hidden">
         @if($thumbnail)
             <div
                 class="@if($type === 'thumb-right') flex-1 flex-shrink flex-grow order-2 @elseif($type === 'thumb-left') flex-1 flex-shrink flex-grow order-1 @endif @if($type === 'thumb-bg') w-full h-full @endif @if($thumbRadius) rounded-full @endif post-thumbnail effect"
                 style="padding-bottom: calc( {{ $ratio }} * 100% );"
             >
                 <a
-                    href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $data->slug]) !!}"
+                    href="{!! !empty($data->slug) ? $data->url : 'javascript:void(0)' !!}"
                     class="block"
                 >
                     <img
                         class="w-full h-full object-cover {{ $rounded }} absolute lozad"
                         data-src="{{ TnMedia::getImageUrl($data->image, $sizeImage, asset('/images/no-image.jpg')) }}"
-                        data-srcset="{{ TnMedia::getImageUrl($data->image . '?w=400', asset('/images/no-image.jpg')) }} 1000w, {{ TnMedia::getImageUrl($data->image, $sizeImage, asset('/images/no-image.jpg')) }} 2000w"
+                        data-srcset="{{ TnMedia::getImageUrl($data->image . '?w=200', asset('/images/no-image.jpg')) }} 1000w, {{ TnMedia::getImageUrl($data->image, $sizeImage, asset('/images/no-image.jpg')) }} 2000w"
                         src="{{ asset('/images/no-image.jpg') }}"
                         alt="{{ $data->name }}"
                     >
@@ -77,7 +77,7 @@
                     {{ $classTitle }}"
             >
                 <a
-                    href="{!! route(ROUTE_BLOG_POST_SCREEN_NAME, ['slug' => $data->slug]) !!}"
+                    href="{!! !empty($data->slug) ? $data->url : 'javascript:void(0)' !!}"
                     class="hover:underline"
                 >
                     {{ $data->name }}

@@ -36,10 +36,14 @@ Route::group([
                 if (is_active_plugin('ecommerce')){
                     // get all product & category
                     $categories_product = \Ocart\Ecommerce\Models\Category::orderBy('created_at', 'desc')->get();
+                    $tags_product = \Ocart\Ecommerce\Models\Tag::orderBy('created_at', 'desc')->get();
                     $products = \Ocart\Ecommerce\Models\Product::orderBy('created_at', 'desc')->get();
                     // add every product & category to the sitemap
                     foreach ($categories_product as $category) {
                         $sitemap->add($category->url, $category->created_at, '1.0', 'monthly');
+                    }
+                    foreach ($tags_product as $tag) {
+                        $sitemap->add($tag->url, $tag->created_at, '1.0', 'monthly');
                     }
                     foreach ($products as $product) {
                         $sitemap->add($product->url, $product->created_at, '1.0', 'hourly');
@@ -47,17 +51,21 @@ Route::group([
 
                 }
 
-                if (is_active_plugin('blog')){
-                    // get all posts & category
-                    $categories_post = \Ocart\Blog\Models\Category::orderBy('created_at', 'desc')->get();
-                    $posts = \Ocart\Blog\Models\Post::orderBy('created_at', 'desc')->get();
-                    // add every post & category to the sitemap
-                    foreach ($categories_post as $category) {
-                        $sitemap->add($category->url, $category->created_at, '1.0', 'monthly');
-                    }
-                    foreach ($posts as $post) {
-                        $sitemap->add($post->url, $post->created_at, '1.0', 'hourly');
-                    }
+                 if (is_active_plugin('blog')){
+                     // get all posts & category
+                     $categories_post = \Ocart\Blog\Models\Category::orderBy('created_at', 'desc')->get();
+                     $tags_post = \Ocart\Blog\Models\Tag::orderBy('created_at', 'desc')->get();
+                     $posts = \Ocart\Blog\Models\Post::orderBy('created_at', 'desc')->get();
+                     // add every post & category to the sitemap
+                     foreach ($categories_post as $category) {
+                         $sitemap->add($category->url, $category->created_at, '1.0', 'monthly');
+                     }
+                     foreach ($tags_post as $tag) {
+                         $sitemap->add($tag->url, $tag->created_at, '1.0', 'monthly');
+                     }
+                     foreach ($posts as $post) {
+                         $sitemap->add($post->url, $post->created_at, '1.0', 'hourly');
+                     }
                 }
             }
 

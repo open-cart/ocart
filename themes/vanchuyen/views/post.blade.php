@@ -56,7 +56,7 @@
                     $last = 1;
 
                     // get all H1, H2, …, H6 elements
-                    foreach ($xpath->query('//*[self::h1 or self::h2 or self::h3]') as $headline) {
+                    foreach ($xpath->query('//*[self::h2 or self::h3]') as $headline) {
                         // get level of current headline
                         sscanf($headline->tagName, 'h%u', $curr);
 

@@ -6,24 +6,39 @@
                 @foreach(parent_recursive(get_categories()) as $category)
                     <li class="py-0.5">
                         <a
-                            data-body="category-container"
-                            href="{{ $category->url }}"
-                            class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
+                                data-body="category-container"
+                                href="{{ $category->url }}"
+                                class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
                             {{ $category->name }}
                         </a>
                         @if(!empty($category->children) && count($category->children)>0)
-                            <ul class="submenu1-category-product ml-4">
-                                @foreach($category->children as $subitem)
-                                    <li class="py-0.5">
-                                        <a data-body="category-container"
-                                           href="{{ $subitem->url }}"
-                                           class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
-                                            {{ $subitem->name }}
-                                        </a>
-                                    </li>
+                        <ul class="submenu1-category-product ml-4">
+                            @foreach($category->children as $subitem)
+                                <li class="py-0.5">
+                                    <a data-body="category-container"
+                                        href="{{ $subitem->url }}"
+                                        class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
+                                        {{ $subitem->name }}
+                                    </a>
 
-                                @endforeach
-                            </ul>
+                                    @if(!empty($subitem->children) && count($subitem->children)>0)
+                                        <ul class="submenu1-category-product ml-4">
+                                            @foreach($subitem->children as $subitem2)
+                                                <li class="py-0.5">
+                                                    <a data-body="category-container"
+                                                       href="{{ $subitem2->url }}"
+                                                       class="text-sm font-semibold block text-gray-500 hover:text-blue-600">
+                                                        {{ $subitem2->name }}
+                                                    </a>
+                                                </li>
+
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
+
+                            @endforeach
+                        </ul>
                         @endif
                     </li>
                 @endforeach

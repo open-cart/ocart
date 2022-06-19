@@ -198,3 +198,77 @@
 .google-speed{
     display: block;
 }
+.toast {
+    margin-bottom: 1rem;
+}
+.toast-message {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+@media (min-width: 640px) {
+    .toast-message {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+}
+.toast-top-right {
+    z-index: 50;
+    top: 4rem;
+    right: 1rem;
+    position: fixed;
+}
+@media (min-width: 768px) {
+    .toast-top-right {
+        top: 6rem;
+    }
+}
+.toast-success {
+    color: rgba(4, 120, 87, 1);
+    border-color: rgba(52, 211, 153, 1);
+    background-color: rgba(209, 250, 229, 1);
+    position: relative;
+    border-width: 1px;
+    border-radius: 0.25rem;
+}
+.toast-error {
+    color: rgba(185, 28, 28, 1);
+    border-color: rgba(248, 113, 113, 1);
+    background-color: rgba(254, 226, 226, 1);
+    position: relative;
+    border-width: 1px;
+    border-radius: 0.25rem;
+}
+
+@-webkit-keyframes phonering-alo-circle-anim {
+    0%{-webkit-transform:rotate(0) scale(0.5) skew(1deg);-webkit-opacity:0.1;}
+    30%{-webkit-transform:rotate(0) scale(0.7) skew(1deg);-webkit-opacity:0.5;}
+    100%{-webkit-transform:rotate(0) scale(1) skew(1deg);-webkit-opacity:0.1;}
+}
+@-webkit-keyframes phonering-alo-circle-fill-anim {
+    0%{-webkit-transform:rotate(0) scale(0.7) skew(1deg);opacity:0.6;}
+    50%{-webkit-transform:rotate(0) scale(1) skew(1deg);opacity:0.6;}
+    100%{-webkit-transform:rotate(0) scale(0.7) skew(1deg);opacity:0.6;}
+}
+@-webkit-keyframes phonering-alo-circle-img-anim {
+    0%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+    10%{-webkit-transform:rotate(-25deg) scale(1) skew(1deg);}
+    20%{-webkit-transform:rotate(25deg) scale(1) skew(1deg);}
+    30%{-webkit-transform:rotate(-25deg) scale(1) skew(1deg);}
+    40%{-webkit-transform:rotate(25deg) scale(1) skew(1deg);}
+    50%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+    100%{-webkit-transform:rotate(0) scale(1) skew(1deg);}
+}
+
+.animation-turn{
+    -webkit-animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+    animation: phonering-alo-circle-img-anim 1s infinite ease-in-out;
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+.grid-template-columns-5-20{
+    grid-template-columns: repeat(5, 20vw);
+}

@@ -6,18 +6,27 @@
                     @php
                         $address1 = theme_options()->getOption('address1', null);
                         $address2 = theme_options()->getOption('address2', null);
-                        $hotline = theme_options()->getOption('phone', null);
+                        $hotline1 = theme_options()->getOption('phone1', null);
+                        $hotline2 = theme_options()->getOption('phone2', null);
+                        $email = theme_options()->getOption('email', null);
                     @endphp
                     <h4 class="widget-title mb-3 font-bold text-lg text-white">{!! get_title() !!}</h4>
                     <p>{!! get_deps_footer() !!}</p>
+                    @if($hotline1)
+                        <p>Hotline: {!! $hotline1 !!}
+                        @if($hotline2)
+                            <span> - {!! $hotline2 !!}</span>
+                        @endif
+                        </p>
+                    @endif
+                    @if($email)
+                        <p>Email: {!! $email !!}</p>
+                    @endif
                     @if($address1)
-                        <p>Địa chỉ 1: {!! $address1 !!}</p>
+                    <p>Địa chỉ 1: {!! $address1 !!}</p>
                     @endif
                     @if($address2)
-                        <p>Địa chỉ 2: {!! $address2 !!}</p>
-                    @endif
-                    @if($hotline)
-                        <p>Hotline: {!! $hotline !!}</p>
+                    <p>Địa chỉ 2: {!! $address2 !!}</p>
                     @endif
                 </div>
 
@@ -41,7 +50,7 @@
                                     <ul class="footer-menu">
                                         @foreach($children as $i)
                                             @if(!empty(Arr::get($i, 'url')))
-                                                <li><a href="{{ Arr::get($i, 'url') }}">{{ Arr::get($i, 'title') }}</a></li>
+                                                <li><a href="{{ Arr::get($i, 'url') }}" target="{{ Arr::get($i, 'target') }}">{{ Arr::get($i, 'title') }}</a></li>
                                             @else
                                                 <li>{{ Arr::get($i, 'title') }}</li>
                                             @endif
@@ -62,7 +71,7 @@
             @php
                 $domain = theme_options()->getOption('domain_web', '');
             @endphp
-            <p class="mb-0">© 2021 {{ $domain }} Designd By <a href="https://sevenweb.vn">SevenWeb</a> All Rights
+            <p class="mb-0">© 2021 {{ $domain }} Designd By <a href="https://zalo.me/0972675428" rel="noreferrer nofollow" target="_blank">SevenWeb</a> All Rights
                 Reserved</p>
         </div>
     </div>

@@ -1,6 +1,6 @@
 @props(['keySlide'=> 'default'])
 
-<section class="sec-testimonial section-custom" style="background: url({{ TnMedia::getImageUrl(!empty(theme_options()->getOption('bg_testimonial1', null)) ? theme_options()->getOption('bg_testimonial1', null) : asset('/images/no-image.jpg')) }}) center center no-repeat;">
+<section class="sec-testimonial section-custom">
     <div class="max-w-6xl mx-auto px-4">
         @if(!empty(theme_options()->getOption('title_main_testimonial1', '')))
             <div class="sec-blog-header lg:py-12">
@@ -8,8 +8,8 @@
                     {{ theme_options()->getOption('title_main_testimonial1', '') }}
                 </a>
             </div>
-        @endif
-        <!-- Swiper -->
+    @endif
+    <!-- Swiper -->
         <div class="{{ 'swiperTestimonial1'.$keySlide }} swiper-container shadow-2xl rounded-lg">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
@@ -36,7 +36,7 @@
                                 </p>
                                 <p class="mt-6 animate-bounce">
                                     <a
-                                        href="javascript:void(0)"
+                                        href="{{ !empty(theme_options()->getOption('link_testimonial1', '')) ? theme_options()->getOption('link_testimonial1', '') : 'javascript:void(0)'}}"
                                         class="font-medium text-blue-600 hover:text-blue-900"
                                     >
                                         {{ theme_options()->getOption('title_testimonial1', '') }}
@@ -70,7 +70,7 @@
                                 </p>
                                 <p class="mt-6 animate-bounce">
                                     <a
-                                        href="javascript:void(0)"
+                                        href="{{ !empty(theme_options()->getOption('link_testimonial1_2', '')) ? theme_options()->getOption('link_testimonial1_2', '') : 'javascript:void(0)'}}"
                                         class="font-medium text-blue-600 hover:text-blue-900"
                                     >
                                         {{ theme_options()->getOption('title_testimonial1_2', '') }}
@@ -104,7 +104,7 @@
                                 </p>
                                 <p class="mt-6 animate-bounce">
                                     <a
-                                        href="javascript:void(0)"
+                                        href="{{ !empty(theme_options()->getOption('link_testimonial1_3', '')) ? theme_options()->getOption('link_testimonial1_3', '') : 'javascript:void(0)'}}"
                                         class="font-medium text-blue-600 hover:text-blue-900"
                                     >
                                         {{ theme_options()->getOption('title_testimonial1_3', '') }}

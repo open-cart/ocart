@@ -172,12 +172,12 @@
                                 </div>
                             </button>
 
-                            @if(!empty(theme_options()->getOption('phone', null)))
-                                <a href="tel:{{ preg_replace( '/[^0-9]/', '', theme_options()->getOption('phone', null) )}}"
+                            @if(!empty(theme_options()->getOption('phone1', null)))
+                                <a href="tel:{{ preg_replace( '/[^0-9]/', '', theme_options()->getOption('phone1', null) )}}"
                                    class="items-center whitespace-nowrap inline-flex w-full text-white bg-green-500 border-0 py-3 px-6 mt-3 focus:outline-none rounded">
                                     <x-theme::icons.phone class="w-8"/>
                                     <span
-                                        class="w-full text-xl text-center">{{ theme_options()->getOption('phone', null) }}</span>
+                                        class="w-full text-xl text-center">{{ theme_options()->getOption('phone1', null) }}</span>
                                 </a>
                             @endif
 
@@ -600,6 +600,7 @@
 
         function product() {
             let product = @json($product);
+            const link_home_storage = @json(TnMedia::url('/'));
             let attributes = {};
             let list_attr = [];
             let _index = 0;
@@ -678,7 +679,13 @@
                 product.sale_price = product_active.product.sale_price;
                 product.sell_price = product_active.product.sell_price;
                 product.sku = product_active.product.sku;
-                product.images = product_active.product.images;
+                product.images = product_active.product.images.map(image => {
+                    return link_home_storage + image;
+                });
+            } else {
+                product.images = product.images.map(image => {
+                    return link_home_storage + image;
+                });
             }
             addValueImagesProduct(product.images);
 
@@ -723,7 +730,9 @@
                         this.product.sale_price = this.product_active.product.sale_price;
                         this.product.sell_price = this.product_active.product.sell_price;
                         this.product.sku = this.product_active.product.sku;
-                        this.product.images = this.product_active.product.images;
+                        this.product.images = this.product_active.product.images.map(image => {
+                            return link_home_storage + image;
+                        });
                         if (this.product.images.length > 0){
                             addValueImagesProduct(this.product.images);
                         }

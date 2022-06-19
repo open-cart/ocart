@@ -12,7 +12,12 @@
         <div class="pl-3 flex flex-wrap">
             <div>
                 <div>
-                    <a href="{!! $data->url !!}" class="font-bold text-gray-500 hover:text-blue-600 line-clamp-2">{{ $data->name }}</a>
+                    <a
+                        href="{!! !empty($data->slug) ? $data->url : 'javascript:void(0)' !!}"
+                        class="font-bold text-gray-500 hover:text-blue-600 line-clamp-2"
+                    >
+                        {{ $data->name }}
+                    </a>
                 </div>
                 @if(count($data->categories)>0)
                     <div>

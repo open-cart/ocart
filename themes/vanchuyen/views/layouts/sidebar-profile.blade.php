@@ -25,5 +25,18 @@
             </li>
         </ul>
     </div>
+    <div class="pt-4 border-t border-gray-200">
+        <div class="mb-2">Đơn hàng của tôi</div>
+        <ul>
+            <li>
+                <a href="#"
+                   class="text-sm pb-1 font-semibold block text-gray-500 hover:text-blue-600">Tất cả đơn hàng</a>
+            </li>
+            <li>
+                <a href="#"
+                   class="text-sm pb-1 font-semibold block text-gray-500 hover:text-blue-600">Đơn hàng đổi trả</a>
+            </li>
+        </ul>
+    </div>
 
 </div>

@@ -1,9 +1,9 @@
 <div id="list-sharing-desktop" class="list-sharing z-50">
     <ul class="list-sharing-ul">
-        @if(!empty(theme_options()->getOption('phone', null)))
+        @if(!empty(theme_options()->getOption('phone1', null)))
             <li class="list-sharing-item">
-                <a href="tel:{{ preg_replace( '/[^0-9]/', '', theme_options()->getOption('phone', null) )}}" rel="nofollow"
-                   class="list-sharing-item-icon">
+                <a href="tel:{{ preg_replace( '/[^0-9]/', '', theme_options()->getOption('phone1', null) )}}" rel="nofollow"
+                   class="list-sharing-item-icon effect animation-turn">
                     <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="22" cy="22" r="22" fill="url(#paint2_linear)"></circle>
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -23,7 +23,7 @@
         @if(!empty(theme_options()->getOption('chat_zalo', null)))
             <li class="list-sharing-item">
                 <a href="{{ theme_options()->getOption('chat_zalo', null) }}" target="_blank"
-                   rel="nofollow" class="list-sharing-item-icon">
+                   rel="nofollow" class="list-sharing-item-icon effect animation-turn">
                     <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="22" cy="22" r="22" fill="url(#paint4_linear)"></circle>
                         <g clip-path="url(#clip0)">
@@ -58,7 +58,7 @@
         @if(!empty(theme_options()->getOption('chat_facebook', null)))
             <li class="list-sharing-item">
                 <a href="{{ theme_options()->getOption('chat_facebook', null) }}" target="_blank" rel="nofollow"
-                   class="list-sharing-item-icon">
+                   class="list-sharing-item-icon effect animation-turn">
                     <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="22" cy="22" r="22" fill="url(#paint3_linear)"></circle>
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -77,7 +77,7 @@
         @endif
         <li class="list-sharing-item">
             <button id="gotop"
-                    class="list-sharing-item-icon bg-green-500 bg-opacity-80 hover:bg-green-700 text-white rounded-full focus:outline-none">
+                    class="list-sharing-item-icon effect animation-turn bg-green-500 bg-opacity-80 hover:bg-green-700 text-white rounded-full focus:outline-none">
                 <x-theme::icons.chevron-double class="mx-auto"/>
             </button>
         </li>
@@ -106,7 +106,7 @@
     .list-sharing {
         position: fixed;
         bottom: 45px;
-        right: 0;
+        right: 15px;
         visibility: visible;
     }
 
@@ -142,14 +142,15 @@
         .list-sharing{
             bottom: -1px;
             left: 0;
+            right: 0;
         }
         .list-sharing-ul{
             display: flex;
-            align-items: center;
+            /*align-items: center;*/
             background: white;
         }
         .list-sharing-ul .list-sharing-item{
-            margin-bottom: 7px;
+            margin-bottom: 0;
             margin-top: 5px;
             flex: 1;
             text-align: center;

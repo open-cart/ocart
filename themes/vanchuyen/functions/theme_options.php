@@ -17,7 +17,6 @@ Event::listen(RouteMatched::class, function () {
     dequy(get_blog_categories(), $blog_categories);
 
     $blog_categories = [0 => 'None'] + $blog_categories;
-
     theme_options()->setField([
         'id' => 'domain_web',
         'section_id' => 'opt-general',
@@ -50,6 +49,17 @@ Event::listen(RouteMatched::class, function () {
             'rows' => 3,
         ]
     ])->setField([
+        'id' => 'style_custom',
+        'section_id' => 'opt-general',
+        'type' => Field::TEXTAREA,
+        'name' => 'style_custom',
+        'label' => trans('Css Custom'),
+        'attr' => [
+            'placeholder' => trans('Code Css'),
+            'inline' => true,
+            'rows' => 3,
+        ]
+    ])->setField([
         'id' => 'address1',
         'section_id' => 'opt-general',
         'type' => Field::TEXT,
@@ -68,13 +78,31 @@ Event::listen(RouteMatched::class, function () {
             'placeholder' => trans('Address') . ' 2',
         ]
     ])->setField([
-        'id' => 'phone',
+        'id' => 'phone1',
         'section_id' => 'opt-general',
         'type' => Field::TEXT,
-        'name' => 'phone',
-        'label' => trans('Hotline'),
+        'name' => 'phone1',
+        'label' => trans('Hotline 1'),
         'attr' => [
-            'placeholder' => trans('Phone Number'),
+            'placeholder' => trans('Phone 1 Number'),
+        ]
+    ])->setField([
+        'id' => 'phone2',
+        'section_id' => 'opt-general',
+        'type' => Field::TEXT,
+        'name' => 'phone2',
+        'label' => trans('Hotline 2'),
+        'attr' => [
+            'placeholder' => trans('Phone 2 Number'),
+        ]
+    ])->setField([
+        'id' => 'email',
+        'section_id' => 'opt-general',
+        'type' => Field::TEXT,
+        'name' => 'email',
+        'label' => trans('Email'),
+        'attr' => [
+            'placeholder' => trans('Email'),
         ]
     ])->setField([
         'id' => 'chat_zalo',
@@ -110,7 +138,7 @@ Event::listen(RouteMatched::class, function () {
         'name' => 'section_list',
         'label' => trans('Section List'),
         'attr' => [
-            'placeholder' => trans('["sec1","sec4","sec5","sec6","sec7","sec9","sec11","sec12","sec13"]'),
+            'placeholder' => trans('["sec1","sec4","sec5","sec6","sec7","sec9","sec11","sec12"]'),
         ]
     ])->setField([
         'id' => 'link_slide1',
@@ -167,176 +195,347 @@ Event::listen(RouteMatched::class, function () {
             'placeholder' => trans('Image'),
         ]
     ])->setField([
-        'id' => 'link_banner1',
+        'id' => 'link_grid1',
         'section_id' => 'opt-sections',
         'type' => Field::TEXT,
-        'name' => 'link_banner1',
+        'name' => 'link_grid1',
         'label' => trans('Section 2 Link'),
         'attr' => [
             'placeholder' => trans('Link'),
         ]
     ])->setField([
-        'id' => 'banner1',
+        'id' => 'grid1',
         'section_id' => 'opt-sections',
         'type' => Field::MEDIA_IMAGE,
-        'name' => 'banner1',
-        'label' => trans('Section 2 Banner'),
+        'name' => 'grid1',
+        'label' => trans('Section 2 Grid'),
         'attr' => [
             'placeholder' => trans('Image'),
         ]
     ])->setField([
-        'id' => 'blog1',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog1',
-        'label' => trans('Section 4'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'blog_slide3',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog_slide3',
-        'label' => trans('Section 5'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'blog2',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog2',
-        'label' => trans('Section 6'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'blog3',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog3',
-        'label' => trans('Section 7'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'link_banner2',
+        'id' => 'link_grid1_2',
         'section_id' => 'opt-sections',
         'type' => Field::TEXT,
-        'name' => 'link_banner2',
-        'label' => trans('Section 8 Link'),
+        'name' => 'link_grid1_2',
+        'label' => trans('Section 2.2 Link'),
         'attr' => [
             'placeholder' => trans('Link'),
         ]
     ])->setField([
-        'id' => 'banner2',
+        'id' => 'grid1_2',
         'section_id' => 'opt-sections',
         'type' => Field::MEDIA_IMAGE,
-        'name' => 'banner2',
-        'label' => trans('Section 8 Banner'),
+        'name' => 'grid1_2',
+        'label' => trans('Section 2.2 Grid'),
         'attr' => [
             'placeholder' => trans('Image'),
         ]
     ])->setField([
-        'id' => 'blog4',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog4',
-        'label' => trans('Section 9'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'blog4_2',
-        'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog4_2',
-        'label' => trans('Section 9.2'),
-        'choices'    => $blog_categories
-    ])->setField([
-        'id' => 'link_banner_blog_4',
+        'id' => 'link_grid1_3',
         'section_id' => 'opt-sections',
         'type' => Field::TEXT,
-        'name' => 'link_banner_blog_4',
-        'label' => trans('Section 9 Link'),
+        'name' => 'link_grid1_3',
+        'label' => trans('Section 2.3 Link'),
         'attr' => [
             'placeholder' => trans('Link'),
         ]
     ])->setField([
-        'id' => 'banner_blog_4',
+        'id' => 'grid1_3',
         'section_id' => 'opt-sections',
         'type' => Field::MEDIA_IMAGE,
-        'name' => 'banner_blog_4',
-        'label' => trans('Section 9 Banner'),
-        'attr' => [
-            'placeholder' => trans('Banner'),
-        ]
-    ])->setField([
-        'id' => 'link_banner_blog_4_2',
-        'section_id' => 'opt-sections',
-        'type' => Field::TEXT,
-        'name' => 'link_banner_blog_4_2',
-        'label' => trans('Section 9.2 Link'),
-        'attr' => [
-            'placeholder' => trans('Link'),
-        ]
-    ])->setField([
-        'id' => 'banner_blog_4_2',
-        'section_id' => 'opt-sections',
-        'type' => Field::MEDIA_IMAGE,
-        'name' => 'banner_blog_4_2',
-        'label' => trans('Section 9.2 Banner'),
-        'attr' => [
-            'placeholder' => trans('Banner'),
-        ]
-    ])->setField([
-        'id' => 'link_banner3',
-        'section_id' => 'opt-sections',
-        'type' => Field::TEXT,
-        'name' => 'link_banner3',
-        'label' => trans('Section 10 Link'),
-        'attr' => [
-            'placeholder' => trans('Link'),
-        ]
-    ])->setField([
-        'id' => 'banner3',
-        'section_id' => 'opt-sections',
-        'type' => Field::MEDIA_IMAGE,
-        'name' => 'banner3',
-        'label' => trans('Section 10 Banner'),
+        'name' => 'grid1_3',
+        'label' => trans('Section 2.3 Grid'),
         'attr' => [
             'placeholder' => trans('Image'),
         ]
     ])->setField([
-        'id' => 'blog5',
+        'id' => 'link_grid1_4',
         'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog5',
-        'label' => trans('Section 11'),
-        'choices'    => $blog_categories
+        'type' => Field::TEXT,
+        'name' => 'link_grid1_4',
+        'label' => trans('Section 2.4 Link'),
+        'attr' => [
+            'placeholder' => trans('Link'),
+        ]
     ])->setField([
-        'id' => 'blog5_2',
+        'id' => 'grid1_4',
         'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog5_2',
-        'label' => trans('Section 11.2'),
-        'choices'    => $blog_categories
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'grid1_4',
+        'label' => trans('Section 2.4 Grid'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
     ])->setField([
-        'id' => 'blog5_3',
+        'id' => 'link_grid1_5',
         'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog5_3',
-        'label' => trans('Section 11.3'),
-        'choices'    => $blog_categories
+        'type' => Field::TEXT,
+        'name' => 'link_grid1_5',
+        'label' => trans('Section 2.5 Link'),
+        'attr' => [
+            'placeholder' => trans('Link'),
+        ]
+    ])->setField([
+        'id' => 'grid1_5',
+        'section_id' => 'opt-sections',
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'grid1_5',
+        'label' => trans('Section 2.5 Grid'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
+    ])->setField([
+        'id' => 'link_grid1_6',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'link_grid1_6',
+        'label' => trans('Section 2.6 Link'),
+        'attr' => [
+            'placeholder' => trans('Link'),
+        ]
+    ])->setField([
+        'id' => 'grid1_6',
+        'section_id' => 'opt-sections',
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'grid1_6',
+        'label' => trans('Section 2.6 Grid'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
     ])->setField([
         'id' => 'title_product1',
         'section_id' => 'opt-sections',
         'type' => Field::TEXT,
         'name' => 'title_product1',
-        'label' => trans('Section 12 Title'),
+        'label' => trans('Section 4 Title'),
     ])->setField([
         'id' => 'deps_product1',
         'section_id' => 'opt-sections',
         'type' => Field::TEXT,
         'name' => 'deps_product1',
-        'label' => trans('Section 12 Deps'),
+        'label' => trans('Section 4 Deps'),
     ])->setField([
-        'id' => 'blog_slide4',
+        'id' => 'icon_about1',
         'section_id' => 'opt-sections',
-        'type' => Field::SELECT,
-        'name' => 'blog_slide4',
-        'label' => trans('Section 13'),
-        'choices'    => $blog_categories
+        'type' => Field::TEXT,
+        'name' => 'icon_about1',
+        'label' => trans('Section 5 Icon'),
+    ])->setField([
+        'id' => 'title_about1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_about1',
+        'label' => trans('Section 5 Title'),
+    ])->setField([
+        'id' => 'deps_about1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_about1',
+        'label' => trans('Section 5 Deps'),
+    ])->setField([
+        'id' => 'icon_about1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'icon_about1_2',
+        'label' => trans('Section 5.2 Icon'),
+    ])->setField([
+        'id' => 'title_about1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_about1_2',
+        'label' => trans('Section 5.2 Title'),
+    ])->setField([
+        'id' => 'deps_about1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_about1_2',
+        'label' => trans('Section 5.2 Deps'),
+    ])->setField([
+        'id' => 'icon_about1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'icon_about1_3',
+        'label' => trans('Section 5.3 Icon'),
+    ])->setField([
+        'id' => 'title_about1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_about1_3',
+        'label' => trans('Section 5.3 Title'),
+    ])->setField([
+        'id' => 'deps_about1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_about1_3',
+        'label' => trans('Section 5.3 Deps'),
+    ])->setField([
+        'id' => 'title_product2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_product2',
+        'label' => trans('Section 6 Title'),
+    ])->setField([
+        'id' => 'deps_product2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_product2',
+        'label' => trans('Section 6 Deps'),
+    ])->setField([
+        'id' => 'title_testimonial1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_testimonial1',
+        'label' => trans('Section 7 Title'),
+    ])->setField([
+        'id' => 'link_testimonial1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'link_testimonial1',
+        'label' => trans('Section 7 Link'),
+    ])->setField([
+        'id' => 'deps_testimonial1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXTAREA,
+        'name' => 'deps_testimonial1',
+        'label' => trans('Section 7 Deps'),
+        'attr' => [
+            'inline' => true,
+            'rows' => 3,
+        ]
+    ])->setField([
+        'id' => 'image_testimonial1',
+        'section_id' => 'opt-sections',
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'image_testimonial1',
+        'label' => trans('Section 7 Image'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
+    ])->setField([
+        'id' => 'title_testimonial1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_testimonial1_2',
+        'label' => trans('Section 7.2 Title'),
+    ])->setField([
+        'id' => 'link_testimonial1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'link_testimonial1_2',
+        'label' => trans('Section 7.2 Link'),
+    ])->setField([
+        'id' => 'deps_testimonial1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXTAREA,
+        'name' => 'deps_testimonial1_2',
+        'label' => trans('Section 7.2 Deps'),
+        'attr' => [
+            'inline' => true,
+            'rows' => 3,
+        ]
+    ])->setField([
+        'id' => 'image_testimonial1_2',
+        'section_id' => 'opt-sections',
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'image_testimonial1_2',
+        'label' => trans('Section 7.2 Image'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
+    ])->setField([
+        'id' => 'title_testimonial1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_testimonial1_3',
+        'label' => trans('Section 7.3 Title'),
+    ])->setField([
+        'id' => 'link_testimonial1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'link_testimonial1_3',
+        'label' => trans('Section 7.3 Link'),
+    ])->setField([
+        'id' => 'deps_testimonial1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXTAREA,
+        'name' => 'deps_testimonial1_3',
+        'label' => trans('Section 7.3 Deps'),
+        'attr' => [
+            'inline' => true,
+            'rows' => 3,
+        ]
+    ])->setField([
+        'id' => 'image_testimonial1_3',
+        'section_id' => 'opt-sections',
+        'type' => Field::MEDIA_IMAGE,
+        'name' => 'image_testimonial1_3',
+        'label' => trans('Section 7.3 Image'),
+        'attr' => [
+            'placeholder' => trans('Image'),
+        ]
+    ])->setField([
+        'id' => 'product3',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXTAREA,
+        'name' => 'product3',
+        'label' => trans('Section 8'),
+        'attr' => [
+            'placeholder' => trans('[{"name":"name","slug":"slug","id":"id","children":[{"name":"name","slug":"slug"},{"name":"name","slug":"slug"}]}]'),
+            'inline' => true,
+            'rows' => 3,
+        ],
+    ])->setField([
+        'id' => 'title_blog6',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_blog6',
+        'label' => trans('Section 9 Title'),
+    ])->setField([
+        'id' => 'deps_blog6',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_blog6',
+        'label' => trans('Section 9 Deps'),
+    ])->setField([
+        'id' => 'title_partner1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_partner1',
+        'label' => trans('Section 10 Title'),
+        'attr' => [
+            'placeholder' => trans('Title'),
+        ]
+    ])->setField([
+        'id' => 'deps_partner1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_partner1',
+        'label' => trans('Section 10 Deps'),
+        'attr' => [
+            'placeholder' => trans('Deps'),
+        ]
+    ])->setField([
+        'id' => 'images_partner1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXTAREA,
+        'name' => 'images_partner1',
+        'label' => trans('Section 10 Images'),
+        'attr' => [
+            'placeholder' => trans('[images]'),
+            'inline' => true,
+            'rows' => 3,
+        ],
+    ])->setField([
+        'id' => 'title_contact1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'title_contact1',
+        'label' => trans('Section 11 Title'),
+    ])->setField([
+        'id' => 'deps_contact1',
+        'section_id' => 'opt-sections',
+        'type' => Field::TEXT,
+        'name' => 'deps_contact1',
+        'label' => trans('Section 11.2 Deps'),
     ]);
 });

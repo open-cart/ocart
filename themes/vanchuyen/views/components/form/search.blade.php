@@ -1,8 +1,9 @@
 @props(['id' => 'form-search', 'type' => 'default'])
 
 <div id="{{ $id }}">
+    @if(is_active_plugin('ecommerce'))
     <form
-        action="{{ route('blog') }}"
+        action="{{ route('shop') }}"
         method="GET"
         class="relative @if($type == 'default') pr-12 md:pr-14 @endif bg-white overflow-hidden rounded-md w-full"
     >
@@ -15,7 +16,7 @@
             <input
                 id="{{$id}}form-search-name"
                 class="@if($type == 'right') text-right @endif h-12 lg:h-14 text-heading outline-none w-full placeholder-gray-400 text-sm lg:text-base"
-                placeholder="Tìm kiếm"
+                placeholder="Tìm kiếm sản phẩm"
                 autocomplete="off"
                 name="name"
                 value=""
@@ -33,6 +34,42 @@
         @endif
 
     </form>
+
+    @endif
+        @if(is_active_plugin('blog'))
+            <form
+                action="{{ route('blog') }}"
+                method="GET"
+                class="relative @if($type == 'default') pr-12 md:pr-14 @endif bg-white overflow-hidden rounded-md w-full"
+            >
+                <label for="search" class="flex items-center">
+                    <button
+                        type="button"
+                        class="@if($type == 'right') text-blue-500 order-last @endif w-12 md:w-14 h-full flex flex-shrink-0 justify-center items-center cursor-pointer focus:outline-none">
+                        <x-theme::icons.search class="w-6"/>
+                    </button>
+                    <input
+                        id="{{$id}}form-search-name-blog"
+                        class="@if($type == 'right') text-right @endif h-12 lg:h-14 text-heading outline-none w-full placeholder-gray-400 text-sm lg:text-base"
+                        placeholder="Tìm kiếm bài viết"
+                        autocomplete="off"
+                        name="name"
+                        value=""
+                    >
+                    <input type="hidden" name="submit" value="search"/>
+
+                </label>
+                @if($type != 'right')
+                    <div
+                        id="{{$id}}remove-search-text-blog"
+                        class="w-12 md:w-14 outline-none text-2xl md:text-3xl text-gray-400 absolute top-0 right-0 h-full flex items-center justify-center transition duration-200 ease-in-out hover:text-heading focus:outline-none cursor-pointer"
+                    >
+                        <x-theme::icons.close class="w-6 h-6"/>
+                    </div>
+                @endif
+
+            </form>
+        @endif
 </div>
 
 <script>
@@ -64,6 +101,12 @@
 
         filterForm.on('click', '#{{$id}}remove-search-text', () => {
             $('#{{$id}}form-search-name').val('');
+        });
+
+        filterForm.on('submit', 'form', searchFn)
+
+        filterForm.on('click', '#{{$id}}remove-search-text-blog', () => {
+            $('#{{$id}}form-search-name-blog').val('');
         });
 
         filterForm.on('submit', 'form', searchFn)
