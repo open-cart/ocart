@@ -75,6 +75,8 @@ Route::group([
 
     Route::get('shop', 'PublicController@shop')->name(ROUTE_SHOP_SCREEN_NAME);
 
+    Route::get('bill', 'PublicController@bill')->name(ROUTE_BILL_SCREEN_NAME);
+
     Route::get('shopping-cart', 'ShoppingController@cart')->name(ROUTE_SHOPPING_CART_SCREEN_NAME);
 
     Route::get('shopping-buy', 'CheckoutController@getCheckout')->name(ROUTE_SHOPPING_BUY_SCREEN_NAME);

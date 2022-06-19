@@ -2,11 +2,14 @@
 
 namespace Ocart\Ecommerce\Http\Controllers\Front;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Ocart\Core\Http\Controllers\BaseController;
+use Ocart\Ecommerce\Repositories\Criteria\OrderSearchCriteria;
 use Ocart\Ecommerce\Repositories\Criteria\ProductSearchCriteria;
 use Ocart\Ecommerce\Repositories\Interfaces\CategoryRepository;
+use Ocart\Ecommerce\Repositories\Interfaces\OrderRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\ProductRepository;
 use Ocart\Ecommerce\Repositories\Interfaces\TagRepository;
 use Ocart\Ecommerce\Repositories\ProductRepositoryEloquent;
@@ -23,12 +26,14 @@ class PublicController extends BaseController
     protected $repo;
     protected $repoCategory;
     protected $repoTag;
+    protected $repoOrder;
 
-    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, TagRepository $tagRepository)
+    public function __construct(ProductRepository $productRepository, CategoryRepository $categoryRepository, TagRepository $tagRepository, OrderRepository $orderRepository)
     {
         $this->repo = $productRepository;
         $this->repoCategory = $categoryRepository;
         $this->repoTag = $tagRepository;
+        $this->repoOrder = $orderRepository;
     }
 
     /**
@@ -127,5 +132,26 @@ class PublicController extends BaseController
         do_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, ECOMMERCE_CATEGORY_MODULE_SCREEN_NAME, $tag);
 
         return Theme::scope('product-tag',  compact('tag', 'products'),'packages/ecommerce::product-tag');
+    }
+
+    public function bill(Request $request)
+    {
+        $title = 'Tra cứu vận đơn';
+        $description = 'Tra cứu vận đơn';
+
+        SeoHelper::setTitle($title);
+        SeoHelper::setDescription($description);
+        $meta = SeoHelper::openGraph();
+        $meta->setTitle($title);
+        $meta->setDescription($description);
+        $meta->setType('page');
+
+        $orders = [];
+
+        if (!empty($request->get('query'))) {
+            $orders = $this->repoOrder->where('id', '=', get_order_id($request->get('query')))->get();
+        }
+
+        return Theme::scope('bill', compact( 'orders'),);
     }
 }

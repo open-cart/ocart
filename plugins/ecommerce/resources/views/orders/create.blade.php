@@ -28,7 +28,7 @@
                             <div class="w-1/2">
                                 <div class="flex flex-col">
                                     <label for="note">Note</label>
-                                    <x-input placeholder="Note for order..." id="note" x-model="note" class="w-full"/>
+                                    <x-textarea placeholder="Note for order..." id="note" x-model="note" class="w-full"/>
                                 </div>
                             </div>
                             <div class="w-1/2 space-y-2">
