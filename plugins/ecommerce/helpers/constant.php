@@ -71,3 +71,7 @@ if (!defined('ORDER_RENDER_TABLE_ORDER_UPDATE')) {
 if (!defined('ORDER_MODULE_SCREEN_NAME')) {
     define('ORDER_MODULE_SCREEN_NAME', 'plugin-order');
 }
+
+if (!defined('ROUTE_BILL_SCREEN_NAME')) {
+    define('ROUTE_BILL_SCREEN_NAME', 'bill');
+}

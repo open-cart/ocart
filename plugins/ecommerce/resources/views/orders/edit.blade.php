@@ -25,7 +25,7 @@
                             <div class="w-1/2">
                                 <div class="flex flex-col">
                                     <label for="note">Note</label>
-                                    <x-input placeholder="Note for order..."
+                                    <x-textarea placeholder="Note for order..."
                                              id="note"
                                              x-model="order.description"
                                              class="w-full"/>

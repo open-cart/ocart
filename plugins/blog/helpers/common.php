@@ -123,3 +123,21 @@ if (!function_exists('get_post_category_children')) {
         return $category_children;
     }
 }
+
+if (!function_exists('get_post_categories_feature')) {
+    /**
+     * @param array $args
+     * @return array|mixed
+     */
+    function get_post_categories_feature($limit = 10)
+    {
+        $repo = app(CategoryRepository::class);
+
+        $repo->orderBy($repo->getModel()->qualifyColumn('updated_at'), 'DESC');
+        $repo->orderBy($repo->getModel()->qualifyColumn('order'), 'ASC');
+        /** @var \Ocart\Blog\Repositories\CategoryRepositoryEloquent $repo */
+        $categories = $repo->getFeature($limit);
+
+        return $categories;
+    }
+}

@@ -37,4 +37,19 @@ class CategoryRepositoryEloquent extends RepositoriesAbstract implements Categor
         $this->pushCriteria(app(RequestCriteria::class));
 //        $this->pushCriteria(app(BeforeQueryCriteria::class));
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public function getFeature($limit = 9)
+    {
+        $this->applyConditions([
+            'is_featured' => 1
+        ]);
+
+        $results = $this->limit($limit);
+
+        return $this->parserResult($results);
+    }
 }

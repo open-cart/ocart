@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Ocart\Blog\Repositories\Caches\PostCacheDecorator;
 use Ocart\Core\Facades\EmailHandler;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,7 @@ Route::get('testEamil', function () {
         ->preview()
         ->sendUsingTemplate('plugins.ecommerce::emails.order_recover');
 });
+
+Route::get('change-language/{language}', [HomeController::class, 'changeLanguage'] )->name('user.change-language');
 
 require __DIR__.'/auth.php';
