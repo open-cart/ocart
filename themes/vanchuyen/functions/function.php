@@ -1,7 +1,8 @@
 <?php
 
 \Ocart\Page\Supports\Template::registerTemplate([
-    'guest' => 'Guest'
+    'slide' => 'Slide',
+    'guest' => 'Guest',
 ]);
 
 TnMedia::addSize('medium', '400', '400');
