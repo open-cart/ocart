@@ -113,14 +113,14 @@
                     <x-theme::icons.search class="w-6"/>
                 </a>
 
-                @if(is_active_plugin('ecommerce'))
-                    <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}"
-                       class="relative z-20 mr-2 bg-white rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">
-                        <x-theme::icons.shopping-cart class="w-6"/>
-                        <small id="cartcount"
-                               class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>
-                    </a>
-                @endif
+{{--                @if(is_active_plugin('ecommerce'))--}}
+{{--                    <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}"--}}
+{{--                       class="relative z-20 mr-2 bg-white rounded-md inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none">--}}
+{{--                        <x-theme::icons.shopping-cart class="w-6"/>--}}
+{{--                        <small id="cartcount"--}}
+{{--                               class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>--}}
+{{--                    </a>--}}
+{{--                @endif--}}
 
                 <button x-on:click="openMobile = !openMobile" type="button"
                         class="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
@@ -148,13 +148,13 @@
                     <x-theme::icons.search class="w-6"/>
                 </a>
 
-                @if(is_active_plugin('ecommerce'))
-                    <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="relative z-20 mr-8">
-                        <x-theme::icons.shopping-cart class="w-6"/>
-                        <small id="cartcount"
-                               class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>
-                    </a>
-                @endif
+{{--                @if(is_active_plugin('ecommerce'))--}}
+{{--                    <a href="{!! route(ROUTE_SHOPPING_CART_SCREEN_NAME) !!}" class="relative z-20 mr-8">--}}
+{{--                        <x-theme::icons.shopping-cart class="w-6"/>--}}
+{{--                        <small id="cartcount"--}}
+{{--                               class="cart-count absolute -top-1.5 -right-1.5 bg-blue-500 text-white w-4 h-4 text-xs inline-block text-center leading-4 rounded-full">{{ get_cart_count() }}</small>--}}
+{{--                    </a>--}}
+{{--                @endif--}}
 
                 @if(Auth::user())
                     <x-dropdown align="right" width="48">
