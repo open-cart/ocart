@@ -90,7 +90,9 @@
                 return !$.trim(el.html())
             }
             if (isEmpty($('#layout-content-main'))) {
-                $.pjax.submit(event, '#body-content');
+                $.pjax.submit(event, '#body-content', {
+                    'scrollTo': 500,
+                });
             }else {
                 $.pjax.submit(event, '#layout-content-main');
             }
