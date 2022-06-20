@@ -32,7 +32,7 @@
                    Tra cứu
                </button>
            </form>
-           <div class="hidden">
+           <div>
                <img src="https://viettelpost.vn/viettelpost-iframe/assets/images/tracking-img.svg" alt="">
            </div>
        </div>
@@ -65,9 +65,6 @@
                 Đơn hàng không tồn tại. Vui lòng kiểm tra lại hoặc liên hệ với chúng tôi để được trợ giúp.
             </div>
         @endif
-        <div class="py-4 lg:py-8">
-            <img src="https://viettelpost.vn/viettelpost-iframe/assets/images/tracking-img.svg" alt="" class="mx-auto">
-        </div>
     </div>
 </div>
 <script>
